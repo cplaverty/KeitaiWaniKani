@@ -1,0 +1,51 @@
+PODS:
+  - 1PasswordExtension (1.6.1)
+  - CocoaLumberjack (2.0.1):
+    - CocoaLumberjack/Default (= 2.0.1)
+    - CocoaLumberjack/Extensions (= 2.0.1)
+  - CocoaLumberjack/Core (2.0.1)
+  - CocoaLumberjack/Default (2.0.1):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.0.1):
+    - CocoaLumberjack/Default
+  - CocoaLumberjack/Swift (2.0.1):
+    - CocoaLumberjack/Extensions
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
+  - FMDB/common (2.5)
+  - FMDB/standard (2.5):
+    - FMDB/common
+  - SwiftyJSON (2.3.0)
+
+DEPENDENCIES:
+  - 1PasswordExtension (~> 1.6)
+  - CocoaLumberjack (from `https://github.com/CocoaLumberjack/CocoaLumberjack.git`,
+    branch `swift_2.0`)
+  - CocoaLumberjack/Swift (from `https://github.com/CocoaLumberjack/CocoaLumberjack.git`,
+    branch `swift_2.0`)
+  - FMDB (from `https://github.com/ccgus/fmdb.git`, branch `swiftFramework`)
+  - SwiftyJSON (~> 2.3)
+
+EXTERNAL SOURCES:
+  CocoaLumberjack:
+    :branch: swift_2.0
+    :git: https://github.com/CocoaLumberjack/CocoaLumberjack.git
+  FMDB:
+    :branch: swiftFramework
+    :git: https://github.com/ccgus/fmdb.git
+
+CHECKOUT OPTIONS:
+  CocoaLumberjack:
+    :commit: 479279f102a8ab23084290697bafa77aac0d1bdf
+    :git: https://github.com/CocoaLumberjack/CocoaLumberjack.git
+  FMDB:
+    :commit: 43881cfcff4aedf5d8ea4045ab21a8f097ed35fa
+    :git: https://github.com/ccgus/fmdb.git
+
+SPEC CHECKSUMS:
+  1PasswordExtension: 42b79b7ac6d8e7468b22b7a651fc0b445bcdbd3e
+  CocoaLumberjack: 3eefa3b3b4d42d4700fa4e9d9bbb33c4cc80aaae
+  FMDB: 8e59e93d20d76d0b135db26ecc83ae88d016076d
+  SwiftyJSON: 8d6b61a70277ef2a5d710d372e06e7e2d87fb9e4
+
+COCOAPODS: 0.39.0.beta.4
