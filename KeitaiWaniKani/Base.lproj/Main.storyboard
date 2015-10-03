@@ -167,7 +167,7 @@
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <state key="normal" title="Log in to WaniKani"/>
                                             <connections>
-                                                <segue destination="LuD-Kp-yIC" kind="show" identifier="WaniKani Login" id="O2d-l2-3EC"/>
+                                                <action selector="loginButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EfR-JL-eyh"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Kpd-AN-2be">
@@ -319,7 +319,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zUI-XS-sHG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="P9W-NS-UoT" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="810" y="1636"/>
+            <point key="canvasLocation" x="1604" y="884"/>
         </scene>
         <!--Dashboard-->
         <scene sceneID="dJH-9y-fFn">
@@ -359,9 +359,6 @@
                                         </tableViewCellContentView>
                                         <animations/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.75" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <segue destination="LuD-Kp-yIC" kind="presentation" identifier="Do Lessons" id="Xfd-pD-dgb"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="54" id="ibl-3u-pf1" userLabel="Available Reviews Table View Cell">
                                         <rect key="frame" x="0.0" y="168" width="600" height="54"/>
@@ -414,9 +411,6 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rZG-oe-mqW" secondAttribute="trailing" constant="15" id="V3k-9c-G7M"/>
                                         </constraints>
-                                        <connections>
-                                            <segue destination="LuD-Kp-yIC" kind="presentation" identifier="Do Reviews" id="HIh-Da-pA5"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -883,9 +877,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="LuD-Kp-yIC" kind="presentation" identifier="Go To Web Dashboard" id="Kk3-qS-VF0"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Bv4-3T-AeM" style="IBUITableViewCellStyleDefault" id="dfG-fd-KB8">
                                         <rect key="frame" x="0.0" y="992" width="600" height="44"/>
@@ -903,9 +894,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="LuD-Kp-yIC" kind="presentation" identifier="Go To Community Center" id="mKr-ux-2bU"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1219,7 +1207,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E3b-xk-eVV">
                                     <rect key="frame" x="262" y="8" width="77" height="34"/>
                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -1240,7 +1228,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UVx-nM-Lby" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3144" y="884"/>
+            <point key="canvasLocation" x="2356" y="884"/>
         </scene>
         <!--Settings-->
         <scene sceneID="aBB-Yd-fwi">
@@ -1348,46 +1336,6 @@
             </objects>
             <point key="canvasLocation" x="3144" y="-595"/>
         </scene>
-        <!--Web View Controller-->
-        <scene sceneID="Ckg-gw-xg0">
-            <objects>
-                <viewController storyboardIdentifier="WebViewController" id="JVl-6o-raW" customClass="WebViewController" customModule="KeitaiWaniKani" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="aya-L6-9vt"/>
-                        <viewControllerLayoutGuide type="bottom" id="um2-4n-AGY"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="xiW-bf-Swe">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N60-GX-uOj">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
-                                <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                            </view>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="N60-GX-uOj" secondAttribute="trailing" id="2po-Jb-mKy"/>
-                            <constraint firstItem="N60-GX-uOj" firstAttribute="bottom" secondItem="xiW-bf-Swe" secondAttribute="bottomMargin" id="6fD-TD-gXS"/>
-                            <constraint firstItem="N60-GX-uOj" firstAttribute="top" secondItem="xiW-bf-Swe" secondAttribute="topMargin" id="L85-bQ-kOo"/>
-                            <constraint firstItem="N60-GX-uOj" firstAttribute="leading" secondItem="xiW-bf-Swe" secondAttribute="leading" id="hQz-KX-nOg"/>
-                        </constraints>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="7Qh-9b-yea">
-                        <nil key="title"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="webViewContainerView" destination="N60-GX-uOj" id="aq4-2I-prx"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rl3-KB-xYd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2356" y="884"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="bED-S0-fT2">
             <objects>
@@ -1432,31 +1380,6 @@
             </objects>
             <point key="canvasLocation" x="810" y="884"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Ixr-xU-RSW">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" hidesBarsOnSwipe="YES" hidesBarsWhenVerticallyCompact="YES" id="LuD-Kp-yIC" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NGy-e4-dEK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="Phr-ba-A3y">
-                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
-                        <color key="tintColor" red="0.1126213819" green="0.58001059290000001" blue="0.58367556330000003" alpha="1" colorSpace="calibratedRGB"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="JVl-6o-raW" kind="relationship" relationship="rootViewController" id="bHs-uA-dXN"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kgg-rE-CUp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1604" y="884"/>
-        </scene>
     </scenes>
     <resources>
         <image name="Apprentice" width="23" height="23"/>
@@ -1468,8 +1391,7 @@
         <image name="Settings" width="23" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Kk3-qS-VF0"/>
-        <segue reference="AcY-j3-xU7"/>
+        <segue reference="0Hn-Mk-onL"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.1126213819" green="0.58001059290000001" blue="0.58367556330000003" alpha="1" colorSpace="calibratedRGB"/>
 </document>

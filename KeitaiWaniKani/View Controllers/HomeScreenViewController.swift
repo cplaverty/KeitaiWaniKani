@@ -15,7 +15,6 @@ class HomeScreenViewController: UIViewController, WebViewControllerDelegate, WKS
     
     struct SegueIdentifiers {
         static let showDashboard = "Show Dashboard"
-        static let login = "WaniKani Login"
     }
     
     // MARK: - Outlets
@@ -24,6 +23,18 @@ class HomeScreenViewController: UIViewController, WebViewControllerDelegate, WKS
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - Actions
+    
+    @IBAction func loginButtonTouched(sender: UIButton) {
+        let wvc = WebViewController.forURL(WaniKaniURLs.loginPage) { wcvc in
+            wcvc.delegate = self
+            
+            let userScript = WKUserScript(source: getApiKeyScriptSource, injectionTime: .AtDocumentEnd, forMainFrameOnly: true)
+            wcvc.webViewConfiguration.userContentController.addScriptMessageHandler(self, name: "apiKey")
+            wcvc.webViewConfiguration.userContentController.addUserScript(userScript)
+        }
+        
+        presentViewController(wvc, animated: true, completion: nil)
+    }
     
     @IBAction func apiKeySet(segue: UIStoryboardSegue) {
         ApplicationSettings.apiKeyVerified = true
@@ -68,25 +79,6 @@ class HomeScreenViewController: UIViewController, WebViewControllerDelegate, WKS
             pvc.presentViewController(viewControllerToPresent, animated: flag, completion: completion)
         } else {
             super.presentViewController(viewControllerToPresent, animated: flag, completion: completion)
-        }
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        guard let identifier = segue.identifier else {
-            return
-        }
-        
-        switch identifier {
-        case SegueIdentifiers.login:
-            if let wvc = segue.destinationContentViewController as? WebViewController {
-                let userScript = WKUserScript(source: getApiKeyScriptSource, injectionTime: .AtDocumentEnd, forMainFrameOnly: true)
-                
-                wvc.webViewConfiguration.userContentController.addScriptMessageHandler(self, name: "apiKey")
-                wvc.webViewConfiguration.userContentController.addUserScript(userScript)
-                wvc.delegate = self
-                wvc.URL = WaniKaniURLs.loginPage
-            }
-        default: break
         }
     }
 

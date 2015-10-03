@@ -20,6 +20,42 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
         static let showBackHistory = "Show Web Back History"
         static let showForwardHistory = "Show Web Forward History"
     }
+
+    class func forURL(URL: NSURL, @noescape configBlock: (WebViewController) -> Void) -> UINavigationController {
+        let webViewController = WebViewController(URL: URL)
+        configBlock(webViewController)
+        
+        let nc = UINavigationController(navigationBarClass: nil, toolbarClass: nil)
+        nc.setToolbarHidden(false, animated: false)
+        nc.navigationBar.tintColor = ApplicationSettings.globalTintColor
+        nc.toolbar.tintColor = ApplicationSettings.globalTintColor
+        nc.hidesBarsOnSwipe = true
+        nc.hidesBarsWhenVerticallyCompact = true
+        
+        nc.pushViewController(webViewController, animated: false)
+        
+        return nc
+    }
+    
+    // MARK: - Initialisers
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    convenience init(URL: NSURL) {
+        self.init()
+        self.URL = URL
+    }
+    
+    convenience init(configuration: WKWebViewConfiguration) {
+        self.init()
+        self.webViewConfiguration = configuration
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     deinit {
         // Unregister the listeners on the web view
@@ -32,7 +68,7 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
     
     weak var delegate: WebViewControllerDelegate?
     weak var navigationDelegate: WKNavigationDelegate?
-
+    
     var URL: NSURL?
     
     var webViewConfiguration: WKWebViewConfiguration = {
@@ -93,17 +129,13 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
         return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done:")
         }()
     
-    // MARK: - Outlets
-    
-    @IBOutlet weak var webViewContainerView: UIView!
-    
     // MARK: - Actions
     
-    @IBAction func done(sender: UIBarButtonItem) {
+    func done(sender: UIBarButtonItem) {
         delegate?.webViewControllerDidFinish(self)
     }
     
-    @IBAction func share(sender: UIBarButtonItem) {
+    func share(sender: UIBarButtonItem) {
         guard let absoluteURL = webView.URL?.absoluteURL else {
             return
         }
@@ -143,7 +175,7 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
         }
     }
     
-    @IBAction func openInSafari(sender: UIBarButtonItem) {
+    func openInSafari(sender: UIBarButtonItem) {
         guard let URL = webView.URL else {
             return
         }
@@ -151,7 +183,7 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
         UIApplication.sharedApplication().openURL(URL)
     }
     
-    @IBAction func backButtonTouched(sender: UIBarButtonItem, forEvent event: UIEvent) {
+    func backButtonTouched(sender: UIBarButtonItem, forEvent event: UIEvent) {
         guard let touch = event.allTouches()?.first else { return }
         switch touch.tapCount {
         case 0: // Long press
@@ -162,7 +194,7 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
         }
     }
     
-    @IBAction func forwardButtonTouched(sender: UIBarButtonItem, forEvent event: UIEvent) {
+    func forwardButtonTouched(sender: UIBarButtonItem, forEvent event: UIEvent) {
         guard let touch = event.allTouches()?.first else { return }
         switch touch.tapCount {
         case 0: // Long press
@@ -184,17 +216,16 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
             popover.presentPopoverFromBarButtonItem(sender, permittedArrowDirections: [.Up, .Down], animated: true)
         } else {
             let nc = UINavigationController(rootViewController: bflvc)
-            nc.navigationBar.tintColor = self.view.tintColor
+            nc.navigationBar.tintColor = ApplicationSettings.globalTintColor
             self.presentViewController(nc, animated: true, completion: nil)
         }
     }
-
+    
     // MARK: - WKUIDelegate
     
     func webView(webView: WKWebView, createWebViewWithConfiguration configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        let newVC = self.storyboard!.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
+        let newVC = WebViewController(configuration: configuration)
         newVC.delegate = self
-        newVC.webViewConfiguration = configuration
         newVC.URL = navigationAction.request.URL
         self.navigationController?.pushViewController(newVC, animated: true)
         return newVC.webView
@@ -257,15 +288,17 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        webView = WKWebView(frame: webViewContainerView.bounds, configuration: webViewConfiguration)
+        webView = WKWebView(frame: view.bounds, configuration: webViewConfiguration)
+        webView.translatesAutoresizingMaskIntoConstraints = false
         webView.navigationDelegate = navigationDelegate
         webView.UIDelegate = self
-        webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         webView.allowsBackForwardNavigationGestures = true
         if #available(iOS 9.0, *) {
             webView.allowsLinkPreview = true
         }
-        webViewContainerView.addSubview(webView)
+        self.view.addSubview(webView)
+        NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
+        NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
         
         configureForTraitCollection(self.traitCollection)
         

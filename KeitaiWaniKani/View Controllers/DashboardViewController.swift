@@ -15,12 +15,8 @@ import WaniKaniKit
 class DashboardViewController: UITableViewController, WebViewControllerDelegate, WKScriptMessageHandler {
     
     private struct SegueIdentifiers {
-        static let doLessons = "Do Lessons"
-        static let doReviews = "Do Reviews"
         static let radicalsProgress = "Show Radicals Progress"
         static let kanjiProgress = "Show Kanji Progress"
-        static let webDashboard = "Go To Web Dashboard"
-        static let communityCentre = "Go To Community Center"
     }
     
     private enum TableViewSections: Int {
@@ -532,7 +528,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         updateStudyQueueTimer = nil
     }
     
-    // MARK: - WaniKaniWebViewControllerDelegate
+    // MARK: - WebViewControllerDelegate
     
     func webViewControllerDidFinish(controller: WebViewController) {
         controller.dismissViewControllerAnimated(true, completion: nil)
@@ -579,8 +575,40 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         return visualEffectVibrancyView
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        guard let tableViewSection = TableViewSections(rawValue: indexPath.section) else {
+            fatalError("Invalid section index \(indexPath.section) requested")
+        }
+
+        switch (tableViewSection, indexPath.row) {
+        case (.CurrentlyAvailable, 0): // Lessons
+            let vc = WebViewController.forURL(WaniKaniURLs.lessonSession, configBlock: webViewControllerCommonConfiguration)
+            if self.dataRefreshOperation != nil {
+                // Cancel data refresh operation because we're just going to restart it when the web view is dismissed
+                DDLogDebug("Cancelling data refresh operation")
+                self.dataRefreshOperation = nil
+            }
+            presentViewController(vc, animated: true, completion: nil)
+        case (.CurrentlyAvailable, 1): // Reviews
+            let vc = WebViewController.forURL(WaniKaniURLs.reviewSession, configBlock: webViewControllerCommonConfiguration)
+            if self.dataRefreshOperation != nil {
+                // Cancel data refresh operation because we're just going to restart it when the web view is dismissed
+                DDLogDebug("Cancelling data refresh operation")
+                self.dataRefreshOperation = nil
+            }
+            presentViewController(vc, animated: true, completion: nil)
+        case (.Links, 0): // Web Dashboard
+            let vc = WebViewController.forURL(WaniKaniURLs.dashboard, configBlock: webViewControllerCommonConfiguration)
+            presentViewController(vc, animated: true, completion: nil)
+        case (.Links, 1): // Community Centre
+            let vc = WebViewController.forURL(WaniKaniURLs.communityCentre, configBlock: webViewControllerCommonConfiguration)
+            presentViewController(vc, animated: true, completion: nil)
+        default: break
+        }
+    }
+
     // MARK: - WKScriptMessageHandler
-    
+
     func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
         DDLogDebug("Received script message body \(message.body)")
     }
@@ -708,28 +736,6 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         }
         
         switch identifier {
-        case SegueIdentifiers.doLessons:
-            if let vc = segue.destinationContentViewController as? WebViewController {
-                webViewControllerCommonConfiguration(vc)
-                vc.URL = WaniKaniURLs.lessonSession
-                
-                if self.dataRefreshOperation != nil {
-                    // Cancel data refresh operation because we're just going to restart it when the web view is dismissed
-                    DDLogDebug("Cancelling data refresh operation")
-                    self.dataRefreshOperation = nil
-                }
-            }
-        case SegueIdentifiers.doReviews:
-            if let vc = segue.destinationContentViewController as? WebViewController {
-                webViewControllerCommonConfiguration(vc)
-                vc.URL = WaniKaniURLs.reviewSession
-                
-                if self.dataRefreshOperation != nil {
-                    // Cancel data refresh operation because we're just going to restart it when the web view is dismissed
-                    DDLogDebug("Cancelling data refresh operation")
-                    self.dataRefreshOperation = nil
-                }
-            }
         case SegueIdentifiers.radicalsProgress:
             if let vc = segue.destinationContentViewController as? SRSDataItemCollectionViewController {
                 self.databaseQueue.inDatabase { database in
@@ -755,16 +761,6 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
                         DDLogWarn("Failed to get radicals for current level: \(error)")
                     }
                 }
-            }
-        case SegueIdentifiers.webDashboard:
-            if let vc = segue.destinationContentViewController as? WebViewController {
-                webViewControllerCommonConfiguration(vc)
-                vc.URL = WaniKaniURLs.dashboard
-            }
-        case SegueIdentifiers.communityCentre:
-            if let vc = segue.destinationContentViewController as? WebViewController {
-                webViewControllerCommonConfiguration(vc)
-                vc.URL = WaniKaniURLs.communityCentre
             }
         default: break
         }
