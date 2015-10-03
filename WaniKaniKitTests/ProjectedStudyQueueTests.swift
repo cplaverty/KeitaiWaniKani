@@ -43,7 +43,7 @@ class ProjectedStudyQueueTests: DatabaseTestCase {
             XCTAssertTrue(errors.isEmpty, "Expected no errors, but received: \(errors)")
             kanjiExpectation.fulfill()
             })
-        radicalsOperation.addObserver(BlockObserver { _, errors in
+        vocabularyOperation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors, but received: \(errors)")
             vocabularyExpectation.fulfill()
             })

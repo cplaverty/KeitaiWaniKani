@@ -38,7 +38,7 @@ class SRSDataItemCoderTests: DatabaseTestCase {
             kanjiExpectation.fulfill()
             XCTAssertEqual(errors.count, 0, "Expected no errors, but received: \(errors)")
             })
-        radicalsOperation.addObserver(BlockObserver { _, errors in
+        vocabularyOperation.addObserver(BlockObserver { _, errors in
             vocabularyExpectation.fulfill()
             XCTAssertEqual(errors.count, 0, "Expected no errors, but received: \(errors)")
             })
