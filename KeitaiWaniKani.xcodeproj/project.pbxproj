@@ -558,13 +558,13 @@
 				8347BDB61B725D73000F99EF /* GetSRSDistributionOperationTests.swift */,
 				8347BDB71B725D73000F99EF /* GetStudyQueueOperationTests.swift */,
 				8347BDB81B725D73000F99EF /* GetVocabularyOperationTests.swift */,
+				8307F2511BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift */,
 				832462BC1B932ADF00FB62C9 /* SRSDataItemCoderTests.swift */,
 				83ABABD91B91AE680013AE4F /* StudyQueueTests.swift */,
 				8347BDB91B725D73000F99EF /* TestFileResourceResolver.swift */,
 				83ABABDB1B91AF690013AE4F /* UtilityFunctions.swift */,
 				8347BDBB1B725D73000F99EF /* WaniKaniAPIResourceResolverTests.swift */,
 				8347BDBD1B725D73000F99EF /* WaniKaniAPITests.swift */,
-				8307F2511BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift */,
 			);
 			path = WaniKaniKitTests;
 			sourceTree = "<group>";

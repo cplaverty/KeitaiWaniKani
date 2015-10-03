@@ -73,6 +73,7 @@ class GetKanjiOperationTests: DatabaseTestCase {
         }
     }
     
+    #if HAS_DOWNLOADED_DATA
     func testLoadByLevel() {
         let resourceResolver = TestFileResourceResolver(fileName: "Kanji Levels 1-20")
         let operationQueue = OperationQueue()
@@ -129,5 +130,5 @@ class GetKanjiOperationTests: DatabaseTestCase {
             }
         }
     }
-    
+    #endif
 }

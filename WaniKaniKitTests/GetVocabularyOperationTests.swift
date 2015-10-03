@@ -77,6 +77,7 @@ class GetVocabularyOperationTests: DatabaseTestCase {
         }
     }
     
+    #if HAS_DOWNLOADED_DATA
     func testLoadByLevel() {
         let resourceResolver = TestFileResourceResolver(fileName: "Vocab Levels 1-20")
         let operationQueue = OperationQueue()
@@ -133,5 +134,6 @@ class GetVocabularyOperationTests: DatabaseTestCase {
             }
         }
     }
+    #endif
     
 }

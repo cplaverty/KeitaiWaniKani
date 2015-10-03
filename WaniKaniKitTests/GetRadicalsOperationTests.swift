@@ -74,6 +74,7 @@ class GetRadicalsOperationTests: DatabaseTestCase {
         }
     }
     
+    #if HAS_DOWNLOADED_DATA
     func testLoadByLevel() {
         let resourceResolver = TestFileResourceResolver(fileName: "Radicals Levels 1-20")
         let operationQueue = OperationQueue()
@@ -130,5 +131,6 @@ class GetRadicalsOperationTests: DatabaseTestCase {
             }
         }
     }
+    #endif
 
 }

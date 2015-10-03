@@ -9,6 +9,7 @@ import XCTest
 import OperationKit
 @testable import WaniKaniKit
 
+#if HAS_DOWNLOADED_DATA
 class SRSDataItemCoderTests: DatabaseTestCase {
 
     override func setUp() {
@@ -77,3 +78,4 @@ class SRSDataItemCoderTests: DatabaseTestCase {
     }
 
 }
+#endif

@@ -9,6 +9,7 @@ import XCTest
 import OperationKit
 @testable import WaniKaniKit
 
+#if HAS_DOWNLOADED_DATA
 class ProjectedStudyQueueTests: DatabaseTestCase {
     
     override func setUp() {
@@ -98,3 +99,4 @@ class ProjectedStudyQueueTests: DatabaseTestCase {
         }
     }
 }
+#endif
