@@ -26,14 +26,10 @@ class ProjectedStudyQueueTests: DatabaseTestCase {
         
         let radicalsOperation = GetRadicalsOperation(resolver: TestFileResourceResolver(fileName: "SQPTRadicals"),
             databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
-        
         let kanjiOperation = GetKanjiOperation(resolver: TestFileResourceResolver(fileName: "SQPTKanji"),
             databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
-        kanjiOperation.addDependency(radicalsOperation)
-        
         let vocabularyOperation = GetVocabularyOperation(resolver: TestFileResourceResolver(fileName: "SQPTVocab"),
             databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
-        vocabularyOperation.addDependency(kanjiOperation)
         
         radicalsOperation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors, but received: \(errors)")

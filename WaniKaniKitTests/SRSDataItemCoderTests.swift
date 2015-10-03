@@ -21,14 +21,10 @@ class SRSDataItemCoderTests: DatabaseTestCase {
         
         let radicalsOperation = GetRadicalsOperation(resolver: TestFileResourceResolver(fileName: "Radicals Levels 1-20"),
             databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
-        
         let kanjiOperation = GetKanjiOperation(resolver: TestFileResourceResolver(fileName: "Kanji Levels 1-20"),
             databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
-        kanjiOperation.addDependency(radicalsOperation)
-        
         let vocabularyOperation = GetVocabularyOperation(resolver: TestFileResourceResolver(fileName: "Vocab Levels 1-20"),
             databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
-        vocabularyOperation.addDependency(kanjiOperation)
         
         radicalsOperation.addObserver(BlockObserver { _, errors in
             radicalsExpectation.fulfill()
@@ -53,8 +49,8 @@ class SRSDataItemCoderTests: DatabaseTestCase {
         self.measureBlock() {
             self.databaseQueue.inDatabase { database in
                 let reviewTimeline = try! SRSDataItemCoder.reviewTimeline(database)
-                XCTAssertEqual(reviewTimeline.count, 98)
-                XCTAssertEqual(reviewTimeline[2], SRSReviewCounts(dateAvailable: NSDate(timeIntervalSince1970: 1388475000), itemCounts: SRSItemCounts(radicals: 0, kanji: 2, vocabulary: 0, total: 2)))
+                XCTAssertEqual(reviewTimeline.count, 249)
+                XCTAssertEqual(reviewTimeline[2], SRSReviewCounts(dateAvailable: NSDate(timeIntervalSince1970: 1387708200), itemCounts: SRSItemCounts(radicals: 0, kanji: 0, vocabulary: 2, total: 2)))
             }
         }
     }
@@ -63,9 +59,9 @@ class SRSDataItemCoderTests: DatabaseTestCase {
         self.measureBlock() {
             self.databaseQueue.inDatabase { database in
                 let reviewTimeline = try! SRSDataItemCoder.reviewTimeline(database, since: NSDate(timeIntervalSince1970: 1432004400))
-                XCTAssertEqual(reviewTimeline.count, 10)
-                XCTAssertEqual(reviewTimeline[0], SRSReviewCounts(dateAvailable: NSDate(timeIntervalSince1970: 0), itemCounts: SRSItemCounts(radicals: 18, kanji: 102, vocabulary: 0, total: 120)))
-                XCTAssertEqual(reviewTimeline[2], SRSReviewCounts(dateAvailable: NSDate(timeIntervalSince1970: 1432250100), itemCounts: SRSItemCounts(radicals: 1, kanji: 2, vocabulary: 0, total: 3)))
+                XCTAssertEqual(reviewTimeline.count, 29)
+                XCTAssertEqual(reviewTimeline[0], SRSReviewCounts(dateAvailable: NSDate(timeIntervalSince1970: 0), itemCounts: SRSItemCounts(radicals: 18, kanji: 102, vocabulary: 347, total: 467)))
+                XCTAssertEqual(reviewTimeline[2], SRSReviewCounts(dateAvailable: NSDate(timeIntervalSince1970: 1432250100), itemCounts: SRSItemCounts(radicals: 1, kanji: 2, vocabulary: 1, total: 4)))
             }
         }
     }
@@ -75,7 +71,7 @@ class SRSDataItemCoderTests: DatabaseTestCase {
             self.databaseQueue.inDatabase { database in
                 let reviewTimeline = try! SRSDataItemCoder.reviewTimeline(database, rowLimit: 10)
                 XCTAssertEqual(reviewTimeline.count, 10)
-                XCTAssertEqual(reviewTimeline[2], SRSReviewCounts(dateAvailable: NSDate(timeIntervalSince1970: 1388475000), itemCounts: SRSItemCounts(radicals: 0, kanji: 2, vocabulary: 0, total: 2)))
+                XCTAssertEqual(reviewTimeline[2], SRSReviewCounts(dateAvailable: NSDate(timeIntervalSince1970: 1387708200), itemCounts: SRSItemCounts(radicals: 0, kanji: 0, vocabulary: 2, total: 2)))
             }
         }
     }
