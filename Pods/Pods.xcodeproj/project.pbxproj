@@ -7,338 +7,347 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		081716A3153783E415A98FC3C52E3202 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4931FB40E92E36051584CD03BD78A07 /* Foundation.framework */; };
-		092B1DD3BCE52B4FA3021A1B1C4BA796 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C657778878A92A64D275ECFEB6C34F90 /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		0E7F4DEEA4E867C3A6434170D1828A3B /* onepassword-extension~compact.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EAC08EF19A9CA9FAF85ADB0CC835086 /* onepassword-extension~compact.png */; };
-		0EB28BADAC77FB6FCD4F4B8FA78A7CE9 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B1342059833FB1D34E003F270C77E77B /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		119EEDF82B5FD950EA1ECA023BA0283E /* onepassword-toolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9D9F1A6D69213397980918706C61FC11 /* onepassword-toolbar.png */; };
-		137558562D3A2D87BC5F7C5F6249707A /* onepassword-toolbar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 567644705BD1C401B767C19A16523C82 /* onepassword-toolbar@3x.png */; };
-		149DAC3828BE9A9B5E43FEFB7CE37628 /* onepassword-navbar-light.png in Resources */ = {isa = PBXBuildFile; fileRef = F5D61C0E33211FCA978D0A5D474CBCF6 /* onepassword-navbar-light.png */; };
-		16EF49A18BB758033B23A8359C70069F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8004DF160705A12B1B03B64C31FDC8C7 /* UIKit.framework */; };
-		17EC8441270F51768E79E5296F210DF0 /* onepassword-toolbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD04C3E11EF5403ACFBF1C814BFB2486 /* onepassword-toolbar@2x.png */; };
-		201E722916CDC889A566C4E74AD04D7B /* onepassword-extension-light@2x~compact.png in Resources */ = {isa = PBXBuildFile; fileRef = 837FC5F68B655DC0D44990E4E10B2132 /* onepassword-extension-light@2x~compact.png */; };
-		20EEFF69515D50D46BF5DC60DC3563F0 /* onepassword-navbar-light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 426ED4568EA6080FADF3A2B8CB33657E /* onepassword-navbar-light@2x.png */; };
-		225A65A50616135101149B553AA39E15 /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = DD053094262EE875FB47561D274603C7 /* DDTTYLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		227374B0ADB047DF85AC7E75E678EB8A /* FMDB-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 03337439007B956A7BDEDD64C8230097 /* FMDB-dummy.m */; };
-		24564E294DE0395C6585D87252DA90D2 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = D085A2BC5BF35A706A02866C5FA3CB1D /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		2A0960D3C9A3E21699C1EB85931AAED9 /* onepassword-toolbar-light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9613B9A16158013F598FAE8A57C8E40B /* onepassword-toolbar-light@2x.png */; };
-		2B7FBE76A1281FADC125C5B186C6F716 /* 1PasswordExtension-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 38622354A99E221E0694822E6C91D91A /* 1PasswordExtension-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2E2F9B6FC8AAC072B0FDAEFCB8462ACB /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 03618CB0BEE87153BA7A46586FCD8916 /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		35D252ED155A395F68124218606A275D /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3FA9712F2D98A522D464B2B7CEB2B5 /* SwiftyJSON.swift */; };
-		37A32059285D32969BCA28210DF2769C /* onepassword-extension@2x~compact.png in Resources */ = {isa = PBXBuildFile; fileRef = F0612FF293A8BAF0EAB42C6018881F30 /* onepassword-extension@2x~compact.png */; };
-		3AF41F5A30E443BFE81A128A9C8F5601 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B650A1B863E44CED52A6E24F1961660C /* Pods-dummy.m */; };
-		3D54F8F87C90D1E5C409738EAE0D1366 /* onepassword-extension-light~compact.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DAB8467A94140C7AA6C06150BFA87CB /* onepassword-extension-light~compact.png */; };
-		3D8BA2A5670E9F5C3F85840BEFEF51E5 /* OnePasswordExtensionResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFE3FEFE7165F9AAE964450D8ACA6 /* OnePasswordExtensionResources.bundle */; };
-		45CE59F5E6804AF2E770DE5F49092636 /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 095588D4E3382085ED8101A333BA7651 /* DDLegacyMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4941C2DF30B316A2D5C6271321886F3E /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 5571EE02B5BC08737531571AD83539CF /* DDAssertMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4EBF2CBEBC925DE2FDC8BDE83AA7E833 /* OnePasswordExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = B4EFCDFD447C798135C65CFD626B2F21 /* OnePasswordExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		51870399C4C5FA01568426FC65568932 /* onepassword-navbar-light@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA040C04FDABF62CAF3D9CB72BD65DAA /* onepassword-navbar-light@3x.png */; };
-		5472386247882BDB5814E483A1592C01 /* Pods-KeitaiWaniKani-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CF1DB8B3C51F4EA26C2158F468645CEA /* Pods-KeitaiWaniKani-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		57E8D495A4D067A1BB209FA1A39562F8 /* Pods-KeitaiWaniKani-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 08330A66B24C9510ED6A014DD8AF959F /* Pods-KeitaiWaniKani-dummy.m */; };
-		583A0EF1C1DA086C0B3D3EB5FC735AC8 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = B64D907C7D0F65251F6091DF6164CA3E /* DDASLLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5A9BCB2BF3F5BBBC3B8816B6C16BAEF3 /* onepassword-button-light@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1BDDBB59A499B93873A5E397FE7373AC /* onepassword-button-light@3x.png */; };
-		5FE11FE949BEACD21F21C2EACBE1CDF1 /* onepassword-navbar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D94D7642340144E572B13D16958F7E82 /* onepassword-navbar@3x.png */; };
-		60970FC000E927E14FA4406DC03BE87F /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D78557F8AE1115F6783CEEDAD904AAD /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		67D49BF684B3A8CB8E02DF77B1773974 /* onepassword-extension@2x~regular.png in Resources */ = {isa = PBXBuildFile; fileRef = EFD0D482DCC97A26E3115770F83AF0DC /* onepassword-extension@2x~regular.png */; };
-		67E018E2F94BF1BF1DFF0278FB38B240 /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 02D39FD411E1DC335DB87DB605FD7BA3 /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6AF0D70AAECD405C266480F2A4A918B1 /* onepassword-extension-light@2x~regular.png in Resources */ = {isa = PBXBuildFile; fileRef = 71401AAA71EBD132D1951376C92D34AF /* onepassword-extension-light@2x~regular.png */; };
-		6DCF53965641B6B196E9E5A6498BFEC6 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = DA74B27B421761D90AF3210CFFDB7E40 /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6F8B1301F820462ACA5B942C244CA066 /* onepassword-extension-light~regular.png in Resources */ = {isa = PBXBuildFile; fileRef = 33540953BFAEE6A5E704DE60C3B6E424 /* onepassword-extension-light~regular.png */; };
-		6FB92269DE34577DA5D21A6F659FACB5 /* onepassword-button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D7263E05225200242D868027CFD88A4 /* onepassword-button@3x.png */; };
-		72CB77911CECDE4B378D2471B57DAF2F /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 887614C858894EAE9121F7D6FE3AB48C /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		72D89779802B8C53F81231EAF2994411 /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D48B05784CBD706962C72824D83AC5 /* SwiftyJSON-dummy.m */; };
-		761B507862A8D17FA3C5B20E5BE97A18 /* onepassword-toolbar-light@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 12DB1CF055A02C095D5CE6FB1DE24258 /* onepassword-toolbar-light@3x.png */; };
-		8880014567AB05A77EEE76715129AADB /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = F4A55E920278CB83162D6CBBC9B1F39C /* DDMultiFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		88B6AF052FF7BB569BD835B9990899E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4931FB40E92E36051584CD03BD78A07 /* Foundation.framework */; };
-		8DAEC31C7C5383D756DE7E6842A5A12F /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A5F7B903A6013389F45029A3F2E3BE /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		8EF62F0AE82C39372D8A6B4333420D82 /* 1PasswordExtension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 540A999444E52AD998ECBB55617D5347 /* 1PasswordExtension-dummy.m */; };
-		945DECA42F8DBE0404E04C1FDEF4B7F3 /* FMDB-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 436463C11138B9A23DB417AD8EC39944 /* FMDB-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		94A6247A29EB49E7D0F4E96940CEA35B /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = CF7177C9F81334293212246A08388194 /* DDLogMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9526BC999D0FA724643CE957FBB3AB9C /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A49EE2AF3B56289F88D172CC48843A /* DDASLLogCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		95590FC035758B008319A2BF5A1C5264 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4931FB40E92E36051584CD03BD78A07 /* Foundation.framework */; };
-		98557C2F569B116F291A7B4B3BE9ED3B /* onepassword-button.png in Resources */ = {isa = PBXBuildFile; fileRef = F496299B28EAD9BF98CDBAF4C8A1ED1A /* onepassword-button.png */; };
-		AC8DF52259EDB56823C077F31F55C4F0 /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = AE677B531BC3AA3A38D3D39260C5B5AC /* DDASLLogCapture.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		ADB625DE8AA871FB719838787752F00D /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DA3A0E2C1FB5085EA3C287220D2E0C7 /* CocoaLumberjack.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B363C03EF60802C164FB5E164A6BCA2D /* onepassword-toolbar-light.png in Resources */ = {isa = PBXBuildFile; fileRef = A81DDC57403B5A689C5DE7DC6899C0E4 /* onepassword-toolbar-light.png */; };
-		B40BC628B79A89A279A01D866367FD1D /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = EB435AEA68587B27B8F94703FE154FEB /* DDFileLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B51D522B46DE0E38A25ED7ABF4528A0A /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 69782DEB1641D4E99B581FA9A695B417 /* DDContextFilterLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B8E170131783CF5E7848F5F9405153F8 /* OnePasswordExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B4C35CDAD233E05D00876FCCD5DAD8C7 /* OnePasswordExtension.m */; };
-		B98FEB50A2E3570475982FBC17D7FCF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4931FB40E92E36051584CD03BD78A07 /* Foundation.framework */; };
-		BA5961D8B79CEDFAE54E17199266C472 /* FMDatabase+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 20B8092CDF4ADE5E613BE3D0156BADC6 /* FMDatabase+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		BE0D14ADDBFAFAD3ED4380D316CEA1AC /* onepassword-button-light.png in Resources */ = {isa = PBXBuildFile; fileRef = 97D494C96CA2426515FA89221A2FE087 /* onepassword-button-light.png */; };
-		BEFB0246D4B469DAFBFDA0C8379E979E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4931FB40E92E36051584CD03BD78A07 /* Foundation.framework */; };
-		C4649757A6E5479CDEBF437F6CF560D1 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A72965282F83EA8C2567DDAAD29AF4EE /* DDLog.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		C6CD7822459AAC36CDE1546B50DF2AB5 /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B5AB75B0F0BA0230C1AD5D4B867965D5 /* DDMultiFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		C72EDC6CA16D4C3D7AF8B52D463A8C9A /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = EF03164AC8B229C1AE7F2C19594CFEBA /* DDLog+LOGV.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C788AB2CD380395EB98B64517A9E603F /* onepassword-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C6616841261520923B447F7971A5611 /* onepassword-button@2x.png */; };
-		CBB0191D56339B34774F55459C5581EF /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 52232D9474887B11D203DA59838236A4 /* DDDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		CCC4FB762283008AAD419E55D1DFAEF6 /* CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDC8FAD954356F3C0C929EDF88C2A47 /* CocoaLumberjack-dummy.m */; };
-		CD82829E6F6C273E8EB3D99F43A541FE /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F16D91426AAE46F6A587EC8B7567F29 /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D01FDD1B40F8DD72CA03FE965CC9C910 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E138744D2C5D6D39794FBACC5AF2684 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		D25AEA4FE2C85E03114EA7468DE4D154 /* onepassword-button-light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 56142CC159676B07F737976AA71A662C /* onepassword-button-light@2x.png */; };
-		D6D43367121CEBF6BCAEB3F4F9E825E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4931FB40E92E36051584CD03BD78A07 /* Foundation.framework */; };
-		D801C4DA8D52BB68155451E264400FD7 /* onepassword-extension~regular.png in Resources */ = {isa = PBXBuildFile; fileRef = E22506CD1162ADBF761EDB8C96E921B8 /* onepassword-extension~regular.png */; };
-		D8BE0A9B47A4A1460B00257620C6305A /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FCF65DBEFB50F4C7F2F47E0BEC0943B /* DDContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		D8BEDEA8FB83F842FA407A8CBFB0AC9F /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 21025B1F8ED7B5393DAD71ECF910A8BD /* FMDatabaseQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DA04A48C03AE18377A2EE53F5D392B6C /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D3C0A4A2D5F3EB3D248A8BACA3C737 /* DDAbstractDatabaseLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DB2E30F3559CE9497EC93238F394261A /* onepassword-navbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BD02DF693BC0E94B856EC8BCB4D1AC5 /* onepassword-navbar@2x.png */; };
-		DBC0A0E0B4A1B08C07C8F3099AA75EA0 /* onepassword-extension@3x~compact.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BF145D0EEA370FD11F1D198193A0216 /* onepassword-extension@3x~compact.png */; };
-		DF6352FA57CD21FDA8E1BC17982CAF8F /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D358C73C7068CB4DE3F1D5EF825E17E /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E0A25607027A2B04F9F03F858D18C5A0 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C49E20BA038144D5BF61B92A354206 /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E4450C4F118BC702485B56EA28571900 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F3EE03EC9DD4553655CE53CFFCBF9C7 /* FMDatabasePool.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E528CCFB2121239A05777F1EE8B4294D /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C46C12F21615401590C8F42F44B7314 /* DDDispatchQueueLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E72F18E98F6AD823C181A49F9676881C /* onepassword-extension-light@3x~compact.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D52677C337A30D3FCFB7207EA01B470 /* onepassword-extension-light@3x~compact.png */; };
-		EDEAD1FC8DDB54168159B86F9D6A6AD5 /* 1Password.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89D3E8EB07C747B834C4EA32BB2D0EFB /* 1Password.xcassets */; };
-		F6395CFC993A776F39DC7A008BE9FAA5 /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = 8598443F5BEC1D4BEFA83C4F180BB183 /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F7368ECD53FF411BF07675D88BE6D379 /* Pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A3ADFCB2D5CECDD104E287F5EFC018C5 /* Pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FA20CDADC71BFAB027BC2D4876375F4A /* onepassword-navbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E695D87C42D127CBBFC87BD90632F25 /* onepassword-navbar.png */; };
-		FB43C3595BBBE3F22D9BFB0D01AABBB3 /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = ED7A35EB6812B9BB257DA5352C442631 /* FMDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FD0F32380CE4D3BCDDD6F1AA990FE0E9 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D213253817B313DD69E6D9F674365164 /* CocoaLumberjack.swift */; };
+		02A39F8B3A72D3E336E34139356F6A5E /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F2A54750F46ADDDD8C620A51C3D540EE /* DDMultiFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		03162F6FBBFF4775606AFC6444A3C7BC /* onepassword-extension-light@3x~compact.png in Resources */ = {isa = PBXBuildFile; fileRef = D60BF4F24FF3442844A01D921B5F458F /* onepassword-extension-light@3x~compact.png */; };
+		0609EB54B4E39118857FC292345E7461 /* FMDatabase+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CFC5F89C18063AB88630A902104EEA4 /* FMDatabase+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		07BACDDE0EC91C8C1F7BC33390C87344 /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CAB0E2741E01644C87F6409601EDF28 /* FMDatabaseQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		093609D078A154B7E17835F75A487E3C /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = CF40FAF6000D6006E65E8EC63F8D720B /* DDLogMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0A49140678241829867000A84E017BF8 /* onepassword-toolbar.png in Resources */ = {isa = PBXBuildFile; fileRef = F251075751BCC6723CCD9E498A09E322 /* onepassword-toolbar.png */; };
+		0F83E9950D54B3325FBCD9102BA9130B /* onepassword-navbar-light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CA421DA5880E4791A7FC22096675D5A6 /* onepassword-navbar-light@2x.png */; };
+		0FBB724B8B2A45186D369029D8ACDB44 /* onepassword-extension@2x~regular.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C2F375B7E7D82AB8282398D753B6D3C /* onepassword-extension@2x~regular.png */; };
+		2A6A29CAD800ED3F71FC72F380E5ADBB /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B81F10234D4BCD4B524E155BAB24E0 /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		30314B36B0C3A2F6B1BB05019DE7857A /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5FAC58FE934312A1CEA45012207E56D /* DDDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		3533E693117020E8050CC1167812413C /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = EB93CAE005E4FC3FC0CFA06814282BBC /* FMDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3AE78F265EC9578B995647737A0AFAA6 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0415190C05F3E14B4A6D972E577ACA72 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		3B5B549BC203CE2AA9F5B52B3D5A8CA4 /* Pods-KeitaiWaniKani-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AD1B40227E78BE8223A6EA3626F8AA0 /* Pods-KeitaiWaniKani-dummy.m */; };
+		3DB7862FB83E65375AB21FC76E2DE753 /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = B1202B956A49147518C1434533B4E0E3 /* DDLog+LOGV.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		410EA55906BCBD2E9BCB3746D0BB987B /* onepassword-extension-light~regular.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B249F35A167C9BA0489DC35D04479F0 /* onepassword-extension-light~regular.png */; };
+		4661B2C1110AEF944B8A9848080FC2A2 /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9094CDD4967A8CE0E6AE2339F69FBC6E /* DDContextFilterLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		50BAD6C908615581F757A50C86C08026 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
+		546205F68C5B619AF8075F83B5CE4FA7 /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B4AB5F99DBB9800C2BBE12E109198DE6 /* DDContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		5707377F6C5625A03ECEFC936B5E3CF8 /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F0385B4F8C3845D6D2C539F8AF8D6C67 /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5BFDD4A46F87D54A47D92ABF2F894F6C /* onepassword-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EEB36C96E58433ED56831C683621C1D0 /* onepassword-button@2x.png */; };
+		5C33495C74FBC9D432B795F9ACC9DFF6 /* onepassword-extension-light@2x~regular.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E2FF72EC7D71D6CB10AD1096A16DAB /* onepassword-extension-light@2x~regular.png */; };
+		5C6B42BC007CE112E798727FE31BD878 /* onepassword-button-light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53AB972C3072D75BCB1FB5B189658D9F /* onepassword-button-light@2x.png */; };
+		5EA4528128AC6CE7FFB87BC8CED7A67A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */; };
+		62E146B96CC76C574C55174CB934C049 /* 1PasswordExtension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F02158D5EE1398A9FF8B0CCFF15D78C /* 1PasswordExtension-dummy.m */; };
+		63AEEE80FCA662A31DECE0421F4598FE /* FMDB-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 584293CEC16A05FFEE22B2C62CD5514F /* FMDB-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		69C3E31732A84B840529DD362F2F3E2F /* onepassword-button-light.png in Resources */ = {isa = PBXBuildFile; fileRef = E8D6CF2E8708D1DB5D0A54E8D415A51E /* onepassword-button-light.png */; };
+		6D729EC862FD66C7298F1A0268D2C339 /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = F679E55A0A1A6568C129E40BBA7FA02D /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6E76DB7CFB3EB29B2A3007F79240B925 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = FE51C335E0FB6F952085D3FBAA7A8B0E /* FMDatabasePool.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		6F7DD4B4474BB70863C894D340EE5F94 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 37804ABB10F2D1148E3AC6C04048F3A6 /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		715CE370FD80ED47C9B3E440F121F3BC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
+		788ACAA13D08B8580F8638E0D35BBF3B /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC37C550CE0099D2261067539EBC80E /* SwiftyJSON.swift */; };
+		78937F2D5689B56C6F5DA104227BFCAF /* FMDB-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE07BCA170312AE8DFA44611AD95381A /* FMDB-dummy.m */; };
+		7B65BAA073C184DFD7060DA4FD50FFD1 /* Pods-KeitaiWaniKani-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B164698628E72F709A1EFF355C9DC08 /* Pods-KeitaiWaniKani-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7E079AD6AC309071A275DECA8F2A2933 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 542C2C9AA5B8C6D16AAB5F23A1CA5459 /* DDLog.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		7EAE3B004E8867CB16ECA3BA219D54B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
+		8161C5BAC6975FCDF19BD18736CBE107 /* onepassword-toolbar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 41A1DDBBCE13C55EA117C0D36583F42B /* onepassword-toolbar@3x.png */; };
+		81FB4787BB9DC7A6793401091F545360 /* onepassword-navbar-light@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FF586A076A72E4F707BE4E3FD1DF53E1 /* onepassword-navbar-light@3x.png */; };
+		83DBBC894A6203F6E4CFCDDA4911C9AF /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = EBD22A4B1428D84D081965A44DE7DAE1 /* DDASLLogCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		84170A779E7E5BFB8711667B43522EDA /* onepassword-extension-light~compact.png in Resources */ = {isa = PBXBuildFile; fileRef = F43D17B03BB7D6198FFE84B0CB2501EE /* onepassword-extension-light~compact.png */; };
+		88756437411C0BA31BED1C70905009EB /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = EAB93687DD359B9C20E75D4DC616DC07 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		8968C07D6412C29A06CDD21E176A8790 /* 1Password.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A22447648D7BB67D7FE7760A66F68DF /* 1Password.xcassets */; };
+		8C7114E0961DC39DBD647101A4954911 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = ED58B6B3BC0FF665F0D364AAF19FA169 /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D2785903123280114C8F3DBF46744BF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
+		903C373321B237294AE4541BC5654749 /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = D9884E07B0426745EF1B33821954B693 /* DDASLLogCapture.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		91FDF8A5A1BC96856AC4470759421D6B /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = B2E63518FAC63CFE6346A87A2988D8A8 /* DDAssertMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		948D94766FEB76BCD3ADC9D5386A9ED6 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = FFD25C94CB06F83FCD1982A2DFC2BB8C /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		9630205806FA13CEE278F4E4FA6DA3F0 /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 011B372E1135FB9AAFF1A5EF24D67613 /* DDLegacyMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9DE39E915B1BD1524E76A6D46E552776 /* onepassword-extension~compact.png in Resources */ = {isa = PBXBuildFile; fileRef = 95FBC1AF84C3DE4CD3E98E5929AC260B /* onepassword-extension~compact.png */; };
+		A7E8FB4E56812F86EC0AD7535003E6D3 /* onepassword-toolbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A348EED0DF648BB2EFAE2C79B541902E /* onepassword-toolbar@2x.png */; };
+		A898D0F955339E6881D0EAFDBDD478D6 /* Pods-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D47C2E1168EFB26D521488D33A15DED7 /* Pods-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9C8BBD485B6AE706640E9EA9249D39B /* onepassword-navbar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = E55DC71097AB4D5585AD5B4DFB8CF374 /* onepassword-navbar@3x.png */; };
+		ADAB596307334EB253E60C441CB46139 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
+		AE4B151EAF5003685962E5601C55F58A /* OnePasswordExtensionResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F5CA94E11086897955CBB3C0C8819D3B /* OnePasswordExtensionResources.bundle */; };
+		B11B7A22C629F8C1136E77515B2CDA02 /* onepassword-extension@2x~compact.png in Resources */ = {isa = PBXBuildFile; fileRef = C0F4E36F356E41D73F0CE5E293DF506D /* onepassword-extension@2x~compact.png */; };
+		B54289A84A48604EE38881A0E071AD48 /* onepassword-extension~regular.png in Resources */ = {isa = PBXBuildFile; fileRef = CCF87BCF7AC0377C25BA41E64BF3A49D /* onepassword-extension~regular.png */; };
+		B61B8ACD7135223233EA574580E3B040 /* onepassword-toolbar-light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2F48C88EB36B917FB94064B4E0A924A9 /* onepassword-toolbar-light@2x.png */; };
+		BD4F190C5655A904B8AE2486ADBFDD32 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = FE66EF6743CDC3DC194C38D68114D7FC /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BD687FC56130CEEB1049FEEC1127C5F7 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A44F77FDBC9F132A3E53FF7648054EF /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BED21B6237708EC89E1CDC9E7E4FCB49 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F9ABAB644CEF8C489D27D645F7ACA4D /* DDAbstractDatabaseLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C31506056B8DB16EB0F7D9D4B2CDF629 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B136160802ED8E15045D34C920C31C2 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		C32CF4DD337DE89B987C6119D8E74710 /* onepassword-navbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 11CB3EB0770DABC72C13CD47B5958882 /* onepassword-navbar@2x.png */; };
+		C614D999D29E96EE823C75220ECEC0C6 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = C576C9196E735F5BD3E5DCFEF20B9F4C /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		CA055F7C7C352B1A1E177863F0AF11B6 /* onepassword-navbar-light.png in Resources */ = {isa = PBXBuildFile; fileRef = 11CF70B491F85A96BDB68A0FC7C26115 /* onepassword-navbar-light.png */; };
+		CB4A7A09049C12437382BB51FB2B519A /* onepassword-toolbar-light@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BC85424F80869CC41FD6CEFB131C659E /* onepassword-toolbar-light@3x.png */; };
+		CC50CAF7FF957283D42DEBF5C63B12FE /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F775B3A1523B515B8B6F0485F0B96CF /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		CC5FEAEB89DE59D36D674D0E9D52428C /* onepassword-toolbar-light.png in Resources */ = {isa = PBXBuildFile; fileRef = 107172BB4185D1E0032547DF94DC13B6 /* onepassword-toolbar-light.png */; };
+		CD81315E9E8FD7FD4F3C4D28BAB50C3D /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 311DEDA68B60CE09AA9A619A04499291 /* CocoaLumberjack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CEAF472964979C3218CF0AFB20703306 /* onepassword-button.png in Resources */ = {isa = PBXBuildFile; fileRef = C97C0505CE4D8CD3012CFC1C9667444A /* onepassword-button.png */; };
+		CED79DE801DE133B9FC1E7716D65EBF5 /* onepassword-button@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B1D4068E668F154FBE58C85FB8EFC9F /* onepassword-button@3x.png */; };
+		D2D417A51677012E9EEF8F1297F87231 /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = BE533BC8781022B1A61EC39CC5BE1868 /* DDMultiFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5B5AA391818C821A981129B1E1388F5 /* CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 92597E1C8064071360E8D5CA8F41D26F /* CocoaLumberjack-dummy.m */; };
+		D7FC54BD8552D287685873F972FCE475 /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 32395B57ED9437FBA14F93D5165B3BC4 /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DF0E4A2B45545137FB5294B838EE6A49 /* onepassword-navbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 38AE905DDCB970758182FC4E686E1B6F /* onepassword-navbar.png */; };
+		E35C17E5C254DD854CDB3A05B1F3A98A /* onepassword-extension@3x~compact.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1A631A8C587D55814D497C97B2E4E0 /* onepassword-extension@3x~compact.png */; };
+		E42339C81E18F58451BC9B15844E1ACC /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F1F4C26C5EC8DAFB57FFA490C39F054A /* Pods-dummy.m */; };
+		E747D3457DA2D0D95C5C030983663674 /* onepassword-button-light@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2A565635816350D9931D594CD3DA168C /* onepassword-button-light@3x.png */; };
+		E7C7A7317124A1FEA09C8DFB95FACE7B /* OnePasswordExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 63CC88CE725EADAADDC9917BD43EC196 /* OnePasswordExtension.m */; };
+		EAAD4EB2DC3993E40926CF8D93BEA794 /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D6FA6D7CF73284735327D9C9B2F065 /* SwiftyJSON-dummy.m */; };
+		EAE970E887C03DE9D99C0E18036B6FA9 /* OnePasswordExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = D837A82183E6C50661BF40D41835C76D /* OnePasswordExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ECB58C2372417300030D10FE302FD32E /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B924F12C6097120D50F07A9F1A95075 /* DDTTYLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EE61F282567EEFBBDC8BA0BE06433C6F /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = F0C7A6388C72B6CA5FFF303E3FCF2483 /* DDFileLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EFD1A8C17A9631363C4AC6E2BE2F1434 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D0C17C39C2EBF55D1227955D19C9299 /* DDASLLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F185D5C38C5F56AE5BF8923B49A4E061 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A00168F3F1DAF3CF9A6583EA2807D3 /* CocoaLumberjack.swift */; };
+		F3E5C62D72C98FEDEDA619582108B1D7 /* onepassword-extension-light@2x~compact.png in Resources */ = {isa = PBXBuildFile; fileRef = 960377247F82135FEA90D1C3CACCF50D /* onepassword-extension-light@2x~compact.png */; };
+		F6B2D1720CCF6A5A35163A64C96154CA /* 1PasswordExtension-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 81DCB1446CBD2A737EF2E61078D05576 /* 1PasswordExtension-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB73CC220FBF2BD69320CC68B7892CFB /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = F832EF106A59B8F352E8DA62AD16D12E /* DDDispatchQueueLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FC558D517BEA67914CE816BF78C61CCA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		021B32ACFBC77E2EEA353227A657FB08 /* PBXContainerItemProxy */ = {
+		1341860FAD1BB00901B5D25960BF9441 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 251EFAE3D9DF4B50EDBA0A44CA52C13E;
+			remoteGlobalIDString = BECABEDAB48604D681293C70DA19828D;
+			remoteInfo = SwiftyJSON;
+		};
+		4CD24C844F3A423B182504E4FB9FA81B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BECABEDAB48604D681293C70DA19828D;
+			remoteInfo = SwiftyJSON;
+		};
+		8B7A511048ABED61512910C40F257C67 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D082FD9722F53B9C3A1229257D4008F7;
+			remoteInfo = CocoaLumberjack;
+		};
+		921AB2F74EA95232D72B0C59252E2B31 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FF62A25D3E480238C0D473193AB70325;
 			remoteInfo = "1PasswordExtension-OnePasswordExtensionResources";
 		};
-		4395D3B098049BF873FB854C95A55626 /* PBXContainerItemProxy */ = {
+		945C41048A91E3F43FA964EC467E0A91 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = AFDCF589EE25B7D4E29348E6921EBC07;
+			remoteGlobalIDString = DAA98624E34DF6800E87FF078754FB49;
 			remoteInfo = FMDB;
 		};
-		4DBC9E2C091AD7C5B91480E51D360BF6 /* PBXContainerItemProxy */ = {
+		DFDCE68A401CE91091C8DCC1D878E506 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = AFDCF589EE25B7D4E29348E6921EBC07;
+			remoteGlobalIDString = D082FD9722F53B9C3A1229257D4008F7;
+			remoteInfo = CocoaLumberjack;
+		};
+		E1B73EC9E81D1875E149F27010E163CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DAA98624E34DF6800E87FF078754FB49;
 			remoteInfo = FMDB;
 		};
-		69B90051CF9A14C99DD068BE1587B12B /* PBXContainerItemProxy */ = {
+		E7009C01C1DD9E875D79018068FC74D6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 71ABBFE8FF93CAC76E2EE0620997320F;
-			remoteInfo = SwiftyJSON;
-		};
-		6E1C3CD63937523313F68BEC7B06BC09 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 71ABBFE8FF93CAC76E2EE0620997320F;
-			remoteInfo = SwiftyJSON;
-		};
-		C293D0CCCC24B6A07F2E38191DA93E81 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2AF51E1EFB134E21EA2911FE2D669846;
-			remoteInfo = CocoaLumberjack;
-		};
-		E132BE6887D325B75DF06B88D2BE2040 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2AF51E1EFB134E21EA2911FE2D669846;
-			remoteInfo = CocoaLumberjack;
-		};
-		FD4C9A8B74DE45A6C52B905B6EF03193 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A77C2EE4AC41E0392C0A45900884D8B7;
+			remoteGlobalIDString = D8B57B89BC28E74DBA035283E73E0107;
 			remoteInfo = 1PasswordExtension;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0087E64540ABCD129D88C58E5285C9E5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
-		02D39FD411E1DC335DB87DB605FD7BA3 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = src/fmdb/FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		03337439007B956A7BDEDD64C8230097 /* FMDB-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FMDB-dummy.m"; sourceTree = "<group>"; };
-		03618CB0BEE87153BA7A46586FCD8916 /* FMResultSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = src/fmdb/FMResultSet.h; sourceTree = "<group>"; };
-		06375DB691164336905B1E0CB233154A /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
-		07ECFE3FEFE7165F9AAE964450D8ACA6 /* OnePasswordExtensionResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnePasswordExtensionResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		08330A66B24C9510ED6A014DD8AF959F /* Pods-KeitaiWaniKani-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KeitaiWaniKani-dummy.m"; sourceTree = "<group>"; };
-		095588D4E3382085ED8101A333BA7651 /* DDLegacyMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLegacyMacros.h; path = Classes/DDLegacyMacros.h; sourceTree = "<group>"; };
-		0C6B9C7707AD0C4224C088261DA4D9E1 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		11A49EE2AF3B56289F88D172CC48843A /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Classes/DDASLLogCapture.h; sourceTree = "<group>"; };
-		12DB1CF055A02C095D5CE6FB1DE24258 /* onepassword-toolbar-light@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-toolbar-light@3x.png"; path = "1Password.xcassets/onepassword-toolbar-light.imageset/onepassword-toolbar-light@3x.png"; sourceTree = "<group>"; };
-		1BDDBB59A499B93873A5E397FE7373AC /* onepassword-button-light@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-button-light@3x.png"; path = "1Password.xcassets/onepassword-button-light.imageset/onepassword-button-light@3x.png"; sourceTree = "<group>"; };
-		1D358C73C7068CB4DE3F1D5EF825E17E /* FMDatabase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = src/fmdb/FMDatabase.h; sourceTree = "<group>"; };
-		1DA3A0E2C1FB5085EA3C287220D2E0C7 /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
+		011B372E1135FB9AAFF1A5EF24D67613 /* DDLegacyMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLegacyMacros.h; path = Classes/DDLegacyMacros.h; sourceTree = "<group>"; };
+		0415190C05F3E14B4A6D972E577ACA72 /* FMResultSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = src/fmdb/FMResultSet.m; sourceTree = "<group>"; };
+		04E2FF72EC7D71D6CB10AD1096A16DAB /* onepassword-extension-light@2x~regular.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension-light@2x~regular.png"; path = "1Password.xcassets/onepassword-extension-light.imageset/onepassword-extension-light@2x~regular.png"; sourceTree = "<group>"; };
+		0A22447648D7BB67D7FE7760A66F68DF /* 1Password.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = 1Password.xcassets; sourceTree = "<group>"; };
+		107172BB4185D1E0032547DF94DC13B6 /* onepassword-toolbar-light.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-toolbar-light.png"; path = "1Password.xcassets/onepassword-toolbar-light.imageset/onepassword-toolbar-light.png"; sourceTree = "<group>"; };
+		11CB3EB0770DABC72C13CD47B5958882 /* onepassword-navbar@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-navbar@2x.png"; path = "1Password.xcassets/onepassword-navbar.imageset/onepassword-navbar@2x.png"; sourceTree = "<group>"; };
+		11CF70B491F85A96BDB68A0FC7C26115 /* onepassword-navbar-light.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-navbar-light.png"; path = "1Password.xcassets/onepassword-navbar-light.imageset/onepassword-navbar-light.png"; sourceTree = "<group>"; };
+		11FDEF1EC73C32CBEAE53B5B073E8BDE /* CocoaLumberjack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaLumberjack.xcconfig; sourceTree = "<group>"; };
+		13A00168F3F1DAF3CF9A6583EA2807D3 /* CocoaLumberjack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CocoaLumberjack.swift; path = Classes/CocoaLumberjack.swift; sourceTree = "<group>"; };
 		1E3234DF6C7066CC8C4AEC7EB6E2FE3C /* 1PasswordExtension-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "1PasswordExtension-prefix.pch"; sourceTree = "<group>"; };
-		1F16D91426AAE46F6A587EC8B7567F29 /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
-		20B8092CDF4ADE5E613BE3D0156BADC6 /* FMDatabase+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FMDatabase+Private.h"; path = "src/fmdb/FMDatabase+Private.h"; sourceTree = "<group>"; };
 		20FE2835465F16B89A55D3A14DB7811E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		21025B1F8ED7B5393DAD71ECF910A8BD /* FMDatabaseQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = src/fmdb/FMDatabaseQueue.h; sourceTree = "<group>"; };
 		25A82DCE58694C88760D73AEB35875A4 /* Pods.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Pods.modulemap; sourceTree = "<group>"; };
 		28A73017A7266AA2B81381DFB911EC4F /* 1PasswordExtension.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = 1PasswordExtension.modulemap; sourceTree = "<group>"; };
+		2A565635816350D9931D594CD3DA168C /* onepassword-button-light@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-button-light@3x.png"; path = "1Password.xcassets/onepassword-button-light.imageset/onepassword-button-light@3x.png"; sourceTree = "<group>"; };
+		2B136160802ED8E15045D34C920C31C2 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = src/fmdb/FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		2B1D4068E668F154FBE58C85FB8EFC9F /* onepassword-button@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-button@3x.png"; path = "1Password.xcassets/onepassword-button.imageset/onepassword-button@3x.png"; sourceTree = "<group>"; };
+		2B249F35A167C9BA0489DC35D04479F0 /* onepassword-extension-light~regular.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension-light~regular.png"; path = "1Password.xcassets/onepassword-extension-light.imageset/onepassword-extension-light~regular.png"; sourceTree = "<group>"; };
 		2BD9872BF5F0EFBBDE8D534E032B11A1 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
-		2C6616841261520923B447F7971A5611 /* onepassword-button@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-button@2x.png"; path = "1Password.xcassets/onepassword-button.imageset/onepassword-button@2x.png"; sourceTree = "<group>"; };
-		2E138744D2C5D6D39794FBACC5AF2684 /* FMResultSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = src/fmdb/FMResultSet.m; sourceTree = "<group>"; };
-		33540953BFAEE6A5E704DE60C3B6E424 /* onepassword-extension-light~regular.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension-light~regular.png"; path = "1Password.xcassets/onepassword-extension-light.imageset/onepassword-extension-light~regular.png"; sourceTree = "<group>"; };
-		38622354A99E221E0694822E6C91D91A /* 1PasswordExtension-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "1PasswordExtension-umbrella.h"; sourceTree = "<group>"; };
-		3BD02DF693BC0E94B856EC8BCB4D1AC5 /* onepassword-navbar@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-navbar@2x.png"; path = "1Password.xcassets/onepassword-navbar.imageset/onepassword-navbar@2x.png"; sourceTree = "<group>"; };
-		3D52677C337A30D3FCFB7207EA01B470 /* onepassword-extension-light@3x~compact.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension-light@3x~compact.png"; path = "1Password.xcassets/onepassword-extension-light.imageset/onepassword-extension-light@3x~compact.png"; sourceTree = "<group>"; };
-		41A5F7B903A6013389F45029A3F2E3BE /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = src/fmdb/FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		426ED4568EA6080FADF3A2B8CB33657E /* onepassword-navbar-light@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-navbar-light@2x.png"; path = "1Password.xcassets/onepassword-navbar-light.imageset/onepassword-navbar-light@2x.png"; sourceTree = "<group>"; };
+		2C2F375B7E7D82AB8282398D753B6D3C /* onepassword-extension@2x~regular.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension@2x~regular.png"; path = "1Password.xcassets/onepassword-extension.imageset/onepassword-extension@2x~regular.png"; sourceTree = "<group>"; };
+		2F48C88EB36B917FB94064B4E0A924A9 /* onepassword-toolbar-light@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-toolbar-light@2x.png"; path = "1Password.xcassets/onepassword-toolbar-light.imageset/onepassword-toolbar-light@2x.png"; sourceTree = "<group>"; };
+		311DEDA68B60CE09AA9A619A04499291 /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
+		316AA6F85CF57BB7D8DF741A595FE0FB /* FMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		31A862C4B41212B2F64B5E7A00A2F09B /* Pods-KeitaiWaniKani.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KeitaiWaniKani.debug.xcconfig"; sourceTree = "<group>"; };
+		32395B57ED9437FBA14F93D5165B3BC4 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = src/fmdb/FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		37804ABB10F2D1148E3AC6C04048F3A6 /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
+		38AE905DDCB970758182FC4E686E1B6F /* onepassword-navbar.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-navbar.png"; path = "1Password.xcassets/onepassword-navbar.imageset/onepassword-navbar.png"; sourceTree = "<group>"; };
+		3D0C17C39C2EBF55D1227955D19C9299 /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = Classes/DDASLLogger.h; sourceTree = "<group>"; };
+		3F02158D5EE1398A9FF8B0CCFF15D78C /* 1PasswordExtension-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "1PasswordExtension-dummy.m"; sourceTree = "<group>"; };
+		3F9ABAB644CEF8C489D27D645F7ACA4D /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Classes/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		41A1DDBBCE13C55EA117C0D36583F42B /* onepassword-toolbar@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-toolbar@3x.png"; path = "1Password.xcassets/onepassword-toolbar.imageset/onepassword-toolbar@3x.png"; sourceTree = "<group>"; };
 		42B7FEC1B086697498621F7E0582B0CB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		436463C11138B9A23DB417AD8EC39944 /* FMDB-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-umbrella.h"; sourceTree = "<group>"; };
+		448463B218602A39A5D310BCD5236E74 /* FMDB.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FMDB.xcconfig; sourceTree = "<group>"; };
 		49EED8A8CE619494D328A2A7E49709B6 /* Pods-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-frameworks.sh"; sourceTree = "<group>"; };
 		4A27073988EA94562E2668824009AF94 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4BEF1DD18195D1D0DFFFFEA002BF6099 /* OnePasswordExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OnePasswordExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D7263E05225200242D868027CFD88A4 /* onepassword-button@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-button@3x.png"; path = "1Password.xcassets/onepassword-button.imageset/onepassword-button@3x.png"; sourceTree = "<group>"; };
-		4EAC08EF19A9CA9FAF85ADB0CC835086 /* onepassword-extension~compact.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension~compact.png"; path = "1Password.xcassets/onepassword-extension.imageset/onepassword-extension~compact.png"; sourceTree = "<group>"; };
-		52232D9474887B11D203DA59838236A4 /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDDispatchQueueLogFormatter.m; path = Classes/Extensions/DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
-		540A999444E52AD998ECBB55617D5347 /* 1PasswordExtension-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "1PasswordExtension-dummy.m"; sourceTree = "<group>"; };
-		5571EE02B5BC08737531571AD83539CF /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Classes/DDAssertMacros.h; sourceTree = "<group>"; };
-		56142CC159676B07F737976AA71A662C /* onepassword-button-light@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-button-light@2x.png"; path = "1Password.xcassets/onepassword-button-light.imageset/onepassword-button-light@2x.png"; sourceTree = "<group>"; };
-		567644705BD1C401B767C19A16523C82 /* onepassword-toolbar@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-toolbar@3x.png"; path = "1Password.xcassets/onepassword-toolbar.imageset/onepassword-toolbar@3x.png"; sourceTree = "<group>"; };
-		5FCF65DBEFB50F4C7F2F47E0BEC0943B /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDContextFilterLogFormatter.m; path = Classes/Extensions/DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		4AD1B40227E78BE8223A6EA3626F8AA0 /* Pods-KeitaiWaniKani-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KeitaiWaniKani-dummy.m"; sourceTree = "<group>"; };
+		4CFC5F89C18063AB88630A902104EEA4 /* FMDatabase+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FMDatabase+Private.h"; path = "src/fmdb/FMDatabase+Private.h"; sourceTree = "<group>"; };
+		4FC37C550CE0099D2261067539EBC80E /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = "<group>"; };
+		51D6FA6D7CF73284735327D9C9B2F065 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
+		53AB972C3072D75BCB1FB5B189658D9F /* onepassword-button-light@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-button-light@2x.png"; path = "1Password.xcassets/onepassword-button-light.imageset/onepassword-button-light@2x.png"; sourceTree = "<group>"; };
+		53DE84D24376D4C2E4ACCE2A20BF3D94 /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
+		542C2C9AA5B8C6D16AAB5F23A1CA5459 /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = Classes/DDLog.m; sourceTree = "<group>"; };
+		584293CEC16A05FFEE22B2C62CD5514F /* FMDB-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-umbrella.h"; sourceTree = "<group>"; };
+		5A589D82F9882611910C4310412A6D7C /* Pods-KeitaiWaniKani.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KeitaiWaniKani.release.xcconfig"; sourceTree = "<group>"; };
+		5B1A631A8C587D55814D497C97B2E4E0 /* onepassword-extension@3x~compact.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension@3x~compact.png"; path = "1Password.xcassets/onepassword-extension.imageset/onepassword-extension@3x~compact.png"; sourceTree = "<group>"; };
+		5B924F12C6097120D50F07A9F1A95075 /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Classes/DDTTYLogger.h; sourceTree = "<group>"; };
+		5F775B3A1523B515B8B6F0485F0B96CF /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		63CC88CE725EADAADDC9917BD43EC196 /* OnePasswordExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = OnePasswordExtension.m; sourceTree = "<group>"; };
 		67DB2729559B9C811BAF2F0445C3C568 /* CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
-		69782DEB1641D4E99B581FA9A695B417 /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
 		6A3DFC7AE29AABEDF218BCE3EAA420CA /* Pods-KeitaiWaniKani-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KeitaiWaniKani-frameworks.sh"; sourceTree = "<group>"; };
-		6C46C12F21615401590C8F42F44B7314 /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDDispatchQueueLogFormatter.h; path = Classes/Extensions/DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
-		70FF100145F9C45692DA7F52187D4F29 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
-		71401AAA71EBD132D1951376C92D34AF /* onepassword-extension-light@2x~regular.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension-light@2x~regular.png"; path = "1Password.xcassets/onepassword-extension-light.imageset/onepassword-extension-light@2x~regular.png"; sourceTree = "<group>"; };
+		6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		6F7CE41FB66F8C7386E6F97255FB2F80 /* OnePasswordExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OnePasswordExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		72EA2F76A54DE18100F2323A3EA40680 /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
 		7A058F61B7C28D478976C63BDBCDB554 /* FMDB-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-prefix.pch"; sourceTree = "<group>"; };
-		7E695D87C42D127CBBFC87BD90632F25 /* onepassword-navbar.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-navbar.png"; path = "1Password.xcassets/onepassword-navbar.imageset/onepassword-navbar.png"; sourceTree = "<group>"; };
-		8004DF160705A12B1B03B64C31FDC8C7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		837FC5F68B655DC0D44990E4E10B2132 /* onepassword-extension-light@2x~compact.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension-light@2x~compact.png"; path = "1Password.xcassets/onepassword-extension-light.imageset/onepassword-extension-light@2x~compact.png"; sourceTree = "<group>"; };
+		7A44F77FDBC9F132A3E53FF7648054EF /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Classes/DDLog.h; sourceTree = "<group>"; };
+		7B164698628E72F709A1EFF355C9DC08 /* Pods-KeitaiWaniKani-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-KeitaiWaniKani-umbrella.h"; sourceTree = "<group>"; };
+		7C4E6FA3D62A0FA770C6522052BFB3DF /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CAB0E2741E01644C87F6409601EDF28 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = src/fmdb/FMDatabaseQueue.h; sourceTree = "<group>"; };
+		81DCB1446CBD2A737EF2E61078D05576 /* 1PasswordExtension-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "1PasswordExtension-umbrella.h"; sourceTree = "<group>"; };
 		847F032451405EBC7F2371FEDF152DD0 /* Pods-KeitaiWaniKani.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-KeitaiWaniKani.modulemap"; sourceTree = "<group>"; };
 		8570C455A63FBC4F5770DE363BB98B9F /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
-		8598443F5BEC1D4BEFA83C4F180BB183 /* FMDatabasePool.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = src/fmdb/FMDatabasePool.h; sourceTree = "<group>"; };
 		85BA75B58B9153E39F67D3658971F592 /* Pods-KeitaiWaniKani-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KeitaiWaniKani-resources.sh"; sourceTree = "<group>"; };
-		887614C858894EAE9121F7D6FE3AB48C /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
-		89D3E8EB07C747B834C4EA32BB2D0EFB /* 1Password.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = 1Password.xcassets; sourceTree = "<group>"; };
-		8DAB8467A94140C7AA6C06150BFA87CB /* onepassword-extension-light~compact.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension-light~compact.png"; path = "1Password.xcassets/onepassword-extension-light.imageset/onepassword-extension-light~compact.png"; sourceTree = "<group>"; };
-		8DDC8FAD954356F3C0C929EDF88C2A47 /* CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
-		8F3EE03EC9DD4553655CE53CFFCBF9C7 /* FMDatabasePool.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = src/fmdb/FMDatabasePool.m; sourceTree = "<group>"; };
-		915E78642DCC6824C1526C589017F2C2 /* Pods-KeitaiWaniKani.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KeitaiWaniKani.debug.xcconfig"; sourceTree = "<group>"; };
-		947246CC34C134D2931B6A41893BDEC0 /* CocoaLumberjack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaLumberjack.xcconfig; sourceTree = "<group>"; };
-		9613B9A16158013F598FAE8A57C8E40B /* onepassword-toolbar-light@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-toolbar-light@2x.png"; path = "1Password.xcassets/onepassword-toolbar-light.imageset/onepassword-toolbar-light@2x.png"; sourceTree = "<group>"; };
+		9094CDD4967A8CE0E6AE2339F69FBC6E /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		92597E1C8064071360E8D5CA8F41D26F /* CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
+		95FBC1AF84C3DE4CD3E98E5929AC260B /* onepassword-extension~compact.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension~compact.png"; path = "1Password.xcassets/onepassword-extension.imageset/onepassword-extension~compact.png"; sourceTree = "<group>"; };
+		960377247F82135FEA90D1C3CACCF50D /* onepassword-extension-light@2x~compact.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension-light@2x~compact.png"; path = "1Password.xcassets/onepassword-extension-light.imageset/onepassword-extension-light@2x~compact.png"; sourceTree = "<group>"; };
 		9690693ECC56A589F94A2E783AD73B8B /* CocoaLumberjack.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = CocoaLumberjack.modulemap; sourceTree = "<group>"; };
-		97D494C96CA2426515FA89221A2FE087 /* onepassword-button-light.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-button-light.png"; path = "1Password.xcassets/onepassword-button-light.imageset/onepassword-button-light.png"; sourceTree = "<group>"; };
-		9BF145D0EEA370FD11F1D198193A0216 /* onepassword-extension@3x~compact.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension@3x~compact.png"; path = "1Password.xcassets/onepassword-extension.imageset/onepassword-extension@3x~compact.png"; sourceTree = "<group>"; };
-		9D78557F8AE1115F6783CEEDAD904AAD /* FMDatabase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = src/fmdb/FMDatabase.m; sourceTree = "<group>"; };
-		9D9F1A6D69213397980918706C61FC11 /* onepassword-toolbar.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-toolbar.png"; path = "1Password.xcassets/onepassword-toolbar.imageset/onepassword-toolbar.png"; sourceTree = "<group>"; };
 		9EBB7AE6C665270DF78937BAC533FA3E /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
-		A3ADFCB2D5CECDD104E287F5EFC018C5 /* Pods-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-umbrella.h"; sourceTree = "<group>"; };
-		A72965282F83EA8C2567DDAAD29AF4EE /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = Classes/DDLog.m; sourceTree = "<group>"; };
-		A81DDC57403B5A689C5DE7DC6899C0E4 /* onepassword-toolbar-light.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-toolbar-light.png"; path = "1Password.xcassets/onepassword-toolbar-light.imageset/onepassword-toolbar-light.png"; sourceTree = "<group>"; };
-		AA040C04FDABF62CAF3D9CB72BD65DAA /* onepassword-navbar-light@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-navbar-light@3x.png"; path = "1Password.xcassets/onepassword-navbar-light.imageset/onepassword-navbar-light@3x.png"; sourceTree = "<group>"; };
+		A348EED0DF648BB2EFAE2C79B541902E /* onepassword-toolbar@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-toolbar@2x.png"; path = "1Password.xcassets/onepassword-toolbar.imageset/onepassword-toolbar@2x.png"; sourceTree = "<group>"; };
+		A5FA48FD1B2108F83739888FD061BCD9 /* Pods_KeitaiWaniKani.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeitaiWaniKani.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACA2ED4BFAA0CB82375DDA67B0B9F69A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AE210A6FBAF0BE379425AB00A01684DA /* 1PasswordExtension.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = 1PasswordExtension.xcconfig; sourceTree = "<group>"; };
-		AE677B531BC3AA3A38D3D39260C5B5AC /* DDASLLogCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogCapture.m; path = Classes/DDASLLogCapture.m; sourceTree = "<group>"; };
-		B1342059833FB1D34E003F270C77E77B /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
-		B2FF5C6C1A47FD5DE45C236E0A651096 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1202B956A49147518C1434533B4E0E3 /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Classes/DDLog+LOGV.h"; sourceTree = "<group>"; };
+		B2E63518FAC63CFE6346A87A2988D8A8 /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Classes/DDAssertMacros.h; sourceTree = "<group>"; };
 		B34F699B36356994342C5DE63D7BB7B7 /* Pods-KeitaiWaniKani-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-KeitaiWaniKani-acknowledgements.markdown"; sourceTree = "<group>"; };
-		B49C10E01E9F4272E366A9F6391D860C /* FMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B4C35CDAD233E05D00876FCCD5DAD8C7 /* OnePasswordExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = OnePasswordExtension.m; sourceTree = "<group>"; };
-		B4EFCDFD447C798135C65CFD626B2F21 /* OnePasswordExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OnePasswordExtension.h; sourceTree = "<group>"; };
-		B5AB75B0F0BA0230C1AD5D4B867965D5 /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Classes/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
-		B64D907C7D0F65251F6091DF6164CA3E /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = Classes/DDASLLogger.h; sourceTree = "<group>"; };
-		B650A1B863E44CED52A6E24F1961660C /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		B4AB5F99DBB9800C2BBE12E109198DE6 /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDContextFilterLogFormatter.m; path = Classes/Extensions/DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		B6FD163D55ABEA2AD1F31DF4F4399569 /* 1PasswordExtension.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = 1PasswordExtension.xcconfig; sourceTree = "<group>"; };
+		BA3FD18FA427750272E558B9A33A1B23 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		BC5FA1208D92D3F901B891F98F0FADB8 /* Pods-KeitaiWaniKani.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KeitaiWaniKani.release.xcconfig"; sourceTree = "<group>"; };
-		BD04C3E11EF5403ACFBF1C814BFB2486 /* onepassword-toolbar@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-toolbar@2x.png"; path = "1Password.xcassets/onepassword-toolbar.imageset/onepassword-toolbar@2x.png"; sourceTree = "<group>"; };
+		BC85424F80869CC41FD6CEFB131C659E /* onepassword-toolbar-light@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-toolbar-light@3x.png"; path = "1Password.xcassets/onepassword-toolbar-light.imageset/onepassword-toolbar-light@3x.png"; sourceTree = "<group>"; };
+		BE07BCA170312AE8DFA44611AD95381A /* FMDB-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FMDB-dummy.m"; sourceTree = "<group>"; };
+		BE533BC8781022B1A61EC39CC5BE1868 /* DDMultiFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDMultiFormatter.h; path = Classes/Extensions/DDMultiFormatter.h; sourceTree = "<group>"; };
+		C0F4E36F356E41D73F0CE5E293DF506D /* onepassword-extension@2x~compact.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension@2x~compact.png"; path = "1Password.xcassets/onepassword-extension.imageset/onepassword-extension@2x~compact.png"; sourceTree = "<group>"; };
 		C30B2A067F09A009D14922B0F7852F97 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		C576C9196E735F5BD3E5DCFEF20B9F4C /* FMDatabaseQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = src/fmdb/FMDatabaseQueue.m; sourceTree = "<group>"; };
+		C5B81F10234D4BCD4B524E155BAB24E0 /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Classes/DDTTYLogger.m; sourceTree = "<group>"; };
 		C600A24E636A5711B2A29BE57433F88E /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
-		C657778878A92A64D275ECFEB6C34F90 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = src/fmdb/FMDatabaseQueue.m; sourceTree = "<group>"; };
-		C91432AD072E04FC818EA4750BE3674E /* FMDB.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FMDB.xcconfig; sourceTree = "<group>"; };
-		CA4E6947A91367EA3911CDE1B74D2796 /* Pods_KeitaiWaniKani.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeitaiWaniKani.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF1DB8B3C51F4EA26C2158F468645CEA /* Pods-KeitaiWaniKani-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-KeitaiWaniKani-umbrella.h"; sourceTree = "<group>"; };
-		CF7177C9F81334293212246A08388194 /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
-		D085A2BC5BF35A706A02866C5FA3CB1D /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Classes/DDFileLogger.m; sourceTree = "<group>"; };
-		D0D3C0A4A2D5F3EB3D248A8BACA3C737 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Classes/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
-		D213253817B313DD69E6D9F674365164 /* CocoaLumberjack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CocoaLumberjack.swift; path = Classes/CocoaLumberjack.swift; sourceTree = "<group>"; };
-		D94D7642340144E572B13D16958F7E82 /* onepassword-navbar@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-navbar@3x.png"; path = "1Password.xcassets/onepassword-navbar.imageset/onepassword-navbar@3x.png"; sourceTree = "<group>"; };
-		DA74B27B421761D90AF3210CFFDB7E40 /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Classes/DDLog.h; sourceTree = "<group>"; };
-		DD053094262EE875FB47561D274603C7 /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Classes/DDTTYLogger.h; sourceTree = "<group>"; };
-		DE3FA9712F2D98A522D464B2B7CEB2B5 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = "<group>"; };
-		E22506CD1162ADBF761EDB8C96E921B8 /* onepassword-extension~regular.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension~regular.png"; path = "1Password.xcassets/onepassword-extension.imageset/onepassword-extension~regular.png"; sourceTree = "<group>"; };
-		E4931FB40E92E36051584CD03BD78A07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		E7C49E20BA038144D5BF61B92A354206 /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Classes/DDTTYLogger.m; sourceTree = "<group>"; };
-		EB435AEA68587B27B8F94703FE154FEB /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Classes/DDFileLogger.h; sourceTree = "<group>"; };
-		ED7A35EB6812B9BB257DA5352C442631 /* FMDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = src/fmdb/FMDB.h; sourceTree = "<group>"; };
-		EF03164AC8B229C1AE7F2C19594CFEBA /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Classes/DDLog+LOGV.h"; sourceTree = "<group>"; };
-		EFD0D482DCC97A26E3115770F83AF0DC /* onepassword-extension@2x~regular.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension@2x~regular.png"; path = "1Password.xcassets/onepassword-extension.imageset/onepassword-extension@2x~regular.png"; sourceTree = "<group>"; };
-		F0612FF293A8BAF0EAB42C6018881F30 /* onepassword-extension@2x~compact.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension@2x~compact.png"; path = "1Password.xcassets/onepassword-extension.imageset/onepassword-extension@2x~compact.png"; sourceTree = "<group>"; };
+		C97C0505CE4D8CD3012CFC1C9667444A /* onepassword-button.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-button.png"; path = "1Password.xcassets/onepassword-button.imageset/onepassword-button.png"; sourceTree = "<group>"; };
+		C9E641FC2BFD4A2FDC417C4967C97FB6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		CA421DA5880E4791A7FC22096675D5A6 /* onepassword-navbar-light@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-navbar-light@2x.png"; path = "1Password.xcassets/onepassword-navbar-light.imageset/onepassword-navbar-light@2x.png"; sourceTree = "<group>"; };
+		CCF87BCF7AC0377C25BA41E64BF3A49D /* onepassword-extension~regular.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension~regular.png"; path = "1Password.xcassets/onepassword-extension.imageset/onepassword-extension~regular.png"; sourceTree = "<group>"; };
+		CF40FAF6000D6006E65E8EC63F8D720B /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
+		D47C2E1168EFB26D521488D33A15DED7 /* Pods-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-umbrella.h"; sourceTree = "<group>"; };
+		D60BF4F24FF3442844A01D921B5F458F /* onepassword-extension-light@3x~compact.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension-light@3x~compact.png"; path = "1Password.xcassets/onepassword-extension-light.imageset/onepassword-extension-light@3x~compact.png"; sourceTree = "<group>"; };
+		D795FD0FB6309D777E1BCAD6208498D0 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D837A82183E6C50661BF40D41835C76D /* OnePasswordExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OnePasswordExtension.h; sourceTree = "<group>"; };
+		D9884E07B0426745EF1B33821954B693 /* DDASLLogCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogCapture.m; path = Classes/DDASLLogCapture.m; sourceTree = "<group>"; };
+		E55DC71097AB4D5585AD5B4DFB8CF374 /* onepassword-navbar@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-navbar@3x.png"; path = "1Password.xcassets/onepassword-navbar.imageset/onepassword-navbar@3x.png"; sourceTree = "<group>"; };
+		E72597A3A87986ABB8F12541F44BCC37 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8D6CF2E8708D1DB5D0A54E8D415A51E /* onepassword-button-light.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-button-light.png"; path = "1Password.xcassets/onepassword-button-light.imageset/onepassword-button-light.png"; sourceTree = "<group>"; };
+		EAB93687DD359B9C20E75D4DC616DC07 /* FMDatabase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = src/fmdb/FMDatabase.m; sourceTree = "<group>"; };
+		EB93CAE005E4FC3FC0CFA06814282BBC /* FMDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = src/fmdb/FMDB.h; sourceTree = "<group>"; };
+		EBD22A4B1428D84D081965A44DE7DAE1 /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Classes/DDASLLogCapture.h; sourceTree = "<group>"; };
+		ED58B6B3BC0FF665F0D364AAF19FA169 /* FMResultSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = src/fmdb/FMResultSet.h; sourceTree = "<group>"; };
+		EEB36C96E58433ED56831C683621C1D0 /* onepassword-button@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-button@2x.png"; path = "1Password.xcassets/onepassword-button.imageset/onepassword-button@2x.png"; sourceTree = "<group>"; };
+		F0385B4F8C3845D6D2C539F8AF8D6C67 /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
+		F0C7A6388C72B6CA5FFF303E3FCF2483 /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Classes/DDFileLogger.h; sourceTree = "<group>"; };
+		F1F4C26C5EC8DAFB57FFA490C39F054A /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
 		F23DCEA1EC17F7C88AEF6DDAA7696546 /* Pods-KeitaiWaniKani-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-KeitaiWaniKani-acknowledgements.plist"; sourceTree = "<group>"; };
-		F496299B28EAD9BF98CDBAF4C8A1ED1A /* onepassword-button.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-button.png"; path = "1Password.xcassets/onepassword-button.imageset/onepassword-button.png"; sourceTree = "<group>"; };
-		F4A55E920278CB83162D6CBBC9B1F39C /* DDMultiFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDMultiFormatter.h; path = Classes/Extensions/DDMultiFormatter.h; sourceTree = "<group>"; };
-		F4D48B05784CBD706962C72824D83AC5 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
-		F5D61C0E33211FCA978D0A5D474CBCF6 /* onepassword-navbar-light.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-navbar-light.png"; path = "1Password.xcassets/onepassword-navbar-light.imageset/onepassword-navbar-light.png"; sourceTree = "<group>"; };
+		F251075751BCC6723CCD9E498A09E322 /* onepassword-toolbar.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-toolbar.png"; path = "1Password.xcassets/onepassword-toolbar.imageset/onepassword-toolbar.png"; sourceTree = "<group>"; };
+		F2A54750F46ADDDD8C620A51C3D540EE /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Classes/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
+		F43D17B03BB7D6198FFE84B0CB2501EE /* onepassword-extension-light~compact.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-extension-light~compact.png"; path = "1Password.xcassets/onepassword-extension-light.imageset/onepassword-extension-light~compact.png"; sourceTree = "<group>"; };
+		F5CA94E11086897955CBB3C0C8819D3B /* OnePasswordExtensionResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnePasswordExtensionResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5FAC58FE934312A1CEA45012207E56D /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDDispatchQueueLogFormatter.m; path = Classes/Extensions/DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		F679E55A0A1A6568C129E40BBA7FA02D /* FMDatabasePool.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = src/fmdb/FMDatabasePool.h; sourceTree = "<group>"; };
 		F7222A2FCC9C89C8C543ECC3904E7D74 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F832EF106A59B8F352E8DA62AD16D12E /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDDispatchQueueLogFormatter.h; path = Classes/Extensions/DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
 		FB0EE3D10EC9B9A3780849BE8FA0D76F /* FMDB.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = FMDB.modulemap; sourceTree = "<group>"; };
-		FCF3B7C363F8FC06EDF30387BE97408A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE51C335E0FB6F952085D3FBAA7A8B0E /* FMDatabasePool.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = src/fmdb/FMDatabasePool.m; sourceTree = "<group>"; };
+		FE66EF6743CDC3DC194C38D68114D7FC /* FMDatabase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = src/fmdb/FMDatabase.h; sourceTree = "<group>"; };
+		FF586A076A72E4F707BE4E3FD1DF53E1 /* onepassword-navbar-light@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "onepassword-navbar-light@3x.png"; path = "1Password.xcassets/onepassword-navbar-light.imageset/onepassword-navbar-light@3x.png"; sourceTree = "<group>"; };
+		FFD25C94CB06F83FCD1982A2DFC2BB8C /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Classes/DDFileLogger.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		22C0731691321FDD2D4246B6A0CEFFD7 /* Frameworks */ = {
+		0E0A90EB2D07827041B20E6FE8B4EB62 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88B6AF052FF7BB569BD835B9990899E2 /* Foundation.framework in Frameworks */,
+				50BAD6C908615581F757A50C86C08026 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3A7A34CD98D10B91597E4120E1084823 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				081716A3153783E415A98FC3C52E3202 /* Foundation.framework in Frameworks */,
-				16EF49A18BB758033B23A8359C70069F /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		49FD1593A2D15F539A5D605DD8ACC2A0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B98FEB50A2E3570475982FBC17D7FCF7 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4CCBDFE88E83DAD0076403C7B3F64B19 /* Frameworks */ = {
+		11EF961F251687F2D28E7E7F6A52456C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8C74511C4478EC4612D3E6640777CFC9 /* Frameworks */ = {
+		3F80C482A4BF4E52479EC43E862CFC2B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6D43367121CEBF6BCAEB3F4F9E825E6 /* Foundation.framework in Frameworks */,
+				8D2785903123280114C8F3DBF46744BF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9BD4F7F378A454F0B66DD61A8E2451C7 /* Frameworks */ = {
+		42FA4C1F396C6D95C46DECAD0D1C844C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEFB0246D4B469DAFBFDA0C8379E979E /* Foundation.framework in Frameworks */,
+				715CE370FD80ED47C9B3E440F121F3BC /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D6D4A8F5A01A29FE913E910E5880D27D /* Frameworks */ = {
+		4AEC251EB34CAF0A4D7614C38C9534F2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95590FC035758B008319A2BF5A1C5264 /* Foundation.framework in Frameworks */,
+				ADAB596307334EB253E60C441CB46139 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E45CFA9B2E9B95CFED4BAE62A3B20AFF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EAE3B004E8867CB16ECA3BA219D54B2 /* Foundation.framework in Frameworks */,
+				5EA4528128AC6CE7FFB87BC8CED7A67A /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F55C8BD6FA54327F5589AA13B935D292 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC558D517BEA67914CE816BF78C61CCA /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18340F12838DEE43507667CC74401EB1 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */,
+				C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		25E66F2BD689DA52CB191502FC4516D4 /* Pods-KeitaiWaniKani */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,12 +355,12 @@
 				847F032451405EBC7F2371FEDF152DD0 /* Pods-KeitaiWaniKani.modulemap */,
 				B34F699B36356994342C5DE63D7BB7B7 /* Pods-KeitaiWaniKani-acknowledgements.markdown */,
 				F23DCEA1EC17F7C88AEF6DDAA7696546 /* Pods-KeitaiWaniKani-acknowledgements.plist */,
-				08330A66B24C9510ED6A014DD8AF959F /* Pods-KeitaiWaniKani-dummy.m */,
+				4AD1B40227E78BE8223A6EA3626F8AA0 /* Pods-KeitaiWaniKani-dummy.m */,
 				6A3DFC7AE29AABEDF218BCE3EAA420CA /* Pods-KeitaiWaniKani-frameworks.sh */,
 				85BA75B58B9153E39F67D3658971F592 /* Pods-KeitaiWaniKani-resources.sh */,
-				CF1DB8B3C51F4EA26C2158F468645CEA /* Pods-KeitaiWaniKani-umbrella.h */,
-				915E78642DCC6824C1526C589017F2C2 /* Pods-KeitaiWaniKani.debug.xcconfig */,
-				BC5FA1208D92D3F901B891F98F0FADB8 /* Pods-KeitaiWaniKani.release.xcconfig */,
+				7B164698628E72F709A1EFF355C9DC08 /* Pods-KeitaiWaniKani-umbrella.h */,
+				31A862C4B41212B2F64B5E7A00A2F09B /* Pods-KeitaiWaniKani.debug.xcconfig */,
+				5A589D82F9882611910C4310412A6D7C /* Pods-KeitaiWaniKani.release.xcconfig */,
 			);
 			name = "Pods-KeitaiWaniKani";
 			path = "Target Support Files/Pods-KeitaiWaniKani";
@@ -360,7 +369,7 @@
 		326F9C8EC671B50D1F4154E655EDAD8F /* Swift */ = {
 			isa = PBXGroup;
 			children = (
-				D213253817B313DD69E6D9F674365164 /* CocoaLumberjack.swift */,
+				13A00168F3F1DAF3CF9A6583EA2807D3 /* CocoaLumberjack.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -368,7 +377,7 @@
 		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D0FB9306D21AF23A056944AE037CBFFF /* iOS */,
+				18340F12838DEE43507667CC74401EB1 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -380,12 +389,12 @@
 				25A82DCE58694C88760D73AEB35875A4 /* Pods.modulemap */,
 				9EBB7AE6C665270DF78937BAC533FA3E /* Pods-acknowledgements.markdown */,
 				8570C455A63FBC4F5770DE363BB98B9F /* Pods-acknowledgements.plist */,
-				B650A1B863E44CED52A6E24F1961660C /* Pods-dummy.m */,
+				F1F4C26C5EC8DAFB57FFA490C39F054A /* Pods-dummy.m */,
 				49EED8A8CE619494D328A2A7E49709B6 /* Pods-frameworks.sh */,
 				2BD9872BF5F0EFBBDE8D534E032B11A1 /* Pods-resources.sh */,
-				A3ADFCB2D5CECDD104E287F5EFC018C5 /* Pods-umbrella.h */,
-				0087E64540ABCD129D88C58E5285C9E5 /* Pods.debug.xcconfig */,
-				70FF100145F9C45692DA7F52187D4F29 /* Pods.release.xcconfig */,
+				D47C2E1168EFB26D521488D33A15DED7 /* Pods-umbrella.h */,
+				C9E641FC2BFD4A2FDC417C4967C97FB6 /* Pods.debug.xcconfig */,
+				BA3FD18FA427750272E558B9A33A1B23 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			path = "Target Support Files/Pods";
@@ -394,7 +403,7 @@
 		5D372B44CDD094231B42A14D51718171 /* Default */ = {
 			isa = PBXGroup;
 			children = (
-				1DA3A0E2C1FB5085EA3C287220D2E0C7 /* CocoaLumberjack.h */,
+				311DEDA68B60CE09AA9A619A04499291 /* CocoaLumberjack.h */,
 			);
 			name = Default;
 			sourceTree = "<group>";
@@ -402,22 +411,22 @@
 		6FB311B3A19CBD40FC10D63A4E8C7B51 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				D0D3C0A4A2D5F3EB3D248A8BACA3C737 /* DDAbstractDatabaseLogger.h */,
-				887614C858894EAE9121F7D6FE3AB48C /* DDAbstractDatabaseLogger.m */,
-				11A49EE2AF3B56289F88D172CC48843A /* DDASLLogCapture.h */,
-				AE677B531BC3AA3A38D3D39260C5B5AC /* DDASLLogCapture.m */,
-				B64D907C7D0F65251F6091DF6164CA3E /* DDASLLogger.h */,
-				B1342059833FB1D34E003F270C77E77B /* DDASLLogger.m */,
-				5571EE02B5BC08737531571AD83539CF /* DDAssertMacros.h */,
-				EB435AEA68587B27B8F94703FE154FEB /* DDFileLogger.h */,
-				D085A2BC5BF35A706A02866C5FA3CB1D /* DDFileLogger.m */,
-				095588D4E3382085ED8101A333BA7651 /* DDLegacyMacros.h */,
-				DA74B27B421761D90AF3210CFFDB7E40 /* DDLog.h */,
-				A72965282F83EA8C2567DDAAD29AF4EE /* DDLog.m */,
-				EF03164AC8B229C1AE7F2C19594CFEBA /* DDLog+LOGV.h */,
-				CF7177C9F81334293212246A08388194 /* DDLogMacros.h */,
-				DD053094262EE875FB47561D274603C7 /* DDTTYLogger.h */,
-				E7C49E20BA038144D5BF61B92A354206 /* DDTTYLogger.m */,
+				3F9ABAB644CEF8C489D27D645F7ACA4D /* DDAbstractDatabaseLogger.h */,
+				5F775B3A1523B515B8B6F0485F0B96CF /* DDAbstractDatabaseLogger.m */,
+				EBD22A4B1428D84D081965A44DE7DAE1 /* DDASLLogCapture.h */,
+				D9884E07B0426745EF1B33821954B693 /* DDASLLogCapture.m */,
+				3D0C17C39C2EBF55D1227955D19C9299 /* DDASLLogger.h */,
+				37804ABB10F2D1148E3AC6C04048F3A6 /* DDASLLogger.m */,
+				B2E63518FAC63CFE6346A87A2988D8A8 /* DDAssertMacros.h */,
+				F0C7A6388C72B6CA5FFF303E3FCF2483 /* DDFileLogger.h */,
+				FFD25C94CB06F83FCD1982A2DFC2BB8C /* DDFileLogger.m */,
+				011B372E1135FB9AAFF1A5EF24D67613 /* DDLegacyMacros.h */,
+				7A44F77FDBC9F132A3E53FF7648054EF /* DDLog.h */,
+				542C2C9AA5B8C6D16AAB5F23A1CA5459 /* DDLog.m */,
+				B1202B956A49147518C1434533B4E0E3 /* DDLog+LOGV.h */,
+				CF40FAF6000D6006E65E8EC63F8D720B /* DDLogMacros.h */,
+				5B924F12C6097120D50F07A9F1A95075 /* DDTTYLogger.h */,
+				C5B81F10234D4BCD4B524E155BAB24E0 /* DDTTYLogger.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -426,10 +435,10 @@
 			isa = PBXGroup;
 			children = (
 				28A73017A7266AA2B81381DFB911EC4F /* 1PasswordExtension.modulemap */,
-				AE210A6FBAF0BE379425AB00A01684DA /* 1PasswordExtension.xcconfig */,
-				540A999444E52AD998ECBB55617D5347 /* 1PasswordExtension-dummy.m */,
+				B6FD163D55ABEA2AD1F31DF4F4399569 /* 1PasswordExtension.xcconfig */,
+				3F02158D5EE1398A9FF8B0CCFF15D78C /* 1PasswordExtension-dummy.m */,
 				1E3234DF6C7066CC8C4AEC7EB6E2FE3C /* 1PasswordExtension-prefix.pch */,
-				38622354A99E221E0694822E6C91D91A /* 1PasswordExtension-umbrella.h */,
+				81DCB1446CBD2A737EF2E61078D05576 /* 1PasswordExtension-umbrella.h */,
 				20FE2835465F16B89A55D3A14DB7811E /* Info.plist */,
 			);
 			name = "Support Files";
@@ -439,7 +448,7 @@
 		7110E023AE2A1EB0BCDDB56F67AC5176 /* SwiftyJSON */ = {
 			isa = PBXGroup;
 			children = (
-				DE3FA9712F2D98A522D464B2B7CEB2B5 /* SwiftyJSON.swift */,
+				4FC37C550CE0099D2261067539EBC80E /* SwiftyJSON.swift */,
 				C84A676427720A7EE792A6482E35C622 /* Support Files */,
 			);
 			path = SwiftyJSON;
@@ -459,13 +468,13 @@
 		8A3FF58AFC8782AFEF197D72B8ABCAAF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0C6B9C7707AD0C4224C088261DA4D9E1 /* CocoaLumberjack.framework */,
-				B49C10E01E9F4272E366A9F6391D860C /* FMDB.framework */,
-				4BEF1DD18195D1D0DFFFFEA002BF6099 /* OnePasswordExtension.framework */,
-				07ECFE3FEFE7165F9AAE964450D8ACA6 /* OnePasswordExtensionResources.bundle */,
-				FCF3B7C363F8FC06EDF30387BE97408A /* Pods.framework */,
-				CA4E6947A91367EA3911CDE1B74D2796 /* Pods_KeitaiWaniKani.framework */,
-				B2FF5C6C1A47FD5DE45C236E0A651096 /* SwiftyJSON.framework */,
+				E72597A3A87986ABB8F12541F44BCC37 /* CocoaLumberjack.framework */,
+				316AA6F85CF57BB7D8DF741A595FE0FB /* FMDB.framework */,
+				6F7CE41FB66F8C7386E6F97255FB2F80 /* OnePasswordExtension.framework */,
+				F5CA94E11086897955CBB3C0C8819D3B /* OnePasswordExtensionResources.bundle */,
+				D795FD0FB6309D777E1BCAD6208498D0 /* Pods.framework */,
+				A5FA48FD1B2108F83739888FD061BCD9 /* Pods_KeitaiWaniKani.framework */,
+				7C4E6FA3D62A0FA770C6522052BFB3DF /* SwiftyJSON.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -473,35 +482,35 @@
 		8EDEE5B1569891BAE74E70F2BA43CAA4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				89D3E8EB07C747B834C4EA32BB2D0EFB /* 1Password.xcassets */,
-				F496299B28EAD9BF98CDBAF4C8A1ED1A /* onepassword-button.png */,
-				97D494C96CA2426515FA89221A2FE087 /* onepassword-button-light.png */,
-				56142CC159676B07F737976AA71A662C /* onepassword-button-light@2x.png */,
-				1BDDBB59A499B93873A5E397FE7373AC /* onepassword-button-light@3x.png */,
-				2C6616841261520923B447F7971A5611 /* onepassword-button@2x.png */,
-				4D7263E05225200242D868027CFD88A4 /* onepassword-button@3x.png */,
-				837FC5F68B655DC0D44990E4E10B2132 /* onepassword-extension-light@2x~compact.png */,
-				71401AAA71EBD132D1951376C92D34AF /* onepassword-extension-light@2x~regular.png */,
-				3D52677C337A30D3FCFB7207EA01B470 /* onepassword-extension-light@3x~compact.png */,
-				8DAB8467A94140C7AA6C06150BFA87CB /* onepassword-extension-light~compact.png */,
-				33540953BFAEE6A5E704DE60C3B6E424 /* onepassword-extension-light~regular.png */,
-				F0612FF293A8BAF0EAB42C6018881F30 /* onepassword-extension@2x~compact.png */,
-				EFD0D482DCC97A26E3115770F83AF0DC /* onepassword-extension@2x~regular.png */,
-				9BF145D0EEA370FD11F1D198193A0216 /* onepassword-extension@3x~compact.png */,
-				4EAC08EF19A9CA9FAF85ADB0CC835086 /* onepassword-extension~compact.png */,
-				E22506CD1162ADBF761EDB8C96E921B8 /* onepassword-extension~regular.png */,
-				7E695D87C42D127CBBFC87BD90632F25 /* onepassword-navbar.png */,
-				F5D61C0E33211FCA978D0A5D474CBCF6 /* onepassword-navbar-light.png */,
-				426ED4568EA6080FADF3A2B8CB33657E /* onepassword-navbar-light@2x.png */,
-				AA040C04FDABF62CAF3D9CB72BD65DAA /* onepassword-navbar-light@3x.png */,
-				3BD02DF693BC0E94B856EC8BCB4D1AC5 /* onepassword-navbar@2x.png */,
-				D94D7642340144E572B13D16958F7E82 /* onepassword-navbar@3x.png */,
-				9D9F1A6D69213397980918706C61FC11 /* onepassword-toolbar.png */,
-				A81DDC57403B5A689C5DE7DC6899C0E4 /* onepassword-toolbar-light.png */,
-				9613B9A16158013F598FAE8A57C8E40B /* onepassword-toolbar-light@2x.png */,
-				12DB1CF055A02C095D5CE6FB1DE24258 /* onepassword-toolbar-light@3x.png */,
-				BD04C3E11EF5403ACFBF1C814BFB2486 /* onepassword-toolbar@2x.png */,
-				567644705BD1C401B767C19A16523C82 /* onepassword-toolbar@3x.png */,
+				0A22447648D7BB67D7FE7760A66F68DF /* 1Password.xcassets */,
+				C97C0505CE4D8CD3012CFC1C9667444A /* onepassword-button.png */,
+				E8D6CF2E8708D1DB5D0A54E8D415A51E /* onepassword-button-light.png */,
+				53AB972C3072D75BCB1FB5B189658D9F /* onepassword-button-light@2x.png */,
+				2A565635816350D9931D594CD3DA168C /* onepassword-button-light@3x.png */,
+				EEB36C96E58433ED56831C683621C1D0 /* onepassword-button@2x.png */,
+				2B1D4068E668F154FBE58C85FB8EFC9F /* onepassword-button@3x.png */,
+				960377247F82135FEA90D1C3CACCF50D /* onepassword-extension-light@2x~compact.png */,
+				04E2FF72EC7D71D6CB10AD1096A16DAB /* onepassword-extension-light@2x~regular.png */,
+				D60BF4F24FF3442844A01D921B5F458F /* onepassword-extension-light@3x~compact.png */,
+				F43D17B03BB7D6198FFE84B0CB2501EE /* onepassword-extension-light~compact.png */,
+				2B249F35A167C9BA0489DC35D04479F0 /* onepassword-extension-light~regular.png */,
+				C0F4E36F356E41D73F0CE5E293DF506D /* onepassword-extension@2x~compact.png */,
+				2C2F375B7E7D82AB8282398D753B6D3C /* onepassword-extension@2x~regular.png */,
+				5B1A631A8C587D55814D497C97B2E4E0 /* onepassword-extension@3x~compact.png */,
+				95FBC1AF84C3DE4CD3E98E5929AC260B /* onepassword-extension~compact.png */,
+				CCF87BCF7AC0377C25BA41E64BF3A49D /* onepassword-extension~regular.png */,
+				38AE905DDCB970758182FC4E686E1B6F /* onepassword-navbar.png */,
+				11CF70B491F85A96BDB68A0FC7C26115 /* onepassword-navbar-light.png */,
+				CA421DA5880E4791A7FC22096675D5A6 /* onepassword-navbar-light@2x.png */,
+				FF586A076A72E4F707BE4E3FD1DF53E1 /* onepassword-navbar-light@3x.png */,
+				11CB3EB0770DABC72C13CD47B5958882 /* onepassword-navbar@2x.png */,
+				E55DC71097AB4D5585AD5B4DFB8CF374 /* onepassword-navbar@3x.png */,
+				F251075751BCC6723CCD9E498A09E322 /* onepassword-toolbar.png */,
+				107172BB4185D1E0032547DF94DC13B6 /* onepassword-toolbar-light.png */,
+				2F48C88EB36B917FB94064B4E0A924A9 /* onepassword-toolbar-light@2x.png */,
+				BC85424F80869CC41FD6CEFB131C659E /* onepassword-toolbar-light@3x.png */,
+				A348EED0DF648BB2EFAE2C79B541902E /* onepassword-toolbar@2x.png */,
+				41A1DDBBCE13C55EA117C0D36583F42B /* onepassword-toolbar@3x.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -510,10 +519,10 @@
 			isa = PBXGroup;
 			children = (
 				FB0EE3D10EC9B9A3780849BE8FA0D76F /* FMDB.modulemap */,
-				C91432AD072E04FC818EA4750BE3674E /* FMDB.xcconfig */,
-				03337439007B956A7BDEDD64C8230097 /* FMDB-dummy.m */,
+				448463B218602A39A5D310BCD5236E74 /* FMDB.xcconfig */,
+				BE07BCA170312AE8DFA44611AD95381A /* FMDB-dummy.m */,
 				7A058F61B7C28D478976C63BDBCDB554 /* FMDB-prefix.pch */,
-				436463C11138B9A23DB417AD8EC39944 /* FMDB-umbrella.h */,
+				584293CEC16A05FFEE22B2C62CD5514F /* FMDB-umbrella.h */,
 				C30B2A067F09A009D14922B0F7852F97 /* Info.plist */,
 			);
 			name = "Support Files";
@@ -523,18 +532,18 @@
 		A74991FB7303DA051BAD8773E5AA3417 /* common */ = {
 			isa = PBXGroup;
 			children = (
-				1D358C73C7068CB4DE3F1D5EF825E17E /* FMDatabase.h */,
-				9D78557F8AE1115F6783CEEDAD904AAD /* FMDatabase.m */,
-				20B8092CDF4ADE5E613BE3D0156BADC6 /* FMDatabase+Private.h */,
-				02D39FD411E1DC335DB87DB605FD7BA3 /* FMDatabaseAdditions.h */,
-				41A5F7B903A6013389F45029A3F2E3BE /* FMDatabaseAdditions.m */,
-				8598443F5BEC1D4BEFA83C4F180BB183 /* FMDatabasePool.h */,
-				8F3EE03EC9DD4553655CE53CFFCBF9C7 /* FMDatabasePool.m */,
-				21025B1F8ED7B5393DAD71ECF910A8BD /* FMDatabaseQueue.h */,
-				C657778878A92A64D275ECFEB6C34F90 /* FMDatabaseQueue.m */,
-				ED7A35EB6812B9BB257DA5352C442631 /* FMDB.h */,
-				03618CB0BEE87153BA7A46586FCD8916 /* FMResultSet.h */,
-				2E138744D2C5D6D39794FBACC5AF2684 /* FMResultSet.m */,
+				FE66EF6743CDC3DC194C38D68114D7FC /* FMDatabase.h */,
+				EAB93687DD359B9C20E75D4DC616DC07 /* FMDatabase.m */,
+				4CFC5F89C18063AB88630A902104EEA4 /* FMDatabase+Private.h */,
+				32395B57ED9437FBA14F93D5165B3BC4 /* FMDatabaseAdditions.h */,
+				2B136160802ED8E15045D34C920C31C2 /* FMDatabaseAdditions.m */,
+				F679E55A0A1A6568C129E40BBA7FA02D /* FMDatabasePool.h */,
+				FE51C335E0FB6F952085D3FBAA7A8B0E /* FMDatabasePool.m */,
+				7CAB0E2741E01644C87F6409601EDF28 /* FMDatabaseQueue.h */,
+				C576C9196E735F5BD3E5DCFEF20B9F4C /* FMDatabaseQueue.m */,
+				EB93CAE005E4FC3FC0CFA06814282BBC /* FMDB.h */,
+				ED58B6B3BC0FF665F0D364AAF19FA169 /* FMResultSet.h */,
+				0415190C05F3E14B4A6D972E577ACA72 /* FMResultSet.m */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -542,8 +551,8 @@
 		AA505E319D2993CA9201264C58727E75 /* 1PasswordExtension */ = {
 			isa = PBXGroup;
 			children = (
-				B4EFCDFD447C798135C65CFD626B2F21 /* OnePasswordExtension.h */,
-				B4C35CDAD233E05D00876FCCD5DAD8C7 /* OnePasswordExtension.m */,
+				D837A82183E6C50661BF40D41835C76D /* OnePasswordExtension.h */,
+				63CC88CE725EADAADDC9917BD43EC196 /* OnePasswordExtension.m */,
 				8EDEE5B1569891BAE74E70F2BA43CAA4 /* Resources */,
 				708B67130707D6CF5DEFF3C7B898D440 /* Support Files */,
 			);
@@ -554,8 +563,8 @@
 			isa = PBXGroup;
 			children = (
 				9690693ECC56A589F94A2E783AD73B8B /* CocoaLumberjack.modulemap */,
-				947246CC34C134D2931B6A41893BDEC0 /* CocoaLumberjack.xcconfig */,
-				8DDC8FAD954356F3C0C929EDF88C2A47 /* CocoaLumberjack-dummy.m */,
+				11FDEF1EC73C32CBEAE53B5B073E8BDE /* CocoaLumberjack.xcconfig */,
+				92597E1C8064071360E8D5CA8F41D26F /* CocoaLumberjack-dummy.m */,
 				67DB2729559B9C811BAF2F0445C3C568 /* CocoaLumberjack-prefix.pch */,
 				ACA2ED4BFAA0CB82375DDA67B0B9F69A /* Info.plist */,
 			);
@@ -577,33 +586,24 @@
 			children = (
 				42B7FEC1B086697498621F7E0582B0CB /* Info.plist */,
 				72EA2F76A54DE18100F2323A3EA40680 /* SwiftyJSON.modulemap */,
-				06375DB691164336905B1E0CB233154A /* SwiftyJSON.xcconfig */,
-				F4D48B05784CBD706962C72824D83AC5 /* SwiftyJSON-dummy.m */,
+				53DE84D24376D4C2E4ACCE2A20BF3D94 /* SwiftyJSON.xcconfig */,
+				51D6FA6D7CF73284735327D9C9B2F065 /* SwiftyJSON-dummy.m */,
 				C600A24E636A5711B2A29BE57433F88E /* SwiftyJSON-prefix.pch */,
-				1F16D91426AAE46F6A587EC8B7567F29 /* SwiftyJSON-umbrella.h */,
+				F0385B4F8C3845D6D2C539F8AF8D6C67 /* SwiftyJSON-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/SwiftyJSON";
 			sourceTree = "<group>";
 		};
-		D0FB9306D21AF23A056944AE037CBFFF /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				E4931FB40E92E36051584CD03BD78A07 /* Foundation.framework */,
-				8004DF160705A12B1B03B64C31FDC8C7 /* UIKit.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
 		D48EDE8DA20AD9839DB0EEDDB14838E4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				69782DEB1641D4E99B581FA9A695B417 /* DDContextFilterLogFormatter.h */,
-				5FCF65DBEFB50F4C7F2F47E0BEC0943B /* DDContextFilterLogFormatter.m */,
-				6C46C12F21615401590C8F42F44B7314 /* DDDispatchQueueLogFormatter.h */,
-				52232D9474887B11D203DA59838236A4 /* DDDispatchQueueLogFormatter.m */,
-				F4A55E920278CB83162D6CBBC9B1F39C /* DDMultiFormatter.h */,
-				B5AB75B0F0BA0230C1AD5D4B867965D5 /* DDMultiFormatter.m */,
+				9094CDD4967A8CE0E6AE2339F69FBC6E /* DDContextFilterLogFormatter.h */,
+				B4AB5F99DBB9800C2BBE12E109198DE6 /* DDContextFilterLogFormatter.m */,
+				F832EF106A59B8F352E8DA62AD16D12E /* DDDispatchQueueLogFormatter.h */,
+				F5FAC58FE934312A1CEA45012207E56D /* DDDispatchQueueLogFormatter.m */,
+				BE533BC8781022B1A61EC39CC5BE1868 /* DDMultiFormatter.h */,
+				F2A54750F46ADDDD8C620A51C3D540EE /* DDMultiFormatter.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -643,160 +643,106 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		3F32FEB67A6130933D91DAB7B0CAEC08 /* Headers */ = {
+		100C41AB97F1E7D191A797932EF8AF16 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5472386247882BDB5814E483A1592C01 /* Pods-KeitaiWaniKani-umbrella.h in Headers */,
+				F6B2D1720CCF6A5A35163A64C96154CA /* 1PasswordExtension-umbrella.h in Headers */,
+				EAE970E887C03DE9D99C0E18036B6FA9 /* OnePasswordExtension.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5807D04BF4A51CC3EB3004B4E333A6E3 /* Headers */ = {
+		849D3801F3A750CE450746D7A044E202 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD82829E6F6C273E8EB3D99F43A541FE /* SwiftyJSON-umbrella.h in Headers */,
+				5707377F6C5625A03ECEFC936B5E3CF8 /* SwiftyJSON-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A42F315FDBE5EDF6132CFDDD57FC295E /* Headers */ = {
+		A3E8BE6E4158C0CD8C464CBC82934C6F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADB625DE8AA871FB719838787752F00D /* CocoaLumberjack.h in Headers */,
-				DA04A48C03AE18377A2EE53F5D392B6C /* DDAbstractDatabaseLogger.h in Headers */,
-				9526BC999D0FA724643CE957FBB3AB9C /* DDASLLogCapture.h in Headers */,
-				583A0EF1C1DA086C0B3D3EB5FC735AC8 /* DDASLLogger.h in Headers */,
-				4941C2DF30B316A2D5C6271321886F3E /* DDAssertMacros.h in Headers */,
-				B51D522B46DE0E38A25ED7ABF4528A0A /* DDContextFilterLogFormatter.h in Headers */,
-				E528CCFB2121239A05777F1EE8B4294D /* DDDispatchQueueLogFormatter.h in Headers */,
-				B40BC628B79A89A279A01D866367FD1D /* DDFileLogger.h in Headers */,
-				45CE59F5E6804AF2E770DE5F49092636 /* DDLegacyMacros.h in Headers */,
-				C72EDC6CA16D4C3D7AF8B52D463A8C9A /* DDLog+LOGV.h in Headers */,
-				6DCF53965641B6B196E9E5A6498BFEC6 /* DDLog.h in Headers */,
-				94A6247A29EB49E7D0F4E96940CEA35B /* DDLogMacros.h in Headers */,
-				8880014567AB05A77EEE76715129AADB /* DDMultiFormatter.h in Headers */,
-				225A65A50616135101149B553AA39E15 /* DDTTYLogger.h in Headers */,
+				A898D0F955339E6881D0EAFDBDD478D6 /* Pods-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B20D4941BEE39022E9DE776B831E0C7E /* Headers */ = {
+		C04C32BDC0038948F7850C6CD6F5DB51 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA5961D8B79CEDFAE54E17199266C472 /* FMDatabase+Private.h in Headers */,
-				DF6352FA57CD21FDA8E1BC17982CAF8F /* FMDatabase.h in Headers */,
-				67E018E2F94BF1BF1DFF0278FB38B240 /* FMDatabaseAdditions.h in Headers */,
-				F6395CFC993A776F39DC7A008BE9FAA5 /* FMDatabasePool.h in Headers */,
-				D8BEDEA8FB83F842FA407A8CBFB0AC9F /* FMDatabaseQueue.h in Headers */,
-				945DECA42F8DBE0404E04C1FDEF4B7F3 /* FMDB-umbrella.h in Headers */,
-				FB43C3595BBBE3F22D9BFB0D01AABBB3 /* FMDB.h in Headers */,
-				2E2F9B6FC8AAC072B0FDAEFCB8462ACB /* FMResultSet.h in Headers */,
+				7B65BAA073C184DFD7060DA4FD50FFD1 /* Pods-KeitaiWaniKani-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B9524E350B5C23CBB25622CE32DD9081 /* Headers */ = {
+		C08344349ACD23AD9050794E5C64C5B3 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7368ECD53FF411BF07675D88BE6D379 /* Pods-umbrella.h in Headers */,
+				0609EB54B4E39118857FC292345E7461 /* FMDatabase+Private.h in Headers */,
+				BD4F190C5655A904B8AE2486ADBFDD32 /* FMDatabase.h in Headers */,
+				D7FC54BD8552D287685873F972FCE475 /* FMDatabaseAdditions.h in Headers */,
+				6D729EC862FD66C7298F1A0268D2C339 /* FMDatabasePool.h in Headers */,
+				07BACDDE0EC91C8C1F7BC33390C87344 /* FMDatabaseQueue.h in Headers */,
+				63AEEE80FCA662A31DECE0421F4598FE /* FMDB-umbrella.h in Headers */,
+				3533E693117020E8050CC1167812413C /* FMDB.h in Headers */,
+				8C7114E0961DC39DBD647101A4954911 /* FMResultSet.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D0884153A565824282B5027613451F41 /* Headers */ = {
+		F6404F95A0B5D38808B453032F1C1D3F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B7FBE76A1281FADC125C5B186C6F716 /* 1PasswordExtension-umbrella.h in Headers */,
-				4EBF2CBEBC925DE2FDC8BDE83AA7E833 /* OnePasswordExtension.h in Headers */,
+				CD81315E9E8FD7FD4F3C4D28BAB50C3D /* CocoaLumberjack.h in Headers */,
+				BED21B6237708EC89E1CDC9E7E4FCB49 /* DDAbstractDatabaseLogger.h in Headers */,
+				83DBBC894A6203F6E4CFCDDA4911C9AF /* DDASLLogCapture.h in Headers */,
+				EFD1A8C17A9631363C4AC6E2BE2F1434 /* DDASLLogger.h in Headers */,
+				91FDF8A5A1BC96856AC4470759421D6B /* DDAssertMacros.h in Headers */,
+				4661B2C1110AEF944B8A9848080FC2A2 /* DDContextFilterLogFormatter.h in Headers */,
+				FB73CC220FBF2BD69320CC68B7892CFB /* DDDispatchQueueLogFormatter.h in Headers */,
+				EE61F282567EEFBBDC8BA0BE06433C6F /* DDFileLogger.h in Headers */,
+				9630205806FA13CEE278F4E4FA6DA3F0 /* DDLegacyMacros.h in Headers */,
+				3DB7862FB83E65375AB21FC76E2DE753 /* DDLog+LOGV.h in Headers */,
+				BD687FC56130CEEB1049FEEC1127C5F7 /* DDLog.h in Headers */,
+				093609D078A154B7E17835F75A487E3C /* DDLogMacros.h in Headers */,
+				D2D417A51677012E9EEF8F1297F87231 /* DDMultiFormatter.h in Headers */,
+				ECB58C2372417300030D10FE302FD32E /* DDTTYLogger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		251EFAE3D9DF4B50EDBA0A44CA52C13E /* 1PasswordExtension-OnePasswordExtensionResources */ = {
+		46D08EE94F782819890A51ABBB6F33E8 /* Pods-KeitaiWaniKani */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 32AF3862546CF8A5054D31D8C34531F0 /* Build configuration list for PBXNativeTarget "1PasswordExtension-OnePasswordExtensionResources" */;
+			buildConfigurationList = DFF70C0CE60A370DDA211E68FA24273D /* Build configuration list for PBXNativeTarget "Pods-KeitaiWaniKani" */;
 			buildPhases = (
-				7C14012AF60FF213301E614A1425BF08 /* Sources */,
-				4CCBDFE88E83DAD0076403C7B3F64B19 /* Frameworks */,
-				BC14B92B004828DC5A54C67AF6788EF0 /* Resources */,
+				B23737C16A30A0D14035DAADB160E349 /* Sources */,
+				42FA4C1F396C6D95C46DECAD0D1C844C /* Frameworks */,
+				C04C32BDC0038948F7850C6CD6F5DB51 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-			);
-			name = "1PasswordExtension-OnePasswordExtensionResources";
-			productName = "1PasswordExtension-OnePasswordExtensionResources";
-			productReference = 07ECFE3FEFE7165F9AAE964450D8ACA6 /* OnePasswordExtensionResources.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
-		2AF51E1EFB134E21EA2911FE2D669846 /* CocoaLumberjack */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B632CB2197B5E6A638028F14DAF4BF8E /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */;
-			buildPhases = (
-				3DCD573A60CB7E8C69150DABE95DC779 /* Sources */,
-				8C74511C4478EC4612D3E6640777CFC9 /* Frameworks */,
-				A42F315FDBE5EDF6132CFDDD57FC295E /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CocoaLumberjack;
-			productName = CocoaLumberjack;
-			productReference = 0C6B9C7707AD0C4224C088261DA4D9E1 /* CocoaLumberjack.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		3F137F22EE2B9B3D71FCEE48BBF0A7C6 /* Pods */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = EF2992D247DC27038221075C508A09B0 /* Build configuration list for PBXNativeTarget "Pods" */;
-			buildPhases = (
-				9DC1AA9AD85A8D4E209B4C7E3F53F727 /* Sources */,
-				49FD1593A2D15F539A5D605DD8ACC2A0 /* Frameworks */,
-				B9524E350B5C23CBB25622CE32DD9081 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F2C3E8589D149ACDE140766AC2B6B556 /* PBXTargetDependency */,
-				1AA3883A90F9ACFE799A93A9381BCEC2 /* PBXTargetDependency */,
-				620AC8A020DB6D5000C5696F98F5C795 /* PBXTargetDependency */,
-			);
-			name = Pods;
-			productName = Pods;
-			productReference = FCF3B7C363F8FC06EDF30387BE97408A /* Pods.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		51B3264D8C1C8DEC9817A7D741682C74 /* Pods-KeitaiWaniKani */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CEDE7AD86A3C8AB7B87303532711B1BC /* Build configuration list for PBXNativeTarget "Pods-KeitaiWaniKani" */;
-			buildPhases = (
-				60D9AB9AE9EA3A60DDBFE5B23F445B83 /* Sources */,
-				D6D4A8F5A01A29FE913E910E5880D27D /* Frameworks */,
-				3F32FEB67A6130933D91DAB7B0CAEC08 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3DB36533723703A69DF07EF9F4964B4A /* PBXTargetDependency */,
-				700E151218898121AB60E91D75A9DA2E /* PBXTargetDependency */,
-				E97A5291D815FAD200EB7CBD92305336 /* PBXTargetDependency */,
-				EB44C125F1753546FD5D2F04B0E0481B /* PBXTargetDependency */,
+				3093DC841D636AF88D71AB9C3B313CE8 /* PBXTargetDependency */,
+				47AC8F6421D366EC5F8EE532C61998F2 /* PBXTargetDependency */,
+				8CEDC6AB1B9DC8368B5822268D32E5FF /* PBXTargetDependency */,
+				99A5DFCBDF226B2BFD62016C770FEF12 /* PBXTargetDependency */,
 			);
 			name = "Pods-KeitaiWaniKani";
 			productName = "Pods-KeitaiWaniKani";
-			productReference = CA4E6947A91367EA3911CDE1B74D2796 /* Pods_KeitaiWaniKani.framework */;
+			productReference = A5FA48FD1B2108F83739888FD061BCD9 /* Pods_KeitaiWaniKani.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		71ABBFE8FF93CAC76E2EE0620997320F /* SwiftyJSON */ = {
+		BECABEDAB48604D681293C70DA19828D /* SwiftyJSON */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4ABD7E74128884C4C228F520039F7C07 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */;
+			buildConfigurationList = 90883ACE0F67AE99638AB2BB4F7652ED /* Build configuration list for PBXNativeTarget "SwiftyJSON" */;
 			buildPhases = (
-				0E4B7828F8420F4C0C638B8E48D2D731 /* Sources */,
-				9BD4F7F378A454F0B66DD61A8E2451C7 /* Frameworks */,
-				5807D04BF4A51CC3EB3004B4E333A6E3 /* Headers */,
+				92A0AE7DAB8C76657D060E585BD9D809 /* Sources */,
+				F55C8BD6FA54327F5589AA13B935D292 /* Frameworks */,
+				849D3801F3A750CE450746D7A044E202 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -804,35 +750,72 @@
 			);
 			name = SwiftyJSON;
 			productName = SwiftyJSON;
-			productReference = B2FF5C6C1A47FD5DE45C236E0A651096 /* SwiftyJSON.framework */;
+			productReference = 7C4E6FA3D62A0FA770C6522052BFB3DF /* SwiftyJSON.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		A77C2EE4AC41E0392C0A45900884D8B7 /* 1PasswordExtension */ = {
+		CB954953B79E7640B9A8B6B87B3DD7A1 /* Pods */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6E2C9F1F2410CDCFC1088410DA146B4F /* Build configuration list for PBXNativeTarget "1PasswordExtension" */;
+			buildConfigurationList = 31A3CFC873C6EF6ADC85E21845E60B32 /* Build configuration list for PBXNativeTarget "Pods" */;
 			buildPhases = (
-				EC78DCA432CC9333AACADFE311EB3F46 /* Sources */,
-				3A7A34CD98D10B91597E4120E1084823 /* Frameworks */,
-				15B7C063856CAA71BE6D6F0DD17CFD12 /* Resources */,
-				D0884153A565824282B5027613451F41 /* Headers */,
+				AFB978FB2FCAA362920A5A8E2B40FE8D /* Sources */,
+				0E0A90EB2D07827041B20E6FE8B4EB62 /* Frameworks */,
+				A3E8BE6E4158C0CD8C464CBC82934C6F /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D2098E2E4160055C66B7AB268B819601 /* PBXTargetDependency */,
+				0DEE54FA31EE8CF5CABFB5BA56C272E3 /* PBXTargetDependency */,
+				813C807C45459EB030831A199F408487 /* PBXTargetDependency */,
+				59B22145416C5E0BC3D3DBB4499393EC /* PBXTargetDependency */,
+			);
+			name = Pods;
+			productName = Pods;
+			productReference = D795FD0FB6309D777E1BCAD6208498D0 /* Pods.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D082FD9722F53B9C3A1229257D4008F7 /* CocoaLumberjack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 002F9559682E320A15C01003FF74440A /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */;
+			buildPhases = (
+				93F42E9F1FD66C2C576358B03BA3E044 /* Sources */,
+				4AEC251EB34CAF0A4D7614C38C9534F2 /* Frameworks */,
+				F6404F95A0B5D38808B453032F1C1D3F /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CocoaLumberjack;
+			productName = CocoaLumberjack;
+			productReference = E72597A3A87986ABB8F12541F44BCC37 /* CocoaLumberjack.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D8B57B89BC28E74DBA035283E73E0107 /* 1PasswordExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C2CF8869B37A0420A4C5DEA1E16BD3A /* Build configuration list for PBXNativeTarget "1PasswordExtension" */;
+			buildPhases = (
+				33A69C3294284057522F5B845326BD31 /* Sources */,
+				E45CFA9B2E9B95CFED4BAE62A3B20AFF /* Frameworks */,
+				13D34B3F365181A42983CECAAC4F2ACD /* Resources */,
+				100C41AB97F1E7D191A797932EF8AF16 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC970CC919652E561DEE8924F4F30163 /* PBXTargetDependency */,
 			);
 			name = 1PasswordExtension;
 			productName = 1PasswordExtension;
-			productReference = 4BEF1DD18195D1D0DFFFFEA002BF6099 /* OnePasswordExtension.framework */;
+			productReference = 6F7CE41FB66F8C7386E6F97255FB2F80 /* OnePasswordExtension.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		AFDCF589EE25B7D4E29348E6921EBC07 /* FMDB */ = {
+		DAA98624E34DF6800E87FF078754FB49 /* FMDB */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 69E3E4549F8D616DCFBF1E0414C28C13 /* Build configuration list for PBXNativeTarget "FMDB" */;
+			buildConfigurationList = 4F37DFD91009C83F36178307CD1F5575 /* Build configuration list for PBXNativeTarget "FMDB" */;
 			buildPhases = (
-				5235B3DEEECDB5CD178705B1067DA6E8 /* Sources */,
-				22C0731691321FDD2D4246B6A0CEFFD7 /* Frameworks */,
-				B20D4941BEE39022E9DE776B831E0C7E /* Headers */,
+				E120CFC4CABE67DD5A2C0783F37DDE0C /* Sources */,
+				3F80C482A4BF4E52479EC43E862CFC2B /* Frameworks */,
+				C08344349ACD23AD9050794E5C64C5B3 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -840,8 +823,25 @@
 			);
 			name = FMDB;
 			productName = FMDB;
-			productReference = B49C10E01E9F4272E366A9F6391D860C /* FMDB.framework */;
+			productReference = 316AA6F85CF57BB7D8DF741A595FE0FB /* FMDB.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		FF62A25D3E480238C0D473193AB70325 /* 1PasswordExtension-OnePasswordExtensionResources */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF81894FFC9BC6789F1C68FCCDB017F7 /* Build configuration list for PBXNativeTarget "1PasswordExtension-OnePasswordExtensionResources" */;
+			buildPhases = (
+				9C35B1D96E09727BDE97537677DE9CA8 /* Sources */,
+				11EF961F251687F2D28E7E7F6A52456C /* Frameworks */,
+				5E2B03ED562DA2F4CEE9CF1413BD3A66 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "1PasswordExtension-OnePasswordExtensionResources";
+			productName = "1PasswordExtension-OnePasswordExtensionResources";
+			productReference = F5CA94E11086897955CBB3C0C8819D3B /* OnePasswordExtensionResources.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -864,200 +864,324 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A77C2EE4AC41E0392C0A45900884D8B7 /* 1PasswordExtension */,
-				251EFAE3D9DF4B50EDBA0A44CA52C13E /* 1PasswordExtension-OnePasswordExtensionResources */,
-				2AF51E1EFB134E21EA2911FE2D669846 /* CocoaLumberjack */,
-				AFDCF589EE25B7D4E29348E6921EBC07 /* FMDB */,
-				3F137F22EE2B9B3D71FCEE48BBF0A7C6 /* Pods */,
-				51B3264D8C1C8DEC9817A7D741682C74 /* Pods-KeitaiWaniKani */,
-				71ABBFE8FF93CAC76E2EE0620997320F /* SwiftyJSON */,
+				D8B57B89BC28E74DBA035283E73E0107 /* 1PasswordExtension */,
+				FF62A25D3E480238C0D473193AB70325 /* 1PasswordExtension-OnePasswordExtensionResources */,
+				D082FD9722F53B9C3A1229257D4008F7 /* CocoaLumberjack */,
+				DAA98624E34DF6800E87FF078754FB49 /* FMDB */,
+				CB954953B79E7640B9A8B6B87B3DD7A1 /* Pods */,
+				46D08EE94F782819890A51ABBB6F33E8 /* Pods-KeitaiWaniKani */,
+				BECABEDAB48604D681293C70DA19828D /* SwiftyJSON */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		15B7C063856CAA71BE6D6F0DD17CFD12 /* Resources */ = {
+		13D34B3F365181A42983CECAAC4F2ACD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D8BA2A5670E9F5C3F85840BEFEF51E5 /* OnePasswordExtensionResources.bundle in Resources */,
+				AE4B151EAF5003685962E5601C55F58A /* OnePasswordExtensionResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BC14B92B004828DC5A54C67AF6788EF0 /* Resources */ = {
+		5E2B03ED562DA2F4CEE9CF1413BD3A66 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDEAD1FC8DDB54168159B86F9D6A6AD5 /* 1Password.xcassets in Resources */,
-				BE0D14ADDBFAFAD3ED4380D316CEA1AC /* onepassword-button-light.png in Resources */,
-				D25AEA4FE2C85E03114EA7468DE4D154 /* onepassword-button-light@2x.png in Resources */,
-				5A9BCB2BF3F5BBBC3B8816B6C16BAEF3 /* onepassword-button-light@3x.png in Resources */,
-				98557C2F569B116F291A7B4B3BE9ED3B /* onepassword-button.png in Resources */,
-				C788AB2CD380395EB98B64517A9E603F /* onepassword-button@2x.png in Resources */,
-				6FB92269DE34577DA5D21A6F659FACB5 /* onepassword-button@3x.png in Resources */,
-				201E722916CDC889A566C4E74AD04D7B /* onepassword-extension-light@2x~compact.png in Resources */,
-				6AF0D70AAECD405C266480F2A4A918B1 /* onepassword-extension-light@2x~regular.png in Resources */,
-				E72F18E98F6AD823C181A49F9676881C /* onepassword-extension-light@3x~compact.png in Resources */,
-				3D54F8F87C90D1E5C409738EAE0D1366 /* onepassword-extension-light~compact.png in Resources */,
-				6F8B1301F820462ACA5B942C244CA066 /* onepassword-extension-light~regular.png in Resources */,
-				37A32059285D32969BCA28210DF2769C /* onepassword-extension@2x~compact.png in Resources */,
-				67D49BF684B3A8CB8E02DF77B1773974 /* onepassword-extension@2x~regular.png in Resources */,
-				DBC0A0E0B4A1B08C07C8F3099AA75EA0 /* onepassword-extension@3x~compact.png in Resources */,
-				0E7F4DEEA4E867C3A6434170D1828A3B /* onepassword-extension~compact.png in Resources */,
-				D801C4DA8D52BB68155451E264400FD7 /* onepassword-extension~regular.png in Resources */,
-				149DAC3828BE9A9B5E43FEFB7CE37628 /* onepassword-navbar-light.png in Resources */,
-				20EEFF69515D50D46BF5DC60DC3563F0 /* onepassword-navbar-light@2x.png in Resources */,
-				51870399C4C5FA01568426FC65568932 /* onepassword-navbar-light@3x.png in Resources */,
-				FA20CDADC71BFAB027BC2D4876375F4A /* onepassword-navbar.png in Resources */,
-				DB2E30F3559CE9497EC93238F394261A /* onepassword-navbar@2x.png in Resources */,
-				5FE11FE949BEACD21F21C2EACBE1CDF1 /* onepassword-navbar@3x.png in Resources */,
-				B363C03EF60802C164FB5E164A6BCA2D /* onepassword-toolbar-light.png in Resources */,
-				2A0960D3C9A3E21699C1EB85931AAED9 /* onepassword-toolbar-light@2x.png in Resources */,
-				761B507862A8D17FA3C5B20E5BE97A18 /* onepassword-toolbar-light@3x.png in Resources */,
-				119EEDF82B5FD950EA1ECA023BA0283E /* onepassword-toolbar.png in Resources */,
-				17EC8441270F51768E79E5296F210DF0 /* onepassword-toolbar@2x.png in Resources */,
-				137558562D3A2D87BC5F7C5F6249707A /* onepassword-toolbar@3x.png in Resources */,
+				8968C07D6412C29A06CDD21E176A8790 /* 1Password.xcassets in Resources */,
+				69C3E31732A84B840529DD362F2F3E2F /* onepassword-button-light.png in Resources */,
+				5C6B42BC007CE112E798727FE31BD878 /* onepassword-button-light@2x.png in Resources */,
+				E747D3457DA2D0D95C5C030983663674 /* onepassword-button-light@3x.png in Resources */,
+				CEAF472964979C3218CF0AFB20703306 /* onepassword-button.png in Resources */,
+				5BFDD4A46F87D54A47D92ABF2F894F6C /* onepassword-button@2x.png in Resources */,
+				CED79DE801DE133B9FC1E7716D65EBF5 /* onepassword-button@3x.png in Resources */,
+				F3E5C62D72C98FEDEDA619582108B1D7 /* onepassword-extension-light@2x~compact.png in Resources */,
+				5C33495C74FBC9D432B795F9ACC9DFF6 /* onepassword-extension-light@2x~regular.png in Resources */,
+				03162F6FBBFF4775606AFC6444A3C7BC /* onepassword-extension-light@3x~compact.png in Resources */,
+				84170A779E7E5BFB8711667B43522EDA /* onepassword-extension-light~compact.png in Resources */,
+				410EA55906BCBD2E9BCB3746D0BB987B /* onepassword-extension-light~regular.png in Resources */,
+				B11B7A22C629F8C1136E77515B2CDA02 /* onepassword-extension@2x~compact.png in Resources */,
+				0FBB724B8B2A45186D369029D8ACDB44 /* onepassword-extension@2x~regular.png in Resources */,
+				E35C17E5C254DD854CDB3A05B1F3A98A /* onepassword-extension@3x~compact.png in Resources */,
+				9DE39E915B1BD1524E76A6D46E552776 /* onepassword-extension~compact.png in Resources */,
+				B54289A84A48604EE38881A0E071AD48 /* onepassword-extension~regular.png in Resources */,
+				CA055F7C7C352B1A1E177863F0AF11B6 /* onepassword-navbar-light.png in Resources */,
+				0F83E9950D54B3325FBCD9102BA9130B /* onepassword-navbar-light@2x.png in Resources */,
+				81FB4787BB9DC7A6793401091F545360 /* onepassword-navbar-light@3x.png in Resources */,
+				DF0E4A2B45545137FB5294B838EE6A49 /* onepassword-navbar.png in Resources */,
+				C32CF4DD337DE89B987C6119D8E74710 /* onepassword-navbar@2x.png in Resources */,
+				A9C8BBD485B6AE706640E9EA9249D39B /* onepassword-navbar@3x.png in Resources */,
+				CC5FEAEB89DE59D36D674D0E9D52428C /* onepassword-toolbar-light.png in Resources */,
+				B61B8ACD7135223233EA574580E3B040 /* onepassword-toolbar-light@2x.png in Resources */,
+				CB4A7A09049C12437382BB51FB2B519A /* onepassword-toolbar-light@3x.png in Resources */,
+				0A49140678241829867000A84E017BF8 /* onepassword-toolbar.png in Resources */,
+				A7E8FB4E56812F86EC0AD7535003E6D3 /* onepassword-toolbar@2x.png in Resources */,
+				8161C5BAC6975FCDF19BD18736CBE107 /* onepassword-toolbar@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0E4B7828F8420F4C0C638B8E48D2D731 /* Sources */ = {
+		33A69C3294284057522F5B845326BD31 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72D89779802B8C53F81231EAF2994411 /* SwiftyJSON-dummy.m in Sources */,
-				35D252ED155A395F68124218606A275D /* SwiftyJSON.swift in Sources */,
+				62E146B96CC76C574C55174CB934C049 /* 1PasswordExtension-dummy.m in Sources */,
+				E7C7A7317124A1FEA09C8DFB95FACE7B /* OnePasswordExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3DCD573A60CB7E8C69150DABE95DC779 /* Sources */ = {
+		92A0AE7DAB8C76657D060E585BD9D809 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCC4FB762283008AAD419E55D1DFAEF6 /* CocoaLumberjack-dummy.m in Sources */,
-				FD0F32380CE4D3BCDDD6F1AA990FE0E9 /* CocoaLumberjack.swift in Sources */,
-				72CB77911CECDE4B378D2471B57DAF2F /* DDAbstractDatabaseLogger.m in Sources */,
-				AC8DF52259EDB56823C077F31F55C4F0 /* DDASLLogCapture.m in Sources */,
-				0EB28BADAC77FB6FCD4F4B8FA78A7CE9 /* DDASLLogger.m in Sources */,
-				D8BE0A9B47A4A1460B00257620C6305A /* DDContextFilterLogFormatter.m in Sources */,
-				CBB0191D56339B34774F55459C5581EF /* DDDispatchQueueLogFormatter.m in Sources */,
-				24564E294DE0395C6585D87252DA90D2 /* DDFileLogger.m in Sources */,
-				C4649757A6E5479CDEBF437F6CF560D1 /* DDLog.m in Sources */,
-				C6CD7822459AAC36CDE1546B50DF2AB5 /* DDMultiFormatter.m in Sources */,
-				E0A25607027A2B04F9F03F858D18C5A0 /* DDTTYLogger.m in Sources */,
+				EAAD4EB2DC3993E40926CF8D93BEA794 /* SwiftyJSON-dummy.m in Sources */,
+				788ACAA13D08B8580F8638E0D35BBF3B /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5235B3DEEECDB5CD178705B1067DA6E8 /* Sources */ = {
+		93F42E9F1FD66C2C576358B03BA3E044 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60970FC000E927E14FA4406DC03BE87F /* FMDatabase.m in Sources */,
-				8DAEC31C7C5383D756DE7E6842A5A12F /* FMDatabaseAdditions.m in Sources */,
-				E4450C4F118BC702485B56EA28571900 /* FMDatabasePool.m in Sources */,
-				092B1DD3BCE52B4FA3021A1B1C4BA796 /* FMDatabaseQueue.m in Sources */,
-				227374B0ADB047DF85AC7E75E678EB8A /* FMDB-dummy.m in Sources */,
-				D01FDD1B40F8DD72CA03FE965CC9C910 /* FMResultSet.m in Sources */,
+				D5B5AA391818C821A981129B1E1388F5 /* CocoaLumberjack-dummy.m in Sources */,
+				F185D5C38C5F56AE5BF8923B49A4E061 /* CocoaLumberjack.swift in Sources */,
+				CC50CAF7FF957283D42DEBF5C63B12FE /* DDAbstractDatabaseLogger.m in Sources */,
+				903C373321B237294AE4541BC5654749 /* DDASLLogCapture.m in Sources */,
+				6F7DD4B4474BB70863C894D340EE5F94 /* DDASLLogger.m in Sources */,
+				546205F68C5B619AF8075F83B5CE4FA7 /* DDContextFilterLogFormatter.m in Sources */,
+				30314B36B0C3A2F6B1BB05019DE7857A /* DDDispatchQueueLogFormatter.m in Sources */,
+				948D94766FEB76BCD3ADC9D5386A9ED6 /* DDFileLogger.m in Sources */,
+				7E079AD6AC309071A275DECA8F2A2933 /* DDLog.m in Sources */,
+				02A39F8B3A72D3E336E34139356F6A5E /* DDMultiFormatter.m in Sources */,
+				2A6A29CAD800ED3F71FC72F380E5ADBB /* DDTTYLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		60D9AB9AE9EA3A60DDBFE5B23F445B83 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				57E8D495A4D067A1BB209FA1A39562F8 /* Pods-KeitaiWaniKani-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7C14012AF60FF213301E614A1425BF08 /* Sources */ = {
+		9C35B1D96E09727BDE97537677DE9CA8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9DC1AA9AD85A8D4E209B4C7E3F53F727 /* Sources */ = {
+		AFB978FB2FCAA362920A5A8E2B40FE8D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AF41F5A30E443BFE81A128A9C8F5601 /* Pods-dummy.m in Sources */,
+				E42339C81E18F58451BC9B15844E1ACC /* Pods-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EC78DCA432CC9333AACADFE311EB3F46 /* Sources */ = {
+		B23737C16A30A0D14035DAADB160E349 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EF62F0AE82C39372D8A6B4333420D82 /* 1PasswordExtension-dummy.m in Sources */,
-				B8E170131783CF5E7848F5F9405153F8 /* OnePasswordExtension.m in Sources */,
+				3B5B549BC203CE2AA9F5B52B3D5A8CA4 /* Pods-KeitaiWaniKani-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E120CFC4CABE67DD5A2C0783F37DDE0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88756437411C0BA31BED1C70905009EB /* FMDatabase.m in Sources */,
+				C31506056B8DB16EB0F7D9D4B2CDF629 /* FMDatabaseAdditions.m in Sources */,
+				6E76DB7CFB3EB29B2A3007F79240B925 /* FMDatabasePool.m in Sources */,
+				C614D999D29E96EE823C75220ECEC0C6 /* FMDatabaseQueue.m in Sources */,
+				78937F2D5689B56C6F5DA104227BFCAF /* FMDB-dummy.m in Sources */,
+				3AE78F265EC9578B995647737A0AFAA6 /* FMResultSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1AA3883A90F9ACFE799A93A9381BCEC2 /* PBXTargetDependency */ = {
+		0DEE54FA31EE8CF5CABFB5BA56C272E3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = FMDB;
-			target = AFDCF589EE25B7D4E29348E6921EBC07 /* FMDB */;
-			targetProxy = 4DBC9E2C091AD7C5B91480E51D360BF6 /* PBXContainerItemProxy */;
+			name = CocoaLumberjack;
+			target = D082FD9722F53B9C3A1229257D4008F7 /* CocoaLumberjack */;
+			targetProxy = DFDCE68A401CE91091C8DCC1D878E506 /* PBXContainerItemProxy */;
 		};
-		3DB36533723703A69DF07EF9F4964B4A /* PBXTargetDependency */ = {
+		3093DC841D636AF88D71AB9C3B313CE8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = 1PasswordExtension;
-			target = A77C2EE4AC41E0392C0A45900884D8B7 /* 1PasswordExtension */;
-			targetProxy = FD4C9A8B74DE45A6C52B905B6EF03193 /* PBXContainerItemProxy */;
+			target = D8B57B89BC28E74DBA035283E73E0107 /* 1PasswordExtension */;
+			targetProxy = E7009C01C1DD9E875D79018068FC74D6 /* PBXContainerItemProxy */;
 		};
-		620AC8A020DB6D5000C5696F98F5C795 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftyJSON;
-			target = 71ABBFE8FF93CAC76E2EE0620997320F /* SwiftyJSON */;
-			targetProxy = 6E1C3CD63937523313F68BEC7B06BC09 /* PBXContainerItemProxy */;
-		};
-		700E151218898121AB60E91D75A9DA2E /* PBXTargetDependency */ = {
+		47AC8F6421D366EC5F8EE532C61998F2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CocoaLumberjack;
-			target = 2AF51E1EFB134E21EA2911FE2D669846 /* CocoaLumberjack */;
-			targetProxy = C293D0CCCC24B6A07F2E38191DA93E81 /* PBXContainerItemProxy */;
+			target = D082FD9722F53B9C3A1229257D4008F7 /* CocoaLumberjack */;
+			targetProxy = 8B7A511048ABED61512910C40F257C67 /* PBXContainerItemProxy */;
 		};
-		D2098E2E4160055C66B7AB268B819601 /* PBXTargetDependency */ = {
+		59B22145416C5E0BC3D3DBB4499393EC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "1PasswordExtension-OnePasswordExtensionResources";
-			target = 251EFAE3D9DF4B50EDBA0A44CA52C13E /* 1PasswordExtension-OnePasswordExtensionResources */;
-			targetProxy = 021B32ACFBC77E2EEA353227A657FB08 /* PBXContainerItemProxy */;
+			name = SwiftyJSON;
+			target = BECABEDAB48604D681293C70DA19828D /* SwiftyJSON */;
+			targetProxy = 4CD24C844F3A423B182504E4FB9FA81B /* PBXContainerItemProxy */;
 		};
-		E97A5291D815FAD200EB7CBD92305336 /* PBXTargetDependency */ = {
+		813C807C45459EB030831A199F408487 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FMDB;
-			target = AFDCF589EE25B7D4E29348E6921EBC07 /* FMDB */;
-			targetProxy = 4395D3B098049BF873FB854C95A55626 /* PBXContainerItemProxy */;
+			target = DAA98624E34DF6800E87FF078754FB49 /* FMDB */;
+			targetProxy = E1B73EC9E81D1875E149F27010E163CE /* PBXContainerItemProxy */;
 		};
-		EB44C125F1753546FD5D2F04B0E0481B /* PBXTargetDependency */ = {
+		8CEDC6AB1B9DC8368B5822268D32E5FF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FMDB;
+			target = DAA98624E34DF6800E87FF078754FB49 /* FMDB */;
+			targetProxy = 945C41048A91E3F43FA964EC467E0A91 /* PBXContainerItemProxy */;
+		};
+		99A5DFCBDF226B2BFD62016C770FEF12 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftyJSON;
-			target = 71ABBFE8FF93CAC76E2EE0620997320F /* SwiftyJSON */;
-			targetProxy = 69B90051CF9A14C99DD068BE1587B12B /* PBXContainerItemProxy */;
+			target = BECABEDAB48604D681293C70DA19828D /* SwiftyJSON */;
+			targetProxy = 1341860FAD1BB00901B5D25960BF9441 /* PBXContainerItemProxy */;
 		};
-		F2C3E8589D149ACDE140766AC2B6B556 /* PBXTargetDependency */ = {
+		EC970CC919652E561DEE8924F4F30163 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = CocoaLumberjack;
-			target = 2AF51E1EFB134E21EA2911FE2D669846 /* CocoaLumberjack */;
-			targetProxy = E132BE6887D325B75DF06B88D2BE2040 /* PBXContainerItemProxy */;
+			name = "1PasswordExtension-OnePasswordExtensionResources";
+			target = FF62A25D3E480238C0D473193AB70325 /* 1PasswordExtension-OnePasswordExtensionResources */;
+			targetProxy = 921AB2F74EA95232D72B0C59252E2B31 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0014E236871F2E1AA6F9A5366FDF4F15 /* Release */ = {
+		08285A37B2590F1685EF9C9691604C4E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE210A6FBAF0BE379425AB00A01684DA /* 1PasswordExtension.xcconfig */;
+			baseConfigurationReference = B6FD163D55ABEA2AD1F31DF4F4399569 /* 1PasswordExtension.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1.6.1;
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/1PasswordExtension/1PasswordExtension-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/1PasswordExtension/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/1PasswordExtension/1PasswordExtension.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = OnePasswordExtension;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0BE7BA7E5A6F133B99866A72754A0A2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11FDEF1EC73C32CBEAE53B5B073E8BDE /* CocoaLumberjack.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CocoaLumberjack/CocoaLumberjack-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CocoaLumberjack/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CocoaLumberjack/CocoaLumberjack.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = CocoaLumberjack;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3CC7B67D1C6176CEBE93BBC03D419F66 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6FD163D55ABEA2AD1F31DF4F4399569 /* 1PasswordExtension.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = OnePasswordExtensionResources;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		411BD0441DC145D1BDABD6639194723F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53DE84D24376D4C2E4ACCE2A20BF3D94 /* SwiftyJSON.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SwiftyJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5B8B9EB6DEB98EF7312009066BD9E831 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 448463B218602A39A5D310BCD5236E74 /* FMDB.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/FMDB/FMDB-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FMDB/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/FMDB/FMDB.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = FMDB;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5C17C8DA3ACDBF29F0F156B8A9D9F77B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6FD163D55ABEA2AD1F31DF4F4399569 /* 1PasswordExtension.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/1PasswordExtension/1PasswordExtension-prefix.pch";
@@ -1076,54 +1200,28 @@
 			};
 			name = Release;
 		};
-		0A968CADBBC0FD687C5799F38CAADE34 /* Debug */ = {
+		5FCF1F52672B90BF6D44ED010C9F005B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C91432AD072E04FC818EA4750BE3674E /* FMDB.xcconfig */;
+			baseConfigurationReference = C9E641FC2BFD4A2FDC417C4967C97FB6 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.5.0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 2;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/FMDB/FMDB-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FMDB/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/FMDB/FMDB.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods/Pods.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = FMDB;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		17DD14AD4E1FD7B644593DD39E48C6BC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 947246CC34C134D2931B6A41893BDEC0 /* CocoaLumberjack.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.0.1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 2;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/CocoaLumberjack/CocoaLumberjack-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CocoaLumberjack/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/CocoaLumberjack/CocoaLumberjack.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = CocoaLumberjack;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1133,9 +1231,9 @@
 			};
 			name = Debug;
 		};
-		39A097A1923B94B03EDB0E04A62AB9FF /* Debug */ = {
+		794A89C40C411BCF9EB4866AAA48EB92 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 915E78642DCC6824C1526C589017F2C2 /* Pods-KeitaiWaniKani.debug.xcconfig */;
+			baseConfigurationReference = 5A589D82F9882611910C4310412A6D7C /* Pods-KeitaiWaniKani.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1149,40 +1247,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Pods-KeitaiWaniKani/Pods-KeitaiWaniKani.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = Pods_KeitaiWaniKani;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		8FCCDDA5C313DFC7321C21D71F279328 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 947246CC34C134D2931B6A41893BDEC0 /* CocoaLumberjack.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.0.1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 2;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/CocoaLumberjack/CocoaLumberjack-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CocoaLumberjack/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/CocoaLumberjack/CocoaLumberjack.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = CocoaLumberjack;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1191,31 +1260,15 @@
 			};
 			name = Release;
 		};
-		94B564960AE185B74A44E28813A8826B /* Release */ = {
+		9DA202A06FEEFCA2C8BE28B148639F9F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C91432AD072E04FC818EA4750BE3674E /* FMDB.xcconfig */;
+			baseConfigurationReference = B6FD163D55ABEA2AD1F31DF4F4399569 /* 1PasswordExtension.xcconfig */;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.5.0;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 2;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/FMDB/FMDB-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FMDB/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/FMDB/FMDB.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = FMDB;
+				PRODUCT_NAME = OnePasswordExtensionResources;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
@@ -1258,137 +1311,9 @@
 			};
 			name = Debug;
 		};
-		B14DA71C856F02068671CD95822CB82B /* Debug */ = {
+		D6FD09FBEF7C841612263EFB11286043 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0087E64540ABCD129D88C58E5285C9E5 /* Pods.debug.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods/Pods.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = Pods;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		BBF0C3023AF43276F0AB4E27459500B8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE210A6FBAF0BE379425AB00A01684DA /* 1PasswordExtension.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1.6.1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/1PasswordExtension/1PasswordExtension-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/1PasswordExtension/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/1PasswordExtension/1PasswordExtension.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = OnePasswordExtension;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		C4832F089CE5BDA2996571C3793C3E5B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 70FF100145F9C45692DA7F52187D4F29 /* Pods.release.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Pods/Pods.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = Pods;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		C97E73CE0EE9492E5307AA710C6A1C3E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 06375DB691164336905B1E0CB233154A /* SwiftyJSON.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.3.0;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 2;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SwiftyJSON;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		D0FE969843D031A94628C660F62C5A29 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE210A6FBAF0BE379425AB00A01684DA /* 1PasswordExtension.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = OnePasswordExtensionResources;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		F29FB8F7A84A45CA992CDBDCE6A92C4C /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BC5FA1208D92D3F901B891F98F0FADB8 /* Pods-KeitaiWaniKani.release.xcconfig */;
+			baseConfigurationReference = 31A862C4B41212B2F64B5E7A00A2F09B /* Pods-KeitaiWaniKani.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
@@ -1402,11 +1327,127 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/Pods-KeitaiWaniKani/Pods-KeitaiWaniKani.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = Pods_KeitaiWaniKani;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DC146FDEB5438F7C297B9B47A2459208 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 448463B218602A39A5D310BCD5236E74 /* FMDB.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/FMDB/FMDB-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FMDB/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/FMDB/FMDB.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = FMDB;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E48C9DF55943AE143B9DB6FF8ADC059F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA3FD18FA427750272E558B9A33A1B23 /* Pods.release.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods/Pods.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		EF3F8F39287E80AE35FEC49C34B2A1A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53DE84D24376D4C2E4ACCE2A20BF3D94 /* SwiftyJSON.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SwiftyJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F3E7BDC61CA5AA8264FB52423B71F296 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11FDEF1EC73C32CBEAE53B5B073E8BDE /* CocoaLumberjack.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CocoaLumberjack/CocoaLumberjack-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CocoaLumberjack/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CocoaLumberjack/CocoaLumberjack.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = CocoaLumberjack;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1449,50 +1490,18 @@
 			};
 			name = Release;
 		};
-		FC00BAA69C1C70C0D5BCCC71A777C5C4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE210A6FBAF0BE379425AB00A01684DA /* 1PasswordExtension.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				PRODUCT_NAME = OnePasswordExtensionResources;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		FFA40355AF52FB84B8901EBCEA05C9C4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 06375DB691164336905B1E0CB233154A /* SwiftyJSON.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.3.0;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 2;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = SwiftyJSON;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		002F9559682E320A15C01003FF74440A /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BE7BA7E5A6F133B99866A72754A0A2E /* Debug */,
+				F3E7BDC61CA5AA8264FB52423B71F296 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1502,65 +1511,56 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		32AF3862546CF8A5054D31D8C34531F0 /* Build configuration list for PBXNativeTarget "1PasswordExtension-OnePasswordExtensionResources" */ = {
+		31A3CFC873C6EF6ADC85E21845E60B32 /* Build configuration list for PBXNativeTarget "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FC00BAA69C1C70C0D5BCCC71A777C5C4 /* Debug */,
-				D0FE969843D031A94628C660F62C5A29 /* Release */,
+				5FCF1F52672B90BF6D44ED010C9F005B /* Debug */,
+				E48C9DF55943AE143B9DB6FF8ADC059F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4ABD7E74128884C4C228F520039F7C07 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
+		3C2CF8869B37A0420A4C5DEA1E16BD3A /* Build configuration list for PBXNativeTarget "1PasswordExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FFA40355AF52FB84B8901EBCEA05C9C4 /* Debug */,
-				C97E73CE0EE9492E5307AA710C6A1C3E /* Release */,
+				08285A37B2590F1685EF9C9691604C4E /* Debug */,
+				5C17C8DA3ACDBF29F0F156B8A9D9F77B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		69E3E4549F8D616DCFBF1E0414C28C13 /* Build configuration list for PBXNativeTarget "FMDB" */ = {
+		4F37DFD91009C83F36178307CD1F5575 /* Build configuration list for PBXNativeTarget "FMDB" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0A968CADBBC0FD687C5799F38CAADE34 /* Debug */,
-				94B564960AE185B74A44E28813A8826B /* Release */,
+				DC146FDEB5438F7C297B9B47A2459208 /* Debug */,
+				5B8B9EB6DEB98EF7312009066BD9E831 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6E2C9F1F2410CDCFC1088410DA146B4F /* Build configuration list for PBXNativeTarget "1PasswordExtension" */ = {
+		90883ACE0F67AE99638AB2BB4F7652ED /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BBF0C3023AF43276F0AB4E27459500B8 /* Debug */,
-				0014E236871F2E1AA6F9A5366FDF4F15 /* Release */,
+				EF3F8F39287E80AE35FEC49C34B2A1A0 /* Debug */,
+				411BD0441DC145D1BDABD6639194723F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B632CB2197B5E6A638028F14DAF4BF8E /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */ = {
+		CF81894FFC9BC6789F1C68FCCDB017F7 /* Build configuration list for PBXNativeTarget "1PasswordExtension-OnePasswordExtensionResources" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				17DD14AD4E1FD7B644593DD39E48C6BC /* Debug */,
-				8FCCDDA5C313DFC7321C21D71F279328 /* Release */,
+				3CC7B67D1C6176CEBE93BBC03D419F66 /* Debug */,
+				9DA202A06FEEFCA2C8BE28B148639F9F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CEDE7AD86A3C8AB7B87303532711B1BC /* Build configuration list for PBXNativeTarget "Pods-KeitaiWaniKani" */ = {
+		DFF70C0CE60A370DDA211E68FA24273D /* Build configuration list for PBXNativeTarget "Pods-KeitaiWaniKani" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				39A097A1923B94B03EDB0E04A62AB9FF /* Debug */,
-				F29FB8F7A84A45CA992CDBDCE6A92C4C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		EF2992D247DC27038221075C508A09B0 /* Build configuration list for PBXNativeTarget "Pods" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B14DA71C856F02068671CD95822CB82B /* Debug */,
-				C4832F089CE5BDA2996571C3793C3E5B /* Release */,
+				D6FD09FBEF7C841612263EFB11286043 /* Debug */,
+				794A89C40C411BCF9EB4866AAA48EB92 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

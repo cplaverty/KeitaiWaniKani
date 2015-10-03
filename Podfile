@@ -4,7 +4,7 @@ use_frameworks!
 
 xcodeproj 'KeitaiWaniKani'
 
-link_with 'OperationKit', 'WaniKaniKit', 'WaniKaniKitTests', 'WaniKaniStudyQueueWidget'
+link_with 'OperationKit', 'WaniKaniKit', 'WaniKaniStudyQueueWidget'
 
 #pod 'FMDB', '~> 2.5'
 pod 'FMDB', :git => 'https://github.com/ccgus/fmdb.git', :branch => 'swiftFramework'
