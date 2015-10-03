@@ -13,13 +13,29 @@ private let radicalReuseIdentifier = "RadicalDataItemCell"
 private let kanjiReuseIdentifier = "KanjiDataItemCell"
 
 private struct ClassifiedSRSDataItems {
-    let pending: [SRSDataItem]?
-    let complete: [SRSDataItem]?
+    struct Section {
+        let title: String
+        let items: [SRSDataItem]
+    }
+    
+    let sections: [Section]
     
     init(items: [SRSDataItem]) {
         let items = items.sort { $0.userSpecificSRSData?.srsLevelNumeric < $1.userSpecificSRSData?.srsLevelNumeric }
-        pending = items.filter(self.dynamicType.isPending)
-        complete = items.filter(self.dynamicType.isComplete)
+        var sections: [Section] = []
+        sections.reserveCapacity(2)
+        
+        let pending = items.filter(self.dynamicType.isPending)
+        if !pending.isEmpty {
+            sections.append(Section(title: "Remaining to Level", items: pending))
+        }
+        
+        let complete = items.filter(self.dynamicType.isComplete)
+        if !complete.isEmpty {
+            sections.append(Section(title: "Complete", items: complete))
+        }
+        
+        self.sections = sections
     }
     
     private static func isPending(item: SRSDataItem) -> Bool {
@@ -35,10 +51,6 @@ private struct ClassifiedSRSDataItems {
 
 class SRSDataItemCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    private enum CollectionViewSections: Int {
-        case Pending = 0, Complete = 1
-    }
-    
     // MARK: - Properties
     
     private var classifiedItems: ClassifiedSRSDataItems?
@@ -50,31 +62,19 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
     // MARK: - UICollectionViewDataSource
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 2
+        guard let classifiedItems = classifiedItems else { return 0 }
+        return classifiedItems.sections.count
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let collectionViewSection = CollectionViewSections(rawValue: section) else {
-            fatalError("Invalid section index \(section) requested")
-        }
+        guard let classifiedItems = classifiedItems else { return 0 }
         
-        switch collectionViewSection {
-        case .Pending: return classifiedItems?.pending?.count ?? 0
-        case .Complete: return classifiedItems?.complete?.count ?? 0
-        }
+        return classifiedItems.sections[section].items.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let collectionViewSection = CollectionViewSections(rawValue: indexPath.section) else {
-            fatalError("Invalid section index \(indexPath.section) requested")
-        }
-        
-        if let items = classifiedItems {
-            let item: SRSDataItem
-            switch collectionViewSection {
-            case .Pending: item = items.pending![indexPath.row]
-            case .Complete: item = items.complete![indexPath.row]
-            }
+        if let classifiedItems = classifiedItems {
+            let item = classifiedItems.sections[indexPath.section].items[indexPath.row]
             
             switch item {
             case let radical as Radical:
@@ -93,21 +93,13 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
     }
     
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        guard let collectionViewSection = CollectionViewSections(rawValue: indexPath.section) else {
-            fatalError("Invalid section index \(indexPath.section) requested")
-        }
-        
         let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerReuseIdentifier, forIndexPath: indexPath) as! SRSItemHeaderCollectionReusableView
         
-        if kind == UICollectionElementKindSectionHeader && self.collectionView(collectionView, numberOfItemsInSection: indexPath.section) > 0 {
-            switch collectionViewSection {
-            case .Pending: view.headerLabel.text = "Remaining to Level"
-            case .Complete: view.headerLabel.text = "Complete"
-            }
-            view.hidden = false
+        if kind == UICollectionElementKindSectionHeader {
+            let section = classifiedItems?.sections[indexPath.section]
+            view.headerLabel.text = section?.title
         } else {
             view.headerLabel.text = nil
-            view.hidden = true
         }
         
         return view
@@ -118,22 +110,5 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
-    
-    // MARK: - UICollectionViewDelegate
-    
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-    return false
-    }
-    
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-    return false
-    }
-    
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
     
 }
