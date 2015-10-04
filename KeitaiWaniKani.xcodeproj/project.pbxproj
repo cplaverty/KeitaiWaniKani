@@ -143,6 +143,7 @@
 		83D550591BB489A9007442EF /* OperationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8F94A1B9B2E7E007CBFBF /* OperationKit.framework */; settings = {ASSET_TAGS = (); }; };
 		83D550611BB48AB8007442EF /* OperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D550601BB48AB8007442EF /* OperationTests.swift */; settings = {ASSET_TAGS = (); }; };
 		83D550631BB48AD4007442EF /* StubOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D550621BB48AD4007442EF /* StubOperation.swift */; settings = {ASSET_TAGS = (); }; };
+		83D7CF821BC15FCB00C1AFC4 /* WaniKaniReviewPageWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D7CF811BC15FCB00C1AFC4 /* WaniKaniReviewPageWebViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		83D931691BB9CC66009DF31A /* FileMissingCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D931681BB9CC66009DF31A /* FileMissingCondition.swift */; settings = {ASSET_TAGS = (); }; };
 		83D9316B1BB9D2AA009DF31A /* FileMissingConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D9316A1BB9D2AA009DF31A /* FileMissingConditionTests.swift */; settings = {ASSET_TAGS = (); }; };
 		83DC478C1B440A6200AD716C /* RubyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC478B1B440A6200AD716C /* RubyLabel.swift */; };
@@ -365,6 +366,7 @@
 		83D550581BB489A9007442EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83D550601BB48AB8007442EF /* OperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationTests.swift; sourceTree = "<group>"; };
 		83D550621BB48AD4007442EF /* StubOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubOperation.swift; sourceTree = "<group>"; };
+		83D7CF811BC15FCB00C1AFC4 /* WaniKaniReviewPageWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaniKaniReviewPageWebViewController.swift; sourceTree = "<group>"; };
 		83D931681BB9CC66009DF31A /* FileMissingCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileMissingCondition.swift; sourceTree = "<group>"; };
 		83D9316A1BB9D2AA009DF31A /* FileMissingConditionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileMissingConditionTests.swift; sourceTree = "<group>"; };
 		83DC478B1B440A6200AD716C /* RubyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RubyLabel.swift; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 				83B1555A1B94A18D0022217E /* SettingsTableViewController.swift */,
 				831FF75B1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift */,
 				833BF0BD1B4930A20038AAE3 /* UIViewControllerExtensions.swift */,
+				83D7CF811BC15FCB00C1AFC4 /* WaniKaniReviewPageWebViewController.swift */,
 				833FECE81BADF0DD001C9260 /* WebViewBackForwardListTableViewController.swift */,
 				837BD4931B6E724200EDB325 /* WebViewController.swift */,
 			);
@@ -1176,6 +1179,7 @@
 				8347BDD91B7260B1000F99EF /* AlertOperation.swift in Sources */,
 				8347BDDC1B7260B1000F99EF /* GetDashboardDataOperation.swift in Sources */,
 				831FF7601BB8861400C31FDF /* SRSDataItemCollectionViewCell.swift in Sources */,
+				83D7CF821BC15FCB00C1AFC4 /* WaniKaniReviewPageWebViewController.swift in Sources */,
 				83354D8E1B484C98007686D5 /* GetAPIKeyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

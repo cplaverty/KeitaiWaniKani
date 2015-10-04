@@ -582,7 +582,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
 
         switch (tableViewSection, indexPath.row) {
         case (.CurrentlyAvailable, 0): // Lessons
-            let vc = WebViewController.forURL(WaniKaniURLs.lessonSession, configBlock: webViewControllerCommonConfiguration)
+            let vc = WaniKaniReviewPageWebViewController.forURL(WaniKaniURLs.lessonSession, configBlock: webViewControllerCommonConfiguration)
             if self.dataRefreshOperation != nil {
                 // Cancel data refresh operation because we're just going to restart it when the web view is dismissed
                 DDLogDebug("Cancelling data refresh operation")
@@ -590,7 +590,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             }
             presentViewController(vc, animated: true, completion: nil)
         case (.CurrentlyAvailable, 1): // Reviews
-            let vc = WebViewController.forURL(WaniKaniURLs.reviewSession, configBlock: webViewControllerCommonConfiguration)
+            let vc = WaniKaniReviewPageWebViewController.forURL(WaniKaniURLs.reviewSession, configBlock: webViewControllerCommonConfiguration)
             if self.dataRefreshOperation != nil {
                 // Cancel data refresh operation because we're just going to restart it when the web view is dismissed
                 DDLogDebug("Cancelling data refresh operation")

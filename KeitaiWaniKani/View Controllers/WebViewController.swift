@@ -14,7 +14,7 @@ protocol WebViewControllerDelegate: class {
     func webViewControllerDidFinish(controller: WebViewController)
 }
 
-class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelegate, WebViewBackForwardListTableViewControllerDelegate {
+class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WebViewControllerDelegate, WebViewBackForwardListTableViewControllerDelegate {
     
     private struct SegueIdentifiers {
         static let showBackHistory = "Show Web Back History"
@@ -22,7 +22,7 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
     }
     
     class func forURL(URL: NSURL, @noescape configBlock: (WebViewController) -> Void) -> UINavigationController {
-        let webViewController = WebViewController(URL: URL)
+        let webViewController = self.init(URL: URL)
         configBlock(webViewController)
         
         let nc = UINavigationController(navigationBarClass: nil, toolbarClass: nil)
@@ -37,17 +37,13 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
     
     // MARK: - Initialisers
     
-    init() {
+    required init(URL: NSURL) {
         super.init(nibName: nil, bundle: nil)
-    }
-    
-    convenience init(URL: NSURL) {
-        self.init()
         self.URL = URL
     }
     
-    convenience init(configuration: WKWebViewConfiguration) {
-        self.init()
+    required init(configuration: WKWebViewConfiguration) {
+        super.init(nibName: nil, bundle: nil)
         self.webViewConfiguration = configuration
     }
     
@@ -65,7 +61,6 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
     // MARK: - Properties
     
     weak var delegate: WebViewControllerDelegate?
-    weak var navigationDelegate: WKNavigationDelegate?
     
     var URL: NSURL?
     
@@ -218,13 +213,29 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
         }
     }
     
+    // MARK: - WKNavigationDelegate
+    
+    func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.setToolbarHidden(false, animated: true)
+    }
+    
+    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+        decisionHandler(.Allow)
+    }
+    
+    func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void) {
+        decisionHandler(.Allow)
+    }
+    
     // MARK: - WKUIDelegate
     
     func webView(webView: WKWebView, createWebViewWithConfiguration configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        let newVC = WebViewController(configuration: configuration)
+        let newVC = self.dynamicType.init(configuration: configuration)
         newVC.delegate = self
         newVC.URL = navigationAction.request.URL
         self.navigationController?.pushViewController(newVC, animated: true)
+        
         return newVC.webView
     }
     
@@ -287,7 +298,7 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
         
         webView = WKWebView(frame: view.bounds, configuration: webViewConfiguration)
         webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.navigationDelegate = navigationDelegate
+        webView.navigationDelegate = self
         webView.UIDelegate = self
         webView.allowsBackForwardNavigationGestures = true
         if #available(iOS 9.0, *) {
