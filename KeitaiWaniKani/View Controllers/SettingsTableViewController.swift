@@ -63,16 +63,19 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             cell.settingName = userScript.name
             cell.settingDescription = userScript.description
             cell.applicationSettingKey = userScript.settingKey
+            cell.accessoryType = .None
             cell.layoutIfNeeded()
             
             return cell
         case .Feedback:
             let cell = tableView.dequeueReusableCellWithIdentifier("Basic", forIndexPath: indexPath)
             cell.textLabel?.text = "Send Feedback"
+            cell.accessoryType = .DisclosureIndicator
             return cell
         case .LogOut:
             let cell = tableView.dequeueReusableCellWithIdentifier("Basic", forIndexPath: indexPath)
             cell.textLabel?.text = "Log Out"
+            cell.accessoryType = .DisclosureIndicator
             return cell
         }
     }
