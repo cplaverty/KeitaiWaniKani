@@ -37,6 +37,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDLog.addLogger(fileLogger)
         
         DDLogInfo("Starting new instance (logging level \(defaultDebugLevel))")
+        
+        UINavigationBar.appearance().tintColor = ApplicationSettings.globalTintColor
+        UIToolbar.appearance().tintColor = ApplicationSettings.globalTintColor
+        
         return true
     }
 

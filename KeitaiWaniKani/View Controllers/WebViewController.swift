@@ -20,15 +20,13 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
         static let showBackHistory = "Show Web Back History"
         static let showForwardHistory = "Show Web Forward History"
     }
-
+    
     class func forURL(URL: NSURL, @noescape configBlock: (WebViewController) -> Void) -> UINavigationController {
         let webViewController = WebViewController(URL: URL)
         configBlock(webViewController)
         
         let nc = UINavigationController(navigationBarClass: nil, toolbarClass: nil)
         nc.setToolbarHidden(false, animated: false)
-        nc.navigationBar.tintColor = ApplicationSettings.globalTintColor
-        nc.toolbar.tintColor = ApplicationSettings.globalTintColor
         nc.hidesBarsOnSwipe = true
         nc.hidesBarsWhenVerticallyCompact = true
         
@@ -110,7 +108,7 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
             }
         }
     }
-
+    
     lazy var backButton: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(named: "ArrowLeft"), style: .Plain, target: self, action: "backButtonTouched:forEvent:")
         return item
@@ -216,7 +214,6 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
             popover.presentPopoverFromBarButtonItem(sender, permittedArrowDirections: [.Up, .Down], animated: true)
         } else {
             let nc = UINavigationController(rootViewController: bflvc)
-            nc.navigationBar.tintColor = ApplicationSettings.globalTintColor
             self.presentViewController(nc, animated: true, completion: nil)
         }
     }
@@ -373,7 +370,7 @@ class WebViewController: UIViewController, WKUIDelegate, WebViewControllerDelega
         
         navigationController?.presentViewController(avc, animated: true, completion: nil)
     }
-
+    
     private func updateUIFromWebView() {
         // Network indicator
         UIApplication.sharedApplication().networkActivityIndicatorVisible = webView.loading
