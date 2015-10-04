@@ -17,7 +17,7 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         guard let URL = webView.URL else { return }
         
         switch URL {
-        case WaniKaniURLs.reviewSession:
+        case WaniKaniURLs.lessonSession, WaniKaniURLs.reviewSession:
             showBrowserInterface(false)
         default: break
         }
@@ -27,7 +27,7 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        showBrowserInterface(webView.URL != WaniKaniURLs.reviewSession)
+        showBrowserInterface(webView.URL != WaniKaniURLs.lessonSession && webView.URL != WaniKaniURLs.reviewSession)
     }
     
     // MARK: - Update UI
