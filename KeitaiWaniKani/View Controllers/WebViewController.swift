@@ -9,6 +9,7 @@ import UIKit
 import WebKit
 import CocoaLumberjack
 import OnePasswordExtension
+import WaniKaniKit
 
 protocol WebViewControllerDelegate: class {
     func webViewControllerDidFinish(controller: WebViewController)
@@ -221,7 +222,13 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
     }
     
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-        decisionHandler(.Allow)
+        switch navigationAction.request.URL {
+        case WaniKaniURLs.subscription?:
+            self.showAlertWithTitle("Can not manage subscription", message: "Due to Apple App Store rules, you can not manage your subscription within the app.")
+            decisionHandler(.Cancel)
+        default:
+            decisionHandler(.Allow)
+        }
     }
     
     func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void) {

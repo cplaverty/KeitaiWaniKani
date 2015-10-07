@@ -14,6 +14,7 @@ public struct WaniKaniURLs {
     public static let dashboard = NSURL(string: "dashboard", relativeToURL: home)!.absoluteURL
     public static let communityCentre = NSURL(string: "community", relativeToURL: home)!.absoluteURL
     public static let account = NSURL(string: "account", relativeToURL: home)!.absoluteURL
+    public static let subscription = NSURL(string: "account/subscription", relativeToURL: home)!.absoluteURL
     
     public static let reviewHome = NSURL(string: "review", relativeToURL: home)!.absoluteURL
     public static let reviewSession = NSURL(string: "review/session", relativeToURL: home)!.absoluteURL
