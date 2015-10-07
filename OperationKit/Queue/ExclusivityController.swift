@@ -7,7 +7,6 @@ The file contains the code to automatically set up dependencies between mutually
 */
 
 import Foundation
-import CocoaLumberjack
 
 /**
     `ExclusivityController` is a singleton to keep track of all the in-flight
@@ -36,7 +35,6 @@ public class ExclusivityController {
             until after the operation had already begun, which would be incorrect.
         */
         dispatch_sync(serialQueue) {
-            DDLogVerbose("Adding exclusivity categories \(categories) to operation \(operation.dynamicType)")
             for category in categories {
                 self.noqueue_addOperation(operation, category: category)
             }
@@ -46,7 +44,6 @@ public class ExclusivityController {
     /// Unregisters an operation from being mutually exclusive.
     public func removeOperation(operation: Operation, categories: [String]) {
         dispatch_async(serialQueue) {
-            DDLogVerbose("Removing exclusivity categories \(categories) from operation \(operation.dynamicType)")
             for category in categories {
                 self.noqueue_removeOperation(operation, category: category)
             }
