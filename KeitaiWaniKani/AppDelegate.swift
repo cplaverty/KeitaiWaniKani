@@ -169,6 +169,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return queue
         }
 
+        ApplicationSettings.purgeDatabase = true
         fatalError("Failed to create database at \(storeURL)")
     }
     
