@@ -20,7 +20,7 @@ public protocol JSONDecoder {
 }
 
 public protocol DatabaseCoder {
-    func createTable(database: FMDatabase) throws
+    func createTable(database: FMDatabase, dropFirst: Bool) throws
     func hasBeenUpdatedSince(since: NSDate, inDatabase database: FMDatabase) throws -> Bool
 }
 
@@ -32,10 +32,14 @@ public protocol SingleItemDatabaseCoder: DatabaseCoder {
 }
 
 public protocol ListItemDatabaseCoder: DatabaseCoder {
-    typealias ModelObject: Equatable
+    typealias ModelObject: SRSDataItem, Equatable
     
     func loadFromDatabase(database: FMDatabase) throws -> [ModelObject]
     func save(models: [ModelObject], toDatabase database: FMDatabase) throws
+    
+    func maxLevel(database: FMDatabase) -> Int
+    func lessonsOutstanding(database: FMDatabase) throws -> [ModelObject]
+    func reviewsDueBefore(date: NSDate, database: FMDatabase) throws -> [ModelObject]
 }
 
 extension DatabaseCoder {

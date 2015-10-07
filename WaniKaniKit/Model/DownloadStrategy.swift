@@ -34,38 +34,85 @@ public struct DownloadStrategy {
     
     private let databaseQueue: FMDatabaseQueue
     
-    private let initialState: State
-    
     public init(databaseQueue: FMDatabaseQueue) {
         self.databaseQueue = databaseQueue
-        self.initialState = State(databaseQueue: databaseQueue)
     }
     
     public func batchesForCoder(coder: RadicalCoder) -> [DownloadBatches] {
-        return [DownloadBatches(description: nil, argument: nil)]
+        let currentState = State(databaseQueue: self.databaseQueue)
+        guard let levelRange = staleLevelsForCoder(coder, currentState: currentState) else {
+            // Download everything
+            return [DownloadBatches(description: nil, argument: nil)]
+        }
+        
+        if levelRange.isEmpty {
+            DDLogDebug("All radical levels up to date")
+            return []
+        } else {
+            let argument = levelArrayToArgument(levelRange)
+            DDLogDebug("Will fetch radicals for levels \(argument)")
+            return [DownloadBatches(description: nil, argument: argument)]
+        }
     }
     
     public func batchesForCoder(coder: KanjiCoder) -> [DownloadBatches] {
-        return [DownloadBatches(description: nil, argument: nil)]
+        let currentState = State(databaseQueue: self.databaseQueue)
+        guard let levelRange = staleLevelsForCoder(coder, currentState: currentState) else {
+            // Download everything
+            return [DownloadBatches(description: nil, argument: nil)]
+        }
+        
+        if levelRange.isEmpty {
+            DDLogDebug("All kanji levels up to date")
+            return []
+        } else {
+            let argument = levelArrayToArgument(levelRange)
+            DDLogDebug("Will fetch kanji for levels \(argument)")
+            return [DownloadBatches(description: nil, argument: argument)]
+        }
     }
     
     public func batchesForCoder(coder: VocabularyCoder) -> [DownloadBatches] {
-        return levelRangeArgumentListsUsingBatchSize(levelFetchBatchSize)
+        let currentState = State(databaseQueue: self.databaseQueue)
+        let levelRange = staleLevelsForCoder(coder, currentState: currentState) ?? Array(1...(maxLevel ?? currentState.userInformation!.level))
+        let stride = 0.stride(to: levelRange.count, by: levelFetchBatchSize)
+        
+        let arguments = stride.map { start -> String in
+            let end = min(levelRange.count - 1, start + levelFetchBatchSize - 1)
+            return levelArrayToArgument(levelRange[start...end])
+        }
+        
+        if arguments.isEmpty {
+            DDLogDebug("All vocabulary levels up to date")
+            return []
+        } else {
+            DDLogDebug("Will fetch vocabulary with batches \(arguments)")
+            var batchNumber = 1
+            return arguments.map { DownloadBatches(description: arguments.count == 1 ? nil : "(batch \(batchNumber++) of \(arguments.count))", argument: $0) }
+        }
     }
     
-    private func levelRangeArgumentListsUsingBatchSize(batchSize: Int) -> [DownloadBatches] {
-        assert(batchSize > 0, "Batch size must be a positive number")
+    private func staleLevelsForCoder<Coder: ListItemDatabaseCoder>(coder: Coder, currentState: State) -> [Int]? {
+        guard let studyQueue = currentState.studyQueue, userInformation = currentState.userInformation else { return nil }
         
-        let currentState = State(databaseQueue: self.databaseQueue)
-        guard let level = maxLevel ?? currentState.userInformation?.level else {
-            return []
+        var levelRange: [Int]? = nil
+        databaseQueue.inDatabase {
+            do {
+                let outstandingLessons = try coder.lessonsOutstanding($0).map {$0.level}
+                let outstandingReviews = try coder.reviewsDueBefore(studyQueue.lastUpdateTimestamp, database: $0).map {$0.level}
+                let currentLevel = userInformation.level
+                let maxSavedLevel = coder.maxLevel($0)
+                let missingLevels = maxSavedLevel < currentLevel ? ((maxSavedLevel + 1)...currentLevel) : currentLevel..<currentLevel
+                levelRange = Set(outstandingLessons + outstandingReviews + missingLevels).sort()
+            } catch {
+                DDLogWarn("Failed to determine reduced fetch set for \(Coder.self.dynamicType): \(error)")
+            }
         }
         
-        let stride = 1.stride(through: level, by: batchSize)
-        
-        return stride.map { start -> DownloadBatches in
-            let end = min(level, start + batchSize - 1)
-            return DownloadBatches(description: start == end ? "Level \(start)" : "Levels \(start)-\(end)", argument: (start...end).map { $0.description }.joinWithSeparator(","))
-        }
+        return levelRange
+    }
+    
+    private func levelArrayToArgument<T: CollectionType where T.Generator.Element == Int>(levels: T) -> String {
+        return levels.map { $0.description }.joinWithSeparator(",")
     }
 }

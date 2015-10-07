@@ -109,6 +109,7 @@ public class GetListItemResourceOperation<Coder: protocol<ResourceHandler, JSOND
             parseOperation.addDependency(downloadOperation)
             if let lastDownloadOperation = downloadOperations.last {
                 downloadOperation.addDependency(lastDownloadOperation)
+                downloadOperation.addCondition(NoCancelledDependencies())
             }
             
             addOperation(downloadOperation)

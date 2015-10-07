@@ -83,7 +83,13 @@ public final class UserInformationCoder: ResourceHandler, JSONDecoder, SingleIte
     
     lazy var columnCount: Int = { self.columnNameList.count }()
     
-    public func createTable(database: FMDatabase) throws {
+    public func createTable(database: FMDatabase, dropFirst: Bool) throws {
+        if dropFirst {
+            guard database.executeUpdate("DROP TABLE IF EXISTS \(self.dynamicType.tableName)") else {
+                throw database.lastError()
+            }
+        }
+        
         guard database.executeUpdate("CREATE TABLE IF NOT EXISTS \(self.dynamicType.tableName)(\(columnDefinitions))") else {
             throw database.lastError()
         }

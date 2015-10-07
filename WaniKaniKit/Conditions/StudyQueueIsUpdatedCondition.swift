@@ -10,7 +10,7 @@ import FMDB
 import OperationKit
 
 public enum StudyQueueIsUpdatedConditionError: ErrorType {
-    case NotUpdated
+    case Missing, NotUpdated
 }
 
 public struct StudyQueueIsUpdatedCondition: OperationCondition {
@@ -29,7 +29,12 @@ public struct StudyQueueIsUpdatedCondition: OperationCondition {
     }
     
     public func evaluateForOperation(operation: Operation, completion: OperationConditionResult -> Void) {
-        if let studyQueue = try? databaseQueue.withDatabase({ try StudyQueue.coder.loadFromDatabase($0) }) where studyQueue == projectedStudyQueue {
+        guard let studyQueue = try! databaseQueue.withDatabase({ try StudyQueue.coder.loadFromDatabase($0) }) else {
+            completion(.Failed(StudyQueueIsUpdatedConditionError.Missing))
+            return
+        }
+        
+        if studyQueue == projectedStudyQueue {
             completion(.Failed(StudyQueueIsUpdatedConditionError.NotUpdated))
         } else {
             completion(.Satisfied)

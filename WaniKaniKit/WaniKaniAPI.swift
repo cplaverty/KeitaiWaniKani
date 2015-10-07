@@ -6,7 +6,33 @@
 //
 
 import Foundation
+import CocoaLumberjack
 import FMDB
+
+private let currentDatabaseVersion = 1
+
+private struct DatabaseMetadata {
+    var databaseVersion: Int {
+        get {
+            return database.longForQuery("SELECT value FROM \(tableName) where name = ?", "version") ?? 0
+        }
+        set {
+            if !database.executeUpdate("INSERT OR REPLACE INTO \(tableName)(name, value) VALUES (?, ?)", "version", newValue) {
+                DDLogWarn("Failed to update database version: \(self.database.lastError())")
+            }
+        }
+    }
+    
+    private let tableName = "kwk_metadata"
+    private let database: FMDatabase
+    
+    init(database: FMDatabase) throws {
+        self.database = database
+        guard database.executeUpdate("CREATE TABLE IF NOT EXISTS \(self.tableName)(name TEXT PRIMARY KEY, value TEXT)") else {
+            throw database.lastError()
+        }
+    }
+}
 
 public struct WaniKaniAPI {
     public static let updateMinuteCount = 15
@@ -40,14 +66,28 @@ public struct WaniKaniAPI {
         return calendar.dateByAddingComponents(offsetComponents, toDate: lastRefreshTime, options: [])!
     }
     
+    public static func databaseIsCurrentVersion(database: FMDatabase) throws -> Bool {
+        let metadata = try DatabaseMetadata(database: database)
+        return metadata.databaseVersion == currentDatabaseVersion
+    }
+    
     public static func createTablesInDatabase(database: FMDatabase) throws {
-        try UserInformation.coder.createTable(database)
-        try StudyQueue.coder.createTable(database)
-        try LevelProgression.coder.createTable(database)
-        try SRSDistribution.coder.createTable(database)
-        try Radical.coder.createTable(database)
-        try Kanji.coder.createTable(database)
-        try Vocabulary.coder.createTable(database)
+        var metadata = try DatabaseMetadata(database: database)
+        
+        let shouldDropTable = metadata.databaseVersion != currentDatabaseVersion
+        
+        DDLogInfo("Database at version \(metadata.databaseVersion)")
+        if shouldDropTable {
+            DDLogInfo("Upgrading database from version \(metadata.databaseVersion) to \(currentDatabaseVersion)")
+        }
+        try UserInformation.coder.createTable(database, dropFirst: shouldDropTable)
+        try StudyQueue.coder.createTable(database, dropFirst: shouldDropTable)
+        try LevelProgression.coder.createTable(database, dropFirst: shouldDropTable)
+        try SRSDistribution.coder.createTable(database, dropFirst: shouldDropTable)
+        try Radical.coder.createTable(database, dropFirst: shouldDropTable)
+        try Kanji.coder.createTable(database, dropFirst: shouldDropTable)
+        try Vocabulary.coder.createTable(database, dropFirst: shouldDropTable)
+        metadata.databaseVersion = currentDatabaseVersion
         
         database.setShouldCacheStatements(true)
     }

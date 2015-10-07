@@ -14,6 +14,7 @@ public extension Kanji {
 }
 
 public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, ListItemDatabaseCoder {
+    
     private struct Columns {
         /// Primary key
         static let character = "character"
@@ -42,7 +43,7 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
             level = json[Columns.level].int else {
                 return nil
         }
-
+        
         let userSpecificSRSData = UserSpecificSRSData.coder.loadFromJSON(json[Columns.userSpecificSRSData])
         
         return Kanji(character: character,
@@ -58,7 +59,7 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
     // MARK: - DatabaseCoder
     
     override var columnDefinitions: String {
-        return "\(Columns.character) TEXT, " +
+        return "\(Columns.character) TEXT PRIMARY KEY, " +
             "\(Columns.meaning) TEXT NOT NULL, " +
             "\(Columns.onyomi) TEXT, " +
             "\(Columns.kunyomi) TEXT, " +
@@ -72,8 +73,14 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
     override var columnNameList: [String] {
         return [Columns.character, Columns.meaning, Columns.onyomi, Columns.kunyomi, Columns.nanori, Columns.importantReading, Columns.level, Columns.lastUpdateTimestamp] + super.columnNameList
     }
-
-    public func createTable(database: FMDatabase) throws {
+    
+    public func createTable(database: FMDatabase, dropFirst: Bool) throws {
+        if dropFirst {
+            guard database.executeUpdate("DROP TABLE IF EXISTS \(tableName)") else {
+                throw database.lastError()
+            }
+        }
+        
         let createTable = "CREATE TABLE IF NOT EXISTS \(tableName)(\(columnDefinitions))"
         let indexes = "CREATE INDEX IF NOT EXISTS idx_\(tableName)_lastUpdateTimestamp ON \(tableName) (\(Columns.lastUpdateTimestamp));"
             + "CREATE INDEX IF NOT EXISTS idx_\(tableName)_level ON \(tableName) (\(Columns.level));"
@@ -82,7 +89,7 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
             throw database.lastError()
         }
     }
-
+    
     public func loadFromDatabase(database: FMDatabase) throws -> [Kanji] {
         return try loadFromDatabase(database, forLevel: nil)
     }
@@ -99,17 +106,7 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
         
         var results = [Kanji]()
         while resultSet.next() {
-            let srsData = try loadSRSDataForRow(resultSet)
-            results.append(
-                Kanji(character: resultSet.stringForColumn(Columns.character),
-                    meaning: resultSet.stringForColumn(Columns.meaning),
-                    onyomi: resultSet.stringForColumn(Columns.onyomi) as String?,
-                    kunyomi: resultSet.stringForColumn(Columns.kunyomi) as String?,
-                    nanori: resultSet.stringForColumn(Columns.nanori) as String?,
-                    importantReading: resultSet.stringForColumn(Columns.importantReading),
-                    level: resultSet.longForColumn(Columns.level),
-                    userSpecificSRSData: srsData,
-                    lastUpdateTimestamp: resultSet.dateForColumn(Columns.lastUpdateTimestamp)))
+            results.append(try loadModelObjectFromRow(resultSet))
         }
         
         return results
@@ -117,11 +114,13 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
     
     private lazy var updateSQL: String = {
         let columnValuePlaceholders = self.createColumnValuePlaceholders(self.columnCount)
-        return "INSERT INTO \(self.tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
+        return "INSERT OR REPLACE INTO \(self.tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
         }()
-
+    
     public func save(models: [Kanji], toDatabase database: FMDatabase) throws {
-        guard database.executeUpdate("DELETE FROM \(tableName)") else {
+        let maxLevelToKeep = try! UserInformation.coder.loadFromDatabase(database)?.level ?? 0
+        let levelsToReplace = Set(models.map { $0.level }).sort()
+        guard database.executeUpdate("DELETE FROM \(tableName) WHERE \(Columns.level) IN (?) OR \(Columns.level) > ?", levelsToReplace, maxLevelToKeep) else {
             throw database.lastError()
         }
         
@@ -150,6 +149,51 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
         }
         
         return earliestDate >= since
+    }
+    
+    public func maxLevel(database: FMDatabase) -> Int {
+        return database.longForQuery("SELECT MAX(\(Columns.level)) FROM \(tableName)") ?? 0
+    }
+    
+    public func lessonsOutstanding(database: FMDatabase) throws -> [Kanji] {
+        let sql = "SELECT \(columnNames) FROM \(tableName) WHERE \(UserSpecificSRSDataColumns.dateAvailable) IS NULL"
+        guard let resultSet = database.executeQuery(sql) else {
+            throw database.lastError()
+        }
+        
+        var results = [Kanji]()
+        while resultSet.next() {
+            results.append(try loadModelObjectFromRow(resultSet))
+        }
+        
+        return results
+    }
+    
+    public func reviewsDueBefore(date: NSDate, database: FMDatabase) throws -> [Kanji] {
+        let sql = "SELECT \(columnNames) FROM \(tableName) WHERE \(UserSpecificSRSDataColumns.dateAvailable) < ? AND \(UserSpecificSRSDataColumns.burned) = 0"
+        guard let resultSet = database.executeQuery(sql, date) else {
+            throw database.lastError()
+        }
+        
+        var results = [Kanji]()
+        while resultSet.next() {
+            results.append(try loadModelObjectFromRow(resultSet))
+        }
+        
+        return results
+    }
+    
+    private func loadModelObjectFromRow(resultSet: FMResultSet) throws -> Kanji {
+        let srsData = try loadSRSDataForRow(resultSet)
+        return Kanji(character: resultSet.stringForColumn(Columns.character),
+            meaning: resultSet.stringForColumn(Columns.meaning),
+            onyomi: resultSet.stringForColumn(Columns.onyomi) as String?,
+            kunyomi: resultSet.stringForColumn(Columns.kunyomi) as String?,
+            nanori: resultSet.stringForColumn(Columns.nanori) as String?,
+            importantReading: resultSet.stringForColumn(Columns.importantReading),
+            level: resultSet.longForColumn(Columns.level),
+            userSpecificSRSData: srsData,
+            lastUpdateTimestamp: resultSet.dateForColumn(Columns.lastUpdateTimestamp))
     }
     
 }

@@ -51,7 +51,9 @@ final class UserSpecificSRSDataCoder: JSONDecoder {
 }
 
 public class SRSDataItemCoder {
-    private struct Columns {
+    private typealias Columns = UserSpecificSRSDataColumns
+    
+    struct UserSpecificSRSDataColumns {
         static let srsLevel = "srs"
         static let srsLevelNumeric = "srs_numeric"
         static let dateUnlocked = "unlocked_date"
@@ -226,7 +228,7 @@ extension SRSDataItemCoder {
         let kanjiColumn = "kanji"
         let vocabularyColumn = "vocabulary"
         var queryArgs: [String: AnyObject] = [:]
-        var whereStatement = "WHERE \(Columns.dateAvailable) IS NOT NULL AND \(Columns.burned) == 0"
+        var whereStatement = "WHERE \(Columns.dateAvailable) IS NOT NULL AND \(Columns.burned) = 0"
         if let level = level {
             // TODO: The level column name needs to be parameterised somehow
             whereStatement += " AND level = :level"
@@ -264,7 +266,7 @@ extension SRSDataItemCoder {
         
         return results
     }
-
+    
     public static func reviewTimelineByDate(database: FMDatabase, since: NSDate? = nil, forLevel level: Int? = nil, rowLimit limit: Int? = nil) throws -> [(NSDate, [SRSReviewCounts])] {
         let reviewTimeline = try self.reviewTimeline(database, since: since, forLevel: level, rowLimit: limit)
         var reviewsByDate: [NSDate: [SRSReviewCounts]] = [:]

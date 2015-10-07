@@ -14,6 +14,7 @@ public extension Vocabulary {
 }
 
 public final class VocabularyCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, ListItemDatabaseCoder {
+    
     private struct Columns {
         /// Primary key
         static let character = "character"
@@ -39,7 +40,7 @@ public final class VocabularyCoder: SRSDataItemCoder, ResourceHandler, JSONDecod
             level = json[Columns.level].int else {
                 return nil
         }
-
+        
         let meaning = json[Columns.meaning].stringValue
         let kana = json[Columns.kana].stringValue
         let userSpecificSRSData = UserSpecificSRSData.coder.loadFromJSON(json[Columns.userSpecificSRSData])
@@ -50,7 +51,7 @@ public final class VocabularyCoder: SRSDataItemCoder, ResourceHandler, JSONDecod
     // MARK: - DatabaseCoder
     
     override var columnDefinitions: String {
-        return "\(Columns.character) TEXT, " +
+        return "\(Columns.character) TEXT PRIMARY KEY, " +
             "\(Columns.meaning) TEXT NOT NULL, " +
             "\(Columns.kana) TEXT NOT NULL, " +
             "\(Columns.level) INT NOT NULL, " +
@@ -62,7 +63,13 @@ public final class VocabularyCoder: SRSDataItemCoder, ResourceHandler, JSONDecod
         return [Columns.character, Columns.meaning, Columns.kana, Columns.level, Columns.lastUpdateTimestamp] + super.columnNameList
     }
     
-    public func createTable(database: FMDatabase) throws {
+    public func createTable(database: FMDatabase, dropFirst: Bool) throws {
+        if dropFirst {
+            guard database.executeUpdate("DROP TABLE IF EXISTS \(tableName)") else {
+                throw database.lastError()
+            }
+        }
+        
         let createTable = "CREATE TABLE IF NOT EXISTS \(tableName)(\(columnDefinitions))"
         let indexes = "CREATE INDEX IF NOT EXISTS idx_\(tableName)_lastUpdateTimestamp ON \(tableName) (\(Columns.lastUpdateTimestamp));"
             + "CREATE INDEX IF NOT EXISTS idx_\(tableName)_level ON \(tableName) (\(Columns.level));"
@@ -88,14 +95,7 @@ public final class VocabularyCoder: SRSDataItemCoder, ResourceHandler, JSONDecod
         
         var results = [Vocabulary]()
         while resultSet.next() {
-            let srsData = try loadSRSDataForRow(resultSet)
-            results.append(
-                Vocabulary(character: resultSet.stringForColumn(Columns.character),
-                    meaning: resultSet.stringForColumn(Columns.meaning),
-                    kana: resultSet.stringForColumn(Columns.kana),
-                    level: resultSet.longForColumn(Columns.level),
-                    userSpecificSRSData: srsData,
-                    lastUpdateTimestamp: resultSet.dateForColumn(Columns.lastUpdateTimestamp)))
+            results.append(try loadModelObjectFromRow(resultSet))
         }
         
         return results
@@ -103,14 +103,16 @@ public final class VocabularyCoder: SRSDataItemCoder, ResourceHandler, JSONDecod
     
     private lazy var updateSQL: String = {
         let columnValuePlaceholders = self.createColumnValuePlaceholders(self.columnCount)
-        return "INSERT INTO \(self.tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
+        return "INSERT OR REPLACE INTO \(self.tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
         }()
-
+    
     public func save(models: [Vocabulary], toDatabase database: FMDatabase) throws {
-        guard database.executeUpdate("DELETE FROM \(tableName)") else {
+        let maxLevelToKeep = try! UserInformation.coder.loadFromDatabase(database)?.level ?? 0
+        let levelsToReplace = Set(models.map { $0.level }).sort()
+        guard database.executeUpdate("DELETE FROM \(tableName) WHERE \(Columns.level) IN (?) OR \(Columns.level) > ?", levelsToReplace, maxLevelToKeep) else {
             throw database.lastError()
         }
-
+        
         for model in models {
             let columnValues: [AnyObject] = [model.character, model.meaning, model.kana, model.level, model.lastUpdateTimestamp] + srsDataColumnValues(model.userSpecificSRSData)
             
@@ -128,4 +130,47 @@ public final class VocabularyCoder: SRSDataItemCoder, ResourceHandler, JSONDecod
         
         return earliestDate >= since
     }
+    
+    public func maxLevel(database: FMDatabase) -> Int {
+        return database.longForQuery("SELECT MAX(\(Columns.level)) FROM \(tableName)") ?? 0
+    }
+    
+    public func lessonsOutstanding(database: FMDatabase) throws -> [Vocabulary] {
+        let sql = "SELECT \(columnNames) FROM \(tableName) WHERE \(UserSpecificSRSDataColumns.dateAvailable) IS NULL"
+        guard let resultSet = database.executeQuery(sql) else {
+            throw database.lastError()
+        }
+        
+        var results = [Vocabulary]()
+        while resultSet.next() {
+            results.append(try loadModelObjectFromRow(resultSet))
+        }
+        
+        return results
+    }
+    
+    public func reviewsDueBefore(date: NSDate, database: FMDatabase) throws -> [Vocabulary] {
+        let sql = "SELECT \(columnNames) FROM \(tableName) WHERE \(UserSpecificSRSDataColumns.dateAvailable) < ? AND \(UserSpecificSRSDataColumns.burned) = 0"
+        guard let resultSet = database.executeQuery(sql, date) else {
+            throw database.lastError()
+        }
+        
+        var results = [Vocabulary]()
+        while resultSet.next() {
+            results.append(try loadModelObjectFromRow(resultSet))
+        }
+        
+        return results
+    }
+    
+    private func loadModelObjectFromRow(resultSet: FMResultSet) throws -> Vocabulary {
+        let srsData = try loadSRSDataForRow(resultSet)
+        return Vocabulary(character: resultSet.stringForColumn(Columns.character),
+            meaning: resultSet.stringForColumn(Columns.meaning),
+            kana: resultSet.stringForColumn(Columns.kana),
+            level: resultSet.longForColumn(Columns.level),
+            userSpecificSRSData: srsData,
+            lastUpdateTimestamp: resultSet.dateForColumn(Columns.lastUpdateTimestamp))
+    }
+    
 }
