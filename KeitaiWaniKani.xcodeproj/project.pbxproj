@@ -864,7 +864,6 @@
 				83426DEA1B7369F8005F4503 /* Sources */,
 				83426DEB1B7369F8005F4503 /* Frameworks */,
 				83426DEC1B7369F8005F4503 /* Resources */,
-				7682083E0AE710B78A214172 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1118,21 +1117,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KeitaiWaniKani/Pods-KeitaiWaniKani-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7682083E0AE710B78A214172 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		99C77577C2A082E19F06C589 /* Copy Pods Resources */ = {
