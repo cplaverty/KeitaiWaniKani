@@ -271,7 +271,8 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             return
         }
         
-        setCount(studyQueue.lessonsAvailable, forLabel: pendingLessonsLabel)
+        setCount(studyQueue.lessonsAvailable, forLabel: pendingLessonsLabel, availableColour: self.view.tintColor)
+        pendingLessonsLabel.font = UIFont.systemFontOfSize(24, weight: studyQueue.lessonsAvailable > 0 ? UIFontWeightRegular : UIFontWeightThin)
         lessonsCell.accessoryType = studyQueue.lessonsAvailable > 0 ? .DisclosureIndicator : .None
         
         setCount(studyQueue.reviewsAvailableNextHour, forLabel: reviewsNextHourLabel)
@@ -280,11 +281,11 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         setTimeToNextReview(studyQueue)
     }
     
-    private func setCount(count: Int, forLabel label: UILabel?) {
+    private func setCount(count: Int, forLabel label: UILabel?, availableColour: UIColor = UIColor.blackColor(), unavailableColour: UIColor = UIColor.lightGrayColor()) {
         guard let label = label else { return }
         
         label.text = NSNumberFormatter.localizedStringFromNumber(count, numberStyle: .DecimalStyle)
-        label.textColor = count > 0 ? UIColor.blackColor() : UIColor.lightGrayColor()
+        label.textColor = count > 0 ? availableColour : unavailableColour
     }
     
     func setTimeToNextReview(studyQueue: StudyQueue) {
@@ -294,19 +295,22 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         case .None, .Now:
             reviewsCell.accessoryType = .DisclosureIndicator
             reviewTitleLabel.text = "Reviews"
-            setCount(studyQueue.reviewsAvailable, forLabel: reviewCountLabel)
+            setCount(studyQueue.reviewsAvailable, forLabel: reviewCountLabel, availableColour: self.view.tintColor)
+            reviewCountLabel.font = UIFont.systemFontOfSize(24, weight: UIFontWeightRegular)
             reviewTimeRemainingLabel.text = nil
         case .FormattedString(let formattedInterval):
             reviewsCell.accessoryType = .None
             reviewTitleLabel.text = "Next Review"
             reviewCountLabel.text = studyQueue.formattedNextReviewDate()
             reviewCountLabel.textColor = UIColor.blackColor()
+            reviewCountLabel.font = UIFont.systemFontOfSize(24, weight: UIFontWeightThin)
             reviewTimeRemainingLabel.text = formattedInterval
         case .UnformattedInterval(let secondsUntilNextReview):
             reviewsCell.accessoryType = .None
             reviewTitleLabel.text = "Next Review"
             reviewCountLabel.text = studyQueue.formattedNextReviewDate()
             reviewCountLabel.textColor = UIColor.blackColor()
+            reviewCountLabel.font = UIFont.systemFontOfSize(24, weight: UIFontWeightThin)
             reviewTimeRemainingLabel.text = "\(NSNumberFormatter.localizedStringFromNumber(secondsUntilNextReview, numberStyle: .DecimalStyle))s"
         }
     }
