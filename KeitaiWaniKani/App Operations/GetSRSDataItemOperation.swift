@@ -24,7 +24,7 @@ final class GetSRSDataItemOperation: GroupOperation, NSProgressReporting {
     
     init(resolver: ResourceResolver, databaseQueue: FMDatabaseQueue, networkObserver: OperationObserver? = nil) {
         progress = NSProgress(totalUnitCount: 16)
-        progress.localizedDescription = "Downloading SRS data from WaniKani"
+        progress.localizedDescription = "Downloading SRS data"
         progress.localizedAdditionalDescription = "Waiting..."
         
         let downloadStrategy = DownloadStrategy(databaseQueue: databaseQueue)
@@ -43,9 +43,6 @@ final class GetSRSDataItemOperation: GroupOperation, NSProgressReporting {
         vocabularyOperation = GetVocabularyOperation(resolver: resolver, databaseQueue: databaseQueue, downloadStrategy: downloadStrategy, networkObserver: networkObserver)
         vocabularyOperation.addProgressListenerForDestinationProgress(progress)
         progress.resignCurrent()
-        
-        kanjiOperation.addDependency(radicalsOperation)
-        vocabularyOperation.addDependency(kanjiOperation)
         
         reviewCountNotificationOperation = ReviewCountNotificationOperation(databaseQueue: databaseQueue)
         reviewCountNotificationOperation.addDependencies([radicalsOperation, kanjiOperation, vocabularyOperation])

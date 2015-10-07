@@ -48,27 +48,27 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         progress.becomeCurrentWithPendingUnitCount(1)
         levelProgressionOperation = GetLevelProgressionOperation(resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver)
         progress.resignCurrent()
-        levelProgressionOperation.addProgressListenerForDestinationProgress(progress)
+        levelProgressionOperation.addProgressListenerForDestinationProgress(progress, localizedDescription: "Downloading data from WaniKani")
         levelProgressionOperation.addCondition(studyQueueIsUpdatedCondition)
         
         progress.becomeCurrentWithPendingUnitCount(1)
         srsDistributionOperation = GetSRSDistributionOperation(resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver)
         progress.resignCurrent()
-        srsDistributionOperation.addProgressListenerForDestinationProgress(progress)
+        srsDistributionOperation.addProgressListenerForDestinationProgress(progress, localizedDescription: "Downloading data from WaniKani")
         srsDistributionOperation.addCondition(studyQueueIsUpdatedCondition)
         
         progress.becomeCurrentWithPendingUnitCount(7)
         srsDataItemOperation = GetSRSDataItemOperation(resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver)
         progress.resignCurrent()
-        srsDataItemOperation.addProgressListenerForDestinationProgress(progress)
+        srsDataItemOperation.addProgressListenerForDestinationProgress(progress, localizedDescription: "Downloading data from WaniKani")
         srsDataItemOperation.addCondition(studyQueueIsUpdatedCondition)
         
         reviewTimeNotificationOperation = ReviewTimeNotificationOperation(databaseQueue: databaseQueue)
         reviewTimeNotificationOperation.addDependency(studyQueueOperation)
         
         levelProgressionOperation.addDependency(studyQueueOperation)
-        srsDistributionOperation.addDependency(levelProgressionOperation)
-        srsDataItemOperation.addDependency(srsDistributionOperation)
+        srsDistributionOperation.addDependency(studyQueueOperation)
+        srsDataItemOperation.addDependency(studyQueueOperation)
         
         super.init(operations: [studyQueueOperation, levelProgressionOperation, srsDistributionOperation, srsDataItemOperation, reviewTimeNotificationOperation])
         progress.cancellationHandler = { self.cancel() }

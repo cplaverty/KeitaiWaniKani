@@ -18,12 +18,10 @@ public struct DownloadStrategy {
     private struct State {
         let userInformation: UserInformation?
         let studyQueue: StudyQueue?
-        let levelProgression: LevelProgression?
-        let srsDistribution: SRSDistribution?
         
         init(databaseQueue: FMDatabaseQueue) {
-            (userInformation, studyQueue, levelProgression, srsDistribution) = try! databaseQueue.withDatabase {
-                (try UserInformation.coder.loadFromDatabase($0), try StudyQueue.coder.loadFromDatabase($0), try LevelProgression.coder.loadFromDatabase($0), try SRSDistribution.coder.loadFromDatabase($0))
+            (userInformation, studyQueue) = try! databaseQueue.withDatabase {
+                (try UserInformation.coder.loadFromDatabase($0), try StudyQueue.coder.loadFromDatabase($0))
             }
         }
     }
