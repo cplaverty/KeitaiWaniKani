@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A9F85975D108FEE98F582A3 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1F2D81F43153739F06BE /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		1092AAF6DC93767F43A2CA8E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1F2D81F43153739F06BE /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1092AAF6DC93767F43A2CA8E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1F2D81F43153739F06BE /* Pods.framework */; };
 		8304F8241BBC82EC009D7054 /* common.js in Resources */ = {isa = PBXBuildFile; fileRef = 8304F8231BBC82EC009D7054 /* common.js */; settings = {ASSET_TAGS = (); }; };
 		8304F8281BBD083A009D7054 /* DelayOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8304F8271BBD083A009D7054 /* DelayOperationTests.swift */; settings = {ASSET_TAGS = (); }; };
 		8307F2501BB564EC00BDDF10 /* WebAddressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8307F24F1BB564EC00BDDF10 /* WebAddressBarView.swift */; settings = {ASSET_TAGS = (); }; };
@@ -149,9 +149,9 @@
 		83DC478C1B440A6200AD716C /* RubyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC478B1B440A6200AD716C /* RubyLabel.swift */; };
 		83FDC2B01BB529D2006AAB8E /* GroupOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FDC2AF1BB529D2006AAB8E /* GroupOperationTests.swift */; settings = {ASSET_TAGS = (); }; };
 		83FE7CD51BB9C1720006689F /* GetRadicalImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FE7CD41BB9C1720006689F /* GetRadicalImageOperation.swift */; settings = {ASSET_TAGS = (); }; };
-		ADE0B705340234203132ABC5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1F2D81F43153739F06BE /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		DECD2EDB58623E847F91BD2D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1F2D81F43153739F06BE /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		E8490EAF6807671BF0DE2E62 /* Pods_KeitaiWaniKani.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFFFAB54E9C012195FAE77AF /* Pods_KeitaiWaniKani.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		ADE0B705340234203132ABC5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1F2D81F43153739F06BE /* Pods.framework */; };
+		DECD2EDB58623E847F91BD2D /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1F2D81F43153739F06BE /* Pods.framework */; };
+		E8490EAF6807671BF0DE2E62 /* Pods_KeitaiWaniKani.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFFFAB54E9C012195FAE77AF /* Pods_KeitaiWaniKani.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -864,6 +864,7 @@
 				83426DEA1B7369F8005F4503 /* Sources */,
 				83426DEB1B7369F8005F4503 /* Frameworks */,
 				83426DEC1B7369F8005F4503 /* Resources */,
+				7682083E0AE710B78A214172 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1117,6 +1118,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KeitaiWaniKani/Pods-KeitaiWaniKani-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7682083E0AE710B78A214172 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		99C77577C2A082E19F06C589 /* Copy Pods Resources */ = {
