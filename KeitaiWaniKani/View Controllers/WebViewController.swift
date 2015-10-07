@@ -27,7 +27,9 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
         configBlock(webViewController)
         
         let nc = UINavigationController(navigationBarClass: nil, toolbarClass: nil)
-        nc.setToolbarHidden(false, animated: false)
+        if nc.toolbarItems?.isEmpty == false {
+            nc.setToolbarHidden(false, animated: false)
+        }
         nc.hidesBarsOnSwipe = true
         nc.hidesBarsWhenVerticallyCompact = true
         
@@ -218,7 +220,9 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
     
     func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationController?.setToolbarHidden(false, animated: true)
+        if self.toolbarItems?.isEmpty == false {
+            self.navigationController?.setToolbarHidden(false, animated: true)
+        }
     }
     
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
