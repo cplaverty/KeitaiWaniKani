@@ -16,7 +16,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         case UserScripts = 0, Feedback = 1, LogOut = 2
     }
     
-    // MARK: Properties
+    // MARK: - Properties
     
     let userScripts: [(name: String, description: String, settingKey: String)] = [
         (name: "Ignore Answer",
@@ -24,7 +24,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             settingKey: ApplicationSettingKeys.userScriptIgnoreAnswerEnabled)
     ]
     
-    // MARK: View Controller Lifecycle
+    // MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         tableView.rowHeight = UITableViewAutomaticDimension
     }
     
-    // MARK: UITableViewDataSource
+    // MARK: - UITableViewDataSource
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 3
@@ -119,14 +119,14 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         return nil
     }
     
-    // MARK: MFMailComposeViewControllerDelegate
+    // MARK: - MFMailComposeViewControllerDelegate
     
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         DDLogDebug("MFMailComposeViewController finished with result \(result): \(error)")
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
-
-    // MARK: Send Mail
+    
+    // MARK: - Send Mail
     
     private func sendMail() {
         if !MFMailComposeViewController.canSendMail() {
@@ -141,10 +141,10 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         }
     }
     
-    // MARK: Log Out
+    // MARK: - Log Out
     
     private func confirmLogOut() {
-        let alert = UIAlertController(title: "Log Out", message: "Are you sure you want to log out?", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Are you sure you want to log out?", message: nil, preferredStyle: .ActionSheet)
         alert.addAction(UIAlertAction(title: "Log Out", style: .Destructive) { _ in self.performLogOut() })
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         
