@@ -38,8 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DDLogInfo("Starting new instance (logging level \(defaultDebugLevel))")
         
+        let barTintColor = UIColor(hue: 180 / 360, saturation: 0.05, brightness: 0.9, alpha: 1)
         UINavigationBar.appearance().tintColor = ApplicationSettings.globalTintColor
+        UINavigationBar.appearance().barTintColor = barTintColor
         UIToolbar.appearance().tintColor = ApplicationSettings.globalTintColor
+        UIToolbar.appearance().barTintColor = barTintColor
         
         return true
     }

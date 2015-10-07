@@ -159,11 +159,11 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     
     // MARK: SRS Distribution
     
-    @IBOutlet weak var apprenticeItemCountLabel: UILabel!
-    @IBOutlet weak var guruItemCountLabel: UILabel!
-    @IBOutlet weak var masterItemCountLabel: UILabel!
-    @IBOutlet weak var enlightenedItemCountLabel: UILabel!
-    @IBOutlet weak var burnedItemCountLabel: UILabel!
+    @IBOutlet weak var apprenticeCell: UITableViewCell!
+    @IBOutlet weak var guruCell: UITableViewCell!
+    @IBOutlet weak var masterCell: UITableViewCell!
+    @IBOutlet weak var enlightenedCell: UITableViewCell!
+    @IBOutlet weak var burnedCell: UITableViewCell!
 
     // MARK: - Actions
     
@@ -343,11 +343,11 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         assert(NSThread.isMainThread(), "Must be called on the main thread")
         
         let pairs: [(SRSLevel, UILabel?)] = [
-            (.Apprentice, apprenticeItemCountLabel),
-            (.Guru, guruItemCountLabel),
-            (.Master, masterItemCountLabel),
-            (.Enlightened, enlightenedItemCountLabel),
-            (.Burned, burnedItemCountLabel),
+            (.Apprentice, apprenticeCell.detailTextLabel),
+            (.Guru, guruCell.detailTextLabel),
+            (.Master, masterCell.detailTextLabel),
+            (.Enlightened, enlightenedCell.detailTextLabel),
+            (.Burned, burnedCell.detailTextLabel),
         ]
         
         for (srsLevel, label) in pairs {
@@ -548,16 +548,19 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             fatalError("Invalid section index \(section) requested")
         }
         
-        let label = UILabel(frame: CGRect(x: 10, y: 0, width: tableView.bounds.size.width - 10, height: 44))
-        label.autoresizingMask = .FlexibleWidth
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = UIColor.clearColor()
         label.opaque = false
-        label.textColor = UIColor.whiteColor()
+        label.textColor = UIColor.blackColor()
         label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
         let visualEffectVibrancyView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: blurEffect))
-        visualEffectVibrancyView.autoresizingMask = .FlexibleWidth
-        visualEffectVibrancyView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 44)
+        visualEffectVibrancyView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         visualEffectVibrancyView.contentView.addSubview(label)
+        visualEffectVibrancyView.contentView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+
+        NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[label]-|", options: [], metrics: nil, views: ["label": label]))
+        NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[label]", options: [], metrics: nil, views: ["label": label]))
         
         switch tableViewSection {
         case .CurrentlyAvailable: label.text = "Currently Available"
@@ -615,8 +618,8 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     
     // MARK: - View Controller Lifecycle
     
-    override func loadView() {
-        super.loadView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didEnterBackground:", name: UIApplicationDidEnterBackgroundNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didEnterForeground:", name: UIApplicationDidBecomeActiveNotification, object: nil)
@@ -628,11 +631,17 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         backgroundView.addSubview(imageView)
         let visualEffectBlurView = UIVisualEffectView(effect: blurEffect)
         visualEffectBlurView.frame = imageView.frame
-        visualEffectBlurView.autoresizingMask = [ .FlexibleHeight, .FlexibleWidth ]
+        visualEffectBlurView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         backgroundView.addSubview(visualEffectBlurView)
         tableView.backgroundView = backgroundView
         tableView.separatorEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
 
+        apprenticeCell.imageView?.image = apprenticeCell.imageView?.image?.imageWithRenderingMode(.AlwaysTemplate)
+        guruCell.imageView?.image = guruCell.imageView?.image?.imageWithRenderingMode(.AlwaysTemplate)
+        masterCell.imageView?.image = masterCell.imageView?.image?.imageWithRenderingMode(.AlwaysTemplate)
+        enlightenedCell.imageView?.image = enlightenedCell.imageView?.image?.imageWithRenderingMode(.AlwaysTemplate)
+        burnedCell.imageView?.image = burnedCell.imageView?.image?.imageWithRenderingMode(.AlwaysTemplate)
+        
         // Ensure the refresh control is positioned on top of the background view
         if let refreshControl = self.refreshControl where refreshControl.layer.zPosition <= tableView.backgroundView!.layer.zPosition {
             tableView.backgroundView!.layer.zPosition = refreshControl.layer.zPosition - 1
