@@ -18,6 +18,7 @@
 		830EAB8F1B41DC7700EBF073 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830EAB8D1B41DC7700EBF073 /* Main.storyboard */; };
 		830EAB911B41DC7700EBF073 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830EAB901B41DC7700EBF073 /* Assets.xcassets */; };
 		830EAB941B41DC7700EBF073 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830EAB921B41DC7700EBF073 /* LaunchScreen.storyboard */; };
+		831E66881BC70E4E00EE34C1 /* SRSDataItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E66871BC70E4E00EE34C1 /* SRSDataItemTests.swift */; settings = {ASSET_TAGS = (); }; };
 		831FF75C1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831FF75B1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		831FF75E1BB87CDD00C31FDF /* SRSDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831FF75D1BB87CDD00C31FDF /* SRSDataItem.swift */; settings = {ASSET_TAGS = (); }; };
 		831FF7601BB8861400C31FDF /* SRSDataItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831FF75F1BB8861400C31FDF /* SRSDataItemCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
@@ -239,6 +240,7 @@
 		830EAB901B41DC7700EBF073 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		830EAB931B41DC7700EBF073 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		830EAB951B41DC7700EBF073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		831E66871BC70E4E00EE34C1 /* SRSDataItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemTests.swift; sourceTree = "<group>"; };
 		831FF75B1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemCollectionViewController.swift; sourceTree = "<group>"; };
 		831FF75D1BB87CDD00C31FDF /* SRSDataItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItem.swift; sourceTree = "<group>"; };
 		831FF75F1BB8861400C31FDF /* SRSDataItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 				8347BDB81B725D73000F99EF /* GetVocabularyOperationTests.swift */,
 				8307F2511BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift */,
 				832462BC1B932ADF00FB62C9 /* SRSDataItemCoderTests.swift */,
+				831E66871BC70E4E00EE34C1 /* SRSDataItemTests.swift */,
 				83ABABD91B91AE680013AE4F /* StudyQueueTests.swift */,
 				8347BDB91B725D73000F99EF /* TestFileResourceResolver.swift */,
 				83ABABDB1B91AF690013AE4F /* UtilityFunctions.swift */,
@@ -1260,6 +1263,7 @@
 				8347BDC01B725D73000F99EF /* GetLevelProgressionOperationTests.swift in Sources */,
 				8347BDC91B725D73000F99EF /* WaniKaniAPITests.swift in Sources */,
 				8307F2521BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift in Sources */,
+				831E66881BC70E4E00EE34C1 /* SRSDataItemTests.swift in Sources */,
 				83ABABDC1B91AF690013AE4F /* UtilityFunctions.swift in Sources */,
 				8347BDC71B725D73000F99EF /* WaniKaniAPIResourceResolverTests.swift in Sources */,
 				8347BDC21B725D73000F99EF /* GetSRSDistributionOperationTests.swift in Sources */,
