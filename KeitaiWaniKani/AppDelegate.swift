@@ -14,15 +14,15 @@ import WaniKaniKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
-    // MARK: Application lifecycle
+    
+    // MARK: - Application lifecycle
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         #if DEBUG
             defaultDebugLevel = DDLogLevel.Verbose
-        #else
+            #else
             // TODO: Change to Info once stable
             defaultDebugLevel = DDLogLevel.Debug
         #endif
@@ -46,33 +46,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
-
+    
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
-
+    
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     }
-
+    
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         if ApplicationSettings.purgeDatabase {
             databaseQueue = self.dynamicType.createDatabaseQueue()
         }
     }
-
+    
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    // MARK: Background fetch
+    func applicationDidReceiveMemoryWarning(application: UIApplication) {
+        DDLogDebug("Low memory warning: clearing statement cache")
+        databaseQueue.inDatabase { $0.clearCachedStatements() }
+    }
+    
+    // MARK: - Background fetch
     
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         DDLogInfo("In background fetch handler")
@@ -112,27 +117,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         operationQueue.addOperation(operation)
     }
     
-    // MARK: WKProcessPool
+    // MARK: - WKProcessPool
     
     lazy var webKitProcessPool = WKProcessPool()
     
-    // MARK: Operation queue
-
+    // MARK: - Operation queue
+    
     lazy var operationQueue: OperationQueue = {
         let oq = OperationQueue()
         oq.name = "KeitaiWaniKani worker queue"
         return oq
         }()
     
-    // MARK: SQLite Database
+    // MARK: - SQLite Database
     
     lazy var databaseQueue: FMDatabaseQueue = AppDelegate.createDatabaseQueue()
-
+    
     static var secureAppGroupPersistentStoreURL: NSURL = {
         let fm = NSFileManager.defaultManager()
         let directory = fm.containerURLForSecurityApplicationGroupIdentifier("group.uk.me.laverty.KeitaiWaniKani")!
         return directory.URLByAppendingPathComponent("WaniKaniData.sqlite")
-    }()
+        }()
     
     func recreateDatabase() {
         ApplicationSettings.purgeDatabase = true
@@ -168,7 +173,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let queue = databaseQueue {
             return queue
         }
-
+        
         ApplicationSettings.purgeDatabase = true
         fatalError("Failed to create database at \(storeURL)")
     }
@@ -176,7 +181,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private static func isValidDatabaseQueue(databaseQueue: FMDatabaseQueue) -> Bool {
         return try! databaseQueue.withDatabase { $0.goodConnection() }
     }
-
+    
     private static func createDatabaseQueueAtURL(URL: NSURL) -> FMDatabaseQueue? {
         assert(URL.fileURL, "createDatabaseQueueAtURL requires a file URL")
         let path = URL.path!
