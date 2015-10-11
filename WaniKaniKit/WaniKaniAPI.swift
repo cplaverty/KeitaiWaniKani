@@ -89,6 +89,9 @@ public struct WaniKaniAPI {
         try Vocabulary.coder.createTable(database, dropFirst: shouldDropTable)
         metadata.databaseVersion = currentDatabaseVersion
         
+        DDLogInfo("Vacuuming database")
+        database.executeUpdate("VACUUM")
+        
         database.setShouldCacheStatements(true)
     }
     
