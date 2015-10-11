@@ -115,6 +115,7 @@
 		83AB92D71B7C05F2006D08F2 /* GetSRSDataItemOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AB92D61B7C05F2006D08F2 /* GetSRSDataItemOperation.swift */; };
 		83ABABDA1B91AE680013AE4F /* StudyQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ABABD91B91AE680013AE4F /* StudyQueueTests.swift */; settings = {ASSET_TAGS = (); }; };
 		83ABABDC1B91AF690013AE4F /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ABABDB1B91AF690013AE4F /* UtilityFunctions.swift */; settings = {ASSET_TAGS = (); }; };
+		83AC365B1BC9BF0100C93078 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AC365A1BC9BF0100C93078 /* Formatter.swift */; settings = {ASSET_TAGS = (); }; };
 		83B155571B944B360022217E /* ReviewTimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B155561B944B360022217E /* ReviewTimelineTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		83B155591B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B155581B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		83B1555B1B94A18D0022217E /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B1555A1B94A18D0022217E /* SettingsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -339,6 +340,7 @@
 		83AB92D61B7C05F2006D08F2 /* GetSRSDataItemOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSRSDataItemOperation.swift; sourceTree = "<group>"; };
 		83ABABD91B91AE680013AE4F /* StudyQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyQueueTests.swift; sourceTree = "<group>"; };
 		83ABABDB1B91AF690013AE4F /* UtilityFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
+		83AC365A1BC9BF0100C93078 /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		83B155561B944B360022217E /* ReviewTimelineTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTimelineTableViewController.swift; sourceTree = "<group>"; };
 		83B155581B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTimelineEntryTableViewCell.swift; sourceTree = "<group>"; };
 		83B1555A1B94A18D0022217E /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -615,6 +617,7 @@
 				8347BD5B1B725D46000F99EF /* UserSpecificSRSData.swift */,
 				8347BD5C1B725D46000F99EF /* Vocabulary.swift */,
 				8347BD5D1B725D46000F99EF /* WaniKaniAPIResourceResolver.swift */,
+				83AC365A1BC9BF0100C93078 /* Formatter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1242,6 +1245,7 @@
 				8347BD901B725D46000F99EF /* StudyQueueCoder.swift in Sources */,
 				8347BD8D1B725D46000F99EF /* RadicalCoder.swift in Sources */,
 				8347BDF81B72A556000F99EF /* GetRadicalsOperation.swift in Sources */,
+				83AC365B1BC9BF0100C93078 /* Formatter.swift in Sources */,
 				8347BD961B725D46000F99EF /* Radical.swift in Sources */,
 				8347BD851B725D46000F99EF /* FMDatabaseVariadic.swift in Sources */,
 				833074561BA8C609008E66E6 /* CollectionType+WaniKani.swift in Sources */,

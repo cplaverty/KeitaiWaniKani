@@ -43,10 +43,6 @@ public func ==(lhs: StudyQueue, rhs: StudyQueue) -> Bool {
         lhs.reviewsAvailableNextDay == rhs.reviewsAvailableNextDay
 }
 
-public enum StudyQueueReviewTime {
-    case None, Now, FormattedString(String), UnformattedInterval(NSTimeInterval)
-}
-
 public extension StudyQueue {
     public func formattedNextReviewDate(referenceDate: NSDate = NSDate()) -> String? {
         guard let nextReviewDate = self.nextReviewDate else {
@@ -63,34 +59,17 @@ public extension StudyQueue {
     }
     
     public static let timeToNextReviewFormatter: NSDateComponentsFormatter = {
-        let formatter = NSDateComponentsFormatter()
-        formatter.allowedUnits = [.Year, .Month, .WeekOfMonth, .Day, .Hour, .Minute]
-        formatter.maximumUnitCount = 2
-        formatter.unitsStyle = .Abbreviated
-        formatter.zeroFormattingBehavior = [.DropLeading, .DropTrailing]
+        let formatter = Formatter.defaultFormatter.copy() as! NSDateComponentsFormatter
         formatter.includesTimeRemainingPhrase = true
         
         return formatter
         }()
 
-    public func formattedTimeToNextReview(formatter: NSDateComponentsFormatter? = nil) -> StudyQueueReviewTime {
-        guard let nextReviewDate = self.nextReviewDate else {
-            return .None
-        }
-        
-        let secondsUntilNextReview = nextReviewDate.timeIntervalSinceNow
-        if secondsUntilNextReview <= 0 || reviewsAvailable > 0 {
+    public func formattedTimeToNextReview(formatter: NSDateComponentsFormatter? = nil) -> FormattedTimeInterval {
+        guard reviewsAvailable == 0 else {
             return .Now
         }
         
-        // Since the UI only shows time remaining in minutes, round to the next whole minute before formatting
-        let roundedSecondsUntilNextReview = secondsUntilNextReview + ((60 - (secondsUntilNextReview % 60)) % 60)
-        let formatter = formatter ?? self.dynamicType.timeToNextReviewFormatter
-        if let formatted = formatter.stringFromTimeInterval(roundedSecondsUntilNextReview) {
-            return .FormattedString(formatted)
-        }
-
-        // It's not entirely clear when the date component formatter can fail, so we add this failsafe in case
-        return .UnformattedInterval(secondsUntilNextReview)
+        return Formatter.formatTimeIntervalToDate(self.nextReviewDate, formatter: self.dynamicType.timeToNextReviewFormatter)
     }
 }

@@ -24,7 +24,7 @@ private struct ClassifiedSRSDataItems {
         let items = items.sort {
             let u1 = $0.userSpecificSRSData, u2 = $1.userSpecificSRSData
             if u1?.srsLevelNumeric == u2?.srsLevelNumeric {
-                return u1?.dateAvailable < u2?.dateAvailable
+                return u1?.dateAvailable > u2?.dateAvailable
             } else {
                 return u1?.srsLevelNumeric < u2?.srsLevelNumeric
             }
@@ -86,11 +86,11 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
             switch item {
             case let radical as Radical:
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier(radicalReuseIdentifier, forIndexPath: indexPath) as! RadicalGuruProgressCollectionViewCell
-                cell.radical = radical
+                cell.dataItem = radical
                 return cell
             case let kanji as Kanji:
                 let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kanjiReuseIdentifier, forIndexPath: indexPath) as! KanjiGuruProgressCollectionViewCell
-                cell.kanji = kanji
+                cell.dataItem = kanji
                 return cell
             default: fatalError("Only Radicals and Kanji are supported by \(self.dynamicType)")
             }
@@ -110,12 +110,6 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
         }
         
         return view
-    }
-    
-    // MARK: - UICollectionViewDelegateFlowLayout
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
     
 }

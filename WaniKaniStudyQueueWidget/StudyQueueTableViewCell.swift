@@ -13,7 +13,7 @@ class StudyQueueTableViewCell: UITableViewCell {
     // MARK: Properties
     
     private static let timeToNextReviewFormatter: NSDateComponentsFormatter = {
-        let formatter = StudyQueue.timeToNextReviewFormatter.copy() as! NSDateComponentsFormatter
+        let formatter = Formatter.defaultFormatter.copy() as! NSDateComponentsFormatter
         formatter.maximumUnitCount = 1
         formatter.allowsFractionalUnits = true
         formatter.includesApproximationPhrase = false
