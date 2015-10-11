@@ -33,8 +33,12 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     // MARK: - Update UI
     
     func showBrowserInterface(showBrowserInterface: Bool) {
-        self.navigationController?.setNavigationBarHidden(!showBrowserInterface, animated: true)
-        self.navigationController?.setToolbarHidden(!showBrowserInterface, animated: true)
+        guard let nc = self.navigationController else { return }
+        
+        nc.setNavigationBarHidden(!showBrowserInterface, animated: true)
+        if nc.toolbarItems?.isEmpty == false {
+            nc.setToolbarHidden(!showBrowserInterface, animated: true)
+        }
     }
     
     override func prefersStatusBarHidden() -> Bool {
