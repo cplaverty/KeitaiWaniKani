@@ -74,7 +74,7 @@ public final class LevelProgressionCoder: ResourceHandler, JSONDecoder, SingleIt
         }
         
         var result: LevelProgression? = nil
-        while resultSet.next() {
+        if resultSet.next() {
             result = LevelProgression(radicalsProgress: resultSet.longForColumn(Columns.radicalsProgress),
                 radicalsTotal: resultSet.longForColumn(Columns.radicalsTotal),
                 kanjiProgress: resultSet.longForColumn(Columns.kanjiProgress),
