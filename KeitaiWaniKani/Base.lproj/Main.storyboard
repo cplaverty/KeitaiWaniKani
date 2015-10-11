@@ -557,11 +557,11 @@
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
+                                                            <exclude reference="ks2-CS-yYz"/>
                                                             <exclude reference="3Fr-bJ-GiO"/>
                                                             <exclude reference="3Nt-nc-0sc"/>
                                                             <exclude reference="Kev-9f-2DY"/>
                                                             <exclude reference="qVk-Gw-xeg"/>
-                                                            <exclude reference="ks2-CS-yYz"/>
                                                             <exclude reference="Mxo-1G-ubT"/>
                                                         </mask>
                                                     </variation>
@@ -1106,34 +1106,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="PSm-Dg-TIm">
-                            <size key="itemSize" width="100" height="110"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="PSm-Dg-TIm">
+                            <size key="itemSize" width="96" height="110"/>
                             <size key="headerReferenceSize" width="50" height="50"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
+                            <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RadicalDataItemCell" id="kdf-P0-gho" customClass="RadicalGuruProgressCollectionViewCell" customModule="KeitaiWaniKani" customModuleProvider="target">
-                                <rect key="frame" x="5" y="119" width="100" height="110"/>
+                                <rect key="frame" x="8" y="122" width="96" height="110"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="110"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="96" height="110"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XII-U8-9sJ">
-                                            <rect key="frame" x="8" y="8" width="84" height="50"/>
+                                            <rect key="frame" x="8" y="8" width="80" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y4d-YU-tKJ">
-                                                    <rect key="frame" x="21" y="0.0" width="42" height="51"/>
+                                                    <rect key="frame" x="19" y="0.0" width="42" height="51"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="42"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Nv3-lE-IPs">
-                                                    <rect key="frame" x="32" y="15" width="20" height="20"/>
+                                                    <rect key="frame" x="30" y="15" width="20" height="20"/>
                                                 </activityIndicatorView>
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xq3-us-eBK">
-                                                    <rect key="frame" x="17" y="0.0" width="50" height="50"/>
+                                                    <rect key="frame" x="15" y="0.0" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="YQc-Ga-7EB"/>
                                                         <constraint firstAttribute="height" constant="50" id="zoZ-kv-ntr"/>
@@ -1152,19 +1152,19 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Locked" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNi-1Q-pAx">
-                                            <rect key="frame" x="0.0" y="66" width="100" height="14"/>
+                                            <rect key="frame" x="0.0" y="66" width="96" height="14"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="–" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fYT-CO-Vz7">
-                                            <rect key="frame" x="0.0" y="80" width="100" height="14"/>
+                                            <rect key="frame" x="0.0" y="80" width="96" height="14"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="U54-iO-BRT">
-                                            <rect key="frame" x="8" y="100" width="84" height="2"/>
+                                            <rect key="frame" x="8" y="100" width="80" height="2"/>
                                             <color key="progressTintColor" red="0.76042270660400391" green="0.86458128690719604" blue="0.98684453964233398" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="trackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </progressView>
@@ -1203,17 +1203,17 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="KanjiDataItemCell" id="06G-6T-yoc" customClass="KanjiGuruProgressCollectionViewCell" customModule="KeitaiWaniKani" customModuleProvider="target">
-                                <rect key="frame" x="128" y="119" width="100" height="110"/>
+                                <rect key="frame" x="130" y="122" width="96" height="110"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="100" height="110"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="96" height="110"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kv1-TX-Lab">
-                                            <rect key="frame" x="8" y="8" width="84" height="50"/>
+                                            <rect key="frame" x="8" y="8" width="80" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3w5-bV-Eod">
-                                                    <rect key="frame" x="21" y="0.0" width="42" height="51"/>
+                                                    <rect key="frame" x="19" y="0.0" width="42" height="51"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="42"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -1237,19 +1237,19 @@
                                             </variation>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Locked" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eey-CQ-4JQ">
-                                            <rect key="frame" x="0.0" y="66" width="100" height="14"/>
+                                            <rect key="frame" x="0.0" y="66" width="96" height="14"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="–" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdI-lh-wkX">
-                                            <rect key="frame" x="0.0" y="80" width="100" height="14"/>
+                                            <rect key="frame" x="0.0" y="80" width="96" height="14"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8Ft-xx-P2z">
-                                            <rect key="frame" x="8" y="100" width="84" height="2"/>
+                                            <rect key="frame" x="8" y="100" width="80" height="2"/>
                                             <color key="progressTintColor" red="0.99295365810394287" green="0.68242716789245605" blue="0.89597606658935547" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="trackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </progressView>
