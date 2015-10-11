@@ -27,7 +27,7 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
         configBlock(webViewController)
         
         let nc = UINavigationController(navigationBarClass: nil, toolbarClass: nil)
-        if nc.toolbarItems?.isEmpty == false {
+        if webViewController.toolbarItems?.isEmpty == false {
             nc.setToolbarHidden(false, animated: false)
         }
         nc.hidesBarsOnSwipe = true

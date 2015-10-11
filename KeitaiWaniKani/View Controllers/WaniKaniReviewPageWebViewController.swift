@@ -36,7 +36,7 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         guard let nc = self.navigationController else { return }
         
         nc.setNavigationBarHidden(!showBrowserInterface, animated: true)
-        if nc.toolbarItems?.isEmpty == false {
+        if self.toolbarItems?.isEmpty == false {
             nc.setToolbarHidden(!showBrowserInterface, animated: true)
         }
     }
