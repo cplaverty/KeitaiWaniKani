@@ -112,6 +112,8 @@
 		8393CEAA1BA75DF5008701D6 /* DelayOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8393CEA91BA75DF5008701D6 /* DelayOperation.swift */; settings = {ASSET_TAGS = (); }; };
 		83966D6A1BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83966D691BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift */; settings = {ASSET_TAGS = (); }; };
 		839D76AB1B9A3BC40037294C /* UserScriptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839D76AA1B9A3BC40037294C /* UserScriptTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		83A597861BCC53EB0040C730 /* RetryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A597851BCC53EB0040C730 /* RetryOperation.swift */; settings = {ASSET_TAGS = (); }; };
+		83A597881BCC595E0040C730 /* RetryOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A597871BCC595E0040C730 /* RetryOperationTests.swift */; settings = {ASSET_TAGS = (); }; };
 		83AB92D71B7C05F2006D08F2 /* GetSRSDataItemOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AB92D61B7C05F2006D08F2 /* GetSRSDataItemOperation.swift */; };
 		83ABABDA1B91AE680013AE4F /* StudyQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ABABD91B91AE680013AE4F /* StudyQueueTests.swift */; settings = {ASSET_TAGS = (); }; };
 		83ABABDC1B91AF690013AE4F /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ABABDB1B91AF690013AE4F /* UtilityFunctions.swift */; settings = {ASSET_TAGS = (); }; };
@@ -337,6 +339,8 @@
 		8393CEA91BA75DF5008701D6 /* DelayOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelayOperation.swift; sourceTree = "<group>"; };
 		83966D691BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSProgress+KeitaiWaniKani.swift"; sourceTree = "<group>"; };
 		839D76AA1B9A3BC40037294C /* UserScriptTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserScriptTableViewCell.swift; sourceTree = "<group>"; };
+		83A597851BCC53EB0040C730 /* RetryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryOperation.swift; sourceTree = "<group>"; };
+		83A597871BCC595E0040C730 /* RetryOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryOperationTests.swift; sourceTree = "<group>"; };
 		83AB92D61B7C05F2006D08F2 /* GetSRSDataItemOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSRSDataItemOperation.swift; sourceTree = "<group>"; };
 		83ABABD91B91AE680013AE4F /* StudyQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyQueueTests.swift; sourceTree = "<group>"; };
 		83ABABDB1B91AF690013AE4F /* UtilityFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
@@ -748,6 +752,7 @@
 				8393CEA91BA75DF5008701D6 /* DelayOperation.swift */,
 				83C8F9711B9B2F9D007CBFBF /* GroupOperation.swift */,
 				83C8F9721B9B2F9D007CBFBF /* Operation.swift */,
+				83A597851BCC53EB0040C730 /* RetryOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -778,6 +783,7 @@
 				8304F8271BBD083A009D7054 /* DelayOperationTests.swift */,
 				83FDC2AF1BB529D2006AAB8E /* GroupOperationTests.swift */,
 				83D550601BB48AB8007442EF /* OperationTests.swift */,
+				83A597871BCC595E0040C730 /* RetryOperationTests.swift */,
 				83D550621BB48AD4007442EF /* StubOperation.swift */,
 			);
 			path = Operations;
@@ -1296,6 +1302,7 @@
 				83C8F9841B9B2F9D007CBFBF /* Operation.swift in Sources */,
 				8393CEAA1BA75DF5008701D6 /* DelayOperation.swift in Sources */,
 				83C8F9801B9B2F9D007CBFBF /* ProgressDescriptionCopyObserver.swift in Sources */,
+				83A597861BCC53EB0040C730 /* RetryOperation.swift in Sources */,
 				83C8F9791B9B2F9D007CBFBF /* UserNotificationCondition.swift in Sources */,
 				83C8F9821B9B2F9D007CBFBF /* BlockOperation.swift in Sources */,
 				83C8F9831B9B2F9D007CBFBF /* GroupOperation.swift in Sources */,
@@ -1309,6 +1316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83A597881BCC595E0040C730 /* RetryOperationTests.swift in Sources */,
 				83D9316B1BB9D2AA009DF31A /* FileMissingConditionTests.swift in Sources */,
 				8304F8281BBD083A009D7054 /* DelayOperationTests.swift in Sources */,
 				83829B421BB531D900CDED3F /* StubConditions.swift in Sources */,
