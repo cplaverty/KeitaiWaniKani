@@ -204,7 +204,7 @@ class GroupOperationTests: XCTestCase {
         XCTAssertFalse(operation.ready)
         XCTAssertFalse(operation.executing)
         XCTAssertTrue(operation.finished)
-        XCTAssertFalse(operation.cancelled)
+        XCTAssertTrue(operation.cancelled)
         
         XCTAssertTrue(childOperation1.wasRun)
         XCTAssertFalse(childOperation1.ready)
@@ -216,7 +216,7 @@ class GroupOperationTests: XCTestCase {
         XCTAssertFalse(childOperation2.ready)
         XCTAssertFalse(childOperation2.executing)
         XCTAssertTrue(childOperation2.finished)
-        XCTAssertFalse(childOperation2.cancelled)
+        XCTAssertTrue(childOperation2.cancelled)
         
         XCTAssertFalse(childOperation3.wasRun)
         XCTAssertFalse(childOperation3.ready)

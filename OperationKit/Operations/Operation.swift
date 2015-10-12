@@ -175,6 +175,17 @@ public class Operation: NSOperation {
         }
     }
     
+    private var _cancelled = false
+    
+    public override var cancelled: Bool {
+        return _cancelled || super.cancelled
+    }
+    
+    public override func cancel() {
+        _cancelled = true
+        super.cancel()
+    }
+
     public override var executing: Bool {
         return state == .Executing
     }

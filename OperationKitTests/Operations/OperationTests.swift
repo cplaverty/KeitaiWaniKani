@@ -140,7 +140,7 @@ class OperationTests: XCTestCase {
         XCTAssertFalse(operation.ready)
         XCTAssertFalse(operation.executing)
         XCTAssertTrue(operation.finished)
-        XCTAssertFalse(operation.cancelled)
+        XCTAssertTrue(operation.cancelled)
     }
     
 }

@@ -66,11 +66,11 @@ public class GroupOperation: Operation {
     
     public override func cancel() {
         DDLogVerbose("Cancelling group operation \(self.dynamicType)")
+        super.cancel()
         internalQueue.cancelAllOperations()
         if internalQueue.suspended {
             internalQueue.suspended = false
         }
-        super.cancel()
     }
     
     public override func execute() {
