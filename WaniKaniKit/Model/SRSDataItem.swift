@@ -48,7 +48,7 @@ public extension SRSDataItem {
         let calendar = NSCalendar.autoupdatingCurrentCalendar()
         for level in initialLevel..<finalLevel {
             guard let timeForLevel = timeToNextReviewForLevel(level, isRadical: isRadical, isAccelerated: isAccelerated) else { return nil }
-            guruDate = calendar.dateByAddingComponents(timeForLevel, toDate: guruDate, options: .WrapComponents)!
+            guruDate = calendar.dateByAddingComponents(timeForLevel, toDate: guruDate, options: [])!
         }
         
         return guruDate
