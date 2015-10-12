@@ -65,11 +65,11 @@ public extension StudyQueue {
         return formatter
         }()
 
-    public func formattedTimeToNextReview(formatter: NSDateComponentsFormatter? = nil) -> FormattedTimeInterval {
+    public func formattedTimeToNextReview(formatter: NSDateComponentsFormatter = timeToNextReviewFormatter) -> FormattedTimeInterval {
         guard reviewsAvailable == 0 else {
             return .Now
         }
         
-        return Formatter.formatTimeIntervalToDate(self.nextReviewDate, formatter: self.dynamicType.timeToNextReviewFormatter)
+        return Formatter.formatTimeIntervalToDate(self.nextReviewDate, formatter: formatter)
     }
 }
