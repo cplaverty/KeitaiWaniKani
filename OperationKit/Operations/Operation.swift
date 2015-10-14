@@ -21,7 +21,7 @@ public class Operation: NSOperation {
     
     // use the KVO mechanism to indicate that changes to "state" affect other properties as well
     public class func keyPathsForValuesAffectingIsReady() -> Set<NSObject> {
-        return ["state", "isCancelled"]
+        return ["state", "_cancelled", "isCancelled"]
     }
     
     public class func keyPathsForValuesAffectingIsExecuting() -> Set<NSObject> {
@@ -30,6 +30,10 @@ public class Operation: NSOperation {
     
     public class func keyPathsForValuesAffectingIsFinished() -> Set<NSObject> {
         return ["state"]
+    }
+    
+    public class func keyPathsForValuesAffectingIsCancelled() -> Set<NSObject> {
+        return ["_cancelled"]
     }
     
     // MARK: State Management
@@ -182,6 +186,8 @@ public class Operation: NSOperation {
     }
     
     public override func cancel() {
+        guard !finished else { return }
+        
         _cancelled = true
         super.cancel()
     }
@@ -234,7 +240,7 @@ public class Operation: NSOperation {
     
     // MARK: Execution and Cancellation
     
-    public override func start() {
+    public override final func start() {
         DDLogVerbose("Starting \(self.dynamicType)")
         
         // NSOperation.start() contains important logic that shouldn't be bypassed.
@@ -294,7 +300,9 @@ public class Operation: NSOperation {
     
     public func cancelWithErrors(errors: [ErrorType] = []) {
         DDLogVerbose("Cancelling \(self.dynamicType), errors: \(errors)")
-        _internalErrors.appendContentsOf(errors)
+        if !errors.isEmpty {
+            _internalErrors.appendContentsOf(errors)
+        }
         
         cancel()
     }
