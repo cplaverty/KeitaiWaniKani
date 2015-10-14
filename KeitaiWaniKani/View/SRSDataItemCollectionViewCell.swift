@@ -18,13 +18,12 @@ class SRSItemHeaderCollectionReusableView: UICollectionReusableView {
     
 }
 
-
 private let dateComponentsFormatter: NSDateComponentsFormatter = {
-    let formatter = Formatter.defaultFormatter.copy() as! NSDateComponentsFormatter
+    let formatter = NSDateComponentsFormatter()
+    formatter.allowedUnits = [.Year, .Month, .WeekOfMonth, .Day, .Hour, .Minute]
     formatter.maximumUnitCount = 1
-    formatter.allowsFractionalUnits = true
-    formatter.includesApproximationPhrase = false
-    formatter.includesTimeRemainingPhrase = false
+    formatter.unitsStyle = .Abbreviated
+    formatter.zeroFormattingBehavior = [.DropLeading, .DropTrailing]
     
     return formatter
     }()

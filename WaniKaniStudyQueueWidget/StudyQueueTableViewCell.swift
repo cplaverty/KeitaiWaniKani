@@ -10,15 +10,15 @@ import WaniKaniKit
 
 class StudyQueueTableViewCell: UITableViewCell {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     private static let timeToNextReviewFormatter: NSDateComponentsFormatter = {
-        let formatter = Formatter.defaultFormatter.copy() as! NSDateComponentsFormatter
+        let formatter = NSDateComponentsFormatter()
+        formatter.allowedUnits = [.Year, .Month, .WeekOfMonth, .Day, .Hour, .Minute]
         formatter.maximumUnitCount = 1
-        formatter.allowsFractionalUnits = true
-        formatter.includesApproximationPhrase = false
-        formatter.includesTimeRemainingPhrase = false
-        
+        formatter.unitsStyle = .Abbreviated
+        formatter.zeroFormattingBehavior = [.DropLeading, .DropTrailing]
+
         return formatter
         }()
     
@@ -28,13 +28,13 @@ class StudyQueueTableViewCell: UITableViewCell {
         }
     }
     
-    // MARK: Outlets
+    // MARK: - Outlets
     
     @IBOutlet weak var timeToNextReviewLabel: UILabel!
     @IBOutlet weak var associatedValueLabel: UILabel!
     @IBOutlet weak var associatedNameLabel: UILabel!
     
-    // MARK: Update UI
+    // MARK: - Update UI
     
     func updateUI() {
         guard let studyQueue = self.studyQueue else {

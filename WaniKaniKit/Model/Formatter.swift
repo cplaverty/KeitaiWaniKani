@@ -13,7 +13,7 @@ public enum FormattedTimeInterval {
 
 public struct Formatter {
     
-    public static let defaultFormatter: NSDateComponentsFormatter = {
+    private static let defaultFormatter: NSDateComponentsFormatter = {
         let formatter = NSDateComponentsFormatter()
         formatter.allowedUnits = [.Year, .Month, .WeekOfMonth, .Day, .Hour, .Minute]
         formatter.maximumUnitCount = 2
@@ -33,9 +33,8 @@ public struct Formatter {
             return .Now
         }
         
-        // Since the UI only shows time remaining in minutes, round to the next whole minute before formatting
+        // Since the default formatter only shows time remaining in minutes, round to the next whole minute before formatting
         let roundedSecondsUntilNextReview = secondsUntilNextReview + ((60 - (secondsUntilNextReview % 60)) % 60)
-        let formatter = formatter
         if let formatted = formatter.stringFromTimeInterval(roundedSecondsUntilNextReview) {
             return .FormattedString(formatted)
         }

@@ -59,7 +59,11 @@ public extension StudyQueue {
     }
     
     public static let timeToNextReviewFormatter: NSDateComponentsFormatter = {
-        let formatter = Formatter.defaultFormatter.copy() as! NSDateComponentsFormatter
+        let formatter = NSDateComponentsFormatter()
+        formatter.allowedUnits = [.Year, .Month, .WeekOfMonth, .Day, .Hour, .Minute]
+        formatter.maximumUnitCount = 2
+        formatter.unitsStyle = .Abbreviated
+        formatter.zeroFormattingBehavior = [.DropLeading, .DropTrailing]
         formatter.includesTimeRemainingPhrase = true
         
         return formatter
