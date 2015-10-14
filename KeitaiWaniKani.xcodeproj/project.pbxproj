@@ -112,6 +112,7 @@
 		8393CEAA1BA75DF5008701D6 /* DelayOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8393CEA91BA75DF5008701D6 /* DelayOperation.swift */; settings = {ASSET_TAGS = (); }; };
 		83966D6A1BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83966D691BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift */; settings = {ASSET_TAGS = (); }; };
 		839D76AB1B9A3BC40037294C /* UserScriptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839D76AA1B9A3BC40037294C /* UserScriptTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		83A23FE71BCD96C100060B66 /* String+WaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A23FE61BCD96C100060B66 /* String+WaniKani.swift */; settings = {ASSET_TAGS = (); }; };
 		83A597861BCC53EB0040C730 /* RetryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A597851BCC53EB0040C730 /* RetryOperation.swift */; settings = {ASSET_TAGS = (); }; };
 		83A597881BCC595E0040C730 /* RetryOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A597871BCC595E0040C730 /* RetryOperationTests.swift */; settings = {ASSET_TAGS = (); }; };
 		83AB92D71B7C05F2006D08F2 /* GetSRSDataItemOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AB92D61B7C05F2006D08F2 /* GetSRSDataItemOperation.swift */; };
@@ -122,6 +123,7 @@
 		83B155591B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B155581B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		83B1555B1B94A18D0022217E /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B1555A1B94A18D0022217E /* SettingsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		83BF363A1B52D24A0044F59B /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BF36391B52D24A0044F59B /* DashboardViewController.swift */; };
+		83C09A291BCEF68700B7E1D8 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C09A281BCEF68700B7E1D8 /* StringExtensionsTests.swift */; settings = {ASSET_TAGS = (); }; };
 		83C8F94D1B9B2E7E007CBFBF /* OperationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 83C8F94C1B9B2E7E007CBFBF /* OperationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83C8F9511B9B2E7E007CBFBF /* OperationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8F94A1B9B2E7E007CBFBF /* OperationKit.framework */; };
 		83C8F9521B9B2E7E007CBFBF /* OperationKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8F94A1B9B2E7E007CBFBF /* OperationKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -339,6 +341,7 @@
 		8393CEA91BA75DF5008701D6 /* DelayOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelayOperation.swift; sourceTree = "<group>"; };
 		83966D691BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSProgress+KeitaiWaniKani.swift"; sourceTree = "<group>"; };
 		839D76AA1B9A3BC40037294C /* UserScriptTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserScriptTableViewCell.swift; sourceTree = "<group>"; };
+		83A23FE61BCD96C100060B66 /* String+WaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+WaniKani.swift"; sourceTree = "<group>"; };
 		83A597851BCC53EB0040C730 /* RetryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryOperation.swift; sourceTree = "<group>"; };
 		83A597871BCC595E0040C730 /* RetryOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryOperationTests.swift; sourceTree = "<group>"; };
 		83AB92D61B7C05F2006D08F2 /* GetSRSDataItemOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSRSDataItemOperation.swift; sourceTree = "<group>"; };
@@ -349,6 +352,7 @@
 		83B155581B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTimelineEntryTableViewCell.swift; sourceTree = "<group>"; };
 		83B1555A1B94A18D0022217E /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		83BF36391B52D24A0044F59B /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		83C09A281BCEF68700B7E1D8 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		83C8F94A1B9B2E7E007CBFBF /* OperationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OperationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C8F94C1B9B2E7E007CBFBF /* OperationKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OperationKit.h; sourceTree = "<group>"; };
 		83C8F94E1B9B2E7E007CBFBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -577,6 +581,7 @@
 				83ABABDB1B91AF690013AE4F /* UtilityFunctions.swift */,
 				8347BDBB1B725D73000F99EF /* WaniKaniAPIResourceResolverTests.swift */,
 				8347BDBD1B725D73000F99EF /* WaniKaniAPITests.swift */,
+				83C09A281BCEF68700B7E1D8 /* StringExtensionsTests.swift */,
 			);
 			path = WaniKaniKitTests;
 			sourceTree = "<group>";
@@ -598,6 +603,7 @@
 				832462BA1B93224800FB62C9 /* NSDate+Comparable.swift */,
 				833074551BA8C609008E66E6 /* CollectionType+WaniKani.swift */,
 				836B2BA91BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift */,
+				83A23FE61BCD96C100060B66 /* String+WaniKani.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1210,6 +1216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8347BD9F1B725D46000F99EF /* WaniKaniAPIResourceResolver.swift in Sources */,
+				83A23FE71BCD96C100060B66 /* String+WaniKani.swift in Sources */,
 				832427DD1BB6D0DB004777C9 /* WaniKaniAPIResourceParser.swift in Sources */,
 				8347BDFB1B72A556000F99EF /* GetVocabularyOperation.swift in Sources */,
 				8347BD941B725D46000F99EF /* Kanji.swift in Sources */,
@@ -1266,6 +1273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83C09A291BCEF68700B7E1D8 /* StringExtensionsTests.swift in Sources */,
 				83ABABDA1B91AE680013AE4F /* StudyQueueTests.swift in Sources */,
 				8347BDC41B725D73000F99EF /* GetVocabularyOperationTests.swift in Sources */,
 				8347BDC31B725D73000F99EF /* GetStudyQueueOperationTests.swift in Sources */,
