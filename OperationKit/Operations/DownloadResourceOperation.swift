@@ -1,15 +1,14 @@
 //
 //  DownloadResourceOperation.swift
-//  WaniKaniKit
+//  OperationKit
 //
 //  Copyright © 2015 Chris Laverty. All rights reserved.
 //
 
 import Foundation
 import CocoaLumberjack
-import OperationKit
 
-public enum WaniKaniDownloadError: ErrorType {
+public enum DownloadResourceOperationError: ErrorType {
     case InvalidHTTPResponse(URL: NSURL, code: Int, message: String)
 }
 
@@ -48,15 +47,7 @@ public final class DownloadResourceOperation: Operation, NSURLSessionDownloadDel
         
         progress.cancellationHandler = { self.cancel() }
         
-        name = "Download"
-    }
-    
-    convenience init(resolver: ResourceResolver, resource: Resource, argument: String? = nil, destinationFileURL: NSURL, networkObserver: OperationObserver? = nil) {
-        let sourceURL = resolver.URLForResource(resource, withArgument: argument)
-        
-        self.init(sourceURL: sourceURL, destinationFileURL: destinationFileURL, networkObserver: networkObserver)
-        
-        name = "Download \(resource)"
+        name = "Download Resource"
     }
     
     // MARK: Operation
@@ -120,7 +111,7 @@ public final class DownloadResourceOperation: Operation, NSURLSessionDownloadDel
             let statusCode = response.statusCode
             DDLogDebug("Got HTTP status code \(statusCode): \(NSHTTPURLResponse.localizedStringForStatusCode(statusCode))")
             guard statusCode / 100 == 2 else {
-                let httpError = WaniKaniDownloadError.InvalidHTTPResponse(URL: response.URL!, code: statusCode, message: NSHTTPURLResponse.localizedStringForStatusCode(statusCode))
+                let httpError = DownloadResourceOperationError.InvalidHTTPResponse(URL: response.URL!, code: statusCode, message: NSHTTPURLResponse.localizedStringForStatusCode(statusCode))
                 finishWithError(httpError)
                 return
             }

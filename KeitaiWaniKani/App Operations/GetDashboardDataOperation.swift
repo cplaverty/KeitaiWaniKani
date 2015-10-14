@@ -116,7 +116,7 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
             alert.title = "Unable to Download"
             alert.message = "Cannot download WaniKani API data. Try again later."
             
-        case WaniKaniDownloadError.InvalidHTTPResponse(URL: _, code: let code, message: let message):
+        case DownloadResourceOperationError.InvalidHTTPResponse(URL: _, code: let code, message: let message):
             // We failed because the WaniKani site returned a non-2xx return code
             alert.title = "Invalid Response Code"
             alert.message = "WaniKani site returned an error code \(code) (\(message)). Try again later."
