@@ -20,7 +20,7 @@ public protocol SRSDataItem {
 
 public extension SRSDataItem {
     private static var isRadical: Bool { return self == Radical.self }
-    private var isAccelerated: Bool { return self.dynamicType.isRadical && level <= 2 }
+    private var isAccelerated: Bool { return level <= 2 }
     
     public func guruDate(unlockDateForLockedItems: NSDate?) -> NSDate? {
         // Assume best case scenario: the next review is successful
