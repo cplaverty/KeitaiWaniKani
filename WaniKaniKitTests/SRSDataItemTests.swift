@@ -14,7 +14,7 @@ class SRSDataItemTests: XCTestCase {
         let locked = Kanji(character: "",
             meaning: "",
             importantReading: "",
-            level: 1)
+            level: 4)
         
         let lockedGuruDate = locked.guruDate(date(2016, 1, 1, 0, 0, 0))
         let lockedExpectedGuruDate = date(2016, 1, 5, 10, 0, 0)
@@ -25,7 +25,7 @@ class SRSDataItemTests: XCTestCase {
         let newlyUnlocked = Kanji(character: "",
             meaning: "",
             importantReading: "",
-            level: 1,
+            level: 4,
             userSpecificSRSData: UserSpecificSRSData(srsLevel: SRSLevel.Apprentice,
                 srsLevelNumeric: 1,
                 dateUnlocked: date(2016, 1, 1, 0, 0, 0),
@@ -41,7 +41,7 @@ class SRSDataItemTests: XCTestCase {
         let nearlyGuru = Kanji(character: "",
             meaning: "",
             importantReading: "",
-            level: 1,
+            level: 4,
             userSpecificSRSData: UserSpecificSRSData(srsLevel: SRSLevel.Apprentice,
                 srsLevelNumeric: SRSLevel.Guru.numericLevelThreshold - 1,
                 dateUnlocked: date(2016, 1, 1, 0, 0, 0),
@@ -57,7 +57,7 @@ class SRSDataItemTests: XCTestCase {
         let mastered = Kanji(character: "",
             meaning: "",
             importantReading: "",
-            level: 1,
+            level: 4,
             userSpecificSRSData: UserSpecificSRSData(srsLevel: SRSLevel.Master,
                 srsLevelNumeric: SRSLevel.Master.numericLevelThreshold,
                 dateUnlocked: date(2016, 1, 1, 0, 0, 0),
@@ -117,7 +117,7 @@ class SRSDataItemTests: XCTestCase {
         let locked = Kanji(character: "",
             meaning: "",
             importantReading: "",
-            level: 1)
+            level: 4)
         
         let lockedGuruDate = locked.earliestPossibleGuruDate(date(2016, 1, 1, 0, 0, 0))
         let lockedExpectedGuruDate = date(2016, 1, 5, 10, 0, 0)
@@ -128,7 +128,7 @@ class SRSDataItemTests: XCTestCase {
         let newlyUnlocked = Kanji(character: "",
             meaning: "",
             importantReading: "",
-            level: 1,
+            level: 4,
             userSpecificSRSData: UserSpecificSRSData(srsLevel: SRSLevel.Apprentice,
                 srsLevelNumeric: 1,
                 dateUnlocked: date(2016, 1, 1, 0, 0, 0),
@@ -144,7 +144,7 @@ class SRSDataItemTests: XCTestCase {
         let nearlyGuru = Kanji(character: "",
             meaning: "",
             importantReading: "",
-            level: 1,
+            level: 4,
             userSpecificSRSData: UserSpecificSRSData(srsLevel: SRSLevel.Apprentice,
                 srsLevelNumeric: SRSLevel.Guru.numericLevelThreshold - 1,
                 dateUnlocked: date(2016, 1, 1, 0, 0, 0),
@@ -160,7 +160,7 @@ class SRSDataItemTests: XCTestCase {
         let mastered = Kanji(character: "",
             meaning: "",
             importantReading: "",
-            level: 1,
+            level: 4,
             userSpecificSRSData: UserSpecificSRSData(srsLevel: SRSLevel.Master,
                 srsLevelNumeric: SRSLevel.Master.numericLevelThreshold,
                 dateUnlocked: date(2016, 1, 1, 0, 0, 0),
