@@ -6,10 +6,11 @@
 //
 
 import XCTest
+import OHHTTPStubs
 import OperationKit
 @testable import WaniKaniKit
 
-class GetRadicalsOperationTests: DatabaseTestCase {
+class GetRadicalsOperationTests: DatabaseTestCase, ResourceHTTPStubs {
         
     func testRadicalLevel1Success() {
         // Check a radical with a Unicode character
@@ -35,8 +36,10 @@ class GetRadicalsOperationTests: DatabaseTestCase {
                 meaningStats: ItemStats(correctCount: 5, incorrectCount: 0, maxStreakLength: 5, currentStreakLength: 5)))
         
 
-        let resourceResolver = TestFileResourceResolver(fileName: "Radicals Level 1")
+        let resourceResolver = WaniKaniAPIResourceResolver(forAPIKey: "TEST_API_KEY")
         let operationQueue = OperationQueue()
+        
+        stubForResource(Resource.Radicals, file: "Radicals Level 1")
         
         self.measureBlock() {
             let expect = self.expectationWithDescription("radicals")
@@ -76,9 +79,11 @@ class GetRadicalsOperationTests: DatabaseTestCase {
     
     #if HAS_DOWNLOADED_DATA
     func testLoadByLevel() {
-        let resourceResolver = TestFileResourceResolver(fileName: "Radicals Levels 1-20")
+        let resourceResolver = WaniKaniAPIResourceResolver(forAPIKey: "TEST_API_KEY")
         let operationQueue = OperationQueue()
         
+        stubForResource(Resource.Radicals, file: "Radicals Levels 1-20")
+    
         let expect = self.expectationWithDescription("radicals")
         let operation = GetRadicalsOperation(resolver: resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
         
@@ -105,9 +110,11 @@ class GetRadicalsOperationTests: DatabaseTestCase {
         let radicalCount = 26 + 35 + 22 + 33 + 27 + 19 + 17 + 16 + 15 + 14 +
             14 + 11 + 16 + 6 + 7 + 6 + 8 + 8 + 9 + 7
         
-        let resourceResolver = TestFileResourceResolver(fileName: "Radicals Levels 1-20")
+        let resourceResolver = WaniKaniAPIResourceResolver(forAPIKey: "TEST_API_KEY")
         let operationQueue = OperationQueue()
         
+        stubForResource(Resource.Radicals, file: "Radicals Levels 1-20")
+    
         self.measureBlock() {
             let expect = self.expectationWithDescription("radicals")
             let operation = GetRadicalsOperation(resolver: resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)

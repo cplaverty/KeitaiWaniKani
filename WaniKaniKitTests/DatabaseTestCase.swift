@@ -7,6 +7,7 @@
 
 import XCTest
 import FMDB
+import OHHTTPStubs
 @testable import WaniKaniKit
 
 class DatabaseTestCase: XCTestCase {
@@ -56,6 +57,8 @@ class DatabaseTestCase: XCTestCase {
             _ = try? NSFileManager.defaultManager().removeItemAtPath(databasePath)
         }
         databasePath = nil
+        
+        OHHTTPStubs.removeAllStubs()
     }
 
 }

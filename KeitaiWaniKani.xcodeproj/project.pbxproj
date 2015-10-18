@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A9F85975D108FEE98F582A3 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1F2D81F43153739F06BE /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1092AAF6DC93767F43A2CA8E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1F2D81F43153739F06BE /* Pods.framework */; };
+		60580E3A655BC07D417484EC /* Pods_WaniKaniKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7B292F1CBE9FBB24CBD910 /* Pods_WaniKaniKitTests.framework */; };
 		8304F8241BBC82EC009D7054 /* common.js in Resources */ = {isa = PBXBuildFile; fileRef = 8304F8231BBC82EC009D7054 /* common.js */; settings = {ASSET_TAGS = (); }; };
 		8304F8281BBD083A009D7054 /* DelayOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8304F8271BBD083A009D7054 /* DelayOperationTests.swift */; settings = {ASSET_TAGS = (); }; };
 		8307F2501BB564EC00BDDF10 /* WebAddressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8307F24F1BB564EC00BDDF10 /* WebAddressBarView.swift */; settings = {ASSET_TAGS = (); }; };
@@ -232,8 +233,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		08D28489F753328A80947E83 /* Pods-WaniKaniKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		303C5E564330A5EF7B625832 /* Pods-KeitaiWaniKani.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KeitaiWaniKani.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KeitaiWaniKani/Pods-KeitaiWaniKani.debug.xcconfig"; sourceTree = "<group>"; };
+		4F7B292F1CBE9FBB24CBD910 /* Pods_WaniKaniKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaniKaniKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63596BA2AAAE40EC96BE5897 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		71D3F456F47FF3C24AB23E52 /* Pods-WaniKaniKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		8304F8231BBC82EC009D7054 /* common.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = common.js; sourceTree = "<group>"; };
 		8304F8271BBD083A009D7054 /* DelayOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelayOperationTests.swift; sourceTree = "<group>"; };
 		8307F24F1BB564EC00BDDF10 /* WebAddressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebAddressBarView.swift; sourceTree = "<group>"; };
@@ -427,6 +431,7 @@
 			files = (
 				8347BD031B725428000F99EF /* WaniKaniKit.framework in Frameworks */,
 				0A9F85975D108FEE98F582A3 /* Pods.framework in Frameworks */,
+				60580E3A655BC07D417484EC /* Pods_WaniKaniKitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -814,6 +819,8 @@
 				BFAF1EEC1DF4AC9549F53E45 /* Pods.release.xcconfig */,
 				303C5E564330A5EF7B625832 /* Pods-KeitaiWaniKani.debug.xcconfig */,
 				C0B818C1341ED1A4810FFC51 /* Pods-KeitaiWaniKani.release.xcconfig */,
+				08D28489F753328A80947E83 /* Pods-WaniKaniKitTests.debug.xcconfig */,
+				71D3F456F47FF3C24AB23E52 /* Pods-WaniKaniKitTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -824,6 +831,7 @@
 				832E173F1B459F3A00A67A3E /* NotificationCenter.framework */,
 				DC0E1F2D81F43153739F06BE /* Pods.framework */,
 				CFFFAB54E9C012195FAE77AF /* Pods_KeitaiWaniKani.framework */,
+				4F7B292F1CBE9FBB24CBD910 /* Pods_WaniKaniKitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -882,7 +890,7 @@
 				83426DEA1B7369F8005F4503 /* Sources */,
 				83426DEB1B7369F8005F4503 /* Frameworks */,
 				83426DEC1B7369F8005F4503 /* Resources */,
-				E89A50665B18DB7984C31464 /* Embed Pods Frameworks */,
+				3342E637A0D8F2D34DBF5263 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -915,9 +923,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8347BD161B725428000F99EF /* Build configuration list for PBXNativeTarget "WaniKaniKitTests" */;
 			buildPhases = (
+				E9718B44461995C07425A5B5 /* Check Pods Manifest.lock */,
 				8347BCFE1B725428000F99EF /* Sources */,
 				8347BCFF1B725428000F99EF /* Frameworks */,
 				8347BD001B725428000F99EF /* Resources */,
+				A9E631F598FFA314A19392DA /* Embed Pods Frameworks */,
+				E3E44C68EEB18E97D1E59688 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1108,6 +1119,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		3342E637A0D8F2D34DBF5263 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		407611BE50DE188324985B34 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1153,6 +1179,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A9E631F598FFA314A19392DA /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DCBC7ADB9D613709B99241DB /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1168,19 +1209,34 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		E89A50665B18DB7984C31464 /* Embed Pods Frameworks */ = {
+		E3E44C68EEB18E97D1E59688 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9718B44461995C07425A5B5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1621,6 +1677,7 @@
 		};
 		8347BD121B725428000F99EF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08D28489F753328A80947E83 /* Pods-WaniKaniKitTests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = WaniKaniKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1633,6 +1690,7 @@
 		};
 		8347BD131B725428000F99EF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71D3F456F47FF3C24AB23E52 /* Pods-WaniKaniKitTests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = WaniKaniKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

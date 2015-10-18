@@ -209,7 +209,6 @@ public class Operation: NSOperation {
         guard conditionsLock.tryLock() else { return }
         defer { conditionsLock.unlock() }
         
-        assert(state == .Pending && !cancelled, "evaluateConditions() was called out-of-order")
         guard state == .Pending && !cancelled else { return }
         
         state = .EvaluatingConditions

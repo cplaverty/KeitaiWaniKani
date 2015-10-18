@@ -14,7 +14,12 @@ pod 'CocoaLumberjack', '~> 2.1.0-beta'
 pod 'CocoaLumberjack/Swift', '~> 2.1.0-beta'
 
 target :KeitaiWaniKani do
-    pod '1PasswordExtension', '~> 1.6'
+    pod '1PasswordExtension'
+end
+
+target :WaniKaniKitTests do
+    pod 'OHHTTPStubs'
+    pod 'OHHTTPStubs/Swift'
 end
 
 post_install do |installer|

@@ -6,10 +6,11 @@
 //
 
 import XCTest
+import OHHTTPStubs
 import OperationKit
 @testable import WaniKaniKit
 
-class GetKanjiOperationTests: DatabaseTestCase {
+class GetKanjiOperationTests: DatabaseTestCase, ResourceHTTPStubs {
     
     func testKanjiLevel2Success() {
         // Check a Kanji with multiple meanings
@@ -34,9 +35,11 @@ class GetKanjiOperationTests: DatabaseTestCase {
                 meaningStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3),
                 readingStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3)))
         
-        let resourceResolver = TestFileResourceResolver(fileName: "Kanji Level 2")
+        let resourceResolver = WaniKaniAPIResourceResolver(forAPIKey: "TEST_API_KEY")
         let operationQueue = OperationQueue()
         
+        stubForResource(Resource.Kanji, file: "Kanji Level 2")
+
         self.measureBlock() {
             let expect = self.expectationWithDescription("kanji")
             let operation = GetKanjiOperation(resolver: resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
@@ -75,9 +78,11 @@ class GetKanjiOperationTests: DatabaseTestCase {
     
     #if HAS_DOWNLOADED_DATA
     func testLoadByLevel() {
-        let resourceResolver = TestFileResourceResolver(fileName: "Kanji Levels 1-20")
+        let resourceResolver = WaniKaniAPIResourceResolver(forAPIKey: "TEST_API_KEY")
         let operationQueue = OperationQueue()
         
+        stubForResource(Resource.Kanji, file: "Kanji Levels 1-20")
+    
         let expect = self.expectationWithDescription("kanji")
         let operation = GetKanjiOperation(resolver: resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
         
@@ -104,8 +109,10 @@ class GetKanjiOperationTests: DatabaseTestCase {
         let kanjiCount = 18 + 38 + 33 + 38 + 42 + 40 + 33 + 32 + 35 + 35 +
             38 + 37 + 37 + 32 + 33 + 35 + 33 + 29 + 34 + 32
         
-        let resourceResolver = TestFileResourceResolver(fileName: "Kanji Levels 1-20")
+        let resourceResolver = WaniKaniAPIResourceResolver(forAPIKey: "TEST_API_KEY")
         let operationQueue = OperationQueue()
+        
+        stubForResource(Resource.Kanji, file: "Kanji Levels 1-20")
         
         self.measureBlock() {
             let expect = self.expectationWithDescription("kanji")

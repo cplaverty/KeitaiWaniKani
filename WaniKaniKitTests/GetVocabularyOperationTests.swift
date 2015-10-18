@@ -6,10 +6,11 @@
 //
 
 import XCTest
+import OHHTTPStubs
 import OperationKit
 @testable import WaniKaniKit
 
-class GetVocabularyOperationTests: DatabaseTestCase {
+class GetVocabularyOperationTests: DatabaseTestCase, ResourceHTTPStubs {
     
     func testVocabLevel1Success() {
         // Check a locked Vocab with multiple meanings
@@ -38,17 +39,19 @@ class GetVocabularyOperationTests: DatabaseTestCase {
                 meaningStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3),
                 readingStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3)))
         
-        let resourceResolver = TestFileResourceResolver(fileName: "Vocab Level 1")
+        let resourceResolver = WaniKaniAPIResourceResolver(forAPIKey: "TEST_API_KEY")
         let operationQueue = OperationQueue()
+        
+        stubForResource(Resource.Vocabulary, file: "Vocab Level 1")
         
         self.measureBlock() {
             let expect = self.expectationWithDescription("vocabulary")
             let operation = GetVocabularyOperation(resolver: resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
             
-            let completionObserver = BlockObserver(finishHandler: { (operation, errors) -> Void in
+            let completionObserver = BlockObserver { (operation, errors) -> Void in
                 defer { expect.fulfill() }
                 XCTAssertEqual(errors.count, 0, "Expected no errors, but received: \(errors)")
-            })
+            }
             operation.addObserver(completionObserver)
             operationQueue.addOperation(operation)
             
@@ -79,16 +82,18 @@ class GetVocabularyOperationTests: DatabaseTestCase {
     
     #if HAS_DOWNLOADED_DATA
     func testLoadByLevel() {
-        let resourceResolver = TestFileResourceResolver(fileName: "Vocab Levels 1-20")
+        let resourceResolver = WaniKaniAPIResourceResolver(forAPIKey: "TEST_API_KEY")
         let operationQueue = OperationQueue()
         
+        stubForResource(Resource.Vocabulary, file: "Vocab Levels 1-20")
+    
         let expect = self.expectationWithDescription("vocabulary")
         let operation = GetVocabularyOperation(resolver: resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
         
-        let completionObserver = BlockObserver(finishHandler: { (operation, errors) -> Void in
+        let completionObserver = BlockObserver { (operation, errors) -> Void in
             defer { expect.fulfill() }
             XCTAssertEqual(errors.count, 0, "Expected no errors, but received: \(errors)")
-        })
+        }
         operation.addObserver(completionObserver)
         operationQueue.addOperation(operation)
         
@@ -108,17 +113,19 @@ class GetVocabularyOperationTests: DatabaseTestCase {
         let vocabCount = 42 + 90 + 68 + 104 + 124 + 115 + 95 + 132 + 115 + 114 +
             121 + 125 + 113 + 114 + 96 + 116 + 122 + 134 + 105 + 112
         
-        let resourceResolver = TestFileResourceResolver(fileName: "Vocab Levels 1-20")
+        let resourceResolver = WaniKaniAPIResourceResolver(forAPIKey: "TEST_API_KEY")
         let operationQueue = OperationQueue()
+        
+        stubForResource(Resource.Vocabulary, file: "Vocab Levels 1-20")
         
         self.measureBlock() {
             let expect = self.expectationWithDescription("vocabulary")
             let operation = GetVocabularyOperation(resolver: resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
             
-            let completionObserver = BlockObserver(finishHandler: { (operation, errors) -> Void in
+            let completionObserver = BlockObserver { (operation, errors) -> Void in
                 defer { expect.fulfill() }
                 XCTAssertEqual(errors.count, 0, "Expected no errors, but received: \(errors)")
-            })
+            }
             operation.addObserver(completionObserver)
             operationQueue.addOperation(operation)
             
