@@ -258,14 +258,10 @@ function scriptInit() {
     // Set up hooks
     try {
         scriptLog('loaded');
-        var styleNode = document.createElement('style');
-        styleNode.type = 'text/css';
-        var styleText =
+        addStyle(
             '#WKO_button {background-color: #CC0000; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 1em; padding: 10px; vertical-align: bottom;}' +
             '#answer-form fieldset.WKO_ignored input[type="text"]:-moz-placeholder, #answer-form fieldset.WKO_ignored input[type="text"]:-moz-placeholder {color: #FFFFFF; font-family: "Source Sans Pro",sans-serif; font-weight: 300; text-shadow: none; transition: color 0.15s linear 0s; }' +
-            '#answer-form fieldset.WKO_ignored button, #answer-form fieldset.WKO_ignored input[type="text"], #answer-form fieldset.WKO_ignored input[type="text"]:disabled { background-color: #FFCC00 !important; }';
-        styleNode.appendChild(document.createTextNode(styleText));
-        document.head.appendChild(styleNode)
+            '#answer-form fieldset.WKO_ignored button, #answer-form fieldset.WKO_ignored input[type="text"], #answer-form fieldset.WKO_ignored input[type="text"]:disabled { background-color: #FFCC00 !important; }');
         addIgnoreAnswerBtn();
         bindHotkey();
     }

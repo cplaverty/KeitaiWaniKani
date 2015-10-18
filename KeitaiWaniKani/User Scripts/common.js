@@ -9,3 +9,16 @@ if (typeof String.prototype.endsWith != 'function') {
         return this.slice(-str.length) == str;
     };
 }
+
+function addStyle(aCss) {
+    var head, style;
+    head = document.getElementsByTagName('head')[0];
+    if (head) {
+        style = document.createElement('style');
+        style.setAttribute('type', 'text/css');
+        style.textContent = aCss;
+        head.appendChild(style);
+        return style;
+    }
+    return null;
+}
