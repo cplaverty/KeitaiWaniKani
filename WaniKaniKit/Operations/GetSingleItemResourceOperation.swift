@@ -1,69 +1,54 @@
 //
 //  GetSingleItemResourceOperation.swift
-//  KeitaiWaniKani
+//  WaniKaniKit
 //
 //  Copyright © 2015 Chris Laverty. All rights reserved.
 //
 
 import Foundation
+import Alamofire
 import CocoaLumberjack
 import FMDB
+import SwiftyJSON
 import OperationKit
 
 /// A composite `Operation` to both download and parse resource data.
-public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSONDecoder, SingleItemDatabaseCoder>>: GroupOperation, NSProgressReporting {
+public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSONDecoder, SingleItemDatabaseCoder>>: Operation, WaniKaniAPIResourceParser, NSProgressReporting {
     
     // MARK: - Properties
     
-    public let progress: NSProgress = {
-        let progress = NSProgress(totalUnitCount: 2)
-        return progress
-        }()
+    public let progress: NSProgress
     
-    public private(set) var downloadOperation: DownloadResourceOperation?
-    public private(set) var parseOperation: ParseSingleItemOperation<Coder>?
+    public private(set) var parsed: Coder.ModelObject?
+    
     public var fetchRequired: Bool {
-        guard let downloadOperation = downloadOperation else { return false }
-        return !downloadOperation.cancelled
+        return !cancelled
     }
     
     private let coder: Coder
-    private let resolver: ResourceResolver
     private let databaseQueue: FMDatabaseQueue
-    private let networkObserver: OperationObserver?
-    private lazy var cacheFile: NSURL = {
-        let tempDirectory = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        return tempDirectory.URLByAppendingPathComponent("\(self.resource)/\(NSUUID().UUIDString).json")
-        }()
-    
-    private let resource: Resource
+    private let sourceURL: NSURL
+    private var request: Request?
     
     // MARK: - Initialisers
     
     public init(coder: Coder, resolver: ResourceResolver, databaseQueue: FMDatabaseQueue, networkObserver: OperationObserver?) {
-        self.resource = coder.resource
         self.coder = coder
-        self.resolver = resolver
         self.databaseQueue = databaseQueue
-        self.networkObserver = networkObserver
         
-        super.init(operations: [])
+        let resource = coder.resource
+        self.sourceURL = resolver.URLForResource(resource, withArgument: nil)
+        
+        progress = NSProgress(totalUnitCount: 3)
         progress.localizedDescription = "Fetching \(resource)"
         progress.localizedAdditionalDescription = "Waiting..."
+        
+        super.init()
         progress.cancellationHandler = { self.cancel() }
-        addObserver(BlockObserver { _ in
-            guard self.downloadOperation != nil else { return }
-            self.progress.localizedAdditionalDescription = "Finishing..."
-            
-            do {
-                DDLogDebug("Cleaning up cache file \(self.cacheFile)")
-                try NSFileManager.defaultManager().removeItemAtURL(self.cacheFile)
-            } catch NSCocoaError.FileNoSuchFileError {
-                DDLogDebug("Ignoring failure to delete cache file in directory which didn't exist: \(self.cacheFile)")
-            } catch {
-                DDLogWarn("Failed to clean up temporary file in \(self.cacheFile): \(error)")
-            }
-            })
+        
+        if let networkObserver = networkObserver {
+            addObserver(networkObserver)
+        }
         
         name = "Get \(resource)"
     }
@@ -71,44 +56,80 @@ public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSO
     // MARK: - Operation
     
     public override func execute() {
-        progress.totalUnitCount = 2
-        
-        progress.becomeCurrentWithPendingUnitCount(1)
-        let parseOperation = ParseSingleItemOperation(coder: coder, cacheFile: cacheFile, databaseQueue: databaseQueue)
-        parseOperation.addProgressListenerForDestinationProgress(progress, localizedDescription: "Parsing \(resource)")
-        parseOperation.addCondition(NoCancelledDependencies())
-        progress.resignCurrent()
-        self.parseOperation = parseOperation
-        
-        progress.becomeCurrentWithPendingUnitCount(1)
-        let downloadOperation = DownloadResourceOperation(resolver: resolver, resource: resource, destinationFileURL: cacheFile, networkObserver: networkObserver)
-        downloadOperation.addProgressListenerForDestinationProgress(progress, localizedDescription: "Downloading \(resource)")
-        progress.resignCurrent()
-        self.downloadOperation = downloadOperation
-        
-        // These operations must be executed in order
-        parseOperation.addDependency(downloadOperation)
-        
-        addOperation(downloadOperation)
-        addOperation(parseOperation)
-        
-        // This must be done last as it starts the internal queue
-        super.execute()
-    }
-    
-    public override func operationDidFinish(operation: NSOperation, withErrors errors: [ErrorType]) {
-        if errors.isEmpty {
-            DDLogDebug("\(operation.self.dynamicType) finished with no errors")
-        } else {
-            DDLogWarn("\(operation.self.dynamicType) finished with \(errors.count) error(s): \(errors)")
+        DDLogInfo("Starting download of \(self.sourceURL)")
+        request = Alamofire.request(.GET, self.sourceURL)
+            .validate()
+            .responseJSON { [progress] response in
+                progress.completedUnitCount = 1
+                defer { progress.completedUnitCount = progress.totalUnitCount }
+                DDLogInfo("Download of \(self.sourceURL) complete")
+                switch response.result {
+                case .Success(let value):
+                    do {
+                        let json = JSON(value)
+                        try self.throwForError(json)
+                        try self.parse(json)
+                        self.finish()
+                    } catch {
+                        self.finishWithError(error)
+                    }
+                case .Failure(let error):
+                    self.finishWithError(error)
+                }
         }
     }
     
-    public override func finished(errors: [ErrorType]) {
-        super.finished(errors)
+    public override func cancel() {
+        DDLogInfo("Cancelling download of \(self.sourceURL)")
+        super.cancel()
+        request?.cancel()
+    }
+    
+    // MARK: - Parse
+    
+    private func parse(json: JSON) throws {
+        var maybeError: ErrorType? = nil
+        var userInformation: UserInformation? = nil
+        var parsed: Coder.ModelObject?
         
-        // Ensure progress is 100%
-        progress.completedUnitCount = progress.totalUnitCount
+        userInformation = UserInformation.coder.loadFromJSON(json[WaniKaniAPIResourceKeys.userInformation])
+        
+        parsed = coder.loadFromJSON(json[WaniKaniAPIResourceKeys.requestedInformation])
+        
+        ++progress.completedUnitCount
+        
+        DDLogInfo("Parsed \(Coder.ModelObject.self).  Adding to database...")
+        progress.localizedAdditionalDescription = "Saving..."
+        
+        databaseQueue.inTransaction { (db, rollback) -> Void in
+            do {
+                if let item = userInformation {
+                    DDLogDebug("Saving user information")
+                    try UserInformation.coder.save(item, toDatabase: db)
+                }
+                
+                if let parsed = parsed {
+                    DDLogDebug("Saving \(Coder.ModelObject.self) data")
+                    try self.coder.save(parsed, toDatabase: db)
+                } else {
+                    DDLogWarn("Not saving \(Coder.ModelObject.self) as no valid items were parsed")
+                }
+                
+                ++self.progress.completedUnitCount
+            } catch {
+                DDLogWarn("Rolling back due to database error: \(error)")
+                rollback.memory = true
+                maybeError = error
+            }
+        }
+        progress.localizedAdditionalDescription = "Done!"
+        
+        if let error = maybeError {
+            throw error
+        }
+        
+        self.parsed = parsed
+        DDLogInfo("\(Coder.ModelObject.self) database insert complete")
     }
     
 }

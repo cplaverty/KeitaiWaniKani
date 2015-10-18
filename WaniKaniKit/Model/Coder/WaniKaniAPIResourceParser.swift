@@ -51,7 +51,7 @@ extension WaniKaniAPIResourceParser {
         return json
     }
     
-    private func throwForError(json: JSON) throws {
+    func throwForError(json: JSON) throws {
         if let code = json[WaniKaniAPIResourceKeys.error]["code"].string {
             let message = json[WaniKaniAPIResourceKeys.error]["message"].string
             DDLogInfo("Received API error \(code): \(message)")

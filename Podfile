@@ -6,13 +6,12 @@ xcodeproj 'KeitaiWaniKani'
 
 link_with 'OperationKit', 'WaniKaniKit', 'WaniKaniStudyQueueWidget'
 
+pod 'Alamofire', '~> 3.0'
 #pod 'FMDB', '~> 2.5'
 pod 'FMDB', :git => 'https://github.com/ccgus/fmdb.git', :branch => 'swiftFramework'
 pod 'SwiftyJSON', '~> 2.3'
-#pod 'CocoaLumberjack', '~> 2.0.1'
-pod 'CocoaLumberjack', :git => 'https://github.com/CocoaLumberjack/CocoaLumberjack.git', :branch => 'swift_2.0'
-#pod 'CocoaLumberjack/Swift', '~> 2.0.1'
-pod 'CocoaLumberjack/Swift', :git => 'https://github.com/CocoaLumberjack/CocoaLumberjack.git', :branch => 'swift_2.0'
+pod 'CocoaLumberjack', '~> 2.1.0-beta'
+pod 'CocoaLumberjack/Swift', '~> 2.1.0-beta'
 
 target :KeitaiWaniKani do
     pod '1PasswordExtension', '~> 1.6'

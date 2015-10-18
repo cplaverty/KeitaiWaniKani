@@ -23,7 +23,6 @@
 		831FF75E1BB87CDD00C31FDF /* SRSDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831FF75D1BB87CDD00C31FDF /* SRSDataItem.swift */; settings = {ASSET_TAGS = (); }; };
 		831FF7601BB8861400C31FDF /* SRSDataItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831FF75F1BB8861400C31FDF /* SRSDataItemCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		832427D91BB6CA09004777C9 /* ParseListItemOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832427D81BB6CA09004777C9 /* ParseListItemOperation.swift */; settings = {ASSET_TAGS = (); }; };
-		832427DB1BB6CE67004777C9 /* ParseSingleItemOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832427DA1BB6CE67004777C9 /* ParseSingleItemOperation.swift */; settings = {ASSET_TAGS = (); }; };
 		832427DD1BB6D0DB004777C9 /* WaniKaniAPIResourceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832427DC1BB6D0DB004777C9 /* WaniKaniAPIResourceParser.swift */; settings = {ASSET_TAGS = (); }; };
 		832427DF1BB6D3C1004777C9 /* GetSingleItemResourceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832427DE1BB6D3C1004777C9 /* GetSingleItemResourceOperation.swift */; settings = {ASSET_TAGS = (); }; };
 		832462B91B930AC200FB62C9 /* ReviewCountNotificationOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832462B81B930AC100FB62C9 /* ReviewCountNotificationOperation.swift */; settings = {ASSET_TAGS = (); }; };
@@ -251,7 +250,6 @@
 		831FF75D1BB87CDD00C31FDF /* SRSDataItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItem.swift; sourceTree = "<group>"; };
 		831FF75F1BB8861400C31FDF /* SRSDataItemCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		832427D81BB6CA09004777C9 /* ParseListItemOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseListItemOperation.swift; sourceTree = "<group>"; };
-		832427DA1BB6CE67004777C9 /* ParseSingleItemOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseSingleItemOperation.swift; sourceTree = "<group>"; };
 		832427DC1BB6D0DB004777C9 /* WaniKaniAPIResourceParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaniKaniAPIResourceParser.swift; sourceTree = "<group>"; };
 		832427DE1BB6D3C1004777C9 /* GetSingleItemResourceOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSingleItemResourceOperation.swift; sourceTree = "<group>"; };
 		832462B81B930AC100FB62C9 /* ReviewCountNotificationOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewCountNotificationOperation.swift; sourceTree = "<group>"; };
@@ -680,7 +678,6 @@
 				8347BDF41B72A556000F99EF /* GetStudyQueueOperation.swift */,
 				8347BDF51B72A556000F99EF /* GetVocabularyOperation.swift */,
 				832427D81BB6CA09004777C9 /* ParseListItemOperation.swift */,
-				832427DA1BB6CE67004777C9 /* ParseSingleItemOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -885,6 +882,7 @@
 				83426DEA1B7369F8005F4503 /* Sources */,
 				83426DEB1B7369F8005F4503 /* Frameworks */,
 				83426DEC1B7369F8005F4503 /* Resources */,
+				E89A50665B18DB7984C31464 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1170,6 +1168,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		E89A50665B18DB7984C31464 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1233,7 +1246,6 @@
 				8347BD9D1B725D46000F99EF /* UserSpecificSRSData.swift in Sources */,
 				8347BD931B725D46000F99EF /* VocabularyCoder.swift in Sources */,
 				8347BDFD1B72AE90000F99EF /* WaniKaniAPI.swift in Sources */,
-				832427DB1BB6CE67004777C9 /* ParseSingleItemOperation.swift in Sources */,
 				8347BDF71B72A556000F99EF /* GetLevelProgressionOperation.swift in Sources */,
 				8347BD9B1B725D46000F99EF /* StudyQueue.swift in Sources */,
 				8362E3621BCF11640062AC97 /* DownloadResourceOperation+WaniKani.swift in Sources */,
