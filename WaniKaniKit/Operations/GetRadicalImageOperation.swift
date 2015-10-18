@@ -15,7 +15,7 @@ public class GetRadicalImageOperation: GroupOperation {
     
     public let sourceURL: NSURL
     public let destinationFileURL: NSURL
-    public let downloadOperation: DownloadResourceOperation
+    public let downloadOperation: DownloadFileOperation
     
     public static var parentDirectory: NSURL = {
         let fm = NSFileManager.defaultManager()
@@ -33,7 +33,7 @@ public class GetRadicalImageOperation: GroupOperation {
         self.sourceURL = sourceURL
         self.destinationFileURL = self.dynamicType.parentDirectory.URLByAppendingPathComponent(sourceURL.lastPathComponent!)
         
-        downloadOperation = DownloadResourceOperation(sourceURL: sourceURL, destinationFileURL: destinationFileURL, networkObserver: networkObserver)
+        downloadOperation = DownloadFileOperation(sourceURL: sourceURL, destinationFileURL: destinationFileURL, networkObserver: networkObserver)
         downloadOperation.addCondition(FileMissingCondition(fileURL: destinationFileURL))
         
         super.init(operations: [downloadOperation])

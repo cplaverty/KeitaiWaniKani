@@ -38,6 +38,7 @@
 		83354D8E1B484C98007686D5 /* GetAPIKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83354D8D1B484C98007686D5 /* GetAPIKeyViewController.swift */; };
 		833BF0BE1B4930A20038AAE3 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BF0BD1B4930A20038AAE3 /* UIViewControllerExtensions.swift */; };
 		833FECE91BADF0DD001C9260 /* WebViewBackForwardListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833FECE81BADF0DD001C9260 /* WebViewBackForwardListTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		83420E9D1BD3D79800557E13 /* DownloadFileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83420E9C1BD3D79800557E13 /* DownloadFileOperation.swift */; settings = {ASSET_TAGS = (); }; };
 		83426DEF1B7369F8005F4503 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832E173F1B459F3A00A67A3E /* NotificationCenter.framework */; };
 		83426DF21B7369F8005F4503 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83426DF11B7369F8005F4503 /* TodayViewController.swift */; };
 		83426DF51B7369F8005F4503 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83426DF31B7369F8005F4503 /* MainInterface.storyboard */; };
@@ -99,8 +100,7 @@
 		8347BDFB1B72A556000F99EF /* GetVocabularyOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347BDF51B72A556000F99EF /* GetVocabularyOperation.swift */; };
 		8347BDFD1B72AE90000F99EF /* WaniKaniAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347BDFC1B72AE90000F99EF /* WaniKaniAPI.swift */; };
 		834802541B97A76500CC7461 /* ModelObjectUpdateCheckCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834802531B97A76500CC7461 /* ModelObjectUpdateCheckCondition.swift */; settings = {ASSET_TAGS = (); }; };
-		8362E3601BCF10D90062AC97 /* DownloadResourceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347BDEA1B726A5D000F99EF /* DownloadResourceOperation.swift */; settings = {ASSET_TAGS = (); }; };
-		8362E3621BCF11640062AC97 /* DownloadResourceOperation+WaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8362E3611BCF11640062AC97 /* DownloadResourceOperation+WaniKani.swift */; settings = {ASSET_TAGS = (); }; };
+		8362E3621BCF11640062AC97 /* DownloadFileOperation+WaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8362E3611BCF11640062AC97 /* DownloadFileOperation+WaniKani.swift */; settings = {ASSET_TAGS = (); }; };
 		83699C8F1BBD15E500BBF6FB /* BlockOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83699C8E1BBD15E500BBF6FB /* BlockOperationTests.swift */; settings = {ASSET_TAGS = (); }; };
 		83699C911BBD17E300BBF6FB /* MutuallyExclusiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83699C901BBD17E300BBF6FB /* MutuallyExclusiveTests.swift */; settings = {ASSET_TAGS = (); }; };
 		836B2BAA1BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836B2BA91BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift */; settings = {ASSET_TAGS = (); }; };
@@ -265,6 +265,7 @@
 		83354D8D1B484C98007686D5 /* GetAPIKeyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAPIKeyViewController.swift; sourceTree = "<group>"; };
 		833BF0BD1B4930A20038AAE3 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		833FECE81BADF0DD001C9260 /* WebViewBackForwardListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewBackForwardListTableViewController.swift; sourceTree = "<group>"; };
+		83420E9C1BD3D79800557E13 /* DownloadFileOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadFileOperation.swift; sourceTree = "<group>"; };
 		83426DEE1B7369F8005F4503 /* WaniKaniStudyQueueWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WaniKaniStudyQueueWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		83426DF11B7369F8005F4503 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		83426DF41B7369F8005F4503 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
@@ -317,7 +318,6 @@
 		8347BDCE1B7260B1000F99EF /* GetDashboardDataOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetDashboardDataOperation.swift; sourceTree = "<group>"; };
 		8347BDD61B7260B1000F99EF /* NetworkObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkObserver.swift; sourceTree = "<group>"; };
 		8347BDD81B7260B1000F99EF /* ReviewTimeNotificationOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTimeNotificationOperation.swift; sourceTree = "<group>"; };
-		8347BDEA1B726A5D000F99EF /* DownloadResourceOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadResourceOperation.swift; sourceTree = "<group>"; };
 		8347BDEC1B728CD7000F99EF /* GetListItemResourceOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetListItemResourceOperation.swift; sourceTree = "<group>"; };
 		8347BDF01B72A556000F99EF /* GetKanjiOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetKanjiOperation.swift; sourceTree = "<group>"; };
 		8347BDF11B72A556000F99EF /* GetLevelProgressionOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetLevelProgressionOperation.swift; sourceTree = "<group>"; };
@@ -329,7 +329,7 @@
 		834802531B97A76500CC7461 /* ModelObjectUpdateCheckCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelObjectUpdateCheckCondition.swift; sourceTree = "<group>"; };
 		834C92521B7660390025D359 /* WaniKaniStudyQueueWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WaniKaniStudyQueueWidget.entitlements; sourceTree = "<group>"; };
 		834C92531B76603F0025D359 /* KeitaiWaniKani.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = KeitaiWaniKani.entitlements; sourceTree = "<group>"; };
-		8362E3611BCF11640062AC97 /* DownloadResourceOperation+WaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DownloadResourceOperation+WaniKani.swift"; sourceTree = "<group>"; };
+		8362E3611BCF11640062AC97 /* DownloadFileOperation+WaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DownloadFileOperation+WaniKani.swift"; sourceTree = "<group>"; };
 		83699C8E1BBD15E500BBF6FB /* BlockOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockOperationTests.swift; sourceTree = "<group>"; };
 		83699C901BBD17E300BBF6FB /* MutuallyExclusiveTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutuallyExclusiveTests.swift; sourceTree = "<group>"; };
 		836B2BA91BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DDLogLevel+CustomStringConvertible.swift"; sourceTree = "<group>"; };
@@ -604,7 +604,7 @@
 				833074551BA8C609008E66E6 /* CollectionType+WaniKani.swift */,
 				836B2BA91BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift */,
 				83A23FE61BCD96C100060B66 /* String+WaniKani.swift */,
-				8362E3611BCF11640062AC97 /* DownloadResourceOperation+WaniKani.swift */,
+				8362E3611BCF11640062AC97 /* DownloadFileOperation+WaniKani.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -678,6 +678,7 @@
 				8347BDF41B72A556000F99EF /* GetStudyQueueOperation.swift */,
 				8347BDF51B72A556000F99EF /* GetVocabularyOperation.swift */,
 				832427D81BB6CA09004777C9 /* ParseListItemOperation.swift */,
+				83420E9C1BD3D79800557E13 /* DownloadFileOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -753,7 +754,6 @@
 		83C8F96F1B9B2F9D007CBFBF /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				8347BDEA1B726A5D000F99EF /* DownloadResourceOperation.swift */,
 				83C8F9701B9B2F9D007CBFBF /* BlockOperation.swift */,
 				8393CEA91BA75DF5008701D6 /* DelayOperation.swift */,
 				83C8F9711B9B2F9D007CBFBF /* GroupOperation.swift */,
@@ -1248,7 +1248,7 @@
 				8347BDFD1B72AE90000F99EF /* WaniKaniAPI.swift in Sources */,
 				8347BDF71B72A556000F99EF /* GetLevelProgressionOperation.swift in Sources */,
 				8347BD9B1B725D46000F99EF /* StudyQueue.swift in Sources */,
-				8362E3621BCF11640062AC97 /* DownloadResourceOperation+WaniKani.swift in Sources */,
+				8362E3621BCF11640062AC97 /* DownloadFileOperation+WaniKani.swift in Sources */,
 				8347BDF91B72A556000F99EF /* GetSRSDistributionOperation.swift in Sources */,
 				834802541B97A76500CC7461 /* ModelObjectUpdateCheckCondition.swift in Sources */,
 				8347BDB11B725D46000F99EF /* WaniKaniURLs.swift in Sources */,
@@ -1276,6 +1276,7 @@
 				83AC365B1BC9BF0100C93078 /* Formatter.swift in Sources */,
 				8347BD961B725D46000F99EF /* Radical.swift in Sources */,
 				8347BD851B725D46000F99EF /* FMDatabaseVariadic.swift in Sources */,
+				83420E9D1BD3D79800557E13 /* DownloadFileOperation.swift in Sources */,
 				833074561BA8C609008E66E6 /* CollectionType+WaniKani.swift in Sources */,
 				8347BD911B725D46000F99EF /* UserInformationCoder.swift in Sources */,
 				832462BF1B935FB500FB62C9 /* SRSReviewCounts.swift in Sources */,
@@ -1324,7 +1325,6 @@
 				83C8F97A1B9B2F9D007CBFBF /* Dictionary+Operations.swift in Sources */,
 				83C8F9841B9B2F9D007CBFBF /* Operation.swift in Sources */,
 				8393CEAA1BA75DF5008701D6 /* DelayOperation.swift in Sources */,
-				8362E3601BCF10D90062AC97 /* DownloadResourceOperation.swift in Sources */,
 				83C8F9801B9B2F9D007CBFBF /* ProgressDescriptionCopyObserver.swift in Sources */,
 				83A597861BCC53EB0040C730 /* RetryOperation.swift in Sources */,
 				83C8F9791B9B2F9D007CBFBF /* UserNotificationCondition.swift in Sources */,

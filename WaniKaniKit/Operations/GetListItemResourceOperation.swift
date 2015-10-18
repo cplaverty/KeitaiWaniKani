@@ -20,7 +20,7 @@ public class GetListItemResourceOperation<Coder: protocol<ResourceHandler, JSOND
         return progress
     }()
     
-    public private(set) var downloadOperations: [DownloadResourceOperation]?
+    public private(set) var downloadOperations: [DownloadFileOperation]?
     public private(set) var parseOperation: ParseListItemOperation<Coder>?
     public var fetchRequired: Bool {
         guard let downloadOperations = downloadOperations else { return false }
@@ -93,11 +93,11 @@ public class GetListItemResourceOperation<Coder: protocol<ResourceHandler, JSOND
         
         self.parseOperation = parseOperation
 
-        var downloadOperations = [DownloadResourceOperation]()
+        var downloadOperations = [DownloadFileOperation]()
         for batch in downloadBatches {
             let cacheFile = rootCacheDirectory.URLByAppendingPathComponent(batch.description == nil ? "download.json" : "\(batch.description).json")
             progress.becomeCurrentWithPendingUnitCount(1)
-            let downloadOperation = DownloadResourceOperation(resolver: resolver, resource: resource, argument: batch.argument, destinationFileURL: cacheFile, networkObserver: networkObserver)
+            let downloadOperation = DownloadFileOperation(resolver: resolver, resource: resource, argument: batch.argument, destinationFileURL: cacheFile, networkObserver: networkObserver)
             var progressDescription = "Downloading \(resource)"
             if let batchDescription = batch.description {
                 progressDescription += " \(batchDescription)"

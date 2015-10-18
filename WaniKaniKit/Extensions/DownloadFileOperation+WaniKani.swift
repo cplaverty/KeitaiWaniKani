@@ -1,5 +1,5 @@
 //
-//  DownloadResourceOperation+WaniKani.swift
+//  DownloadFileOperation+WaniKani.swift
 //  WaniKaniKit
 //
 //  Copyright © 2015 Chris Laverty. All rights reserved.
@@ -8,7 +8,7 @@
 import Foundation
 import OperationKit
 
-extension DownloadResourceOperation {
+extension DownloadFileOperation {
     
     convenience init(resolver: ResourceResolver, resource: Resource, argument: String? = nil, destinationFileURL: NSURL, networkObserver: OperationObserver? = nil) {
         let sourceURL = resolver.URLForResource(resource, withArgument: argument)
