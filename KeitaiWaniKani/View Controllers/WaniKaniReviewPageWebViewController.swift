@@ -25,6 +25,11 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     
     // MARK: - View Controller Lifecycle
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        webView.removeInputAccessoryView()
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         showBrowserInterface(webView.URL != WaniKaniURLs.lessonSession && webView.URL != WaniKaniURLs.reviewSession)
