@@ -781,6 +781,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     
     private func webViewControllerCommonConfiguration(webViewController: WebViewController) {
         webViewController.webViewConfiguration.userContentController.addUserScript(getUserScript("common"))
+        webViewController.webViewConfiguration.userContentController.addUserScript(getUserScript("resize"))
         if ApplicationSettings.userScriptIgnoreAnswerEnabled {
             webViewController.webViewConfiguration.userContentController.addUserScript(getUserScript("wkoverride.user"))
         }
