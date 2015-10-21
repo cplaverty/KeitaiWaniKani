@@ -11,6 +11,8 @@ import WaniKaniKit
 
 class WaniKaniReviewPageWebViewController: WebViewController {
     
+    override var allowsBackForwardNavigationGestures: Bool { return false }
+
     // MARK: - WKNavigationDelegate
     
     func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {

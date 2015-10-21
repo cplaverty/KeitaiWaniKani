@@ -107,6 +107,8 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
     
     var URL: NSURL?
     
+    var allowsBackForwardNavigationGestures: Bool { return true }
+    
     var webViewConfiguration: WKWebViewConfiguration = {
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let config = WKWebViewConfiguration()
@@ -127,25 +129,22 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
     private var progressViewIsHidden = true
     
     private let webViewObservedKeys = ["canGoBack", "canGoForward", "estimatedProgress", "loading", "URL"]
-    var webView: WKWebView! {
-        willSet {
-            guard let formerWebView = webView else { return }
-            
-            for webViewObservedKey in webViewObservedKeys {
-                formerWebView.removeObserver(self, forKeyPath: webViewObservedKey, context: &webViewControllerObservationContext)
-            }
+    lazy var webView: WKWebView = {
+        let webView = WKWebView(frame: self.view.bounds, configuration: self.webViewConfiguration)
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.navigationDelegate = self
+        webView.UIDelegate = self
+        webView.allowsBackForwardNavigationGestures = self.allowsBackForwardNavigationGestures
+        if #available(iOS 9.0, *) {
+            webView.allowsLinkPreview = true
+        }
+
+        for webViewObservedKey in self.webViewObservedKeys {
+            webView.addObserver(self, forKeyPath: webViewObservedKey, options: [], context: &self.webViewControllerObservationContext)
         }
         
-        didSet {
-            if let newWebView = webView {
-                for webViewObservedKey in webViewObservedKeys {
-                    newWebView.addObserver(self, forKeyPath: webViewObservedKey, options: [], context: &webViewControllerObservationContext)
-                }
-                
-                updateUIFromWebView()
-            }
-        }
-    }
+        return webView
+    }()
     
     lazy var backButton: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(named: "ArrowLeft"), style: .Plain, target: self, action: "backButtonTouched:forEvent:")
@@ -347,14 +346,6 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        webView = WKWebView(frame: view.bounds, configuration: webViewConfiguration)
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.navigationDelegate = self
-        webView.UIDelegate = self
-        webView.allowsBackForwardNavigationGestures = true
-        if #available(iOS 9.0, *) {
-            webView.allowsLinkPreview = true
-        }
         self.view.addSubview(webView)
         NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
         NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
