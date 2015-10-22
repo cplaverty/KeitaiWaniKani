@@ -5,6 +5,7 @@ if (window.location.hostname.endsWith('wanikani.com') &&
         '@media (max-width: 767px) {' +
              '#answer-form { font-size: 1.25em; }' +
              '#summary-button, #header-buttons, #reviews #stats, #lessons #stats { font-size: 14px; }' +
+             '#answer-exception { font-size: 1em; }' +
         '}'
     )
 }
