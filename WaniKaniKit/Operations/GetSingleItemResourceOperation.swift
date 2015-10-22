@@ -57,6 +57,7 @@ public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSO
     
     public override func execute() {
         DDLogInfo("Starting download of \(self.sourceURL)")
+        progress.localizedAdditionalDescription = "Connecting..."
         request = Alamofire.request(.GET, self.sourceURL)
             .validate()
             .responseJSON { [progress] response in
