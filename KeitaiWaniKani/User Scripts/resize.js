@@ -1,7 +1,7 @@
 if (window.location.hostname.endsWith('wanikani.com') &&
     (window.location.pathname.startsWith('/review/session') || window.location.pathname.startsWith('/lesson/session'))) {
     addStyle(
-        '#reviews #question #character, #lessons header #main-info #character { font-size: 10vh; line-height: 18vh; padding: 10px 0 0; }' +
+        '#reviews #question #character, #lessons header #main-info #character { font-size: 10vh !important; line-height: 18vh !important; padding: 10px 0 0; }' +
         'header #main-info #meaning { padding: 0; }' +
         '#main-info { padding: 10px 0; }' +
         '@media (max-width: 767px) {' +
