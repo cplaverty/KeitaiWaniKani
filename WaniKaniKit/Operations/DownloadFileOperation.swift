@@ -65,7 +65,6 @@ public class DownloadFileOperation: Operation, NSProgressReporting {
             return self.destinationFileURL
             }
             .progress { [progress] bytesRead, totalBytesRead, totalBytesExpectedToRead in
-                DDLogVerbose("Downloaded \(totalBytesRead)/\(totalBytesExpectedToRead) of \(self.sourceURL)")
                 if totalBytesExpectedToRead != NSURLSessionTransferSizeUnknown {
                     progress.localizedAdditionalDescription = nil
                     progress.totalUnitCount = totalBytesExpectedToRead

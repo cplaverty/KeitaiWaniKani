@@ -39,12 +39,8 @@ public class GroupOperation: Operation {
         oq.name = "\(self.dynamicType) internal queue"
         return oq
         }()
-    private lazy var startingOperation: NSBlockOperation = {
-        NSBlockOperation() { DDLogVerbose("Starting start marker operation \(self.dynamicType) on internal queue") }
-        }()
-    private lazy var finishingOperation: NSBlockOperation = {
-        NSBlockOperation() { DDLogVerbose("Starting finish marker operation of \(self.dynamicType) on internal queue") }
-        }()
+    private let startingOperation = NSBlockOperation() {}
+    private let finishingOperation = NSBlockOperation() {}
     
     private var aggregatedErrors = [ErrorType]()
     
@@ -81,8 +77,6 @@ public class GroupOperation: Operation {
     
     public func addOperation(operation: NSOperation) {
         assert(!finishingOperation.finished && !finishingOperation.executing, "cannot add new operations to a group after the group has completed")
-        
-        DDLogVerbose("Adding operation \(operation.dynamicType) to group operation \(self.dynamicType)")
         
         /*
         Some operation in this group has produced a new operation to execute.
@@ -130,7 +124,6 @@ extension GroupOperation: OperationQueueDelegate {
         
         if operation === finishingOperation {
             internalQueue.suspended = true
-            DDLogVerbose("Marking \(self.dynamicType) finished")
             finish(aggregatedErrors)
         }
         else if operation !== startingOperation {
