@@ -15,46 +15,6 @@ protocol WebViewControllerDelegate: class {
     func webViewControllerDidFinish(controller: WebViewController)
 }
 
-private var swizzledClassMapping: [AnyClass] = []
-
-// Adapted from http://stackoverflow.com/questions/19033292/ios-7-uiwebview-keyboard-issue?lq=1
-extension WKWebView {
-    func noInputAccessoryView() -> UIView? {
-        return nil
-    }
-    
-    public func removeInputAccessoryView() {
-        guard let subview = scrollView.subviews.filter({ NSStringFromClass($0.dynamicType).hasPrefix("WKContent") }).first else {
-            return
-        }
-        
-        // Guard in case this method is called twice on the same webview.
-        guard !(swizzledClassMapping as NSArray).containsObject(subview.dynamicType) else {
-            return
-        }
-        
-        let className = "\(subview.dynamicType)_SwizzleHelper"
-        var newClass: AnyClass? = NSClassFromString(className)
-        
-        if newClass == nil {
-            newClass = objc_allocateClassPair(subview.dynamicType, className, 0)
-            
-            guard newClass != nil else {
-                return
-            }
-            
-            let method = class_getInstanceMethod(self.dynamicType, "noInputAccessoryView")
-            class_addMethod(newClass!, "inputAccessoryView", method_getImplementation(method), method_getTypeEncoding(method))
-            
-            objc_registerClassPair(newClass!)
-            
-            swizzledClassMapping += [newClass!]
-        }
-        
-        object_setClass(subview, newClass!)
-    }
-}
-
 class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WebViewControllerDelegate, WebViewBackForwardListTableViewControllerDelegate {
     
     private struct SegueIdentifiers {
