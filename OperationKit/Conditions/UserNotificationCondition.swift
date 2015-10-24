@@ -9,6 +9,7 @@ This file shows an example of implementing the OperationCondition protocol.
 #if os(iOS)
 
 import UIKit
+import CocoaLumberjack
 
 public enum UserNotificationConditionError: ErrorType {
     case SettingsMismatch(currentSettings: UIUserNotificationSettings?, desiredSettings: UIUserNotificationSettings)
@@ -56,27 +57,19 @@ public struct UserNotificationCondition: OperationCondition {
     }
     
     public func dependencyForOperation(operation: Operation) -> NSOperation? {
-        if settingsMatch() {
-            return nil
-        } else {
-            return UserNotificationPermissionOperation(settings: settings, application: application, behavior: behavior)
-        }
+        return UserNotificationPermissionOperation(settings: settings, application: application, behavior: behavior)
     }
     
     public func evaluateForOperation(operation: Operation, completion: OperationConditionResult -> Void) {
-        if settingsMatch() {
+        let current = application.currentUserNotificationSettings()
+        
+        if let current = current where current.contains(settings) {
             completion(.Satisfied)
         } else {
-            let error = UserNotificationConditionError.SettingsMismatch(currentSettings: application.currentUserNotificationSettings(), desiredSettings: settings)
-            
-            completion(.Failed(error))
+            completion(.Failed(UserNotificationConditionError.SettingsMismatch(currentSettings: current, desiredSettings: settings)))
         }
     }
     
-    private func settingsMatch() -> Bool {
-        guard let current = application.currentUserNotificationSettings() else { return false }
-        return current.contains(settings)
-    }
 }
 
 /**
