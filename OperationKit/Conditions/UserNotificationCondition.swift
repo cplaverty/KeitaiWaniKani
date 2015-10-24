@@ -56,25 +56,26 @@ public struct UserNotificationCondition: OperationCondition {
     }
     
     public func dependencyForOperation(operation: Operation) -> NSOperation? {
-        return UserNotificationPermissionOperation(settings: settings, application: application, behavior: behavior)
+        if settingsMatch() {
+            return nil
+        } else {
+            return UserNotificationPermissionOperation(settings: settings, application: application, behavior: behavior)
+        }
     }
     
     public func evaluateForOperation(operation: Operation, completion: OperationConditionResult -> Void) {
-        let result: OperationConditionResult
-        
-        let current = application.currentUserNotificationSettings()
-
-        switch (current, settings)  {
-            case (let current?, let settings) where current.contains(settings):
-                result = .Satisfied
-
-            default:
-                let error = UserNotificationConditionError.SettingsMismatch(currentSettings: current, desiredSettings: settings)
-                
-                result = .Failed(error)
+        if settingsMatch() {
+            completion(.Satisfied)
+        } else {
+            let error = UserNotificationConditionError.SettingsMismatch(currentSettings: application.currentUserNotificationSettings(), desiredSettings: settings)
+            
+            completion(.Failed(error))
         }
-        
-        completion(result)
+    }
+    
+    private func settingsMatch() -> Bool {
+        guard let current = application.currentUserNotificationSettings() else { return false }
+        return current.contains(settings)
     }
 }
 
