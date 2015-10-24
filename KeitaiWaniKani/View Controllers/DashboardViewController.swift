@@ -88,7 +88,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             }
             
             if formerProgress.fractionCompleted < 1 && formerProgress.cancellable {
-                DDLogDebug("Cancelling incomplete operation \(formerDataRefreshOperation.UUID)")
+                DDLogDebug("Cancelling incomplete operation \(ObjectIdentifier(formerDataRefreshOperation).uintValue)")
                 formerDataRefreshOperation.cancel()
             }
         }
@@ -379,7 +379,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
                     self.srsDistribution = srsDistribution
                     self.updateProgress()
                     
-                    DDLogDebug("Fetch of latest StudyQueue (\(studyQueue?.lastUpdateTimestamp)) from database complete.  Needs refreshing? \(self.apiDataNeedsRefresh)")
+                    DDLogDebug("Fetch of latest StudyQueue (\(studyQueue?.lastUpdateTimestamp ?? NSDate.distantPast())) from database complete.  Needs refreshing? \(self.apiDataNeedsRefresh)")
                     if self.apiDataNeedsRefresh {
                         self.updateStudyQueueTimer?.fire()
                     }
@@ -448,11 +448,11 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         // Operation finish
         let observer = BlockObserver(
             startHandler: { operation in
-                DDLogInfo("Fetching study queue for API key \(apiKey) (request ID \(operation.UUID))...")
+                DDLogInfo("Fetching study queue (request ID \(ObjectIdentifier(operation).uintValue))...")
             },
             finishHandler: { [weak self] (operation, errors) in
                 let fatalErrors = errors.filterNonFatalErrors()
-                DDLogInfo("Study queue fetch for API key \(apiKey) complete (request ID \(operation.UUID)): \(fatalErrors)")
+                DDLogInfo("Study queue fetch complete (request ID \(ObjectIdentifier(operation).uintValue)): \(fatalErrors)")
                 let operation = operation as! GetDashboardDataOperation
                 dispatch_async(dispatch_get_main_queue()) {
                     // If this operation represents the currently tracked operation, then set to nil to mark as done
@@ -494,7 +494,6 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     }
     
     func startTimers() {
-        DDLogDebug("Starting dashboard timers")
         updateUITimer = {
             // Find out when the start of the next minute is
             let referenceDate = NSDate()
@@ -527,7 +526,6 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     }
     
     func killTimers() {
-        DDLogDebug("Killing dashboard timers")
         updateUITimer = nil
         updateStudyQueueTimer = nil
     }

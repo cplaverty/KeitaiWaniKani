@@ -17,8 +17,6 @@ about interesting operation state changes
 */
 public class Operation: NSOperation {
     
-    public let UUID = NSUUID()
-    
     // use the KVO mechanism to indicate that changes to "state" affect other properties as well
     public class func keyPathsForValuesAffectingIsReady() -> Set<NSObject> {
         return ["state", "_cancelled", "isCancelled"]
