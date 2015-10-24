@@ -20,7 +20,7 @@ final class ReviewTimeNotificationOperation: Operation {
         
         super.init()
         
-        let requestedNotificationSettings = UIUserNotificationSettings(forTypes: [.Badge, .Sound, .Alert], categories: nil)
+        let requestedNotificationSettings = UIUserNotificationSettings(forTypes: [.Sound, .Alert], categories: nil)
         let reviewTimeNotificationCondition = UserNotificationCondition(settings: requestedNotificationSettings, application: UIApplication.sharedApplication())
         addCondition(reviewTimeNotificationCondition)
     }
@@ -35,15 +35,13 @@ final class ReviewTimeNotificationOperation: Operation {
                 return
             }
             
-            let application = UIApplication.sharedApplication()
-            application.applicationIconBadgeNumber = studyQueue.reviewsAvailable
-            
             guard let nextReviewDate = studyQueue.nextReviewDate where nextReviewDate.timeIntervalSinceNow > 0 else {
                 DDLogInfo("Not setting local notification: next review date not set or in the past (\(studyQueue.nextReviewDate))")
                 finish()
                 return
             }
             
+            let application = UIApplication.sharedApplication()
             if let scheduledLocalNotifications = application.scheduledLocalNotifications {
                 for notification in scheduledLocalNotifications {
                     if let userInfo = notification.userInfo where userInfo["source"] as? String == "\(self.dynamicType)" {

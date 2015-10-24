@@ -73,6 +73,14 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         super.init(operations: [studyQueueOperation, levelProgressionOperation, srsDistributionOperation, srsDataItemOperation, reviewTimeNotificationOperation])
         progress.cancellationHandler = { self.cancel() }
         
+        studyQueueOperation.addObserver(BlockObserver { _, _ in
+            guard let studyQueue = self.studyQueueOperation.parsed else { return }
+
+            DDLogDebug("Badging app icon: \(studyQueue.reviewsAvailable)")
+            let application = UIApplication.sharedApplication()
+            application.applicationIconBadgeNumber = studyQueue.reviewsAvailable
+            })
+
         if let delay = delay {
             ++progress.totalUnitCount
             let delayOperation = DelayOperation(interval: delay)
