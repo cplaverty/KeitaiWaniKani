@@ -14,6 +14,7 @@ struct ApplicationSettingKeys {
     static let purgeDatabase = "purgeDatabase"
     static let lastRefreshTime = "lastRefreshTime"
     static let userScriptIgnoreAnswerEnabled = "userScript-IgnoreAnswer"
+    static let userScriptWaniKaniImproveEnabled = "userScript-WaniKaniImprove"
 }
 
 struct ApplicationSettings {
@@ -49,12 +50,18 @@ struct ApplicationSettings {
         set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.userScriptIgnoreAnswerEnabled) }
     }
     
+    static var userScriptWaniKaniImproveEnabled: Bool {
+        get { return userDefaults.boolForKey(ApplicationSettingKeys.userScriptWaniKaniImproveEnabled) }
+        set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.userScriptWaniKaniImproveEnabled) }
+    }
+    
     static func resetToDefaults() {
         apiKey = nil
         apiKeyVerified = false
         purgeDatabase = false
         lastRefreshTime = nil
         userScriptIgnoreAnswerEnabled = false
+        userScriptWaniKaniImproveEnabled = false
     }
 }
 

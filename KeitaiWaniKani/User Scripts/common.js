@@ -22,3 +22,43 @@ function addStyle(aCss) {
     }
     return null;
 }
+
+function addScript(aScript) {
+    var head, script;
+    head = document.getElementsByTagName('head')[0];
+    if (head) {
+        script = document.createElement('script');
+        script.setAttribute('type', 'text/javascript');
+        script.textContent = aScript;
+        head.appendChild(script);
+        return script;
+    }
+    return null;
+}
+
+function linkStyleSheet(location) {
+    var head, link;
+    head = document.getElementsByTagName('head')[0];
+    if (head) {
+        link = document.createElement('link');
+        link.setAttribute('rel', 'stylesheet');
+        link.setAttribute('type', 'text/css');
+        link.setAttribute('href', location);
+        head.appendChild(link);
+        return link;
+    }
+    return null;
+}
+
+function linkScript(location) {
+    var head, script;
+    head = document.getElementsByTagName('head')[0];
+    if (head) {
+        script = document.createElement('script');
+        script.setAttribute('type', 'text/javascript');
+        script.setAttribute('src', location);
+        head.appendChild(script);
+        return script;
+    }
+    return null;
+}

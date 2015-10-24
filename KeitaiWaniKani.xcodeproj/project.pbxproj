@@ -102,6 +102,7 @@
 		8347BDFD1B72AE90000F99EF /* WaniKaniAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347BDFC1B72AE90000F99EF /* WaniKaniAPI.swift */; };
 		834802541B97A76500CC7461 /* ModelObjectUpdateCheckCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834802531B97A76500CC7461 /* ModelObjectUpdateCheckCondition.swift */; };
 		8362E3621BCF11640062AC97 /* DownloadFileOperation+WaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8362E3611BCF11640062AC97 /* DownloadFileOperation+WaniKani.swift */; };
+		836639521BDB9F9E00BD0B92 /* wkimprove.js in Resources */ = {isa = PBXBuildFile; fileRef = 836639511BDB9F9E00BD0B92 /* wkimprove.js */; };
 		83699C8F1BBD15E500BBF6FB /* BlockOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83699C8E1BBD15E500BBF6FB /* BlockOperationTests.swift */; };
 		83699C911BBD17E300BBF6FB /* MutuallyExclusiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83699C901BBD17E300BBF6FB /* MutuallyExclusiveTests.swift */; };
 		836B2BAA1BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836B2BA91BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift */; };
@@ -335,6 +336,7 @@
 		834C92521B7660390025D359 /* WaniKaniStudyQueueWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WaniKaniStudyQueueWidget.entitlements; sourceTree = "<group>"; };
 		834C92531B76603F0025D359 /* KeitaiWaniKani.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = KeitaiWaniKani.entitlements; sourceTree = "<group>"; };
 		8362E3611BCF11640062AC97 /* DownloadFileOperation+WaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DownloadFileOperation+WaniKani.swift"; sourceTree = "<group>"; };
+		836639511BDB9F9E00BD0B92 /* wkimprove.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkimprove.js; sourceTree = "<group>"; };
 		83699C8E1BBD15E500BBF6FB /* BlockOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockOperationTests.swift; sourceTree = "<group>"; };
 		83699C901BBD17E300BBF6FB /* MutuallyExclusiveTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutuallyExclusiveTests.swift; sourceTree = "<group>"; };
 		836B2BA91BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DDLogLevel+CustomStringConvertible.swift"; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 				8304F8231BBC82EC009D7054 /* common.js */,
 				832462C41B936F0300FB62C9 /* wkoverride.user.js */,
 				8396244E1BD7740F00269558 /* resize.js */,
+				836639511BDB9F9E00BD0B92 /* wkimprove.js */,
 			);
 			path = "User Scripts";
 			sourceTree = "<group>";
@@ -1060,6 +1063,7 @@
 				83CB3E0F1B5849EE00761D68 /* Settings.bundle in Resources */,
 				830EAB941B41DC7700EBF073 /* LaunchScreen.storyboard in Resources */,
 				832462C51B936F0300FB62C9 /* wkoverride.user.js in Resources */,
+				836639521BDB9F9E00BD0B92 /* wkimprove.js in Resources */,
 				8304F8241BBC82EC009D7054 /* common.js in Resources */,
 				8396244F1BD7740F00269558 /* resize.js in Resources */,
 				830EAB911B41DC7700EBF073 /* Assets.xcassets in Resources */,

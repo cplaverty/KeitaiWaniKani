@@ -778,21 +778,24 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     }
     
     private func webViewControllerCommonConfiguration(webViewController: WebViewController) {
-        webViewController.webViewConfiguration.userContentController.addUserScript(getUserScript("common"))
+        webViewController.webViewConfiguration.userContentController.addUserScript(getUserScript("common", injectionTime: .AtDocumentStart))
         webViewController.webViewConfiguration.userContentController.addUserScript(getUserScript("resize"))
         if ApplicationSettings.userScriptIgnoreAnswerEnabled {
             webViewController.webViewConfiguration.userContentController.addUserScript(getUserScript("wkoverride.user"))
+        }
+        if ApplicationSettings.userScriptWaniKaniImproveEnabled {
+            webViewController.webViewConfiguration.userContentController.addUserScript(getUserScript("wkimprove"))
         }
         webViewController.webViewConfiguration.userContentController.addScriptMessageHandler(self, name: "debuglog")
         webViewController.delegate = self
     }
     
-    private func getUserScript(name: String) -> WKUserScript {
+    private func getUserScript(name: String, injectionTime: WKUserScriptInjectionTime = .AtDocumentEnd) -> WKUserScript {
         guard let scriptURL = NSBundle.mainBundle().URLForResource("\(name)", withExtension: "js") else {
             fatalError("Count not find user script \(name).js in main bundle")
         }
         let scriptSource = try! String(contentsOfURL: scriptURL)
-        return WKUserScript(source: scriptSource, injectionTime: .AtDocumentEnd, forMainFrameOnly: true)
+        return WKUserScript(source: scriptSource, injectionTime: injectionTime, forMainFrameOnly: true)
     }
     
     // MARK: - Background transition

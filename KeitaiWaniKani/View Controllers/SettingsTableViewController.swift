@@ -20,8 +20,11 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     
     let userScripts: [(name: String, description: String, settingKey: String)] = [
         (name: "Ignore Answer",
-            description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  PLEASE USE RESPONSIBLY!  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script by Rui Pinheiro, modified to work on iOS.",
-            settingKey: ApplicationSettingKeys.userScriptIgnoreAnswerEnabled)
+            description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  PLEASE USE RESPONSIBLY!  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script written by Rui Pinheiro.",
+            settingKey: ApplicationSettingKeys.userScriptIgnoreAnswerEnabled),
+        (name: "WaniKani Improve",
+            description: "Auto forward to the next item if the answer was correct (\"lightning mode\").  Original script written by Seiji.",
+            settingKey: ApplicationSettingKeys.userScriptWaniKaniImproveEnabled)
     ]
     
     // MARK: - View Controller Lifecycle
