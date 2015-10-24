@@ -10,8 +10,7 @@ pod 'Alamofire', '~> 3.0'
 #pod 'FMDB', '~> 2.5'
 pod 'FMDB', :git => 'https://github.com/ccgus/fmdb.git', :branch => 'swiftFramework'
 pod 'SwiftyJSON', '~> 2.3'
-pod 'CocoaLumberjack', '~> 2.1.0-rc'
-pod 'CocoaLumberjack/Swift', '~> 2.1.0-rc'
+pod 'CocoaLumberjack/Swift', '~> 2.1.0'
 
 target :KeitaiWaniKani do
     pod '1PasswordExtension'
