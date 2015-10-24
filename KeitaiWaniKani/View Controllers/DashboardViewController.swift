@@ -715,7 +715,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         super.viewDidAppear(animated)
 
         guard let apiKey = ApplicationSettings.apiKey where !apiKey.isEmpty else {
-            DDLogInfo("Dashboard view has no API key.  Dismissing back to home screen.")
+            DDLogDebug("Dashboard view has no API key.  Dismissing back to home screen.")
             dismissViewControllerAnimated(false, completion: nil)
             return
         }
@@ -727,7 +727,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         // The view will be dismissed if there's no API key set (possibly because it was cleared in app settings)
         // Don't bother starting timers in this case.
         guard let apiKey = ApplicationSettings.apiKey where !apiKey.isEmpty else {
-            DDLogInfo("Dashboard view has no API key.  Not starting timers.")
+            DDLogDebug("Dashboard view has no API key.  Not starting timers.")
             return
         }
         

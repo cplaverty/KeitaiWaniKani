@@ -56,14 +56,14 @@ public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSO
     // MARK: - Operation
     
     public override func execute() {
-        DDLogInfo("Starting download of \(self.sourceURL)")
+        DDLogDebug("Starting download of \(self.sourceURL)")
         progress.localizedAdditionalDescription = "Connecting..."
         request = Alamofire.request(.GET, self.sourceURL)
             .validate()
             .responseJSON { [progress] response in
                 progress.completedUnitCount = 1
                 defer { progress.completedUnitCount = progress.totalUnitCount }
-                DDLogInfo("Download of \(self.sourceURL) complete")
+                DDLogDebug("Download of \(self.sourceURL) complete")
                 switch response.result {
                 case .Success(let value):
                     do {
@@ -81,7 +81,7 @@ public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSO
     }
     
     public override func cancel() {
-        DDLogInfo("Cancelling download of \(self.sourceURL)")
+        DDLogDebug("Cancelling download of \(self.sourceURL)")
         super.cancel()
         request?.cancel()
     }
@@ -130,7 +130,7 @@ public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSO
         }
         
         self.parsed = parsed
-        DDLogInfo("\(Coder.ModelObject.self) database insert complete")
+        DDLogDebug("\(Coder.ModelObject.self) database insert complete")
     }
     
 }

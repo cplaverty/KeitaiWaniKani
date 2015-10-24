@@ -56,7 +56,7 @@ public class DownloadFileOperation: Operation, NSProgressReporting {
     
     public override func execute() {
         assert(request == nil, "Operation executed twice?")
-        DDLogInfo("Starting download of \(self.sourceURL)")
+        DDLogDebug("Starting download of \(self.sourceURL)")
         
         request = Alamofire.download(.GET, self.sourceURL) { _, _ in
             // Ensure the parent directory exists

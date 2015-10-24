@@ -37,7 +37,7 @@ class GetAPIKeyViewController: UIViewController, UITextFieldDelegate {
 
         ApplicationSettings.apiKey = apiKey
         
-        DDLogInfo("Checking validity of API key \(apiKey)")
+        DDLogDebug("Checking validity of API key \(apiKey)")
         dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
             let finishHandler = BlockObserver(finishHandler: { _, operationErrors in
                 let errors = operationErrors.filter { error in
@@ -51,7 +51,7 @@ class GetAPIKeyViewController: UIViewController, UITextFieldDelegate {
                     // Ignore user notification errors
                     self.allowInput()
                     if errors.isEmpty {
-                        DDLogInfo("API key valid.  Dismissing view controller.")
+                        DDLogDebug("API key valid.  Dismissing view controller.")
                         self.performSegueWithIdentifier(SegueIdentifiers.apiKeySet, sender: self)
                     } else {
                         if errors.contains({ if case WaniKaniAPIError.UserNotFound = $0 { return true } else { return false } }) {
@@ -65,7 +65,7 @@ class GetAPIKeyViewController: UIViewController, UITextFieldDelegate {
                 }
             })
             
-            DDLogInfo("Checking API key \(apiKey)...")
+            DDLogVerbose("Checking API key...")
             let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let resolver = WaniKaniAPI.resourceResolverForAPIKey(apiKey)
             let operation = GetStudyQueueOperation(resolver: resolver, databaseQueue: delegate.databaseQueue)

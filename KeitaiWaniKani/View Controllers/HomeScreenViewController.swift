@@ -46,13 +46,13 @@ class HomeScreenViewController: UIViewController, WebViewControllerDelegate, WKS
         DDLogVerbose("Received script message body \(message.body)")
         if let responseDictionary = message.body as? [String: NSObject] {
             if let apiKey = responseDictionary["apiKey"] as? String {
-                DDLogInfo("Received script message API Key \(apiKey)")
+                DDLogVerbose("Received script message API Key \(apiKey)")
                 ApplicationSettings.apiKey = apiKey
                 ApplicationSettings.apiKeyVerified = true
                 self.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
             }
             if let error = responseDictionary["error"] {
-                DDLogInfo("Received script message error \(error)")
+                DDLogWarn("Received script message error: \(error)")
             }
         }
     }
@@ -96,7 +96,7 @@ class HomeScreenViewController: UIViewController, WebViewControllerDelegate, WKS
     func validateAPIKey() {
         defer { activityIndicator.stopAnimating() }
         guard let apiKey = ApplicationSettings.apiKey where !apiKey.isEmpty && ApplicationSettings.apiKeyVerified else {
-            DDLogInfo("We either do not have an API Key, or it hasn't been verified")
+            DDLogDebug("We either do not have an API Key, or it hasn't been verified")
             showLoginButtonsOnMainQueue()
             return
         }

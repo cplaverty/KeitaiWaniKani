@@ -80,11 +80,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Background fetch
     
     func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        DDLogInfo("In background fetch handler")
+        DDLogDebug("In background fetch handler")
         
         // We must have an API key set, or there's no data to fetch
         guard let apiKey = ApplicationSettings.apiKey else {
-            DDLogInfo("Background fetch result = .NoData (No API key set)")
+            DDLogDebug("Background fetch result = .NoData (No API key set)")
             completionHandler(.NoData)
             return
         }
@@ -96,18 +96,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let completionHandlerOperationObserver = BlockObserver { operation, errors in
             guard let operation = operation as? GetDashboardDataOperation else { return }
             
-            DDLogInfo("Background run of \(operation.dynamicType) finished with errors \(errors)")
+            DDLogDebug("Background run of \(operation.dynamicType) finished with errors \(errors)")
             // Check if any of these errors are non-fatal
             let fatalErrors = errors.filterNonFatalErrors()
             
             if !fatalErrors.isEmpty {
-                DDLogInfo("Background fetch result = .Failed")
+                DDLogDebug("Background fetch result = .Failed")
                 completionHandler(.Failed)
             } else if operation.fetchRequired {
-                DDLogInfo("Background fetch result = .NewData")
+                DDLogDebug("Background fetch result = .NewData")
                 completionHandler(.NewData)
             } else {
-                DDLogInfo("Background fetch result = .NoData")
+                DDLogDebug("Background fetch result = .NoData")
                 completionHandler(.NoData)
             }
         }
