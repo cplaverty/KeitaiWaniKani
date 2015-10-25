@@ -1027,7 +1027,6 @@
 					};
 					8347BD011B725428000F99EF = {
 						CreatedOnToolsVersion = 7.0;
-						TestTargetID = 830EAB851B41DC7700EBF073;
 					};
 					83C8F9491B9B2E7E007CBFBF = {
 						CreatedOnToolsVersion = 7.0;
@@ -1684,7 +1683,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.WaniKaniKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KeitaiWaniKani.app/KeitaiWaniKani";
 			};
 			name = Debug;
 		};
@@ -1697,7 +1695,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.WaniKaniKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KeitaiWaniKani.app/KeitaiWaniKani";
 			};
 			name = Release;
 		};
