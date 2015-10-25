@@ -19,6 +19,7 @@
 		830EAB8F1B41DC7700EBF073 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830EAB8D1B41DC7700EBF073 /* Main.storyboard */; };
 		830EAB911B41DC7700EBF073 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830EAB901B41DC7700EBF073 /* Assets.xcassets */; };
 		830EAB941B41DC7700EBF073 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830EAB921B41DC7700EBF073 /* LaunchScreen.storyboard */; };
+		831A700C1BDD760A00435FC8 /* jquery.qtip.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 831A700B1BDD760A00435FC8 /* jquery.qtip.min.js */; };
 		831E66881BC70E4E00EE34C1 /* SRSDataItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E66871BC70E4E00EE34C1 /* SRSDataItemTests.swift */; };
 		831FF75C1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831FF75B1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift */; };
 		831FF75E1BB87CDD00C31FDF /* SRSDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831FF75D1BB87CDD00C31FDF /* SRSDataItem.swift */; };
@@ -252,6 +253,7 @@
 		830EAB901B41DC7700EBF073 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		830EAB931B41DC7700EBF073 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		830EAB951B41DC7700EBF073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		831A700B1BDD760A00435FC8 /* jquery.qtip.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.qtip.min.js; sourceTree = "<group>"; };
 		831E66871BC70E4E00EE34C1 /* SRSDataItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemTests.swift; sourceTree = "<group>"; };
 		831FF75B1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemCollectionViewController.swift; sourceTree = "<group>"; };
 		831FF75D1BB87CDD00C31FDF /* SRSDataItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItem.swift; sourceTree = "<group>"; };
@@ -521,9 +523,10 @@
 			isa = PBXGroup;
 			children = (
 				8304F8231BBC82EC009D7054 /* common.js */,
-				832462C41B936F0300FB62C9 /* wkoverride.user.js */,
+				831A700B1BDD760A00435FC8 /* jquery.qtip.min.js */,
 				8396244E1BD7740F00269558 /* resize.js */,
 				836639511BDB9F9E00BD0B92 /* wkimprove.js */,
+				832462C41B936F0300FB62C9 /* wkoverride.user.js */,
 			);
 			path = "User Scripts";
 			sourceTree = "<group>";
@@ -1068,6 +1071,7 @@
 				832462C51B936F0300FB62C9 /* wkoverride.user.js in Resources */,
 				836639521BDB9F9E00BD0B92 /* wkimprove.js in Resources */,
 				8304F8241BBC82EC009D7054 /* common.js in Resources */,
+				831A700C1BDD760A00435FC8 /* jquery.qtip.min.js in Resources */,
 				8396244F1BD7740F00269558 /* resize.js in Resources */,
 				830EAB911B41DC7700EBF073 /* Assets.xcassets in Resources */,
 				830EAB8F1B41DC7700EBF073 /* Main.storyboard in Resources */,

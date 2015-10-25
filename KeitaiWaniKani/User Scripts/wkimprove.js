@@ -13,9 +13,7 @@
 // ==/UserScript==
 
 if (window.location.hostname.endsWith('wanikani.com') && window.location.pathname == '/review/session') {
-    linkScript('https://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.js')
     linkStyleSheet('https://cdn.jsdelivr.net/qtip2/2.2.1/jquery.qtip.min.css')
-    
     
     var wki_settings = $.jStorage.get('wki_settings');
     

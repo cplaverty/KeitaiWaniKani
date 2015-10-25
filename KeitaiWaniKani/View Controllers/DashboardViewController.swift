@@ -784,6 +784,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             webViewController.webViewConfiguration.userContentController.addUserScript(getUserScript("wkoverride.user"))
         }
         if ApplicationSettings.userScriptWaniKaniImproveEnabled {
+            webViewController.webViewConfiguration.userContentController.addUserScript(getUserScript("jquery.qtip.min"))
             webViewController.webViewConfiguration.userContentController.addUserScript(getUserScript("wkimprove"))
         }
         webViewController.webViewConfiguration.userContentController.addScriptMessageHandler(self, name: "debuglog")
