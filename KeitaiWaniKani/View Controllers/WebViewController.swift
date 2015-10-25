@@ -217,13 +217,6 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
     
     // MARK: - WKNavigationDelegate
     
-    func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        if self.toolbarItems?.isEmpty == false {
-            self.navigationController?.setToolbarHidden(false, animated: true)
-        }
-    }
-    
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         switch navigationAction.request.URL {
         case WaniKaniURLs.subscription?:
@@ -238,6 +231,23 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
         decisionHandler(.Allow)
     }
     
+    func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        if self.toolbarItems?.isEmpty == false {
+            self.navigationController?.setToolbarHidden(false, animated: true)
+        }
+    }
+
+    func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
+        DDLogWarn("Navigation failed: \(error)")
+        showAlertWithTitle("Failed to load page", message: error.localizedDescription)
+    }
+    
+    func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
+        DDLogWarn("Navigation failed: \(error)")
+        showAlertWithTitle("Failed to load page", message: error.localizedDescription)
+    }
+
     // MARK: - WKUIDelegate
     
     func webView(webView: WKWebView, createWebViewWithConfiguration configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
