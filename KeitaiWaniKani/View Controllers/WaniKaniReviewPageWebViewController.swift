@@ -7,9 +7,10 @@
 
 import UIKit
 import WebKit
+import CocoaLumberjack
 import WaniKaniKit
 
-class WaniKaniReviewPageWebViewController: WebViewController {
+class WaniKaniReviewPageWebViewController: WebViewController, WKScriptMessageHandler {
     
     // MARK: - Properties
     
@@ -33,11 +34,18 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         }
     }
     
+    // MARK: - WKScriptMessageHandler
+    
+    func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
+        DDLogDebug("Received script message body \(message.body)")
+    }
+    
     // MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.removeInputAccessoryView()
+        self.webView.configuration.userContentController.addScriptMessageHandler(self, name: "debuglog")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -47,6 +55,20 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
+    override func getUserScripts() -> [String]? {
+        var scripts = [getUserScriptContent("common"), getUserScriptContent("resize")]
+    
+        if ApplicationSettings.userScriptIgnoreAnswerEnabled {
+            scripts.append(getUserScriptContent("wkoverride.user"))
+        }
+        if ApplicationSettings.userScriptWaniKaniImproveEnabled {
+            scripts.append(getUserScriptContent("jquery.qtip.min"))
+            scripts.append(getUserScriptContent("wkimprove"))
+        }
+        
+        return scripts
+    }
+
     // MARK: - Update UI
     
     func showBrowserInterface(showBrowserInterface: Bool, animated: Bool) {
