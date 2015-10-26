@@ -28,12 +28,12 @@ PODS:
   - OHHTTPStubs/OHPathHelpers (4.4.0)
   - OHHTTPStubs/Swift (4.4.0):
     - OHHTTPStubs/Core
-  - SwiftyJSON (2.3.0)
+  - SwiftyJSON (2.3.1)
 
 DEPENDENCIES:
   - 1PasswordExtension
   - Alamofire (~> 3.0)
-  - CocoaLumberjack/Swift (~> 2.1.0)
+  - CocoaLumberjack/Swift (~> 2.1)
   - FMDB (from `https://github.com/ccgus/fmdb.git`, branch `swiftFramework`)
   - OHHTTPStubs
   - OHHTTPStubs/Swift
@@ -55,6 +55,6 @@ SPEC CHECKSUMS:
   CocoaLumberjack: d6627e7ad42e14d41a4fa2e6c7ae42489d5f3e8b
   FMDB: 8e59e93d20d76d0b135db26ecc83ae88d016076d
   OHHTTPStubs: 1a95a653b78287a1fdb44eb38364b43257ac3550
-  SwiftyJSON: 8d6b61a70277ef2a5d710d372e06e7e2d87fb9e4
+  SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
 
 COCOAPODS: 0.39.0

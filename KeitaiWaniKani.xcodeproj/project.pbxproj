@@ -818,11 +818,11 @@
 		83DC478A1B4408FB00AD716C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				83DC478B1B440A6200AD716C /* RubyLabel.swift */,
 				83B155581B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift */,
+				83DC478B1B440A6200AD716C /* RubyLabel.swift */,
+				831FF75F1BB8861400C31FDF /* SRSDataItemCollectionViewCell.swift */,
 				839D76AA1B9A3BC40037294C /* UserScriptTableViewCell.swift */,
 				8307F24F1BB564EC00BDDF10 /* WebAddressBarView.swift */,
-				831FF75F1BB8861400C31FDF /* SRSDataItemCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
