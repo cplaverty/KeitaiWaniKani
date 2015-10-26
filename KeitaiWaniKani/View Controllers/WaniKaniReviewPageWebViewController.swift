@@ -55,9 +55,11 @@ class WaniKaniReviewPageWebViewController: WebViewController, WKScriptMessageHan
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
+    // MARK: - User Scripts
+    
     override func getUserScripts() -> [String]? {
         var scripts = [getUserScriptContent("common"), getUserScriptContent("resize")]
-    
+        
         if ApplicationSettings.userScriptIgnoreAnswerEnabled {
             scripts.append(getUserScriptContent("wkoverride.user"))
         }
@@ -68,7 +70,7 @@ class WaniKaniReviewPageWebViewController: WebViewController, WKScriptMessageHan
         
         return scripts
     }
-
+    
     // MARK: - Update UI
     
     func showBrowserInterface(showBrowserInterface: Bool, animated: Bool) {
