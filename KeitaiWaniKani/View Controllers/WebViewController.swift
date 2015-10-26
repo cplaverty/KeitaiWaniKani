@@ -69,7 +69,7 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
     
     var allowsBackForwardNavigationGestures: Bool { return true }
     
-    var webViewConfiguration: WKWebViewConfiguration = {
+    lazy var webViewConfiguration: WKWebViewConfiguration = {
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let config = WKWebViewConfiguration()
         config.allowsInlineMediaPlayback = true
@@ -80,6 +80,14 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
         } else {
             config.mediaPlaybackRequiresUserAction = false
         }
+        
+        if let userScripts = self.getUserScripts() {
+            for script in userScripts {
+                let wkUserScript = WKUserScript(source: script, injectionTime: .AtDocumentEnd, forMainFrameOnly: true)
+                config.userContentController.addUserScript(wkUserScript)
+            }
+        }
+        
         return config
         }()
     
@@ -379,6 +387,19 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
         navigationItem.leftItemsSupplementBackButton = true
         navigationItem.leftBarButtonItems = [backButton, forwardButton]
         navigationItem.rightBarButtonItems = [doneButton, openInSafariButton, shareButton]
+    }
+    
+    // MARK: - User Scripts
+    
+    func getUserScripts() -> [String]? {
+        return nil
+    }
+    
+    func getUserScriptContent(name: String) -> String {
+        guard let scriptURL = NSBundle.mainBundle().URLForResource("\(name)", withExtension: "js") else {
+            fatalError("Count not find user script \(name).js in main bundle")
+        }
+        return try! String(contentsOfURL: scriptURL)
     }
     
     // MARK: - Implementation
