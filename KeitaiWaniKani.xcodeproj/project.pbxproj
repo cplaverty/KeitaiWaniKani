@@ -158,6 +158,7 @@
 		83D931691BB9CC66009DF31A /* FileMissingCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D931681BB9CC66009DF31A /* FileMissingCondition.swift */; };
 		83D9316B1BB9D2AA009DF31A /* FileMissingConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D9316A1BB9D2AA009DF31A /* FileMissingConditionTests.swift */; };
 		83DC478C1B440A6200AD716C /* RubyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC478B1B440A6200AD716C /* RubyLabel.swift */; };
+		83F32EA91BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */; };
 		83FDC2B01BB529D2006AAB8E /* GroupOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FDC2AF1BB529D2006AAB8E /* GroupOperationTests.swift */; };
 		83FE7CD51BB9C1720006689F /* GetRadicalImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FE7CD41BB9C1720006689F /* GetRadicalImageOperation.swift */; };
 		ADE0B705340234203132ABC5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1F2D81F43153739F06BE /* Pods.framework */; };
@@ -394,6 +395,7 @@
 		83D931681BB9CC66009DF31A /* FileMissingCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileMissingCondition.swift; sourceTree = "<group>"; };
 		83D9316A1BB9D2AA009DF31A /* FileMissingConditionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileMissingConditionTests.swift; sourceTree = "<group>"; };
 		83DC478B1B440A6200AD716C /* RubyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RubyLabel.swift; sourceTree = "<group>"; };
+		83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaniKaniLoginWebViewController.swift; sourceTree = "<group>"; };
 		83FDC2AF1BB529D2006AAB8E /* GroupOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupOperationTests.swift; sourceTree = "<group>"; };
 		83FE7CD41BB9C1720006689F /* GetRadicalImageOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetRadicalImageOperation.swift; sourceTree = "<group>"; };
 		BFAF1EEC1DF4AC9549F53E45 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -541,6 +543,7 @@
 				83B1555A1B94A18D0022217E /* SettingsTableViewController.swift */,
 				831FF75B1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift */,
 				833BF0BD1B4930A20038AAE3 /* UIViewControllerExtensions.swift */,
+				83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */,
 				83D7CF811BC15FCB00C1AFC4 /* WaniKaniReviewPageWebViewController.swift */,
 				833FECE81BADF0DD001C9260 /* WebViewBackForwardListTableViewController.swift */,
 				837BD4931B6E724200EDB325 /* WebViewController.swift */,
@@ -1245,6 +1248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8347BDE41B7260B1000F99EF /* NetworkObserver.swift in Sources */,
+				83F32EA91BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift in Sources */,
 				83BF363A1B52D24A0044F59B /* DashboardViewController.swift in Sources */,
 				8347BDE61B7260B1000F99EF /* ReviewTimeNotificationOperation.swift in Sources */,
 				831FF75C1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift in Sources */,

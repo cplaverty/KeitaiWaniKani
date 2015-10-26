@@ -11,7 +11,7 @@ import CocoaLumberjack
 import SwiftyJSON
 import WaniKaniKit
 
-class HomeScreenViewController: UIViewController, WebViewControllerDelegate, WKScriptMessageHandler {
+class HomeScreenViewController: UIViewController, WebViewControllerDelegate {
     
     struct SegueIdentifiers {
         static let showDashboard = "Show Dashboard"
@@ -25,36 +25,13 @@ class HomeScreenViewController: UIViewController, WebViewControllerDelegate, WKS
     // MARK: - Actions
     
     @IBAction func loginButtonTouched(sender: UIButton) {
-        let wvc = WebViewController.forURL(WaniKaniURLs.loginPage) { wcvc in
-            wcvc.delegate = self
-            
-            let userScript = WKUserScript(source: getApiKeyScriptSource, injectionTime: .AtDocumentEnd, forMainFrameOnly: true)
-            wcvc.webViewConfiguration.userContentController.addScriptMessageHandler(self, name: "apiKey")
-            wcvc.webViewConfiguration.userContentController.addUserScript(userScript)
-        }
+        let wvc = WaniKaniLoginWebViewController.forURL(WaniKaniURLs.loginPage) { $0.delegate = self }
         
         presentViewController(wvc, animated: true, completion: nil)
     }
     
     @IBAction func apiKeySet(segue: UIStoryboardSegue) {
         ApplicationSettings.apiKeyVerified = true
-    }
-    
-    // MARK: - WKScriptMessageHandler
-    
-    func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
-        DDLogVerbose("Received script message body \(message.body)")
-        if let responseDictionary = message.body as? [String: NSObject] {
-            if let apiKey = responseDictionary["apiKey"] as? String {
-                DDLogVerbose("Received script message API Key \(apiKey)")
-                ApplicationSettings.apiKey = apiKey
-                ApplicationSettings.apiKeyVerified = true
-                self.presentedViewController?.dismissViewControllerAnimated(true, completion: nil)
-            }
-            if let error = responseDictionary["error"] {
-                DDLogWarn("Received script message error: \(error)")
-            }
-        }
     }
     
     // MARK: - WebViewControllerDelegate
@@ -113,17 +90,6 @@ class HomeScreenViewController: UIViewController, WebViewControllerDelegate, WKS
         }
     }
 
-    private lazy var getApiKeyScriptSource: String = {
-        return
-            "$.get('/account').done(function(data, textStatus, jqXHR) {" +
-                "var apiKey = $(data).find('#api-button').parent().find('input').attr('value');" +
-                "if (typeof apiKey === 'string') {" +
-                    "window.webkit.messageHandlers.apiKey.postMessage({ apiKey: apiKey });" +
-                "}" +
-            "}).fail(function(jqXHR, textStatus) {" +
-                "window.webkit.messageHandlers.apiKey.postMessage({ error: textStatus });" +
-            "});"
-        }()
 }
 
 private extension UIViewController {
