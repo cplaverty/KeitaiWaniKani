@@ -31,7 +31,6 @@
 		832462BB1B93224800FB62C9 /* NSDate+Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832462BA1B93224800FB62C9 /* NSDate+Comparable.swift */; };
 		832462BD1B932ADF00FB62C9 /* SRSDataItemCoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832462BC1B932ADF00FB62C9 /* SRSDataItemCoderTests.swift */; };
 		832462BF1B935FB500FB62C9 /* SRSReviewCounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832462BE1B935FB500FB62C9 /* SRSReviewCounts.swift */; };
-		832462C51B936F0300FB62C9 /* wkoverride.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 832462C41B936F0300FB62C9 /* wkoverride.user.js */; };
 		8326D2DE1BB7E52F006FF2D0 /* DownloadStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8326D2DD1BB7E52F006FF2D0 /* DownloadStrategy.swift */; };
 		83288CC21B45E808002B82B3 /* ApplicationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83288CC11B45E808002B82B3 /* ApplicationSettings.swift */; };
 		833074561BA8C609008E66E6 /* CollectionType+WaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833074551BA8C609008E66E6 /* CollectionType+WaniKani.swift */; };
@@ -126,7 +125,7 @@
 		83B155571B944B360022217E /* ReviewTimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B155561B944B360022217E /* ReviewTimelineTableViewController.swift */; };
 		83B155591B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B155581B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift */; };
 		83B1555B1B94A18D0022217E /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B1555A1B94A18D0022217E /* SettingsTableViewController.swift */; };
-		83B6110A1BDC1F11008D305C /* WKWebView+KeitaiWaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B611091BDC1F11008D305C /* WKWebView+KeitaiWaniKani.swift */; };
+		83B6110A1BDC1F11008D305C /* UIWebView+KeitaiWaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B611091BDC1F11008D305C /* UIWebView+KeitaiWaniKani.swift */; };
 		83BF363A1B52D24A0044F59B /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BF36391B52D24A0044F59B /* DashboardViewController.swift */; };
 		83C09A291BCEF68700B7E1D8 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C09A281BCEF68700B7E1D8 /* StringExtensionsTests.swift */; };
 		83C8F94D1B9B2E7E007CBFBF /* OperationKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 83C8F94C1B9B2E7E007CBFBF /* OperationKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -159,6 +158,7 @@
 		83D9316B1BB9D2AA009DF31A /* FileMissingConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D9316A1BB9D2AA009DF31A /* FileMissingConditionTests.swift */; };
 		83DC478C1B440A6200AD716C /* RubyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC478B1B440A6200AD716C /* RubyLabel.swift */; };
 		83F32EA91BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */; };
+		83F32EAB1BDFCCFA00F2ABA0 /* wkdoublecheck.js in Resources */ = {isa = PBXBuildFile; fileRef = 83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */; };
 		83FDC2B01BB529D2006AAB8E /* GroupOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FDC2AF1BB529D2006AAB8E /* GroupOperationTests.swift */; };
 		83FE7CD51BB9C1720006689F /* GetRadicalImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FE7CD41BB9C1720006689F /* GetRadicalImageOperation.swift */; };
 		ADE0B705340234203132ABC5 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1F2D81F43153739F06BE /* Pods.framework */; };
@@ -266,7 +266,6 @@
 		832462BA1B93224800FB62C9 /* NSDate+Comparable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Comparable.swift"; sourceTree = "<group>"; };
 		832462BC1B932ADF00FB62C9 /* SRSDataItemCoderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemCoderTests.swift; sourceTree = "<group>"; };
 		832462BE1B935FB500FB62C9 /* SRSReviewCounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSReviewCounts.swift; sourceTree = "<group>"; };
-		832462C41B936F0300FB62C9 /* wkoverride.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkoverride.user.js; sourceTree = "<group>"; };
 		8326D2DD1BB7E52F006FF2D0 /* DownloadStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadStrategy.swift; sourceTree = "<group>"; };
 		83288CC11B45E808002B82B3 /* ApplicationSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationSettings.swift; sourceTree = "<group>"; };
 		832E173F1B459F3A00A67A3E /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -363,7 +362,7 @@
 		83B155561B944B360022217E /* ReviewTimelineTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTimelineTableViewController.swift; sourceTree = "<group>"; };
 		83B155581B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewTimelineEntryTableViewCell.swift; sourceTree = "<group>"; };
 		83B1555A1B94A18D0022217E /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
-		83B611091BDC1F11008D305C /* WKWebView+KeitaiWaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WKWebView+KeitaiWaniKani.swift"; sourceTree = "<group>"; };
+		83B611091BDC1F11008D305C /* UIWebView+KeitaiWaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWebView+KeitaiWaniKani.swift"; sourceTree = "<group>"; };
 		83BF36391B52D24A0044F59B /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		83C09A281BCEF68700B7E1D8 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
 		83C8F94A1B9B2E7E007CBFBF /* OperationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OperationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -396,6 +395,7 @@
 		83D9316A1BB9D2AA009DF31A /* FileMissingConditionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileMissingConditionTests.swift; sourceTree = "<group>"; };
 		83DC478B1B440A6200AD716C /* RubyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RubyLabel.swift; sourceTree = "<group>"; };
 		83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaniKaniLoginWebViewController.swift; sourceTree = "<group>"; };
+		83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkdoublecheck.js; sourceTree = "<group>"; };
 		83FDC2AF1BB529D2006AAB8E /* GroupOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupOperationTests.swift; sourceTree = "<group>"; };
 		83FE7CD41BB9C1720006689F /* GetRadicalImageOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetRadicalImageOperation.swift; sourceTree = "<group>"; };
 		BFAF1EEC1DF4AC9549F53E45 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -527,8 +527,8 @@
 				8304F8231BBC82EC009D7054 /* common.js */,
 				831A700B1BDD760A00435FC8 /* jquery.qtip.min.js */,
 				8396244E1BD7740F00269558 /* resize.js */,
+				83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */,
 				836639511BDB9F9E00BD0B92 /* wkimprove.js */,
-				832462C41B936F0300FB62C9 /* wkoverride.user.js */,
 			);
 			path = "User Scripts";
 			sourceTree = "<group>";
@@ -717,7 +717,7 @@
 			isa = PBXGroup;
 			children = (
 				83966D691BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift */,
-				83B611091BDC1F11008D305C /* WKWebView+KeitaiWaniKani.swift */,
+				83B611091BDC1F11008D305C /* UIWebView+KeitaiWaniKani.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1070,8 +1070,8 @@
 			files = (
 				83CB3E0F1B5849EE00761D68 /* Settings.bundle in Resources */,
 				830EAB941B41DC7700EBF073 /* LaunchScreen.storyboard in Resources */,
-				832462C51B936F0300FB62C9 /* wkoverride.user.js in Resources */,
 				836639521BDB9F9E00BD0B92 /* wkimprove.js in Resources */,
+				83F32EAB1BDFCCFA00F2ABA0 /* wkdoublecheck.js in Resources */,
 				8304F8241BBC82EC009D7054 /* common.js in Resources */,
 				831A700C1BDD760A00435FC8 /* jquery.qtip.min.js in Resources */,
 				8396244F1BD7740F00269558 /* resize.js in Resources */,
@@ -1270,7 +1270,7 @@
 				83966D6A1BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift in Sources */,
 				8347BDD91B7260B1000F99EF /* AlertOperation.swift in Sources */,
 				8347BDDC1B7260B1000F99EF /* GetDashboardDataOperation.swift in Sources */,
-				83B6110A1BDC1F11008D305C /* WKWebView+KeitaiWaniKani.swift in Sources */,
+				83B6110A1BDC1F11008D305C /* UIWebView+KeitaiWaniKani.swift in Sources */,
 				831FF7601BB8861400C31FDF /* SRSDataItemCollectionViewCell.swift in Sources */,
 				83D7CF821BC15FCB00C1AFC4 /* WaniKaniReviewPageWebViewController.swift in Sources */,
 				83354D8E1B484C98007686D5 /* GetAPIKeyViewController.swift in Sources */,

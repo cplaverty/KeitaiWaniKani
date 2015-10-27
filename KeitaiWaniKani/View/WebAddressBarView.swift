@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import WebKit
 
 class WebAddressBarView: UIView {
     
@@ -20,13 +19,11 @@ class WebAddressBarView: UIView {
     private let stopLoadingImage = UIImage(named: "NavigationBarStopLoading")
     private let reloadImage = UIImage(named: "NavigationBarReload")
     
-    private var observationContext = 0
-    private let webViewObservedKeys = ["hasOnlySecureContent", "loading", "URL"]
-    private let webView: WKWebView
+    private let webView: UIWebView
     
     // MARK: - Initialisers
     
-    init(frame: CGRect, forWebView webView: WKWebView) {
+    init(frame: CGRect, forWebView webView: UIWebView) {
         self.webView = webView
         secureSiteIndicator = UIImageView(image: lockImage)
         secureSiteIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -44,11 +41,7 @@ class WebAddressBarView: UIView {
         
         refreshButton.addTarget(self, action: "stopOrRefreshWebView:", forControlEvents: .TouchUpInside)
         
-        for webViewObservedKey in webViewObservedKeys {
-            webView.addObserver(self, forKeyPath: webViewObservedKey, options: [], context: &observationContext)
-        }
-        
-        updateUIFromWebView()
+        updateUIForRequest(nil, andLoadingStatus: false)
         addSubview(secureSiteIndicator)
         addSubview(addressLabel)
         addSubview(refreshButton)
@@ -72,32 +65,29 @@ class WebAddressBarView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        // Unregister the listeners on the web view
-        for webViewObservedKey in webViewObservedKeys {
-            webView.removeObserver(self, forKeyPath: webViewObservedKey, context: &observationContext)
-        }
-    }
-    
     // MARK: - Update UI
     
     func stopOrRefreshWebView(sender: UIButton) {
+        let loading: Bool
         if webView.loading {
             webView.stopLoading()
+            loading = false
         } else {
             webView.reload()
+            loading = true
         }
+        updateUIForRequest(nil, andLoadingStatus: loading)
     }
     
-    private func updateUIFromWebView() {
+    func updateUIForRequest(request: NSURLRequest?, andLoadingStatus loading: Bool) {
         // Padlock
-        secureSiteIndicator.hidden = !webView.hasOnlySecureContent
+        secureSiteIndicator.hidden = request?.URL?.scheme != "https"
         
         // URL
-        addressLabel.text = domainForURL(webView.URL)
+        addressLabel.text = domainForURL(request?.URL)
         
         // Stop/Reload indicator
-        if webView.loading {
+        if loading {
             refreshButton.setImage(stopLoadingImage, forState: .Normal)
         } else {
             refreshButton.setImage(reloadImage, forState: .Normal)
@@ -116,19 +106,6 @@ class WebAddressBarView: UIView {
             }
         }
         return host
-    }
-    
-    // MARK: - Key-Value Observing
-    
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        guard context == &observationContext else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
-            return
-        }
-        
-        if object === self.webView {
-            updateUIFromWebView()
-        }
     }
     
 }

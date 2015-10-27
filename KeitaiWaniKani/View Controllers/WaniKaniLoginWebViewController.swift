@@ -5,53 +5,71 @@
 //  Copyright © 2015 Chris Laverty. All rights reserved.
 //
 
-import WebKit
 import CocoaLumberjack
+import WaniKaniKit
 
-class WaniKaniLoginWebViewController: WebViewController, WKScriptMessageHandler {
+class WaniKaniLoginWebViewController: WebViewController {
     
     // MARK: - Properties
     
     private lazy var getApiKeyScriptSource: String = {
-        return
-        "$.get('/account').done(function(data, textStatus, jqXHR) {" +
-            "var apiKey = $(data).find('#api-button').parent().find('input').attr('value');" +
-            "if (typeof apiKey === 'string') {" +
-            "window.webkit.messageHandlers.apiKey.postMessage({ apiKey: apiKey });" +
-            "}" +
-            "}).fail(function(jqXHR, textStatus) {" +
-            "window.webkit.messageHandlers.apiKey.postMessage({ error: textStatus });" +
-        "});"
+        return "$('#api-button').parent().find('input').attr('value');"
     }()
     
     // MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        webView.configuration.userContentController.addScriptMessageHandler(self, name: "apiKey")
     }
     
     // MARK: - WKScriptMessageHandler
     
-    func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
-        DDLogVerbose("Received script message body \(message.body)")
-        if let responseDictionary = message.body as? [String: NSObject] {
-            if let apiKey = responseDictionary["apiKey"] as? String {
+    override func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        guard super.webView(webView, shouldStartLoadWithRequest: request, navigationType: navigationType) else {
+            return false
+        }
+        
+        if request.URL == WaniKaniURLs.dashboard {
+            // Wait half a second for the request to be cancelled
+            let when = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
+            dispatch_after(when, dispatch_get_main_queue()) {
+                print("Loading account page")
+                webView.loadRequest(NSURLRequest(URL: WaniKaniURLs.account))
+            }
+            return false
+        }
+        
+        return true
+    }
+    
+    override func webViewDidFinishLoad(webView: UIWebView) {
+        super.webViewDidFinishLoad(webView)
+        guard let URL = webView.request?.URL else {
+            return
+        }
+        
+        switch URL {
+        case WaniKaniURLs.account:
+            if let apiKey = webView.stringByEvaluatingJavaScriptFromString(getApiKeyScriptSource) where !apiKey.isEmpty {
                 DDLogVerbose("Received script message API Key \(apiKey)")
                 ApplicationSettings.apiKey = apiKey
                 ApplicationSettings.apiKeyVerified = true
                 delegate?.webViewControllerDidFinish(self)
+            } else {
+                DDLogWarn("Got blank API key")
+                showAlertWithTitle("No API key found", message: "Check your account page to ensure an API key has been generated and reload the page to try again.")
             }
-            if let error = responseDictionary["error"] {
-                DDLogWarn("Received script message error: \(error)")
-            }
+        default: break
         }
     }
     
-    // MARK: - User Scripts
-    
-    override func getUserScripts() -> [String]? {
-        return [getApiKeyScriptSource]
+    override func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+        if let error = error where error.domain == "WebKitErrorDomain" && error.code == 102 && error.userInfo["NSErrorFailingURLKey"] as? NSURL == WaniKaniURLs.dashboard {
+            // Ignore frame load errors for dashboard as these are expected
+            DDLogVerbose("Got frame load error for dashboard page: ignoring")
+        } else {
+            super.webView(webView, didFailLoadWithError: error)
+        }
     }
     
 }

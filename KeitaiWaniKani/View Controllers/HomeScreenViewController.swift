@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import WebKit
 import CocoaLumberjack
 import SwiftyJSON
 import WaniKaniKit

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import WebKit
 import CocoaLumberjack
 import OnePasswordExtension
 import WaniKaniKit
@@ -15,7 +14,7 @@ protocol WebViewControllerDelegate: class {
     func webViewControllerDidFinish(controller: WebViewController)
 }
 
-class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WebViewControllerDelegate, WebViewBackForwardListTableViewControllerDelegate {
+class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerDelegate {
     
     private struct SegueIdentifiers {
         static let showBackHistory = "Show Web Back History"
@@ -45,20 +44,12 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
         self.URL = URL
     }
     
-    required init(configuration: WKWebViewConfiguration) {
-        super.init(nibName: nil, bundle: nil)
-        self.webViewConfiguration = configuration
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     deinit {
-        // Unregister the listeners on the web view
-        for webViewObservedKey in webViewObservedKeys {
-            webView.removeObserver(self, forKeyPath: webViewObservedKey, context: &webViewControllerObservationContext)
-        }
+        webView.delegate = nil
     }
     
     // MARK: - Properties
@@ -66,53 +57,27 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
     weak var delegate: WebViewControllerDelegate?
     
     var URL: NSURL?
-    
-    var allowsBackForwardNavigationGestures: Bool { return true }
-    
-    lazy var webViewConfiguration: WKWebViewConfiguration = {
-        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let config = WKWebViewConfiguration()
-        config.allowsInlineMediaPlayback = true
-        config.processPool = delegate.webKitProcessPool
-        if #available(iOS 9.0, *) {
-            config.applicationNameForUserAgent = "KeitaiWaniKani"
-            config.requiresUserActionForMediaPlayback = false
-        } else {
-            config.mediaPlaybackRequiresUserAction = false
-        }
-        
-        if let userScripts = self.getUserScripts() {
-            for script in userScripts {
-                let wkUserScript = WKUserScript(source: script, injectionTime: .AtDocumentEnd, forMainFrameOnly: true)
-                config.userContentController.addUserScript(wkUserScript)
-            }
-        }
-        
-        return config
-        }()
-    
-    private var webViewControllerObservationContext = 0
-    
+    private var webViewPageTitle: String?
+
     weak var progressView: UIProgressView!
     private var progressViewIsHidden = true
+
+    var addressBarView: WebAddressBarView!
     
-    private let webViewObservedKeys = ["canGoBack", "canGoForward", "estimatedProgress", "loading", "URL"]
-    lazy var webView: WKWebView = {
-        let webView = WKWebView(frame: self.view.bounds, configuration: self.webViewConfiguration)
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.navigationDelegate = self
-        webView.UIDelegate = self
-        webView.allowsBackForwardNavigationGestures = self.allowsBackForwardNavigationGestures
+    func createWebView() -> UIWebView {
+        let webView = UIWebView(frame: self.view.bounds)
+        webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        webView.delegate = self
+        webView.allowsInlineMediaPlayback = true
+        webView.mediaPlaybackRequiresUserAction = false
         if #available(iOS 9.0, *) {
             webView.allowsLinkPreview = true
         }
-
-        for webViewObservedKey in self.webViewObservedKeys {
-            webView.addObserver(self, forKeyPath: webViewObservedKey, options: [], context: &self.webViewControllerObservationContext)
-        }
         
         return webView
-    }()
+    }
+    
+    lazy var webView: UIWebView = self.createWebView()
     
     lazy var backButton: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(named: "ArrowLeft"), style: .Plain, target: self, action: "backButtonTouched:forEvent:")
@@ -139,7 +104,7 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
     }
     
     func share(sender: UIBarButtonItem) {
-        guard let absoluteURL = webView.URL?.absoluteURL else {
+        guard let absoluteURL = webView.request?.URL?.absoluteURL else {
             return
         }
         
@@ -152,7 +117,7 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
                 } else if let extensionItem = extensionItem {
                     activityItems.append(extensionItem)
                 }
-                self.presentActivityViewController(activityItems, title: self.webView.title, sender: sender) {
+                self.presentActivityViewController(activityItems, title: self.webViewPageTitle, sender: sender) {
                     activityType, completed, returnedItems, activityError in
                     if let error = activityError {
                         DDLogWarn("Activity failed: \(error)")
@@ -174,12 +139,12 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
                 }
             }
         } else {
-            presentActivityViewController(activityItems, title: webView.title, sender: sender)
+            presentActivityViewController(activityItems, title: webViewPageTitle, sender: sender)
         }
     }
     
     func openInSafari(sender: UIBarButtonItem) {
-        guard let URL = webView.URL else {
+        guard let URL = webView.request?.URL else {
             return
         }
         
@@ -187,136 +152,71 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
     }
     
     func backButtonTouched(sender: UIBarButtonItem, forEvent event: UIEvent) {
-        guard let touch = event.allTouches()?.first else { return }
-        switch touch.tapCount {
-        case 0: // Long press
-            self.showBackForwardList(webView.backForwardList.backList, sender: sender)
-        case 1: // Tap
-            self.webView.goBack()
-        default: break
+        if webView.canGoBack {
+            webView.goBack()
         }
     }
     
     func forwardButtonTouched(sender: UIBarButtonItem, forEvent event: UIEvent) {
-        guard let touch = event.allTouches()?.first else { return }
-        switch touch.tapCount {
-        case 0: // Long press
-            self.showBackForwardList(webView.backForwardList.forwardList, sender: sender)
-        case 1: // Tap
-            self.webView.goForward()
-        default: break
+        if webView.canGoForward {
+            webView.goForward()
         }
     }
     
-    func showBackForwardList(backForwardList: [WKBackForwardListItem], sender: UIBarButtonItem) {
-        let bflvc = WebViewBackForwardListTableViewController()
-        bflvc.backForwardList = backForwardList
-        bflvc.delegate = self
-        
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            bflvc.tableView.backgroundColor = UIColor.clearColor()
-            let popover = UIPopoverController(contentViewController: bflvc)
-            popover.presentPopoverFromBarButtonItem(sender, permittedArrowDirections: [.Up, .Down], animated: true)
-        } else {
-            let nc = UINavigationController(rootViewController: bflvc)
-            self.presentViewController(nc, animated: true, completion: nil)
-        }
-    }
+    // MARK: - UIWebViewDelegate
     
-    // MARK: - WKNavigationDelegate
-    
-    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-        switch navigationAction.request.URL {
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        addressBarView.updateUIForRequest(request, andLoadingStatus: true)
+        switch request.URL {
         case WaniKaniURLs.subscription?:
             self.showAlertWithTitle("Can not manage subscription", message: "Due to Apple App Store rules, you can not manage your subscription within the app.")
-            decisionHandler(.Cancel)
+            return false
         default:
-            decisionHandler(.Allow)
+            return true
         }
     }
     
-    func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void) {
-        decisionHandler(.Allow)
-    }
-    
-    func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+    func webViewDidStartLoad(webView: UIWebView) {
+        webViewPageTitle = nil
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         if self.toolbarItems?.isEmpty == false {
             self.navigationController?.setToolbarHidden(false, animated: true)
         }
-    }
-
-    func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
-        DDLogWarn("Navigation failed: \(error)")
-        showAlertWithTitle("Failed to load page", message: error.localizedDescription)
+        updateUIFromWebView()
+        addressBarView.updateUIForRequest(webView.request, andLoadingStatus: true)
     }
     
-    func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
-        DDLogWarn("Navigation failed: \(error)")
-        showAlertWithTitle("Failed to load page", message: error.localizedDescription)
+    func webViewDidFinishLoad(webView: UIWebView) {
+        if let documentTitle = webView.stringByEvaluatingJavaScriptFromString("document.title") where !documentTitle.isEmpty {
+            webViewPageTitle = documentTitle
+        }
+        updateUIFromWebView()
+        addressBarView.updateUIForRequest(webView.request, andLoadingStatus: false)
     }
-
+    
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+        DDLogWarn("Navigation failed: \(error)")
+        showAlertWithTitle("Failed to load page", message: error?.localizedDescription ?? "Unknown error")
+        updateUIFromWebView()
+        addressBarView.updateUIForRequest(webView.request, andLoadingStatus: false)
+    }
+    
     // MARK: - WKUIDelegate
-    
-    func webView(webView: WKWebView, createWebViewWithConfiguration configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        let newVC = self.dynamicType.init(configuration: configuration)
-        newVC.delegate = self
-        newVC.URL = navigationAction.request.URL
-        self.navigationController?.pushViewController(newVC, animated: true)
-        
-        return newVC.webView
-    }
-    
-    func webView(webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: () -> Void) {
-        let host = frame.request.URL?.host ?? "web page"
-        let title = "From \(host):"
-        dispatch_async(dispatch_get_main_queue()) {
-            DDLogInfo("Displaying alert with title \(title) and message \(message)")
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in completionHandler() })
-            
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func webView(webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: (Bool) -> Void) {
-        let host = frame.request.URL?.host ?? "web page"
-        let title = "From \(host):"
-        dispatch_async(dispatch_get_main_queue()) {
-            DDLogInfo("Displaying alert with title \(title) and message \(message)")
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in completionHandler(true) })
-            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { _ in completionHandler(false) })
-            
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func webView(webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: (String?) -> Void) {
-        let host = frame.request.URL?.host ?? "web page"
-        let title = "From \(host):"
-        dispatch_async(dispatch_get_main_queue()) {
-            DDLogInfo("Displaying input panel with title \(title) and message \(prompt)")
-            let alert = UIAlertController(title: title, message: prompt, preferredStyle: .Alert)
-            alert.addTextFieldWithConfigurationHandler { $0.text = defaultText }
-            alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in completionHandler(alert.textFields?.first?.text) })
-            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { _ in completionHandler(nil) })
-            
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-    }
+
+    // TODO: Handle _blank links
+//    func webView(webView: WKWebView, createWebViewWithConfiguration configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+//        let newVC = self.dynamicType.init(configuration: configuration)
+//        newVC.delegate = self
+//        newVC.URL = navigationAction.request.URL
+//        self.navigationController?.pushViewController(newVC, animated: true)
+//        
+//        return newVC.webView
+//    }
     
     // MARK: - WebViewControllerDelegate
     
     func webViewControllerDidFinish(controller: WebViewController) {
         self.delegate?.webViewControllerDidFinish(self)
-    }
-    
-    // MARK: - WebViewBackForwardListTableViewControllerDelegate
-    
-    func webViewBackForwardListTableViewController(controller: WebViewBackForwardListTableViewController, didSelectBackForwardListItem item: WKBackForwardListItem) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
-        self.webView.goToBackForwardListItem(item)
     }
     
     // MARK: - View Controller Lifecycle
@@ -325,8 +225,6 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
         super.viewDidLoad()
         
         self.view.addSubview(webView)
-        NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
-        NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
         
         configureForTraitCollection(self.traitCollection)
         
@@ -345,7 +243,7 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
             NSLayoutConstraint(item: progressView, attribute: .Trailing, relatedBy: .Equal, toItem: navBar, attribute: .Trailing, multiplier: 1, constant: 0).active = true
             NSLayoutConstraint(item: progressView, attribute: .Bottom, relatedBy: .Equal, toItem: navBar, attribute: .Bottom, multiplier: 1, constant: 0).active = true
             
-            let addressBarView = WebAddressBarView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: navBar.bounds.width, height: 28)), forWebView: webView)
+            addressBarView = WebAddressBarView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: navBar.bounds.width, height: 28)), forWebView: webView)
             addressBarView.autoresizingMask = [.FlexibleWidth]
             self.navigationItem.titleView = addressBarView
         }
@@ -391,10 +289,6 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
     
     // MARK: - User Scripts
     
-    func getUserScripts() -> [String]? {
-        return nil
-    }
-    
     func getUserScriptContent(name: String) -> String {
         guard let scriptURL = NSBundle.mainBundle().URLForResource("\(name)", withExtension: "js") else {
             fatalError("Count not find user script \(name).js in main bundle")
@@ -419,6 +313,7 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
         // Network indicator
         UIApplication.sharedApplication().networkActivityIndicatorVisible = webView.loading
         
+        let estimatedProgress: Float = 0 // webView.estimatedProgress
         // Loading progress
         let shouldHideProgress = !webView.loading
         if !progressViewIsHidden && shouldHideProgress {
@@ -437,40 +332,28 @@ class WebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, W
         } else if progressViewIsHidden && !shouldHideProgress {
             progressView?.setProgress(0.0, animated: false)
             progressView?.alpha = 1.0
-            progressView?.setProgress(Float(webView.estimatedProgress), animated: true)
+            progressView?.setProgress(estimatedProgress, animated: true)
             
             progressViewIsHidden = false
         } else if !progressViewIsHidden && !shouldHideProgress{
-            progressView?.setProgress(Float(webView.estimatedProgress), animated: true)
+            progressView?.setProgress(estimatedProgress, animated: true)
         }
         
         // Navigation buttons
         backButton.enabled = webView.canGoBack
         forwardButton.enabled = webView.canGoForward
-        shareButton.enabled = !webView.loading && webView.URL != nil
-        openInSafariButton.enabled = webView.URL != nil
+        shareButton.enabled = !webView.loading && webView.request?.URL != nil
+        openInSafariButton.enabled = webView.request?.URL != nil
     }
     
     func fillUsing1Password(sender: AnyObject!) {
         OnePasswordExtension.sharedExtension().fillItemIntoWebView(self.webView, forViewController: self, sender: sender, showOnlyLogins: true) { success, error in
             if (!success) {
-                DDLogWarn("Failed to fill password into webview: <\(error)>")
+                DDLogWarn("Failed to fill password into webview: \(error)")
             } else {
                 DDLogDebug("Filled login using password manager")
             }
         }
     }
     
-    // MARK: - Key-Value Observing
-    
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        guard context == &webViewControllerObservationContext else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
-            return
-        }
-        
-        if object === self.webView {
-            updateUIFromWebView()
-        }
-    }
 }

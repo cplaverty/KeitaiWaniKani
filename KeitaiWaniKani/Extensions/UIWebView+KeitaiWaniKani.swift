@@ -1,22 +1,22 @@
 //
-//  WKWebView+KeitaiWaniKani.swift
+//  UIWebView+KeitaiWaniKani.swift
 //  KeitaiWaniKani
 //
 //  Copyright © 2015 Chris Laverty. All rights reserved.
 //
 
-import WebKit
+import UIKit
 
 private var swizzledClassMapping: [AnyClass] = []
 
-extension WKWebView {
+extension UIWebView {
     // Adapted from http://stackoverflow.com/questions/19033292/ios-7-uiwebview-keyboard-issue?lq=1
     func noInputAccessoryView() -> UIView? {
         return nil
     }
     
     func removeInputAccessoryView() {
-        guard let subview = scrollView.subviews.filter({ NSStringFromClass($0.dynamicType).hasPrefix("WKContent") }).first else {
+        guard let subview = scrollView.subviews.filter({ NSStringFromClass($0.dynamicType).hasPrefix("UIWeb") }).first else {
             return
         }
         
@@ -58,14 +58,6 @@ extension WKWebView {
                 subview.bounces = enabled
                 subview.panGestureRecognizer.enabled = enabled
             }
-            
-            for subScrollView in subview.subviews {
-                if subScrollView.dynamicType == NSClassFromString("WKContentView")! {
-                    for gesture in subScrollView.gestureRecognizers! {
-                        subScrollView.removeGestureRecognizer(gesture)
-                    }
-                }
-            }
         }
     }
     
@@ -74,4 +66,3 @@ extension WKWebView {
     }
 
 }
-

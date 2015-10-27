@@ -9,9 +9,9 @@ This unofficial app for [WaniKani](https://www.wanikani.com) is designed to impr
 Features:
 * Do reviews and lessons in the app with an embedded web browser
     * Support for user scripts (disabled by default: you must explicitly enable them in the app settings)
-    	* Ignore Answer
+    	* WaniKani Double Check
     	
-    	  https://www.wanikani.com/chat/api-and-third-party-apps/2940
+    	  https://www.wanikani.com/chat/api-and-third-party-apps/8598
     	* WaniKani Improve
     	
     	  http://www.wanikani.com/chat/api-and-third-party-apps/2952

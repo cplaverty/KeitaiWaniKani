@@ -6,69 +6,71 @@
 //
 
 import UIKit
-import WebKit
 import CocoaLumberjack
 import WaniKaniKit
 
-class WaniKaniReviewPageWebViewController: WebViewController, WKScriptMessageHandler {
+class WaniKaniReviewPageWebViewController: WebViewController {
     
     // MARK: - Properties
     
-    override var allowsBackForwardNavigationGestures: Bool { return false }
-    
+    override func createWebView() -> UIWebView {
+        let webView = super.createWebView()
+        webView.dataDetectorTypes = .None
+        webView.keyboardDisplayRequiresUserAction = false
+        if #available(iOS 9.0, *) {
+            webView.allowsLinkPreview = false
+        }
+        
+        return webView
+    }
+
     // MARK: - Initialisers
     
     deinit {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    // MARK: - WKNavigationDelegate
+    // MARK: - UIWebViewDelegate
     
-    func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
-        guard let URL = webView.URL else { return }
+    override func webViewDidFinishLoad(webView: UIWebView) {
+        super.webViewDidFinishLoad(webView)
+        
+        guard let URL = webView.request?.URL else { return }
         
         switch URL {
-        case WaniKaniURLs.lessonSession, WaniKaniURLs.reviewSession:
+        case WaniKaniURLs.lessonSession:
             showBrowserInterface(false, animated: true)
+            DDLogDebug("Loading user scripts")
+            webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("common"))
+            webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("resize"))
+        case WaniKaniURLs.reviewSession:
+            showBrowserInterface(false, animated: true)
+            DDLogDebug("Loading user scripts")
+            webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("common"))
+            webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("resize"))
+            if ApplicationSettings.userScriptIgnoreAnswerEnabled {
+                webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("wkdoublecheck"))
+            }
+            if ApplicationSettings.userScriptWaniKaniImproveEnabled {
+                webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("jquery.qtip.min"))
+                webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("wkimprove"))
+            }
         default: break
         }
-    }
-    
-    // MARK: - WKScriptMessageHandler
-    
-    func userContentController(userContentController: WKUserContentController, didReceiveScriptMessage message: WKScriptMessage) {
-        DDLogDebug("Received script message body \(message.body)")
     }
     
     // MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        webView.removeInputAccessoryView()
-        self.webView.configuration.userContentController.addScriptMessageHandler(self, name: "debuglog")
+        self.webView.removeInputAccessoryView()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        showBrowserInterface(webView.URL != WaniKaniURLs.lessonSession && webView.URL != WaniKaniURLs.reviewSession, animated: true)
+        showBrowserInterface(webView.request?.URL != WaniKaniURLs.lessonSession && webView.request?.URL != WaniKaniURLs.reviewSession, animated: true)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
-    }
-    
-    // MARK: - User Scripts
-    
-    override func getUserScripts() -> [String]? {
-        var scripts = [getUserScriptContent("common"), getUserScriptContent("resize")]
-        
-        if ApplicationSettings.userScriptIgnoreAnswerEnabled {
-            scripts.append(getUserScriptContent("wkoverride.user"))
-        }
-        if ApplicationSettings.userScriptWaniKaniImproveEnabled {
-            scripts.append(getUserScriptContent("jquery.qtip.min"))
-            scripts.append(getUserScriptContent("wkimprove"))
-        }
-        
-        return scripts
     }
     
     // MARK: - Update UI
