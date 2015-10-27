@@ -31,6 +31,10 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
     init(resolver: ResourceResolver, databaseQueue: FMDatabaseQueue, forcedFetch forced: Bool, initialDelay delay: NSTimeInterval? = nil) {
         let networkObserver = NetworkObserver()
         
+        // Dummy op to prompt for notification permissions
+        let dummy = BlockOperation {}
+        dummy.addCondition(UserNotificationCondition(settings: UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil), application: UIApplication.sharedApplication()))
+        
         progress = NSProgress(totalUnitCount: 10)
         progress.localizedDescription = "Downloading data from WaniKani"
         progress.localizedAdditionalDescription = "Waiting..."
@@ -70,7 +74,7 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         srsDistributionOperation.addDependency(studyQueueOperation)
         srsDataItemOperation.addDependency(studyQueueOperation)
         
-        super.init(operations: [studyQueueOperation, levelProgressionOperation, srsDistributionOperation, srsDataItemOperation, reviewTimeNotificationOperation])
+        super.init(operations: [dummy, studyQueueOperation, levelProgressionOperation, srsDistributionOperation, srsDataItemOperation, reviewTimeNotificationOperation])
         progress.cancellationHandler = { self.cancel() }
         
         studyQueueOperation.addObserver(BlockObserver { _, _ in
