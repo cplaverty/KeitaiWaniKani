@@ -33,7 +33,6 @@ class WaniKaniLoginWebViewController: WebViewController {
             // Wait half a second for the request to be cancelled
             let when = dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC)))
             dispatch_after(when, dispatch_get_main_queue()) {
-                print("Loading account page")
                 webView.loadRequest(NSURLRequest(URL: WaniKaniURLs.account))
             }
             return false
