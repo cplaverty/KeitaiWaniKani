@@ -36,9 +36,7 @@ class HomeScreenViewController: UIViewController, WebViewControllerDelegate {
     // MARK: - WebViewControllerDelegate
     
     func webViewControllerDidFinish(controller: WebViewController) {
-        controller.dismissViewControllerAnimated(true) {
-            self.validateAPIKey()
-        }
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // MARK: - View Controller Lifecycle
