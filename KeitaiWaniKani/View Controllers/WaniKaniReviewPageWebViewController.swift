@@ -40,11 +40,13 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         switch URL {
         case WaniKaniURLs.lessonSession:
             showBrowserInterface(false, animated: true)
+            webView.removeInputAccessoryView()
             DDLogDebug("Loading user scripts")
             webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("common"))
             webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("resize"))
         case WaniKaniURLs.reviewSession:
             showBrowserInterface(false, animated: true)
+            webView.removeInputAccessoryView()
             DDLogDebug("Loading user scripts")
             webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("common"))
             webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("resize"))
@@ -63,7 +65,6 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.webView.removeInputAccessoryView()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -85,6 +86,8 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     }
     
     func keyboardDidShow(notification: NSNotification) {
+        guard let URL = webView.request?.URL where URL == WaniKaniURLs.lessonSession || URL == WaniKaniURLs.reviewSession else { return }
+        
         showBrowserInterface(false, animated: false)
         webView.scrollToTop(false)
         webView.setScrollEnabled(false)
