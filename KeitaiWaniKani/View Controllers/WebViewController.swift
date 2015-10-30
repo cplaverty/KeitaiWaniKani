@@ -79,6 +79,15 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
         return webView
     }
     
+    lazy var statusBarView: UIView = {
+        let statusBarView = UIView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: self.view.frame.size.width, height: 20)))
+        statusBarView.autoresizingMask = .FlexibleWidth
+        statusBarView.backgroundColor = ApplicationSettings.globalBarTintColor()
+        statusBarView.addBottomBorderWithColor(UIColor.lightGrayColor(), width: 1)
+        
+        return statusBarView
+    }()
+    
     lazy var webView: UIWebView = self.createWebView()
     
     lazy var backButton: UIBarButtonItem = {
@@ -235,6 +244,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
         super.viewDidLoad()
         
         self.view.addSubview(webView)
+        self.view.addSubview(statusBarView)
         
         configureForTraitCollection(self.traitCollection)
         
@@ -265,6 +275,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
     }
     
     override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        statusBarView.hidden = newCollection.verticalSizeClass == .Compact
         if newCollection.horizontalSizeClass != traitCollection.horizontalSizeClass || newCollection.verticalSizeClass != traitCollection.verticalSizeClass {
             configureForTraitCollection(newCollection)
         }
