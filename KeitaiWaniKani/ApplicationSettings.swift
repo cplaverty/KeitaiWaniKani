@@ -19,7 +19,13 @@ struct ApplicationSettingKeys {
 
 struct ApplicationSettings {
     
-    static let globalTintColor = UIColor(red: 29 / 255, green: 148 / 255, blue: 149 / 255, alpha: 1)
+    static func globalTintColor() -> UIColor {
+        return UIColor(red: 29 / 255, green: 148 / 255, blue: 149 / 255, alpha: 1)
+    }
+    
+    static func globalBarTintColor() -> UIColor {
+        return UIColor(hue: 180 / 360, saturation: 0.05, brightness: 0.9, alpha: 1)
+    }
     
     static var userDefaults: NSUserDefaults {
         return NSUserDefaults.standardUserDefaults()
