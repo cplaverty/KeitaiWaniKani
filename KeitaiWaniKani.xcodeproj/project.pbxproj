@@ -114,7 +114,6 @@
 		839AA3D91BE2BB8C006A05F3 /* jquery.qtip.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 839AA3D71BE2BB8C006A05F3 /* jquery.qtip.min.css */; };
 		839AA3DA1BE2BB8C006A05F3 /* jquery.qtip.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */; };
 		839AA3DC1BE2BC08006A05F3 /* resize.css in Resources */ = {isa = PBXBuildFile; fileRef = 839AA3DB1BE2BC08006A05F3 /* resize.css */; };
-		839D434A1BE3CA2B00D916DD /* UIView+KeitaiWaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839D43491BE3CA2B00D916DD /* UIView+KeitaiWaniKani.swift */; };
 		839D76AB1B9A3BC40037294C /* UserScriptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839D76AA1B9A3BC40037294C /* UserScriptTableViewCell.swift */; };
 		83A23FE71BCD96C100060B66 /* String+WaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A23FE61BCD96C100060B66 /* String+WaniKani.swift */; };
 		83A597861BCC53EB0040C730 /* RetryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A597851BCC53EB0040C730 /* RetryOperation.swift */; };
@@ -352,7 +351,6 @@
 		839AA3D71BE2BB8C006A05F3 /* jquery.qtip.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = jquery.qtip.min.css; sourceTree = "<group>"; };
 		839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.qtip.min.js; sourceTree = "<group>"; };
 		839AA3DB1BE2BC08006A05F3 /* resize.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = resize.css; sourceTree = "<group>"; };
-		839D43491BE3CA2B00D916DD /* UIView+KeitaiWaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+KeitaiWaniKani.swift"; sourceTree = "<group>"; };
 		839D76AA1B9A3BC40037294C /* UserScriptTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserScriptTableViewCell.swift; sourceTree = "<group>"; };
 		83A23FE61BCD96C100060B66 /* String+WaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+WaniKani.swift"; sourceTree = "<group>"; };
 		83A597851BCC53EB0040C730 /* RetryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryOperation.swift; sourceTree = "<group>"; };
@@ -720,7 +718,6 @@
 			children = (
 				83966D691BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift */,
 				83B611091BDC1F11008D305C /* UIWebView+KeitaiWaniKani.swift */,
-				839D43491BE3CA2B00D916DD /* UIView+KeitaiWaniKani.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1277,7 +1274,6 @@
 				831FF7601BB8861400C31FDF /* SRSDataItemCollectionViewCell.swift in Sources */,
 				83D7CF821BC15FCB00C1AFC4 /* WaniKaniReviewPageWebViewController.swift in Sources */,
 				83354D8E1B484C98007686D5 /* GetAPIKeyViewController.swift in Sources */,
-				839D434A1BE3CA2B00D916DD /* UIView+KeitaiWaniKani.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
