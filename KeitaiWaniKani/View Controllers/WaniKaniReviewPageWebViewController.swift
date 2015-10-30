@@ -23,7 +23,7 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         
         return webView
     }
-
+    
     // MARK: - Initialisers
     
     deinit {
@@ -40,22 +40,19 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         switch URL {
         case WaniKaniURLs.lessonSession:
             showBrowserInterface(false, animated: true)
-            webView.removeInputAccessoryView()
             DDLogDebug("Loading user scripts")
-            webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("common"))
-            webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("resize"))
+            injectStyleSheet("resize", inWebView: webView)
         case WaniKaniURLs.reviewSession:
             showBrowserInterface(false, animated: true)
-            webView.removeInputAccessoryView()
             DDLogDebug("Loading user scripts")
-            webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("common"))
-            webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("resize"))
+            injectStyleSheet("resize", inWebView: webView)
             if ApplicationSettings.userScriptIgnoreAnswerEnabled {
-                webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("wkdoublecheck"))
+                injectScript("wkdoublecheck", inWebView: webView)
             }
             if ApplicationSettings.userScriptWaniKaniImproveEnabled {
-                webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("jquery.qtip.min"))
-                webView.stringByEvaluatingJavaScriptFromString(getUserScriptContent("wkimprove"))
+                injectStyleSheet("jquery.qtip.min", inWebView: webView)
+                injectScript("jquery.qtip.min", inWebView: webView)
+                injectScript("wkimprove", inWebView: webView)
             }
         default: break
         }
@@ -65,6 +62,7 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        webView.removeInputAccessoryView()
     }
     
     override func viewDidAppear(animated: Bool) {

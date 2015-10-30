@@ -12,9 +12,7 @@ class WaniKaniLoginWebViewController: WebViewController {
     
     // MARK: - Properties
     
-    private lazy var getApiKeyScriptSource: String = {
-        return "$('#api-button').parent().find('input').attr('value');"
-    }()
+    private let getApiKeyScriptSource: String = "$('#api-button').parent().find('input').attr('value');"
     
     // MARK: - View Controller Lifecycle
     
@@ -59,15 +57,6 @@ class WaniKaniLoginWebViewController: WebViewController {
                 showAlertWithTitle("No API key found", message: "Check your account page to ensure an API key has been generated and reload the page to try again.")
             }
         default: break
-        }
-    }
-    
-    override func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
-        if let error = error where error.domain == "WebKitErrorDomain" && error.code == 102 && error.userInfo["NSErrorFailingURLKey"] as? NSURL == WaniKaniURLs.dashboard {
-            // Ignore frame load errors for dashboard as these are expected
-            DDLogVerbose("Got frame load error for dashboard page: ignoring")
-        } else {
-            super.webView(webView, didFailLoadWithError: error)
         }
     }
     

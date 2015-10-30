@@ -10,7 +10,6 @@
 		0A9F85975D108FEE98F582A3 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1F2D81F43153739F06BE /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1092AAF6DC93767F43A2CA8E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC0E1F2D81F43153739F06BE /* Pods.framework */; };
 		60580E3A655BC07D417484EC /* Pods_WaniKaniKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7B292F1CBE9FBB24CBD910 /* Pods_WaniKaniKitTests.framework */; };
-		8304F8241BBC82EC009D7054 /* common.js in Resources */ = {isa = PBXBuildFile; fileRef = 8304F8231BBC82EC009D7054 /* common.js */; };
 		8304F8281BBD083A009D7054 /* DelayOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8304F8271BBD083A009D7054 /* DelayOperationTests.swift */; };
 		8307F2501BB564EC00BDDF10 /* WebAddressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8307F24F1BB564EC00BDDF10 /* WebAddressBarView.swift */; };
 		8307F2521BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8307F2511BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift */; };
@@ -19,7 +18,6 @@
 		830EAB8F1B41DC7700EBF073 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830EAB8D1B41DC7700EBF073 /* Main.storyboard */; };
 		830EAB911B41DC7700EBF073 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830EAB901B41DC7700EBF073 /* Assets.xcassets */; };
 		830EAB941B41DC7700EBF073 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830EAB921B41DC7700EBF073 /* LaunchScreen.storyboard */; };
-		831A700C1BDD760A00435FC8 /* jquery.qtip.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 831A700B1BDD760A00435FC8 /* jquery.qtip.min.js */; };
 		831E66881BC70E4E00EE34C1 /* SRSDataItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E66871BC70E4E00EE34C1 /* SRSDataItemTests.swift */; };
 		831FF75C1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831FF75B1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift */; };
 		831FF75E1BB87CDD00C31FDF /* SRSDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831FF75D1BB87CDD00C31FDF /* SRSDataItem.swift */; };
@@ -112,8 +110,10 @@
 		83829B421BB531D900CDED3F /* StubConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83829B411BB531D900CDED3F /* StubConditions.swift */; };
 		83829B441BB53E2E00CDED3F /* NoCancelledDependenciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83829B431BB53E2E00CDED3F /* NoCancelledDependenciesTests.swift */; };
 		8393CEAA1BA75DF5008701D6 /* DelayOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8393CEA91BA75DF5008701D6 /* DelayOperation.swift */; };
-		8396244F1BD7740F00269558 /* resize.js in Resources */ = {isa = PBXBuildFile; fileRef = 8396244E1BD7740F00269558 /* resize.js */; };
 		83966D6A1BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83966D691BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift */; };
+		839AA3D91BE2BB8C006A05F3 /* jquery.qtip.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 839AA3D71BE2BB8C006A05F3 /* jquery.qtip.min.css */; };
+		839AA3DA1BE2BB8C006A05F3 /* jquery.qtip.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */; };
+		839AA3DC1BE2BC08006A05F3 /* resize.css in Resources */ = {isa = PBXBuildFile; fileRef = 839AA3DB1BE2BC08006A05F3 /* resize.css */; };
 		839D76AB1B9A3BC40037294C /* UserScriptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839D76AA1B9A3BC40037294C /* UserScriptTableViewCell.swift */; };
 		83A23FE71BCD96C100060B66 /* String+WaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A23FE61BCD96C100060B66 /* String+WaniKani.swift */; };
 		83A597861BCC53EB0040C730 /* RetryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A597851BCC53EB0040C730 /* RetryOperation.swift */; };
@@ -243,7 +243,6 @@
 		4F7B292F1CBE9FBB24CBD910 /* Pods_WaniKaniKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaniKaniKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63596BA2AAAE40EC96BE5897 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		71D3F456F47FF3C24AB23E52 /* Pods-WaniKaniKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests.release.xcconfig"; sourceTree = "<group>"; };
-		8304F8231BBC82EC009D7054 /* common.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = common.js; sourceTree = "<group>"; };
 		8304F8271BBD083A009D7054 /* DelayOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelayOperationTests.swift; sourceTree = "<group>"; };
 		8307F24F1BB564EC00BDDF10 /* WebAddressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebAddressBarView.swift; sourceTree = "<group>"; };
 		8307F2511BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectedStudyQueueTests.swift; sourceTree = "<group>"; };
@@ -254,7 +253,6 @@
 		830EAB901B41DC7700EBF073 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		830EAB931B41DC7700EBF073 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		830EAB951B41DC7700EBF073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		831A700B1BDD760A00435FC8 /* jquery.qtip.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.qtip.min.js; sourceTree = "<group>"; };
 		831E66871BC70E4E00EE34C1 /* SRSDataItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemTests.swift; sourceTree = "<group>"; };
 		831FF75B1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemCollectionViewController.swift; sourceTree = "<group>"; };
 		831FF75D1BB87CDD00C31FDF /* SRSDataItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItem.swift; sourceTree = "<group>"; };
@@ -349,8 +347,10 @@
 		83829B411BB531D900CDED3F /* StubConditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubConditions.swift; sourceTree = "<group>"; };
 		83829B431BB53E2E00CDED3F /* NoCancelledDependenciesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCancelledDependenciesTests.swift; sourceTree = "<group>"; };
 		8393CEA91BA75DF5008701D6 /* DelayOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelayOperation.swift; sourceTree = "<group>"; };
-		8396244E1BD7740F00269558 /* resize.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = resize.js; sourceTree = "<group>"; };
 		83966D691BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSProgress+KeitaiWaniKani.swift"; sourceTree = "<group>"; };
+		839AA3D71BE2BB8C006A05F3 /* jquery.qtip.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = jquery.qtip.min.css; sourceTree = "<group>"; };
+		839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.qtip.min.js; sourceTree = "<group>"; };
+		839AA3DB1BE2BC08006A05F3 /* resize.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = resize.css; sourceTree = "<group>"; };
 		839D76AA1B9A3BC40037294C /* UserScriptTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserScriptTableViewCell.swift; sourceTree = "<group>"; };
 		83A23FE61BCD96C100060B66 /* String+WaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+WaniKani.swift"; sourceTree = "<group>"; };
 		83A597851BCC53EB0040C730 /* RetryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryOperation.swift; sourceTree = "<group>"; };
@@ -524,9 +524,9 @@
 		832462C01B93687E00FB62C9 /* User Scripts */ = {
 			isa = PBXGroup;
 			children = (
-				8304F8231BBC82EC009D7054 /* common.js */,
-				831A700B1BDD760A00435FC8 /* jquery.qtip.min.js */,
-				8396244E1BD7740F00269558 /* resize.js */,
+				839AA3D71BE2BB8C006A05F3 /* jquery.qtip.min.css */,
+				839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */,
+				839AA3DB1BE2BC08006A05F3 /* resize.css */,
 				83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */,
 				836639511BDB9F9E00BD0B92 /* wkimprove.js */,
 			);
@@ -1068,13 +1068,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				839AA3DC1BE2BC08006A05F3 /* resize.css in Resources */,
 				83CB3E0F1B5849EE00761D68 /* Settings.bundle in Resources */,
 				830EAB941B41DC7700EBF073 /* LaunchScreen.storyboard in Resources */,
 				836639521BDB9F9E00BD0B92 /* wkimprove.js in Resources */,
+				839AA3DA1BE2BB8C006A05F3 /* jquery.qtip.min.js in Resources */,
+				839AA3D91BE2BB8C006A05F3 /* jquery.qtip.min.css in Resources */,
 				83F32EAB1BDFCCFA00F2ABA0 /* wkdoublecheck.js in Resources */,
-				8304F8241BBC82EC009D7054 /* common.js in Resources */,
-				831A700C1BDD760A00435FC8 /* jquery.qtip.min.js in Resources */,
-				8396244F1BD7740F00269558 /* resize.js in Resources */,
 				830EAB911B41DC7700EBF073 /* Assets.xcassets in Resources */,
 				830EAB8F1B41DC7700EBF073 /* Main.storyboard in Resources */,
 			);

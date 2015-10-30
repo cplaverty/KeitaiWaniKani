@@ -58,15 +58,17 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
     
     var URL: NSURL?
     private var webViewPageTitle: String?
-
+    
     weak var progressView: UIProgressView!
     private var progressViewIsHidden = true
-
+    private var estimatedLoadingProgress: Float = 0
+    
     var addressBarView: WebAddressBarView!
     
     func createWebView() -> UIWebView {
         let webView = UIWebView(frame: self.view.bounds)
         webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        webView.backgroundColor = UIColor.whiteColor()
         webView.delegate = self
         webView.allowsInlineMediaPlayback = true
         webView.mediaPlaybackRequiresUserAction = false
@@ -82,20 +84,20 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
     lazy var backButton: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(named: "ArrowLeft"), style: .Plain, target: self, action: "backButtonTouched:forEvent:")
         return item
-        }()
+    }()
     lazy var forwardButton: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(named: "ArrowRight"), style: .Plain, target: self, action: "forwardButtonTouched:forEvent:")
         return item
-        }()
+    }()
     lazy var shareButton: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "share:")
-        }()
+    }()
     lazy var openInSafariButton: UIBarButtonItem = {
         return UIBarButtonItem(image: UIImage(named: "OpenInSafari"), style: .Plain, target: self, action: "openInSafari:")
-        }()
+    }()
     lazy var doneButton: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done:")
-        }()
+    }()
     
     // MARK: - Actions
     
@@ -166,6 +168,8 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
     // MARK: - UIWebViewDelegate
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        DDLogVerbose("shouldStartLoadWithRequest: \(request) navigationType: \(navigationType)")
+        estimatedLoadingProgress = 0
         addressBarView.updateUIForRequest(request, andLoadingStatus: true)
         switch request.URL {
         case WaniKaniURLs.subscription?:
@@ -177,16 +181,19 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
     }
     
     func webViewDidStartLoad(webView: UIWebView) {
+        DDLogVerbose("webViewDidStartLoad webView.request: \(webView.request)")
+        estimatedLoadingProgress = 0.1
         webViewPageTitle = nil
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         if self.toolbarItems?.isEmpty == false {
             self.navigationController?.setToolbarHidden(false, animated: true)
         }
         updateUIFromWebView()
-        addressBarView.updateUIForRequest(webView.request, andLoadingStatus: true)
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
+        DDLogVerbose("webViewDidFinishLoad webView.request: \(webView.request)")
+        estimatedLoadingProgress = 1
         if let documentTitle = webView.stringByEvaluatingJavaScriptFromString("document.title") where !documentTitle.isEmpty {
             webViewPageTitle = documentTitle
         }
@@ -196,20 +203,23 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         DDLogWarn("Navigation failed: \(error)")
-        showAlertWithTitle("Failed to load page", message: error?.localizedDescription ?? "Unknown error")
         updateUIFromWebView()
         addressBarView.updateUIForRequest(webView.request, andLoadingStatus: false)
+        
+        if let error = error where error.domain != "WebKitErrorDomain" && error.code != 102 {
+            showAlertWithTitle("Failed to load page", message: error.localizedDescription ?? "Unknown error")
+        }
     }
     
     // MARK: - WKUIDelegate
-
+    
     // TODO: Handle _blank links
 //    func webView(webView: WKWebView, createWebViewWithConfiguration configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
 //        let newVC = self.dynamicType.init(configuration: configuration)
 //        newVC.delegate = self
 //        newVC.URL = navigationAction.request.URL
 //        self.navigationController?.pushViewController(newVC, animated: true)
-//        
+//
 //        return newVC.webView
 //    }
     
@@ -289,11 +299,33 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
     
     // MARK: - User Scripts
     
-    func getUserScriptContent(name: String) -> String {
-        guard let scriptURL = NSBundle.mainBundle().URLForResource("\(name)", withExtension: "js") else {
+    func injectStyleSheet(name: String, inWebView webView: UIWebView) {
+        guard let ssURL = NSBundle.mainBundle().URLForResource(name, withExtension: "css") else {
+            fatalError("Count not find style sheet \(name).css in main bundle")
+        }
+        let contents = encodeForJavascript(try! String(contentsOfURL: ssURL))
+        
+        let script = "var style = document.createElement('style');style.setAttribute('type', 'text/css');style.appendChild(document.createTextNode('\(contents)'));document.head.appendChild(document.createComment('\(name).css'));document.head.appendChild(style);"
+        
+        if webView.stringByEvaluatingJavaScriptFromString(script) == nil {
+            DDLogError("Failed to add style sheet \(name).css")
+        }
+    }
+    
+    func injectScript(name: String, inWebView webView: UIWebView) {
+        guard let scriptURL = NSBundle.mainBundle().URLForResource(name, withExtension: "js") else {
             fatalError("Count not find user script \(name).js in main bundle")
         }
-        return try! String(contentsOfURL: scriptURL)
+        let contents = encodeForJavascript(try! String(contentsOfURL: scriptURL))
+        
+        let script = "var script = document.createElement('script');script.setAttribute('type', 'text/javascript');script.appendChild(document.createTextNode('\(contents)'));document.head.appendChild(document.createComment('\(name).js'));document.head.appendChild(script);"
+        if webView.stringByEvaluatingJavaScriptFromString(script) == nil {
+            DDLogError("Failed to add script \(name).js")
+        }
+    }
+    
+    private func encodeForJavascript(string: String) -> String  {
+        return string.unicodeScalars.map({$0.escape(asASCII: false)}).joinWithSeparator("")
     }
     
     // MARK: - Implementation
@@ -313,7 +345,6 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
         // Network indicator
         UIApplication.sharedApplication().networkActivityIndicatorVisible = webView.loading
         
-        let estimatedProgress: Float = 0 // webView.estimatedProgress
         // Loading progress
         let shouldHideProgress = !webView.loading
         if !progressViewIsHidden && shouldHideProgress {
@@ -332,11 +363,11 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
         } else if progressViewIsHidden && !shouldHideProgress {
             progressView?.setProgress(0.0, animated: false)
             progressView?.alpha = 1.0
-            progressView?.setProgress(estimatedProgress, animated: true)
+            progressView?.setProgress(estimatedLoadingProgress, animated: true)
             
             progressViewIsHidden = false
         } else if !progressViewIsHidden && !shouldHideProgress{
-            progressView?.setProgress(estimatedProgress, animated: true)
+            progressView?.setProgress(estimatedLoadingProgress, animated: true)
         }
         
         // Navigation buttons
@@ -356,4 +387,17 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
         }
     }
     
+}
+
+extension UIWebViewNavigationType: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case LinkClicked: return "LinkClicked"
+        case FormSubmitted: return "FormSubmitted"
+        case BackForward: return "BackForward"
+        case Reload: return "Reload"
+        case FormResubmitted: return "FormResubmitted"
+        case Other: return "Other"
+        }
+    }
 }
