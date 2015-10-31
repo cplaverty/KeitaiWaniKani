@@ -38,8 +38,8 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         }
         
         guard let URL = request.URL
-            where URL != WaniKaniURLs.reviewHome && URL != WaniKaniURLs.reviewSession &&
-                URL != WaniKaniURLs.lessonHome && URL != WaniKaniURLs.lessonSession else {
+            where URL.path != WaniKaniURLs.reviewHome.path && URL.path != WaniKaniURLs.reviewSession.path &&
+                URL.path != WaniKaniURLs.lessonHome.path && URL.path != WaniKaniURLs.lessonSession.path else {
                     return true
         }
         
