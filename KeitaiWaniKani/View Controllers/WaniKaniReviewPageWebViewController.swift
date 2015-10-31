@@ -32,6 +32,30 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     
     // MARK: - UIWebViewDelegate
     
+    override func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        guard super.webView(webView, shouldStartLoadWithRequest: request, navigationType: navigationType) else {
+            return false
+        }
+        
+        guard let URL = request.URL
+            where URL != WaniKaniURLs.reviewHome && URL != WaniKaniURLs.reviewSession &&
+                URL != WaniKaniURLs.lessonHome && URL != WaniKaniURLs.lessonSession else {
+                    return true
+        }
+        
+        guard let referer = request.valueForHTTPHeaderField("Referer"),
+            let refererURL = NSURL(string: referer)
+            where refererURL == WaniKaniURLs.reviewSession || refererURL == WaniKaniURLs.lessonSession else {
+                return true
+        }
+        
+        let newVC = self.dynamicType.init(URL: URL)
+        newVC.delegate = self
+        self.navigationController?.pushViewController(newVC, animated: true)
+        
+        return false
+    }
+    
     override func webViewDidFinishLoad(webView: UIWebView) {
         super.webViewDidFinishLoad(webView)
         

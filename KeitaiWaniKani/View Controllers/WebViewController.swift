@@ -220,18 +220,6 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
         }
     }
     
-    // MARK: - WKUIDelegate
-    
-    // TODO: Handle _blank links
-//    func webView(webView: WKWebView, createWebViewWithConfiguration configuration: WKWebViewConfiguration, forNavigationAction navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-//        let newVC = self.dynamicType.init(configuration: configuration)
-//        newVC.delegate = self
-//        newVC.URL = navigationAction.request.URL
-//        self.navigationController?.pushViewController(newVC, animated: true)
-//
-//        return newVC.webView
-//    }
-    
     // MARK: - WebViewControllerDelegate
     
     func webViewControllerDidFinish(controller: WebViewController) {
