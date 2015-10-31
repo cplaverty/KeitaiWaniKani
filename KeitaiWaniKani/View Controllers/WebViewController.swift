@@ -223,7 +223,13 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
         addressBarView.loading = false
         
         if let error = error where error.domain != "WebKitErrorDomain" && error.code != 102 {
-            showAlertWithTitle("Failed to load page", message: error.localizedDescription ?? "Unknown error")
+            switch (error.domain, error.code) {
+                // Ignore navigation cancellation errors
+            case (NSURLErrorDomain, NSURLErrorCancelled), ("WebKitErrorDomain", 102):
+                break
+            default:
+                showAlertWithTitle("Failed to load page", message: error.localizedDescription ?? "Unknown error")
+            }
         }
     }
     
