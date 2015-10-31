@@ -108,6 +108,10 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
         return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done:")
     }()
     
+    var shouldIncludeDoneButton: Bool {
+        return self.navigationController?.viewControllers.first == self
+    }
+    
     // MARK: - Actions
     
     func done(sender: UIBarButtonItem) {
@@ -179,7 +183,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         DDLogVerbose("shouldStartLoadWithRequest: \(request) navigationType: \(navigationType)")
         estimatedLoadingProgress = 0
-        addressBarView.updateUIForRequest(request, andLoadingStatus: true)
+        addressBarView.URL = request.URL
         switch request.URL {
         case WaniKaniURLs.subscription?:
             self.showAlertWithTitle("Can not manage subscription", message: "Due to Apple App Store rules, you can not manage your subscription within the app.")
@@ -193,6 +197,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
         DDLogVerbose("webViewDidStartLoad webView.request: \(webView.request)")
         estimatedLoadingProgress = 0.1
         webViewPageTitle = nil
+        addressBarView.loading = true
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         if self.toolbarItems?.isEmpty == false {
             self.navigationController?.setToolbarHidden(false, animated: true)
@@ -207,13 +212,15 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
             webViewPageTitle = documentTitle
         }
         updateUIFromWebView()
-        addressBarView.updateUIForRequest(webView.request, andLoadingStatus: false)
+        addressBarView.URL = webView.request?.URL
+        addressBarView.loading = false
     }
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         DDLogWarn("Navigation failed: \(error)")
         updateUIFromWebView()
-        addressBarView.updateUIForRequest(webView.request, andLoadingStatus: false)
+        addressBarView.URL = webView.request?.URL
+        addressBarView.loading = false
         
         if let error = error where error.domain != "WebKitErrorDomain" && error.code != 102 {
             showAlertWithTitle("Failed to load page", message: error.localizedDescription ?? "Unknown error")
@@ -282,7 +289,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
     func addToolbarItemsForCompactWidthRegularHeight() {
         self.navigationController?.setToolbarHidden(false, animated: true)
         navigationItem.leftBarButtonItems = nil
-        navigationItem.rightBarButtonItems = [doneButton]
+        navigationItem.rightBarButtonItems = shouldIncludeDoneButton ? [doneButton] : nil
         let flexibleSpace = { UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil) }
         setToolbarItems([backButton, flexibleSpace(), forwardButton, flexibleSpace(), shareButton, flexibleSpace(), openInSafariButton], animated: true)
     }
@@ -293,7 +300,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
         setToolbarItems(nil, animated: true)
         navigationItem.leftItemsSupplementBackButton = true
         navigationItem.leftBarButtonItems = [backButton, forwardButton]
-        navigationItem.rightBarButtonItems = [doneButton, openInSafariButton, shareButton]
+        navigationItem.rightBarButtonItems = shouldIncludeDoneButton ? [doneButton, openInSafariButton, shareButton] : [openInSafariButton, shareButton]
     }
     
     // MARK: - User Scripts

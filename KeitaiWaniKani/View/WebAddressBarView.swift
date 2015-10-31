@@ -15,6 +15,9 @@ class WebAddressBarView: UIView {
     let addressLabel: UILabel
     let refreshButton: UIButton
     
+    var URL: NSURL? { didSet { updateUI() } }
+    var loading: Bool = false { didSet { updateUI() } }
+    
     private let lockImage = UIImage(named: "NavigationBarLock")
     private let stopLoadingImage = UIImage(named: "NavigationBarStopLoading")
     private let reloadImage = UIImage(named: "NavigationBarReload")
@@ -41,7 +44,6 @@ class WebAddressBarView: UIView {
         
         refreshButton.addTarget(self, action: "stopOrRefreshWebView:", forControlEvents: .TouchUpInside)
         
-        updateUIForRequest(nil, andLoadingStatus: false)
         addSubview(secureSiteIndicator)
         addSubview(addressLabel)
         addSubview(refreshButton)
@@ -68,7 +70,7 @@ class WebAddressBarView: UIView {
     // MARK: - Update UI
     
     func stopOrRefreshWebView(sender: UIButton) {
-        let loading: Bool
+        URL = webView.request?.URL
         if webView.loading {
             webView.stopLoading()
             loading = false
@@ -76,15 +78,17 @@ class WebAddressBarView: UIView {
             webView.reload()
             loading = true
         }
-        updateUIForRequest(nil, andLoadingStatus: loading)
+        updateUI()
     }
     
-    func updateUIForRequest(request: NSURLRequest?, andLoadingStatus loading: Bool) {
+    private func updateUI() {
+        assert(NSThread.isMainThread(), "Must be called on the main thread")
+        
         // Padlock
-        secureSiteIndicator.hidden = request?.URL?.scheme != "https"
+        secureSiteIndicator.hidden = URL?.scheme != "https"
         
         // URL
-        addressLabel.text = domainForURL(request?.URL)
+        addressLabel.text = domainForURL(URL)
         
         // Stop/Reload indicator
         if loading {
