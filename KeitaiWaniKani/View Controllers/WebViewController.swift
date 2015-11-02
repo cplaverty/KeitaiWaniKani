@@ -14,7 +14,7 @@ protocol WebViewControllerDelegate: class {
     func webViewControllerDidFinish(controller: WebViewController)
 }
 
-class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerDelegate {
+class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelegate, WebViewControllerDelegate {
     
     private struct SegueIdentifiers {
         static let showBackHistory = "Show Web Back History"
@@ -68,9 +68,10 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
     
     func createWebView() -> UIWebView {
         let webView = UIWebView(frame: self.view.bounds)
+        webView.scrollView.delegate = self
+        webView.delegate = self
         webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         webView.backgroundColor = UIColor.whiteColor()
-        webView.delegate = self
         webView.allowsInlineMediaPlayback = true
         webView.mediaPlaybackRequiresUserAction = false
         if #available(iOS 9.0, *) {
@@ -232,6 +233,15 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
                 showAlertWithTitle("Failed to load page", message: error.localizedDescription ?? "Unknown error")
             }
         }
+    }
+    
+    // MARK: - UIScrollViewDelegate
+    
+    func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
+        guard let nc = navigationController where nc.navigationBarHidden else { return true }
+        
+        showBrowserInterface(true, animated: true)
+        return false
     }
     
     // MARK: - WebViewControllerDelegate
@@ -409,6 +419,15 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
         }
     }
     
+    func showBrowserInterface(showBrowserInterface: Bool, animated: Bool) {
+        guard let nc = self.navigationController else { return }
+        
+        nc.setNavigationBarHidden(!showBrowserInterface, animated: animated)
+        if self.toolbarItems?.isEmpty == false {
+            nc.setToolbarHidden(!showBrowserInterface, animated: animated)
+        }
+    }
+    
 }
 
 extension UIWebViewNavigationType: CustomStringConvertible {
@@ -440,7 +459,7 @@ private class UIBottomBorderedView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private override func layoutSubviews() {
+    override func layoutSubviews() {
         super.layoutSubviews()
         borderLayer.frame = CGRect(x: 0, y: max(0, self.frame.size.height - borderWidth), width: self.frame.size.width, height: borderWidth)
     }

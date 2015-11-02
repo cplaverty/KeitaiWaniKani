@@ -99,15 +99,6 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     
     // MARK: - Update UI
     
-    func showBrowserInterface(showBrowserInterface: Bool, animated: Bool) {
-        guard let nc = self.navigationController else { return }
-        
-        nc.setNavigationBarHidden(!showBrowserInterface, animated: animated)
-        if self.toolbarItems?.isEmpty == false {
-            nc.setToolbarHidden(!showBrowserInterface, animated: animated)
-        }
-    }
-    
     func keyboardDidShow(notification: NSNotification) {
         guard let URL = webView.request?.URL where URL == WaniKaniURLs.lessonSession || URL == WaniKaniURLs.reviewSession else { return }
         
