@@ -85,6 +85,7 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     // MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
+        allowsBackForwardNavigationGestures = false
         super.viewDidLoad()
         webView.removeInputAccessoryView()
     }

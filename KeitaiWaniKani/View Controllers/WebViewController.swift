@@ -55,6 +55,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
     // MARK: - Properties
     
     weak var delegate: WebViewControllerDelegate?
+    var allowsBackForwardNavigationGestures: Bool = true
     
     var URL: NSURL?
     private var webViewPageTitle: String?
@@ -246,6 +247,15 @@ class WebViewController: UIViewController, UIWebViewDelegate, WebViewControllerD
         
         self.view.addSubview(webView)
         self.view.addSubview(statusBarView)
+        
+        if allowsBackForwardNavigationGestures {
+            let backSwipeGesture = UISwipeGestureRecognizer(target: webView, action: "goBack")
+            let forwardSwipeGesture = UISwipeGestureRecognizer(target: webView, action: "goForward")
+            backSwipeGesture.direction = .Right
+            forwardSwipeGesture.direction = .Left
+            webView.scrollView.addGestureRecognizer(backSwipeGesture)
+            webView.scrollView.addGestureRecognizer(forwardSwipeGesture)
+        }
         
         configureForTraitCollection(self.traitCollection)
         
