@@ -259,12 +259,14 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         self.view.addSubview(statusBarView)
         
         if allowsBackForwardNavigationGestures {
-            let backSwipeGesture = UISwipeGestureRecognizer(target: webView, action: "goBack")
-            let forwardSwipeGesture = UISwipeGestureRecognizer(target: webView, action: "goForward")
-            backSwipeGesture.direction = .Right
-            forwardSwipeGesture.direction = .Left
+            let backSwipeGesture = UIScreenEdgePanGestureRecognizer(target: webView, action: "goBack")
+            backSwipeGesture.edges = .Left
+            let forwardSwipeGesture = UIScreenEdgePanGestureRecognizer(target: webView, action: "goForward")
+            forwardSwipeGesture.edges = .Right
             webView.scrollView.addGestureRecognizer(backSwipeGesture)
             webView.scrollView.addGestureRecognizer(forwardSwipeGesture)
+            webView.scrollView.panGestureRecognizer.requireGestureRecognizerToFail(backSwipeGesture)
+            webView.scrollView.panGestureRecognizer.requireGestureRecognizerToFail(forwardSwipeGesture)
         }
         
         configureForTraitCollection(self.traitCollection)
