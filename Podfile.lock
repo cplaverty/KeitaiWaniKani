@@ -13,20 +13,20 @@ PODS:
   - FMDB/common (2.5)
   - FMDB/standard (2.5):
     - FMDB/common
-  - OHHTTPStubs (4.5.0):
-    - OHHTTPStubs/Default (= 4.5.0)
-  - OHHTTPStubs/Core (4.5.0)
-  - OHHTTPStubs/Default (4.5.0):
+  - OHHTTPStubs (4.5.1):
+    - OHHTTPStubs/Default (= 4.5.1)
+  - OHHTTPStubs/Core (4.5.1)
+  - OHHTTPStubs/Default (4.5.1):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (4.5.0):
+  - OHHTTPStubs/JSON (4.5.1):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (4.5.0):
+  - OHHTTPStubs/NSURLSession (4.5.1):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (4.5.0)
-  - OHHTTPStubs/Swift (4.5.0):
+  - OHHTTPStubs/OHPathHelpers (4.5.1)
+  - OHHTTPStubs/Swift (4.5.1):
     - OHHTTPStubs/Core
   - SwiftyJSON (2.3.1)
 
@@ -54,7 +54,7 @@ SPEC CHECKSUMS:
   Alamofire: 9b0a7188b961a03914a99304488bd226b0e46c0e
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
   FMDB: 8e59e93d20d76d0b135db26ecc83ae88d016076d
-  OHHTTPStubs: e573e76dd8bcd7ee5fcc6c3d86251551f4261e0c
+  OHHTTPStubs: f9ed5d0574877f6008261de9c2728cc1662a6566
   SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
 
 COCOAPODS: 0.39.0
