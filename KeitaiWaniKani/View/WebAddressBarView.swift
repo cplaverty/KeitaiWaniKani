@@ -22,7 +22,7 @@ class WebAddressBarView: UIView {
     private let stopLoadingImage = UIImage(named: "NavigationBarStopLoading")
     private let reloadImage = UIImage(named: "NavigationBarReload")
     
-    private let webView: UIWebView
+    private unowned let webView: UIWebView
     
     // MARK: - Initialisers
     
@@ -65,6 +65,10 @@ class WebAddressBarView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        refreshButton.removeTarget(self, action: nil, forControlEvents: .AllEvents)
     }
     
     // MARK: - Update UI
