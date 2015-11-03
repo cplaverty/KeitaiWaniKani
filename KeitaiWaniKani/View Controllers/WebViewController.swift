@@ -49,7 +49,10 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     }
     
     deinit {
+        webView.scrollView.delegate = nil
         webView.delegate = nil
+        backScreenEdgePanGesture?.removeTarget(self, action: nil)
+        forwardScreenEdgePanGesture?.removeTarget(self, action: nil)
     }
     
     // MARK: - Properties
@@ -115,6 +118,9 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         return self.navigationController?.viewControllers.first == self
     }
     
+    private var backScreenEdgePanGesture: UIScreenEdgePanGestureRecognizer?
+    private var forwardScreenEdgePanGesture: UIScreenEdgePanGestureRecognizer?
+    
     // MARK: - Actions
     
     func done(sender: UIBarButtonItem) {
@@ -177,6 +183,18 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     func forwardButtonTouched(sender: UIBarButtonItem, forEvent event: UIEvent) {
         if webView.canGoForward {
+            webView.goForward()
+        }
+    }
+    
+    func backScreenEdgePanGestureTriggered(gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
+        if gestureRecognizer.state == .Ended && webView.canGoBack {
+            webView.goBack()
+        }
+    }
+    
+    func forwardScreenEdgePanGestureTriggered(gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
+        if gestureRecognizer.state == .Ended && webView.canGoForward {
             webView.goForward()
         }
     }
@@ -271,14 +289,14 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         self.view.addSubview(statusBarView)
         
         if allowsBackForwardNavigationGestures {
-            let backSwipeGesture = UIScreenEdgePanGestureRecognizer(target: webView, action: "goBack")
-            backSwipeGesture.edges = .Left
-            let forwardSwipeGesture = UIScreenEdgePanGestureRecognizer(target: webView, action: "goForward")
-            forwardSwipeGesture.edges = .Right
-            webView.scrollView.addGestureRecognizer(backSwipeGesture)
-            webView.scrollView.addGestureRecognizer(forwardSwipeGesture)
-            webView.scrollView.panGestureRecognizer.requireGestureRecognizerToFail(backSwipeGesture)
-            webView.scrollView.panGestureRecognizer.requireGestureRecognizerToFail(forwardSwipeGesture)
+            backScreenEdgePanGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "backScreenEdgePanGestureTriggered:")
+            backScreenEdgePanGesture!.edges = .Left
+            forwardScreenEdgePanGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "forwardScreenEdgePanGestureTriggered:")
+            forwardScreenEdgePanGesture!.edges = .Right
+            webView.scrollView.addGestureRecognizer(backScreenEdgePanGesture!)
+            webView.scrollView.addGestureRecognizer(forwardScreenEdgePanGesture!)
+            webView.scrollView.panGestureRecognizer.requireGestureRecognizerToFail(backScreenEdgePanGesture!)
+            webView.scrollView.panGestureRecognizer.requireGestureRecognizerToFail(forwardScreenEdgePanGesture!)
         }
         
         configureForTraitCollection(self.traitCollection)
