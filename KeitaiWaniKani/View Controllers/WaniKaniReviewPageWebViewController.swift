@@ -24,6 +24,8 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         return webView
     }
     
+    private var userScriptsInjected = false
+    
     // MARK: - Initialisers
     
     deinit {
@@ -45,7 +47,7 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         
         guard let referer = request.valueForHTTPHeaderField("Referer"),
             let refererURL = NSURL(string: referer)
-            where refererURL == WaniKaniURLs.reviewSession || refererURL == WaniKaniURLs.lessonSession else {
+            where (refererURL == WaniKaniURLs.reviewSession || refererURL == WaniKaniURLs.lessonSession) && navigationType == .LinkClicked else {
                 return true
         }
         
@@ -56,10 +58,19 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         return false
     }
     
+    override func webViewDidStartLoad(webView: UIWebView) {
+        super.webViewDidStartLoad(webView)
+        let requestStarted = requestStack.last!
+        if requestStarted == WaniKaniURLs.lessonSession || requestStarted == WaniKaniURLs.reviewSession {
+            userScriptsInjected = false
+        }
+    }
+    
     override func webViewDidFinishLoad(webView: UIWebView) {
         super.webViewDidFinishLoad(webView)
         
         guard let URL = webView.request?.URL else { return }
+        guard !userScriptsInjected else { return }
         
         switch URL {
         case WaniKaniURLs.lessonSession:
@@ -80,6 +91,7 @@ class WaniKaniReviewPageWebViewController: WebViewController {
             }
         default: break
         }
+        userScriptsInjected = true
     }
     
     // MARK: - View Controller Lifecycle

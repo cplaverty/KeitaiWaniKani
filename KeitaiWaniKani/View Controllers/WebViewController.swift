@@ -59,6 +59,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     var URL: NSURL?
     private var webViewPageTitle: String?
+    private(set) var requestStack: [NSURLRequest] = []
     
     weak var progressView: UIProgressView!
     private var progressViewIsHidden = true
@@ -184,8 +185,11 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         DDLogVerbose("shouldStartLoadWithRequest: \(request) navigationType: \(navigationType)")
+        if requestStack.isEmpty {
+            addressBarView.URL = request.URL
+        }
+        requestStack.append(request)
         estimatedLoadingProgress = 0
-        addressBarView.URL = request.URL
         switch request.URL {
         case WaniKaniURLs.subscription?:
             self.showAlertWithTitle("Can not manage subscription", message: "Due to Apple App Store rules, you can not manage your subscription within the app.")
@@ -196,33 +200,41 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     }
     
     func webViewDidStartLoad(webView: UIWebView) {
-        DDLogVerbose("webViewDidStartLoad webView.request: \(webView.request)")
-        estimatedLoadingProgress = 0.1
-        webViewPageTitle = nil
-        addressBarView.loading = true
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        if self.toolbarItems?.isEmpty == false {
-            self.navigationController?.setToolbarHidden(false, animated: true)
+        let requestStarted = requestStack.last!
+        DDLogVerbose("webViewDidStartLoad webView.request: \(requestStarted)")
+        // Start load of new page
+        if requestStack.count == 1 {
+            estimatedLoadingProgress = 0.1
+            webViewPageTitle = nil
+            addressBarView.loading = true
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            if self.toolbarItems?.isEmpty == false {
+                self.navigationController?.setToolbarHidden(false, animated: true)
+            }
         }
         updateUIFromWebView()
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
-        DDLogVerbose("webViewDidFinishLoad webView.request: \(webView.request)")
-        estimatedLoadingProgress = 1
-        if let documentTitle = webView.stringByEvaluatingJavaScriptFromString("document.title") where !documentTitle.isEmpty {
-            webViewPageTitle = documentTitle
+        let requestFinished = requestStack.popLast()
+        DDLogVerbose("webViewDidFinishLoad webView.request: \(requestFinished)")
+        // Finish load of new page
+        if requestStack.isEmpty {
+            estimatedLoadingProgress = 1
+            if let documentTitle = webView.stringByEvaluatingJavaScriptFromString("document.title") where !documentTitle.isEmpty {
+                webViewPageTitle = documentTitle
+            }
+            addressBarView.URL = webView.request?.URL
+            addressBarView.loading = false
         }
         updateUIFromWebView()
-        addressBarView.URL = webView.request?.URL
-        addressBarView.loading = false
     }
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         DDLogWarn("Navigation failed: \(error)")
-        updateUIFromWebView()
         addressBarView.URL = webView.request?.URL
         addressBarView.loading = false
+        updateUIFromWebView()
         
         if let error = error where error.domain != "WebKitErrorDomain" && error.code != 102 {
             switch (error.domain, error.code) {
@@ -377,10 +389,10 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     private func updateUIFromWebView() {
         // Network indicator
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = webView.loading
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = addressBarView.loading
         
         // Loading progress
-        let shouldHideProgress = !webView.loading
+        let shouldHideProgress = !addressBarView.loading
         if !progressViewIsHidden && shouldHideProgress {
             UIView.animateWithDuration(0.1) {
                 self.progressView?.setProgress(1.0, animated: false)
@@ -407,7 +419,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         // Navigation buttons
         backButton.enabled = webView.canGoBack
         forwardButton.enabled = webView.canGoForward
-        shareButton.enabled = !webView.loading && webView.request?.URL != nil
+        shareButton.enabled = !addressBarView.loading && webView.request?.URL != nil
         openInSafariButton.enabled = webView.request?.URL != nil
     }
     
