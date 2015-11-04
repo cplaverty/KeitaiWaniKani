@@ -1,13 +1,106 @@
-#reviews #question #character, #lessons header #main-info #character {
-    font-size: 10vh !important; line-height: 18vh !important; padding: 10px 0 0;
+/* Reviews */
+#reviews #question #character {
+    padding: 5px 0;
+}
+
+/* Lessons */
+#main-info {
+    padding: 10px 0;
 }
 
 header #main-info #meaning {
     padding: 0;
 }
 
-#main-info {
-    padding: 10px 0;
+header #main-info #character {
+    padding: 0;
+}
+
+footer, #lessons-hotkey-footer {
+    display: none !important;
+}
+
+/* Portrait */
+@media only screen and (orientation: portrait) {
+    
+    /* 3.5" iPhone */
+    @media (min-width: 320px) and (max-width: 767px) {
+        #reviews #question #character, #lessons header #main-info #character {
+            font-size: 42px !important; line-height: 96px !important;
+        }
+    }
+    
+    /* 4" iPhone */
+    @media (min-width: 320px) and (max-width: 767px) and (min-height: 500px) {
+        #reviews #question #character, #lessons header #main-info #character {
+            font-size: 48px !important; line-height: 108px !important;
+        }
+    }
+
+    /* 4.7" iPhone */
+    @media (min-width: 375px) and (max-width: 767px) {
+        #reviews #question #character, #lessons header #main-info #character {
+            font-size: 56px !important; line-height: 120px !important;
+        }
+    }
+    
+    /* 5.5" iPhone */
+    @media (min-width: 414px) and (max-width: 767px) {
+        #reviews #question #character, #lessons header #main-info #character {
+            font-size: 64px !important; line-height: 133px !important;
+        }
+    }
+    
+    /* iPad */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        #reviews #question #character, #lessons header #main-info #character {
+            font-size: 140px !important; line-height: 300px !important;
+        }
+    }
+
+}
+
+/* Landscape */
+@media only screen and (orientation: landscape) {
+    
+    /* 3.5" and 4" iPhone */
+    @media (max-height: 375px) {
+        #answer-form input[type=text], #answer-form button {
+            height: 2.25em;
+        }
+    }
+    
+    @media (min-height: 320px) and (max-height: 1003px) {
+        #lessons header #main-info #character {
+            font-size: 24px !important; line-height: 46px !important;
+        }
+        
+        #reviews #question #character {
+            font-size: 28px !important; line-height: 56px !important;
+        }
+    }
+    
+    /* 4.7" iPhone */
+    @media (min-height: 375px) and (max-height: 1003px) {
+        #reviews #question #character, #lessons header #main-info #character {
+            font-size: 40px !important; line-height: 78px !important;
+        }
+    }
+    
+    /* 5.5" iPhone */
+    @media (min-height: 414px) and (max-height: 1003px) {
+        #reviews #question #character, #lessons header #main-info #character {
+            font-size: 48px !important; line-height: 108px !important;
+        }
+    }
+    
+    /* iPad (minus status bar) */
+    @media (min-height: 748px) and (max-height: 1003px) {
+        #reviews #question #character, #lessons header #main-info #character {
+            font-size: 72px !important; line-height: 150px !important;
+        }
+    }
+    
 }
 
 @media (max-width: 767px) {
