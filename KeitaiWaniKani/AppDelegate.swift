@@ -71,10 +71,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func applicationDidReceiveMemoryWarning(application: UIApplication) {
-        DDLogDebug("Low memory warning: clearing statement cache")
-        databaseQueue.inDatabase { $0.clearCachedStatements() }
-    }
+//    func applicationDidReceiveMemoryWarning(application: UIApplication) {
+//        DDLogDebug("Low memory warning: clearing statement cache")
+//        databaseQueue.inDatabase { $0.clearCachedStatements() }
+//    }
     
     // MARK: - Background fetch
     

@@ -92,7 +92,7 @@ public struct WaniKaniAPI {
         DDLogInfo("Vacuuming database")
         database.executeUpdate("VACUUM")
         
-        database.setShouldCacheStatements(true)
+//        database.setShouldCacheStatements(true)
     }
     
     public static func resourceResolverForAPIKey(apiKey: String) -> ResourceResolver {
