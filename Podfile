@@ -4,7 +4,7 @@ use_frameworks!
 
 xcodeproj 'KeitaiWaniKani'
 
-link_with 'OperationKit', 'WaniKaniKit', 'WaniKaniStudyQueueWidget'
+link_with 'OperationKit', 'WaniKaniKit'
 
 pod 'Alamofire'
 #pod 'FMDB', '~> 2.5'
