@@ -18,6 +18,8 @@
 		830EAB8F1B41DC7700EBF073 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830EAB8D1B41DC7700EBF073 /* Main.storyboard */; };
 		830EAB911B41DC7700EBF073 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830EAB901B41DC7700EBF073 /* Assets.xcassets */; };
 		830EAB941B41DC7700EBF073 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830EAB921B41DC7700EBF073 /* LaunchScreen.storyboard */; };
+		83183BC41BECC1C300FAE0B6 /* wkoverride.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 83183BC31BECC1C300FAE0B6 /* wkoverride.user.js */; };
+		83183BC61BECC4B300FAE0B6 /* common.js in Resources */ = {isa = PBXBuildFile; fileRef = 83183BC51BECC4B300FAE0B6 /* common.js */; };
 		831E66881BC70E4E00EE34C1 /* SRSDataItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E66871BC70E4E00EE34C1 /* SRSDataItemTests.swift */; };
 		831FF75C1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831FF75B1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift */; };
 		831FF75E1BB87CDD00C31FDF /* SRSDataItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831FF75D1BB87CDD00C31FDF /* SRSDataItem.swift */; };
@@ -253,6 +255,8 @@
 		830EAB901B41DC7700EBF073 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		830EAB931B41DC7700EBF073 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		830EAB951B41DC7700EBF073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83183BC31BECC1C300FAE0B6 /* wkoverride.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkoverride.user.js; sourceTree = "<group>"; };
+		83183BC51BECC4B300FAE0B6 /* common.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = common.js; sourceTree = "<group>"; };
 		831E66871BC70E4E00EE34C1 /* SRSDataItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemTests.swift; sourceTree = "<group>"; };
 		831FF75B1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemCollectionViewController.swift; sourceTree = "<group>"; };
 		831FF75D1BB87CDD00C31FDF /* SRSDataItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItem.swift; sourceTree = "<group>"; };
@@ -524,11 +528,13 @@
 		832462C01B93687E00FB62C9 /* User Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				83183BC51BECC4B300FAE0B6 /* common.js */,
 				839AA3D71BE2BB8C006A05F3 /* jquery.qtip.min.css */,
 				839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */,
 				839AA3DB1BE2BC08006A05F3 /* resize.css */,
 				83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */,
 				836639511BDB9F9E00BD0B92 /* wkimprove.js */,
+				83183BC31BECC1C300FAE0B6 /* wkoverride.user.js */,
 			);
 			path = "User Scripts";
 			sourceTree = "<group>";
@@ -1068,8 +1074,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83183BC61BECC4B300FAE0B6 /* common.js in Resources */,
 				839AA3DC1BE2BC08006A05F3 /* resize.css in Resources */,
 				83CB3E0F1B5849EE00761D68 /* Settings.bundle in Resources */,
+				83183BC41BECC1C300FAE0B6 /* wkoverride.user.js in Resources */,
 				830EAB941B41DC7700EBF073 /* LaunchScreen.storyboard in Resources */,
 				836639521BDB9F9E00BD0B92 /* wkimprove.js in Resources */,
 				839AA3DA1BE2BB8C006A05F3 /* jquery.qtip.min.js in Resources */,
