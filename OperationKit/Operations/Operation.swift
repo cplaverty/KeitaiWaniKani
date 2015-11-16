@@ -134,35 +134,46 @@ public class Operation: NSOperation {
             didChangeValueForKey("state")
         }
     }
+
+    // We use a recursive lock here because retrieving the ready state can invoke evaluateConditions, which will change state
+    // firing of KVO notifications for the ready property
+    private let readyLock = NSRecursiveLock()
     
     // Here is where we extend our definition of "readiness".
     public override var ready: Bool {
-        switch state {
-            
-        case .Initialized:
-            // If the operation has been cancelled, "isReady" should return true
-            return cancelled
-            
-        case .Pending:
-            // If the operation has been cancelled, "isReady" should return true
-            guard !cancelled else {
-                return true
+        var isReady = false
+        
+        readyLock.withCriticalScope {
+            switch state {
+                
+            case .Initialized:
+                // If the operation has been cancelled, "isReady" should return true
+                isReady = cancelled
+                
+            case .Pending:
+                // If the operation has been cancelled, "isReady" should return true
+                guard !cancelled else {
+                    isReady = true
+                    return
+                }
+                
+                // If super isReady, conditions can be evaluated
+                if super.ready {
+                    evaluateConditions()
+                }
+                
+                // Until conditions have been evaluated, "isReady" returns false
+                isReady = false
+                
+            case .Ready:
+                isReady = super.ready || cancelled
+                
+            default:
+                isReady = false
             }
-            
-            // If super isReady, conditions can be evaluated
-            if super.ready {
-                evaluateConditions()
-            }
-            
-            // Until conditions have been evaluated, "isReady" returns false
-            return false
-            
-        case .Ready:
-            return super.ready || cancelled
-            
-        default:
-            return false
         }
+        
+        return isReady
     }
     
     public var userInitiated: Bool {
@@ -198,15 +209,7 @@ public class Operation: NSOperation {
         return state == .Finished
     }
     
-    /// A lock to guard invocations of 'evaluateConditions'
-    private let conditionsLock = NSLock()
-    
     private func evaluateConditions() {
-        // We use a lock here since this function could be called by multiple threads since it's invoked by calls to the `ready` property.
-        // We want this function to be called only once.
-        guard conditionsLock.tryLock() else { return }
-        defer { conditionsLock.unlock() }
-        
         guard state == .Pending && !cancelled else { return }
         
         state = .EvaluatingConditions

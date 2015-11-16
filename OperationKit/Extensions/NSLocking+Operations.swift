@@ -3,12 +3,12 @@
     See LICENSE.txt for this sample’s licensing information
     
     Abstract:
-    An extension to NSLock to simplify executing critical code.
+    An extension to NSLocking to simplify executing critical code.
 */
 
 import Foundation
 
-extension NSLock {
+extension NSLocking {
     func withCriticalScope<T>(@noescape block: Void -> T) -> T {
         lock()
         let value = block()

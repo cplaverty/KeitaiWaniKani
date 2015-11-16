@@ -138,7 +138,7 @@
 		83C8F9781B9B2F9D007CBFBF /* ReachabilityCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C8F9631B9B2F9D007CBFBF /* ReachabilityCondition.swift */; };
 		83C8F9791B9B2F9D007CBFBF /* UserNotificationCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C8F9641B9B2F9D007CBFBF /* UserNotificationCondition.swift */; };
 		83C8F97A1B9B2F9D007CBFBF /* Dictionary+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C8F9661B9B2F9D007CBFBF /* Dictionary+Operations.swift */; };
-		83C8F97B1B9B2F9D007CBFBF /* NSLock+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C8F9671B9B2F9D007CBFBF /* NSLock+Operations.swift */; };
+		83C8F97B1B9B2F9D007CBFBF /* NSLocking+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C8F9671B9B2F9D007CBFBF /* NSLocking+Operations.swift */; };
 		83C8F97C1B9B2F9D007CBFBF /* NSOperation+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C8F9681B9B2F9D007CBFBF /* NSOperation+Operations.swift */; };
 		83C8F97D1B9B2F9D007CBFBF /* UIUserNotifications+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C8F9691B9B2F9D007CBFBF /* UIUserNotifications+Operations.swift */; };
 		83C8F97E1B9B2F9D007CBFBF /* BlockObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C8F96B1B9B2F9D007CBFBF /* BlockObserver.swift */; };
@@ -377,7 +377,7 @@
 		83C8F9631B9B2F9D007CBFBF /* ReachabilityCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityCondition.swift; sourceTree = "<group>"; };
 		83C8F9641B9B2F9D007CBFBF /* UserNotificationCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserNotificationCondition.swift; sourceTree = "<group>"; };
 		83C8F9661B9B2F9D007CBFBF /* Dictionary+Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Operations.swift"; sourceTree = "<group>"; };
-		83C8F9671B9B2F9D007CBFBF /* NSLock+Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLock+Operations.swift"; sourceTree = "<group>"; };
+		83C8F9671B9B2F9D007CBFBF /* NSLocking+Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLocking+Operations.swift"; sourceTree = "<group>"; };
 		83C8F9681B9B2F9D007CBFBF /* NSOperation+Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSOperation+Operations.swift"; sourceTree = "<group>"; };
 		83C8F9691B9B2F9D007CBFBF /* UIUserNotifications+Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIUserNotifications+Operations.swift"; sourceTree = "<group>"; };
 		83C8F96B1B9B2F9D007CBFBF /* BlockObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockObserver.swift; sourceTree = "<group>"; };
@@ -759,7 +759,7 @@
 			isa = PBXGroup;
 			children = (
 				83C8F9661B9B2F9D007CBFBF /* Dictionary+Operations.swift */,
-				83C8F9671B9B2F9D007CBFBF /* NSLock+Operations.swift */,
+				83C8F9671B9B2F9D007CBFBF /* NSLocking+Operations.swift */,
 				83C8F9681B9B2F9D007CBFBF /* NSOperation+Operations.swift */,
 				83C8F9691B9B2F9D007CBFBF /* UIUserNotifications+Operations.swift */,
 			);
@@ -1386,7 +1386,7 @@
 				83C8F9781B9B2F9D007CBFBF /* ReachabilityCondition.swift in Sources */,
 				83C8F9851B9B2F9D007CBFBF /* ExclusivityController.swift in Sources */,
 				83C8F9771B9B2F9D007CBFBF /* OperationCondition.swift in Sources */,
-				83C8F97B1B9B2F9D007CBFBF /* NSLock+Operations.swift in Sources */,
+				83C8F97B1B9B2F9D007CBFBF /* NSLocking+Operations.swift in Sources */,
 				83C8F97E1B9B2F9D007CBFBF /* BlockObserver.swift in Sources */,
 				83C8F97D1B9B2F9D007CBFBF /* UIUserNotifications+Operations.swift in Sources */,
 				83C8F97A1B9B2F9D007CBFBF /* Dictionary+Operations.swift in Sources */,
