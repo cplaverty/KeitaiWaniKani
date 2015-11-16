@@ -63,9 +63,9 @@ final class ReviewCountNotificationOperation: Operation {
                 localNotification.userInfo = ["source": "\(self.dynamicType)"]
                 
                 application.scheduleLocalNotification(localNotification)
-                
-                finish()
             }
+            
+            finish()
         } catch {
             DDLogError("Failed to schedule review count notifications due to error: \(error)")
             finishWithError(error)
