@@ -82,6 +82,9 @@ class WaniKaniReviewPageWebViewController: WebViewController {
             DDLogDebug("Loading user scripts")
             injectStyleSheet("resize", inWebView: webView)
             if ApplicationSettings.userScriptIgnoreAnswerEnabled {
+                injectScript("wkoverride.user", inWebView: webView)
+            }
+            if ApplicationSettings.userScriptDoubleCheckEnabled {
                 injectScript("wkdoublecheck", inWebView: webView)
             }
             if ApplicationSettings.userScriptWaniKaniImproveEnabled {

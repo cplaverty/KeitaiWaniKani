@@ -14,6 +14,7 @@ struct ApplicationSettingKeys {
     static let purgeDatabase = "purgeDatabase"
     static let lastRefreshTime = "lastRefreshTime"
     static let userScriptIgnoreAnswerEnabled = "userScript-IgnoreAnswer"
+    static let userScriptDoubleCheckEnabled = "userScript-DoubleCheck"
     static let userScriptWaniKaniImproveEnabled = "userScript-WaniKaniImprove"
 }
 
@@ -56,6 +57,11 @@ struct ApplicationSettings {
         set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.userScriptIgnoreAnswerEnabled) }
     }
     
+    static var userScriptDoubleCheckEnabled: Bool {
+        get { return userDefaults.boolForKey(ApplicationSettingKeys.userScriptDoubleCheckEnabled) }
+        set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.userScriptDoubleCheckEnabled) }
+    }
+    
     static var userScriptWaniKaniImproveEnabled: Bool {
         get { return userDefaults.boolForKey(ApplicationSettingKeys.userScriptWaniKaniImproveEnabled) }
         set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.userScriptWaniKaniImproveEnabled) }
@@ -67,6 +73,7 @@ struct ApplicationSettings {
         purgeDatabase = false
         lastRefreshTime = nil
         userScriptIgnoreAnswerEnabled = false
+        userScriptDoubleCheckEnabled = false
         userScriptWaniKaniImproveEnabled = false
     }
 }

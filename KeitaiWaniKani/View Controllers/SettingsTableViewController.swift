@@ -19,11 +19,14 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     // MARK: - Properties
     
     let userScripts: [(name: String, description: String, settingKey: String)] = [
+        (name: "WaniKani Override",
+            description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  PLEASE USE RESPONSIBLY!  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script by Rui Pinheiro.",
+            settingKey: ApplicationSettingKeys.userScriptIgnoreAnswerEnabled),
         (name: "WaniKani Double Check",
             description: "Adds a thumbs up/down button that permits incorrect answers to be marked correct, and correct answers to be marked incorrect.  PLEASE USE RESPONSIBLY!  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script written by Ethan.",
-            settingKey: ApplicationSettingKeys.userScriptIgnoreAnswerEnabled),
+            settingKey: ApplicationSettingKeys.userScriptDoubleCheckEnabled),
         (name: "WaniKani Improve",
-            description: "Auto forward to the next item if the answer was correct (\"lightning mode\").  Original script written by Seiji.",
+            description: "Auto forward to the next item if the answer was correct (otherwise known as \"lightning mode\").  Original script written by Seiji.",
             settingKey: ApplicationSettingKeys.userScriptWaniKaniImproveEnabled)
     ]
     
