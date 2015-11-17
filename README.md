@@ -9,14 +9,18 @@ This unofficial app for [WaniKani](https://www.wanikani.com) is designed to impr
 Features:
 * Do reviews and lessons in the app with an embedded web browser
     * Support for user scripts (disabled by default: you must explicitly enable them in the app settings)
+    	* WaniKani Override
+    	
+    	  https://www.wanikani.com/chat/api-and-third-party-apps/2940
     	* WaniKani Double Check
     	
     	  https://www.wanikani.com/chat/api-and-third-party-apps/8598
     	* WaniKani Improve
     	
-    	  http://www.wanikani.com/chat/api-and-third-party-apps/2952
+    	  https://www.wanikani.com/chat/api-and-third-party-apps/2952
     * 1Password support
     * Browser interface can be hidden by swiping up on the page, letting the page content take the full screen.  Swiping down on the page will show the browser interface again.
 * Receive notifications when reviews are due
-* See a list of upcoming reviews in the review timeline
+* Shows a list of upcoming reviews in the review timeline
+* Progress for current-level radicals and kanji, including time until next review and quickest time to Guru
 * Notification Centre widget
