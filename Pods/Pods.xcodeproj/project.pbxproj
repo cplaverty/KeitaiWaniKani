@@ -1536,6 +1536,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F3985611047B391777BFED9002B67924 /* CocoaLumberjack.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1592,6 +1593,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B2808085661147469561C550F068877 /* FMDB.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1620,6 +1622,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 406BA4070D43C198841A87A3D179813F /* Pods.debug.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1713,6 +1716,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 879B083C9A2D97C12B4930601AEDDB10 /* Pods-KeitaiWaniKani.debug.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1744,6 +1748,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BD4597DB381F34BF8F830CE85A1D3CAE /* SwiftyJSON.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1800,6 +1805,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F3985611047B391777BFED9002B67924 /* CocoaLumberjack.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1828,6 +1834,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1317FD49754B187129539605F5DC8427 /* Alamofire.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1856,6 +1863,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DDE5EEFA83FDE38D6FC4C6CE379364C6 /* Pods.release.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -1982,6 +1990,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B2808085661147469561C550F068877 /* FMDB.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2010,6 +2019,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BD4597DB381F34BF8F830CE85A1D3CAE /* SwiftyJSON.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2051,6 +2061,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1317FD49754B187129539605F5DC8427 /* Alamofire.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -2079,6 +2090,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B272BA8231C5169CDAE68AC112F6A0E7 /* Pods-KeitaiWaniKani.release.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
