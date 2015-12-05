@@ -231,6 +231,7 @@ function WKO_ignoreAnswer()
             $('#answer-form fieldset').removeClass('WKO_ignored');
             $('#answer-form fieldset').addClass('incorrect');
         }
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
         return true;
     }
     catch (err) {
@@ -267,8 +268,8 @@ function bindHotkey()
 function addIgnoreAnswerBtn()
 {
     var footer = document.getElementsByTagName('footer'),
-    $btn = jQuery('<div id="WKO_button" title="Ignore Answer">Ignore Answer</div>').on('click', WKO_ignoreAnswer);
-    jQuery(footer[0]).prepend($btn);
+    $btn = $('<div id="WKO_button_container">').append(jQuery('<div id="WKO_button" title="Ignore Answer">Ignore Answer</div>').on('click', WKO_ignoreAnswer));
+    jQuery(footer[0]).before($btn);
 }
 /*
  * Prepares the script
@@ -277,8 +278,9 @@ function addIgnoreAnswerBtn()
 function scriptInit()
 {
     // Add global CSS styles
-    GM_addStyle('#WKO_button {background-color: #CC0000; color: #FFFFFF; cursor: pointer; display: inline-block; font-size: 0.8125em; padding: 10px; vertical-align: bottom;}');
-    GM_addStyle('#answer-form fieldset.WKO_ignored input[type="text"]:-moz-placeholder, #answer-form fieldset.WKO_ignored input[type="text"]:-moz-placeholder {color: #FFFFFF; font-family: "Source Sans Pro",sans-serif; font-weight: 300; text-shadow: none; transition: color 0.15s linear 0s; } #answer-form fieldset.WKO_ignored button, #answer-form fieldset.WKO_ignored input[type="text"], #answer-form fieldset.WKO_ignored input[type="text"]:disabled { background-color: #FFCC00 !important; }');
+    GM_addStyle('#WKO_button_container { text-align: center; margin: 20px 10px 10px 10px; }');
+    GM_addStyle('#WKO_button { background-color: #CC0000; color: #FFFFFF; cursor: pointer; display: inline-block; padding: 12px; }');
+    GM_addStyle('#answer-form fieldset.WKO_ignored input[type="text"]:-moz-placeholder, #answer-form fieldset.WKO_ignored input[type="text"]:-moz-placeholder { color: #FFFFFF; font-family: "Source Sans Pro",sans-serif; font-weight: 300; text-shadow: none; transition: color 0.15s linear 0s; } #answer-form fieldset.WKO_ignored button, #answer-form fieldset.WKO_ignored input[type="text"], #answer-form fieldset.WKO_ignored input[type="text"]:disabled { background-color: #FFCC00 !important; }');
     scriptLog('loaded');
     // Set up hooks
     try

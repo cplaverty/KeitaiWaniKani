@@ -76,10 +76,12 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         case WaniKaniURLs.lessonSession:
             showBrowserInterface(false, animated: true)
             DDLogDebug("Loading user scripts")
+            injectScript("common", inWebView: webView)
             injectStyleSheet("resize", inWebView: webView)
         case WaniKaniURLs.reviewSession:
             showBrowserInterface(false, animated: true)
             DDLogDebug("Loading user scripts")
+            injectScript("common", inWebView: webView)
             injectStyleSheet("resize", inWebView: webView)
             if ApplicationSettings.userScriptIgnoreAnswerEnabled {
                 injectScript("wkoverride.user", inWebView: webView)
