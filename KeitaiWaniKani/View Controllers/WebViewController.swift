@@ -252,6 +252,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         DDLogWarn("Navigation failed: \(error)")
         addressBarView.URL = webView.request?.URL
         addressBarView.loading = false
+        requestStack.removeAll()
         updateUIFromWebView()
         
         if let error = error where error.domain != "WebKitErrorDomain" && error.code != 102 {
@@ -437,7 +438,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         // Navigation buttons
         backButton.enabled = webView.canGoBack
         forwardButton.enabled = webView.canGoForward
-        shareButton.enabled = !addressBarView.loading && webView.request?.URL != nil
+        shareButton.enabled = webView.request?.URL != nil
         openInSafariButton.enabled = webView.request?.URL != nil
     }
     
