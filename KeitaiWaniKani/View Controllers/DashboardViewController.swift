@@ -404,7 +404,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate 
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let databaseQueue = delegate.databaseQueue
         let resolver = WaniKaniAPI.resourceResolverForAPIKey(apiKey)
-        let operation = GetDashboardDataOperation(resolver: resolver, databaseQueue: databaseQueue, forcedFetch: forced, initialDelay: delay)
+        let operation = GetDashboardDataOperation(resolver: resolver, databaseQueue: databaseQueue, forcedFetch: forced, isInteractive: true, initialDelay: delay)
         
         // Study queue
         let studyQueueObserver = BlockObserver { [weak self] _ in
@@ -534,7 +534,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate 
     func webViewControllerDidFinish(controller: WebViewController) {
         controller.dismissViewControllerAnimated(true, completion: nil)
         if controller.URL == WaniKaniURLs.reviewSession || controller.URL == WaniKaniURLs.lessonSession {
-            fetchStudyQueueFromNetworkInBackground(forced: true, afterDelay: 2)
+            fetchStudyQueueFromNetworkInBackground(forced: true, afterDelay: 1)
         }
     }
     

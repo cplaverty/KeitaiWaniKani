@@ -89,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         let resolver = WaniKaniAPI.resourceResolverForAPIKey(apiKey)
-        let operation = GetDashboardDataOperation(resolver: resolver, databaseQueue: databaseQueue, forcedFetch: false)
+        let operation = GetDashboardDataOperation(resolver: resolver, databaseQueue: databaseQueue, forcedFetch: false, isInteractive: false)
         DDLogInfo("Background fetch study queue for API key \(apiKey)...")
         
         let completionHandlerOperationObserver = BlockObserver { operation, errors in

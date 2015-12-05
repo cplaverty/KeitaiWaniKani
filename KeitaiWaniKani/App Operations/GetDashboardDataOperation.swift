@@ -27,8 +27,10 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
     }
     
     private var hasProducedAlert = false
+    private let interactive: Bool
     
-    init(resolver: ResourceResolver, databaseQueue: FMDatabaseQueue, forcedFetch forced: Bool, initialDelay delay: NSTimeInterval? = nil) {
+    init(resolver: ResourceResolver, databaseQueue: FMDatabaseQueue, forcedFetch forced: Bool, isInteractive interactive: Bool, initialDelay delay: NSTimeInterval? = nil) {
+        self.interactive = interactive
         let networkObserver = NetworkObserver()
         
         // Dummy op to prompt for notification permissions
@@ -53,18 +55,21 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         levelProgressionOperation = GetLevelProgressionOperation(resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver)
         progress.resignCurrent()
         levelProgressionOperation.addProgressListenerForDestinationProgress(progress, localizedDescription: "Downloading data from WaniKani")
+        levelProgressionOperation.addCondition(NoCancelledDependencies())
         levelProgressionOperation.addCondition(studyQueueIsUpdatedCondition)
         
         progress.becomeCurrentWithPendingUnitCount(1)
         srsDistributionOperation = GetSRSDistributionOperation(resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver)
         progress.resignCurrent()
         srsDistributionOperation.addProgressListenerForDestinationProgress(progress, localizedDescription: "Downloading data from WaniKani")
+        srsDistributionOperation.addCondition(NoCancelledDependencies())
         srsDistributionOperation.addCondition(studyQueueIsUpdatedCondition)
         
         progress.becomeCurrentWithPendingUnitCount(7)
         srsDataItemOperation = GetSRSDataItemOperation(resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver)
         progress.resignCurrent()
         srsDataItemOperation.addProgressListenerForDestinationProgress(progress, localizedDescription: "Downloading data from WaniKani")
+        srsDataItemOperation.addCondition(NoCancelledDependencies())
         srsDataItemOperation.addCondition(studyQueueIsUpdatedCondition)
         
         reviewTimeNotificationOperation = ReviewTimeNotificationOperation(databaseQueue: databaseQueue)
@@ -101,6 +106,7 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
     }
     
     override func operationDidFinish(operation: NSOperation, withErrors errors: [ErrorType]) {
+        guard interactive else { return }
         guard let firstError = errors.filterNonFatalErrors().first else {
             return
         }
@@ -132,6 +138,10 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
             // We failed because the WaniKani site returned a non-2xx return code
             alert.title = "Invalid Response Code"
             alert.message = "WaniKani site returned an error code \(code) (\(message)). Try again later."
+
+        case TimeoutObserverError.TimeoutOccurred(interval: _):
+            alert.title = "Operation Timed Out"
+            alert.message = "A timeout occurred downloading data from the WaniKani site. Please try the operation again."
             
         default:
             DDLogWarn("No error message for fatal error \(error)")
