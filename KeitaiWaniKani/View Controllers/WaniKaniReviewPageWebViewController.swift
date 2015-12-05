@@ -78,6 +78,7 @@ class WaniKaniReviewPageWebViewController: WebViewController {
             DDLogDebug("Loading user scripts")
             injectScript("common", inWebView: webView)
             injectStyleSheet("resize", inWebView: webView)
+            userScriptsInjected = true
         case WaniKaniURLs.reviewSession:
             showBrowserInterface(false, animated: true)
             DDLogDebug("Loading user scripts")
@@ -94,9 +95,9 @@ class WaniKaniReviewPageWebViewController: WebViewController {
                 injectScript("jquery.qtip.min", inWebView: webView)
                 injectScript("wkimprove", inWebView: webView)
             }
+            userScriptsInjected = true
         default: break
         }
-        userScriptsInjected = true
     }
     
     // MARK: - View Controller Lifecycle
