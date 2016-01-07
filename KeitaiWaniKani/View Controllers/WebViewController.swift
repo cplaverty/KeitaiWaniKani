@@ -218,8 +218,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     }
     
     func webViewDidStartLoad(webView: UIWebView) {
-        let requestStarted = requestStack.last!
-        DDLogVerbose("webViewDidStartLoad webView.request: \(requestStarted)")
+        DDLogVerbose("webViewDidStartLoad webView.request: \(requestStack.last?.description ?? "<none>")")
         // Start load of new page
         if requestStack.count == 1 {
             estimatedLoadingProgress = 0.1
