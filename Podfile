@@ -1,24 +1,22 @@
 platform :ios, '8.0'
 use_frameworks!
-#inhibit_all_warnings!
 
-xcodeproj 'KeitaiWaniKani'
-
-link_with 'OperationKit', 'WaniKaniKit'
-
-pod 'Alamofire'
-#pod 'FMDB', '~> 2.5'
-pod 'FMDB', :git => 'https://github.com/ccgus/fmdb.git', :branch => 'swiftFramework'
-pod 'SwiftyJSON'
-pod 'CocoaLumberjack/Swift'
-
-target :KeitaiWaniKani do
+target 'KeitaiWaniKani' do
+    pod 'Alamofire'
+    #pod 'FMDB', '~> 2.5'
+    pod 'FMDB', :git => 'https://github.com/ccgus/fmdb.git', :branch => 'swiftFramework'
+    pod 'SwiftyJSON'
+    pod 'CocoaLumberjack/Swift'
     pod '1PasswordExtension'
-end
 
-target :WaniKaniKitTests do
-    pod 'OHHTTPStubs'
-    pod 'OHHTTPStubs/Swift'
+    target 'OperationKit'
+    target 'WaniKaniKit'
+
+    target 'WaniKaniKitTests' do
+        inherit! :search_paths
+        pod 'OHHTTPStubs'
+        pod 'OHHTTPStubs/Swift'
+    end
 end
 
 post_install do |installer|

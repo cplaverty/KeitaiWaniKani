@@ -1,6 +1,6 @@
 PODS:
-  - 1PasswordExtension (1.6.4)
-  - Alamofire (3.1.2)
+  - 1PasswordExtension (1.7)
+  - Alamofire (3.1.4)
   - CocoaLumberjack/Core (2.2.0)
   - CocoaLumberjack/Default (2.2.0):
     - CocoaLumberjack/Core
@@ -13,22 +13,22 @@ PODS:
   - FMDB/common (2.5)
   - FMDB/standard (2.5):
     - FMDB/common
-  - OHHTTPStubs (4.6.0):
-    - OHHTTPStubs/Default (= 4.6.0)
-  - OHHTTPStubs/Core (4.6.0)
-  - OHHTTPStubs/Default (4.6.0):
+  - OHHTTPStubs (4.7.0):
+    - OHHTTPStubs/Default (= 4.7.0)
+  - OHHTTPStubs/Core (4.7.0)
+  - OHHTTPStubs/Default (4.7.0):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (4.6.0):
+  - OHHTTPStubs/JSON (4.7.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (4.6.0):
+  - OHHTTPStubs/NSURLSession (4.7.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (4.6.0)
-  - OHHTTPStubs/Swift (4.6.0):
+  - OHHTTPStubs/OHPathHelpers (4.7.0)
+  - OHHTTPStubs/Swift (4.7.0):
     - OHHTTPStubs/Core
-  - SwiftyJSON (2.3.1)
+  - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - 1PasswordExtension
@@ -50,11 +50,13 @@ CHECKOUT OPTIONS:
     :git: https://github.com/ccgus/fmdb.git
 
 SPEC CHECKSUMS:
-  1PasswordExtension: 9f471645d378283cb88c6d4bf502e4381a42c0ad
-  Alamofire: 7c16ca65f3c7e681fd925fd7f2dec7747ff96855
+  1PasswordExtension: a22573ad528dd63bd79c1f3b3813b17c2f86b91b
+  Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
-  FMDB: 8e59e93d20d76d0b135db26ecc83ae88d016076d
-  OHHTTPStubs: cb1aefbbeb4de4e741644455d4b945538e5248a2
-  SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
+  FMDB: e298c06b460dc13e3a1933c092972ea9c686481c
+  OHHTTPStubs: d2bf6a0f407620d67e75a1d3f12d86a2b1dd15c0
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 863839670982f963a0c0af7c9be3e51ae62d0a21
+
+COCOAPODS: 1.0.0.beta.2

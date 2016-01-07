@@ -13,6 +13,12 @@
   },
   "requires_arc": true,
   "default_subspecs": "standard",
+  "platforms": {
+    "osx": null,
+    "ios": null,
+    "tvos": null,
+    "watchos": null
+  },
   "subspecs": [
     {
       "name": "common",
