@@ -11,7 +11,7 @@ import FMDB
 import OperationKit
 import WaniKaniKit
 
-class DashboardViewController: UITableViewController, WebViewControllerDelegate {
+class DashboardViewController: UITableViewController, WebViewControllerDelegate, WKWebViewControllerDelegate {
     
     private struct SegueIdentifiers {
         static let radicalsProgress = "Show Radicals Progress"
@@ -538,6 +538,12 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate 
         }
     }
     
+    // MARK: - WKWebViewControllerDelegate
+    
+    func wkWebViewControllerDidFinish(controller: WKWebViewController) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     // MARK: - UITableViewDelegate
 
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -602,10 +608,10 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate 
             }
             presentViewController(vc, animated: true, completion: nil)
         case (.Links, 0): // Web Dashboard
-            let vc = WebViewController.forURL(WaniKaniURLs.dashboard, configBlock: webViewControllerCommonConfiguration)
+            let vc = WKWebViewController.forURL(WaniKaniURLs.dashboard, configBlock: wkWebViewControllerCommonConfiguration)
             presentViewController(vc, animated: true, completion: nil)
         case (.Links, 1): // Community Centre
-            let vc = WebViewController.forURL(WaniKaniURLs.communityCentre, configBlock: webViewControllerCommonConfiguration)
+            let vc = WKWebViewController.forURL(WaniKaniURLs.communityCentre, configBlock: wkWebViewControllerCommonConfiguration)
             presentViewController(vc, animated: true, completion: nil)
         default: break
         }
@@ -771,6 +777,10 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate 
     }
     
     private func webViewControllerCommonConfiguration(webViewController: WebViewController) {
+        webViewController.delegate = self
+    }
+    
+    private func wkWebViewControllerCommonConfiguration(webViewController: WKWebViewController) {
         webViewController.delegate = self
     }
     
