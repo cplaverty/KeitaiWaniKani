@@ -115,12 +115,13 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
     private lazy var updateSQL: String = {
         let columnValuePlaceholders = self.createColumnValuePlaceholders(self.columnCount)
         return "INSERT OR REPLACE INTO \(self.tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
-        }()
+    }()
     
     public func save(models: [Kanji], toDatabase database: FMDatabase) throws {
         let maxLevelToKeep = try! UserInformation.coder.loadFromDatabase(database)?.level ?? 0
         let levelsToReplace = Set(models.map { $0.level }).sort()
-        guard database.executeUpdate("DELETE FROM \(tableName) WHERE \(Columns.level) IN (?) OR \(Columns.level) > ?", levelsToReplace, maxLevelToKeep) else {
+        let deleteSql = "DELETE FROM \(tableName) WHERE \(Columns.level) > ? OR \(Columns.level) IN (\(self.createColumnValuePlaceholders(levelsToReplace.count)))"
+        guard database.executeUpdate(deleteSql, withArgumentsInArray: [maxLevelToKeep] + levelsToReplace) else {
             throw database.lastError()
         }
         
@@ -149,6 +150,19 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
         }
         
         return earliestDate >= since
+    }
+    
+    public func levelsNotUpdatedSince(since: NSDate, inDatabase database: FMDatabase) throws -> Set<Int> {
+        let sql = "SELECT DISTINCT \(Columns.level) FROM \(tableName) WHERE \(Columns.lastUpdateTimestamp) < ?"
+        guard let resultSet = database.executeQuery(sql, since) else {
+            throw database.lastError()
+        }
+        
+        var results = Set<Int>()
+        while resultSet.next() {
+            results.insert(resultSet.longForColumnIndex(0))
+        }
+        return results
     }
     
     public func maxLevel(database: FMDatabase) -> Int {

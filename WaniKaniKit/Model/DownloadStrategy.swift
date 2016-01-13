@@ -93,17 +93,23 @@ public struct DownloadStrategy {
     private func staleLevelsForCoder<Coder: ListItemDatabaseCoder>(coder: Coder, currentState: State) -> [Int]? {
         guard let studyQueue = currentState.studyQueue, userInformation = currentState.userInformation else { return nil }
         
+        let currentLevel = userInformation.level
+        let referenceDate: NSDate = studyQueue.lastUpdateTimestamp
+        let staleDate = NSCalendar.autoupdatingCurrentCalendar().dateByAddingUnit(.WeekOfYear, value: -2, toDate: referenceDate, options: [])!
+        
         var levelRange: [Int]? = nil
         databaseQueue.inDatabase {
             do {
-                let outstandingLessons = try coder.lessonsOutstanding($0).map {$0.level}
-                let outstandingReviews = try coder.reviewsDueBefore(studyQueue.lastUpdateTimestamp, database: $0).map {$0.level}
-                let currentLevel = userInformation.level
+                var staleLevels = try coder.levelsNotUpdatedSince(staleDate, inDatabase: $0)
+                staleLevels.unionInPlace(try coder.lessonsOutstanding($0).lazy.map {$0.level})
+                staleLevels.unionInPlace(try coder.reviewsDueBefore(studyQueue.lastUpdateTimestamp, database: $0).lazy.map {$0.level})
+                staleLevels.insert(currentLevel)
                 let maxSavedLevel = coder.maxLevel($0)
                 let missingLevels = maxSavedLevel < currentLevel ? ((maxSavedLevel + 1)...currentLevel) : currentLevel..<currentLevel
-                levelRange = Set(outstandingLessons + outstandingReviews + missingLevels).sort()
+                staleLevels.unionInPlace(missingLevels)
+                levelRange = staleLevels.sort()
             } catch {
-                DDLogWarn("Failed to determine reduced fetch set for \(Coder.self.dynamicType): \(error)")
+                DDLogError("Failed to determine reduced fetch set for \(Coder.self.dynamicType): \(error)")
             }
         }
         
