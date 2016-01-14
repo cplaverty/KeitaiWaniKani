@@ -112,4 +112,9 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
         return view
     }
     
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SRSDataItemInfoURL, let url = cell.srsDataItemInfoURL else { return }
+        
+        self.navigationController?.pushViewController(WKWebViewController(URL: url), animated: true)
+    }
 }

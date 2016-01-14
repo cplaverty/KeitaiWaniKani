@@ -28,6 +28,10 @@ private let dateComponentsFormatter: NSDateComponentsFormatter = {
     return formatter
     }()
 
+protocol SRSDataItemInfoURL {
+    var srsDataItemInfoURL: NSURL? { get }
+}
+
 private protocol SRSDataItemGuruProgressCollectionViewCell {
     typealias DataItem: SRSDataItem, Equatable
     
@@ -81,7 +85,8 @@ private extension SRSDataItemGuruProgressCollectionViewCell {
     
 }
 
-class RadicalGuruProgressCollectionViewCell: UICollectionViewCell, SRSDataItemGuruProgressCollectionViewCell {
+// MARK: - RadicalGuruProgressCollectionViewCell
+class RadicalGuruProgressCollectionViewCell: UICollectionViewCell, SRSDataItemGuruProgressCollectionViewCell, SRSDataItemInfoURL {
     
     // MARK: - Properties
     
@@ -91,6 +96,10 @@ class RadicalGuruProgressCollectionViewCell: UICollectionViewCell, SRSDataItemGu
                 updateUI()
             }
         }
+    }
+    
+    var srsDataItemInfoURL: NSURL? {
+        return dataItem.flatMap { NSURL(string: $0.meaning, relativeToURL: WaniKaniURLs.radicalRoot) }
     }
     
     private var getImageOperation: GetRadicalImageOperation? {
@@ -165,8 +174,8 @@ class RadicalGuruProgressCollectionViewCell: UICollectionViewCell, SRSDataItemGu
     
 }
 
-
-class KanjiGuruProgressCollectionViewCell: UICollectionViewCell, SRSDataItemGuruProgressCollectionViewCell {
+// MARK: - KanjiGuruProgressCollectionViewCell
+class KanjiGuruProgressCollectionViewCell: UICollectionViewCell, SRSDataItemGuruProgressCollectionViewCell, SRSDataItemInfoURL {
     
     // MARK: - Properties
     
@@ -176,6 +185,10 @@ class KanjiGuruProgressCollectionViewCell: UICollectionViewCell, SRSDataItemGuru
                 updateUI()
             }
         }
+    }
+    
+    var srsDataItemInfoURL: NSURL? {
+        return dataItem.flatMap { NSURL(string: $0.character.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLPathAllowedCharacterSet())!, relativeToURL: WaniKaniURLs.kanjiRoot) }
     }
     
     // MARK: - Outlets
