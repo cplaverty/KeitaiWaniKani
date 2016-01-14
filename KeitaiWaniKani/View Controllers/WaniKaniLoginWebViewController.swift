@@ -53,7 +53,24 @@ class WaniKaniLoginWebViewController: WebViewController {
                 ApplicationSettings.apiKeyVerified = true
                 delegate?.webViewControllerDidFinish(self)
             } else {
-                DDLogWarn("Got blank API key")
+                DDLogInfo("Got blank API key")
+                dispatch_async(dispatch_get_main_queue()) {
+                    let alert = UIAlertController(title: "No API key found.  Would you like to generate one now?", message: "KeitaiWaniKani requires an API key to function, but one could not be found for your account.  If you've never used a third-party app or user script, one may not have been generated and you should generate one now.", preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: "Generate API Key", style: .Default) { _ in
+                        if let result = self.webView.stringByEvaluatingJavaScriptFromString("$('#api-button').click();") {
+                            DDLogVerbose("Received script message API Key generation button \(result)")
+                        } else {
+                            DDLogWarn("Failed to click API Key generation button")
+                            self.showAlertWithTitle("Failed to generate API Key", message: "API Key could not be generated.  Please try again later.") { self.delegate?.webViewControllerDidFinish(self) }
+                        }
+                        })
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel) { _ in
+                        self.delegate?.webViewControllerDidFinish(self)
+                        })
+                    
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+                
                 showAlertWithTitle("No API key found", message: "Check your account page to ensure an API key has been generated and reload the page to try again.")
             }
         default: break
