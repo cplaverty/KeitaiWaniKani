@@ -14,7 +14,6 @@ final class GetSRSDataItemOperation: GroupOperation, NSProgressReporting {
     let radicalsOperation: GetRadicalsOperation
     let kanjiOperation: GetKanjiOperation
     let vocabularyOperation: GetVocabularyOperation
-    let reviewCountNotificationOperation: ReviewCountNotificationOperation
     
     let progress: NSProgress
     
@@ -44,10 +43,7 @@ final class GetSRSDataItemOperation: GroupOperation, NSProgressReporting {
         vocabularyOperation.addProgressListenerForDestinationProgress(progress)
         progress.resignCurrent()
         
-        reviewCountNotificationOperation = ReviewCountNotificationOperation(databaseQueue: databaseQueue)
-        reviewCountNotificationOperation.addDependencies([radicalsOperation, kanjiOperation, vocabularyOperation])
-        
-        super.init(operations: [radicalsOperation, kanjiOperation, vocabularyOperation, reviewCountNotificationOperation])
+        super.init(operations: [radicalsOperation, kanjiOperation, vocabularyOperation])
         progress.cancellationHandler = { self.cancel() }
         
         name = "Get SRS Data"

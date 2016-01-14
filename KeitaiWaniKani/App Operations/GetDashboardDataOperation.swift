@@ -19,6 +19,7 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
     let srsDataItemOperation: GetSRSDataItemOperation
     
     let reviewTimeNotificationOperation: ReviewTimeNotificationOperation
+    let reviewCountNotificationOperation: ReviewCountNotificationOperation
     
     let progress: NSProgress
     
@@ -74,12 +75,14 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         
         reviewTimeNotificationOperation = ReviewTimeNotificationOperation(databaseQueue: databaseQueue)
         reviewTimeNotificationOperation.addDependency(studyQueueOperation)
+        reviewCountNotificationOperation = ReviewCountNotificationOperation(databaseQueue: databaseQueue)
+        reviewCountNotificationOperation.addDependency(srsDataItemOperation)
         
         levelProgressionOperation.addDependency(studyQueueOperation)
         srsDistributionOperation.addDependency(studyQueueOperation)
         srsDataItemOperation.addDependency(studyQueueOperation)
         
-        super.init(operations: [dummy, studyQueueOperation, levelProgressionOperation, srsDistributionOperation, srsDataItemOperation, reviewTimeNotificationOperation])
+        super.init(operations: [dummy, studyQueueOperation, levelProgressionOperation, srsDistributionOperation, srsDataItemOperation, reviewTimeNotificationOperation, reviewCountNotificationOperation])
         progress.cancellationHandler = { self.cancel() }
         
         studyQueueOperation.addObserver(BlockObserver { _, _ in
