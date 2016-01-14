@@ -17,18 +17,18 @@ protocol WKWebViewControllerDelegate: class {
 
 class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate, WKWebViewControllerDelegate, WebViewBackForwardListTableViewControllerDelegate {
     
-    class func forURL(URL: NSURL, @noescape configBlock: (WKWebViewController) -> Void) -> UINavigationController {
-        let WKWebViewController = self.init(URL: URL)
-        configBlock(WKWebViewController)
+    class func forURL(URL: NSURL, @noescape configBlock: (WKWebViewController) -> Void = { _ in }) -> UINavigationController {
+        let wkWebViewController = self.init(URL: URL)
+        configBlock(wkWebViewController)
         
         let nc = UINavigationController(navigationBarClass: nil, toolbarClass: nil)
-        if WKWebViewController.toolbarItems?.isEmpty == false {
+        if wkWebViewController.toolbarItems?.isEmpty == false {
             nc.setToolbarHidden(false, animated: false)
         }
         nc.hidesBarsOnSwipe = true
         nc.hidesBarsWhenVerticallyCompact = true
         
-        nc.pushViewController(WKWebViewController, animated: false)
+        nc.pushViewController(wkWebViewController, animated: false)
         
         return nc
     }
@@ -141,7 +141,13 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     }()
     
     var shouldIncludeDoneButton: Bool {
-        return self.navigationController?.viewControllers.first == self
+        guard let nc = self.navigationController else { return false }
+        
+        let isFirst = nc.viewControllers.first == self
+        let presentingVC = self.presentingViewController
+        let presentedVC = presentingVC?.presentedViewController
+        
+        return isFirst && presentedVC == nc
     }
     
     // MARK: - Actions
