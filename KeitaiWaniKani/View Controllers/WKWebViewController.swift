@@ -57,6 +57,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         for webViewObservedKey in webViewObservedKeys {
             webView.removeObserver(self, forKeyPath: webViewObservedKey, context: &WKWebViewControllerObservationContext)
         }
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
     
     // MARK: - Properties

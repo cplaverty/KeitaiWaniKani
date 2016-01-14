@@ -48,6 +48,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         webView.delegate = nil
         backScreenEdgePanGesture?.removeTarget(self, action: nil)
         forwardScreenEdgePanGesture?.removeTarget(self, action: nil)
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
     
     // MARK: - Properties
