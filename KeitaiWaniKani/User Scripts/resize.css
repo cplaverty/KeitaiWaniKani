@@ -104,6 +104,10 @@ footer, #lessons-hotkey-footer {
 }
 
 @media (max-width: 767px) {
+    #item-info {
+        font-size: 100%;
+    }
+    
     #answer-form {
         font-size: 1.25em;
     }
