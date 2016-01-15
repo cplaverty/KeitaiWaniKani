@@ -88,10 +88,7 @@ extension ApplicationSettings {
     static func needsRefresh() -> Bool {
         guard let lastRefreshTime = self.lastRefreshTime else { return true }
         
-        let mostRecentAPIDataChangeTime = WaniKaniAPI.lastRefreshTimeFromNow()
-        let secondsSinceLastRefreshTime = lastRefreshTime.timeIntervalSinceDate(mostRecentAPIDataChangeTime)
-        // Only update if we haven't updated since the last refresh time
-        return secondsSinceLastRefreshTime <= 0
+        return WaniKaniAPI.needsRefresh(lastRefreshTime)
     }
     
 }

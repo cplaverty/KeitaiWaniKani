@@ -117,6 +117,8 @@ public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSO
                 }
                 
                 ++self.progress.completedUnitCount
+                
+                WaniKaniDarwinNotificationCenter.postModelUpdateMessage("\(Coder.ModelObject.self)")
             } catch {
                 DDLogWarn("Rolling back due to database error: \(error)")
                 rollback.memory = true

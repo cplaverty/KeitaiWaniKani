@@ -12,13 +12,13 @@ import WaniKaniKit
 
 class TodayViewController: UITableViewController, NCWidgetProviding {
     
-    // MARK: Properties
+    // MARK: - Properties
     
     private lazy var secureAppGroupPersistentStoreURL: NSURL = {
         let fm = NSFileManager.defaultManager()
         let directory = fm.containerURLForSecurityApplicationGroupIdentifier("group.uk.me.laverty.KeitaiWaniKani")!
         return directory.URLByAppendingPathComponent("WaniKaniData.sqlite")
-        }()
+    }()
     
     private var studyQueue: StudyQueue? {
         didSet {
@@ -28,7 +28,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         }
     }
     
-    // MARK: View Controller Lifecycle
+    // MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,21 +36,46 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         tableView.estimatedRowHeight = 95
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.separatorEffect = UIVibrancyEffect.notificationCenterVibrancyEffect()
+        
+        let nc = CFNotificationCenterGetDarwinNotifyCenter()
+        let observer = UnsafePointer<Void>(Unmanaged.passUnretained(self).toOpaque())
+        
+        CFNotificationCenterAddObserver(nc,
+            observer,
+            { (_, observer, _, _, userInfo) in
+                let dict = userInfo as Dictionary
+                let modelObject = dict[WaniKaniDarwinNotificationCenter.modelObjectUserInfoDictionaryKey] as? String
+                
+                NSLog("Got notification for model object of type \(modelObject)")
+                
+                guard modelObject == "\(StudyQueue.self)" else { return }
+                
+                let mySelf = Unmanaged<TodayViewController>.fromOpaque(COpaquePointer(observer)).takeUnretainedValue()
+                
+                mySelf.updateStudyQueue()
+            },
+            WaniKaniDarwinNotificationCenter.modelUpdateNotificationName,
+            nil,
+            .DeliverImmediately)
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let studyQueue = try? fetchStudyQueueFromDatabase() {
-            self.studyQueue = studyQueue
-        }
+        updateStudyQueue()
     }
     
     override func viewDidAppear(animated: Bool) {
         preferredContentSize = tableView.contentSize
     }
     
-    // MARK: NCWidgetProviding
+    deinit {
+        let nc = CFNotificationCenterGetDarwinNotifyCenter()
+        let observer = UnsafePointer<Void>(Unmanaged.passUnretained(self).toOpaque())
+        CFNotificationCenterRemoveObserver(nc, observer, WaniKaniDarwinNotificationCenter.modelUpdateNotificationName, nil)
+    }
+    
+    // MARK: - NCWidgetProviding
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         do {
@@ -69,7 +94,13 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         }
     }
     
-    // MARK: Implementation
+    // MARK: - Implementation
+    
+    func updateStudyQueue() {
+        if let studyQueue = try? self.fetchStudyQueueFromDatabase() {
+            self.studyQueue = studyQueue
+        }
+    }
     
     func fetchStudyQueueFromDatabase() throws -> StudyQueue? {
         let databasePath = secureAppGroupPersistentStoreURL.path!
@@ -88,7 +119,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         return try StudyQueue.coder.loadFromDatabase(database)
     }
     
-    // MARK: UITableViewDataSource
+    // MARK: - UITableViewDataSource
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -103,6 +134,13 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         cell.studyQueue = self.studyQueue
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.extensionContext?.openURL(NSURL(string: "kwk://launch/reviews")!, completionHandler: nil)
+        dispatch_async(dispatch_get_main_queue()) {
+            self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        }
     }
     
 }

@@ -106,6 +106,8 @@ public final class ParseListItemOperation<Coder: protocol<JSONDecoder, ListItemD
                 DDLogDebug("Saving data")
                 try self.coder.save(parsed, toDatabase: db)
                 ++self.progress.completedUnitCount
+                
+                WaniKaniDarwinNotificationCenter.postModelUpdateMessage("\(Coder.ModelObject.self)")
             } catch {
                 DDLogWarn("Rolling back due to database error: \(error)")
                 rollback.memory = true

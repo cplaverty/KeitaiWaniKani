@@ -34,6 +34,16 @@ private struct DatabaseMetadata {
     }
 }
 
+public struct WaniKaniDarwinNotificationCenter {
+    public static let modelUpdateNotificationName = "uk.me.laverty.KeitaiWaniKani.ModelUpdate"
+    public static let modelObjectUserInfoDictionaryKey = "ModelObject"
+    
+    public static func postModelUpdateMessage(modelObjectType: String) {
+        let nc = CFNotificationCenterGetDarwinNotifyCenter()
+        CFNotificationCenterPostNotification(nc, modelUpdateNotificationName, nil, [modelObjectUserInfoDictionaryKey: modelObjectType], true)
+    }
+}
+
 public struct WaniKaniAPI {
     public static let updateMinuteCount = 15
     public static let refreshTimeOffsetSeconds = Int(arc4random_uniform(25)) + 5
@@ -64,6 +74,13 @@ public struct WaniKaniAPI {
         offsetComponents.minute = updateMinuteCount
         offsetComponents.second = refreshTimeOffsetSeconds
         return calendar.dateByAddingComponents(offsetComponents, toDate: lastRefreshTime, options: [])!
+    }
+    
+    public static func needsRefresh(lastRefreshTime: NSDate) -> Bool {
+        let mostRecentAPIDataChangeTime = WaniKaniAPI.lastRefreshTimeFromNow()
+        let secondsSinceLastRefreshTime = lastRefreshTime.timeIntervalSinceDate(mostRecentAPIDataChangeTime)
+        // Only update if we haven't updated since the last refresh time
+        return secondsSinceLastRefreshTime <= 0
     }
     
     public static func databaseIsCurrentVersion(database: FMDatabase) throws -> Bool {
