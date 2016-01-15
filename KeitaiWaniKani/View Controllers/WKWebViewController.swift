@@ -267,12 +267,22 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
         DDLogWarn("Navigation failed: \(error)")
-        showAlertWithTitle("Failed to load page", message: error.localizedDescription)
+        showErrorDialog(error)
     }
     
     func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
         DDLogWarn("Navigation failed: \(error)")
-        showAlertWithTitle("Failed to load page", message: error.localizedDescription)
+        showErrorDialog(error)
+    }
+    
+    private func showErrorDialog(error: NSError) {
+        switch (error.domain, error.code) {
+            // Ignore navigation cancellation errors
+        case (NSURLErrorDomain, NSURLErrorCancelled), ("WebKitErrorDomain", 102):
+            break
+        default:
+            showAlertWithTitle("Failed to load page", message: error.localizedDescription ?? "Unknown error")
+        }
     }
     
     // MARK: - WKUIDelegate
