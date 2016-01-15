@@ -589,7 +589,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         guard let tableViewSection = TableViewSections(rawValue: indexPath.section) else {
             fatalError("Invalid section index \(indexPath.section) requested")
         }
-
+        
         switch (tableViewSection, indexPath.row) {
         case (.CurrentlyAvailable, 0): // Lessons
             let vc = WaniKaniReviewPageWebViewController.forURL(WaniKaniURLs.lessonSession, configBlock: webViewControllerCommonConfiguration)
@@ -614,6 +614,10 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             let vc = WKWebViewController.forURL(WaniKaniURLs.communityCentre, configBlock: wkWebViewControllerCommonConfiguration)
             presentViewController(vc, animated: true, completion: nil)
         default: break
+        }
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
         }
     }
     
