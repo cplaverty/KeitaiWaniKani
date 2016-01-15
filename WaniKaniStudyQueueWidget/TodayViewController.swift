@@ -24,6 +24,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         didSet {
             if studyQueue != oldValue {
                 tableView.reloadData()
+                preferredContentSize = tableView.contentSize
             }
         }
     }
@@ -125,10 +126,14 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("StudyQueue", forIndexPath: indexPath) as! StudyQueueTableViewCell
-        cell.studyQueue = self.studyQueue
-        
-        return cell
+        if let studyQueue = self.studyQueue {
+            let cell = tableView.dequeueReusableCellWithIdentifier("StudyQueue", forIndexPath: indexPath) as! StudyQueueTableViewCell
+            cell.studyQueue = studyQueue
+            
+            return cell
+        } else {
+            return tableView.dequeueReusableCellWithIdentifier("NotLoggedIn", forIndexPath: indexPath)
+        }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

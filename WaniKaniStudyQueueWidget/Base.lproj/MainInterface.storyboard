@@ -80,6 +80,28 @@
                                     <outlet property="timeToNextReviewLabel" destination="S9H-HW-p6A" id="SP8-ZK-7cm"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="NotLoggedIn" id="4uq-p3-Fg1" customClass="StudyQueueTableViewCell" customModule="WaniKaniStudyQueueWidget" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="123" width="320" height="95"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="4uq-p3-Fg1" id="cnh-uy-wyq">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You must be logged in to see upcoming reviews" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYq-iz-TdI">
+                                            <rect key="frame" x="8" y="8" width="304" height="78"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="nYq-iz-TdI" secondAttribute="bottom" id="HyW-KG-Sl7"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="nYq-iz-TdI" secondAttribute="trailing" id="Jki-sT-d11"/>
+                                        <constraint firstItem="nYq-iz-TdI" firstAttribute="leading" secondItem="cnh-uy-wyq" secondAttribute="leadingMargin" id="QCL-hi-CuK"/>
+                                        <constraint firstItem="nYq-iz-TdI" firstAttribute="top" secondItem="cnh-uy-wyq" secondAttribute="topMargin" id="T8R-Rg-048"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <sections/>
                         <connections>
