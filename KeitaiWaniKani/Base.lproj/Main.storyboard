@@ -7,6 +7,7 @@
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
     </dependencies>
     <scenes>
         <!--Home Screen View Controller-->
@@ -438,7 +439,10 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="vj5-vi-TN2" kind="show" identifier="" id="kuC-Pn-MLm"/>
+                                            <segue destination="vj5-vi-TN2" kind="show" identifier="" id="kuC-Pn-MLm">
+                                                <segue key="commit" inheritsFrom="parent" id="9Wz-gU-tW8"/>
+                                                <segue key="preview" inheritsFrom="commit" id="mHm-ef-czy"/>
+                                            </segue>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -1357,6 +1361,7 @@
         <image name="Settings" width="23" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="kuC-Pn-MLm"/>
         <segue reference="0Hn-Mk-onL"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.1126213819" green="0.58001059290000001" blue="0.58367556330000003" alpha="1" colorSpace="calibratedRGB"/>
