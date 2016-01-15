@@ -56,7 +56,7 @@ private struct ClassifiedSRSDataItems {
     }
 }
 
-class SRSDataItemCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class SRSDataItemCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, WKWebViewControllerDelegate {
     
     // MARK: - Properties
     
@@ -115,6 +115,13 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SRSDataItemInfoURL, let url = cell.srsDataItemInfoURL else { return }
         
-        self.navigationController?.pushViewController(WKWebViewController.forURL(url), animated: true)
+        self.presentViewController(WKWebViewController.forURL(url) { $0.delegate = self }, animated: true, completion: nil)
     }
+    
+    // MARK: - WKWebViewControllerDelegate
+    
+    func wkWebViewControllerDidFinish(controller: WKWebViewController) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 }
