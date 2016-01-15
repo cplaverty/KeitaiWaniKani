@@ -32,6 +32,14 @@ footer, #lessons-hotkey-footer {
     
     /* 4" iPhone */
     @media (min-width: 320px) and (max-width: 767px) and (min-height: 500px) {
+        #question #question-type h1 {
+            font-size: 0.85em
+        }
+        
+        #answer-form input[type=text], #answer-form button {
+            font-size: 0.85em;
+        }
+        
         #reviews #question #character, #lessons header #main-info #character {
             font-size: 48px !important; line-height: 108px !important;
         }
@@ -39,6 +47,14 @@ footer, #lessons-hotkey-footer {
 
     /* 4.7" iPhone */
     @media (min-width: 375px) and (max-width: 767px) {
+        #question #question-type h1 {
+            font-size: 1em
+        }
+        
+        #answer-form input[type=text], #answer-form button {
+            font-size: 1em;
+        }
+        
         #reviews #question #character, #lessons header #main-info #character {
             font-size: 56px !important; line-height: 120px !important;
         }
