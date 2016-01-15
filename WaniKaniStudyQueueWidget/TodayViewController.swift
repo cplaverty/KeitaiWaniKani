@@ -42,19 +42,14 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         
         CFNotificationCenterAddObserver(nc,
             observer,
-            { (_, observer, _, _, userInfo) in
-                let dict = userInfo as Dictionary
-                let modelObject = dict[WaniKaniDarwinNotificationCenter.modelObjectUserInfoDictionaryKey] as? String
-                
-                NSLog("Got notification for model object of type \(modelObject)")
-                
-                guard modelObject == "\(StudyQueue.self)" else { return }
-                
+            { (_, observer, name, _, _) in
+                NSLog("Got notification for \(name)")
                 let mySelf = Unmanaged<TodayViewController>.fromOpaque(COpaquePointer(observer)).takeUnretainedValue()
-                
-                mySelf.updateStudyQueue()
+                dispatch_async(dispatch_get_main_queue()) {
+                    mySelf.updateStudyQueue()
+                }
             },
-            WaniKaniDarwinNotificationCenter.modelUpdateNotificationName,
+            WaniKaniDarwinNotificationCenter.notificationNameForModelObjectType("\(StudyQueue.self)"),
             nil,
             .DeliverImmediately)
     }

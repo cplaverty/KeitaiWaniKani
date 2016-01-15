@@ -36,11 +36,14 @@ private struct DatabaseMetadata {
 
 public struct WaniKaniDarwinNotificationCenter {
     public static let modelUpdateNotificationName = "uk.me.laverty.KeitaiWaniKani.ModelUpdate"
-    public static let modelObjectUserInfoDictionaryKey = "ModelObject"
+    
+    public static func notificationNameForModelObjectType(modelObjectType: String) -> String {
+        return "\(modelUpdateNotificationName).\(modelObjectType)"
+    }
     
     public static func postModelUpdateMessage(modelObjectType: String) {
         let nc = CFNotificationCenterGetDarwinNotifyCenter()
-        CFNotificationCenterPostNotification(nc, modelUpdateNotificationName, nil, [modelObjectUserInfoDictionaryKey: modelObjectType], true)
+        CFNotificationCenterPostNotification(nc, notificationNameForModelObjectType(modelObjectType), nil, nil, true)
     }
 }
 
