@@ -62,6 +62,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
         preferredContentSize = tableView.contentSize
     }
     
