@@ -13,6 +13,7 @@ struct ApplicationSettingKeys {
     static let apiKeyVerified = "apiKeyVerified"
     static let purgeDatabase = "purgeDatabase"
     static let lastRefreshTime = "lastRefreshTime"
+    static let disableNotifications = "disableNotifications"
     static let userScriptIgnoreAnswerEnabled = "userScript-IgnoreAnswer"
     static let userScriptDoubleCheckEnabled = "userScript-DoubleCheck"
     static let userScriptWaniKaniImproveEnabled = "userScript-WaniKaniImprove"
@@ -45,6 +46,11 @@ struct ApplicationSettings {
     static var purgeDatabase: Bool {
         get { return userDefaults.boolForKey(ApplicationSettingKeys.purgeDatabase) }
         set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.purgeDatabase) }
+    }
+    
+    static var disableNotifications: Bool {
+        get { return userDefaults.boolForKey(ApplicationSettingKeys.disableNotifications) }
+        set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.disableNotifications) }
     }
     
     static var lastRefreshTime: NSDate? {

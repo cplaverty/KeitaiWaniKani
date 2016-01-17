@@ -20,9 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Application lifecycle
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // Logging
         #if DEBUG
             defaultDebugLevel = DDLogLevel.Verbose
-            #else
+        #else
             // TODO: Change to Info once stable
             defaultDebugLevel = DDLogLevel.Debug
         #endif
@@ -37,6 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDLog.addLogger(fileLogger)
         
         DDLogInfo("Starting new instance (logging level \(defaultDebugLevel))")
+
+        // Check for notification disable hook (used by Snapshot)
+        DDLogDebug("Notifications disabled? \(ApplicationSettings.disableNotifications)")
+        UserNotificationCondition.notificationsEnabled = !ApplicationSettings.disableNotifications
         
         UINavigationBar.appearance().tintColor = ApplicationSettings.globalTintColor()
         UINavigationBar.appearance().barTintColor = ApplicationSettings.globalBarTintColor()
