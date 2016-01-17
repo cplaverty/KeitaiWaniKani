@@ -10,7 +10,7 @@ import XCTest
 
 class WaniKaniAPIResourceResolverTests: XCTestCase {
     let apiVersion = "v1.4"
-    let apiKey = "30a4916c906b5e9e041cc5b1f22011f9"
+    let apiKey = "TEST_API_KEY"
     
     func testUserInformation() {
         let expected = NSURL(string: "https://www.wanikani.com/api/\(apiVersion)/user/\(apiKey)/user-information")
