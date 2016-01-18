@@ -70,7 +70,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     deinit {
         let nc = CFNotificationCenterGetDarwinNotifyCenter()
         let observer = UnsafePointer<Void>(Unmanaged.passUnretained(self).toOpaque())
-        CFNotificationCenterRemoveObserver(nc, observer, WaniKaniDarwinNotificationCenter.modelUpdateNotificationName, nil)
+        CFNotificationCenterRemoveEveryObserver(nc, observer)
     }
     
     // MARK: - NCWidgetProviding
