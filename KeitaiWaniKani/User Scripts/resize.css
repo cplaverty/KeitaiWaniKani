@@ -20,20 +20,28 @@ footer, #lessons-hotkey-footer {
     display: none !important;
 }
 
+#lessons button.audio-btn {
+    margin: 0;
+    padding: 0 0.5em;
+    font-size: 1.5em;
+    vertical-align: middle;
+}
+
 /* Portrait */
 @media only screen and (orientation: portrait) {
     
     /* 3.5" iPhone */
     @media (min-width: 320px) and (max-width: 767px) {
         #reviews #question #character, #lessons header #main-info #character {
-            font-size: 42px !important; line-height: 96px !important;
+            font-size: 2.75em !important;
+            line-height: 2.15em !important;
         }
     }
     
     /* 4" iPhone */
-    @media (min-width: 320px) and (max-width: 767px) and (min-height: 500px) {
+    @media (min-width: 320px) and (max-width: 767px) and (min-height: 481px) {
         #question #question-type h1 {
-            font-size: 0.85em
+            font-size: 1em;
         }
         
         #answer-form input[type=text], #answer-form button {
@@ -41,14 +49,27 @@ footer, #lessons-hotkey-footer {
         }
         
         #reviews #question #character, #lessons header #main-info #character {
-            font-size: 48px !important; line-height: 108px !important;
+            font-size: 3.25em !important;
+            line-height: 2.5em !important;
         }
     }
-
+    
     /* 4.7" iPhone */
     @media (min-width: 375px) and (max-width: 767px) {
+        #lessons {
+            font-size: 1.25em;
+        }
+        
+        .screen-overlay .btn-set {
+            font-size: 1em;
+        }
+        
+        .srs {
+            font-size: 1em;
+        }
+        
         #question #question-type h1 {
-            font-size: 1em
+            font-size: 1.25em
         }
         
         #answer-form input[type=text], #answer-form button {
@@ -56,14 +77,14 @@ footer, #lessons-hotkey-footer {
         }
         
         #reviews #question #character, #lessons header #main-info #character {
-            font-size: 56px !important; line-height: 120px !important;
+            font-size: 3.75em !important;
         }
     }
     
     /* 5.5" iPhone */
     @media (min-width: 414px) and (max-width: 767px) {
         #reviews #question #character, #lessons header #main-info #character {
-            font-size: 64px !important; line-height: 133px !important;
+            font-size: 4.25em !important;
         }
     }
     
@@ -73,7 +94,7 @@ footer, #lessons-hotkey-footer {
             font-size: 140px !important; line-height: 300px !important;
         }
     }
-
+    
 }
 
 /* Landscape */
@@ -138,5 +159,9 @@ footer, #lessons-hotkey-footer {
     
     #answer-exception.answer-exception-form {
         top: 2.5em;
+    }
+    
+    #additional-content ul li span {
+        font-size: 1em;
     }
 }
