@@ -92,6 +92,7 @@ public final class VocabularyCoder: SRSDataItemCoder, ResourceHandler, JSONDecod
         guard let resultSet = database.executeQuery(sql) else {
             throw database.lastError()
         }
+        defer { resultSet.close() }
         
         var results = [Vocabulary]()
         while resultSet.next() {
@@ -137,6 +138,7 @@ public final class VocabularyCoder: SRSDataItemCoder, ResourceHandler, JSONDecod
         guard let resultSet = database.executeQuery(sql, since) else {
             throw database.lastError()
         }
+        defer { resultSet.close() }
         
         var results = Set<Int>()
         while resultSet.next() {
@@ -154,6 +156,7 @@ public final class VocabularyCoder: SRSDataItemCoder, ResourceHandler, JSONDecod
         guard let resultSet = database.executeQuery(sql) else {
             throw database.lastError()
         }
+        defer { resultSet.close() }
         
         var results = [Vocabulary]()
         while resultSet.next() {
@@ -168,6 +171,7 @@ public final class VocabularyCoder: SRSDataItemCoder, ResourceHandler, JSONDecod
         guard let resultSet = database.executeQuery(sql, date) else {
             throw database.lastError()
         }
+        defer { resultSet.close() }
         
         var results = [Vocabulary]()
         while resultSet.next() {

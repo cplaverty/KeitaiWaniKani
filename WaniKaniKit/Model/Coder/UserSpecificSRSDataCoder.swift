@@ -253,6 +253,7 @@ extension SRSDataItemCoder {
         guard let resultSet = database.executeQuery(sql, withParameterDictionary: queryArgs) else {
             throw database.lastError()
         }
+        defer { resultSet.close() }
         
         var results = [SRSReviewCounts]()
         while resultSet.next() {

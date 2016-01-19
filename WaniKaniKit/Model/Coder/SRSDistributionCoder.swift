@@ -76,6 +76,7 @@ public final class SRSDistributionCoder: SRSItemCountsItem, ResourceHandler, JSO
         guard let resultSet = database.executeQuery("SELECT \(columnNames) FROM \(self.dynamicType.tableName)") else {
             throw database.lastError()
         }
+        defer { resultSet.close() }
         
         var countsBySRSLevel = [SRSLevel: SRSItemCounts]()
         var lastUpdateTimestamp: NSDate?
@@ -97,7 +98,7 @@ public final class SRSDistributionCoder: SRSItemCountsItem, ResourceHandler, JSO
     private lazy var updateSQL: String = {
         let columnValuePlaceholders = self.createColumnValuePlaceholders(self.columnCount)
         return "INSERT INTO \(self.dynamicType.tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
-        }()
+    }()
     
     public func save(model: SRSDistribution, toDatabase database: FMDatabase) throws {
         guard database.executeUpdate("DELETE FROM \(self.dynamicType.tableName)") else {

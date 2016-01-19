@@ -75,6 +75,7 @@ public final class StudyQueueCoder: ResourceHandler, JSONDecoder, SingleItemData
         guard let resultSet = database.executeQuery("SELECT \(columnNames) FROM \(self.dynamicType.tableName)") else {
             throw database.lastError()
         }
+        defer { resultSet.close() }
         
         var result: StudyQueue? = nil
         if resultSet.next() {
@@ -94,7 +95,7 @@ public final class StudyQueueCoder: ResourceHandler, JSONDecoder, SingleItemData
     private lazy var updateSQL: String = {
         let columnValuePlaceholders = self.createColumnValuePlaceholders(self.columnCount)
         return "INSERT INTO \(self.dynamicType.tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
-        }()
+    }()
     
     public func save(model: StudyQueue, toDatabase database: FMDatabase) throws {
         guard database.executeUpdate("DELETE FROM \(self.dynamicType.tableName)") else {

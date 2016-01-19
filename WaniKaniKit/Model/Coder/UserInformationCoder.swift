@@ -99,6 +99,7 @@ public final class UserInformationCoder: ResourceHandler, JSONDecoder, SingleIte
         guard let resultSet = database.executeQuery("SELECT \(columnNames) FROM \(self.dynamicType.tableName)") else {
             throw database.lastError()
         }
+        defer { resultSet.close() }
         
         var result: UserInformation? = nil
         if resultSet.next() {
@@ -124,7 +125,7 @@ public final class UserInformationCoder: ResourceHandler, JSONDecoder, SingleIte
     private lazy var updateSQL: String = {
         let columnValuePlaceholders = self.createColumnValuePlaceholders(self.columnCount)
         return "INSERT INTO \(self.dynamicType.tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
-        }()
+    }()
     
     public func save(model: UserInformation, toDatabase database: FMDatabase) throws {
         guard database.executeUpdate("DELETE FROM \(self.dynamicType.tableName)") else {
