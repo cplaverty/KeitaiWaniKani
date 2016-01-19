@@ -20,7 +20,7 @@ footer, #lessons-hotkey-footer {
     display: none !important;
 }
 
-#lessons button.audio-btn {
+#lessons #supplement-info button.audio-btn {
     margin: 0;
     padding: 0 0.5em;
     font-size: 1.5em;
