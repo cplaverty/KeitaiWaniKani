@@ -112,6 +112,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
             NSLog("Database failed to open! \(database.lastError())")
             throw database.lastError()
         }
+        defer { database.close() }
         
         NSLog("Fetching study queue from database")
         return try StudyQueue.coder.loadFromDatabase(database)
