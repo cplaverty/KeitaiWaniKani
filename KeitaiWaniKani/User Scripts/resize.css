@@ -60,6 +60,10 @@ footer, #lessons-hotkey-footer {
             font-size: 1.25em;
         }
         
+        #answer-exception {
+            font-size: 0.8em;
+        }
+        
         .srs {
             font-size: 1em;
         }
@@ -147,14 +151,6 @@ footer, #lessons-hotkey-footer {
     
     #summary-button, #header-buttons, #reviews #stats, #lessons #stats {
         font-size: 14px;
-    }
-    
-    #answer-exception {
-        font-size: 1em;
-    }
-    
-    #answer-exception.answer-exception-form {
-        top: 2.5em;
     }
     
     #additional-content ul li span {
