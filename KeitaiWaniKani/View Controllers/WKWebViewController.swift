@@ -37,12 +37,13 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     required init(URL: NSURL) {
         super.init(nibName: nil, bundle: nil)
+        self.webView = createWebViewWithConfiguration()
         self.URL = URL
     }
     
     required init(configuration: WKWebViewConfiguration) {
         super.init(nibName: nil, bundle: nil)
-        self.webViewConfiguration = configuration
+        self.webView = createWebViewWithConfiguration(configuration)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,7 +55,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         webView.navigationDelegate = nil
         webView.UIDelegate = nil
         // Unregister the listeners on the web view
-        for webViewObservedKey in webViewObservedKeys {
+        for webViewObservedKey in self.webViewObservedKeys {
             webView.removeObserver(self, forKeyPath: webViewObservedKey, context: &WKWebViewControllerObservationContext)
         }
         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
@@ -68,7 +69,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     var allowsBackForwardNavigationGestures: Bool { return true }
     
-    lazy var webViewConfiguration: WKWebViewConfiguration = {
+    private static var defaultWebViewConfiguration: WKWebViewConfiguration = {
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let config = WKWebViewConfiguration()
         config.allowsInlineMediaPlayback = true
@@ -78,13 +79,6 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
             config.requiresUserActionForMediaPlayback = false
         } else {
             config.mediaPlaybackRequiresUserAction = false
-        }
-        
-        if let userScripts = self.getUserScripts() {
-            for script in userScripts {
-                let wkUserScript = WKUserScript(source: script, injectionTime: .AtDocumentEnd, forMainFrameOnly: true)
-                config.userContentController.addUserScript(wkUserScript)
-            }
         }
         
         return config
@@ -105,8 +99,10 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     }()
     
     private let webViewObservedKeys = ["canGoBack", "canGoForward", "estimatedProgress", "loading", "URL"]
-    lazy var webView: WKWebView = {
-        let webView = WKWebView(frame: self.view.bounds, configuration: self.webViewConfiguration)
+    private(set) var webView: WKWebView!
+    
+    private func createWebViewWithConfiguration(webViewConfiguration: WKWebViewConfiguration = defaultWebViewConfiguration) -> WKWebView {
+        let webView = WKWebView(frame: CGRect.zero, configuration: webViewConfiguration)
         webView.scrollView.delegate = self
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.navigationDelegate = self
@@ -121,7 +117,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         }
         
         return webView
-    }()
+    }
     
     lazy var backButton: UIBarButtonItem = {
         let item = UIBarButtonItem(image: UIImage(named: "ArrowLeft"), style: .Plain, target: self, action: "backButtonTouched:forEvent:")
@@ -361,6 +357,13 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let userScripts = self.getUserScripts() {
+            for script in userScripts {
+                let wkUserScript = WKUserScript(source: script, injectionTime: .AtDocumentEnd, forMainFrameOnly: true)
+                webView.configuration.userContentController.addUserScript(wkUserScript)
+            }
+        }
         
         self.view.addSubview(webView)
         self.view.addSubview(statusBarView)
