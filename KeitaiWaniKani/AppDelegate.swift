@@ -39,9 +39,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DDLogInfo("Starting new instance (logging level \(defaultDebugLevel))")
 
-        // Check for notification disable hook (used by Snapshot)
-        DDLogDebug("Notifications disabled? \(ApplicationSettings.disableNotifications)")
-        UserNotificationCondition.notificationsEnabled = !ApplicationSettings.disableNotifications
+        // Check if we've been launched by Snapshot
+        if NSUserDefaults.standardUserDefaults().boolForKey("FASTLANE_SNAPSHOT") {
+            DDLogInfo("Detected snapshot run: setting login cookie and disabling notification prompts")
+            if let loginCookieValue = NSUserDefaults.standardUserDefaults().stringForKey("LOGIN_COOKIE") {
+            let loginCookie = NSHTTPCookie(properties: [
+                NSHTTPCookieDomain: "www.wanikani.com",
+                NSHTTPCookieName: "remember_user_token",
+                NSHTTPCookiePath: "/",
+                NSHTTPCookieSecure: "TRUE",
+                NSHTTPCookieValue: loginCookieValue
+                ])!
+                
+                DDLogDebug("Setting login cookie value \(loginCookieValue)")
+                NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(loginCookie)
+                ApplicationSettings.apiKeyVerified = false
+            }
+        
+            UserNotificationCondition.notificationsEnabled = false
+        }
         
         UINavigationBar.appearance().tintColor = ApplicationSettings.globalTintColor()
         UINavigationBar.appearance().barTintColor = ApplicationSettings.globalBarTintColor()
