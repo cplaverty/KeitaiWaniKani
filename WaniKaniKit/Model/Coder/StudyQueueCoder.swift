@@ -61,20 +61,14 @@ public final class StudyQueueCoder: ResourceHandler, JSONDecoder, SingleItemData
     
     public func createTable(database: FMDatabase, dropFirst: Bool) throws {
         if dropFirst {
-            guard database.executeUpdate("DROP TABLE IF EXISTS \(self.dynamicType.tableName)") else {
-                throw database.lastError()
-            }
+            try database.executeUpdate("DROP TABLE IF EXISTS \(self.dynamicType.tableName)")
         }
         
-        guard database.executeUpdate("CREATE TABLE IF NOT EXISTS \(self.dynamicType.tableName)(\(columnDefinitions))") else {
-            throw database.lastError()
-        }
+        try database.executeUpdate("CREATE TABLE IF NOT EXISTS \(self.dynamicType.tableName)(\(columnDefinitions))")
     }
     
     public func loadFromDatabase(database: FMDatabase) throws -> StudyQueue? {
-        guard let resultSet = database.executeQuery("SELECT \(columnNames) FROM \(self.dynamicType.tableName)") else {
-            throw database.lastError()
-        }
+        let resultSet = try database.executeQuery("SELECT \(columnNames) FROM \(self.dynamicType.tableName)")
         defer { resultSet.close() }
         
         var result: StudyQueue? = nil
@@ -87,8 +81,6 @@ public final class StudyQueueCoder: ResourceHandler, JSONDecoder, SingleItemData
                 lastUpdateTimestamp: resultSet.dateForColumn(Columns.lastUpdateTimestamp) as NSDate)
         }
         
-        assert(!resultSet.next(), "Expected only a single row of data")
-        
         return result
     }
     
@@ -98,9 +90,7 @@ public final class StudyQueueCoder: ResourceHandler, JSONDecoder, SingleItemData
     }()
     
     public func save(model: StudyQueue, toDatabase database: FMDatabase) throws {
-        guard database.executeUpdate("DELETE FROM \(self.dynamicType.tableName)") else {
-            throw database.lastError()
-        }
+        try database.executeUpdate("DELETE FROM \(self.dynamicType.tableName)")
         
         let columnValues: [AnyObject] = [
             model.lessonsAvailable,
@@ -111,14 +101,11 @@ public final class StudyQueueCoder: ResourceHandler, JSONDecoder, SingleItemData
             model.lastUpdateTimestamp
         ]
         
-        guard database.executeUpdate(updateSQL, withArgumentsInArray: columnValues) else {
-            throw database.lastError()
-        }
+        try database.executeUpdate(updateSQL, values: columnValues)
     }
     
     public func hasBeenUpdatedSince(since: NSDate, inDatabase database: FMDatabase) throws -> Bool {
-        guard let earliestDate = database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(self.dynamicType.tableName)") else {
-            if database.hadError() { throw database.lastError() }
+        guard let earliestDate = try database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(self.dynamicType.tableName)") else {
             return false
         }
         

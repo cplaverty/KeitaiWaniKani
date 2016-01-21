@@ -250,6 +250,7 @@
  */
 
 - (void)setApplicationIDString:(NSString*)string;
+
 #endif
 
 ///-----------------------------------

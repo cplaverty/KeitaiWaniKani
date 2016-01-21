@@ -3,8 +3,7 @@ use_frameworks!
 
 target 'KeitaiWaniKani' do
     pod 'Alamofire'
-    #pod 'FMDB', '~> 2.5'
-    pod 'FMDB', :git => 'https://github.com/ccgus/fmdb.git', :branch => 'swiftFramework'
+    pod 'FMDB'
     pod 'SwiftyJSON'
     pod 'CocoaLumberjack/Swift'
     pod '1PasswordExtension'

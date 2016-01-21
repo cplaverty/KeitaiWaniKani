@@ -76,9 +76,7 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
     
     public func createTable(database: FMDatabase, dropFirst: Bool) throws {
         if dropFirst {
-            guard database.executeUpdate("DROP TABLE IF EXISTS \(tableName)") else {
-                throw database.lastError()
-            }
+            try database.executeUpdate("DROP TABLE IF EXISTS \(tableName)")
         }
         
         let createTable = "CREATE TABLE IF NOT EXISTS \(tableName)(\(columnDefinitions))"
@@ -100,9 +98,7 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
             sql += " WHERE \(Columns.level) = \(level)"
         }
         
-        guard let resultSet = database.executeQuery(sql) else {
-            throw database.lastError()
-        }
+        let resultSet = try database.executeQuery(sql)
         defer { resultSet.close() }
         
         var results = [Kanji]()
@@ -122,9 +118,7 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
         let maxLevelToKeep = try! UserInformation.coder.loadFromDatabase(database)?.level ?? 0
         let levelsToReplace = Set(models.map { $0.level }).sort()
         let deleteSql = "DELETE FROM \(tableName) WHERE \(Columns.level) > ? OR \(Columns.level) IN (\(self.createColumnValuePlaceholders(levelsToReplace.count)))"
-        guard database.executeUpdate(deleteSql, withArgumentsInArray: [maxLevelToKeep] + levelsToReplace) else {
-            throw database.lastError()
-        }
+        try database.executeUpdate(deleteSql, values: [maxLevelToKeep] + levelsToReplace)
         
         for model in models {
             let columnValues: [AnyObject] = [
@@ -138,15 +132,12 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
                 model.lastUpdateTimestamp
                 ] + srsDataColumnValues(model.userSpecificSRSData)
             
-            guard database.executeUpdate(updateSQL, withArgumentsInArray: columnValues) else {
-                throw database.lastError()
-            }
+            try database.executeUpdate(updateSQL, values: columnValues)
         }
     }
     
     public func hasBeenUpdatedSince(since: NSDate, inDatabase database: FMDatabase) throws -> Bool {
-        guard let earliestDate = database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(tableName)") else {
-            if database.hadError() { throw database.lastError() }
+        guard let earliestDate = try database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(tableName)") else {
             return false
         }
         
@@ -155,9 +146,7 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
     
     public func levelsNotUpdatedSince(since: NSDate, inDatabase database: FMDatabase) throws -> Set<Int> {
         let sql = "SELECT DISTINCT \(Columns.level) FROM \(tableName) WHERE \(Columns.lastUpdateTimestamp) < ?"
-        guard let resultSet = database.executeQuery(sql, since) else {
-            throw database.lastError()
-        }
+        let resultSet = try database.executeQuery(sql, since)
         defer { resultSet.close() }
         
         var results = Set<Int>()
@@ -167,15 +156,13 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
         return results
     }
     
-    public func maxLevel(database: FMDatabase) -> Int {
-        return database.longForQuery("SELECT MAX(\(Columns.level)) FROM \(tableName)") ?? 0
+    public func maxLevel(database: FMDatabase) throws -> Int {
+        return try database.longForQuery("SELECT MAX(\(Columns.level)) FROM \(tableName)") ?? 0
     }
     
     public func lessonsOutstanding(database: FMDatabase) throws -> [Kanji] {
         let sql = "SELECT \(columnNames) FROM \(tableName) WHERE \(UserSpecificSRSDataColumns.dateAvailable) IS NULL"
-        guard let resultSet = database.executeQuery(sql) else {
-            throw database.lastError()
-        }
+        let resultSet = try database.executeQuery(sql)
         defer { resultSet.close() }
         
         var results = [Kanji]()
@@ -188,9 +175,7 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
     
     public func reviewsDueBefore(date: NSDate, database: FMDatabase) throws -> [Kanji] {
         let sql = "SELECT \(columnNames) FROM \(tableName) WHERE \(UserSpecificSRSDataColumns.dateAvailable) < ? AND \(UserSpecificSRSDataColumns.burned) = 0"
-        guard let resultSet = database.executeQuery(sql, date) else {
-            throw database.lastError()
-        }
+        let resultSet = try database.executeQuery(sql, date)
         defer { resultSet.close() }
         
         var results = [Kanji]()

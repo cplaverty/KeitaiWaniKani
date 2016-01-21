@@ -85,20 +85,14 @@ public final class UserInformationCoder: ResourceHandler, JSONDecoder, SingleIte
     
     public func createTable(database: FMDatabase, dropFirst: Bool) throws {
         if dropFirst {
-            guard database.executeUpdate("DROP TABLE IF EXISTS \(self.dynamicType.tableName)") else {
-                throw database.lastError()
-            }
+            try database.executeUpdate("DROP TABLE IF EXISTS \(self.dynamicType.tableName)")
         }
         
-        guard database.executeUpdate("CREATE TABLE IF NOT EXISTS \(self.dynamicType.tableName)(\(columnDefinitions))") else {
-            throw database.lastError()
-        }
+        try database.executeUpdate("CREATE TABLE IF NOT EXISTS \(self.dynamicType.tableName)(\(columnDefinitions))")
     }
     
     public func loadFromDatabase(database: FMDatabase) throws -> UserInformation? {
-        guard let resultSet = database.executeQuery("SELECT \(columnNames) FROM \(self.dynamicType.tableName)") else {
-            throw database.lastError()
-        }
+        let resultSet = try database.executeQuery("SELECT \(columnNames) FROM \(self.dynamicType.tableName)")
         defer { resultSet.close() }
         
         var result: UserInformation? = nil
@@ -117,8 +111,6 @@ public final class UserInformationCoder: ResourceHandler, JSONDecoder, SingleIte
                 lastUpdateTimestamp: resultSet.dateForColumn(Columns.lastUpdateTimestamp))
         }
         
-        assert(!resultSet.next(), "Expected only a single row of data")
-        
         return result
     }
     
@@ -128,9 +120,7 @@ public final class UserInformationCoder: ResourceHandler, JSONDecoder, SingleIte
     }()
     
     public func save(model: UserInformation, toDatabase database: FMDatabase) throws {
-        guard database.executeUpdate("DELETE FROM \(self.dynamicType.tableName)") else {
-            throw database.lastError()
-        }
+        try database.executeUpdate("DELETE FROM \(self.dynamicType.tableName)")
         
         let columnValues: [AnyObject] = [
             model.username,
@@ -147,14 +137,11 @@ public final class UserInformationCoder: ResourceHandler, JSONDecoder, SingleIte
             model.lastUpdateTimestamp
         ]
         
-        guard database.executeUpdate(updateSQL, withArgumentsInArray: columnValues) else {
-            throw database.lastError()
-        }
+        try database.executeUpdate(updateSQL, values: columnValues)
     }
     
     public func hasBeenUpdatedSince(since: NSDate, inDatabase database: FMDatabase) throws -> Bool {
-        guard let earliestDate = database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(self.dynamicType.tableName)") else {
-            if database.hadError() { throw database.lastError() }
+        guard let earliestDate = try database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(self.dynamicType.tableName)") else {
             return false
         }
         

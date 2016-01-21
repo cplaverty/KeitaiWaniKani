@@ -109,8 +109,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         
         let database = FMDatabase(path: databasePath)
         guard database.open() else {
-            NSLog("Database failed to open! \(database.lastError())")
-            throw database.lastError()
+            let error = database.lastError()
+            NSLog("Database failed to open! \(error)")
+            throw error
         }
         defer { database.close() }
         

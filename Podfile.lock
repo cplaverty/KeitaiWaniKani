@@ -1,6 +1,6 @@
 PODS:
   - 1PasswordExtension (1.7)
-  - Alamofire (3.1.4)
+  - Alamofire (3.1.5)
   - CocoaLumberjack/Core (2.2.0)
   - CocoaLumberjack/Default (2.2.0):
     - CocoaLumberjack/Core
@@ -8,11 +8,9 @@ PODS:
     - CocoaLumberjack/Default
   - CocoaLumberjack/Swift (2.2.0):
     - CocoaLumberjack/Extensions
-  - FMDB (2.5):
-    - FMDB/standard (= 2.5)
-  - FMDB/common (2.5)
-  - FMDB/standard (2.5):
-    - FMDB/common
+  - FMDB (2.6):
+    - FMDB/standard (= 2.6)
+  - FMDB/standard (2.6)
   - OHHTTPStubs (4.7.0):
     - OHHTTPStubs/Default (= 4.7.0)
   - OHHTTPStubs/Core (4.7.0)
@@ -34,29 +32,19 @@ DEPENDENCIES:
   - 1PasswordExtension
   - Alamofire
   - CocoaLumberjack/Swift
-  - FMDB (from `https://github.com/ccgus/fmdb.git`, branch `swiftFramework`)
+  - FMDB
   - OHHTTPStubs
   - OHHTTPStubs/Swift
   - SwiftyJSON
 
-EXTERNAL SOURCES:
-  FMDB:
-    :branch: swiftFramework
-    :git: https://github.com/ccgus/fmdb.git
-
-CHECKOUT OPTIONS:
-  FMDB:
-    :commit: 43881cfcff4aedf5d8ea4045ab21a8f097ed35fa
-    :git: https://github.com/ccgus/fmdb.git
-
 SPEC CHECKSUMS:
   1PasswordExtension: a22573ad528dd63bd79c1f3b3813b17c2f86b91b
-  Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
+  Alamofire: 5f730ba29fd113b7ddd71c1e65d0c630acf5d7b0
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
-  FMDB: e298c06b460dc13e3a1933c092972ea9c686481c
+  FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
   OHHTTPStubs: d2bf6a0f407620d67e75a1d3f12d86a2b1dd15c0
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 863839670982f963a0c0af7c9be3e51ae62d0a21
+PODFILE CHECKSUM: a20f798dd5291baf3e0698ca7c23af42a82ad3f4
 
 COCOAPODS: 1.0.0.beta.2

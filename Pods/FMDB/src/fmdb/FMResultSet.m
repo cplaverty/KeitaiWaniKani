@@ -1,7 +1,12 @@
 #import "FMResultSet.h"
 #import "FMDatabase.h"
 #import "unistd.h"
-#import "FMDatabase+Private.h"
+
+#if FMDB_SQLITE_STANDALONE
+#import <sqlite3/sqlite3.h>
+#else
+#import <sqlite3.h>
+#endif
 
 @interface FMDatabase ()
 - (void)resultSetDidClose:(FMResultSet *)resultSet;

@@ -8,7 +8,12 @@
 
 #import "FMDatabaseQueue.h"
 #import "FMDatabase.h"
-#import "FMDatabase+Private.h"
+
+#if FMDB_SQLITE_STANDALONE
+#import <sqlite3/sqlite3.h>
+#else
+#import <sqlite3.h>
+#endif
 
 /*
  
@@ -206,12 +211,9 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
 }
 
 - (NSError*)inSavePoint:(void (^)(FMDatabase *db, BOOL *rollback))block {
-    
-    __block NSError *err = 0x00;
-
 #if SQLITE_VERSION_NUMBER >= 3007000
-
     static unsigned long savePointIdx = 0;
+    __block NSError *err = 0x00;
     FMDBRetain(self);
     dispatch_sync(_queue, ^() { 
         
@@ -232,9 +234,12 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
         }
     });
     FMDBRelease(self);
-
-#endif
     return err;
+#else
+    NSString *errorMessage = NSLocalizedString(@"Save point functions require SQLite 3.7", nil);
+    if (self.logsErrors) NSLog(@"%@", errorMessage);
+    return [NSError errorWithDomain:@"FMDatabase" code:0 userInfo:@{NSLocalizedDescriptionKey : errorMessage}];
+#endif
 }
 
 @end

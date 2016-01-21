@@ -14,11 +14,17 @@ private let currentDatabaseVersion = 1
 private struct DatabaseMetadata {
     var databaseVersion: Int {
         get {
-            return database.longForQuery("SELECT value FROM \(tableName) where name = ?", "version") ?? 0
+            do {
+                return try database.longForQuery("SELECT value FROM \(tableName) where name = ?", "version") ?? 0
+            } catch {
+                return 0
+            }
         }
         set {
-            if !database.executeUpdate("INSERT OR REPLACE INTO \(tableName)(name, value) VALUES (?, ?)", "version", newValue) {
-                DDLogWarn("Failed to update database version: \(self.database.lastError())")
+            do {
+                try database.executeUpdate("INSERT OR REPLACE INTO \(tableName)(name, value) VALUES (?, ?)", "version", newValue)
+            } catch {
+                DDLogWarn("Failed to update database version: \(error)")
             }
         }
     }
@@ -28,9 +34,7 @@ private struct DatabaseMetadata {
     
     init(database: FMDatabase) throws {
         self.database = database
-        guard database.executeUpdate("CREATE TABLE IF NOT EXISTS \(self.tableName)(name TEXT PRIMARY KEY, value TEXT)") else {
-            throw database.lastError()
-        }
+        try database.executeUpdate("CREATE TABLE IF NOT EXISTS \(self.tableName)(name TEXT PRIMARY KEY, value TEXT)")
     }
 }
 
@@ -110,7 +114,7 @@ public struct WaniKaniAPI {
         metadata.databaseVersion = currentDatabaseVersion
         
         DDLogInfo("Vacuuming database")
-        database.executeUpdate("VACUUM")
+        try database.executeUpdate("VACUUM")
         
 //        database.setShouldCacheStatements(true)
     }

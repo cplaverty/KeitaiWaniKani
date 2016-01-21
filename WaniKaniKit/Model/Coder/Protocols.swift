@@ -38,7 +38,7 @@ public protocol ListItemDatabaseCoder: DatabaseCoder {
     func save(models: [ModelObject], toDatabase database: FMDatabase) throws
     
     func levelsNotUpdatedSince(since: NSDate, inDatabase database: FMDatabase) throws -> Set<Int>
-    func maxLevel(database: FMDatabase) -> Int
+    func maxLevel(database: FMDatabase) throws -> Int
     func lessonsOutstanding(database: FMDatabase) throws -> [ModelObject]
     func reviewsDueBefore(date: NSDate, database: FMDatabase) throws -> [ModelObject]
 }
