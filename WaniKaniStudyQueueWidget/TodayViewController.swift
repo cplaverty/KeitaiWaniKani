@@ -46,8 +46,8 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
             { (_, observer, name, _, _) in
                 NSLog("Got notification for \(name)")
                 let mySelf = Unmanaged<TodayViewController>.fromOpaque(COpaquePointer(observer)).takeUnretainedValue()
-                dispatch_async(dispatch_get_main_queue()) {
-                    mySelf.updateStudyQueue()
+                dispatch_async(dispatch_get_main_queue()) { [weak mySelf] in
+                    mySelf?.updateStudyQueue()
                 }
             },
             WaniKaniDarwinNotificationCenter.notificationNameForModelObjectType("\(StudyQueue.self)"),
