@@ -46,9 +46,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
             { (_, observer, name, _, _) in
                 NSLog("Got notification for \(name)")
                 let mySelf = Unmanaged<TodayViewController>.fromOpaque(COpaquePointer(observer)).takeUnretainedValue()
-                dispatch_async(dispatch_get_main_queue()) { [weak mySelf] in
-                    mySelf?.updateStudyQueue()
-                }
+                mySelf.updateStudyQueue()
             },
             WaniKaniDarwinNotificationCenter.notificationNameForModelObjectType("\(StudyQueue.self)"),
             nil,
@@ -95,6 +93,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     // MARK: - Implementation
     
     func updateStudyQueue() {
+        assert(NSThread.isMainThread(), "Study queue update must be done on the main thread")
         if let studyQueue = try? self.fetchStudyQueueFromDatabase() {
             self.studyQueue = studyQueue
         }
