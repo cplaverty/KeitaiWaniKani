@@ -278,7 +278,7 @@ function addIgnoreAnswerBtn()
 function scriptInit()
 {
     // Add global CSS styles
-    GM_addStyle('#WKO_button_container { text-align: center; margin: 20px 10px 10px 10px; }');
+    GM_addStyle('#WKO_button_container { text-align: center; margin: 3em 0 10px; } @media (max-width: 767px) { #WKO_button_container { margin: 2em 0 10px; } }');
     GM_addStyle('#WKO_button { background-color: #CC0000; color: #FFFFFF; cursor: pointer; display: inline-block; padding: 12px; }');
     GM_addStyle('#answer-form fieldset.WKO_ignored input[type="text"]:-moz-placeholder, #answer-form fieldset.WKO_ignored input[type="text"]:-moz-placeholder { color: #FFFFFF; font-family: "Source Sans Pro",sans-serif; font-weight: 300; text-shadow: none; transition: color 0.15s linear 0s; } #answer-form fieldset.WKO_ignored button, #answer-form fieldset.WKO_ignored input[type="text"], #answer-form fieldset.WKO_ignored input[type="text"]:disabled { background-color: #FFCC00 !important; }');
     scriptLog('loaded');
