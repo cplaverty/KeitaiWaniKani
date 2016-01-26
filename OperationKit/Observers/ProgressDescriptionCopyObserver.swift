@@ -15,7 +15,7 @@ public class ProgressDescriptionCopyObserver: NSObject, OperationObserver {
     public let localizedAdditionalDescription: String?
 
     // Operations hold a collection of OperationObserver, which this class is expected to be a retained in
-    private unowned let operation: Operation
+    private weak var operation: Operation?
     
     private var localizedDescriptionListenerAttached = false
     private var localizedAdditionalDescriptionListenerAttached = false
