@@ -60,9 +60,9 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     
     override func webViewDidStartLoad(webView: UIWebView) {
         super.webViewDidStartLoad(webView)
-        let requestURLStarted = requestStack.last!.URL
-        if requestURLStarted == WaniKaniURLs.lessonSession || requestURLStarted == WaniKaniURLs.reviewSession {
-            userScriptsInjected = false
+        if let requestURLStarted = requestStack.last?.URL
+            where requestURLStarted == WaniKaniURLs.lessonSession || requestURLStarted == WaniKaniURLs.reviewSession {
+                userScriptsInjected = false
         }
     }
     
