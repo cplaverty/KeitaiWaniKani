@@ -48,14 +48,14 @@ public extension StudyQueue {
         guard let nextReviewDate = self.nextReviewDate else {
             return nil
         }
-
+        
         let calendar = NSCalendar.autoupdatingCurrentCalendar()
-        if calendar.isDate(referenceDate, inSameDayAsDate: nextReviewDate) {
-            // Matching date, so only return the time of day
-            return NSDateFormatter.localizedStringFromDate(nextReviewDate, dateStyle: .NoStyle, timeStyle: .ShortStyle)
-        } else {
-            return NSDateFormatter.localizedStringFromDate(nextReviewDate, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
-        }
+        let formatter = NSDateFormatter()
+        formatter.doesRelativeDateFormatting = true
+        formatter.dateStyle = calendar.isDate(referenceDate, inSameDayAsDate: nextReviewDate) ? .NoStyle : .MediumStyle
+        formatter.timeStyle = .ShortStyle
+        
+        return formatter.stringFromDate(nextReviewDate)
     }
     
     public static let timeToNextReviewFormatter: NSDateComponentsFormatter = {
@@ -67,8 +67,8 @@ public extension StudyQueue {
         formatter.includesTimeRemainingPhrase = true
         
         return formatter
-        }()
-
+    }()
+    
     public func formattedTimeToNextReview(formatter: NSDateComponentsFormatter = timeToNextReviewFormatter) -> FormattedTimeInterval {
         guard reviewsAvailable == 0 else {
             return .Now

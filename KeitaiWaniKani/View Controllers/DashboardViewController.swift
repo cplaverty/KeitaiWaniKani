@@ -23,7 +23,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     }
     
     // MARK: - Properties
-    
+
     var progressDescriptionLabel: UILabel!
     var progressAdditionalDescriptionLabel: UILabel!
     var progressView: UIProgressView!
@@ -118,13 +118,21 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     private let blurEffect = UIBlurEffect(style: .ExtraLight)
     
     /// Formats percentages in truncated to whole percents (as the WK dashboard does)
-    private var percentFormatter: NSNumberFormatter = {
+    private let percentFormatter: NSNumberFormatter = {
         let formatter = NSNumberFormatter()
         formatter.numberStyle = .PercentStyle
         formatter.roundingMode = .RoundDown
         formatter.roundingIncrement = 0.01
         return formatter
-        }()
+    }()
+    
+    private let lastRefreshTimeFormatter: NSDateFormatter = {
+        let formatter = NSDateFormatter()
+        formatter.doesRelativeDateFormatting = true
+        formatter.dateStyle = .MediumStyle
+        formatter.timeStyle = .ShortStyle
+        return formatter
+    }()
     
     private var databaseQueue: FMDatabaseQueue {
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -200,7 +208,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         if localizedDescription?.isEmpty == false {
             progressDescriptionLabel?.text = localizedDescription
         } else {
-            let formattedLastRefreshTime = ApplicationSettings.lastRefreshTime.map { NSDateFormatter.localizedStringFromDate($0, dateStyle: .MediumStyle, timeStyle: .ShortStyle) } ?? "never"
+            let formattedLastRefreshTime = ApplicationSettings.lastRefreshTime.map { lastRefreshTimeFormatter.stringFromDate($0) } ?? "never"
             progressDescriptionLabel?.text = "Last updated: \(formattedLastRefreshTime)"
         }
         

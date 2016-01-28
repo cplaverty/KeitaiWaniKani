@@ -13,6 +13,14 @@ class ReviewTimelineTableViewController: UITableViewController {
     
     // MARK: Properties
     
+    private let reviewDateFormatter: NSDateFormatter = {
+        let formatter = NSDateFormatter()
+        formatter.doesRelativeDateFormatting = true
+        formatter.dateStyle = .FullStyle
+        formatter.timeStyle = .NoStyle
+        return formatter
+    }()
+    
     private var reviewTimelineByDate: [(NSDate, [SRSReviewCounts])]? {
         didSet {
             tableView.reloadData()
@@ -110,7 +118,7 @@ class ReviewTimelineTableViewController: UITableViewController {
             return "Currently Available"
         } else {
             let totalForDay = entries.reduce(0) { $0 + $1.itemCounts.total }
-            let formattedDate = NSDateFormatter.localizedStringFromDate(date, dateStyle: .FullStyle, timeStyle: .NoStyle)
+            let formattedDate = reviewDateFormatter.stringFromDate(date)
             let formattedTotal = NSNumberFormatter.localizedStringFromNumber(totalForDay, numberStyle: .DecimalStyle)
             return "\(formattedDate) (\(formattedTotal))"
         }
