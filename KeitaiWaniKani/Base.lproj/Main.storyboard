@@ -142,7 +142,7 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tX0-yE-hss">
                                             <rect key="frame" x="20" y="20" width="560" height="62"/>
-                                            <string key="text">Welcome to KeitaiWaniKani, a third-party app for the WaniKani web site.  To begin, your WaniKani API key is required.  This can either be retrieved for you by logging in to the WaniKani web site, or you can manually enter it.</string>
+                                            <string key="text">Welcome to this companion app for the WaniKani web site.  Your WaniKani API key is required to proceed, which can either be retrieved for you by logging in to the WaniKani web site, or you can manually enter it.</string>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="highlightedColor"/>
                                         </label>
