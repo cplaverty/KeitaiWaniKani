@@ -10,6 +10,8 @@ import MessageUI
 import WebKit
 import CocoaLumberjack
 
+private let reviewURL = NSURL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1031055291&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software")!
+
 class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
     private enum TableViewSections: Int {
@@ -26,7 +28,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             description: "Adds a thumbs up/down button that permits incorrect answers to be marked correct, and correct answers to be marked incorrect.  PLEASE USE RESPONSIBLY!  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script written by Ethan.",
             settingKey: ApplicationSettingKeys.userScriptDoubleCheckEnabled),
         (name: "WaniKani Improve",
-            description: "Auto forward to the next item if the answer was correct (otherwise known as \"lightning mode\").  Original script written by Seiji.",
+            description: "Automatically moves to the next item if the answer was correct (also known as \"lightning mode\").  Original script written by Seiji.",
             settingKey: ApplicationSettingKeys.userScriptWaniKaniImproveEnabled)
     ]
     
@@ -52,7 +54,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         
         switch tableViewSection {
         case .UserScripts: return userScripts.count
-        case .Feedback: return 1
+        case .Feedback: return 2
         case .LogOut: return 1
         }
     }
@@ -75,7 +77,13 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             return cell
         case .Feedback:
             let cell = tableView.dequeueReusableCellWithIdentifier("Basic", forIndexPath: indexPath)
-            cell.textLabel?.text = "Send Feedback"
+            switch indexPath.row {
+            case 0:
+                cell.textLabel?.text = "Send Feedback"
+            case 1:
+                cell.textLabel?.text = "Leave A Review"
+            default: fatalError("No cell defined for index path \(indexPath)")
+            }
             cell.accessoryType = .DisclosureIndicator
             return cell
         case .LogOut:
@@ -118,7 +126,12 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         
         switch tableViewSection {
         case .UserScripts: break
-        case .Feedback: sendMail()
+        case .Feedback:
+            switch indexPath.row {
+            case 0: sendMail()
+            case 1: leaveReview()
+            default: fatalError("No cell defined for index path \(indexPath)")
+            }
         case .LogOut: confirmLogOut()
         }
         
@@ -132,7 +145,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    // MARK: - Send Mail
+    // MARK: - Feedback
     
     private func sendMail() {
         if !MFMailComposeViewController.canSendMail() {
@@ -145,6 +158,10 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             vc.setSubject("\(product) feedback (v\(version) b\(build))")
             self.presentViewController(vc, animated: true, completion: nil)
         }
+    }
+    
+    private func leaveReview() {
+        UIApplication.sharedApplication().openURL(reviewURL)
     }
     
     // MARK: - Log Out
