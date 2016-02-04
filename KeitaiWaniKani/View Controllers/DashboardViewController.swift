@@ -208,8 +208,8 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         if localizedDescription?.isEmpty == false {
             progressDescriptionLabel?.text = localizedDescription
         } else {
-            let formattedLastRefreshTime = ApplicationSettings.lastRefreshTime.map { lastRefreshTimeFormatter.stringFromDate($0) } ?? "never"
-            progressDescriptionLabel?.text = "Last updated: \(formattedLastRefreshTime)"
+            let formattedLastRefreshTime = ApplicationSettings.lastRefreshTime.map { $0.timeIntervalSinceNow > -60 ? "Just Now" : lastRefreshTimeFormatter.stringFromDate($0) } ?? "Never"
+            progressDescriptionLabel?.text = "Updated \(formattedLastRefreshTime)"
         }
         
         // Additional description label text
