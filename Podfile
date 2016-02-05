@@ -7,6 +7,7 @@ target 'KeitaiWaniKani' do
     pod 'SwiftyJSON'
     pod 'CocoaLumberjack/Swift'
     pod '1PasswordExtension'
+    pod 'Charts'
 
     target 'OperationKit'
     target 'WaniKaniKit'
