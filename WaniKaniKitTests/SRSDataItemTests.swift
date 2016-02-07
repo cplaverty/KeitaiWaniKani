@@ -28,12 +28,12 @@ class SRSDataItemTests: XCTestCase {
             level: 4,
             userSpecificSRSData: UserSpecificSRSData(srsLevel: SRSLevel.Apprentice,
                 srsLevelNumeric: 1,
-                dateUnlocked: date(2016, 1, 1, 0, 0, 0),
-                dateAvailable: date(2016, 2, 1, 0, 0, 0),
+                dateUnlocked: date(2020, 1, 1, 0, 0, 0),
+                dateAvailable: date(2020, 2, 1, 0, 0, 0),
                 burned: false))
         
         let newlyUnlockedGuruDate = newlyUnlocked.guruDate(nil)
-        let newlyUnlockedExpectedGuruDate = date(2016, 2, 5, 6, 0, 0)
+        let newlyUnlockedExpectedGuruDate = date(2020, 2, 5, 6, 0, 0)
         XCTAssertEqual(newlyUnlockedGuruDate, newlyUnlockedExpectedGuruDate)
     }
     
@@ -45,11 +45,11 @@ class SRSDataItemTests: XCTestCase {
             userSpecificSRSData: UserSpecificSRSData(srsLevel: SRSLevel.Apprentice,
                 srsLevelNumeric: SRSLevel.Guru.numericLevelThreshold - 1,
                 dateUnlocked: date(2016, 1, 1, 0, 0, 0),
-                dateAvailable: date(2016, 2, 1, 0, 0, 0),
+                dateAvailable: date(2020, 2, 1, 0, 0, 0),
                 burned: false))
         
         let nearlyGuruDate = nearlyGuru.guruDate(nil)
-        let nearlyGuruExpectedDate = date(2016, 2, 1, 0, 0, 0)
+        let nearlyGuruExpectedDate = date(2020, 2, 1, 0, 0, 0)
         XCTAssertEqual(nearlyGuruDate, nearlyGuruExpectedDate)
     }
     
@@ -61,7 +61,7 @@ class SRSDataItemTests: XCTestCase {
             userSpecificSRSData: UserSpecificSRSData(srsLevel: SRSLevel.Master,
                 srsLevelNumeric: SRSLevel.Master.numericLevelThreshold,
                 dateUnlocked: date(2016, 1, 1, 0, 0, 0),
-                dateAvailable: date(2016, 2, 1, 0, 0, 0),
+                dateAvailable: date(2020, 2, 1, 0, 0, 0),
                 burned: false))
         
         let masteredGuruDate = mastered.guruDate(nil)
@@ -90,12 +90,12 @@ class SRSDataItemTests: XCTestCase {
             level: 1,
             userSpecificSRSData: UserSpecificSRSData(srsLevel: SRSLevel.Apprentice,
                 srsLevelNumeric: 1,
-                dateUnlocked: date(2016, 1, 1, 0, 0, 0),
-                dateAvailable: date(2016, 2, 1, 0, 0, 0),
+                dateUnlocked: date(2020, 1, 1, 0, 0, 0),
+                dateAvailable: date(2020, 2, 1, 0, 0, 0),
                 burned: false))
         
         let newlyUnlockedGuruDate = newlyUnlocked.guruDate(nil)
-        let newlyUnlockedExpectedGuruDate = date(2016, 2, 2, 11, 0, 0)
+        let newlyUnlockedExpectedGuruDate = date(2020, 2, 2, 11, 0, 0)
         XCTAssertEqual(newlyUnlockedGuruDate, newlyUnlockedExpectedGuruDate)
     }
     
@@ -104,12 +104,12 @@ class SRSDataItemTests: XCTestCase {
             level: 10,
             userSpecificSRSData: UserSpecificSRSData(srsLevel: SRSLevel.Apprentice,
                 srsLevelNumeric: 1,
-                dateUnlocked: date(2016, 1, 1, 0, 0, 0),
-                dateAvailable: date(2016, 2, 1, 0, 0, 0),
+                dateUnlocked: date(2020, 1, 1, 0, 0, 0),
+                dateAvailable: date(2020, 2, 1, 0, 0, 0),
                 burned: false))
         
         let newlyUnlockedGuruDate = newlyUnlocked.guruDate(nil)
-        let newlyUnlockedExpectedGuruDate = date(2016, 2, 4, 6, 0, 0)
+        let newlyUnlockedExpectedGuruDate = date(2020, 2, 4, 6, 0, 0)
         XCTAssertEqual(newlyUnlockedGuruDate, newlyUnlockedExpectedGuruDate)
     }
     
