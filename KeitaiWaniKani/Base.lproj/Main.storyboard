@@ -613,7 +613,7 @@
                                             <segue destination="7Yp-Ve-zI8" kind="show" identifier="Show Kanji Progress" id="0Hn-Mk-onL"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="CXe-91-rqa" detailTextLabel="OST-bd-F5R" style="IBUITableViewCellStyleValue1" id="fTL-Up-NzW" userLabel="Current Level Time Table View Cell">
+                                    <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="CXe-91-rqa" detailTextLabel="OST-bd-F5R" style="IBUITableViewCellStyleValue1" id="fTL-Up-NzW" userLabel="Current Level Time Table View Cell">
                                         <rect key="frame" x="0.0" y="592" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fTL-Up-NzW" id="v2o-Iu-p5W">
