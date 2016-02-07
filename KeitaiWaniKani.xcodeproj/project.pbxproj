@@ -259,7 +259,7 @@
 		8307F24F1BB564EC00BDDF10 /* WebAddressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebAddressBarView.swift; sourceTree = "<group>"; };
 		8307F2511BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectedStudyQueueTests.swift; sourceTree = "<group>"; };
 		8307F2561BB6049100BDDF10 /* StudyQueueIsUpdatedCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyQueueIsUpdatedCondition.swift; sourceTree = "<group>"; };
-		830EAB861B41DC7700EBF073 /* KeitaiWaniKani.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeitaiWaniKani.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		830EAB861B41DC7700EBF073 /* AlliCrab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlliCrab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		830EAB891B41DC7700EBF073 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		830EAB8E1B41DC7700EBF073 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		830EAB901B41DC7700EBF073 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -523,7 +523,7 @@
 		830EAB871B41DC7700EBF073 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				830EAB861B41DC7700EBF073 /* KeitaiWaniKani.app */,
+				830EAB861B41DC7700EBF073 /* AlliCrab.app */,
 				8347BCF91B725428000F99EF /* WaniKaniKit.framework */,
 				8347BD021B725428000F99EF /* WaniKaniKitTests.xctest */,
 				83426DEE1B7369F8005F4503 /* WaniKaniStudyQueueWidget.appex */,
@@ -947,7 +947,7 @@
 			);
 			name = KeitaiWaniKani;
 			productName = KeitaiWaniKani;
-			productReference = 830EAB861B41DC7700EBF073 /* KeitaiWaniKani.app */;
+			productReference = 830EAB861B41DC7700EBF073 /* AlliCrab.app */;
 			productType = "com.apple.product-type.application";
 		};
 		83426DED1B7369F8005F4503 /* WaniKaniStudyQueueWidget */ = {
@@ -1706,7 +1706,8 @@
 				INFOPLIST_FILE = KeitaiWaniKani/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.KeitaiWaniKani;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = AlliCrab;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -1723,7 +1724,8 @@
 				INFOPLIST_FILE = KeitaiWaniKani/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.KeitaiWaniKani;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = AlliCrab;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;

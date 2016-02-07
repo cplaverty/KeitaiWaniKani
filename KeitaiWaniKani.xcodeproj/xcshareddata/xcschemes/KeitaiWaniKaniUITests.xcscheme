@@ -27,7 +27,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "830EAB851B41DC7700EBF073"
-            BuildableName = "KeitaiWaniKani.app"
+            BuildableName = "AlliCrab.app"
             BlueprintName = "KeitaiWaniKani"
             ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
          </BuildableReference>
@@ -50,7 +50,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "830EAB851B41DC7700EBF073"
-            BuildableName = "KeitaiWaniKani.app"
+            BuildableName = "AlliCrab.app"
             BlueprintName = "KeitaiWaniKani"
             ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
          </BuildableReference>
@@ -68,7 +68,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "830EAB851B41DC7700EBF073"
-            BuildableName = "KeitaiWaniKani.app"
+            BuildableName = "AlliCrab.app"
             BlueprintName = "KeitaiWaniKani"
             ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
          </BuildableReference>
