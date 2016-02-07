@@ -55,6 +55,10 @@ public struct WaniKaniAPI {
     public static let updateMinuteCount = 15
     public static let refreshTimeOffsetSeconds = Int(arc4random_uniform(25)) + 5
     
+    public static func isAcceleratedLevel(level: Int) -> Bool {
+        return level <= 2
+    }
+    
     public static func lastRefreshTimeFromNow() -> NSDate {
         return lastRefreshTimeFromDate(NSDate())
     }
@@ -122,4 +126,64 @@ public struct WaniKaniAPI {
     public static func resourceResolverForAPIKey(apiKey: String) -> ResourceResolver {
         return WaniKaniAPIResourceResolver(forAPIKey: apiKey)
     }
+    
+    public static func minimumTimeFromSRSLevel(initialLevel: Int, toSRSLevel finalLevel: Int, fromDate baseDate: NSDate, isRadical: Bool, isAccelerated: Bool) -> NSDate? {
+        var guruDate = baseDate
+        let calendar = NSCalendar.autoupdatingCurrentCalendar()
+        for level in initialLevel..<finalLevel {
+            guard let timeForLevel = timeToNextReviewForSRSLevel(level, isRadical: isRadical, isAccelerated: isAccelerated) else { return nil }
+            guruDate = calendar.dateByAddingComponents(timeForLevel, toDate: guruDate, options: [])!
+        }
+        
+        return guruDate
+    }
+    
+    private static func timeToNextReviewForSRSLevel(srsLevelNumeric: Int, isRadical: Bool, isAccelerated: Bool) -> NSDateComponents? {
+        switch srsLevelNumeric {
+        case 1 where isAccelerated:
+            let dc = NSDateComponents()
+            dc.hour = 2
+            return dc
+        case 1, 2 where isAccelerated:
+            let dc = NSDateComponents()
+            dc.hour = 4
+            return dc
+        case 2, 3 where isAccelerated:
+            let dc = NSDateComponents()
+            dc.hour = 8
+            return dc
+        case 3, 4 where isAccelerated:
+            let dc = NSDateComponents()
+            dc.day = 1
+            dc.hour = -1
+            return dc
+        case 4:
+            let dc = NSDateComponents()
+            dc.day = isRadical ? 2 : 3
+            dc.hour = -1
+            return dc
+        case 5: // -> 6
+            let dc = NSDateComponents()
+            dc.day = 7
+            dc.hour = -1
+            return dc
+        case 6: // -> 7
+            let dc = NSDateComponents()
+            dc.day = 14
+            dc.hour = -1
+            return dc
+        case 7: // -> 8
+            let dc = NSDateComponents()
+            dc.month = 1
+            dc.hour = -1
+            return dc
+        case 8: // -> 9
+            let dc = NSDateComponents()
+            dc.month = 4
+            dc.hour = -1
+            return dc
+        default: return nil
+        }
+    }
+
 }

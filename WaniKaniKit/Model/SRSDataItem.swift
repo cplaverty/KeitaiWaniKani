@@ -20,7 +20,7 @@ public protocol SRSDataItem {
 
 public extension SRSDataItem {
     private static var isRadical: Bool { return self == Radical.self }
-    private var isAccelerated: Bool { return level <= 2 }
+    private var isAccelerated: Bool { return WaniKaniAPI.isAcceleratedLevel(level) }
     
     public func guruDate(unlockDateForLockedItems: NSDate?) -> NSDate? {
         // Assume best case scenario: the next review is successful
@@ -32,73 +32,12 @@ public extension SRSDataItem {
         if initialLevel > guruNumericLevel { return nil }
         else if initialLevel == guruNumericLevel { return baseDate }
         
-        return minimumTimeFromLevel(initialLevel, toLevel: guruNumericLevel, fromDate: baseDate)
+        return WaniKaniAPI.minimumTimeFromSRSLevel(initialLevel, toSRSLevel: guruNumericLevel, fromDate: baseDate, isRadical: self.dynamicType.isRadical, isAccelerated: isAccelerated)
     }
     
     public func earliestPossibleGuruDate(unlockDateForLockedItems: NSDate? = nil) -> NSDate? {
         guard let baseDate = userSpecificSRSData?.dateUnlocked ?? unlockDateForLockedItems else { return nil }
         
-        return minimumTimeFromLevel(1, toLevel: SRSLevel.Guru.numericLevelThreshold, fromDate: baseDate)
-    }
-    
-    private func minimumTimeFromLevel(initialLevel: Int, toLevel finalLevel: Int, fromDate baseDate: NSDate) -> NSDate? {
-        let isRadical = self.dynamicType.isRadical
-        let isAccelerated = self.isAccelerated
-        var guruDate = baseDate
-        let calendar = NSCalendar.autoupdatingCurrentCalendar()
-        for level in initialLevel..<finalLevel {
-            guard let timeForLevel = timeToNextReviewForLevel(level, isRadical: isRadical, isAccelerated: isAccelerated) else { return nil }
-            guruDate = calendar.dateByAddingComponents(timeForLevel, toDate: guruDate, options: [])!
-        }
-        
-        return guruDate
-    }
-    
-    private func timeToNextReviewForLevel(srsLevelNumeric: Int, isRadical: Bool, isAccelerated: Bool) -> NSDateComponents? {
-        switch srsLevelNumeric {
-        case 1 where isAccelerated:
-            let dc = NSDateComponents()
-            dc.hour = 2
-            return dc
-        case 1, 2 where isAccelerated:
-            let dc = NSDateComponents()
-            dc.hour = 4
-            return dc
-        case 2, 3 where isAccelerated:
-            let dc = NSDateComponents()
-            dc.hour = 8
-            return dc
-        case 3, 4 where isAccelerated:
-            let dc = NSDateComponents()
-            dc.day = 1
-            dc.hour = -1
-            return dc
-        case 4:
-            let dc = NSDateComponents()
-            dc.day = isRadical ? 2 : 3
-            dc.hour = -1
-            return dc
-        case 5: // -> 6
-            let dc = NSDateComponents()
-            dc.day = 7
-            dc.hour = -1
-            return dc
-        case 6: // -> 7
-            let dc = NSDateComponents()
-            dc.day = 14
-            dc.hour = -1
-            return dc
-        case 7: // -> 8
-            let dc = NSDateComponents()
-            dc.month = 1
-            dc.hour = -1
-            return dc
-        case 8: // -> 9
-            let dc = NSDateComponents()
-            dc.month = 4
-            dc.hour = -1
-            return dc
-        default: return nil
-        }
+        return WaniKaniAPI.minimumTimeFromSRSLevel(1, toSRSLevel: SRSLevel.Guru.numericLevelThreshold, fromDate: baseDate, isRadical: self.dynamicType.isRadical, isAccelerated: isAccelerated)
     }
 }

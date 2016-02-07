@@ -103,6 +103,7 @@
 		834802541B97A76500CC7461 /* ModelObjectUpdateCheckCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834802531B97A76500CC7461 /* ModelObjectUpdateCheckCondition.swift */; };
 		8362E3621BCF11640062AC97 /* DownloadFileOperation+WaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8362E3611BCF11640062AC97 /* DownloadFileOperation+WaniKani.swift */; };
 		836639521BDB9F9E00BD0B92 /* wkimprove.js in Resources */ = {isa = PBXBuildFile; fileRef = 836639511BDB9F9E00BD0B92 /* wkimprove.js */; };
+		836864F71C67711000140EE9 /* LevelInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836864F61C67711000140EE9 /* LevelInfo.swift */; };
 		83699C8F1BBD15E500BBF6FB /* BlockOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83699C8E1BBD15E500BBF6FB /* BlockOperationTests.swift */; };
 		83699C911BBD17E300BBF6FB /* MutuallyExclusiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83699C901BBD17E300BBF6FB /* MutuallyExclusiveTests.swift */; };
 		836B2BAA1BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836B2BA91BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift */; };
@@ -355,6 +356,7 @@
 		834C92531B76603F0025D359 /* KeitaiWaniKani.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = KeitaiWaniKani.entitlements; sourceTree = "<group>"; };
 		8362E3611BCF11640062AC97 /* DownloadFileOperation+WaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DownloadFileOperation+WaniKani.swift"; sourceTree = "<group>"; };
 		836639511BDB9F9E00BD0B92 /* wkimprove.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkimprove.js; sourceTree = "<group>"; };
+		836864F61C67711000140EE9 /* LevelInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelInfo.swift; sourceTree = "<group>"; };
 		83699C8E1BBD15E500BBF6FB /* BlockOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockOperationTests.swift; sourceTree = "<group>"; };
 		83699C901BBD17E300BBF6FB /* MutuallyExclusiveTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutuallyExclusiveTests.swift; sourceTree = "<group>"; };
 		836B2BA91BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DDLogLevel+CustomStringConvertible.swift"; sourceTree = "<group>"; };
@@ -612,14 +614,14 @@
 			isa = PBXGroup;
 			children = (
 				8307F2551BB603CC00BDDF10 /* Conditions */,
-				8347BDE71B726590000F99EF /* Operations */,
 				8347BD3E1B725D46000F99EF /* Database */,
 				8347BD421B725D46000F99EF /* Extensions */,
 				8347BD461B725D46000F99EF /* Model */,
-				8347BD751B725D46000F99EF /* WaniKaniURLs.swift */,
-				8347BCFB1B725428000F99EF /* WaniKaniKit.h */,
-				8347BCFD1B725428000F99EF /* Info.plist */,
+				8347BDE71B726590000F99EF /* Operations */,
 				8347BDFC1B72AE90000F99EF /* WaniKaniAPI.swift */,
+				8347BCFB1B725428000F99EF /* WaniKaniKit.h */,
+				8347BD751B725D46000F99EF /* WaniKaniURLs.swift */,
+				8347BCFD1B725428000F99EF /* Info.plist */,
 			);
 			path = WaniKaniKit;
 			sourceTree = "<group>";
@@ -677,7 +679,9 @@
 			children = (
 				8347BD471B725D46000F99EF /* Coder */,
 				8326D2DD1BB7E52F006FF2D0 /* DownloadStrategy.swift */,
+				83AC365A1BC9BF0100C93078 /* Formatter.swift */,
 				8347BD521B725D46000F99EF /* Kanji.swift */,
+				836864F61C67711000140EE9 /* LevelInfo.swift */,
 				8347BD531B725D46000F99EF /* LevelProgression.swift */,
 				8347BD541B725D46000F99EF /* Radical.swift */,
 				8347BD551B725D46000F99EF /* Resource.swift */,
@@ -691,7 +695,6 @@
 				8347BD5B1B725D46000F99EF /* UserSpecificSRSData.swift */,
 				8347BD5C1B725D46000F99EF /* Vocabulary.swift */,
 				8347BD5D1B725D46000F99EF /* WaniKaniAPIResourceResolver.swift */,
-				83AC365A1BC9BF0100C93078 /* Formatter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1449,6 +1452,7 @@
 				831FF75E1BB87CDD00C31FDF /* SRSDataItem.swift in Sources */,
 				8347BD8F1B725D46000F99EF /* SRSItemCountsCoder.swift in Sources */,
 				8347BD841B725D46000F99EF /* FMDatabaseAdditionsVariadic.swift in Sources */,
+				836864F71C67711000140EE9 /* LevelInfo.swift in Sources */,
 				8326D2DE1BB7E52F006FF2D0 /* DownloadStrategy.swift in Sources */,
 				8347BD991B725D46000F99EF /* SRSDistribution.swift in Sources */,
 				8347BD861B725D46000F99EF /* FMResultSetExtensions.swift in Sources */,

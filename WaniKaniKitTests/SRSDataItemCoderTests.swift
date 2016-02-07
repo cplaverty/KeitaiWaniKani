@@ -10,7 +10,7 @@ import OperationKit
 @testable import WaniKaniKit
 
 #if HAS_DOWNLOADED_DATA
-class SRSDataItemCoderTests: DatabaseTestCase {
+class SRSDataItemCoderTests: DatabaseTestCase, ResourceHTTPStubs {
 
     override func setUp() {
         super.setUp()
@@ -20,11 +20,16 @@ class SRSDataItemCoderTests: DatabaseTestCase {
         let vocabularyExpectation = expectationWithDescription("vocabulary")
         let operationQueue = OperationQueue()
         
-        let radicalsOperation = GetRadicalsOperation(resolver: TestFileResourceResolver(fileName: "Radicals Levels 1-20"),
+        let resourceResolver = WaniKaniAPIResourceResolver(forAPIKey: "TEST_API_KEY")
+        stubForResource(Resource.Radicals, file: "Radicals Levels 1-20")
+        stubForResource(Resource.Kanji, file: "Kanji Levels 1-20")
+        stubForResource(Resource.Vocabulary, file: "Vocab Levels 1-20")
+        
+        let radicalsOperation = GetRadicalsOperation(resolver: resourceResolver,
             databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
-        let kanjiOperation = GetKanjiOperation(resolver: TestFileResourceResolver(fileName: "Kanji Levels 1-20"),
+        let kanjiOperation = GetKanjiOperation(resolver: resourceResolver,
             databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
-        let vocabularyOperation = GetVocabularyOperation(resolver: TestFileResourceResolver(fileName: "Vocab Levels 1-20"),
+        let vocabularyOperation = GetVocabularyOperation(resolver: resourceResolver,
             databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
         
         radicalsOperation.addObserver(BlockObserver { _, errors in
@@ -73,6 +78,16 @@ class SRSDataItemCoderTests: DatabaseTestCase {
                 let reviewTimeline = try! SRSDataItemCoder.reviewTimeline(database, rowLimit: 10)
                 XCTAssertEqual(reviewTimeline.count, 10)
                 XCTAssertEqual(reviewTimeline[2], SRSReviewCounts(dateAvailable: NSDate(timeIntervalSince1970: 1387708200), itemCounts: SRSItemCounts(radicals: 0, kanji: 0, vocabulary: 2, total: 2)))
+            }
+        }
+    }
+    
+    func testLevelTimeline() {
+        self.measureBlock() {
+            self.databaseQueue.inDatabase { database in
+                let levelTimeline = try! SRSDataItemCoder.levelTimeline(database)
+                XCTAssertEqual(levelTimeline.detail.count, 20)
+                XCTAssertNotNil(levelTimeline.averageLevelDuration)
             }
         }
     }

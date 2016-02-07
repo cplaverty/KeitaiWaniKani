@@ -183,6 +183,9 @@ public class SRSDataItemCoder {
 
 extension SRSDataItemCoder {
     
+    // TODO: The level column name needs to be parameterised somehow
+    private static var levelColumnName: String { return "level" }
+    
     /// Takes an out-of-date StudyQueue and projects what it would look like from the SRS data if no reviews or lessons have been done
     public static func projectedStudyQueue(database: FMDatabase, referenceDate now: NSDate = NSDate()) throws -> StudyQueue? {
         guard let studyQueue = try StudyQueue.coder.loadFromDatabase(database) else {
@@ -230,8 +233,7 @@ extension SRSDataItemCoder {
         var queryArgs: [String: AnyObject] = [:]
         var whereStatement = "WHERE \(Columns.dateAvailable) IS NOT NULL AND \(Columns.burned) = 0"
         if let level = level {
-            // TODO: The level column name needs to be parameterised somehow
-            whereStatement += " AND level = :level"
+            whereStatement += " AND \(levelColumnName) = :level"
             queryArgs["level"] = level
         }
         let dateColumn: String
@@ -274,12 +276,88 @@ extension SRSDataItemCoder {
         
         for review in reviewTimeline {
             let date = self.dateAtStartOfDayForDate(review.dateAvailable)
-            var currentItems = reviewsByDate[date] ?? []
-            currentItems.append(review)
-            reviewsByDate[date] = currentItems
+            if case nil = reviewsByDate[date]?.append(review) {
+                reviewsByDate[date] = [review]
+            }
         }
         
         return reviewsByDate.sort { $0.0 < $1.0 }
+    }
+    
+    public static func levelTimeline(database: FMDatabase) throws -> LevelData {
+        guard let userInfo = try UserInformation.coder.loadFromDatabase(database) else {
+            return LevelData(detail: [], projectedCurrentLevel: nil, projectedEndDateBasedOnLockedItem: true)
+        }
+        
+        let now = NSDate()
+
+        var radicalUnlockDatesByLevel = try getUnlockDatesByLevelForTable(Radical.coder.tableName, database: database)
+        var kanjiUnlockDatesByLevel = try getUnlockDatesByLevelForTable(Kanji.coder.tableName, database: database)
+        
+        var startDates = [NSDate]()
+        startDates.reserveCapacity(userInfo.level)
+        
+        for level in 1...userInfo.level {
+            let isAccelerated = WaniKaniAPI.isAcceleratedLevel(level)
+            let radicalUnlockDates = radicalUnlockDatesByLevel[level] ?? []
+            let kanjiUnlockDates = kanjiUnlockDatesByLevel[level] ?? []
+            
+            let startOfPreviousLevel = startDates.last ?? NSDate.distantPast()
+            let eariestPossibleGuruDate = WaniKaniAPI.minimumTimeFromSRSLevel(1, toSRSLevel: SRSLevel.Guru.numericLevelThreshold, fromDate: startOfPreviousLevel, isRadical: true, isAccelerated: isAccelerated)
+            
+            let minStartDate = radicalUnlockDates.lazy.flatMap { $0 }.filter { $0 > eariestPossibleGuruDate }.minElement() ??
+                kanjiUnlockDates.lazy.flatMap { $0 }.filter { $0 > eariestPossibleGuruDate }.minElement()
+            startDates.append(minStartDate ?? now)
+        }
+        
+        var levelInfos = [LevelInfo]()
+        levelInfos.reserveCapacity(userInfo.level)
+        
+        for level in 1...userInfo.level {
+            let startDate = startDates[level - 1]
+            let endDate: NSDate? = startDates.count > level ? startDates[level] : nil
+            levelInfos.append(LevelInfo(level: level, startDate: startDate, endDate: endDate))
+        }
+        
+        let projectedCurrentLevel: LevelInfo?
+        let projectedEndDateBasedOnLockedItem: Bool
+        if let currentLevelRadicals = radicalUnlockDatesByLevel[userInfo.level],
+            let currentLevelKanji = kanjiUnlockDatesByLevel[userInfo.level] {
+                let isAccelerated = WaniKaniAPI.isAcceleratedLevel(userInfo.level)
+                let earliestGuruDateForAllRadicals = currentLevelRadicals.lazy.map {
+                    WaniKaniAPI.minimumTimeFromSRSLevel(1, toSRSLevel: SRSLevel.Guru.numericLevelThreshold, fromDate: $0 ?? now, isRadical: true, isAccelerated: isAccelerated)!
+                    }.maxElement() ?? now
+                let earliestKanjiGuruDates = currentLevelKanji.lazy.map {
+                    WaniKaniAPI.minimumTimeFromSRSLevel(1, toSRSLevel: SRSLevel.Guru.numericLevelThreshold, fromDate: $0 ?? earliestGuruDateForAllRadicals, isRadical: false, isAccelerated: isAccelerated)!
+                    }.sort(<)
+                // You guru a level once at least 90% of all kanji is at Guru level or above
+                let guruThresholdIndex = currentLevelKanji.count * 9 / 10 - (currentLevelKanji.count % 10 == 0 ? 1 : 0)
+                let earliestLevellingDate = earliestKanjiGuruDates[guruThresholdIndex]
+                let sortedCurrentLevelKanji = currentLevelKanji.sort { ($0 ?? NSDate.distantFuture()) < ($1 ?? NSDate.distantFuture()) }
+                projectedEndDateBasedOnLockedItem = sortedCurrentLevelKanji[guruThresholdIndex] == nil
+                projectedCurrentLevel = LevelInfo(level: userInfo.level, startDate: startDates.last ?? now, endDate: earliestLevellingDate)
+        } else {
+            projectedCurrentLevel = nil
+            projectedEndDateBasedOnLockedItem = true
+        }
+        
+        return LevelData(detail: levelInfos, projectedCurrentLevel: projectedCurrentLevel, projectedEndDateBasedOnLockedItem: projectedEndDateBasedOnLockedItem)
+    }
+    
+    private static func getUnlockDatesByLevelForTable(tableName: String, database: FMDatabase) throws -> [Int: [NSDate?]] {
+        let sql = "SELECT \(levelColumnName), \(Columns.dateUnlocked) FROM \(tableName) ORDER BY 1, 2"
+        let resultSet = try database.executeQuery(sql)
+        defer { resultSet.close() }
+        
+        var unlockDatesByLevel: [Int: [NSDate?]] = [:]
+        while resultSet.next() {
+            let level = resultSet.longForColumn(levelColumnName)
+            let dateUnlocked = resultSet.dateForColumn(Columns.dateUnlocked)
+            if case nil = unlockDatesByLevel[level]?.append(dateUnlocked) {
+                unlockDatesByLevel[level] = [dateUnlocked]
+            }
+        }
+        return unlockDatesByLevel
     }
     
     private static func dateAtStartOfDayForDate(date: NSDate) -> NSDate {
@@ -290,4 +368,5 @@ extension SRSDataItemCoder {
         let dateComponents = calendar.components(dayCalendarUnits, fromDate: date)
         return calendar.dateFromComponents(dateComponents)!
     }
+    
 }

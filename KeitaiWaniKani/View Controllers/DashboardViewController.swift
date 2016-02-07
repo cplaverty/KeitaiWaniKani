@@ -71,6 +71,14 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         }
     }
     
+    private var levelData: LevelData? {
+        didSet {
+            if levelData != oldValue {
+                self.updateUIForLevelData(levelData)
+            }
+        }
+    }
+    
     private var apiDataNeedsRefresh: Bool {
         return ApplicationSettings.needsRefresh() || userInformation == nil || studyQueue == nil || levelProgression == nil || srsDistribution == nil
     }
@@ -118,7 +126,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     private let blurEffect = UIBlurEffect(style: .ExtraLight)
     
     /// Formats percentages in truncated to whole percents (as the WK dashboard does)
-    private let percentFormatter: NSNumberFormatter = {
+    private lazy var percentFormatter: NSNumberFormatter = {
         let formatter = NSNumberFormatter()
         formatter.numberStyle = .PercentStyle
         formatter.roundingMode = .RoundDown
@@ -126,11 +134,21 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         return formatter
     }()
     
-    private let lastRefreshTimeFormatter: NSDateFormatter = {
+    private lazy var lastRefreshTimeFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
         formatter.doesRelativeDateFormatting = true
         formatter.dateStyle = .MediumStyle
         formatter.timeStyle = .ShortStyle
+        return formatter
+    }()
+    
+    private lazy var averageLevelDurationFormatter: NSDateComponentsFormatter = {
+        let formatter = NSDateComponentsFormatter()
+        formatter.allowedUnits = [.Year, .Month, .WeekOfMonth, .Day, .Hour]
+        formatter.allowsFractionalUnits = true
+        formatter.collapsesLargestUnit = true
+        formatter.maximumUnitCount = 2
+        formatter.unitsStyle = .Abbreviated
         return formatter
     }()
     
@@ -163,6 +181,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     @IBOutlet weak var kanjiPercentageCompletionLabel: UILabel!
     @IBOutlet weak var kanjiTotalItemCountLabel: UILabel!
     @IBOutlet weak var kanjiProgressView: UIProgressView!
+    @IBOutlet weak var currentLevelTimeCell: UITableViewCell!
     
     // MARK: SRS Distribution
     
@@ -190,6 +209,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         updateUIForLevelProgression(levelProgression)
         updateUIForUserInformation(userInformation)
         updateUIForSRSDistribution(srsDistribution)
+        updateUIForLevelData(levelData)
         updateProgress()
     }
     
@@ -370,6 +390,25 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         self.tableView.reloadSections(NSIndexSet(index: TableViewSections.SRSDistribution.rawValue), withRowAnimation: .None)
     }
     
+    func updateUIForLevelData(levelData: LevelData?) {
+        assert(NSThread.isMainThread(), "Must be called on the main thread")
+        
+        defer { self.tableView.reloadSections(NSIndexSet(index: TableViewSections.LevelProgress.rawValue), withRowAnimation: .None) }
+        
+        guard let levelData = levelData, let projectedCurrentLevel = levelData.projectedCurrentLevel else {
+            currentLevelTimeCell.textLabel?.text = "Do lessons to start the current level"
+            currentLevelTimeCell.detailTextLabel?.text = nil
+            return
+        }
+        
+        let startDate = projectedCurrentLevel.startDate
+        let timeSinceLevelStart = -startDate.timeIntervalSinceNow
+        let formattedTimeSinceLevelStart = averageLevelDurationFormatter.stringFromTimeInterval(timeSinceLevelStart) ?? "\(NSNumberFormatter.localizedStringFromNumber(timeSinceLevelStart, numberStyle: .DecimalStyle))s"
+        
+        currentLevelTimeCell.textLabel?.text = "Current Level Time"
+        currentLevelTimeCell.detailTextLabel?.text = formattedTimeSinceLevelStart
+    }
+    
     // MARK: - Data Fetch
     
     func fetchStudyQueueFromDatabase() {
@@ -379,11 +418,13 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
                 let studyQueue = try StudyQueue.coder.loadFromDatabase(database)
                 let levelProgression = try LevelProgression.coder.loadFromDatabase(database)
                 let srsDistribution = try SRSDistribution.coder.loadFromDatabase(database)
+                let levelData = try SRSDataItemCoder.levelTimeline(database)
                 dispatch_async(dispatch_get_main_queue()) {
                     self.userInformation = userInformation
                     self.studyQueue = studyQueue
                     self.levelProgression = levelProgression
                     self.srsDistribution = srsDistribution
+                    self.levelData = levelData
                     self.updateProgress()
                     
                     DDLogDebug("Fetch of latest StudyQueue (\(studyQueue?.lastUpdateTimestamp ?? NSDate.distantPast())) from database complete.  Needs refreshing? \(self.apiDataNeedsRefresh)")
@@ -451,6 +492,18 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         }
         
         operation.srsDistributionOperation.addObserver(srsDistributionObserver)
+        
+        // SRS Data
+        let srsDataObserver = BlockObserver { [weak self] _ in
+            databaseQueue.inDatabase { database in
+                let levelData = try! SRSDataItemCoder.levelTimeline(database)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self?.levelData = levelData
+                }
+            }
+        }
+        
+        operation.srsDataItemOperation.addObserver(srsDataObserver)
         
         // Operation finish
         let observer = BlockObserver(
