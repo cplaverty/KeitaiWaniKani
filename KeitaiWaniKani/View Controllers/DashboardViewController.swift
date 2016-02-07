@@ -532,7 +532,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     }
     
     func fetchStudyQueueFromNetworkInBackground(forced forced: Bool, afterDelay delay: NSTimeInterval? = nil) {
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) { [weak self] in
+        dispatch_async(dispatch_get_global_queue(forced ? QOS_CLASS_USER_INITIATED : QOS_CLASS_UTILITY, 0)) { [weak self] in
             self?.fetchStudyQueueFromNetwork(forced: forced, afterDelay: delay)
         }
     }
