@@ -16,6 +16,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     private struct SegueIdentifiers {
         static let radicalsProgress = "Show Radicals Progress"
         static let kanjiProgress = "Show Kanji Progress"
+        static let levelDataChart = "Show Level Data Chart"
     }
     
     private enum TableViewSections: Int {
@@ -23,7 +24,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     }
     
     // MARK: - Properties
-
+    
     var progressDescriptionLabel: UILabel!
     var progressAdditionalDescriptionLabel: UILabel!
     var progressView: UIProgressView!
@@ -181,6 +182,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     @IBOutlet weak var kanjiPercentageCompletionLabel: UILabel!
     @IBOutlet weak var kanjiTotalItemCountLabel: UILabel!
     @IBOutlet weak var kanjiProgressView: UIProgressView!
+    @IBOutlet weak var averageLevelTimeCell: UITableViewCell!
     @IBOutlet weak var currentLevelTimeCell: UITableViewCell!
     @IBOutlet weak var currentLevelTimeRemainingCell: UITableViewCell!
     
@@ -191,7 +193,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     @IBOutlet weak var masterCell: UITableViewCell!
     @IBOutlet weak var enlightenedCell: UITableViewCell!
     @IBOutlet weak var burnedCell: UITableViewCell!
-
+    
     // MARK: - Actions
     
     @IBAction func refresh(sender: UIRefreshControl) {
@@ -202,7 +204,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     @IBAction func forceRefreshStudyQueue(segue: UIStoryboardSegue) {
         fetchStudyQueueFromNetworkInBackground(forced: true)
     }
-
+    
     // MARK: - Update UI
     
     func updateUI() {
@@ -396,14 +398,19 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         
         defer { self.tableView.reloadSections(NSIndexSet(index: TableViewSections.LevelProgress.rawValue), withRowAnimation: .None) }
         
-        guard let levelData = levelData,
-            let averageLevelDuration = levelData.averageLevelDuration,
-            let projectedCurrentLevel = levelData.projectedCurrentLevel else {
+        guard let
+            levelData = levelData,
+            averageLevelDuration = levelData.averageLevelDuration,
+            projectedCurrentLevel = levelData.projectedCurrentLevel
+            else {
                 currentLevelTimeCell.textLabel?.text = "Do lessons to start the current level"
                 currentLevelTimeCell.detailTextLabel?.text = nil
                 currentLevelTimeRemainingCell.detailTextLabel?.text = "–"
                 return
         }
+        
+        let formattedAverageLevelDuration = averageLevelDurationFormatter.stringFromTimeInterval(averageLevelDuration) ?? "\(NSNumberFormatter.localizedStringFromNumber(averageLevelDuration, numberStyle: .DecimalStyle))s"
+        averageLevelTimeCell.detailTextLabel?.text = formattedAverageLevelDuration
         
         let startDate = projectedCurrentLevel.startDate
         let timeSinceLevelStart = -startDate.timeIntervalSinceNow
@@ -462,7 +469,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             DDLogInfo("Not restarting study queue refresh as an operation is already running and force flag not set")
             return
         }
-
+        
         DDLogInfo("Checking whether study queue needs refreshed (forced? \(forced))")
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let databaseQueue = delegate.databaseQueue
@@ -552,7 +559,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     }
     
     // MARK: - Timer Callbacks
-
+    
     func updateUITimerDidFire(timer: NSTimer) {
         guard let studyQueue = self.studyQueue else {
             return
@@ -620,7 +627,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     }
     
     // MARK: - UITableViewDelegate
-
+    
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44.0
     }
@@ -640,7 +647,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         visualEffectVibrancyView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         visualEffectVibrancyView.contentView.addSubview(label)
         visualEffectVibrancyView.contentView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-
+        
         NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[label]-|", options: [], metrics: nil, views: ["label": label]))
         NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-[label]", options: [], metrics: nil, views: ["label": label]))
         
@@ -703,7 +710,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didEnterBackground:", name: UIApplicationDidEnterBackgroundNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didEnterForeground:", name: UIApplicationDidBecomeActiveNotification, object: nil)
-
+        
         let backgroundView = UIView(frame: tableView.frame)
         let imageView = UIImageView(image: UIImage(named: "Header"))
         imageView.contentMode = .ScaleAspectFill
@@ -715,7 +722,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         backgroundView.addSubview(visualEffectBlurView)
         tableView.backgroundView = backgroundView
         tableView.separatorEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
-
+        
         apprenticeCell.imageView?.image = apprenticeCell.imageView?.image?.imageWithRenderingMode(.AlwaysTemplate)
         guruCell.imageView?.image = guruCell.imageView?.image?.imageWithRenderingMode(.AlwaysTemplate)
         masterCell.imageView?.image = masterCell.imageView?.image?.imageWithRenderingMode(.AlwaysTemplate)
@@ -773,7 +780,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             NSLayoutConstraint(item: progressAdditionalDescriptionLabel, attribute: .Trailing, relatedBy: .Equal, toItem: statusView, attribute: .Trailing, multiplier: 1, constant: 0).active = true
             NSLayoutConstraint(item: progressAdditionalDescriptionLabel, attribute: .Bottom, relatedBy: .Equal, toItem: statusView, attribute: .Bottom, multiplier: 1, constant: 0).active = true
             NSLayoutConstraint(item: progressAdditionalDescriptionLabel, attribute: .Top, relatedBy: .Equal, toItem: progressDescriptionLabel, attribute: .Bottom, multiplier: 1, constant: 0).active = true
-
+            
             let statusViewBarButtonItem = UIBarButtonItem(customView: toolbarView)
             items.append(statusViewBarButtonItem)
             
@@ -791,7 +798,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
+        
         guard let apiKey = ApplicationSettings.apiKey where !apiKey.isEmpty else {
             DDLogDebug("Dashboard view has no API key.  Dismissing back to home screen.")
             dismissViewControllerAnimated(false, completion: nil)
@@ -851,6 +858,10 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
                     }
                 }
             }
+        case SegueIdentifiers.levelDataChart:
+            if let vc = segue.destinationContentViewController as? LevelChartViewController {
+                vc.levelData = self.levelData
+            }
         default: break
         }
     }
@@ -873,7 +884,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         startTimers()
         updateUI()
     }
-
+    
     // MARK: - Key-Value Observing
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {

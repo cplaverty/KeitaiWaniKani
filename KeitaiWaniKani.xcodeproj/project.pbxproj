@@ -114,6 +114,7 @@
 		83829B441BB53E2E00CDED3F /* NoCancelledDependenciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83829B431BB53E2E00CDED3F /* NoCancelledDependenciesTests.swift */; };
 		8393CEAA1BA75DF5008701D6 /* DelayOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8393CEA91BA75DF5008701D6 /* DelayOperation.swift */; };
 		83966D6A1BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83966D691BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift */; };
+		8399BD601C68D388006FDBE8 /* LevelChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8399BD5F1C68D388006FDBE8 /* LevelChartViewController.swift */; };
 		839AA3D91BE2BB8C006A05F3 /* jquery.qtip.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 839AA3D71BE2BB8C006A05F3 /* jquery.qtip.min.css */; };
 		839AA3DA1BE2BB8C006A05F3 /* jquery.qtip.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */; };
 		839AA3DC1BE2BC08006A05F3 /* resize.css in Resources */ = {isa = PBXBuildFile; fileRef = 839AA3DB1BE2BC08006A05F3 /* resize.css */; };
@@ -367,6 +368,7 @@
 		83829B431BB53E2E00CDED3F /* NoCancelledDependenciesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCancelledDependenciesTests.swift; sourceTree = "<group>"; };
 		8393CEA91BA75DF5008701D6 /* DelayOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelayOperation.swift; sourceTree = "<group>"; };
 		83966D691BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSProgress+KeitaiWaniKani.swift"; sourceTree = "<group>"; };
+		8399BD5F1C68D388006FDBE8 /* LevelChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelChartViewController.swift; sourceTree = "<group>"; };
 		839AA3D71BE2BB8C006A05F3 /* jquery.qtip.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = jquery.qtip.min.css; sourceTree = "<group>"; };
 		839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.qtip.min.js; sourceTree = "<group>"; };
 		839AA3DB1BE2BC08006A05F3 /* resize.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = resize.css; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 				83BF36391B52D24A0044F59B /* DashboardViewController.swift */,
 				83354D8D1B484C98007686D5 /* GetAPIKeyViewController.swift */,
 				8331E5031B48525F005AF085 /* HomeScreenViewController.swift */,
+				8399BD5F1C68D388006FDBE8 /* LevelChartViewController.swift */,
 				83B155561B944B360022217E /* ReviewTimelineTableViewController.swift */,
 				83B1555A1B94A18D0022217E /* SettingsTableViewController.swift */,
 				831FF75B1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift */,
@@ -1378,6 +1381,7 @@
 				839D76AB1B9A3BC40037294C /* UserScriptTableViewCell.swift in Sources */,
 				83B1555B1B94A18D0022217E /* SettingsTableViewController.swift in Sources */,
 				8347BDDA1B7260B1000F99EF /* BackgroundObserver.swift in Sources */,
+				8399BD601C68D388006FDBE8 /* LevelChartViewController.swift in Sources */,
 				83288CC21B45E808002B82B3 /* ApplicationSettings.swift in Sources */,
 				83B155571B944B360022217E /* ReviewTimelineTableViewController.swift in Sources */,
 				83AB92D71B7C05F2006D08F2 /* GetSRSDataItemOperation.swift in Sources */,
