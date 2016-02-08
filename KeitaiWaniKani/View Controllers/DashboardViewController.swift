@@ -144,7 +144,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     
     private lazy var averageLevelDurationFormatter: NSDateComponentsFormatter = {
         let formatter = NSDateComponentsFormatter()
-        formatter.allowedUnits = [.Year, .Month, .WeekOfMonth, .Day, .Hour]
+        formatter.allowedUnits = [.Day, .Hour]
         formatter.allowsFractionalUnits = true
         formatter.collapsesLargestUnit = true
         formatter.maximumUnitCount = 2
