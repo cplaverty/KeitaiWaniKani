@@ -182,6 +182,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     @IBOutlet weak var kanjiTotalItemCountLabel: UILabel!
     @IBOutlet weak var kanjiProgressView: UIProgressView!
     @IBOutlet weak var currentLevelTimeCell: UITableViewCell!
+    @IBOutlet weak var currentLevelTimeRemainingCell: UITableViewCell!
     
     // MARK: SRS Distribution
     
@@ -395,10 +396,13 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         
         defer { self.tableView.reloadSections(NSIndexSet(index: TableViewSections.LevelProgress.rawValue), withRowAnimation: .None) }
         
-        guard let levelData = levelData, let projectedCurrentLevel = levelData.projectedCurrentLevel else {
-            currentLevelTimeCell.textLabel?.text = "Do lessons to start the current level"
-            currentLevelTimeCell.detailTextLabel?.text = nil
-            return
+        guard let levelData = levelData,
+            let averageLevelDuration = levelData.averageLevelDuration,
+            let projectedCurrentLevel = levelData.projectedCurrentLevel else {
+                currentLevelTimeCell.textLabel?.text = "Do lessons to start the current level"
+                currentLevelTimeCell.detailTextLabel?.text = nil
+                currentLevelTimeRemainingCell.detailTextLabel?.text = "–"
+                return
         }
         
         let startDate = projectedCurrentLevel.startDate
@@ -407,6 +411,16 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         
         currentLevelTimeCell.textLabel?.text = "Current Level Time"
         currentLevelTimeCell.detailTextLabel?.text = formattedTimeSinceLevelStart
+        
+        let endDateByEstimate = startDate.dateByAddingTimeInterval(averageLevelDuration)
+        let endDateByProjection = projectedCurrentLevel.endDate!
+        let expectedEndDate = levelData.projectedEndDateBasedOnLockedItem && endDateByEstimate.timeIntervalSinceNow > 0 ? endDateByEstimate : endDateByProjection
+        
+        let timeUntilLevelCompletion = expectedEndDate.timeIntervalSinceNow
+        let formattedTimeUntilLevelCompletion = averageLevelDurationFormatter.stringFromTimeInterval(timeUntilLevelCompletion) ?? "\(NSNumberFormatter.localizedStringFromNumber(timeUntilLevelCompletion, numberStyle: .DecimalStyle))s"
+        
+        currentLevelTimeRemainingCell.textLabel?.text = levelData.projectedEndDateBasedOnLockedItem ? "Level Up In (Estimated)" : "Level Up In"
+        currentLevelTimeRemainingCell.detailTextLabel?.text = formattedTimeUntilLevelCompletion
     }
     
     // MARK: - Data Fetch
