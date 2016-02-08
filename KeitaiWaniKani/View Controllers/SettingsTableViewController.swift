@@ -153,7 +153,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         } else {
             let vc = MFMailComposeViewController()
             vc.mailComposeDelegate = self
-            vc.setToRecipients(["KeitaiWaniKani@icloud.com"])
+            vc.setToRecipients(["allicrab@icloud.com"])
             let (product, version, build) = self.productAndVersion
             vc.setSubject("\(product) feedback (v\(version) b\(build))")
             self.presentViewController(vc, animated: true, completion: nil)
