@@ -9,14 +9,12 @@ import Foundation
 
 public struct LevelData: Equatable {
     public let detail: [LevelInfo]
-    public let projectedCurrentLevel: LevelInfo?
-    public let projectedEndDateBasedOnLockedItem: Bool
+    public let projectedCurrentLevel: ProjectedLevelInfo?
     public let averageLevelDuration: NSTimeInterval?
     
-    public init(detail: [LevelInfo], projectedCurrentLevel: LevelInfo?, projectedEndDateBasedOnLockedItem: Bool) {
+    public init(detail: [LevelInfo], projectedCurrentLevel: ProjectedLevelInfo?) {
         self.detail = detail
         self.projectedCurrentLevel = projectedCurrentLevel
-        self.projectedEndDateBasedOnLockedItem = projectedEndDateBasedOnLockedItem
         self.averageLevelDuration = self.dynamicType.calculateAverageLevelDuration(detail)
     }
     
@@ -69,4 +67,25 @@ public func ==(lhs: LevelInfo, rhs: LevelInfo) -> Bool {
     return lhs.level == rhs.level &&
         lhs.startDate == rhs.startDate &&
         lhs.endDate == rhs.endDate
+}
+
+public struct ProjectedLevelInfo: Equatable {
+    public let level: Int
+    public let startDate: NSDate
+    public let endDate: NSDate
+    public let endDateBasedOnLockedItem: Bool
+    
+    public init(level: Int, startDate: NSDate, endDate: NSDate, endDateBasedOnLockedItem: Bool) {
+        self.level = level
+        self.startDate = startDate
+        self.endDate = endDate
+        self.endDateBasedOnLockedItem = endDateBasedOnLockedItem
+    }
+}
+
+public func ==(lhs: ProjectedLevelInfo, rhs: ProjectedLevelInfo) -> Bool {
+    return lhs.level == rhs.level &&
+        lhs.startDate == rhs.startDate &&
+        lhs.endDate == rhs.endDate &&
+        lhs.endDateBasedOnLockedItem == rhs.endDateBasedOnLockedItem
 }

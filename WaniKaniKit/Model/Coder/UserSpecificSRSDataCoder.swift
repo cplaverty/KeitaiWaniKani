@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CocoaLumberjack
 import FMDB
 import SwiftyJSON
 
@@ -286,7 +287,7 @@ extension SRSDataItemCoder {
     
     public static func levelTimeline(database: FMDatabase) throws -> LevelData {
         guard let userInfo = try UserInformation.coder.loadFromDatabase(database) else {
-            return LevelData(detail: [], projectedCurrentLevel: nil, projectedEndDateBasedOnLockedItem: true)
+            return LevelData(detail: [], projectedCurrentLevel: nil)
         }
         
         let now = NSDate()
@@ -319,29 +320,26 @@ extension SRSDataItemCoder {
             levelInfos.append(LevelInfo(level: level, startDate: startDate, endDate: endDate))
         }
         
-        let projectedCurrentLevel: LevelInfo?
-        let projectedEndDateBasedOnLockedItem: Bool
-        if let currentLevelRadicals = radicalUnlockDatesByLevel[userInfo.level],
-            let currentLevelKanji = kanjiUnlockDatesByLevel[userInfo.level] {
-                let isAccelerated = WaniKaniAPI.isAcceleratedLevel(userInfo.level)
-                let earliestGuruDateForAllRadicals = currentLevelRadicals.lazy.map {
-                    WaniKaniAPI.minimumTimeFromSRSLevel(1, toSRSLevel: SRSLevel.Guru.numericLevelThreshold, fromDate: $0 ?? now, isRadical: true, isAccelerated: isAccelerated)!
-                    }.maxElement() ?? now
-                let earliestKanjiGuruDates = currentLevelKanji.lazy.map {
-                    WaniKaniAPI.minimumTimeFromSRSLevel(1, toSRSLevel: SRSLevel.Guru.numericLevelThreshold, fromDate: $0 ?? earliestGuruDateForAllRadicals, isRadical: false, isAccelerated: isAccelerated)!
-                    }.sort(<)
-                // You guru a level once at least 90% of all kanji is at Guru level or above
-                let guruThresholdIndex = currentLevelKanji.count * 9 / 10 - (currentLevelKanji.count % 10 == 0 ? 1 : 0)
-                let earliestLevellingDate = earliestKanjiGuruDates[guruThresholdIndex]
-                let sortedCurrentLevelKanji = currentLevelKanji.sort { ($0 ?? NSDate.distantFuture()) < ($1 ?? NSDate.distantFuture()) }
-                projectedEndDateBasedOnLockedItem = sortedCurrentLevelKanji[guruThresholdIndex] == nil
-                projectedCurrentLevel = LevelInfo(level: userInfo.level, startDate: startDates.last ?? now, endDate: earliestLevellingDate)
-        } else {
-            projectedCurrentLevel = nil
-            projectedEndDateBasedOnLockedItem = true
-        }
+        let projectedCurrentLevel = try currentLevelProjectionFromDatabase(database, forLevel: userInfo.level, startDate: startDates.last ?? now)
+
+        return LevelData(detail: levelInfos, projectedCurrentLevel: projectedCurrentLevel)
+    }
+    
+    private static func currentLevelProjectionFromDatabase(database: FMDatabase, forLevel level: Int, startDate: NSDate) throws -> ProjectedLevelInfo? {
+        let currentLevelKanji = try Kanji.coder.loadFromDatabase(database, forLevel: level).sort(SRSDataItemSorting.byProgress)
+        guard !currentLevelKanji.isEmpty else { return nil }
         
-        return LevelData(detail: levelInfos, projectedCurrentLevel: projectedCurrentLevel, projectedEndDateBasedOnLockedItem: projectedEndDateBasedOnLockedItem)
+        let currentLevelRadicals = try Radical.coder.loadFromDatabase(database, forLevel: level).sort(SRSDataItemSorting.byProgress)
+        let now = NSDate()
+        let earliestGuruDateForAllRadicals = currentLevelRadicals.first?.guruDate(now) ?? now
+        
+        // You guru a level once at least 90% of all kanji is at Guru level or above, so skip past the first 10% of items
+        let guruThresholdIndex = currentLevelKanji.count / 10
+        let earliestLevellingDate = currentLevelKanji[guruThresholdIndex].guruDate(earliestGuruDateForAllRadicals)!
+        let endDateBasedOnLockedItem = currentLevelKanji[guruThresholdIndex].userSpecificSRSData?.dateUnlocked == nil
+        
+        DDLogVerbose("currentLevelProjectionFromDatabase: startDate = \(startDate), earliestGuruDateForAllRadicals = \(earliestGuruDateForAllRadicals), earliestLevellingDate = \(earliestLevellingDate), endDateBasedOnLockedItem = \(endDateBasedOnLockedItem)")
+        return ProjectedLevelInfo(level: level, startDate: startDate, endDate: earliestLevellingDate, endDateBasedOnLockedItem: endDateBasedOnLockedItem)
     }
     
     private static func getUnlockDatesByLevelForTable(tableName: String, database: FMDatabase) throws -> [Int: [NSDate?]] {
