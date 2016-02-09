@@ -41,3 +41,14 @@ public extension SRSDataItem {
         return WaniKaniAPI.minimumTimeFromSRSLevel(1, toSRSLevel: SRSLevel.Guru.numericLevelThreshold, fromDate: baseDate, isRadical: self.dynamicType.isRadical, isAccelerated: isAccelerated)
     }
 }
+
+public struct SRSDataItemSorting {
+    public static func byProgress(lhs: SRSDataItem, rhs: SRSDataItem) -> Bool {
+        let u1 = lhs.userSpecificSRSData, u2 = rhs.userSpecificSRSData
+        if u1?.srsLevelNumeric == u2?.srsLevelNumeric {
+            return u1?.dateAvailable > u2?.dateAvailable
+        } else {
+            return u1?.srsLevelNumeric < u2?.srsLevelNumeric
+        }
+    }
+}

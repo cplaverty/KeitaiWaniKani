@@ -21,14 +21,7 @@ private struct ClassifiedSRSDataItems {
     let sections: [Section]
     
     init(items: [SRSDataItem]) {
-        let items = items.sort {
-            let u1 = $0.userSpecificSRSData, u2 = $1.userSpecificSRSData
-            if u1?.srsLevelNumeric == u2?.srsLevelNumeric {
-                return u1?.dateAvailable > u2?.dateAvailable
-            } else {
-                return u1?.srsLevelNumeric < u2?.srsLevelNumeric
-            }
-        }
+        let items = items.sort(SRSDataItemSorting.byProgress)
         var sections: [Section] = []
         sections.reserveCapacity(2)
         
