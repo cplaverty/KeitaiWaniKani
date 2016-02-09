@@ -11,45 +11,33 @@ import OperationKit
 import WaniKaniKit
 
 class AlertOperation: Operation {
+    
     // MARK: Properties
-
-    private let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .Alert)
+    
     private let presentationContext: UIViewController?
+    private var actions: [UIAlertAction] = []
     
     var title: String? {
-        get {
-            return alertController.title
-        }
-
-        set {
-            alertController.title = newValue
-            name = newValue
+        didSet {
+            name = title
         }
     }
     
-    var message: String? {
-        get {
-            return alertController.message
-        }
-        
-        set { 
-            alertController.message = newValue
-        }
-    }
+    var message: String?
     
     // MARK: Initialization
     
     init(presentationContext: UIViewController? = nil) {
         self.presentationContext = presentationContext ?? UIApplication.sharedApplication().keyWindow?.rootViewController
-
+        
         super.init()
         
         addCondition(AlertPresentation())
         
         /*
-            This operation modifies the view controller hierarchy.
-            Doing this while other such operations are executing can lead to
-            inconsistencies in UIKit. So, let's make them mutally exclusive.
+        This operation modifies the view controller hierarchy.
+        Doing this while other such operations are executing can lead to
+        inconsistencies in UIKit. So, let's make them mutally exclusive.
         */
         addCondition(MutuallyExclusive<UIViewController>())
     }
@@ -59,26 +47,30 @@ class AlertOperation: Operation {
             if let strongSelf = self {
                 handler(strongSelf)
             }
-
+            
             self?.finish()
         }
         
-        alertController.addAction(action)
+        actions.append(action)
     }
     
     override func execute() {
         guard let presentationContext = presentationContext else {
             finish()
-
+            
             return
         }
-
+        
         dispatch_async(dispatch_get_main_queue()) {
-            if self.alertController.actions.isEmpty {
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .Alert)
+            alertController.title = self.title
+            alertController.message = self.message
+            if self.actions.isEmpty {
                 self.addAction("OK")
             }
+            self.actions.forEach { alertController.addAction($0) }
             
-            presentationContext.presentViewController(self.alertController, animated: true, completion: nil)
+            presentationContext.presentViewController(alertController, animated: true, completion: nil)
         }
     }
 }
