@@ -419,9 +419,14 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         currentLevelTimeCell.textLabel?.text = "Current Level Time"
         currentLevelTimeCell.detailTextLabel?.text = formattedTimeSinceLevelStart
         
-        let endDateByEstimate = startDate.dateByAddingTimeInterval(averageLevelDuration)
+        let expectedEndDate: NSDate
         let endDateByProjection = projectedCurrentLevel.endDate!
-        let expectedEndDate = levelData.projectedEndDateBasedOnLockedItem && endDateByEstimate.timeIntervalSinceNow > 0 ? endDateByEstimate : endDateByProjection
+        if levelData.projectedEndDateBasedOnLockedItem {
+            let endDateByEstimate = startDate.dateByAddingTimeInterval(averageLevelDuration)
+            expectedEndDate = endDateByEstimate.laterDate(endDateByProjection)
+        } else {
+            expectedEndDate = endDateByProjection
+        }
         
         let timeUntilLevelCompletion = expectedEndDate.timeIntervalSinceNow
         let formattedTimeUntilLevelCompletion = averageLevelDurationFormatter.stringFromTimeInterval(timeUntilLevelCompletion) ?? "\(NSNumberFormatter.localizedStringFromNumber(timeUntilLevelCompletion, numberStyle: .DecimalStyle))s"
