@@ -1,13 +1,13 @@
 //
-//  KeitaiWaniKaniSnapshotUITests.swift
-//  KeitaiWaniKaniUITests
+//  SnapshotUITests.swift
+//  AlliCrabUITests
 //
 //  Copyright © 2016 Chris Laverty. All rights reserved.
 //
 
 import XCTest
 
-class KeitaiWaniKaniSnapshotUITests: XCTestCase {
+class SnapshotUITests: XCTestCase {
     
     override func setUp() {
         super.setUp()

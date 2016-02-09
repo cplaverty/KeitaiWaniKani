@@ -43,7 +43,7 @@
 		83426DF51B7369F8005F4503 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83426DF31B7369F8005F4503 /* MainInterface.storyboard */; };
 		83426DF91B7369F8005F4503 /* WaniKaniStudyQueueWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 83426DEE1B7369F8005F4503 /* WaniKaniStudyQueueWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		83426DFD1B736A0F005F4503 /* WaniKaniKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8347BCF91B725428000F99EF /* WaniKaniKit.framework */; };
-		8346E6131C497DF600068686 /* KeitaiWaniKaniSnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8346E6121C497DF600068686 /* KeitaiWaniKaniSnapshotUITests.swift */; };
+		8346E6131C497DF600068686 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8346E6121C497DF600068686 /* SnapshotUITests.swift */; };
 		8346E61D1C497E8900068686 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8346E61B1C497E8900068686 /* SnapshotHelper.swift */; };
 		8347BCFC1B725428000F99EF /* WaniKaniKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8347BCFB1B725428000F99EF /* WaniKaniKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8347BD031B725428000F99EF /* WaniKaniKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8347BCF91B725428000F99EF /* WaniKaniKit.framework */; };
@@ -293,7 +293,7 @@
 		83426DF41B7369F8005F4503 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		83426DF61B7369F8005F4503 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8346E6101C497DF600068686 /* AlliCrabUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlliCrabUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8346E6121C497DF600068686 /* KeitaiWaniKaniSnapshotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeitaiWaniKaniSnapshotUITests.swift; sourceTree = "<group>"; };
+		8346E6121C497DF600068686 /* SnapshotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotUITests.swift; sourceTree = "<group>"; };
 		8346E6141C497DF600068686 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8346E61B1C497E8900068686 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		8347BCF91B725428000F99EF /* WaniKaniKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WaniKaniKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -607,7 +607,7 @@
 			isa = PBXGroup;
 			children = (
 				8346E61B1C497E8900068686 /* SnapshotHelper.swift */,
-				8346E6121C497DF600068686 /* KeitaiWaniKaniSnapshotUITests.swift */,
+				8346E6121C497DF600068686 /* SnapshotUITests.swift */,
 				8346E6141C497DF600068686 /* Info.plist */,
 			);
 			path = KeitaiWaniKaniUITests;
@@ -1413,7 +1413,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8346E6131C497DF600068686 /* KeitaiWaniKaniSnapshotUITests.swift in Sources */,
+				8346E6131C497DF600068686 /* SnapshotUITests.swift in Sources */,
 				8346E61D1C497E8900068686 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
