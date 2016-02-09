@@ -18,7 +18,7 @@ languages([
 #launch_arguments(["-LOGIN_COOKIE <login cookie goes here>"])
 
 # The name of the scheme which contains the UI Tests
-scheme "KeitaiWaniKaniUITests"
+scheme "AlliCrabUITests"
 
 # Where should the resulting screenshots be stored?
 output_directory "./screenshots"

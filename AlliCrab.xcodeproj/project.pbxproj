@@ -1772,6 +1772,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.KeitaiWaniKaniUITests;
 				PRODUCT_NAME = AlliCrabUITests;
+				PROVISIONING_PROFILE = "";
+				TEST_TARGET_NAME = AlliCrab;
 				USES_XCTRUNNER = YES;
 			};
 			name = Debug;
@@ -1784,6 +1786,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.KeitaiWaniKaniUITests;
 				PRODUCT_NAME = AlliCrabUITests;
+				PROVISIONING_PROFILE = "";
+				TEST_TARGET_NAME = AlliCrab;
 				USES_XCTRUNNER = YES;
 			};
 			name = Release;
