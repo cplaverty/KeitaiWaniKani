@@ -18,7 +18,7 @@
                BlueprintIdentifier = "83426DED1B7369F8005F4503"
                BuildableName = "WaniKaniStudyQueueWidget.appex"
                BlueprintName = "WaniKaniStudyQueueWidget"
-               ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
+               ReferencedContainer = "container:AlliCrab.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -32,7 +32,7 @@
                BlueprintIdentifier = "830EAB851B41DC7700EBF073"
                BuildableName = "AlliCrab.app"
                BlueprintName = "AlliCrab"
-               ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
+               ReferencedContainer = "container:AlliCrab.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -48,9 +48,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8346E60F1C497DF600068686"
-               BuildableName = "KeitaiWaniKaniUITests.xctest"
-               BlueprintName = "KeitaiWaniKaniUITests"
-               ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
+               BuildableName = "AlliCrabUITests.xctest"
+               BlueprintName = "AlliCrabUITests"
+               ReferencedContainer = "container:AlliCrab.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -60,7 +60,7 @@
             BlueprintIdentifier = "830EAB851B41DC7700EBF073"
             BuildableName = "AlliCrab.app"
             BlueprintName = "AlliCrab"
-            ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
+            ReferencedContainer = "container:AlliCrab.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -84,7 +84,7 @@
             BlueprintIdentifier = "830EAB851B41DC7700EBF073"
             BuildableName = "AlliCrab.app"
             BlueprintName = "AlliCrab"
-            ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
+            ReferencedContainer = "container:AlliCrab.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -104,7 +104,7 @@
             BlueprintIdentifier = "830EAB851B41DC7700EBF073"
             BuildableName = "AlliCrab.app"
             BlueprintName = "AlliCrab"
-            ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
+            ReferencedContainer = "container:AlliCrab.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

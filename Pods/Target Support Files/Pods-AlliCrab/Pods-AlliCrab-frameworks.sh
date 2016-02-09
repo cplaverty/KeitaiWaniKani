@@ -84,18 +84,18 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-KeitaiWaniKani-WaniKaniKit/OnePasswordExtension.framework"
-  install_framework "Pods-KeitaiWaniKani-WaniKaniKit/Alamofire.framework"
-  install_framework "Pods-KeitaiWaniKani-WaniKaniKit/Charts.framework"
-  install_framework "Pods-KeitaiWaniKani-WaniKaniKit/CocoaLumberjack.framework"
-  install_framework "Pods-KeitaiWaniKani-WaniKaniKit/FMDB.framework"
-  install_framework "Pods-KeitaiWaniKani-WaniKaniKit/SwiftyJSON.framework"
+  install_framework "Pods-AlliCrab/OnePasswordExtension.framework"
+  install_framework "Pods-AlliCrab/Alamofire.framework"
+  install_framework "Pods-AlliCrab/Charts.framework"
+  install_framework "Pods-AlliCrab/CocoaLumberjack.framework"
+  install_framework "Pods-AlliCrab/FMDB.framework"
+  install_framework "Pods-AlliCrab/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-KeitaiWaniKani-WaniKaniKit/OnePasswordExtension.framework"
-  install_framework "Pods-KeitaiWaniKani-WaniKaniKit/Alamofire.framework"
-  install_framework "Pods-KeitaiWaniKani-WaniKaniKit/Charts.framework"
-  install_framework "Pods-KeitaiWaniKani-WaniKaniKit/CocoaLumberjack.framework"
-  install_framework "Pods-KeitaiWaniKani-WaniKaniKit/FMDB.framework"
-  install_framework "Pods-KeitaiWaniKani-WaniKaniKit/SwiftyJSON.framework"
+  install_framework "Pods-AlliCrab/OnePasswordExtension.framework"
+  install_framework "Pods-AlliCrab/Alamofire.framework"
+  install_framework "Pods-AlliCrab/Charts.framework"
+  install_framework "Pods-AlliCrab/CocoaLumberjack.framework"
+  install_framework "Pods-AlliCrab/FMDB.framework"
+  install_framework "Pods-AlliCrab/SwiftyJSON.framework"
 fi

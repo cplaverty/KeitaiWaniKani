@@ -1,6 +1,0 @@
-framework module Pods_KeitaiWaniKani_OperationKit {
-  umbrella header "Pods-KeitaiWaniKani-OperationKit-umbrella.h"
-
-  export *
-  module * { export * }
-}

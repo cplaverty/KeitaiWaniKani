@@ -1,62 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0720"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
-      <BuildActionEntries>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "830EAB851B41DC7700EBF073"
-               BuildableName = "AlliCrab.app"
-               BlueprintName = "AlliCrab"
-               ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "83D550531BB489A9007442EF"
-               BuildableName = "OperationKitTests.xctest"
-               BlueprintName = "OperationKitTests"
-               ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8347BD011B725428000F99EF"
-               BuildableName = "WaniKaniKitTests.xctest"
-               BlueprintName = "WaniKaniKitTests"
-               ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "8346E60F1C497DF600068686"
-               BuildableName = "KeitaiWaniKaniUITests.xctest"
-               BlueprintName = "KeitaiWaniKaniUITests"
-               ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
+               BuildableName = "AlliCrabUITests.xctest"
+               BlueprintName = "AlliCrabUITests"
+               ReferencedContainer = "container:AlliCrab.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -66,7 +29,7 @@
             BlueprintIdentifier = "830EAB851B41DC7700EBF073"
             BuildableName = "AlliCrab.app"
             BlueprintName = "AlliCrab"
-            ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
+            ReferencedContainer = "container:AlliCrab.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -89,7 +52,7 @@
             BlueprintIdentifier = "830EAB851B41DC7700EBF073"
             BuildableName = "AlliCrab.app"
             BlueprintName = "AlliCrab"
-            ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
+            ReferencedContainer = "container:AlliCrab.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -101,16 +64,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "830EAB851B41DC7700EBF073"
             BuildableName = "AlliCrab.app"
             BlueprintName = "AlliCrab"
-            ReferencedContainer = "container:KeitaiWaniKani.xcodeproj">
+            ReferencedContainer = "container:AlliCrab.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

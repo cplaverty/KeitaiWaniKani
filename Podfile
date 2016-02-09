@@ -1,7 +1,7 @@
 platform :ios, '8.0'
 use_frameworks!
 
-target 'KeitaiWaniKani' do
+target 'AlliCrab' do
     pod 'Alamofire'
     pod 'FMDB'
     pod 'SwiftyJSON'
@@ -21,7 +21,7 @@ end
 
 post_install do |installer|
     require 'fileutils'
-    FileUtils.cp_r('Pods/Target Support Files/Pods-KeitaiWaniKani/Pods-KeitaiWaniKani-acknowledgements.plist', 'KeitaiWaniKani/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+    FileUtils.cp_r('Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab-acknowledgements.plist', 'KeitaiWaniKani/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
     
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
