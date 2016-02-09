@@ -928,9 +928,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		830EAB851B41DC7700EBF073 /* KeitaiWaniKani */ = {
+		830EAB851B41DC7700EBF073 /* AlliCrab */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 830EABAE1B41DC7700EBF073 /* Build configuration list for PBXNativeTarget "KeitaiWaniKani" */;
+			buildConfigurationList = 830EABAE1B41DC7700EBF073 /* Build configuration list for PBXNativeTarget "AlliCrab" */;
 			buildPhases = (
 				2177945BD9E8CA74A7DABBD8 /* Check Pods Manifest.lock */,
 				830EAB821B41DC7700EBF073 /* Sources */,
@@ -948,7 +948,7 @@
 				83426DF81B7369F8005F4503 /* PBXTargetDependency */,
 				83C8F9501B9B2E7E007CBFBF /* PBXTargetDependency */,
 			);
-			name = KeitaiWaniKani;
+			name = AlliCrab;
 			productName = KeitaiWaniKani;
 			productReference = 830EAB861B41DC7700EBF073 /* AlliCrab.app */;
 			productType = "com.apple.product-type.application";
@@ -1136,7 +1136,7 @@
 				8347BCF81B725428000F99EF /* WaniKaniKit */,
 				83D550531BB489A9007442EF /* OperationKitTests */,
 				8347BD011B725428000F99EF /* WaniKaniKitTests */,
-				830EAB851B41DC7700EBF073 /* KeitaiWaniKani */,
+				830EAB851B41DC7700EBF073 /* AlliCrab */,
 				83426DED1B7369F8005F4503 /* WaniKaniStudyQueueWidget */,
 				8346E60F1C497DF600068686 /* KeitaiWaniKaniUITests */,
 			);
@@ -1555,7 +1555,7 @@
 		};
 		8346E6161C497DF600068686 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 830EAB851B41DC7700EBF073 /* KeitaiWaniKani */;
+			target = 830EAB851B41DC7700EBF073 /* AlliCrab */;
 			targetProxy = 8346E6151C497DF600068686 /* PBXContainerItemProxy */;
 		};
 		8347BD051B725428000F99EF /* PBXTargetDependency */ = {
@@ -1565,7 +1565,7 @@
 		};
 		8347BD071B725428000F99EF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 830EAB851B41DC7700EBF073 /* KeitaiWaniKani */;
+			target = 830EAB851B41DC7700EBF073 /* AlliCrab */;
 			targetProxy = 8347BD061B725428000F99EF /* PBXContainerItemProxy */;
 		};
 		8347BD0D1B725428000F99EF /* PBXTargetDependency */ = {
@@ -1710,8 +1710,7 @@
 				INFOPLIST_FILE = KeitaiWaniKani/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.KeitaiWaniKani;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = AlliCrab;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -1728,8 +1727,7 @@
 				INFOPLIST_FILE = KeitaiWaniKani/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.KeitaiWaniKani;
-				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
-				PRODUCT_NAME = AlliCrab;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -1946,7 +1944,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		830EABAE1B41DC7700EBF073 /* Build configuration list for PBXNativeTarget "KeitaiWaniKani" */ = {
+		830EABAE1B41DC7700EBF073 /* Build configuration list for PBXNativeTarget "AlliCrab" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				830EABAF1B41DC7700EBF073 /* Debug */,
