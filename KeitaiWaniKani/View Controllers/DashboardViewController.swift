@@ -429,7 +429,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         }
         
         let timeUntilLevelCompletion = expectedEndDate.timeIntervalSinceNow
-        let formattedTimeUntilLevelCompletion = averageLevelDurationFormatter.stringFromTimeInterval(timeUntilLevelCompletion) ?? "\(NSNumberFormatter.localizedStringFromNumber(timeUntilLevelCompletion, numberStyle: .DecimalStyle))s"
+        let formattedTimeUntilLevelCompletion = timeUntilLevelCompletion <= 0 ? "–" : averageLevelDurationFormatter.stringFromTimeInterval(timeUntilLevelCompletion) ?? "\(NSNumberFormatter.localizedStringFromNumber(timeUntilLevelCompletion, numberStyle: .DecimalStyle))s"
         
         currentLevelTimeRemainingCell.textLabel?.text = projectedCurrentLevel.endDateBasedOnLockedItem ? "Level Up In (Estimated)" : "Level Up In"
         currentLevelTimeRemainingCell.detailTextLabel?.text = formattedTimeUntilLevelCompletion
