@@ -29,12 +29,14 @@ public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSO
     private let databaseQueue: FMDatabaseQueue
     private let sourceURL: NSURL
     private var request: Request?
+    private let parseOnly: Bool
     
     // MARK: - Initialisers
     
-    public init(coder: Coder, resolver: ResourceResolver, databaseQueue: FMDatabaseQueue, networkObserver: OperationObserver?) {
+    public init(coder: Coder, resolver: ResourceResolver, databaseQueue: FMDatabaseQueue, networkObserver: OperationObserver?, parseOnly: Bool = false) {
         self.coder = coder
         self.databaseQueue = databaseQueue
+        self.parseOnly = parseOnly
         
         let resource = coder.resource
         self.sourceURL = resolver.URLForResource(resource, withArgument: nil)
@@ -98,6 +100,12 @@ public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSO
         parsed = coder.loadFromJSON(json[WaniKaniAPIResourceKeys.requestedInformation])
         
         ++progress.completedUnitCount
+        
+        if parseOnly {
+            DDLogInfo("Parsed \(Coder.ModelObject.self).  Skipping save to database because parseOnly = true.")
+            ++self.progress.completedUnitCount
+            return
+        }
         
         DDLogInfo("Parsed \(Coder.ModelObject.self).  Adding to database...")
         progress.localizedAdditionalDescription = "Saving..."

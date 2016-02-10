@@ -68,7 +68,7 @@ class GetAPIKeyViewController: UIViewController, UITextFieldDelegate {
             DDLogVerbose("Checking API key...")
             let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let resolver = WaniKaniAPI.resourceResolverForAPIKey(apiKey)
-            let operation = GetStudyQueueOperation(resolver: resolver, databaseQueue: delegate.databaseQueue)
+            let operation = GetStudyQueueOperation(resolver: resolver, databaseQueue: delegate.databaseQueue, parseOnly: true)
             operation.addObserver(finishHandler)
             
             delegate.operationQueue.addOperation(operation)
