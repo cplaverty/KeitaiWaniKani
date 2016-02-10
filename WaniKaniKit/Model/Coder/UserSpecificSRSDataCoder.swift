@@ -306,8 +306,7 @@ extension SRSDataItemCoder {
             let startOfPreviousLevel = startDates.last ?? NSDate.distantPast()
             let eariestPossibleGuruDate = WaniKaniAPI.minimumTimeFromSRSLevel(1, toSRSLevel: SRSLevel.Guru.numericLevelThreshold, fromDate: startOfPreviousLevel, isRadical: true, isAccelerated: isAccelerated)
             
-            let minStartDate = radicalUnlockDates.lazy.flatMap { $0 }.filter { $0 > eariestPossibleGuruDate }.minElement() ??
-                kanjiUnlockDates.lazy.flatMap { $0 }.filter { $0 > eariestPossibleGuruDate }.minElement()
+            let minStartDate = (radicalUnlockDates + kanjiUnlockDates).lazy.flatMap { $0 }.filter { $0 > eariestPossibleGuruDate }.minElement()
             startDates.append(minStartDate ?? now)
         }
         
@@ -335,7 +334,7 @@ extension SRSDataItemCoder {
         
         // You guru a level once at least 90% of all kanji is at Guru level or above, so skip past the first 10% of items
         let guruThresholdIndex = currentLevelKanji.count / 10
-        let earliestLevellingDate = currentLevelKanji[guruThresholdIndex].guruDate(earliestGuruDateForAllRadicals)!
+        let earliestLevellingDate = currentLevelKanji[guruThresholdIndex].guruDate(earliestGuruDateForAllRadicals) ?? now
         let endDateBasedOnLockedItem = currentLevelKanji[guruThresholdIndex].userSpecificSRSData?.dateUnlocked == nil
         
         DDLogVerbose("currentLevelProjectionFromDatabase: startDate = \(startDate), earliestGuruDateForAllRadicals = \(earliestGuruDateForAllRadicals), earliestLevellingDate = \(earliestLevellingDate), endDateBasedOnLockedItem = \(endDateBasedOnLockedItem)")
