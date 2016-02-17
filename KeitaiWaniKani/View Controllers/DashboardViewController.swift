@@ -205,6 +205,14 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         fetchStudyQueueFromNetworkInBackground(forced: true)
     }
     
+    func showLessonsView() {
+        presentReviewPageWebViewControllerForURL(WaniKaniURLs.lessonSession)
+    }
+    
+    func showReviewsView() {
+        presentReviewPageWebViewControllerForURL(WaniKaniURLs.reviewSession)
+    }
+    
     // MARK: - Update UI
     
     func updateUI() {
@@ -679,21 +687,9 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         
         switch (tableViewSection, indexPath.row) {
         case (.CurrentlyAvailable, 0): // Lessons
-            let vc = WaniKaniReviewPageWebViewController.forURL(WaniKaniURLs.lessonSession, configBlock: webViewControllerCommonConfiguration)
-            if self.dataRefreshOperation != nil {
-                // Cancel data refresh operation because we're just going to restart it when the web view is dismissed
-                DDLogDebug("Cancelling data refresh operation")
-                self.dataRefreshOperation = nil
-            }
-            presentViewController(vc, animated: true, completion: nil)
+            showLessonsView()
         case (.CurrentlyAvailable, 1): // Reviews
-            let vc = WaniKaniReviewPageWebViewController.forURL(WaniKaniURLs.reviewSession, configBlock: webViewControllerCommonConfiguration)
-            if self.dataRefreshOperation != nil {
-                // Cancel data refresh operation because we're just going to restart it when the web view is dismissed
-                DDLogDebug("Cancelling data refresh operation")
-                self.dataRefreshOperation = nil
-            }
-            presentViewController(vc, animated: true, completion: nil)
+            showReviewsView()
         case (.Links, 0): // Web Dashboard
             let vc = WKWebViewController.forURL(WaniKaniURLs.dashboard, configBlock: wkWebViewControllerCommonConfiguration)
             presentViewController(vc, animated: true, completion: nil)
@@ -877,6 +873,16 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     
     private func wkWebViewControllerCommonConfiguration(webViewController: WKWebViewController) {
         webViewController.delegate = self
+    }
+    
+    private func presentReviewPageWebViewControllerForURL(URL: NSURL) {
+        let vc = WaniKaniReviewPageWebViewController.forURL(URL, configBlock: webViewControllerCommonConfiguration)
+        if self.dataRefreshOperation != nil {
+            // Cancel data refresh operation because we're just going to restart it when the web view is dismissed
+            DDLogDebug("Cancelling data refresh operation")
+            self.dataRefreshOperation = nil
+        }
+        presentViewController(vc, animated: true, completion: nil)
     }
     
     // MARK: - Background transition
