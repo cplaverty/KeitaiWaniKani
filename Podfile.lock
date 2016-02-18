@@ -1,9 +1,9 @@
 PODS:
-  - 1PasswordExtension (1.7)
-  - Alamofire (3.1.5)
-  - Charts (2.2.1):
-    - Charts/Core (= 2.2.1)
-  - Charts/Core (2.2.1)
+  - 1PasswordExtension (1.8)
+  - Alamofire (3.2.0)
+  - Charts (2.2.2):
+    - Charts/Core (= 2.2.2)
+  - Charts/Core (2.2.2)
   - CocoaLumberjack/Core (2.2.0)
   - CocoaLumberjack/Default (2.2.0):
     - CocoaLumberjack/Core
@@ -42,9 +42,9 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC CHECKSUMS:
-  1PasswordExtension: a22573ad528dd63bd79c1f3b3813b17c2f86b91b
-  Alamofire: 5f730ba29fd113b7ddd71c1e65d0c630acf5d7b0
-  Charts: 3ff893c1a4416ab6abed7a6d26fa1c13372f3456
+  1PasswordExtension: 627d5aecf210c7636968faf5a4c3546c9531385b
+  Alamofire: 4da478599fccddff361205c8929333d7fe18dceb
+  Charts: e32b718fa716bdb7693b9e419d6d4a39a3f7992e
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
   FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
   OHHTTPStubs: d2bf6a0f407620d67e75a1d3f12d86a2b1dd15c0
