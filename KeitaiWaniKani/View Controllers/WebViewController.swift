@@ -14,7 +14,7 @@ protocol WebViewControllerDelegate: class {
     func webViewControllerDidFinish(controller: WebViewController)
 }
 
-class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelegate, WebViewControllerDelegate {
+class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelegate, WebViewControllerDelegate, BundleResourceLoader {
     
     class func forURL(URL: NSURL, @noescape configBlock: (WebViewController) -> Void) -> UINavigationController {
         let webViewController = self.init(URL: URL)
@@ -360,10 +360,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     // MARK: - User Scripts
     
     func injectStyleSheet(name: String, inWebView webView: UIWebView) {
-        guard let ssURL = NSBundle.mainBundle().URLForResource(name, withExtension: "css") else {
-            fatalError("Count not find style sheet \(name).css in main bundle")
-        }
-        let contents = encodeForJavascript(try! String(contentsOfURL: ssURL))
+        let contents = loadBundleResource(name, withExtension: "css", javascriptEncode: true)
         
         let script = "var style = document.createElement('style');style.setAttribute('type', 'text/css');style.appendChild(document.createTextNode('\(contents)'));document.head.appendChild(document.createComment('\(name).css'));document.head.appendChild(style);"
         
@@ -373,19 +370,12 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     }
     
     func injectScript(name: String, inWebView webView: UIWebView) {
-        guard let scriptURL = NSBundle.mainBundle().URLForResource(name, withExtension: "js") else {
-            fatalError("Count not find user script \(name).js in main bundle")
-        }
-        let contents = encodeForJavascript(try! String(contentsOfURL: scriptURL))
+        let contents = loadBundleResource(name, withExtension: "js", javascriptEncode: true)
         
         let script = "var script = document.createElement('script');script.setAttribute('type', 'text/javascript');script.appendChild(document.createTextNode('\(contents)'));document.head.appendChild(document.createComment('\(name).js'));document.head.appendChild(script);"
         if webView.stringByEvaluatingJavaScriptFromString(script) == nil {
             DDLogError("Failed to add script \(name).js")
         }
-    }
-    
-    private func encodeForJavascript(string: String) -> String  {
-        return string.unicodeScalars.map({$0.escape(asASCII: false)}).joinWithSeparator("")
     }
     
     // MARK: - Implementation

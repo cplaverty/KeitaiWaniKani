@@ -29,7 +29,10 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             settingKey: ApplicationSettingKeys.userScriptDoubleCheckEnabled),
         (name: "WaniKani Improve",
             description: "Automatically moves to the next item if the answer was correct (also known as \"lightning mode\").  Original script written by Seiji.",
-            settingKey: ApplicationSettingKeys.userScriptWaniKaniImproveEnabled)
+            settingKey: ApplicationSettingKeys.userScriptWaniKaniImproveEnabled),
+        (name: "WaniKani Markdown Notes",
+            description: "Allows you to write Markdown in the notes, which will be rendered as HTML when the page loads.  Original script written by rfindley.",
+            settingKey: ApplicationSettingKeys.userScriptMarkdownNotesEnabled)
     ]
     
     // MARK: - View Controller Lifecycle

@@ -109,6 +109,10 @@
 		836B2BAA1BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836B2BA91BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift */; };
 		836B2BAC1BA98C2900E7142D /* NoCancelledDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836B2BAB1BA98C2900E7142D /* NoCancelledDependencies.swift */; };
 		836CACC81BAB578600C8A945 /* StudyQueueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836CACC71BAB578600C8A945 /* StudyQueueTableViewCell.swift */; };
+		8371D6641C760ACE008AE534 /* SRSDataItemWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8371D6621C760A9D008AE534 /* SRSDataItemWebViewController.swift */; };
+		8371D6681C760D61008AE534 /* BundleResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8371D6661C760D13008AE534 /* BundleResourceLoader.swift */; };
+		8371D6691C760D6B008AE534 /* markdown.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 8371D65E1C76087F008AE534 /* markdown.user.js */; };
+		8371D66A1C760D6F008AE534 /* showdown.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8371D65F1C76087F008AE534 /* showdown.min.js */; };
 		837BD4941B6E724200EDB325 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837BD4931B6E724200EDB325 /* WebViewController.swift */; };
 		83829B421BB531D900CDED3F /* StubConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83829B411BB531D900CDED3F /* StubConditions.swift */; };
 		83829B441BB53E2E00CDED3F /* NoCancelledDependenciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83829B431BB53E2E00CDED3F /* NoCancelledDependenciesTests.swift */; };
@@ -363,6 +367,10 @@
 		836B2BA91BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DDLogLevel+CustomStringConvertible.swift"; sourceTree = "<group>"; };
 		836B2BAB1BA98C2900E7142D /* NoCancelledDependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCancelledDependencies.swift; sourceTree = "<group>"; };
 		836CACC71BAB578600C8A945 /* StudyQueueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyQueueTableViewCell.swift; sourceTree = "<group>"; };
+		8371D65E1C76087F008AE534 /* markdown.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = markdown.user.js; sourceTree = "<group>"; };
+		8371D65F1C76087F008AE534 /* showdown.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = showdown.min.js; sourceTree = "<group>"; };
+		8371D6621C760A9D008AE534 /* SRSDataItemWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemWebViewController.swift; sourceTree = "<group>"; };
+		8371D6661C760D13008AE534 /* BundleResourceLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleResourceLoader.swift; sourceTree = "<group>"; };
 		837BD4931B6E724200EDB325 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		83829B411BB531D900CDED3F /* StubConditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubConditions.swift; sourceTree = "<group>"; };
 		83829B431BB53E2E00CDED3F /* NoCancelledDependenciesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCancelledDependenciesTests.swift; sourceTree = "<group>"; };
@@ -543,6 +551,7 @@
 				8347BDCA1B7260B1000F99EF /* App Operations */,
 				83966D681BAD9382005799E9 /* Extensions */,
 				832462C01B93687E00FB62C9 /* User Scripts */,
+				8371D6651C760CE9008AE534 /* Util */,
 				83DC478A1B4408FB00AD716C /* View */,
 				83354D8C1B484ADE007686D5 /* View Controllers */,
 				830EAB891B41DC7700EBF073 /* AppDelegate.swift */,
@@ -562,7 +571,9 @@
 				83183BC51BECC4B300FAE0B6 /* common.js */,
 				839AA3D71BE2BB8C006A05F3 /* jquery.qtip.min.css */,
 				839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */,
+				8371D65E1C76087F008AE534 /* markdown.user.js */,
 				839AA3DB1BE2BC08006A05F3 /* resize.css */,
+				8371D65F1C76087F008AE534 /* showdown.min.js */,
 				83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */,
 				836639511BDB9F9E00BD0B92 /* wkimprove.js */,
 				83183BC31BECC1C300FAE0B6 /* wkoverride.user.js */,
@@ -580,6 +591,7 @@
 				83B155561B944B360022217E /* ReviewTimelineTableViewController.swift */,
 				83B1555A1B94A18D0022217E /* SettingsTableViewController.swift */,
 				831FF75B1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift */,
+				8371D6621C760A9D008AE534 /* SRSDataItemWebViewController.swift */,
 				833BF0BD1B4930A20038AAE3 /* UIViewControllerExtensions.swift */,
 				83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */,
 				83D7CF811BC15FCB00C1AFC4 /* WaniKaniReviewPageWebViewController.swift */,
@@ -750,6 +762,14 @@
 				83420E9C1BD3D79800557E13 /* DownloadFileOperation.swift */,
 			);
 			path = Operations;
+			sourceTree = "<group>";
+		};
+		8371D6651C760CE9008AE534 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				8371D6661C760D13008AE534 /* BundleResourceLoader.swift */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 		83829B401BB531B900CDED3F /* Conditions */ = {
@@ -1148,6 +1168,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8371D66A1C760D6F008AE534 /* showdown.min.js in Resources */,
 				83183BC61BECC4B300FAE0B6 /* common.js in Resources */,
 				839AA3DC1BE2BC08006A05F3 /* resize.css in Resources */,
 				83CB3E0F1B5849EE00761D68 /* Settings.bundle in Resources */,
@@ -1159,6 +1180,7 @@
 				83F32EAB1BDFCCFA00F2ABA0 /* wkdoublecheck.js in Resources */,
 				830EAB911B41DC7700EBF073 /* Assets.xcassets in Resources */,
 				830EAB8F1B41DC7700EBF073 /* Main.storyboard in Resources */,
+				8371D6691C760D6B008AE534 /* markdown.user.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1373,6 +1395,7 @@
 				831FF75C1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift in Sources */,
 				83B155591B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift in Sources */,
 				83B5CC4F1C47112F00979DAC /* UIBottomBorderedView.swift in Sources */,
+				8371D6641C760ACE008AE534 /* SRSDataItemWebViewController.swift in Sources */,
 				8331E5041B48525F005AF085 /* HomeScreenViewController.swift in Sources */,
 				83DC478C1B440A6200AD716C /* RubyLabel.swift in Sources */,
 				832462B91B930AC200FB62C9 /* ReviewCountNotificationOperation.swift in Sources */,
@@ -1384,6 +1407,7 @@
 				8399BD601C68D388006FDBE8 /* LevelChartViewController.swift in Sources */,
 				83288CC21B45E808002B82B3 /* ApplicationSettings.swift in Sources */,
 				83B155571B944B360022217E /* ReviewTimelineTableViewController.swift in Sources */,
+				8371D6681C760D61008AE534 /* BundleResourceLoader.swift in Sources */,
 				83AB92D71B7C05F2006D08F2 /* GetSRSDataItemOperation.swift in Sources */,
 				833FECE91BADF0DD001C9260 /* WebViewBackForwardListTableViewController.swift in Sources */,
 				837BD4941B6E724200EDB325 /* WebViewController.swift in Sources */,

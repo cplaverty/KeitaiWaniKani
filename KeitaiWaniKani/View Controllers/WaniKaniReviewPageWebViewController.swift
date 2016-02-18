@@ -95,6 +95,10 @@ class WaniKaniReviewPageWebViewController: WebViewController {
                 injectScript("jquery.qtip.min", inWebView: webView)
                 injectScript("wkimprove", inWebView: webView)
             }
+            if ApplicationSettings.userScriptMarkdownNotesEnabled {
+                injectScript("showdown.min", inWebView: webView)
+                injectScript("markdown.user", inWebView: webView)
+            }
             userScriptsInjected = true
         default: break
         }

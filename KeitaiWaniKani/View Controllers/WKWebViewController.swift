@@ -15,7 +15,7 @@ protocol WKWebViewControllerDelegate: class {
     func wkWebViewControllerDidFinish(controller: WKWebViewController)
 }
 
-class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate, WKWebViewControllerDelegate, WebViewBackForwardListTableViewControllerDelegate {
+class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate, WKWebViewControllerDelegate, WebViewBackForwardListTableViewControllerDelegate, BundleResourceLoader {
     
     class func forURL(URL: NSURL, @noescape configBlock: (WKWebViewController) -> Void = { _ in }) -> UINavigationController {
         let wkWebViewController = self.init(URL: URL)
@@ -358,10 +358,11 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let userScripts = self.getUserScripts() {
+        let userContentController = webView.configuration.userContentController
+        userContentController.removeAllUserScripts()
+        if let userScripts = getUserScripts() {
             for script in userScripts {
-                let wkUserScript = WKUserScript(source: script, injectionTime: .AtDocumentEnd, forMainFrameOnly: true)
-                webView.configuration.userContentController.addUserScript(wkUserScript)
+                userContentController.addUserScript(script)
             }
         }
         
@@ -435,7 +436,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     // MARK: - User Scripts
     
-    func getUserScripts() -> [String]? {
+    func getUserScripts() -> [WKUserScript]? {
         return nil
     }
     
