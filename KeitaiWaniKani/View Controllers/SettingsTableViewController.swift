@@ -173,7 +173,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     // MARK: - Log Out
     
     private func confirmLogOut() {
-        let alert = UIAlertController(title: "Are you sure you want to log out?", message: "Please note that logging out will remove all web cookies and user data, and will reset all settings to default.", preferredStyle: .ActionSheet)
+        let alert = UIAlertController(title: "Are you sure you want to log out?", message: "Please note that logging out will remove all web cookies and user data, and will reset all settings to default.", preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "Log Out", style: .Destructive) { _ in self.performLogOut() })
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         
