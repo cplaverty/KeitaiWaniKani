@@ -411,8 +411,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             averageLevelDuration = levelData.averageLevelDuration,
             projectedCurrentLevel = levelData.projectedCurrentLevel
             else {
-                currentLevelTimeCell.textLabel?.text = "Do lessons to start the current level"
-                currentLevelTimeCell.detailTextLabel?.text = nil
+                currentLevelTimeCell.detailTextLabel?.text = "–"
                 currentLevelTimeRemainingCell.detailTextLabel?.text = "–"
                 return
         }
@@ -424,7 +423,6 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         let timeSinceLevelStart = -startDate.timeIntervalSinceNow
         let formattedTimeSinceLevelStart = averageLevelDurationFormatter.stringFromTimeInterval(timeSinceLevelStart) ?? "\(NSNumberFormatter.localizedStringFromNumber(timeSinceLevelStart, numberStyle: .DecimalStyle))s"
         
-        currentLevelTimeCell.textLabel?.text = "Current Level Time"
         currentLevelTimeCell.detailTextLabel?.text = formattedTimeSinceLevelStart
         
         let expectedEndDate: NSDate
