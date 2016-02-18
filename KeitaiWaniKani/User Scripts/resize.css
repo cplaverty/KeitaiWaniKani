@@ -133,11 +133,29 @@ footer, #lessons-hotkey-footer {
     
     /* iPad (minus status bar) */
     @media (min-height: 748px) and (max-height: 1003px) {
+        .srs {
+            font-size: 1em;
+        }
+        
+        #question #question-type h1 {
+            font-size: 1.25em;
+        }
+        
+        #answer-form input[type=text], #answer-form button {
+            font-size: 1.25em;
+        }
+        
         #reviews #question #character, #lessons header #main-info #character {
             font-size: 72px !important; line-height: 150px !important;
         }
     }
     
+    /* iPad Pro (minus status bar) */
+    @media (min-height: 1004px) and (max-height: 1024px) {
+        #question #question-type h1 {
+            font-size: 1.667em;
+        }
+    }
 }
 
 @media (max-width: 767px) {
