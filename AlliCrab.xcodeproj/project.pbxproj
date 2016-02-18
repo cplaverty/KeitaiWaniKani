@@ -113,6 +113,7 @@
 		8371D6681C760D61008AE534 /* BundleResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8371D6661C760D13008AE534 /* BundleResourceLoader.swift */; };
 		8371D6691C760D6B008AE534 /* markdown.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 8371D65E1C76087F008AE534 /* markdown.user.js */; };
 		8371D66A1C760D6F008AE534 /* showdown.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8371D65F1C76087F008AE534 /* showdown.min.js */; };
+		8371D66D1C764E6D008AE534 /* wkhidem.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 8371D66B1C764E64008AE534 /* wkhidem.user.js */; };
 		837BD4941B6E724200EDB325 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837BD4931B6E724200EDB325 /* WebViewController.swift */; };
 		83829B421BB531D900CDED3F /* StubConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83829B411BB531D900CDED3F /* StubConditions.swift */; };
 		83829B441BB53E2E00CDED3F /* NoCancelledDependenciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83829B431BB53E2E00CDED3F /* NoCancelledDependenciesTests.swift */; };
@@ -371,6 +372,7 @@
 		8371D65F1C76087F008AE534 /* showdown.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = showdown.min.js; sourceTree = "<group>"; };
 		8371D6621C760A9D008AE534 /* SRSDataItemWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemWebViewController.swift; sourceTree = "<group>"; };
 		8371D6661C760D13008AE534 /* BundleResourceLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleResourceLoader.swift; sourceTree = "<group>"; };
+		8371D66B1C764E64008AE534 /* wkhidem.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkhidem.user.js; sourceTree = "<group>"; };
 		837BD4931B6E724200EDB325 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		83829B411BB531D900CDED3F /* StubConditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubConditions.swift; sourceTree = "<group>"; };
 		83829B431BB53E2E00CDED3F /* NoCancelledDependenciesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCancelledDependenciesTests.swift; sourceTree = "<group>"; };
@@ -575,6 +577,7 @@
 				839AA3DB1BE2BC08006A05F3 /* resize.css */,
 				8371D65F1C76087F008AE534 /* showdown.min.js */,
 				83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */,
+				8371D66B1C764E64008AE534 /* wkhidem.user.js */,
 				836639511BDB9F9E00BD0B92 /* wkimprove.js */,
 				83183BC31BECC1C300FAE0B6 /* wkoverride.user.js */,
 			);
@@ -1170,6 +1173,7 @@
 			files = (
 				8371D66A1C760D6F008AE534 /* showdown.min.js in Resources */,
 				83183BC61BECC4B300FAE0B6 /* common.js in Resources */,
+				8371D66D1C764E6D008AE534 /* wkhidem.user.js in Resources */,
 				839AA3DC1BE2BC08006A05F3 /* resize.css in Resources */,
 				83CB3E0F1B5849EE00761D68 /* Settings.bundle in Resources */,
 				83183BC41BECC1C300FAE0B6 /* wkoverride.user.js in Resources */,

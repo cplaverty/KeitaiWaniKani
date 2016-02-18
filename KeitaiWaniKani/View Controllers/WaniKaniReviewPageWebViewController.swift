@@ -99,6 +99,9 @@ class WaniKaniReviewPageWebViewController: WebViewController {
                 injectScript("showdown.min", inWebView: webView)
                 injectScript("markdown.user", inWebView: webView)
             }
+            if ApplicationSettings.userScriptHideMnemonicsEnabled {
+                injectScript("wkhidem.user", inWebView: webView)
+            }
             userScriptsInjected = true
         default: break
         }

@@ -17,6 +17,7 @@ struct ApplicationSettingKeys {
     static let userScriptDoubleCheckEnabled = "userScript-DoubleCheck"
     static let userScriptWaniKaniImproveEnabled = "userScript-WaniKaniImprove"
     static let userScriptMarkdownNotesEnabled = "userScript-MarkdownNotes"
+    static let userScriptHideMnemonicsEnabled = "userScript-HideMnemonics"
 }
 
 struct ApplicationSettings {
@@ -73,6 +74,11 @@ struct ApplicationSettings {
         set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.userScriptMarkdownNotesEnabled) }
     }
     
+    static var userScriptHideMnemonicsEnabled: Bool {
+        get { return userDefaults.boolForKey(ApplicationSettingKeys.userScriptHideMnemonicsEnabled) }
+        set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.userScriptHideMnemonicsEnabled) }
+    }
+    
     static func resetToDefaults() {
         apiKey = nil
         apiKeyVerified = false
@@ -82,6 +88,7 @@ struct ApplicationSettings {
         userScriptDoubleCheckEnabled = false
         userScriptWaniKaniImproveEnabled = false
         userScriptMarkdownNotesEnabled = false
+        userScriptHideMnemonicsEnabled = false
     }
 }
 

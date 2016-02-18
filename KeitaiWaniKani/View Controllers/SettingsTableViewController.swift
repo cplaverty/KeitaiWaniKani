@@ -30,9 +30,12 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         (name: "WaniKani Improve",
             description: "Automatically moves to the next item if the answer was correct (also known as \"lightning mode\").  Original script written by Seiji.",
             settingKey: ApplicationSettingKeys.userScriptWaniKaniImproveEnabled),
-        (name: "WaniKani Markdown Notes",
+        (name: "Markdown Notes",
             description: "Allows you to write Markdown in the notes, which will be rendered as HTML when the page loads.  Original script written by rfindley.",
-            settingKey: ApplicationSettingKeys.userScriptMarkdownNotesEnabled)
+            settingKey: ApplicationSettingKeys.userScriptMarkdownNotesEnabled),
+        (name: "WaniKani Hide Mnemonics",
+            description: "Allows you to hide the reading and meaning mnemonics on the site.  Original script written by nibarius.",
+            settingKey: ApplicationSettingKeys.userScriptHideMnemonicsEnabled),
     ]
     
     // MARK: - View Controller Lifecycle

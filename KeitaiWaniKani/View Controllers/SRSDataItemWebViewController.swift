@@ -16,6 +16,9 @@ class SRSDataItemWebViewController: WKWebViewController {
             scripts.append(WKUserScript(source: loadBundleResource("showdown.min", withExtension: "js", javascriptEncode: false), injectionTime: .AtDocumentEnd, forMainFrameOnly: true))
             scripts.append(WKUserScript(source: loadBundleResource("markdown.user", withExtension: "js", javascriptEncode: false), injectionTime: .AtDocumentEnd, forMainFrameOnly: true))
         }
+        if ApplicationSettings.userScriptHideMnemonicsEnabled {
+            scripts.append(WKUserScript(source: loadBundleResource("wkhidem.user", withExtension: "js", javascriptEncode: false), injectionTime: .AtDocumentEnd, forMainFrameOnly: true))
+        }
         
         return scripts.isEmpty ? nil : scripts
     }
