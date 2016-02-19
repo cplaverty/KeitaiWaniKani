@@ -202,11 +202,10 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         if requestStack.isEmpty {
             addressBarView.URL = request.URL
         }
-        requestStack.append(request)
         estimatedLoadingProgress = 0
         switch request.URL {
         case WaniKaniURLs.subscription?:
-            self.showAlertWithTitle("Can not manage subscription", message: "Due to Apple App Store rules, you can not manage your subscription within the app.")
+            self.showAlertWithTitle("Can not manage subscription", message: "Please use Safari to manage your subscription.")
             return false
         default:
             return true
@@ -214,6 +213,9 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     }
     
     func webViewDidStartLoad(webView: UIWebView) {
+        if let request = webView.request {
+            requestStack.append(request)
+        }
         DDLogVerbose("webViewDidStartLoad webView.request: \(requestStack.last?.description ?? "<none>")")
         // Start load of new page
         if requestStack.count == 1 {
