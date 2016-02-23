@@ -406,29 +406,28 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         
         defer { self.tableView.reloadSections(NSIndexSet(index: TableViewSections.LevelProgress.rawValue), withRowAnimation: .None) }
         
-        guard let
-            levelData = levelData,
-            averageLevelDuration = levelData.averageLevelDuration,
-            projectedCurrentLevel = levelData.projectedCurrentLevel
-            else {
-                currentLevelTimeCell.detailTextLabel?.text = "–"
-                currentLevelTimeRemainingCell.detailTextLabel?.text = "–"
-                return
+        guard let levelData = levelData, projectedCurrentLevel = levelData.projectedCurrentLevel else {
+            averageLevelTimeCell.detailTextLabel?.text = "–"
+            currentLevelTimeCell.detailTextLabel?.text = "–"
+            currentLevelTimeRemainingCell.textLabel?.text = "Level Up In"
+            currentLevelTimeRemainingCell.detailTextLabel?.text = "–"
+            return
         }
         
-        let formattedAverageLevelDuration = averageLevelDurationFormatter.stringFromTimeInterval(averageLevelDuration) ?? "\(NSNumberFormatter.localizedStringFromNumber(averageLevelDuration, numberStyle: .DecimalStyle))s"
-        averageLevelTimeCell.detailTextLabel?.text = formattedAverageLevelDuration
+        if let averageLevelDuration = levelData.averageLevelDuration {
+            let formattedAverageLevelDuration = averageLevelDurationFormatter.stringFromTimeInterval(averageLevelDuration) ?? "\(NSNumberFormatter.localizedStringFromNumber(averageLevelDuration, numberStyle: .DecimalStyle))s"
+            averageLevelTimeCell.detailTextLabel?.text = formattedAverageLevelDuration
+        }
         
         let startDate = projectedCurrentLevel.startDate
         let timeSinceLevelStart = -startDate.timeIntervalSinceNow
         let formattedTimeSinceLevelStart = averageLevelDurationFormatter.stringFromTimeInterval(timeSinceLevelStart) ?? "\(NSNumberFormatter.localizedStringFromNumber(timeSinceLevelStart, numberStyle: .DecimalStyle))s"
-        
         currentLevelTimeCell.detailTextLabel?.text = formattedTimeSinceLevelStart
         
         let expectedEndDate: NSDate
         let endDateByProjection = projectedCurrentLevel.endDate
         if projectedCurrentLevel.endDateBasedOnLockedItem {
-            let endDateByEstimate = startDate.dateByAddingTimeInterval(averageLevelDuration)
+            let endDateByEstimate = startDate.dateByAddingTimeInterval(levelData.averageLevelDuration ?? 0)
             expectedEndDate = endDateByEstimate.laterDate(endDateByProjection)
         } else {
             expectedEndDate = endDateByProjection

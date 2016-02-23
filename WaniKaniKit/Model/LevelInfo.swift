@@ -20,11 +20,12 @@ public struct LevelData: Equatable {
     
     /// Calculate the bounded mean, ignoring durations in the upper and lower quartiles
     private static func calculateAverageLevelDuration(detail: [LevelInfo]) -> NSTimeInterval? {
-        guard detail.count > 0 else { return nil }
+        guard !detail.lazy.filter({ $0.endDate != nil }).isEmpty else { return nil }
         
         var durations = detail.flatMap { $0.duration }
         durations.sortInPlace(<)
         let boundedDurations = durations[interquartileRange(durations.count)]
+        guard !boundedDurations.isEmpty else { return nil }
         
         return boundedDurations.reduce(0.0, combine: +) / Double(boundedDurations.count)
     }
