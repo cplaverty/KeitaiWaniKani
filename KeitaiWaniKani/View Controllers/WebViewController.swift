@@ -58,6 +58,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     var URL: NSURL?
     private var webViewPageTitle: String?
+    private var lastRequest: NSURLRequest? = nil
     private(set) var requestStack: [NSURLRequest] = []
     
     weak var progressView: UIProgressView!
@@ -199,6 +200,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         DDLogVerbose("shouldStartLoadWithRequest: \(request) navigationType: \(navigationType)")
+        lastRequest = request
         if requestStack.isEmpty {
             addressBarView.URL = request.URL
         }
@@ -213,7 +215,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     }
     
     func webViewDidStartLoad(webView: UIWebView) {
-        if let request = webView.request {
+        if let request = lastRequest {
             requestStack.append(request)
         }
         DDLogVerbose("webViewDidStartLoad webView.request: \(requestStack.last?.description ?? "<none>")")
@@ -241,6 +243,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
             }
             addressBarView.URL = webView.request?.URL
             addressBarView.loading = false
+            lastRequest = nil
         }
         updateUIFromWebView()
     }
