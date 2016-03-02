@@ -24,8 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if DEBUG
             defaultDebugLevel = DDLogLevel.Verbose
         #else
-            // TODO: Change to Info once stable
-            defaultDebugLevel = DDLogLevel.Debug
+            defaultDebugLevel = DDLogLevel.Info
         #endif
         
         DDLog.addLogger(DDASLLogger.sharedInstance())
