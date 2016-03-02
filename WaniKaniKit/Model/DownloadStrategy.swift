@@ -101,8 +101,7 @@ public struct DownloadStrategy {
         databaseQueue.inDatabase {
             do {
                 var staleLevels = try coder.levelsNotUpdatedSince(staleDate, inDatabase: $0)
-                staleLevels.unionInPlace(try coder.lessonsOutstanding($0).lazy.map {$0.level})
-                staleLevels.unionInPlace(try coder.reviewsDueBefore(studyQueue.lastUpdateTimestamp, database: $0).lazy.map {$0.level})
+                staleLevels.unionInPlace(try coder.possiblyStaleLevels(studyQueue.lastUpdateTimestamp, inDatabase: $0))
                 staleLevels.insert(currentLevel)
                 let maxSavedLevel = try coder.maxLevel($0)
                 let missingLevels = maxSavedLevel < currentLevel ? ((maxSavedLevel + 1)...currentLevel) : currentLevel..<currentLevel

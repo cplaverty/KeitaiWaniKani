@@ -160,29 +160,15 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
         return try database.longForQuery("SELECT MAX(\(Columns.level)) FROM \(tableName)") ?? 0
     }
     
-    public func lessonsOutstanding(database: FMDatabase) throws -> [Kanji] {
-        let sql = "SELECT \(columnNames) FROM \(tableName) WHERE \(UserSpecificSRSDataColumns.dateAvailable) IS NULL"
-        let resultSet = try database.executeQuery(sql)
+    public func possiblyStaleLevels(since: NSDate, inDatabase database: FMDatabase) throws -> Set<Int> {
+        let sql = "SELECT DISTINCT \(Columns.level) FROM \(tableName) WHERE \(UserSpecificSRSDataColumns.dateAvailable) IS NULL OR (\(UserSpecificSRSDataColumns.dateAvailable) < ? AND \(UserSpecificSRSDataColumns.burned) = 0)"
+        let resultSet = try database.executeQuery(sql, since)
         defer { resultSet.close() }
         
-        var results = [Kanji]()
+        var results = Set<Int>()
         while resultSet.next() {
-            results.append(try loadModelObjectFromRow(resultSet))
+            results.insert(resultSet.longForColumnIndex(0))
         }
-        
-        return results
-    }
-    
-    public func reviewsDueBefore(date: NSDate, database: FMDatabase) throws -> [Kanji] {
-        let sql = "SELECT \(columnNames) FROM \(tableName) WHERE \(UserSpecificSRSDataColumns.dateAvailable) < ? AND \(UserSpecificSRSDataColumns.burned) = 0"
-        let resultSet = try database.executeQuery(sql, date)
-        defer { resultSet.close() }
-        
-        var results = [Kanji]()
-        while resultSet.next() {
-            results.append(try loadModelObjectFromRow(resultSet))
-        }
-        
         return results
     }
     

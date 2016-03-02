@@ -39,8 +39,7 @@ public protocol ListItemDatabaseCoder: DatabaseCoder {
     
     func levelsNotUpdatedSince(since: NSDate, inDatabase database: FMDatabase) throws -> Set<Int>
     func maxLevel(database: FMDatabase) throws -> Int
-    func lessonsOutstanding(database: FMDatabase) throws -> [ModelObject]
-    func reviewsDueBefore(date: NSDate, database: FMDatabase) throws -> [ModelObject]
+    func possiblyStaleLevels(since: NSDate, inDatabase database: FMDatabase) throws -> Set<Int>
 }
 
 extension DatabaseCoder {
