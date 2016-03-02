@@ -78,6 +78,9 @@ class WaniKaniReviewPageWebViewController: WebViewController {
             DDLogDebug("Loading user scripts")
             injectScript("common", inWebView: webView)
             injectStyleSheet("resize", inWebView: webView)
+            if ApplicationSettings.disableLessonSwipe {
+                injectScript("noswipe", inWebView: webView)
+            }
             userScriptsInjected = true
         case WaniKaniURLs.reviewSession:
             showBrowserInterface(false, animated: true)

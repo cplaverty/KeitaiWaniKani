@@ -12,6 +12,7 @@ struct ApplicationSettingKeys {
     static let apiKey = "apiKey"
     static let apiKeyVerified = "apiKeyVerified"
     static let purgeDatabase = "purgeDatabase"
+    static let disableLessonSwipe = "disableLessonSwipe"
     static let lastRefreshTime = "lastRefreshTime"
     static let userScriptIgnoreAnswerEnabled = "userScript-IgnoreAnswer"
     static let userScriptDoubleCheckEnabled = "userScript-DoubleCheck"
@@ -49,6 +50,11 @@ struct ApplicationSettings {
         set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.purgeDatabase) }
     }
     
+    static var disableLessonSwipe: Bool {
+        get { return userDefaults.boolForKey(ApplicationSettingKeys.disableLessonSwipe) }
+        set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.disableLessonSwipe) }
+    }
+    
     static var lastRefreshTime: NSDate? {
         get { return userDefaults.objectForKey(ApplicationSettingKeys.lastRefreshTime) as? NSDate }
         set { userDefaults.setObject(newValue, forKey: ApplicationSettingKeys.lastRefreshTime) }
@@ -83,6 +89,7 @@ struct ApplicationSettings {
         apiKey = nil
         apiKeyVerified = false
         purgeDatabase = false
+        disableLessonSwipe = false
         lastRefreshTime = nil
         userScriptIgnoreAnswerEnabled = false
         userScriptDoubleCheckEnabled = false

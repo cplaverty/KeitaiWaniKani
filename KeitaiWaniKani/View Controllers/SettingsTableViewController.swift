@@ -15,27 +15,39 @@ private let reviewURL = NSURL(string: "itms-apps://itunes.apple.com/WebObjects/M
 class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
     private enum TableViewSections: Int {
-        case UserScripts = 0, Feedback = 1, LogOut = 2
+        case UserScripts = 0, OtherSettings, Feedback, LogOut
+    }
+    
+    private struct ScriptInfo {
+        let name: String
+        let description: String
+        let settingKey: String
     }
     
     // MARK: - Properties
     
-    let userScripts: [(name: String, description: String, settingKey: String)] = [
-        (name: "WaniKani Override",
-            description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  PLEASE USE RESPONSIBLY!  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script written by Rui Pinheiro.",
+    private let userScripts: [ScriptInfo] = [
+        ScriptInfo(name: "WaniKani Override",
+            description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  PLEASE USE RESPONSIBLY!  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script written by ruipgpinheiro.",
             settingKey: ApplicationSettingKeys.userScriptIgnoreAnswerEnabled),
-        (name: "WaniKani Double Check",
+        ScriptInfo(name: "WaniKani Double Check",
             description: "Adds a thumbs up/down button that permits incorrect answers to be marked correct, and correct answers to be marked incorrect.  PLEASE USE RESPONSIBLY!  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script written by Ethan.",
             settingKey: ApplicationSettingKeys.userScriptDoubleCheckEnabled),
-        (name: "WaniKani Improve",
+        ScriptInfo(name: "WaniKani Improve",
             description: "Automatically moves to the next item if the answer was correct (also known as \"lightning mode\").  Original script written by Seiji.",
             settingKey: ApplicationSettingKeys.userScriptWaniKaniImproveEnabled),
-        (name: "Markdown Notes",
+        ScriptInfo(name: "Markdown Notes",
             description: "Allows you to write Markdown in the notes, which will be rendered as HTML when the page loads.  Original script written by rfindley.",
             settingKey: ApplicationSettingKeys.userScriptMarkdownNotesEnabled),
-        (name: "WaniKani Hide Mnemonics",
+        ScriptInfo(name: "WaniKani Hide Mnemonics",
             description: "Allows you to hide the reading and meaning mnemonics on the site.  Original script written by nibarius.",
             settingKey: ApplicationSettingKeys.userScriptHideMnemonicsEnabled),
+    ]
+    
+    private let otherSettings: [ScriptInfo] = [
+        ScriptInfo(name: "Disable Lesson Swipe",
+            description: "Disables the horizontal swipe gesture on the info text during lessons to prevent it being accidentally triggered while scrolling.",
+            settingKey: ApplicationSettingKeys.disableLessonSwipe),
     ]
     
     // MARK: - View Controller Lifecycle
@@ -50,7 +62,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     // MARK: - UITableViewDataSource
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,6 +72,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         
         switch tableViewSection {
         case .UserScripts: return userScripts.count
+        case .OtherSettings: return otherSettings.count
         case .Feedback: return 2
         case .LogOut: return 1
         }
@@ -72,15 +85,9 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         
         switch tableViewSection {
         case .UserScripts:
-            let cell = tableView.dequeueReusableCellWithIdentifier("UserScript", forIndexPath: indexPath) as! UserScriptTableViewCell
-            let userScript = userScripts[indexPath.row]
-            cell.settingName = userScript.name
-            cell.settingDescription = userScript.description
-            cell.applicationSettingKey = userScript.settingKey
-            cell.accessoryType = .None
-            cell.layoutIfNeeded()
-            
-            return cell
+            return dequeueAndInitScriptCell(userScripts, forIndexPath: indexPath)
+        case .OtherSettings:
+            return dequeueAndInitScriptCell(otherSettings, forIndexPath: indexPath)
         case .Feedback:
             let cell = tableView.dequeueReusableCellWithIdentifier("Basic", forIndexPath: indexPath)
             switch indexPath.row {
@@ -107,6 +114,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         
         switch tableViewSection {
         case .UserScripts: return "User Scripts"
+        case .OtherSettings: return "Other Settings"
         case .Feedback: return "Feedback"
         case .LogOut: return "Log Out"
         }
@@ -131,7 +139,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         }
         
         switch tableViewSection {
-        case .UserScripts: break
+        case .UserScripts, .OtherSettings: break
         case .Feedback:
             switch indexPath.row {
             case 0: sendMail()
@@ -142,6 +150,18 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         }
         
         return nil
+    }
+    
+    private func dequeueAndInitScriptCell(scriptDetails: [ScriptInfo], forIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("UserScript", forIndexPath: indexPath) as! UserScriptTableViewCell
+        let userScript = scriptDetails[indexPath.row]
+        cell.settingName = userScript.name
+        cell.settingDescription = userScript.description
+        cell.applicationSettingKey = userScript.settingKey
+        cell.accessoryType = .None
+        cell.layoutIfNeeded()
+        
+        return cell
     }
     
     // MARK: - MFMailComposeViewControllerDelegate

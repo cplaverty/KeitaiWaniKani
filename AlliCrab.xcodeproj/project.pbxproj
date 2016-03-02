@@ -34,6 +34,7 @@
 		833074561BA8C609008E66E6 /* SequenceType+WaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833074551BA8C609008E66E6 /* SequenceType+WaniKani.swift */; };
 		833177931B9B37530014866E /* OperationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83C8F94A1B9B2E7E007CBFBF /* OperationKit.framework */; };
 		8331E5041B48525F005AF085 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8331E5031B48525F005AF085 /* HomeScreenViewController.swift */; };
+		8335185F1C8782170057E956 /* noswipe.js in Resources */ = {isa = PBXBuildFile; fileRef = 8335185D1C87820F0057E956 /* noswipe.js */; };
 		83354D8E1B484C98007686D5 /* GetAPIKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83354D8D1B484C98007686D5 /* GetAPIKeyViewController.swift */; };
 		833BF0BE1B4930A20038AAE3 /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833BF0BD1B4930A20038AAE3 /* UIViewControllerExtensions.swift */; };
 		833FECE91BADF0DD001C9260 /* WebViewBackForwardListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833FECE81BADF0DD001C9260 /* WebViewBackForwardListTableViewController.swift */; };
@@ -289,6 +290,7 @@
 		832E173F1B459F3A00A67A3E /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		833074551BA8C609008E66E6 /* SequenceType+WaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SequenceType+WaniKani.swift"; sourceTree = "<group>"; };
 		8331E5031B48525F005AF085 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
+		8335185D1C87820F0057E956 /* noswipe.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = noswipe.js; sourceTree = "<group>"; };
 		83354D8D1B484C98007686D5 /* GetAPIKeyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetAPIKeyViewController.swift; sourceTree = "<group>"; };
 		833BF0BD1B4930A20038AAE3 /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		833FECE81BADF0DD001C9260 /* WebViewBackForwardListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewBackForwardListTableViewController.swift; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 				839AA3D71BE2BB8C006A05F3 /* jquery.qtip.min.css */,
 				839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */,
 				8371D65E1C76087F008AE534 /* markdown.user.js */,
+				8335185D1C87820F0057E956 /* noswipe.js */,
 				839AA3DB1BE2BC08006A05F3 /* resize.css */,
 				8371D65F1C76087F008AE534 /* showdown.min.js */,
 				83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */,
@@ -1172,6 +1175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8371D66A1C760D6F008AE534 /* showdown.min.js in Resources */,
+				8335185F1C8782170057E956 /* noswipe.js in Resources */,
 				83183BC61BECC4B300FAE0B6 /* common.js in Resources */,
 				8371D66D1C764E6D008AE534 /* wkhidem.user.js in Resources */,
 				839AA3DC1BE2BC08006A05F3 /* resize.css in Resources */,

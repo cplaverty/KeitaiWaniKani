@@ -1,0 +1,1 @@
+$('#supplement-info').addClass('noSwipe')
