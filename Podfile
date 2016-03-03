@@ -8,10 +8,11 @@ target 'AlliCrab' do
     pod 'CocoaLumberjack/Swift'
     pod '1PasswordExtension'
     pod 'Charts'
-
+    
     target 'OperationKit'
     target 'WaniKaniKit'
-
+    target 'WaniKaniStudyQueueWidget'
+    
     target 'WaniKaniKitTests' do
         inherit! :search_paths
         pod 'OHHTTPStubs'

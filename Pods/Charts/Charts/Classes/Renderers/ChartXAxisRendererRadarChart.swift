@@ -13,7 +13,11 @@
 
 import Foundation
 import CoreGraphics
-import UIKit
+
+#if !os(OSX)
+    import UIKit
+#endif
+
 
 public class ChartXAxisRendererRadarChart: ChartXAxisRenderer
 {

@@ -13,7 +13,11 @@
 
 import Foundation
 import CoreGraphics
-import UIKit
+
+#if !os(OSX)
+    import UIKit
+#endif
+
 
 public class ScatterChartRenderer: LineScatterCandleRadarChartRenderer
 {
@@ -63,6 +67,11 @@ public class ScatterChartRenderer: LineScatterCandleRadarChartRenderer
         
         let shapeSize = dataSet.scatterShapeSize
         let shapeHalf = shapeSize / 2.0
+        let shapeHoleSizeHalf = dataSet.scatterShapeHoleRadius
+        let shapeHoleSize = shapeHoleSizeHalf * 2.0
+        let shapeHoleColor = dataSet.scatterShapeHoleColor
+        let shapeStrokeSize = (shapeSize - shapeHoleSize) / 2.0
+        let shapeStrokeSizeHalf = shapeStrokeSize / 2.0
         
         var point = CGPoint()
         
@@ -92,23 +101,109 @@ public class ScatterChartRenderer: LineScatterCandleRadarChartRenderer
             
             if (shape == .Square)
             {
-                CGContextSetFillColorWithColor(context, dataSet.colorAt(j).CGColor)
-                var rect = CGRect()
-                rect.origin.x = point.x - shapeHalf
-                rect.origin.y = point.y - shapeHalf
-                rect.size.width = shapeSize
-                rect.size.height = shapeSize
-                CGContextFillRect(context, rect)
+                if shapeHoleSize > 0.0
+                {
+                    CGContextSetStrokeColorWithColor(context, dataSet.colorAt(j).CGColor)
+                    CGContextSetLineWidth(context, shapeStrokeSize)
+                    var rect = CGRect()
+                    rect.origin.x = point.x - shapeHoleSizeHalf - shapeStrokeSizeHalf
+                    rect.origin.y = point.y - shapeHoleSizeHalf - shapeStrokeSizeHalf
+                    rect.size.width = shapeHoleSize + shapeStrokeSize
+                    rect.size.height = shapeHoleSize + shapeStrokeSize
+                    CGContextStrokeRect(context, rect)
+                    
+                    if let shapeHoleColor = shapeHoleColor
+                    {
+                        CGContextSetFillColorWithColor(context, shapeHoleColor.CGColor)
+                        rect.origin.x = point.x - shapeHoleSizeHalf
+                        rect.origin.y = point.y - shapeHoleSizeHalf
+                        rect.size.width = shapeHoleSize
+                        rect.size.height = shapeHoleSize
+                        CGContextFillRect(context, rect)
+                    }
+                }
+                else
+                {
+                    CGContextSetFillColorWithColor(context, dataSet.colorAt(j).CGColor)
+                    var rect = CGRect()
+                    rect.origin.x = point.x - shapeHalf
+                    rect.origin.y = point.y - shapeHalf
+                    rect.size.width = shapeSize
+                    rect.size.height = shapeSize
+                    CGContextFillRect(context, rect)
+                }
             }
             else if (shape == .Circle)
             {
+                if shapeHoleSize > 0.0
+                {
+                    CGContextSetStrokeColorWithColor(context, dataSet.colorAt(j).CGColor)
+                    CGContextSetLineWidth(context, shapeStrokeSize)
+                    var rect = CGRect()
+                    rect.origin.x = point.x - shapeHoleSizeHalf - shapeStrokeSizeHalf
+                    rect.origin.y = point.y - shapeHoleSizeHalf - shapeStrokeSizeHalf
+                    rect.size.width = shapeHoleSize + shapeStrokeSize
+                    rect.size.height = shapeHoleSize + shapeStrokeSize
+                    CGContextStrokeEllipseInRect(context, rect)
+                    
+                    if let shapeHoleColor = shapeHoleColor
+                    {
+                        CGContextSetFillColorWithColor(context, shapeHoleColor.CGColor)
+                        rect.origin.x = point.x - shapeHoleSizeHalf
+                        rect.origin.y = point.y - shapeHoleSizeHalf
+                        rect.size.width = shapeHoleSize
+                        rect.size.height = shapeHoleSize
+                        CGContextFillEllipseInRect(context, rect)
+                    }
+                }
+                else
+                {
+                    CGContextSetFillColorWithColor(context, dataSet.colorAt(j).CGColor)
+                    var rect = CGRect()
+                    rect.origin.x = point.x - shapeHalf
+                    rect.origin.y = point.y - shapeHalf
+                    rect.size.width = shapeSize
+                    rect.size.height = shapeSize
+                    CGContextFillEllipseInRect(context, rect)
+                }
+            }
+            else if (shape == .Triangle)
+            {
                 CGContextSetFillColorWithColor(context, dataSet.colorAt(j).CGColor)
-                var rect = CGRect()
-                rect.origin.x = point.x - shapeHalf
-                rect.origin.y = point.y - shapeHalf
-                rect.size.width = shapeSize
-                rect.size.height = shapeSize
-                CGContextFillEllipseInRect(context, rect)
+                
+                // create a triangle path
+                CGContextBeginPath(context)
+                CGContextMoveToPoint(context, point.x, point.y - shapeHalf)
+                CGContextAddLineToPoint(context, point.x + shapeHalf, point.y + shapeHalf)
+                CGContextAddLineToPoint(context, point.x - shapeHalf, point.y + shapeHalf)
+                
+                if shapeHoleSize > 0.0
+                {
+                    CGContextAddLineToPoint(context, point.x, point.y - shapeHalf)
+                    
+                    CGContextMoveToPoint(context, point.x - shapeHalf + shapeStrokeSize, point.y + shapeHalf - shapeStrokeSize)
+                    CGContextAddLineToPoint(context, point.x + shapeHalf - shapeStrokeSize, point.y + shapeHalf - shapeStrokeSize)
+                    CGContextAddLineToPoint(context, point.x, point.y - shapeHalf + shapeStrokeSize)
+                    CGContextAddLineToPoint(context, point.x - shapeHalf + shapeStrokeSize, point.y + shapeHalf - shapeStrokeSize)
+                }
+                
+                CGContextClosePath(context)
+                
+                CGContextFillPath(context)
+                
+                if shapeHoleSize > 0.0 && shapeHoleColor != nil
+                {
+                    CGContextSetFillColorWithColor(context, shapeHoleColor!.CGColor)
+                    
+                    // create a triangle path
+                    CGContextBeginPath(context)
+                    CGContextMoveToPoint(context, point.x, point.y - shapeHalf + shapeStrokeSize)
+                    CGContextAddLineToPoint(context, point.x + shapeHalf - shapeStrokeSize, point.y + shapeHalf - shapeStrokeSize)
+                    CGContextAddLineToPoint(context, point.x - shapeHalf + shapeStrokeSize, point.y + shapeHalf - shapeStrokeSize)
+                    CGContextClosePath(context)
+                    
+                    CGContextFillPath(context)
+                }
             }
             else if (shape == .Cross)
             {
@@ -125,18 +220,20 @@ public class ScatterChartRenderer: LineScatterCandleRadarChartRenderer
                 _lineSegments[1].y = point.y + shapeHalf
                 CGContextStrokeLineSegments(context, _lineSegments, 2)
             }
-            else if (shape == .Triangle)
+            else if (shape == .X)
             {
-                CGContextSetFillColorWithColor(context, dataSet.colorAt(j).CGColor)
+                CGContextSetStrokeColorWithColor(context, dataSet.colorAt(j).CGColor)
+                _lineSegments[0].x = point.x - shapeHalf
+                _lineSegments[0].y = point.y - shapeHalf
+                _lineSegments[1].x = point.x + shapeHalf
+                _lineSegments[1].y = point.y + shapeHalf
+                CGContextStrokeLineSegments(context, _lineSegments, 2)
                 
-                // create a triangle path
-                CGContextBeginPath(context)
-                CGContextMoveToPoint(context, point.x, point.y - shapeHalf)
-                CGContextAddLineToPoint(context, point.x + shapeHalf, point.y + shapeHalf)
-                CGContextAddLineToPoint(context, point.x - shapeHalf, point.y + shapeHalf)
-                CGContextClosePath(context)
-                
-                CGContextFillPath(context)
+                _lineSegments[0].x = point.x + shapeHalf
+                _lineSegments[0].y = point.y - shapeHalf
+                _lineSegments[1].x = point.x - shapeHalf
+                _lineSegments[1].y = point.y + shapeHalf
+                CGContextStrokeLineSegments(context, _lineSegments, 2)
             }
             else if (shape == .Custom)
             {

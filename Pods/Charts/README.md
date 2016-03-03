@@ -1,17 +1,19 @@
-**Version 2.2.2**, synced to [MPAndroidChart #9615cc2](https://github.com/PhilJay/MPAndroidChart/commit/9615cc2)
+**Version 2.2.3**, synced to [MPAndroidChart #5f51623](https://github.com/PhilJay/MPAndroidChart/commit/5f51623)
 
 ![alt tag](https://raw.github.com/danielgindi/ios-charts/master/Assets/feature_graphic.png)
-  ![Supported Platforms](https://img.shields.io/cocoapods/p/Charts.svg) [![Releases](https://img.shields.io/github/release/danielgindi/ios-charts.svg)](https://github.com/danielgindi/ios-charts/releases) [![Latest pod release](https://img.shields.io/cocoapods/v/Charts.svg)](http://cocoapods.org/pods/charts)
+  ![Supported Platforms](https://img.shields.io/cocoapods/p/Charts.svg) [![Releases](https://img.shields.io/github/release/danielgindi/ios-charts.svg)](https://github.com/danielgindi/ios-charts/releases) [![Latest pod release](https://img.shields.io/cocoapods/v/Charts.svg)](http://cocoapods.org/pods/charts) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build Status](https://travis-ci.org/danielgindi/ios-charts.svg?branch=master)](https://travis-ci.org/danielgindi/ios-charts)
 
 * Xcode 7 / Swift 2.0
 * iOS 7.0 (Drag .swift files to your project)
 * iOS 8.0 / 9.0 (Use as an **Embedded** Framework)
+* tvOS 9.0
+* OSX 10.11
 
 Okay so there's this beautiful library called [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) by [Philipp Jahoda](https://www.linkedin.com/in/philippjahoda) which has become very popular amongst Android developers, and in the meanwhile there's no decent charting solution for iOS.
 
 I've chosen to write it in `Swift` as it can be highly optimized by the compiler, and can be used in both `Swift` and `ObjC` project. The demo project is written in `ObjC` to demonstrate how it works.
 
-**An amazing feature** of this library now, both Android and iOS, is the time it saves you when developing for both platforms, as the learning curve is singleton- it happens only once, and the code stays very similar so developers don't have to go around and re-invent the app to produce the same output with a different library. (And that's not even considering the fact that there's not really another good choice out there currently...)
+**An amazing feature** of this library now, for Android, iOS, tvOS and OSX, is the time it saves you when developing for both platforms, as the learning curve is singleton- it happens only once, and the code stays very similar so developers don't have to go around and re-invent the app to produce the same output with a different library. (And that's not even considering the fact that there's not really another good choice out there currently...)
 
 ## Usage
 
@@ -24,7 +26,7 @@ In order to correctly compile:
 5.  When using Swift in an ObjC project:
    - You need to import your Bridging Header. Usually it is "*YourProject-Swift.h*", so in ChartsDemo it's "*ChartsDemo-Swift.h*". Do not try to actually include "*ChartsDemo-Swift.h*" in your project :-)
    - Under "Build Options", mark "Embedded Content Contains Swift Code"
-6. When using Realm.io:
+6. When using [Realm.io](https://realm.io/):
    - Note that the Realm framework is not linked with Charts - it is only there for *optional* bindings. Which means that you need to have the framework in your project, and in a compatible version to whatever is compiled with Charts. We will do our best to always compile against the latest version.
 
 
@@ -37,8 +39,8 @@ If you want to compile for iOS 7:
 
 #### Can't compile?
 
-* Please note the difference between installing a compiled framework from Cocoapods or Carthage, and copying the source code.
-* If you are using Realm, please also `#import <ChartsRealm/ChartsRealm.h>`
+* Please note the difference between installing a compiled framework from CocoaPods or Carthage, and copying the source code.
+* If you are using [Realm](https://realm.io/), please also `#import <ChartsRealm/ChartsRealm.h>`
 * If you are compiling the source code and want to use Realm, please make sure to include the code from `ChartsRealm` project.
 * Please read the **Usage** section again.
 * Search in the issues
@@ -53,7 +55,7 @@ If you want to compile for iOS 7:
 
 Add `pod 'Charts'` to your Podfile. "Charts" is the name of the library.  
 
-For Realm support you can specify the subspec in your Podfile as follows:
+For [Realm](https://realm.io/) support you can specify the subspec in your Podfile as follows:
 ```
 pod 'Charts/Realm'
 ```
@@ -65,8 +67,8 @@ pod 'Charts/Realm'
 Charts now include Carthage prebuilt binaries.
 
 ```carthage
-github "danielgindi/ios-charts" == 2.2.2
-github "danielgindi/ios-charts" ~> 2.2.2
+github "danielgindi/ios-charts" == 2.2.3
+github "danielgindi/ios-charts" ~> 2.2.3
 ```
 
 In order to build the binaries for a new release, use `carthage build --no-skip-current && carthage archive Charts && carthage archive ChartsRealm`.
@@ -75,7 +77,7 @@ In order to build the binaries for a new release, use `carthage build --no-skip-
 
 If you like what you see here, and want to support the work being done in this repository, you could:
 * Contribute code, issues and pull requests
-* Let people know this library exists (spread the word!)
+* Let people know this library exists (:fire: spread the word :fire:)
 * [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=68UL6Y8KUPS96) (You can buy me a beer, or you can buy me dinner :-)
 
 **Note:** The author of [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) is the reason that this library exists, and is accepting [donations](https://github.com/PhilJay/MPAndroidChart#donations) on his page. He deserves them!
@@ -87,7 +89,7 @@ If you are having questions or problems, you should:
 
  - Make sure you are using the latest version of the library. Check the [**release-section**](https://github.com/danielgindi/ios-charts/releases).
  - Study the Android version's [**Documentation-Wiki**](https://github.com/PhilJay/MPAndroidChart/wiki)
- - Study the (Still incomplete [![Doc-Percent](https://img.shields.io/cocoapods/metrics/doc-percent/Charts.svg)](http://cocoadocs.org/docsets/Charts/2.2.0)) [**Pod-Documentation**](http://cocoadocs.org/docsets/Charts/2.2.0)
+ - Study the (Still incomplete [![Doc-Percent](https://img.shields.io/cocoapods/metrics/doc-percent/Charts.svg)](http://cocoadocs.org/docsets/Charts/)) [**Pod-Documentation**](http://cocoadocs.org/docsets/Charts/)
  - Search or open questions on [**stackoverflow**](http://stackoverflow.com/questions/tagged/ios-charts) with the `ios-charts` tag
  - Search [**known issues**](https://github.com/danielgindi/ios-charts/issues) for your problem (open and closed)
  - Create new issues (please **search known issues before**, do not create duplicate issues)
@@ -168,7 +170,7 @@ Features
 
 Documentation
 =======
-Currently there's no need for documentation for the iOS version, as the API is **95% the same** as on Android.  
+Currently there's no need for documentation for the iOS/tvOS/OSX version, as the API is **95% the same** as on Android.  
 You can read the official [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) documentation here: [**Wiki**](https://github.com/PhilJay/MPAndroidChart/wiki)
 
 Or you can see the [**ChartsDemo**](https://github.com/danielgindi/ios-charts/tree/master/ChartsDemo) project and learn the how-tos from it.
@@ -181,7 +183,7 @@ Goes to [@liuxuan30](https://github.com/liuxuan30), [@petester42](https://github
 
 License
 =======
-Copyright 2015 Daniel Cohen Gindi & Philipp Jahoda
+Copyright 2016 Daniel Cohen Gindi & Philipp Jahoda
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

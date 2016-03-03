@@ -19,15 +19,31 @@ public class ScatterChartDataSet: LineScatterCandleRadarChartDataSet, IScatterCh
     @objc
     public enum ScatterShape: Int
     {
-        case Cross
-        case Triangle
-        case Circle
         case Square
+        case Circle
+        case Triangle
+        case Cross
+        case X
         case Custom
     }
     
-    public var scatterShapeSize = CGFloat(15.0)
+    // The size the scatter shape will have
+    public var scatterShapeSize = CGFloat(10.0)
+    
+    // The type of shape that is set to be drawn where the values are at
+    // - default: .Square
     public var scatterShape = ScatterChartDataSet.ScatterShape.Square
+    
+    // The radius of the hole in the shape (applies to Square, Circle and Triangle)
+    // - default: 0.0
+    public var scatterShapeHoleRadius: CGFloat = 0.0
+    
+    // Color for the hole in the shape. Setting to `nil` will behave as transparent.
+    // - default: nil
+    public var scatterShapeHoleColor: NSUIColor? = nil
+    
+    // Custom path object to draw where the values are at.
+    // This is used when shape is set to Custom.
     public var customScatterShape: CGPath?
     
     // MARK: NSCopying

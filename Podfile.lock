@@ -1,9 +1,9 @@
 PODS:
   - 1PasswordExtension (1.8)
-  - Alamofire (3.2.0)
-  - Charts (2.2.2):
-    - Charts/Core (= 2.2.2)
-  - Charts/Core (2.2.2)
+  - Alamofire (3.2.1)
+  - Charts (2.2.3):
+    - Charts/Core (= 2.2.3)
+  - Charts/Core (2.2.3)
   - CocoaLumberjack/Core (2.2.0)
   - CocoaLumberjack/Default (2.2.0):
     - CocoaLumberjack/Core
@@ -14,20 +14,20 @@ PODS:
   - FMDB (2.6):
     - FMDB/standard (= 2.6)
   - FMDB/standard (2.6)
-  - OHHTTPStubs (4.7.0):
-    - OHHTTPStubs/Default (= 4.7.0)
-  - OHHTTPStubs/Core (4.7.0)
-  - OHHTTPStubs/Default (4.7.0):
+  - OHHTTPStubs (4.7.1):
+    - OHHTTPStubs/Default (= 4.7.1)
+  - OHHTTPStubs/Core (4.7.1)
+  - OHHTTPStubs/Default (4.7.1):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (4.7.0):
+  - OHHTTPStubs/JSON (4.7.1):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (4.7.0):
+  - OHHTTPStubs/NSURLSession (4.7.1):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (4.7.0)
-  - OHHTTPStubs/Swift (4.7.0):
+  - OHHTTPStubs/OHPathHelpers (4.7.1)
+  - OHHTTPStubs/Swift (4.7.1):
     - OHHTTPStubs/Core
   - SwiftyJSON (2.3.2)
 
@@ -43,13 +43,13 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   1PasswordExtension: 627d5aecf210c7636968faf5a4c3546c9531385b
-  Alamofire: 4da478599fccddff361205c8929333d7fe18dceb
-  Charts: e32b718fa716bdb7693b9e419d6d4a39a3f7992e
+  Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
+  Charts: f54267bb3f0f0e74520c6f248517cf5074dfd6fc
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
   FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
-  OHHTTPStubs: d2bf6a0f407620d67e75a1d3f12d86a2b1dd15c0
+  OHHTTPStubs: f7d1604d04d37d055460c0ef9af01bb249ded0fa
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 65456cd62e97fdcfe11183061ed1045003721e1e
+PODFILE CHECKSUM: 7008498e1707dbbe59ff2dfd7116568f5d396c47
 
-COCOAPODS: 1.0.0.beta.3
+COCOAPODS: 1.0.0.beta.4

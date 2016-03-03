@@ -13,7 +13,11 @@
 
 import Foundation
 import CoreGraphics
-import UIKit
+
+#if !os(OSX)
+    import UIKit
+#endif
+
 
 public class ChartYAxisRenderer: ChartAxisRendererBase
 {
@@ -141,6 +145,11 @@ public class ChartYAxisRenderer: ChartAxisRendererBase
                 
                 for (f = first, i = 0; i < n; f += interval, ++i)
                 {
+                    if (f == 0.0)
+                    { // Fix for IEEE negative zero case (Where value == -0.0, and 0.0 == -0.0)
+                        f = 0.0
+                    }
+                    
                     yAxis.entries[i] = Double(f)
                 }
             }
@@ -280,46 +289,95 @@ public class ChartYAxisRenderer: ChartAxisRendererBase
     {
         guard let yAxis = yAxis else { return }
         
-        if (!yAxis.isDrawGridLinesEnabled || !yAxis.isEnabled)
+        if !yAxis.isEnabled
         {
             return
         }
         
-        CGContextSaveGState(context)
-
-        if (!yAxis.gridAntialiasEnabled)
+        if yAxis.drawGridLinesEnabled
         {
-            CGContextSetShouldAntialias(context, false)
+            CGContextSaveGState(context)
+            
+            CGContextSetShouldAntialias(context, yAxis.gridAntialiasEnabled)
+            CGContextSetStrokeColorWithColor(context, yAxis.gridColor.CGColor)
+            CGContextSetLineWidth(context, yAxis.gridLineWidth)
+            CGContextSetLineCap(context, yAxis.gridLineCap)
+            
+            if (yAxis.gridLineDashLengths != nil)
+            {
+                CGContextSetLineDash(context, yAxis.gridLineDashPhase, yAxis.gridLineDashLengths, yAxis.gridLineDashLengths.count)
+            }
+            else
+            {
+                CGContextSetLineDash(context, 0.0, nil, 0)
+            }
+            
+            let valueToPixelMatrix = transformer.valueToPixelMatrix
+            
+            var position = CGPoint(x: 0.0, y: 0.0)
+            
+            // draw the horizontal grid
+            for (var i = 0, count = yAxis.entryCount; i < count; i++)
+            {
+                position.x = 0.0
+                position.y = CGFloat(yAxis.entries[i])
+                position = CGPointApplyAffineTransform(position, valueToPixelMatrix)
+                
+                _gridLineBuffer[0].x = viewPortHandler.contentLeft
+                _gridLineBuffer[0].y = position.y
+                _gridLineBuffer[1].x = viewPortHandler.contentRight
+                _gridLineBuffer[1].y = position.y
+                CGContextStrokeLineSegments(context, _gridLineBuffer, 2)
+            }
+            
+            CGContextRestoreGState(context)
         }
 
-        CGContextSetStrokeColorWithColor(context, yAxis.gridColor.CGColor)
-        CGContextSetLineWidth(context, yAxis.gridLineWidth)
-        if (yAxis.gridLineDashLengths != nil)
+        if yAxis.drawZeroLineEnabled
         {
-            CGContextSetLineDash(context, yAxis.gridLineDashPhase, yAxis.gridLineDashLengths, yAxis.gridLineDashLengths.count)
+            // draw zero line
+            
+            var position = CGPoint(x: 0.0, y: 0.0)
+            transformer.pointValueToPixel(&position)
+                
+            drawZeroLine(context: context,
+                x1: viewPortHandler.contentLeft,
+                x2: viewPortHandler.contentRight,
+                y1: position.y,
+                y2: position.y);
+        }
+    }
+    
+    /// Draws the zero line at the specified position.
+    public func drawZeroLine(
+        context context: CGContext,
+        x1: CGFloat,
+        x2: CGFloat,
+        y1: CGFloat,
+        y2: CGFloat)
+    {
+        guard let
+            yAxis = yAxis,
+            zeroLineColor = yAxis.zeroLineColor
+            else { return }
+        
+        CGContextSaveGState(context)
+        
+        CGContextSetStrokeColorWithColor(context, zeroLineColor.CGColor)
+        CGContextSetLineWidth(context, yAxis.zeroLineWidth)
+        
+        if (yAxis.zeroLineDashLengths != nil)
+        {
+            CGContextSetLineDash(context, yAxis.zeroLineDashPhase, yAxis.zeroLineDashLengths!, yAxis.zeroLineDashLengths!.count)
         }
         else
         {
             CGContextSetLineDash(context, 0.0, nil, 0)
         }
         
-        let valueToPixelMatrix = transformer.valueToPixelMatrix
-        
-        var position = CGPoint(x: 0.0, y: 0.0)
-        
-        // draw the horizontal grid
-        for (var i = 0, count = yAxis.entryCount; i < count; i++)
-        {
-            position.x = 0.0
-            position.y = CGFloat(yAxis.entries[i])
-            position = CGPointApplyAffineTransform(position, valueToPixelMatrix)
-        
-            _gridLineBuffer[0].x = viewPortHandler.contentLeft
-            _gridLineBuffer[0].y = position.y
-            _gridLineBuffer[1].x = viewPortHandler.contentRight
-            _gridLineBuffer[1].y = position.y
-            CGContextStrokeLineSegments(context, _gridLineBuffer, 2)
-        }
+        CGContextMoveToPoint(context, x1, y1)
+        CGContextAddLineToPoint(context, x2, y2)
+        CGContextDrawPath(context, CGPathDrawingMode.Stroke)
         
         CGContextRestoreGState(context)
     }

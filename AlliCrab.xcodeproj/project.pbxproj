@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14E0CF853667B3F9763B0A6A /* Pods_AlliCrab_WaniKaniStudyQueueWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7944A1E95EEF4A6D0BF4D782 /* Pods_AlliCrab_WaniKaniStudyQueueWidget.framework */; };
 		5ABBCCA9A67E02D05AEE24E5 /* Pods_WaniKaniKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399D94EB29F918B03C80B0D /* Pods_WaniKaniKitTests.framework */; };
 		8304F8281BBD083A009D7054 /* DelayOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8304F8271BBD083A009D7054 /* DelayOperationTests.swift */; };
 		8307F2501BB564EC00BDDF10 /* WebAddressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8307F24F1BB564EC00BDDF10 /* WebAddressBarView.swift */; };
@@ -258,10 +259,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		18510FE7DE06378403C963FC /* Pods-AlliCrab-WaniKaniStudyQueueWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-WaniKaniStudyQueueWidget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-WaniKaniStudyQueueWidget/Pods-AlliCrab-WaniKaniStudyQueueWidget.debug.xcconfig"; sourceTree = "<group>"; };
 		1B283CF6ACF08009A57A8D26 /* Pods_AlliCrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlliCrab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3399D94EB29F918B03C80B0D /* Pods_WaniKaniKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaniKaniKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		41FA43A6B63535AC57AAF8F6 /* Pods-AlliCrab-OperationKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-OperationKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-OperationKit/Pods-AlliCrab-OperationKit.release.xcconfig"; sourceTree = "<group>"; };
 		7702C391F312DD57EFB28E9C /* Pods-AlliCrab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab.debug.xcconfig"; sourceTree = "<group>"; };
+		7944A1E95EEF4A6D0BF4D782 /* Pods_AlliCrab_WaniKaniStudyQueueWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlliCrab_WaniKaniStudyQueueWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8304F8271BBD083A009D7054 /* DelayOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelayOperationTests.swift; sourceTree = "<group>"; };
 		8307F24F1BB564EC00BDDF10 /* WebAddressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebAddressBarView.swift; sourceTree = "<group>"; };
 		8307F2511BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectedStudyQueueTests.swift; sourceTree = "<group>"; };
@@ -438,6 +441,7 @@
 		93AE60655D5846E8718F9328 /* Pods-WaniKaniKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		AAC23C21D0A713D2C72BB0E7 /* Pods_AlliCrab_OperationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlliCrab_OperationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B17549E78CED0B840F2E70DC /* Pods-AlliCrab-WaniKaniKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-WaniKaniKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-WaniKaniKit/Pods-AlliCrab-WaniKaniKit.release.xcconfig"; sourceTree = "<group>"; };
+		CCADCB1B382FC3AB3F5417B7 /* Pods-AlliCrab-WaniKaniStudyQueueWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-WaniKaniStudyQueueWidget.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-WaniKaniStudyQueueWidget/Pods-AlliCrab-WaniKaniStudyQueueWidget.release.xcconfig"; sourceTree = "<group>"; };
 		CCB87E69C883875737A0FC7F /* Pods-AlliCrab-OperationKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-OperationKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-OperationKit/Pods-AlliCrab-OperationKit.debug.xcconfig"; sourceTree = "<group>"; };
 		DA50A834327301E70D6EAFFE /* Pods-AlliCrab-WaniKaniKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-WaniKaniKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-WaniKaniKit/Pods-AlliCrab-WaniKaniKit.debug.xcconfig"; sourceTree = "<group>"; };
 		E33D1ECE0D16208E9C60A9CB /* Pods_AlliCrab_WaniKaniKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlliCrab_WaniKaniKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -462,6 +466,7 @@
 				833177931B9B37530014866E /* OperationKit.framework in Frameworks */,
 				83426DFD1B736A0F005F4503 /* WaniKaniKit.framework in Frameworks */,
 				83426DEF1B7369F8005F4503 /* NotificationCenter.framework in Frameworks */,
+				14E0CF853667B3F9763B0A6A /* Pods_AlliCrab_WaniKaniStudyQueueWidget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -913,6 +918,7 @@
 				AAC23C21D0A713D2C72BB0E7 /* Pods_AlliCrab_OperationKit.framework */,
 				E33D1ECE0D16208E9C60A9CB /* Pods_AlliCrab_WaniKaniKit.framework */,
 				3399D94EB29F918B03C80B0D /* Pods_WaniKaniKitTests.framework */,
+				7944A1E95EEF4A6D0BF4D782 /* Pods_AlliCrab_WaniKaniStudyQueueWidget.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -928,6 +934,8 @@
 				41FA43A6B63535AC57AAF8F6 /* Pods-AlliCrab-OperationKit.release.xcconfig */,
 				DA50A834327301E70D6EAFFE /* Pods-AlliCrab-WaniKaniKit.debug.xcconfig */,
 				B17549E78CED0B840F2E70DC /* Pods-AlliCrab-WaniKaniKit.release.xcconfig */,
+				18510FE7DE06378403C963FC /* Pods-AlliCrab-WaniKaniStudyQueueWidget.debug.xcconfig */,
+				CCADCB1B382FC3AB3F5417B7 /* Pods-AlliCrab-WaniKaniStudyQueueWidget.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -983,9 +991,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83426DFC1B7369F8005F4503 /* Build configuration list for PBXNativeTarget "WaniKaniStudyQueueWidget" */;
 			buildPhases = (
+				6FED66A576FC826B63B6EC1A /* Check Pods Manifest.lock */,
 				83426DEA1B7369F8005F4503 /* Sources */,
 				83426DEB1B7369F8005F4503 /* Frameworks */,
 				83426DEC1B7369F8005F4503 /* Resources */,
+				4E1D47333B3ABDD0DF336C15 /* Embed Pods Frameworks */,
+				6C402E367EF0FDF5CA216B43 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1269,7 +1280,52 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4E1D47333B3ABDD0DF336C15 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlliCrab-WaniKaniStudyQueueWidget/Pods-AlliCrab-WaniKaniStudyQueueWidget-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6432691817AD74E220D58DAA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6C402E367EF0FDF5CA216B43 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlliCrab-WaniKaniStudyQueueWidget/Pods-AlliCrab-WaniKaniStudyQueueWidget-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6FED66A576FC826B63B6EC1A /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1766,6 +1822,7 @@
 		};
 		83426DFA1B7369F8005F4503 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18510FE7DE06378403C963FC /* Pods-AlliCrab-WaniKaniStudyQueueWidget.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = WaniKaniStudyQueueWidget/WaniKaniStudyQueueWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1782,6 +1839,7 @@
 		};
 		83426DFB1B7369F8005F4503 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CCADCB1B382FC3AB3F5417B7 /* Pods-AlliCrab-WaniKaniStudyQueueWidget.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = WaniKaniStudyQueueWidget/WaniKaniStudyQueueWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

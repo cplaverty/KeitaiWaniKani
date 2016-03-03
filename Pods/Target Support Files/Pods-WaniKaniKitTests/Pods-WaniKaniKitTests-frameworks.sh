@@ -84,8 +84,8 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-WaniKaniKitTests/OHHTTPStubs.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/OHHTTPStubs/OHHTTPStubs.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-WaniKaniKitTests/OHHTTPStubs.framework"
+  install_framework "$CONFIGURATION_BUILD_DIR/OHHTTPStubs/OHHTTPStubs.framework"
 fi

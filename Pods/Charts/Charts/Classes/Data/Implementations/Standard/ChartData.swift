@@ -13,7 +13,7 @@
 //
 
 import Foundation
-import UIKit
+
 
 public class ChartData: NSObject
 {
@@ -138,6 +138,8 @@ public class ChartData: NSObject
         }
     }
     
+    /// Call this method to let the ChartData know that the underlying data has changed.
+    /// Calling this performs all necessary recalculations needed when the contained data has changed.
     public func notifyDataChanged()
     {
         initialize(_dataSets)
@@ -761,7 +763,7 @@ public class ChartData: NSObject
     }
     
     /// - returns: all colors used across all DataSet objects this object represents.
-    public func getColors() -> [UIColor]?
+    public func getColors() -> [NSUIColor]?
     {
         if (_dataSets == nil)
         {
@@ -775,7 +777,7 @@ public class ChartData: NSObject
             clrcnt += _dataSets[i].colors.count
         }
         
-        var colors = [UIColor]()
+        var colors = [NSUIColor]()
         
         for (var i = 0; i < _dataSets.count; i++)
         {
@@ -813,7 +815,7 @@ public class ChartData: NSObject
     }
     
     /// Sets the color of the value-text (color in which the value-labels are drawn) for all DataSets this data object contains.
-    public func setValueTextColor(color: UIColor!)
+    public func setValueTextColor(color: NSUIColor!)
     {
         for set in dataSets
         {
@@ -822,7 +824,7 @@ public class ChartData: NSObject
     }
     
     /// Sets the font for all value-labels for all DataSets this data object contains.
-    public func setValueFont(font: UIFont!)
+    public func setValueFont(font: NSUIFont!)
     {
         for set in dataSets
         {

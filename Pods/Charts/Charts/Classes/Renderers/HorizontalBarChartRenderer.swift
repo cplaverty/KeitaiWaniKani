@@ -13,7 +13,11 @@
 
 import Foundation
 import CoreGraphics
-import UIKit
+
+#if !os(OSX)
+    import UIKit
+#endif
+
 
 public class HorizontalBarChartRenderer: BarChartRenderer
 {
@@ -268,7 +272,6 @@ public class HorizontalBarChartRenderer: BarChartRenderer
                 let isInverted = dataProvider.isInverted(dataSet.axisDependency)
                 
                 let valueFont = dataSet.valueFont
-                let valueTextColor = dataSet.valueTextColor
                 let yOffset = -valueFont.lineHeight / 2.0
                 
                 guard let formatter = dataSet.valueFormatter else { continue }
@@ -324,7 +327,7 @@ public class HorizontalBarChartRenderer: BarChartRenderer
                             yPos: valuePoint.y + yOffset,
                             font: valueFont,
                             align: textAlign,
-                            color: valueTextColor)
+                            color: dataSet.valueTextColorAt(j))
                     }
                 }
                 else
@@ -378,7 +381,7 @@ public class HorizontalBarChartRenderer: BarChartRenderer
                                 yPos: valuePoint.y + yOffset,
                                 font: valueFont,
                                 align: textAlign,
-                                color: valueTextColor)
+                                color: dataSet.valueTextColorAt(j))
                         }
                         else
                         {
@@ -449,7 +452,7 @@ public class HorizontalBarChartRenderer: BarChartRenderer
                                     yPos: y + yOffset,
                                     font: valueFont,
                                     align: textAlign,
-                                    color: valueTextColor)
+                                    color: dataSet.valueTextColorAt(j))
                             }
                         }
                     }

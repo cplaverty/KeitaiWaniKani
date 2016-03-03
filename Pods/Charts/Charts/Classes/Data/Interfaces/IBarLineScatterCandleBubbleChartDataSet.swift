@@ -12,6 +12,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 @objc
 public protocol IBarLineScatterCandleBubbleChartDataSet: IChartDataSet
@@ -20,7 +21,7 @@ public protocol IBarLineScatterCandleBubbleChartDataSet: IChartDataSet
     
     // MARK: - Styling functions and accessors
     
-    var highlightColor: UIColor { get set }
+    var highlightColor: NSUIColor { get set }
     var highlightLineWidth: CGFloat { get set }
     var highlightLineDashPhase: CGFloat { get set }
     var highlightLineDashLengths: [CGFloat]? { get set }
