@@ -14,6 +14,7 @@ import WaniKaniKit
 class DashboardViewController: UITableViewController, WebViewControllerDelegate, WKWebViewControllerDelegate {
     
     private struct SegueIdentifiers {
+        static let appSettings = "Show App Settings"
         static let radicalsProgress = "Show Radicals Progress"
         static let kanjiProgress = "Show Kanji Progress"
         static let levelDataChart = "Show Level Data Chart"
@@ -211,6 +212,10 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     
     func showReviewsView() {
         presentReviewPageWebViewControllerForURL(WaniKaniURLs.reviewSession)
+    }
+    
+    func showSettings() {
+        performSegueWithIdentifier(SegueIdentifiers.appSettings, sender: nil)
     }
     
     // MARK: - Update UI

@@ -905,10 +905,15 @@
                     <navigationItem key="navigationItem" title="Dashboard" id="szi-t3-trn">
                         <barButtonItem key="rightBarButtonItem" image="Settings" id="I7Z-3U-VQt">
                             <connections>
-                                <segue destination="fCL-YI-xV5" kind="show" id="OgS-yZ-jkM"/>
+                                <segue destination="fCL-YI-xV5" kind="show" identifier="Show App Settings" id="OgS-yZ-jkM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <keyCommands>
+                        <keyCommand input="l" modifierFlags="1048576" actionName="showLessonsView"/>
+                        <keyCommand input="r" modifierFlags="1048576" actionName="showReviewsView"/>
+                        <keyCommand input="," modifierFlags="1048576" actionName="showSettings"/>
+                    </keyCommands>
                     <refreshControl key="refreshControl" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Pyd-Ke-VRD">
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
