@@ -419,7 +419,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             return
         }
         
-        if let averageLevelDuration = levelData.averageLevelDuration {
+        if let averageLevelDuration = levelData.stats?.mean {
             let formattedAverageLevelDuration = averageLevelDurationFormatter.stringFromTimeInterval(averageLevelDuration) ?? "\(NSNumberFormatter.localizedStringFromNumber(averageLevelDuration, numberStyle: .DecimalStyle))s"
             averageLevelTimeCell.detailTextLabel?.text = formattedAverageLevelDuration
         }
@@ -432,7 +432,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         let expectedEndDate: NSDate
         let endDateByProjection = projectedCurrentLevel.endDate
         if projectedCurrentLevel.endDateBasedOnLockedItem {
-            let endDateByEstimate = startDate.dateByAddingTimeInterval(levelData.averageLevelDuration ?? 0)
+            let endDateByEstimate = startDate.dateByAddingTimeInterval(levelData.stats?.mean ?? 0)
             expectedEndDate = endDateByEstimate.laterDate(endDateByProjection)
         } else {
             expectedEndDate = endDateByProjection

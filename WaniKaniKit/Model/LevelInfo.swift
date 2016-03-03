@@ -10,16 +10,16 @@ import Foundation
 public struct LevelData: Equatable {
     public let detail: [LevelInfo]
     public let projectedCurrentLevel: ProjectedLevelInfo?
-    public let averageLevelDuration: NSTimeInterval?
+    public let stats: LevelStats?
     
     public init(detail: [LevelInfo], projectedCurrentLevel: ProjectedLevelInfo?) {
         self.detail = detail
         self.projectedCurrentLevel = projectedCurrentLevel
-        self.averageLevelDuration = self.dynamicType.calculateAverageLevelDuration(detail)
+        self.stats = self.dynamicType.calculateAverageLevelDuration(detail)
     }
     
     /// Calculate the bounded mean, ignoring durations in the upper and lower quartiles
-    private static func calculateAverageLevelDuration(detail: [LevelInfo]) -> NSTimeInterval? {
+    private static func calculateAverageLevelDuration(detail: [LevelInfo]) -> LevelStats? {
         guard !detail.lazy.filter({ $0.endDate != nil }).isEmpty else { return nil }
         
         var durations = detail.flatMap { $0.duration }
@@ -27,7 +27,11 @@ public struct LevelData: Equatable {
         let boundedDurations = durations[interquartileRange(durations.count)]
         guard !boundedDurations.isEmpty else { return nil }
         
-        return boundedDurations.reduce(0.0, combine: +) / Double(boundedDurations.count)
+        let lowerQuartile = boundedDurations.first!
+        let upperQuartile = boundedDurations.last!
+        let mean = boundedDurations.reduce(0.0, combine: +) / Double(boundedDurations.count)
+        
+        return LevelStats(mean: mean, lowerQuartile: lowerQuartile, upperQuartile: upperQuartile)
     }
     
     /// Grab the middle 50% of values, preferring lower values
@@ -42,9 +46,27 @@ public struct LevelData: Equatable {
 }
 
 public func ==(lhs: LevelData, rhs: LevelData) -> Bool {
-    // No need to check averageLevelDuration since this is a cached calculation
     return lhs.detail == rhs.detail &&
-        lhs.projectedCurrentLevel == rhs.projectedCurrentLevel
+        lhs.projectedCurrentLevel == rhs.projectedCurrentLevel &&
+        lhs.stats == rhs.stats
+}
+
+public struct LevelStats: Equatable {
+    public let mean: NSTimeInterval
+    public let lowerQuartile: NSTimeInterval
+    public let upperQuartile: NSTimeInterval
+    
+    public init(mean: NSTimeInterval, lowerQuartile: NSTimeInterval, upperQuartile: NSTimeInterval) {
+        self.mean = mean
+        self.lowerQuartile = lowerQuartile
+        self.upperQuartile = upperQuartile
+    }
+}
+
+public func ==(lhs: LevelStats, rhs: LevelStats) -> Bool {
+    return lhs.mean == rhs.mean &&
+        lhs.lowerQuartile == rhs.lowerQuartile &&
+        lhs.upperQuartile == rhs.upperQuartile
 }
 
 public struct LevelInfo: Equatable {
