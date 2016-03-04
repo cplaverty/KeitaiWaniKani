@@ -216,6 +216,13 @@
 			remoteGlobalIDString = 8347BCF81B725428000F99EF;
 			remoteInfo = WaniKaniAPI;
 		};
+		835EB6FE1C89F0740022E6A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 830EAB7E1B41DC7700EBF073 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 830EAB851B41DC7700EBF073;
+			remoteInfo = AlliCrab;
+		};
 		83C8F94F1B9B2E7E007CBFBF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 830EAB7E1B41DC7700EBF073 /* Project object */;
@@ -1099,6 +1106,7 @@
 			);
 			dependencies = (
 				83D5505B1BB489A9007442EF /* PBXTargetDependency */,
+				835EB6FF1C89F0740022E6A6 /* PBXTargetDependency */,
 			);
 			name = OperationKitTests;
 			productName = OperationKitTests;
@@ -1146,6 +1154,7 @@
 					};
 					8347BD011B725428000F99EF = {
 						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 830EAB851B41DC7700EBF073;
 					};
 					83C8F9491B9B2E7E007CBFBF = {
 						CreatedOnToolsVersion = 7.0;
@@ -1153,6 +1162,7 @@
 					};
 					83D550531BB489A9007442EF = {
 						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 830EAB851B41DC7700EBF073;
 					};
 				};
 			};
@@ -1661,6 +1671,11 @@
 			target = 8347BCF81B725428000F99EF /* WaniKaniKit */;
 			targetProxy = 8347BD0C1B725428000F99EF /* PBXContainerItemProxy */;
 		};
+		835EB6FF1C89F0740022E6A6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 830EAB851B41DC7700EBF073 /* AlliCrab */;
+			targetProxy = 835EB6FE1C89F0740022E6A6 /* PBXContainerItemProxy */;
+		};
 		83C8F9501B9B2E7E007CBFBF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 83C8F9491B9B2E7E007CBFBF /* OperationKit */;
@@ -1939,6 +1954,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.WaniKaniKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AlliCrab.app/AlliCrab";
 			};
 			name = Debug;
 		};
@@ -1951,6 +1967,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.WaniKaniKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AlliCrab.app/AlliCrab";
 			};
 			name = Release;
 		};
@@ -2010,6 +2027,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.OperationKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AlliCrab.app/AlliCrab";
 			};
 			name = Debug;
 		};
@@ -2021,6 +2039,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.OperationKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AlliCrab.app/AlliCrab";
 			};
 			name = Release;
 		};
