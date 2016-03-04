@@ -73,10 +73,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-//    func applicationDidReceiveMemoryWarning(application: UIApplication) {
-//        DDLogDebug("Low memory warning: clearing statement cache")
-//        databaseQueue.inDatabase { $0.clearCachedStatements() }
-//    }
+    func applicationDidReceiveMemoryWarning(application: UIApplication) {
+        DDLogInfo("Low memory warning: clearing statement cache")
+        databaseQueue.inDatabase { $0.clearCachedStatements() }
+    }
     
     func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
         DDLogInfo("Opening due to url \(url)")
@@ -131,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var operationQueue: OperationQueue = {
         let oq = OperationQueue()
-        oq.name = "KeitaiWaniKani worker queue"
+        oq.name = "AlliCrab worker queue"
         return oq
         }()
     
