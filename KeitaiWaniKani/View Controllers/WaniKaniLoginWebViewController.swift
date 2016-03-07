@@ -70,8 +70,6 @@ class WaniKaniLoginWebViewController: WebViewController {
                     
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
-                
-                showAlertWithTitle("No API key found", message: "Check your account page to ensure an API key has been generated and reload the page to try again.")
             }
         default: break
         }
