@@ -223,7 +223,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         DDLogVerbose("webViewDidStartLoad webView.request: \(requestStack.last?.description ?? "<none>")")
         // Start load of new page
         if requestStack.count == 1 {
-            title = nil
+            title = "Loading..."
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             if self.toolbarItems?.isEmpty == false {
                 self.navigationController?.setToolbarHidden(false, animated: true)
@@ -278,6 +278,9 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
             DDLogDebug("Loading user scripts")
             injectScript("common", inWebView: webView)
             injectStyleSheet("resize", inWebView: webView)
+            if ApplicationSettings.userScriptJitaiEnabled {
+                injectScript("jitai.user", inWebView: webView)
+            }
             if ApplicationSettings.userScriptIgnoreAnswerEnabled {
                 injectScript("wkoverride.user", inWebView: webView)
             }

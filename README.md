@@ -9,6 +9,7 @@ This unofficial app for [WaniKani](https://www.wanikani.com) improves the experi
 
 Features:
 * Do reviews and lessons with an in-app web browser, with support for community-produced user scripts.  (All user scripts are disabled by default and must be enabled in the app settings.)
+    * Jitai: https://www.wanikani.com/chat/api-and-third-party-apps/12858
     * WaniKani Override (also known as the "ignore answer" script): https://www.wanikani.com/chat/api-and-third-party-apps/2940
     * WaniKani Double Check: https://www.wanikani.com/chat/api-and-third-party-apps/8598
     * WaniKani Improve: https://www.wanikani.com/chat/api-and-third-party-apps/2952

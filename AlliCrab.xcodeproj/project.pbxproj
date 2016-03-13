@@ -172,6 +172,17 @@
 		83DC478C1B440A6200AD716C /* RubyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC478B1B440A6200AD716C /* RubyLabel.swift */; };
 		83F32EA91BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */; };
 		83F32EAB1BDFCCFA00F2ABA0 /* wkdoublecheck.js in Resources */ = {isa = PBXBuildFile; fileRef = 83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */; };
+		83FC71BE1C95856600B60C1C /* ArmedBanana.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71BD1C95856600B60C1C /* ArmedBanana.ttf */; };
+		83FC71C01C9585BE00B60C1C /* chifont+.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71BF1C9585BE00B60C1C /* chifont+.ttf */; };
+		83FC71C91C9585F300B60C1C /* chigfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C11C9585F300B60C1C /* chigfont.ttf */; };
+		83FC71CA1C9585F300B60C1C /* cinecaption227.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C21C9585F300B60C1C /* cinecaption227.ttf */; };
+		83FC71CB1C9585F300B60C1C /* dartsfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C31C9585F300B60C1C /* dartsfont.ttf */; };
+		83FC71CC1C9585F300B60C1C /* fc_fl.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C41C9585F300B60C1C /* fc_fl.ttf */; };
+		83FC71CD1C9585F300B60C1C /* hkgokukaikk.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C51C9585F300B60C1C /* hkgokukaikk.ttf */; };
+		83FC71CE1C9585F300B60C1C /* Hosohuwafont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C61C9585F300B60C1C /* Hosohuwafont.ttf */; };
+		83FC71CF1C9585F300B60C1C /* nagayama_kai08.otf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C71C9585F300B60C1C /* nagayama_kai08.otf */; };
+		83FC71D01C9585F300B60C1C /* santyoume.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C81C9585F300B60C1C /* santyoume.ttf */; };
+		83FC71D21C95877100B60C1C /* jitai.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71D11C95877100B60C1C /* jitai.user.js */; };
 		83FDC2B01BB529D2006AAB8E /* GroupOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FDC2AF1BB529D2006AAB8E /* GroupOperationTests.swift */; };
 		83FE7CD51BB9C1720006689F /* GetRadicalImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FE7CD41BB9C1720006689F /* GetRadicalImageOperation.swift */; };
 		8F43683602378F2C4E8C9A07 /* Pods_AlliCrab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B283CF6ACF08009A57A8D26 /* Pods_AlliCrab.framework */; };
@@ -440,6 +451,18 @@
 		83DC478B1B440A6200AD716C /* RubyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RubyLabel.swift; sourceTree = "<group>"; };
 		83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaniKaniLoginWebViewController.swift; sourceTree = "<group>"; };
 		83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkdoublecheck.js; sourceTree = "<group>"; };
+		83FC71BD1C95856600B60C1C /* ArmedBanana.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArmedBanana.ttf; sourceTree = "<group>"; };
+		83FC71BF1C9585BE00B60C1C /* chifont+.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "chifont+.ttf"; sourceTree = "<group>"; };
+		83FC71C11C9585F300B60C1C /* chigfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chigfont.ttf; sourceTree = "<group>"; };
+		83FC71C21C9585F300B60C1C /* cinecaption227.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = cinecaption227.ttf; sourceTree = "<group>"; };
+		83FC71C31C9585F300B60C1C /* dartsfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = dartsfont.ttf; sourceTree = "<group>"; };
+		83FC71C41C9585F300B60C1C /* fc_fl.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fc_fl.ttf; sourceTree = "<group>"; };
+		83FC71C51C9585F300B60C1C /* hkgokukaikk.ttf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hkgokukaikk.ttf; sourceTree = "<group>"; };
+		83FC71C61C9585F300B60C1C /* Hosohuwafont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hosohuwafont.ttf; sourceTree = "<group>"; };
+		83FC71C71C9585F300B60C1C /* nagayama_kai08.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = nagayama_kai08.otf; sourceTree = "<group>"; };
+		83FC71C81C9585F300B60C1C /* santyoume.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = santyoume.ttf; sourceTree = "<group>"; };
+		83FC71D11C95877100B60C1C /* jitai.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jitai.user.js; sourceTree = "<group>"; };
+		83FC71D31C95C60500B60C1C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		83FDC2AF1BB529D2006AAB8E /* GroupOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupOperationTests.swift; sourceTree = "<group>"; };
 		83FE7CD41BB9C1720006689F /* GetRadicalImageOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetRadicalImageOperation.swift; sourceTree = "<group>"; };
 		887039774B5B4B79D31837F4 /* Pods-AlliCrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab.release.xcconfig"; sourceTree = "<group>"; };
@@ -531,6 +554,7 @@
 		830EAB7D1B41DC7700EBF073 = {
 			isa = PBXGroup;
 			children = (
+				83FC71D31C95C60500B60C1C /* README.md */,
 				83C8F94B1B9B2E7E007CBFBF /* OperationKit */,
 				8347BCFA1B725428000F99EF /* WaniKaniKit */,
 				830EAB881B41DC7700EBF073 /* KeitaiWaniKani */,
@@ -564,6 +588,7 @@
 				834C92531B76603F0025D359 /* KeitaiWaniKani.entitlements */,
 				8347BDCA1B7260B1000F99EF /* App Operations */,
 				83966D681BAD9382005799E9 /* Extensions */,
+				83FC71BC1C95853100B60C1C /* Fonts */,
 				832462C01B93687E00FB62C9 /* User Scripts */,
 				8371D6651C760CE9008AE534 /* Util */,
 				83DC478A1B4408FB00AD716C /* View */,
@@ -583,6 +608,7 @@
 			isa = PBXGroup;
 			children = (
 				83183BC51BECC4B300FAE0B6 /* common.js */,
+				83FC71D11C95877100B60C1C /* jitai.user.js */,
 				839AA3D71BE2BB8C006A05F3 /* jquery.qtip.min.css */,
 				839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */,
 				8371D65E1C76087F008AE534 /* markdown.user.js */,
@@ -914,6 +940,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		83FC71BC1C95853100B60C1C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				83FC71BD1C95856600B60C1C /* ArmedBanana.ttf */,
+				83FC71BF1C9585BE00B60C1C /* chifont+.ttf */,
+				83FC71C11C9585F300B60C1C /* chigfont.ttf */,
+				83FC71C21C9585F300B60C1C /* cinecaption227.ttf */,
+				83FC71C31C9585F300B60C1C /* dartsfont.ttf */,
+				83FC71C41C9585F300B60C1C /* fc_fl.ttf */,
+				83FC71C51C9585F300B60C1C /* hkgokukaikk.ttf */,
+				83FC71C61C9585F300B60C1C /* Hosohuwafont.ttf */,
+				83FC71C71C9585F300B60C1C /* nagayama_kai08.otf */,
+				83FC71C81C9585F300B60C1C /* santyoume.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		ADDCBC75FC6B4CD69BBD2594 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1194,17 +1237,28 @@
 			files = (
 				8371D66A1C760D6F008AE534 /* showdown.min.js in Resources */,
 				8335185F1C8782170057E956 /* noswipe.js in Resources */,
+				83FC71CB1C9585F300B60C1C /* dartsfont.ttf in Resources */,
 				83183BC61BECC4B300FAE0B6 /* common.js in Resources */,
 				8371D66D1C764E6D008AE534 /* wkhidem.user.js in Resources */,
+				83FC71CE1C9585F300B60C1C /* Hosohuwafont.ttf in Resources */,
 				839AA3DC1BE2BC08006A05F3 /* resize.css in Resources */,
+				83FC71BE1C95856600B60C1C /* ArmedBanana.ttf in Resources */,
+				83FC71D01C9585F300B60C1C /* santyoume.ttf in Resources */,
+				83FC71CD1C9585F300B60C1C /* hkgokukaikk.ttf in Resources */,
+				83FC71C91C9585F300B60C1C /* chigfont.ttf in Resources */,
+				83FC71C01C9585BE00B60C1C /* chifont+.ttf in Resources */,
 				83CB3E0F1B5849EE00761D68 /* Settings.bundle in Resources */,
+				83FC71CF1C9585F300B60C1C /* nagayama_kai08.otf in Resources */,
 				83183BC41BECC1C300FAE0B6 /* wkoverride.user.js in Resources */,
 				830EAB941B41DC7700EBF073 /* LaunchScreen.storyboard in Resources */,
+				83FC71D21C95877100B60C1C /* jitai.user.js in Resources */,
+				83FC71CC1C9585F300B60C1C /* fc_fl.ttf in Resources */,
 				836639521BDB9F9E00BD0B92 /* wkimprove.js in Resources */,
 				839AA3DA1BE2BB8C006A05F3 /* jquery.qtip.min.js in Resources */,
 				839AA3D91BE2BB8C006A05F3 /* jquery.qtip.min.css in Resources */,
 				83F32EAB1BDFCCFA00F2ABA0 /* wkdoublecheck.js in Resources */,
 				830EAB911B41DC7700EBF073 /* Assets.xcassets in Resources */,
+				83FC71CA1C9585F300B60C1C /* cinecaption227.ttf in Resources */,
 				830EAB8F1B41DC7700EBF073 /* Main.storyboard in Resources */,
 				8371D6691C760D6B008AE534 /* markdown.user.js in Resources */,
 			);

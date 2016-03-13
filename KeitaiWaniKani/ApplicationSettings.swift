@@ -14,6 +14,7 @@ struct ApplicationSettingKeys {
     static let purgeDatabase = "purgeDatabase"
     static let disableLessonSwipe = "disableLessonSwipe"
     static let lastRefreshTime = "lastRefreshTime"
+    static let userScriptJitaiEnabled = "userScript-Jitai"
     static let userScriptIgnoreAnswerEnabled = "userScript-IgnoreAnswer"
     static let userScriptDoubleCheckEnabled = "userScript-DoubleCheck"
     static let userScriptWaniKaniImproveEnabled = "userScript-WaniKaniImprove"
@@ -60,6 +61,11 @@ struct ApplicationSettings {
         set { userDefaults.setObject(newValue, forKey: ApplicationSettingKeys.lastRefreshTime) }
     }
     
+    static var userScriptJitaiEnabled: Bool {
+        get { return userDefaults.boolForKey(ApplicationSettingKeys.userScriptJitaiEnabled) }
+        set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.userScriptJitaiEnabled) }
+    }
+    
     static var userScriptIgnoreAnswerEnabled: Bool {
         get { return userDefaults.boolForKey(ApplicationSettingKeys.userScriptIgnoreAnswerEnabled) }
         set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.userScriptIgnoreAnswerEnabled) }
@@ -91,6 +97,7 @@ struct ApplicationSettings {
         purgeDatabase = false
         disableLessonSwipe = false
         lastRefreshTime = nil
+        userScriptJitaiEnabled = false
         userScriptIgnoreAnswerEnabled = false
         userScriptDoubleCheckEnabled = false
         userScriptWaniKaniImproveEnabled = false
