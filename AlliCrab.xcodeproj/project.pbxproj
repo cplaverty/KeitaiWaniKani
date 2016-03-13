@@ -10,7 +10,6 @@
 		14E0CF853667B3F9763B0A6A /* Pods_AlliCrab_WaniKaniStudyQueueWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7944A1E95EEF4A6D0BF4D782 /* Pods_AlliCrab_WaniKaniStudyQueueWidget.framework */; };
 		5ABBCCA9A67E02D05AEE24E5 /* Pods_WaniKaniKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399D94EB29F918B03C80B0D /* Pods_WaniKaniKitTests.framework */; };
 		8304F8281BBD083A009D7054 /* DelayOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8304F8271BBD083A009D7054 /* DelayOperationTests.swift */; };
-		8307F2501BB564EC00BDDF10 /* WebAddressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8307F24F1BB564EC00BDDF10 /* WebAddressBarView.swift */; };
 		8307F2521BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8307F2511BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift */; };
 		8307F2571BB6049100BDDF10 /* StudyQueueIsUpdatedCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8307F2561BB6049100BDDF10 /* StudyQueueIsUpdatedCondition.swift */; };
 		830EAB8A1B41DC7700EBF073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830EAB891B41DC7700EBF073 /* AppDelegate.swift */; };
@@ -273,7 +272,6 @@
 		7702C391F312DD57EFB28E9C /* Pods-AlliCrab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab.debug.xcconfig"; sourceTree = "<group>"; };
 		7944A1E95EEF4A6D0BF4D782 /* Pods_AlliCrab_WaniKaniStudyQueueWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlliCrab_WaniKaniStudyQueueWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8304F8271BBD083A009D7054 /* DelayOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelayOperationTests.swift; sourceTree = "<group>"; };
-		8307F24F1BB564EC00BDDF10 /* WebAddressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebAddressBarView.swift; sourceTree = "<group>"; };
 		8307F2511BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectedStudyQueueTests.swift; sourceTree = "<group>"; };
 		8307F2561BB6049100BDDF10 /* StudyQueueIsUpdatedCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyQueueIsUpdatedCondition.swift; sourceTree = "<group>"; };
 		830EAB861B41DC7700EBF073 /* AlliCrab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlliCrab.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -910,7 +908,6 @@
 				83DC478B1B440A6200AD716C /* RubyLabel.swift */,
 				831FF75F1BB8861400C31FDF /* SRSDataItemCollectionViewCell.swift */,
 				839D76AA1B9A3BC40037294C /* UserScriptTableViewCell.swift */,
-				8307F24F1BB564EC00BDDF10 /* WebAddressBarView.swift */,
 				83B5CC4C1C470BE600979DAC /* WKWebAddressBarView.swift */,
 				83B5CC4E1C47112F00979DAC /* UIBottomBorderedView.swift */,
 			);
@@ -1474,7 +1471,6 @@
 				83DC478C1B440A6200AD716C /* RubyLabel.swift in Sources */,
 				832462B91B930AC200FB62C9 /* ReviewCountNotificationOperation.swift in Sources */,
 				833BF0BE1B4930A20038AAE3 /* UIViewControllerExtensions.swift in Sources */,
-				8307F2501BB564EC00BDDF10 /* WebAddressBarView.swift in Sources */,
 				839D76AB1B9A3BC40037294C /* UserScriptTableViewCell.swift in Sources */,
 				83B1555B1B94A18D0022217E /* SettingsTableViewController.swift in Sources */,
 				8347BDDA1B7260B1000F99EF /* BackgroundObserver.swift in Sources */,

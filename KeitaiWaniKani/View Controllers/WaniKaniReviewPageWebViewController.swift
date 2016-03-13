@@ -24,8 +24,6 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         return webView
     }
     
-    private var userScriptsInjected = false
-    
     // MARK: - Initialisers
     
     deinit {
@@ -58,77 +56,25 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         return false
     }
     
-    override func webViewDidStartLoad(webView: UIWebView) {
-        super.webViewDidStartLoad(webView)
-        if let requestURLStarted = requestStack.last?.URL
-            where requestURLStarted == WaniKaniURLs.lessonSession || requestURLStarted == WaniKaniURLs.reviewSession {
-                userScriptsInjected = false
-        }
-    }
-    
-    override func webViewDidFinishLoad(webView: UIWebView) {
-        super.webViewDidFinishLoad(webView)
-        
-        guard let URL = webView.request?.URL else { return }
-        guard !userScriptsInjected else { return }
-        
-        switch URL {
-        case WaniKaniURLs.lessonSession:
-            showBrowserInterface(false, animated: true)
-            DDLogDebug("Loading user scripts")
-            injectScript("common", inWebView: webView)
-            injectStyleSheet("resize", inWebView: webView)
-            if ApplicationSettings.disableLessonSwipe {
-                injectScript("noswipe", inWebView: webView)
-            }
-            userScriptsInjected = true
-        case WaniKaniURLs.reviewSession:
-            showBrowserInterface(false, animated: true)
-            DDLogDebug("Loading user scripts")
-            injectScript("common", inWebView: webView)
-            injectStyleSheet("resize", inWebView: webView)
-            if ApplicationSettings.userScriptIgnoreAnswerEnabled {
-                injectScript("wkoverride.user", inWebView: webView)
-            }
-            if ApplicationSettings.userScriptDoubleCheckEnabled {
-                injectScript("wkdoublecheck", inWebView: webView)
-            }
-            if ApplicationSettings.userScriptWaniKaniImproveEnabled {
-                injectStyleSheet("jquery.qtip.min", inWebView: webView)
-                injectScript("jquery.qtip.min", inWebView: webView)
-                injectScript("wkimprove", inWebView: webView)
-            }
-            if ApplicationSettings.userScriptMarkdownNotesEnabled {
-                injectScript("showdown.min", inWebView: webView)
-                injectScript("markdown.user", inWebView: webView)
-            }
-            if ApplicationSettings.userScriptHideMnemonicsEnabled {
-                injectScript("wkhidem.user", inWebView: webView)
-            }
-            userScriptsInjected = true
-        default: break
-        }
-    }
-    
     // MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
         allowsBackForwardNavigationGestures = false
         super.viewDidLoad()
-        webView.removeInputAccessoryView()
+        webView?.removeInputAccessoryView()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        showBrowserInterface(webView.request?.URL != WaniKaniURLs.lessonSession && webView.request?.URL != WaniKaniURLs.reviewSession, animated: true)
+        showBrowserInterface(webView?.request?.URL != WaniKaniURLs.lessonSession && webView?.request?.URL != WaniKaniURLs.reviewSession, animated: true)
     }
     
     // MARK: - Update UI
     
     func keyboardDidShow(notification: NSNotification) {
-        guard let URL = webView.request?.URL where URL == WaniKaniURLs.lessonSession || URL == WaniKaniURLs.reviewSession else { return }
+        guard let webView = self.webView, let URL = webView.request?.URL where URL == WaniKaniURLs.lessonSession || URL == WaniKaniURLs.reviewSession else { return }
         
         showBrowserInterface(false, animated: false)
         webView.scrollToTop(false)
@@ -136,7 +82,7 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        webView.setScrollEnabled(true)
+        webView?.setScrollEnabled(true)
     }
     
 }
