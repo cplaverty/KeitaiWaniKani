@@ -76,7 +76,7 @@ var srs_wrapper_upper = 0;
 
 $('<li id="wki_button" class="wki_default_cursor disabled"><div id="wki_mimic_button"><div class="wki_item_wrapper"><div lang="ja" class="wki_button_item_label"><div class="wki_start_message">Previous item</div></div></div><i class="icon-info-sign"></i></li>').insertAfter('#option-wrap-up');
 var buttonCount = $("#additional-content ul li").length
-$("#additional-content ul li").css("width", 97 / buttonCount + "%"); //make space in the buttons row
+$("#additional-content ul li").css("width", 100 / buttonCount + "%"); //make space in the buttons row
 
 $('<div id="wki_srs_popup_wrapper"><div class="wki_srs_popup_icon"><i class="icon-arrow-up"></i></div><div id="wki_srs_popup_message"></div></div>').appendTo('body');
 
