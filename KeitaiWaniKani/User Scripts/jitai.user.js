@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Jitai
-// @version     1.1.1
+// @version     1.2.0
 // @description Display WaniKani reviews in randomized fonts, for more varied reading training.
 // @author      Samuel (@obskyr)
 // @namespace   http://obskyr.io/
@@ -62,7 +62,7 @@ var fonts = [
     "ArmedBanana", // This one is completely absurd. I recommend it.
     "HakusyuKaisyoExtraBold_kk",
     "aoyagireisyosimo2, AoyagiKouzanFont2OTF",
-    "S2G Nagurigaki font, S2G Nagurigaki font-PRO, nagurigaki, nagurigaki-P",
+    "aquafont",
     
     // Add your fonts here!
     "Fake font name that you can change",
@@ -123,8 +123,11 @@ function canRepresentGlyphs(fontName, glyphs) {
 }
 
 function shuffle(arr) {
+    // WaniKani Reorder Ultimate overwrites Math.random(!?), so this
+    // next line is required for Jitai to work in conjunction with it.
+    var random = Math.randomB || Math.random;
     for (var i = arr.length; i > 0;) {
-        var otherIndex = Math.floor(Math.random() * i);
+        var otherIndex = Math.floor(random() * i);
         i--;
         
         var temp = arr[i];
@@ -200,9 +203,11 @@ var jitai = {
         var oldSet = $.jStorage.set;
         $.jStorage.set = function(key, value, options) {
             var ret = oldSet.apply(this, [key, value, options]);
+            
             if (key === 'currentItem') {
                 jitai.setToRandomFont(value.kan || value.voc || value.rad);
             }
+            
             return ret;
         };
     }
