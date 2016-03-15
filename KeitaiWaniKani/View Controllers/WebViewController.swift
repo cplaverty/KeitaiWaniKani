@@ -77,9 +77,9 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     func createWebView() -> UIWebView {
         let webView = UIWebView(frame: self.view.bounds)
+        webView.translatesAutoresizingMaskIntoConstraints = false
         webView.scrollView.delegate = self
         webView.delegate = self
-        webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         webView.backgroundColor = UIColor.whiteColor()
         webView.allowsInlineMediaPlayback = true
         webView.mediaPlaybackRequiresUserAction = false
@@ -359,10 +359,19 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let nc = self.navigationController {
+            navigationBarSettings = NavigationBarSettings(navigationController: nc)
+        }
+        
         let webView = self.createWebView()
         self.webView = webView
         
         self.view.addSubview(webView)
+        NSLayoutConstraint(item: webView, attribute: .Top, relatedBy: .Equal, toItem: self.view, attribute: .Top, multiplier: 1, constant: 0).active = true
+        NSLayoutConstraint(item: webView, attribute: .Leading, relatedBy: .Equal, toItem: self.view, attribute: .Leading, multiplier: 1, constant: 0).active = true
+        NSLayoutConstraint(item: webView, attribute: .Trailing, relatedBy: .Equal, toItem: self.view, attribute: .Trailing, multiplier: 1, constant: 0).active = true
+        NSLayoutConstraint(item: webView, attribute: .Bottom, relatedBy: .Equal, toItem: self.view, attribute: .Bottom, multiplier: 1, constant: 0).active = true
+
         self.view.addSubview(statusBarView)
         
         if allowsBackForwardNavigationGestures {
@@ -388,7 +397,6 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         super.viewWillAppear(animated)
         
         if let nc = self.navigationController {
-            navigationBarSettings = NavigationBarSettings(navigationController: nc)
             if toolbarItems?.isEmpty == false {
                 nc.setToolbarHidden(false, animated: false)
             }
@@ -403,7 +411,6 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         if let nc = self.navigationController {
             navigationBarSettings?.applyToNavigationController(nc)
         }
-        navigationBarSettings = nil
     }
     
     override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
