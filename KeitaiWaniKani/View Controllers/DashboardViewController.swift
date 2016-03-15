@@ -35,6 +35,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             updateUITimer?.invalidate()
         }
     }
+    
     private var updateStudyQueueTimer: NSTimer? {
         willSet {
             updateStudyQueueTimer?.invalidate()
@@ -465,7 +466,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
                     
                     DDLogDebug("Fetch of latest StudyQueue (\(studyQueue?.lastUpdateTimestamp ?? NSDate.distantPast())) from database complete.  Needs refreshing? \(self.apiDataNeedsRefresh)")
                     if self.apiDataNeedsRefresh {
-                        self.updateStudyQueueTimer?.fire()
+                        self.fetchStudyQueueFromNetworkInBackground(forced: true)
                     }
                 }
             } catch {
@@ -590,6 +591,8 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     }
     
     func startTimers() {
+        assert(NSThread.isMainThread(), "Must be called on the main thread")
+        
         updateUITimer = {
             // Find out when the start of the next minute is
             let referenceDate = NSDate()
@@ -622,6 +625,8 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     }
     
     func killTimers() {
+        assert(NSThread.isMainThread(), "Must be called on the main thread")
+        
         updateUITimer = nil
         updateStudyQueueTimer = nil
     }
@@ -869,22 +874,22 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         }
     }
     
-    private func webViewControllerCommonConfiguration(webViewController: WebViewController) {
-        webViewController.delegate = self
-    }
-    
     private func wkWebViewControllerCommonConfiguration(webViewController: WKWebViewController) {
         webViewController.delegate = self
     }
     
     private func presentReviewPageWebViewControllerForURL(URL: NSURL) {
-        let vc = WaniKaniReviewPageWebViewController.forURL(URL, configBlock: webViewControllerCommonConfiguration)
+        ApplicationSettings.forceRefresh = true
+        
+        let vc = WaniKaniReviewPageWebViewController(URL: URL)
+        vc.delegate = self
         if self.dataRefreshOperation != nil {
             // Cancel data refresh operation because we're just going to restart it when the web view is dismissed
             DDLogDebug("Cancelling data refresh operation")
             self.dataRefreshOperation = nil
         }
-        presentViewController(vc, animated: true, completion: nil)
+        
+        navigationController!.pushViewController(vc, animated: true)
     }
     
     // MARK: - Background transition
