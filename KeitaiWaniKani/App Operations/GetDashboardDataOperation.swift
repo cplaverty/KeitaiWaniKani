@@ -162,6 +162,7 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         if !cancelled && fatalErrors.isEmpty {
             DDLogDebug("Updating last refresh time")
             ApplicationSettings.lastRefreshTime = NSDate()
+            ApplicationSettings.forceRefresh = false
         } else {
             DDLogDebug("Not updating last refresh time due to fatal operation errors: \(fatalErrors)")
         }

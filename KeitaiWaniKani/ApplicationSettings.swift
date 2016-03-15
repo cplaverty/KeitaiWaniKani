@@ -14,6 +14,7 @@ struct ApplicationSettingKeys {
     static let purgeDatabase = "purgeDatabase"
     static let disableLessonSwipe = "disableLessonSwipe"
     static let lastRefreshTime = "lastRefreshTime"
+    static let forceRefresh = "forceRefresh"
     static let userScriptJitaiEnabled = "userScript-Jitai"
     static let userScriptIgnoreAnswerEnabled = "userScript-IgnoreAnswer"
     static let userScriptDoubleCheckEnabled = "userScript-DoubleCheck"
@@ -61,6 +62,11 @@ struct ApplicationSettings {
         set { userDefaults.setObject(newValue, forKey: ApplicationSettingKeys.lastRefreshTime) }
     }
     
+    static var forceRefresh: Bool {
+        get { return userDefaults.boolForKey(ApplicationSettingKeys.forceRefresh) }
+        set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.forceRefresh) }
+    }
+    
     static var userScriptJitaiEnabled: Bool {
         get { return userDefaults.boolForKey(ApplicationSettingKeys.userScriptJitaiEnabled) }
         set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.userScriptJitaiEnabled) }
@@ -97,6 +103,7 @@ struct ApplicationSettings {
         purgeDatabase = false
         disableLessonSwipe = false
         lastRefreshTime = nil
+        forceRefresh = false
         userScriptJitaiEnabled = false
         userScriptIgnoreAnswerEnabled = false
         userScriptDoubleCheckEnabled = false
@@ -114,6 +121,7 @@ extension ApplicationSettings {
     }
     
     static func needsRefresh() -> Bool {
+        if forceRefresh { return true }
         guard let lastRefreshTime = self.lastRefreshTime else { return true }
         
         return WaniKaniAPI.needsRefresh(lastRefreshTime)
