@@ -11,6 +11,24 @@ import CocoaLumberjack
 import OnePasswordExtension
 import WaniKaniKit
 
+private struct NavigationBarSettings {
+    let toolbarHidden: Bool
+    let hidesBarsOnSwipe: Bool
+    let hidesBarsWhenVerticallyCompact: Bool
+    
+    init(navigationController nc: UINavigationController) {
+        self.toolbarHidden = nc.toolbarHidden
+        self.hidesBarsOnSwipe = nc.hidesBarsOnSwipe
+        self.hidesBarsWhenVerticallyCompact = nc.hidesBarsWhenVerticallyCompact
+    }
+    
+    func applyToNavigationController(nc: UINavigationController) {
+        nc.toolbarHidden = self.toolbarHidden
+        nc.hidesBarsOnSwipe = self.hidesBarsOnSwipe
+        nc.hidesBarsWhenVerticallyCompact = self.hidesBarsWhenVerticallyCompact
+    }
+}
+
 protocol WebViewControllerDelegate: class {
     func webViewControllerDidFinish(controller: WebViewController)
 }
@@ -22,12 +40,6 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         configBlock(webViewController)
         
         let nc = UINavigationController(navigationBarClass: nil, toolbarClass: nil)
-        if webViewController.toolbarItems?.isEmpty == false {
-            nc.setToolbarHidden(false, animated: false)
-        }
-        nc.hidesBarsOnSwipe = true
-        nc.hidesBarsWhenVerticallyCompact = true
-        
         nc.pushViewController(webViewController, animated: false)
         
         return nc
@@ -55,12 +67,13 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     weak var jsContext: JSContext?
     weak var delegate: WebViewControllerDelegate?
-    var allowsBackForwardNavigationGestures: Bool = true
+    var allowsBackForwardNavigationGestures: Bool { return true }
     
     var URL: NSURL?
     private var lastRequest: NSURLRequest? = nil
     private(set) var requestStack: [NSURLRequest] = []
     private var userScriptsInjected = false
+    private var navigationBarSettings: NavigationBarSettings? = nil
     
     func createWebView() -> UIWebView {
         let webView = UIWebView(frame: self.view.bounds)
@@ -341,8 +354,9 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         super.viewDidLoad()
         
         let webView = self.createWebView()
-        self.view.addSubview(webView)
         self.webView = webView
+        
+        self.view.addSubview(webView)
         self.view.addSubview(statusBarView)
         
         if allowsBackForwardNavigationGestures {
@@ -364,8 +378,29 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let nc = self.navigationController {
+            navigationBarSettings = NavigationBarSettings(navigationController: nc)
+            if toolbarItems?.isEmpty == false {
+                nc.setToolbarHidden(false, animated: false)
+            }
+            nc.hidesBarsOnSwipe = true
+            nc.hidesBarsWhenVerticallyCompact = true
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let nc = self.navigationController {
+            navigationBarSettings?.applyToNavigationController(nc)
+        }
+        navigationBarSettings = nil
+    }
+    
     override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        statusBarView.hidden = newCollection.verticalSizeClass == .Compact
         if newCollection.horizontalSizeClass != traitCollection.horizontalSizeClass || newCollection.verticalSizeClass != traitCollection.verticalSizeClass {
             configureForTraitCollection(newCollection)
         }
@@ -373,6 +408,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     /// Sets the navigation bar and toolbar items based on the given UITraitCollection
     func configureForTraitCollection(traitCollection: UITraitCollection) {
+        statusBarView.hidden = traitCollection.verticalSizeClass == .Compact
         if traitCollection.horizontalSizeClass == .Compact && traitCollection.verticalSizeClass == .Regular {
             addToolbarItemsForCompactWidthRegularHeight()
         } else {

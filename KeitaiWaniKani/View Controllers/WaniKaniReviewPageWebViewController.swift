@@ -24,6 +24,8 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         return webView
     }
     
+    override var allowsBackForwardNavigationGestures: Bool { return false }
+
     // MARK: - Initialisers
     
     deinit {
@@ -59,7 +61,6 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     // MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
-        allowsBackForwardNavigationGestures = false
         super.viewDidLoad()
         webView?.removeInputAccessoryView()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
