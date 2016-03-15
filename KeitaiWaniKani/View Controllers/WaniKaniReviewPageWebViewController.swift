@@ -64,7 +64,6 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         super.viewDidLoad()
         webView?.removeInputAccessoryView()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -79,11 +78,6 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         
         showBrowserInterface(false, animated: false)
         webView.scrollToTop(false)
-        webView.setScrollEnabled(false)
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        webView?.setScrollEnabled(true)
     }
     
 }
