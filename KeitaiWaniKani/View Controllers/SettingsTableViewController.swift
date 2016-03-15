@@ -28,7 +28,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     
     private let userScripts: [ScriptInfo] = [
         ScriptInfo(name: "Jitai",
-            description: "Display WaniKani reviews in randomized fonts, for more varied reading training.  Original script written by obskyr.",
+            description: "Display WaniKani reviews in randomised fonts, for more varied reading training.  Original script written by obskyr.",
             settingKey: ApplicationSettingKeys.userScriptJitaiEnabled),
         ScriptInfo(name: "WaniKani Override",
             description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  PLEASE USE RESPONSIBLY!  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script written by ruipgpinheiro.",
