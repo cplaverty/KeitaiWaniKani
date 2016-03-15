@@ -21,6 +21,7 @@ struct ApplicationSettingKeys {
     static let userScriptWaniKaniImproveEnabled = "userScript-WaniKaniImprove"
     static let userScriptMarkdownNotesEnabled = "userScript-MarkdownNotes"
     static let userScriptHideMnemonicsEnabled = "userScript-HideMnemonics"
+    static let userScriptReorderUltimateEnabled = "userScript-ReorderUltimate"
 }
 
 struct ApplicationSettings {
@@ -97,6 +98,11 @@ struct ApplicationSettings {
         set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.userScriptHideMnemonicsEnabled) }
     }
     
+    static var userScriptReorderUltimateEnabled: Bool {
+        get { return userDefaults.boolForKey(ApplicationSettingKeys.userScriptReorderUltimateEnabled) }
+        set { userDefaults.setBool(newValue, forKey: ApplicationSettingKeys.userScriptReorderUltimateEnabled) }
+    }
+    
     static func resetToDefaults() {
         apiKey = nil
         apiKeyVerified = false
@@ -110,6 +116,7 @@ struct ApplicationSettings {
         userScriptWaniKaniImproveEnabled = false
         userScriptMarkdownNotesEnabled = false
         userScriptHideMnemonicsEnabled = false
+        userScriptReorderUltimateEnabled = false
     }
 }
 

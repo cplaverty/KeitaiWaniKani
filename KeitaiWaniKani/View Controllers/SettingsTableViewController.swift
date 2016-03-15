@@ -45,6 +45,9 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         ScriptInfo(name: "WaniKani Hide Mnemonics",
             description: "Allows you to hide the reading and meaning mnemonics on the site.  Original script written by nibarius.",
             settingKey: ApplicationSettingKeys.userScriptHideMnemonicsEnabled),
+        ScriptInfo(name: "WaniKani Reorder Ultimate",
+            description: "Allows you to reorder your lessons and reviews by type and level and also force reading/meaning first.  PLEASE USE RESPONSIBLY!  Original script written by xMunch.",
+            settingKey: ApplicationSettingKeys.userScriptReorderUltimateEnabled),
     ]
     
     private let otherSettings: [ScriptInfo] = [

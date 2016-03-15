@@ -285,6 +285,9 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
             if ApplicationSettings.disableLessonSwipe {
                 injectScript("noswipe", inWebView: webView)
             }
+            if ApplicationSettings.userScriptReorderUltimateEnabled {
+                injectScript("WKU.user", inWebView: webView)
+            }
             userScriptsInjected = true
         case WaniKaniURLs.reviewSession:
             showBrowserInterface(false, animated: true)
@@ -311,6 +314,9 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
             }
             if ApplicationSettings.userScriptHideMnemonicsEnabled {
                 injectScript("wkhidem.user", inWebView: webView)
+            }
+            if ApplicationSettings.userScriptReorderUltimateEnabled {
+                injectScript("WKU.user", inWebView: webView)
             }
             userScriptsInjected = true
         default: break

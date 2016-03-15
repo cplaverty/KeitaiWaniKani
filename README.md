@@ -15,6 +15,7 @@ Features:
     * WaniKani Improve: https://www.wanikani.com/chat/api-and-third-party-apps/2952
     * Markdown Notes: https://www.wanikani.com/chat/api-and-third-party-apps/11698
     * WaniKani Hide Mnemonics: https://www.wanikani.com/chat/api-and-third-party-apps/4021
+    * WaniKani Reorder Ultimate: https://www.wanikani.com/chat/api-and-third-party-apps/8471
 * 1Password support for auto-filling your WaniKani login details
 * Receive notifications when reviews are due
 * Lists upcoming reviews in the review timeline

@@ -170,6 +170,7 @@
 		83D931691BB9CC66009DF31A /* FileMissingCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D931681BB9CC66009DF31A /* FileMissingCondition.swift */; };
 		83D9316B1BB9D2AA009DF31A /* FileMissingConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D9316A1BB9D2AA009DF31A /* FileMissingConditionTests.swift */; };
 		83DC478C1B440A6200AD716C /* RubyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC478B1B440A6200AD716C /* RubyLabel.swift */; };
+		83E4A2B71C9820400053A7C0 /* WKU.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 83E4A2B61C9820400053A7C0 /* WKU.user.js */; };
 		83F32EA91BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */; };
 		83F32EAB1BDFCCFA00F2ABA0 /* wkdoublecheck.js in Resources */ = {isa = PBXBuildFile; fileRef = 83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */; };
 		83FC71BE1C95856600B60C1C /* ArmedBanana.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71BD1C95856600B60C1C /* ArmedBanana.ttf */; };
@@ -449,6 +450,7 @@
 		83D931681BB9CC66009DF31A /* FileMissingCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileMissingCondition.swift; sourceTree = "<group>"; };
 		83D9316A1BB9D2AA009DF31A /* FileMissingConditionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileMissingConditionTests.swift; sourceTree = "<group>"; };
 		83DC478B1B440A6200AD716C /* RubyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RubyLabel.swift; sourceTree = "<group>"; };
+		83E4A2B61C9820400053A7C0 /* WKU.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = WKU.user.js; sourceTree = "<group>"; };
 		83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaniKaniLoginWebViewController.swift; sourceTree = "<group>"; };
 		83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkdoublecheck.js; sourceTree = "<group>"; };
 		83FC71BD1C95856600B60C1C /* ArmedBanana.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArmedBanana.ttf; sourceTree = "<group>"; };
@@ -619,6 +621,7 @@
 				8371D66B1C764E64008AE534 /* wkhidem.user.js */,
 				836639511BDB9F9E00BD0B92 /* wkimprove.js */,
 				83183BC31BECC1C300FAE0B6 /* wkoverride.user.js */,
+				83E4A2B61C9820400053A7C0 /* WKU.user.js */,
 			);
 			path = "User Scripts";
 			sourceTree = "<group>";
@@ -1243,6 +1246,7 @@
 				83FC71CE1C9585F300B60C1C /* Hosohuwafont.ttf in Resources */,
 				839AA3DC1BE2BC08006A05F3 /* resize.css in Resources */,
 				83FC71BE1C95856600B60C1C /* ArmedBanana.ttf in Resources */,
+				83E4A2B71C9820400053A7C0 /* WKU.user.js in Resources */,
 				83FC71D01C9585F300B60C1C /* santyoume.ttf in Resources */,
 				83FC71CD1C9585F300B60C1C /* hkgokukaikk.ttf in Resources */,
 				83FC71C91C9585F300B60C1C /* chigfont.ttf in Resources */,
