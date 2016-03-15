@@ -662,7 +662,13 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         label.backgroundColor = UIColor.clearColor()
         label.opaque = false
         label.textColor = UIColor.blackColor()
-        label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        if #available(iOS 9.0, *) {
+            label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle2)
+        } else {
+            let headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+            let pointSize = headlineFont.pointSize * 1.3
+            label.font = headlineFont.fontWithSize(pointSize)
+        }
         let visualEffectVibrancyView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: blurEffect))
         visualEffectVibrancyView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         visualEffectVibrancyView.contentView.addSubview(label)
