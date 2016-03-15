@@ -90,7 +90,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     private var progressViewIsHidden = true
     
     lazy var statusBarView: UIView = {
-        let statusBarView = UIBottomBorderedView(color: UIColor.lightGrayColor(), width: 1)
+        let statusBarView = UIBottomBorderedView(color: UIColor.lightGrayColor(), width: 0.5)
         statusBarView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: self.view.frame.size.width, height: 20))
         statusBarView.autoresizingMask = .FlexibleWidth
         statusBarView.backgroundColor = ApplicationSettings.globalBarTintColor()
@@ -401,7 +401,6 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     }
     
     override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        statusBarView.hidden = newCollection.verticalSizeClass == .Compact
         if newCollection.horizontalSizeClass != traitCollection.horizontalSizeClass || newCollection.verticalSizeClass != traitCollection.verticalSizeClass {
             configureForTraitCollection(newCollection)
         }
@@ -409,6 +408,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     /// Sets the navigation bar and toolbar items based on the given UITraitCollection
     func configureForTraitCollection(traitCollection: UITraitCollection) {
+        statusBarView.hidden = traitCollection.verticalSizeClass == .Compact
         if traitCollection.horizontalSizeClass == .Compact && traitCollection.verticalSizeClass == .Regular {
             addToolbarItemsForCompactWidthRegularHeight()
         } else {
