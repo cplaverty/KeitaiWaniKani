@@ -726,7 +726,9 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "didEnterForeground:", name: UIApplicationDidBecomeActiveNotification, object: nil)
         
         let backgroundView = UIView(frame: tableView.frame)
+        backgroundView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         let imageView = UIImageView(image: UIImage(named: "Header"))
+        imageView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         imageView.contentMode = .ScaleAspectFill
         imageView.frame = backgroundView.frame
         backgroundView.addSubview(imageView)
