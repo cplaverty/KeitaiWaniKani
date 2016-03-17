@@ -115,7 +115,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         defer { database.close() }
         
         NSLog("Fetching study queue from database")
-        return try StudyQueue.coder.loadFromDatabase(database)
+        return try SRSDataItemCoder.projectedStudyQueue(database)
     }
     
     // MARK: - UITableViewDataSource
