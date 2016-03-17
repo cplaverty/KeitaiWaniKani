@@ -193,9 +193,7 @@ extension SRSDataItemCoder {
             return nil
         }
         
-        // Row limit of 101 represents the number of 15-minute intervals in a day, plus one for the "Now"
-        let reviews = try reviewTimeline(database, since: studyQueue.lastUpdateTimestamp, rowLimit: 101)
-        
+        let reviews = try reviewTimeline(database, since: studyQueue.lastUpdateTimestamp)
         guard !reviews.isEmpty else {
             return studyQueue
         }
