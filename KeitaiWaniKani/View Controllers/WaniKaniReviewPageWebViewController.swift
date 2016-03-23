@@ -25,7 +25,7 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     }
     
     override var allowsBackForwardNavigationGestures: Bool { return false }
-
+    
     // MARK: - Initialisers
     
     deinit {
@@ -69,6 +69,11 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         showBrowserInterface(webView?.request?.URL != WaniKaniURLs.lessonSession && webView?.request?.URL != WaniKaniURLs.reviewSession, animated: true)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        ApplicationSettings.forceRefresh = true
     }
     
     // MARK: - Update UI

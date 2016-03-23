@@ -887,8 +887,6 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     }
     
     private func presentReviewPageWebViewControllerForURL(URL: NSURL) {
-        ApplicationSettings.forceRefresh = true
-        
         let vc = WaniKaniReviewPageWebViewController(URL: URL)
         vc.delegate = self
         if self.dataRefreshOperation != nil {
