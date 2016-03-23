@@ -149,7 +149,7 @@ final class RubyLabel: UIView {
             constraints = CGSizeMake(superview?.bounds.size.width ?? CGFloat.max, CGFloat.max)
         }
 
-        let fitrange = UnsafeMutablePointer<CFRange>()
+        let fitrange: UnsafeMutablePointer<CFRange> = nil
         defer { fitrange.destroy() }
 
         let newSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, CFAttributedStringGetLength(rubyString)), frameAttributes, constraints, fitrange)

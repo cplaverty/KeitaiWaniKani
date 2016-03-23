@@ -45,7 +45,7 @@ class ReviewTimelineTableViewController: UITableViewController {
         items.append(UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil))
 
         let segmentedControl = UISegmentedControl(items: ["All Reviews", "Current Level Only"])
-        segmentedControl.addTarget(self, action: "queryChanged:", forControlEvents: .ValueChanged)
+        segmentedControl.addTarget(self, action: #selector(queryChanged(_:)), forControlEvents: .ValueChanged)
         segmentedControl.selectedSegmentIndex = 0
         
         let segmentedControlBarButtonItem = UIBarButtonItem(customView: segmentedControl)

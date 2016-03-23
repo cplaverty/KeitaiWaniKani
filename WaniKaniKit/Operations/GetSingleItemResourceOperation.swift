@@ -99,11 +99,11 @@ public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSO
         
         parsed = coder.loadFromJSON(json[WaniKaniAPIResourceKeys.requestedInformation])
         
-        ++progress.completedUnitCount
+        progress.completedUnitCount += 1
         
         if parseOnly {
             DDLogInfo("Parsed \(Coder.ModelObject.self).  Skipping save to database because parseOnly = true.")
-            ++self.progress.completedUnitCount
+            self.progress.completedUnitCount += 1
             return
         }
         
@@ -124,7 +124,7 @@ public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSO
                     DDLogWarn("Not saving \(Coder.ModelObject.self) as no valid items were parsed")
                 }
                 
-                ++self.progress.completedUnitCount
+                self.progress.completedUnitCount += 1
                 
                 WaniKaniDarwinNotificationCenter.postModelUpdateMessage("\(Coder.ModelObject.self)")
             } catch {

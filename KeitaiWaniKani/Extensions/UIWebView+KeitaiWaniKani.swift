@@ -35,8 +35,8 @@ extension UIWebView {
                 return
             }
             
-            let method = class_getInstanceMethod(self.dynamicType, "noInputAccessoryView")
-            class_addMethod(newClass!, "inputAccessoryView", method_getImplementation(method), method_getTypeEncoding(method))
+            let method = class_getInstanceMethod(self.dynamicType, #selector(noInputAccessoryView))
+            class_addMethod(newClass!, Selector("inputAccessoryView"), method_getImplementation(method), method_getTypeEncoding(method))
             
             objc_registerClassPair(newClass!)
             

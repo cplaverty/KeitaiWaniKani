@@ -33,7 +33,7 @@ class WebViewBackForwardListTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.navigationItem.title = "History"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done:")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(done(_:)))
     }
     
     // MARK: - UITableViewDataSource

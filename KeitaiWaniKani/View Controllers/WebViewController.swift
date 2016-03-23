@@ -102,19 +102,19 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     }()
     
     lazy var backButton: UIBarButtonItem = {
-        return UIBarButtonItem(image: UIImage(named: "ArrowLeft"), style: .Plain, target: self, action: "backButtonTouched:forEvent:")
+        return UIBarButtonItem(image: UIImage(named: "ArrowLeft"), style: .Plain, target: self, action: #selector(backButtonTouched(_:forEvent:)))
     }()
     lazy var forwardButton: UIBarButtonItem = {
-        return UIBarButtonItem(image: UIImage(named: "ArrowRight"), style: .Plain, target: self, action: "forwardButtonTouched:forEvent:")
+        return UIBarButtonItem(image: UIImage(named: "ArrowRight"), style: .Plain, target: self, action: #selector(forwardButtonTouched(_:forEvent:)))
     }()
     lazy var shareButton: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "share:")
+        return UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(share(_:)))
     }()
     lazy var openInSafariButton: UIBarButtonItem = {
-        return UIBarButtonItem(image: UIImage(named: "OpenInSafari"), style: .Plain, target: self, action: "openInSafari:")
+        return UIBarButtonItem(image: UIImage(named: "OpenInSafari"), style: .Plain, target: self, action: #selector(openInSafari(_:)))
     }()
     lazy var doneButton: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done:")
+        return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(done(_:)))
     }()
     
     var shouldIncludeDoneButton: Bool {
@@ -375,9 +375,9 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         self.view.addSubview(statusBarView)
         
         if allowsBackForwardNavigationGestures {
-            backScreenEdgePanGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "backScreenEdgePanGestureTriggered:")
+            backScreenEdgePanGesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(backScreenEdgePanGestureTriggered(_:)))
             backScreenEdgePanGesture!.edges = .Left
-            forwardScreenEdgePanGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "forwardScreenEdgePanGestureTriggered:")
+            forwardScreenEdgePanGesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(forwardScreenEdgePanGestureTriggered(_:)))
             forwardScreenEdgePanGesture!.edges = .Right
             webView.scrollView.addGestureRecognizer(backScreenEdgePanGesture!)
             webView.scrollView.addGestureRecognizer(forwardScreenEdgePanGesture!)

@@ -120,21 +120,21 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     }
     
     lazy var backButton: UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(named: "ArrowLeft"), style: .Plain, target: self, action: "backButtonTouched:forEvent:")
+        let item = UIBarButtonItem(image: UIImage(named: "ArrowLeft"), style: .Plain, target: self, action: #selector(backButtonTouched(_:forEvent:)))
         return item
     }()
     lazy var forwardButton: UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(named: "ArrowRight"), style: .Plain, target: self, action: "forwardButtonTouched:forEvent:")
+        let item = UIBarButtonItem(image: UIImage(named: "ArrowRight"), style: .Plain, target: self, action: #selector(forwardButtonTouched(_:forEvent:)))
         return item
     }()
     lazy var shareButton: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: "share:")
+        return UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(share(_:)))
     }()
     lazy var openInSafariButton: UIBarButtonItem = {
-        return UIBarButtonItem(image: UIImage(named: "OpenInSafari"), style: .Plain, target: self, action: "openInSafari:")
+        return UIBarButtonItem(image: UIImage(named: "OpenInSafari"), style: .Plain, target: self, action: #selector(openInSafari(_:)))
     }()
     lazy var doneButton: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done:")
+        return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(done(_:)))
     }()
     
     var shouldIncludeDoneButton: Bool {

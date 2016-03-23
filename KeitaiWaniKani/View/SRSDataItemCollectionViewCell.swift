@@ -33,7 +33,7 @@ protocol SRSDataItemInfoURL {
 }
 
 private protocol SRSDataItemGuruProgressCollectionViewCell {
-    typealias DataItem: SRSDataItem, Equatable
+    associatedtype DataItem: SRSDataItem, Equatable
     
     // MARK: - Properties
     

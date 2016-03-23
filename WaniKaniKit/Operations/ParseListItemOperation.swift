@@ -86,10 +86,10 @@ public final class ParseListItemOperation<Coder: protocol<JSONDecoder, ListItemD
             if userInformation == nil {
                 userInformation = UserInformation.coder.loadFromJSON(json[WaniKaniAPIResourceKeys.userInformation])
             }
-            ++progress.completedUnitCount
+            progress.completedUnitCount += 1
             
             parsed += jsonArray.flatMap { return coder.loadFromJSON($0) }
-            ++progress.completedUnitCount
+            progress.completedUnitCount += 1
         }
         
         DDLogInfo("Parsed \(parsed.count) \(Coder.ModelObject.self) item(s).  Adding to database...")
@@ -101,11 +101,11 @@ public final class ParseListItemOperation<Coder: protocol<JSONDecoder, ListItemD
                     DDLogDebug("Saving user information")
                     try UserInformation.coder.save(item, toDatabase: db)
                 }
-                ++self.progress.completedUnitCount
+                self.progress.completedUnitCount += 1
                 
                 DDLogDebug("Saving data")
                 try self.coder.save(parsed, toDatabase: db)
-                ++self.progress.completedUnitCount
+                self.progress.completedUnitCount += 1
                 
                 WaniKaniDarwinNotificationCenter.postModelUpdateMessage("\(Coder.ModelObject.self)")
             } catch {

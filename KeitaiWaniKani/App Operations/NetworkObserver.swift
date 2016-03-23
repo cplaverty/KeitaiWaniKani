@@ -15,7 +15,7 @@ import WaniKaniKit
     as long as the `Operation` to which it is attached is executing.
 */
 struct NetworkObserver: OperationObserver {
-    // MARK: Initilization
+    // MARK: Initialization
 
     init() { }
     
@@ -52,7 +52,7 @@ private class NetworkIndicatorController {
     func networkActivityDidStart() {
         assert(NSThread.isMainThread(), "Altering network activity indicator state can only be done on the main thread.")
 
-        activityCount++
+        activityCount += 1
         
         updateIndicatorVisibility()
     }
@@ -60,7 +60,7 @@ private class NetworkIndicatorController {
     func networkActivityDidEnd() {
         assert(NSThread.isMainThread(), "Altering network activity indicator state can only be done on the main thread.")
         
-        activityCount--
+        activityCount -= 1
         
         updateIndicatorVisibility()
     }

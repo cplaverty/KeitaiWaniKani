@@ -42,7 +42,7 @@ class WKWebAddressBarView: UIView {
         self.opaque = false
         self.backgroundColor = UIColor(white: 0.8, alpha: 0.5)
         
-        refreshButton.addTarget(self, action: "stopOrRefreshWebView:", forControlEvents: .TouchUpInside)
+        refreshButton.addTarget(self, action: #selector(stopOrRefreshWebView(_:)), forControlEvents: .TouchUpInside)
         
         for webViewObservedKey in webViewObservedKeys {
             webView.addObserver(self, forKeyPath: webViewObservedKey, options: [], context: &observationContext)

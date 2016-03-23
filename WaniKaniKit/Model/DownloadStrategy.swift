@@ -85,8 +85,9 @@ public struct DownloadStrategy {
             return []
         } else {
             DDLogDebug("Will fetch vocabulary with batches \(arguments)")
-            var batchNumber = 1
-            return arguments.map { DownloadBatches(description: arguments.count == 1 ? nil : "(batch \(batchNumber++) of \(arguments.count))", argument: $0) }
+            return arguments.enumerate().map { (index, element) in
+                DownloadBatches(description: arguments.count == 1 ? nil : "(batch \(index + 1) of \(arguments.count))", argument: element)
+            }
         }
     }
     

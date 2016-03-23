@@ -94,7 +94,7 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
             })
 
         if let delay = delay {
-            ++progress.totalUnitCount
+            progress.totalUnitCount += 1
             let delayOperation = DelayOperation(interval: delay)
             progress.becomeCurrentWithPendingUnitCount(1)
             let countdownObserver = DelayOperationIntervalCountdownObserver(notificationInterval: 1)
@@ -196,7 +196,7 @@ class DelayOperationIntervalCountdownObserver: NSObject, OperationObserver, NSPr
         case .Date(let endDate): self.endDate = endDate
         }
         
-        notificationTimer = NSTimer(timeInterval: notificationInterval, target: self, selector: "timerTick:", userInfo: nil, repeats: true)
+        notificationTimer = NSTimer(timeInterval: notificationInterval, target: self, selector: #selector(timerTick(_:)), userInfo: nil, repeats: true)
         NSRunLoop.mainRunLoop().addTimer(notificationTimer!, forMode: NSDefaultRunLoopMode)
         notificationTimer!.fire()
     }

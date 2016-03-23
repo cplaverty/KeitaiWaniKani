@@ -63,7 +63,7 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         webView?.removeInputAccessoryView()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardDidShow(_:)), name: UIKeyboardDidShowNotification, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {

@@ -32,7 +32,7 @@ public class RetryOperation<T: Operation>: GroupOperation, NSProgressReporting {
         guard let op = operation as? T else { return }
         
         if !self.cancelled && !errors.isEmpty && numberOfRetries < maximumRetryCount && shouldRetry(op, errors) {
-            ++numberOfRetries
+            numberOfRetries += 1
             progress.totalUnitCount = Int64(numberOfRetries + 1)
             progress.completedUnitCount = Int64(numberOfRetries)
             DDLogDebug("Retrying failed operation \(operation) (\(self.numberOfRetries) of \(self.maximumRetryCount))")

@@ -14,7 +14,7 @@ public protocol ResourceHandler {
 }
 
 public protocol JSONDecoder {
-    typealias ModelObject: Equatable
+    associatedtype ModelObject: Equatable
     
     func loadFromJSON(json: JSON) -> ModelObject?
 }
@@ -25,14 +25,14 @@ public protocol DatabaseCoder {
 }
 
 public protocol SingleItemDatabaseCoder: DatabaseCoder {
-    typealias ModelObject: Equatable
+    associatedtype ModelObject: Equatable
     
     func loadFromDatabase(database: FMDatabase) throws -> ModelObject?
     func save(models: ModelObject, toDatabase database: FMDatabase) throws
 }
 
 public protocol ListItemDatabaseCoder: DatabaseCoder {
-    typealias ModelObject: SRSDataItem, Equatable
+    associatedtype ModelObject: SRSDataItem, Equatable
     
     func loadFromDatabase(database: FMDatabase) throws -> [ModelObject]
     func save(models: [ModelObject], toDatabase database: FMDatabase) throws

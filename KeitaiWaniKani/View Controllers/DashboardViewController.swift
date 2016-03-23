@@ -602,7 +602,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             components.minute = 1
             // Schedule timer for the top of every minute
             let nextFireTime = calendar.dateByAddingComponents(components, toDate: referenceDate, options: [])!
-            let timer = NSTimer(fireDate: nextFireTime, interval: 60, target: self, selector: "updateUITimerDidFire:", userInfo: nil, repeats: true)
+            let timer = NSTimer(fireDate: nextFireTime, interval: 60, target: self, selector: #selector(updateUITimerDidFire(_:)), userInfo: nil, repeats: true)
             timer.tolerance = 1
             NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
             return timer
@@ -611,7 +611,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             let nextFetchTime = WaniKaniAPI.nextRefreshTimeFromNow()
             
             DDLogInfo("Will fetch study queue at \(nextFetchTime)")
-            let timer = NSTimer(fireDate: nextFetchTime, interval: NSTimeInterval(WaniKaniAPI.updateMinuteCount * 60), target: self, selector: "updateStudyQueueTimerDidFire:", userInfo: nil, repeats: true)
+            let timer = NSTimer(fireDate: nextFetchTime, interval: NSTimeInterval(WaniKaniAPI.updateMinuteCount * 60), target: self, selector: #selector(updateStudyQueueTimerDidFire(_:)), userInfo: nil, repeats: true)
             timer.tolerance = 20
             NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
             return timer
@@ -722,8 +722,8 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didEnterBackground:", name: UIApplicationDidEnterBackgroundNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didEnterForeground:", name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didEnterBackground(_:)), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didEnterForeground(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
         
         let backgroundView = UIView(frame: tableView.frame)
         backgroundView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
