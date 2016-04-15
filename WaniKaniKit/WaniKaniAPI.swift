@@ -100,6 +100,10 @@ public struct WaniKaniAPI {
     }
     
     public static func createTablesInDatabase(database: FMDatabase) throws {
+        #if DEBUG
+            database.crashOnErrors = true
+        #endif
+        
         var metadata = try DatabaseMetadata(database: database)
         
         let shouldDropTable = metadata.databaseVersion != currentDatabaseVersion
@@ -185,5 +189,5 @@ public struct WaniKaniAPI {
         default: return nil
         }
     }
-
+    
 }
