@@ -1,9 +1,9 @@
 PODS:
   - 1PasswordExtension (1.8)
-  - Alamofire (3.2.1)
-  - Charts (2.2.3):
-    - Charts/Core (= 2.2.3)
-  - Charts/Core (2.2.3)
+  - Alamofire (3.3.1)
+  - Charts (2.2.4):
+    - Charts/Core (= 2.2.4)
+  - Charts/Core (2.2.4)
   - CocoaLumberjack/Core (2.2.0)
   - CocoaLumberjack/Default (2.2.0):
     - CocoaLumberjack/Core
@@ -11,23 +11,23 @@ PODS:
     - CocoaLumberjack/Default
   - CocoaLumberjack/Swift (2.2.0):
     - CocoaLumberjack/Extensions
-  - FMDB (2.6):
-    - FMDB/standard (= 2.6)
-  - FMDB/standard (2.6)
-  - OHHTTPStubs (4.7.1):
-    - OHHTTPStubs/Default (= 4.7.1)
-  - OHHTTPStubs/Core (4.7.1)
-  - OHHTTPStubs/Default (4.7.1):
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/standard (2.6.2)
+  - OHHTTPStubs (5.0.0):
+    - OHHTTPStubs/Default (= 5.0.0)
+  - OHHTTPStubs/Core (5.0.0)
+  - OHHTTPStubs/Default (5.0.0):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (4.7.1):
+  - OHHTTPStubs/JSON (5.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (4.7.1):
+  - OHHTTPStubs/NSURLSession (5.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (4.7.1)
-  - OHHTTPStubs/Swift (4.7.1):
+  - OHHTTPStubs/OHPathHelpers (5.0.0)
+  - OHHTTPStubs/Swift (5.0.0):
     - OHHTTPStubs/Core
   - SwiftyJSON (2.3.2)
 
@@ -43,13 +43,13 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   1PasswordExtension: 627d5aecf210c7636968faf5a4c3546c9531385b
-  Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
-  Charts: f54267bb3f0f0e74520c6f248517cf5074dfd6fc
+  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
+  Charts: a9e735c83c6d376ade20f6612dcf0ba217394a49
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
-  FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
-  OHHTTPStubs: f7d1604d04d37d055460c0ef9af01bb249ded0fa
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  OHHTTPStubs: a5d2e9eea07869d42ec03338325f398bc520e159
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 7008498e1707dbbe59ff2dfd7116568f5d396c47
+PODFILE CHECKSUM: 46d85fc2053c4ac28283f929c0d28bc79d20fcac
 
-COCOAPODS: 1.0.0.beta.4
+COCOAPODS: 1.0.0.beta.7

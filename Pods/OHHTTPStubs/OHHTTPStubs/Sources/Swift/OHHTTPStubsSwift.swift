@@ -151,6 +151,21 @@ public func isPath(path: String) -> OHHTTPStubsTestBlock {
 }
 
 /**
+ * Matcher for testing the start of an `NSURLRequest`'s **path**.
+ *
+ * - Parameter path: The path to match
+ *
+ * - Returns: a matcher (OHHTTPStubsTestBlock) that succeeds only if the request
+ *            starts with the given path
+ *
+ * - Note: URL paths are usually absolute and thus starts with a '/' (which you
+ *         should include in the `path` parameter unless you're testing relative URLs)
+ */
+public func pathStartsWith(path: String) -> OHHTTPStubsTestBlock {
+    return { req in req.URL?.path?.hasPrefix(path) ?? false }
+}
+
+/**
  * Matcher for testing an `NSURLRequest`'s **path extension**.
  *
  * - Parameter ext: The file extension to match (without the dot)
@@ -190,7 +205,31 @@ public func containsQueryParams(params: [String:String?]) -> OHHTTPStubsTestBloc
     }
 }
 
+/**
+ * Matcher testing that the `NSURLRequest` headers contain a specific key
+ * - Parameter name: the name of the key to search for in the `NSURLRequest`'s **allHTTPHeaderFields** property
+ *  
+ * - Returns: a matcher that returns true if the `NSURLRequest`'s headers contain a value for the key name
+ */
+public func hasHeaderNamed(name: String) -> OHHTTPStubsTestBlock {
+    return { (req: NSURLRequest) -> Bool in
+        return req.valueForHTTPHeaderField(name) != nil
+    }
+}
 
+/**
+ * Matcher testing that the `NSURLRequest` headers contain a specific key and the key's value is equal to the parameter value
+ * - Parameter name: the name of the key to search for in the `NSURLRequest`'s **allHTTPHeaderFields** property
+ * - Parameter value: the value to compare against the header's value
+ *  
+ * - Returns: a matcher that returns true if the `NSURLRequest`'s headers contain a value for the key name and it's value
+ *            is equal to the parameter value
+ */
+public func hasHeaderNamed(name: String, value: String) -> OHHTTPStubsTestBlock {
+    return { (req: NSURLRequest) -> Bool in
+        return req.valueForHTTPHeaderField(name) == value
+    }
+}
 
 // MARK: Operators on OHHTTPStubsTestBlock
 

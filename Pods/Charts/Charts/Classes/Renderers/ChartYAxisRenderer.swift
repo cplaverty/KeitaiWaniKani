@@ -31,9 +31,10 @@ public class ChartYAxisRenderer: ChartAxisRendererBase
     }
     
     /// Computes the axis values.
-    public func computeAxis(var yMin yMin: Double, var yMax: Double)
+    public func computeAxis(yMin yMin: Double, yMax: Double)
     {
         guard let yAxis = yAxis else { return }
+        var yMin = yMin, yMax = yMax
         
         // calculate the starting and entry point of the y-labels (depending on
         // zoom / contentrect bounds)
@@ -76,9 +77,19 @@ public class ChartYAxisRenderer: ChartAxisRendererBase
             return
         }
         
+        // Find out how much spacing (in y value space) between axis values
         let rawInterval = range / Double(labelCount)
         var interval = ChartUtils.roundToNextSignificant(number: Double(rawInterval))
-        let intervalMagnitude = pow(10.0, round(log10(interval)))
+        
+        // If granularity is enabled, then do not allow the interval to go below specified granularity.
+        // This is used to avoid repeated values when rounding values for display.
+        if yAxis.granularityEnabled
+        {
+            interval = interval < yAxis.granularity ? yAxis.granularity : interval
+        }
+        
+        // Normalize interval
+        let intervalMagnitude = ChartUtils.roundToNextSignificant(number: pow(10.0, floor(log10(interval))))
         let intervalSigDigit = (interval / intervalMagnitude)
         if (intervalSigDigit > 5)
         {
@@ -104,7 +115,7 @@ public class ChartYAxisRenderer: ChartAxisRendererBase
             
             var v = yMin
             
-            for (var i = 0; i < labelCount; i++)
+            for _ in 0 ..< labelCount
             {
                 yAxis.entries.append(v)
                 v += step
@@ -125,12 +136,10 @@ public class ChartYAxisRenderer: ChartAxisRendererBase
                 let first = ceil(Double(yMin) / interval) * interval
                 let last = ChartUtils.nextUp(floor(Double(yMax) / interval) * interval)
                 
-                var f: Double
-                var i: Int
                 var n = 0
-                for (f = first; f <= last; f += interval)
+                for _ in first.stride(through: last, by: interval)
                 {
-                    ++n
+                    n += 1
                 }
                 
                 if (yAxis.entries.count < n)
@@ -143,7 +152,9 @@ public class ChartYAxisRenderer: ChartAxisRendererBase
                     yAxis.entries.removeRange(n..<yAxis.entries.count)
                 }
                 
-                for (f = first, i = 0; i < n; f += interval, ++i)
+                var f = first
+                var i = 0
+                while (i < n)
                 {
                     if (f == 0.0)
                     { // Fix for IEEE negative zero case (Where value == -0.0, and 0.0 == -0.0)
@@ -151,6 +162,9 @@ public class ChartYAxisRenderer: ChartAxisRendererBase
                     }
                     
                     yAxis.entries[i] = Double(f)
+                    
+                    f += interval
+                    i += 1
                 }
             }
         }
@@ -263,7 +277,7 @@ public class ChartYAxisRenderer: ChartAxisRendererBase
         
         var pt = CGPoint()
         
-        for (var i = 0; i < yAxis.entryCount; i++)
+        for i in 0 ..< yAxis.entryCount
         {
             let text = yAxis.getFormattedLabel(i)
             
@@ -317,7 +331,7 @@ public class ChartYAxisRenderer: ChartAxisRendererBase
             var position = CGPoint(x: 0.0, y: 0.0)
             
             // draw the horizontal grid
-            for (var i = 0, count = yAxis.entryCount; i < count; i++)
+            for i in 0 ..< yAxis.entryCount
             {
                 position.x = 0.0
                 position.y = CGFloat(yAxis.entries[i])
@@ -401,7 +415,7 @@ public class ChartYAxisRenderer: ChartAxisRendererBase
         
         var position = CGPoint(x: 0.0, y: 0.0)
         
-        for (var i = 0; i < limitLines.count; i++)
+        for i in 0 ..< limitLines.count
         {
             let l = limitLines[i]
             

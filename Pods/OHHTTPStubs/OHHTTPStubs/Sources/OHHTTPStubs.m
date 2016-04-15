@@ -44,7 +44,10 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
 @interface OHHTTPStubs()
 + (instancetype)sharedInstance;
 @property(atomic, copy) NSMutableArray* stubDescriptors;
-@property(atomic, copy, nullable) void (^onStubActivationBlock)(NSURLRequest*, id<OHHTTPStubsDescriptor>);
+@property(atomic, assign) BOOL enabledState;
+@property(atomic, copy, nullable) void (^onStubActivationBlock)(NSURLRequest*, id<OHHTTPStubsDescriptor>, OHHTTPStubsResponse*);
+@property(atomic, copy, nullable) void (^onStubRedirectBlock)(NSURLRequest*, NSURLRequest*, id<OHHTTPStubsDescriptor>, OHHTTPStubsResponse*);
+@property(atomic, copy, nullable) void (^afterStubFinishBlock)(NSURLRequest*, id<OHHTTPStubsDescriptor>, OHHTTPStubsResponse*, NSError*);
 @end
 
 @interface OHHTTPStubsDescriptor : NSObject <OHHTTPStubsDescriptor>
@@ -105,7 +108,7 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
 {
     if (self == [OHHTTPStubs class])
     {
-        [self setEnabled:YES];
+        [self _setEnable:YES];
     }
 }
 - (instancetype)init
@@ -114,13 +117,14 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
     if (self)
     {
         _stubDescriptors = [NSMutableArray array];
+        _enabledState = YES; // assume initialize has already been run
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [self.class setEnabled:NO];
+    [self.class _setEnable:NO];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -149,18 +153,26 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
 
 #pragma mark > Disabling & Re-Enabling stubs
 
-+(void)setEnabled:(BOOL)enable
++(void)_setEnable:(BOOL)enable
 {
-    static BOOL currentEnabledState = NO;
-    if (enable && !currentEnabledState)
+    if (enable)
     {
         [NSURLProtocol registerClass:OHHTTPStubsProtocol.class];
     }
-    else if (!enable && currentEnabledState)
+    else
     {
         [NSURLProtocol unregisterClass:OHHTTPStubsProtocol.class];
     }
-    currentEnabledState = enable;
+}
+
++(void)setEnabled:(BOOL)enabled
+{
+    [OHHTTPStubs.sharedInstance setEnabled:enabled];
+}
+
++(BOOL)isEnabled
+{
+    return OHHTTPStubs.sharedInstance.isEnabled;
 }
 
 #if defined(__IPHONE_7_0) || defined(__MAC_10_9)
@@ -189,6 +201,25 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
               @"this method if the user is running iOS7+/OSX9+.", NSStringFromSelector(_cmd));
     }
 }
+
++ (BOOL)isEnabledForSessionConfiguration:(NSURLSessionConfiguration *)sessionConfig
+{
+    // Runtime check to make sure the API is available on this version
+    if (   [sessionConfig respondsToSelector:@selector(protocolClasses)]
+        && [sessionConfig respondsToSelector:@selector(setProtocolClasses:)])
+    {
+        NSMutableArray * urlProtocolClasses = [NSMutableArray arrayWithArray:sessionConfig.protocolClasses];
+        Class protoCls = OHHTTPStubsProtocol.class;
+        return [urlProtocolClasses containsObject:protoCls];
+    }
+    else
+    {
+        NSLog(@"[OHHTTPStubs] %@ is only available when running on iOS7+/OSX9+. "
+              @"Use conditions like 'if ([NSURLSessionConfiguration class])' to only call "
+              @"this method if the user is running iOS7+/OSX9+.", NSStringFromSelector(_cmd));
+        return NO;
+    }
+}
 #endif
 
 #pragma mark > Debug Methods
@@ -198,15 +229,44 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
     return [OHHTTPStubs.sharedInstance stubDescriptors];
 }
 
-+(void)onStubActivation:( nullable void(^)(NSURLRequest* request, id<OHHTTPStubsDescriptor> stub) )block
++(void)onStubActivation:( nullable void(^)(NSURLRequest* request, id<OHHTTPStubsDescriptor> stub, OHHTTPStubsResponse* responseStub) )block
 {
     [OHHTTPStubs.sharedInstance setOnStubActivationBlock:block];
+}
+
++(void)onStubRedirectResponse:( nullable void(^)(NSURLRequest* request, NSURLRequest* redirectRequest, id<OHHTTPStubsDescriptor> stub, OHHTTPStubsResponse* responseStub) )block
+{
+    [OHHTTPStubs.sharedInstance setOnStubRedirectBlock:block];
+}
+
++(void)afterStubFinish:( nullable void(^)(NSURLRequest* request, id<OHHTTPStubsDescriptor> stub, OHHTTPStubsResponse* responseStub, NSError* error) )block
+{
+    [OHHTTPStubs.sharedInstance setAfterStubFinishBlock:block];
 }
 
 
 
 ////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Private instance methods
+
+-(BOOL)isEnabled
+{
+    BOOL enabled = NO;
+    @synchronized(self)
+    {
+        enabled = _enabledState;
+    }
+    return enabled;
+}
+
+-(void)setEnabled:(BOOL)enable
+{
+    @synchronized(self)
+    {
+        _enabledState = enable;
+        [self.class _setEnable:_enabledState];
+    }
+}
 
 -(void)addStub:(OHHTTPStubsDescriptor*)stubDesc
 {
@@ -316,6 +376,10 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
                                   nil];
         NSError* error = [NSError errorWithDomain:@"OHHTTPStubs" code:500 userInfo:userInfo];
         [client URLProtocol:self didFailWithError:error];
+        if (OHHTTPStubs.sharedInstance.afterStubFinishBlock)
+        {
+            OHHTTPStubs.sharedInstance.afterStubFinishBlock(request, self.stub, nil, error);
+        }
         return;
     }
     
@@ -323,7 +387,7 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
     
     if (OHHTTPStubs.sharedInstance.onStubActivationBlock)
     {
-        OHHTTPStubs.sharedInstance.onStubActivationBlock(request, self.stub);
+        OHHTTPStubs.sharedInstance.onStubActivationBlock(request, self.stub, responseStub);
     }
     
     if (responseStub.error == nil)
@@ -361,6 +425,10 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
                 if (!self.stopped)
                 {
                     [client URLProtocol:self wasRedirectedToRequest:redirectRequest redirectResponse:urlResponse];
+                    if (OHHTTPStubs.sharedInstance.onStubRedirectBlock)
+                    {
+                        OHHTTPStubs.sharedInstance.onStubRedirectBlock(request, redirectRequest, self.stub, responseStub);
+                    }
                 }
             }];
         }
@@ -379,6 +447,7 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
                                    completion:^(NSError * error)
                      {
                          [responseStub.inputStream close];
+                         NSError *blockError = nil;
                          if (error==nil)
                          {
                              [client URLProtocolDidFinishLoading:self];
@@ -386,6 +455,11 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
                          else
                          {
                              [client URLProtocol:self didFailWithError:responseStub.error];
+                             blockError = responseStub.error;
+                         }
+                         if (OHHTTPStubs.sharedInstance.afterStubFinishBlock)
+                         {
+                             OHHTTPStubs.sharedInstance.afterStubFinishBlock(request, self.stub, responseStub, blockError);
                          }
                      }];
                 }
@@ -397,6 +471,10 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
             if (!self.stopped)
             {
                 [client URLProtocol:self didFailWithError:responseStub.error];
+                if (OHHTTPStubs.sharedInstance.afterStubFinishBlock)
+                {
+                    OHHTTPStubs.sharedInstance.afterStubFinishBlock(request, self.stub, responseStub, responseStub.error);
+                }
             }
         }];
     }

@@ -70,6 +70,12 @@ public class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
     /// - returns: true if drawing cubic lines is enabled, false if not.
     public var isDrawCubicEnabled: Bool { return drawCubicEnabled }
     
+    /// If true, stepped lines are drawn instead of linear
+    public var drawSteppedEnabled = false
+
+    /// - returns: true if drawing stepped lines is enabled, false if not.
+    public var isDrawSteppedEnabled: Bool { return drawSteppedEnabled }
+    
     /// The radius of the drawn circles.
     public var circleRadius = CGFloat(8.0)
     
@@ -77,10 +83,10 @@ public class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
     
     /// - returns: the color at the given index of the DataSet's circle-color array.
     /// Performs a IndexOutOfBounds check by modulus.
-    public func getCircleColor(var index: Int) -> NSUIColor?
+    public func getCircleColor(index: Int) -> NSUIColor?
     {
         let size = circleColors.count
-        index = index % size
+        let index = index % size
         if (index >= size)
         {
             return nil
@@ -125,6 +131,9 @@ public class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
     /// [1, 3, 4, 2] will paint [-   ----  -   ----  ]
     public var lineDashLengths: [CGFloat]?
     
+    /// Line cap type, default is CGLineCap.Butt
+    public var lineCapType = CGLineCap.Butt
+    
     /// formatter for customizing the position of the fill-line
     private var _fillFormatter: ChartFillFormatter = ChartDefaultFillFormatter()
     
@@ -160,6 +169,7 @@ public class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
         copy.lineDashLengths = lineDashLengths
         copy.drawCirclesEnabled = drawCirclesEnabled
         copy.drawCubicEnabled = drawCubicEnabled
+        copy.drawSteppedEnabled = drawSteppedEnabled
         return copy
     }
 }

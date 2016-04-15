@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14E0CF853667B3F9763B0A6A /* Pods_AlliCrab_WaniKaniStudyQueueWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7944A1E95EEF4A6D0BF4D782 /* Pods_AlliCrab_WaniKaniStudyQueueWidget.framework */; };
-		5ABBCCA9A67E02D05AEE24E5 /* Pods_WaniKaniKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3399D94EB29F918B03C80B0D /* Pods_WaniKaniKitTests.framework */; };
+		7F0D51A79C30B30CDB15AD65 /* Pods_AlliCrab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C88B6C62FF53344A0B7CE04 /* Pods_AlliCrab.framework */; };
 		8304F8281BBD083A009D7054 /* DelayOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8304F8271BBD083A009D7054 /* DelayOperationTests.swift */; };
 		8307F2521BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8307F2511BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift */; };
 		8307F2571BB6049100BDDF10 /* StudyQueueIsUpdatedCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8307F2561BB6049100BDDF10 /* StudyQueueIsUpdatedCondition.swift */; };
@@ -186,9 +185,10 @@
 		83FC71D21C95877100B60C1C /* jitai.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71D11C95877100B60C1C /* jitai.user.js */; };
 		83FDC2B01BB529D2006AAB8E /* GroupOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FDC2AF1BB529D2006AAB8E /* GroupOperationTests.swift */; };
 		83FE7CD51BB9C1720006689F /* GetRadicalImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FE7CD41BB9C1720006689F /* GetRadicalImageOperation.swift */; };
-		8F43683602378F2C4E8C9A07 /* Pods_AlliCrab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B283CF6ACF08009A57A8D26 /* Pods_AlliCrab.framework */; };
-		D887D0E7AB6DF526D69214A8 /* Pods_AlliCrab_WaniKaniKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E33D1ECE0D16208E9C60A9CB /* Pods_AlliCrab_WaniKaniKit.framework */; };
-		E64C6BD3152DF74081CCC164 /* Pods_AlliCrab_OperationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC23C21D0A713D2C72BB0E7 /* Pods_AlliCrab_OperationKit.framework */; };
+		860ADB1054FBDB22BE3A4100 /* Pods_WaniKaniStudyQueueWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BD3F41FB2875CDDAA24471 /* Pods_WaniKaniStudyQueueWidget.framework */; };
+		9A2B7C583E0B52F4598DF6FF /* Pods_AlliCrab_OperationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DAF8FF299A4FCE82A944858 /* Pods_AlliCrab_OperationKit.framework */; };
+		9FF9FC792E158819FA915260 /* Pods_WaniKaniKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAF2F8FE1898ACA2D134E239 /* Pods_WaniKaniKitTests.framework */; };
+		F8785A4F89A9D34C57C2926E /* Pods_AlliCrab_WaniKaniKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95C5EC65DDCE8A04239ED53 /* Pods_AlliCrab_WaniKaniKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -277,12 +277,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		18510FE7DE06378403C963FC /* Pods-AlliCrab-WaniKaniStudyQueueWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-WaniKaniStudyQueueWidget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-WaniKaniStudyQueueWidget/Pods-AlliCrab-WaniKaniStudyQueueWidget.debug.xcconfig"; sourceTree = "<group>"; };
-		1B283CF6ACF08009A57A8D26 /* Pods_AlliCrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlliCrab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3399D94EB29F918B03C80B0D /* Pods_WaniKaniKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaniKaniKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		41FA43A6B63535AC57AAF8F6 /* Pods-AlliCrab-OperationKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-OperationKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-OperationKit/Pods-AlliCrab-OperationKit.release.xcconfig"; sourceTree = "<group>"; };
-		7702C391F312DD57EFB28E9C /* Pods-AlliCrab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab.debug.xcconfig"; sourceTree = "<group>"; };
-		7944A1E95EEF4A6D0BF4D782 /* Pods_AlliCrab_WaniKaniStudyQueueWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlliCrab_WaniKaniStudyQueueWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		06C450A9813CF2DE1860300D /* Pods-WaniKaniStudyQueueWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniStudyQueueWidget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniStudyQueueWidget/Pods-WaniKaniStudyQueueWidget.debug.xcconfig"; sourceTree = "<group>"; };
+		2691F2F6BB02AFAAF87B97D0 /* Pods-WaniKaniKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests.release.xcconfig"; sourceTree = "<group>"; };
+		2890FAE399F71469B0449BEA /* Pods-AlliCrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab.release.xcconfig"; sourceTree = "<group>"; };
+		37BD3F41FB2875CDDAA24471 /* Pods_WaniKaniStudyQueueWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaniKaniStudyQueueWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		728E381FCA9A171DA8D094C2 /* Pods-AlliCrab-WaniKaniKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-WaniKaniKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-WaniKaniKit/Pods-AlliCrab-WaniKaniKit.release.xcconfig"; sourceTree = "<group>"; };
+		746F11E1BAB692DD46347209 /* Pods-WaniKaniKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7B8E75A98632F4551749F0E1 /* Pods-AlliCrab-OperationKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-OperationKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-OperationKit/Pods-AlliCrab-OperationKit.debug.xcconfig"; sourceTree = "<group>"; };
+		7DAF8FF299A4FCE82A944858 /* Pods_AlliCrab_OperationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlliCrab_OperationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8304F8271BBD083A009D7054 /* DelayOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelayOperationTests.swift; sourceTree = "<group>"; };
 		8307F2511BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectedStudyQueueTests.swift; sourceTree = "<group>"; };
 		8307F2561BB6049100BDDF10 /* StudyQueueIsUpdatedCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyQueueIsUpdatedCondition.swift; sourceTree = "<group>"; };
@@ -467,15 +469,13 @@
 		83FC71D31C95C60500B60C1C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		83FDC2AF1BB529D2006AAB8E /* GroupOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupOperationTests.swift; sourceTree = "<group>"; };
 		83FE7CD41BB9C1720006689F /* GetRadicalImageOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetRadicalImageOperation.swift; sourceTree = "<group>"; };
-		887039774B5B4B79D31837F4 /* Pods-AlliCrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab.release.xcconfig"; sourceTree = "<group>"; };
-		93AE60655D5846E8718F9328 /* Pods-WaniKaniKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests.release.xcconfig"; sourceTree = "<group>"; };
-		AAC23C21D0A713D2C72BB0E7 /* Pods_AlliCrab_OperationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlliCrab_OperationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B17549E78CED0B840F2E70DC /* Pods-AlliCrab-WaniKaniKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-WaniKaniKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-WaniKaniKit/Pods-AlliCrab-WaniKaniKit.release.xcconfig"; sourceTree = "<group>"; };
-		CCADCB1B382FC3AB3F5417B7 /* Pods-AlliCrab-WaniKaniStudyQueueWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-WaniKaniStudyQueueWidget.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-WaniKaniStudyQueueWidget/Pods-AlliCrab-WaniKaniStudyQueueWidget.release.xcconfig"; sourceTree = "<group>"; };
-		CCB87E69C883875737A0FC7F /* Pods-AlliCrab-OperationKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-OperationKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-OperationKit/Pods-AlliCrab-OperationKit.debug.xcconfig"; sourceTree = "<group>"; };
-		DA50A834327301E70D6EAFFE /* Pods-AlliCrab-WaniKaniKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-WaniKaniKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-WaniKaniKit/Pods-AlliCrab-WaniKaniKit.debug.xcconfig"; sourceTree = "<group>"; };
-		E33D1ECE0D16208E9C60A9CB /* Pods_AlliCrab_WaniKaniKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlliCrab_WaniKaniKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E35B7A28F5BA3D644A370752 /* Pods-WaniKaniKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8C88B6C62FF53344A0B7CE04 /* Pods_AlliCrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlliCrab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B876EA5824A6CCB6A689FA51 /* Pods-AlliCrab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab.debug.xcconfig"; sourceTree = "<group>"; };
+		BBCF3ECF0B87DFFDC992AF24 /* Pods-WaniKaniStudyQueueWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniStudyQueueWidget.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniStudyQueueWidget/Pods-WaniKaniStudyQueueWidget.release.xcconfig"; sourceTree = "<group>"; };
+		DAF2F8FE1898ACA2D134E239 /* Pods_WaniKaniKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaniKaniKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E51DE559F1671D22F1A275B7 /* Pods-AlliCrab-OperationKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-OperationKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-OperationKit/Pods-AlliCrab-OperationKit.release.xcconfig"; sourceTree = "<group>"; };
+		E95C5EC65DDCE8A04239ED53 /* Pods_AlliCrab_WaniKaniKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlliCrab_WaniKaniKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F589CD6598ADC9C14516EDA8 /* Pods-AlliCrab-WaniKaniKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-WaniKaniKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-WaniKaniKit/Pods-AlliCrab-WaniKaniKit.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -485,7 +485,7 @@
 			files = (
 				8347BD0E1B725428000F99EF /* WaniKaniKit.framework in Frameworks */,
 				83C8F9511B9B2E7E007CBFBF /* OperationKit.framework in Frameworks */,
-				8F43683602378F2C4E8C9A07 /* Pods_AlliCrab.framework in Frameworks */,
+				7F0D51A79C30B30CDB15AD65 /* Pods_AlliCrab.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,7 +496,7 @@
 				833177931B9B37530014866E /* OperationKit.framework in Frameworks */,
 				83426DFD1B736A0F005F4503 /* WaniKaniKit.framework in Frameworks */,
 				83426DEF1B7369F8005F4503 /* NotificationCenter.framework in Frameworks */,
-				14E0CF853667B3F9763B0A6A /* Pods_AlliCrab_WaniKaniStudyQueueWidget.framework in Frameworks */,
+				860ADB1054FBDB22BE3A4100 /* Pods_WaniKaniStudyQueueWidget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,7 +512,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83C8F9871B9B3036007CBFBF /* OperationKit.framework in Frameworks */,
-				D887D0E7AB6DF526D69214A8 /* Pods_AlliCrab_WaniKaniKit.framework in Frameworks */,
+				F8785A4F89A9D34C57C2926E /* Pods_AlliCrab_WaniKaniKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,7 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8347BD031B725428000F99EF /* WaniKaniKit.framework in Frameworks */,
-				5ABBCCA9A67E02D05AEE24E5 /* Pods_WaniKaniKitTests.framework in Frameworks */,
+				9FF9FC792E158819FA915260 /* Pods_WaniKaniKitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,7 +529,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E64C6BD3152DF74081CCC164 /* Pods_AlliCrab_OperationKit.framework in Frameworks */,
+				9A2B7C583E0B52F4598DF6FF /* Pods_AlliCrab_OperationKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,7 +566,7 @@
 				8346E6111C497DF600068686 /* KeitaiWaniKaniUITests */,
 				830EAB871B41DC7700EBF073 /* Products */,
 				ADDCBC75FC6B4CD69BBD2594 /* Frameworks */,
-				E7446C77E8F91C90014BD59D /* Pods */,
+				D6FC4AF6B61CADE8A5960BDC /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -964,28 +964,28 @@
 			isa = PBXGroup;
 			children = (
 				832E173F1B459F3A00A67A3E /* NotificationCenter.framework */,
-				1B283CF6ACF08009A57A8D26 /* Pods_AlliCrab.framework */,
-				AAC23C21D0A713D2C72BB0E7 /* Pods_AlliCrab_OperationKit.framework */,
-				E33D1ECE0D16208E9C60A9CB /* Pods_AlliCrab_WaniKaniKit.framework */,
-				3399D94EB29F918B03C80B0D /* Pods_WaniKaniKitTests.framework */,
-				7944A1E95EEF4A6D0BF4D782 /* Pods_AlliCrab_WaniKaniStudyQueueWidget.framework */,
+				8C88B6C62FF53344A0B7CE04 /* Pods_AlliCrab.framework */,
+				7DAF8FF299A4FCE82A944858 /* Pods_AlliCrab_OperationKit.framework */,
+				E95C5EC65DDCE8A04239ED53 /* Pods_AlliCrab_WaniKaniKit.framework */,
+				DAF2F8FE1898ACA2D134E239 /* Pods_WaniKaniKitTests.framework */,
+				37BD3F41FB2875CDDAA24471 /* Pods_WaniKaniStudyQueueWidget.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E7446C77E8F91C90014BD59D /* Pods */ = {
+		D6FC4AF6B61CADE8A5960BDC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E35B7A28F5BA3D644A370752 /* Pods-WaniKaniKitTests.debug.xcconfig */,
-				93AE60655D5846E8718F9328 /* Pods-WaniKaniKitTests.release.xcconfig */,
-				7702C391F312DD57EFB28E9C /* Pods-AlliCrab.debug.xcconfig */,
-				887039774B5B4B79D31837F4 /* Pods-AlliCrab.release.xcconfig */,
-				CCB87E69C883875737A0FC7F /* Pods-AlliCrab-OperationKit.debug.xcconfig */,
-				41FA43A6B63535AC57AAF8F6 /* Pods-AlliCrab-OperationKit.release.xcconfig */,
-				DA50A834327301E70D6EAFFE /* Pods-AlliCrab-WaniKaniKit.debug.xcconfig */,
-				B17549E78CED0B840F2E70DC /* Pods-AlliCrab-WaniKaniKit.release.xcconfig */,
-				18510FE7DE06378403C963FC /* Pods-AlliCrab-WaniKaniStudyQueueWidget.debug.xcconfig */,
-				CCADCB1B382FC3AB3F5417B7 /* Pods-AlliCrab-WaniKaniStudyQueueWidget.release.xcconfig */,
+				B876EA5824A6CCB6A689FA51 /* Pods-AlliCrab.debug.xcconfig */,
+				2890FAE399F71469B0449BEA /* Pods-AlliCrab.release.xcconfig */,
+				7B8E75A98632F4551749F0E1 /* Pods-AlliCrab-OperationKit.debug.xcconfig */,
+				E51DE559F1671D22F1A275B7 /* Pods-AlliCrab-OperationKit.release.xcconfig */,
+				F589CD6598ADC9C14516EDA8 /* Pods-AlliCrab-WaniKaniKit.debug.xcconfig */,
+				728E381FCA9A171DA8D094C2 /* Pods-AlliCrab-WaniKaniKit.release.xcconfig */,
+				746F11E1BAB692DD46347209 /* Pods-WaniKaniKitTests.debug.xcconfig */,
+				2691F2F6BB02AFAAF87B97D0 /* Pods-WaniKaniKitTests.release.xcconfig */,
+				06C450A9813CF2DE1860300D /* Pods-WaniKaniStudyQueueWidget.debug.xcconfig */,
+				BBCF3ECF0B87DFFDC992AF24 /* Pods-WaniKaniStudyQueueWidget.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1016,14 +1016,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 830EABAE1B41DC7700EBF073 /* Build configuration list for PBXNativeTarget "AlliCrab" */;
 			buildPhases = (
-				2177945BD9E8CA74A7DABBD8 /* Check Pods Manifest.lock */,
+				2177945BD9E8CA74A7DABBD8 /* 📦 Check Pods Manifest.lock */,
 				830EAB821B41DC7700EBF073 /* Sources */,
 				830EAB831B41DC7700EBF073 /* Frameworks */,
 				830EAB841B41DC7700EBF073 /* Resources */,
 				832E174A1B459F3A00A67A3E /* Embed App Extensions */,
 				8347BD151B725428000F99EF /* Embed Frameworks */,
-				E002E4BACB837E8477C24598 /* Embed Pods Frameworks */,
-				E5350D91F449E457A0C44018 /* Copy Pods Resources */,
+				E002E4BACB837E8477C24598 /* 📦 Embed Pods Frameworks */,
+				E5350D91F449E457A0C44018 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1041,12 +1041,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83426DFC1B7369F8005F4503 /* Build configuration list for PBXNativeTarget "WaniKaniStudyQueueWidget" */;
 			buildPhases = (
-				6FED66A576FC826B63B6EC1A /* Check Pods Manifest.lock */,
+				AE2A74ED1B114724DDAD16C8 /* 📦 Check Pods Manifest.lock */,
 				83426DEA1B7369F8005F4503 /* Sources */,
 				83426DEB1B7369F8005F4503 /* Frameworks */,
 				83426DEC1B7369F8005F4503 /* Resources */,
-				4E1D47333B3ABDD0DF336C15 /* Embed Pods Frameworks */,
-				6C402E367EF0FDF5CA216B43 /* Copy Pods Resources */,
+				76040B849F57B4BBE2EFA39C /* 📦 Embed Pods Frameworks */,
+				33045C2190CDBFDABD3A0DE1 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1079,12 +1079,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8347BD141B725428000F99EF /* Build configuration list for PBXNativeTarget "WaniKaniKit" */;
 			buildPhases = (
-				6432691817AD74E220D58DAA /* Check Pods Manifest.lock */,
+				6432691817AD74E220D58DAA /* 📦 Check Pods Manifest.lock */,
 				8347BCF41B725428000F99EF /* Sources */,
 				8347BCF51B725428000F99EF /* Frameworks */,
 				8347BCF61B725428000F99EF /* Headers */,
 				8347BCF71B725428000F99EF /* Resources */,
-				D0D615A7402C9E911BC1307B /* Copy Pods Resources */,
+				D0D615A7402C9E911BC1307B /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1099,12 +1099,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8347BD161B725428000F99EF /* Build configuration list for PBXNativeTarget "WaniKaniKitTests" */;
 			buildPhases = (
-				C43C047F07DDE291612294A8 /* Check Pods Manifest.lock */,
+				C43C047F07DDE291612294A8 /* 📦 Check Pods Manifest.lock */,
 				8347BCFE1B725428000F99EF /* Sources */,
 				8347BCFF1B725428000F99EF /* Frameworks */,
 				8347BD001B725428000F99EF /* Resources */,
-				706BA19302996B8EC1145D4C /* Embed Pods Frameworks */,
-				34675F6C305DD9F94C1F2520 /* Copy Pods Resources */,
+				706BA19302996B8EC1145D4C /* 📦 Embed Pods Frameworks */,
+				34675F6C305DD9F94C1F2520 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1121,12 +1121,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83C8F9551B9B2E7F007CBFBF /* Build configuration list for PBXNativeTarget "OperationKit" */;
 			buildPhases = (
-				7834F8AC0DD44A2168C25E15 /* Check Pods Manifest.lock */,
+				7834F8AC0DD44A2168C25E15 /* 📦 Check Pods Manifest.lock */,
 				83C8F9451B9B2E7E007CBFBF /* Sources */,
 				83C8F9461B9B2E7E007CBFBF /* Frameworks */,
 				83C8F9471B9B2E7E007CBFBF /* Headers */,
 				83C8F9481B9B2E7E007CBFBF /* Resources */,
-				AC3E9A3507D51E8F64EB3155 /* Copy Pods Resources */,
+				AC3E9A3507D51E8F64EB3155 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1315,14 +1315,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2177945BD9E8CA74A7DABBD8 /* Check Pods Manifest.lock */ = {
+		2177945BD9E8CA74A7DABBD8 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1330,14 +1330,29 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		34675F6C305DD9F94C1F2520 /* Copy Pods Resources */ = {
+		33045C2190CDBFDABD3A0DE1 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaniKaniStudyQueueWidget/Pods-WaniKaniStudyQueueWidget-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		34675F6C305DD9F94C1F2520 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1345,29 +1360,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4E1D47333B3ABDD0DF336C15 /* Embed Pods Frameworks */ = {
+		6432691817AD74E220D58DAA /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlliCrab-WaniKaniStudyQueueWidget/Pods-AlliCrab-WaniKaniStudyQueueWidget-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6432691817AD74E220D58DAA /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1375,44 +1375,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		6C402E367EF0FDF5CA216B43 /* Copy Pods Resources */ = {
+		706BA19302996B8EC1145D4C /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlliCrab-WaniKaniStudyQueueWidget/Pods-AlliCrab-WaniKaniStudyQueueWidget-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6FED66A576FC826B63B6EC1A /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		706BA19302996B8EC1145D4C /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1420,14 +1390,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7834F8AC0DD44A2168C25E15 /* Check Pods Manifest.lock */ = {
+		76040B849F57B4BBE2EFA39C /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaniKaniStudyQueueWidget/Pods-WaniKaniStudyQueueWidget-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7834F8AC0DD44A2168C25E15 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1435,14 +1420,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		AC3E9A3507D51E8F64EB3155 /* Copy Pods Resources */ = {
+		AC3E9A3507D51E8F64EB3155 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1450,14 +1435,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlliCrab-OperationKit/Pods-AlliCrab-OperationKit-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C43C047F07DDE291612294A8 /* Check Pods Manifest.lock */ = {
+		AE2A74ED1B114724DDAD16C8 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1465,14 +1450,29 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		D0D615A7402C9E911BC1307B /* Copy Pods Resources */ = {
+		C43C047F07DDE291612294A8 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D0D615A7402C9E911BC1307B /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1480,14 +1480,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlliCrab-WaniKaniKit/Pods-AlliCrab-WaniKaniKit-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E002E4BACB837E8477C24598 /* Embed Pods Frameworks */ = {
+		E002E4BACB837E8477C24598 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1495,14 +1495,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E5350D91F449E457A0C44018 /* Copy Pods Resources */ = {
+		E5350D91F449E457A0C44018 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1857,7 +1857,7 @@
 		};
 		830EABAF1B41DC7700EBF073 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7702C391F312DD57EFB28E9C /* Pods-AlliCrab.debug.xcconfig */;
+			baseConfigurationReference = B876EA5824A6CCB6A689FA51 /* Pods-AlliCrab.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1874,7 +1874,7 @@
 		};
 		830EABB01B41DC7700EBF073 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 887039774B5B4B79D31837F4 /* Pods-AlliCrab.release.xcconfig */;
+			baseConfigurationReference = 2890FAE399F71469B0449BEA /* Pods-AlliCrab.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1891,7 +1891,7 @@
 		};
 		83426DFA1B7369F8005F4503 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 18510FE7DE06378403C963FC /* Pods-AlliCrab-WaniKaniStudyQueueWidget.debug.xcconfig */;
+			baseConfigurationReference = 06C450A9813CF2DE1860300D /* Pods-WaniKaniStudyQueueWidget.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = WaniKaniStudyQueueWidget/WaniKaniStudyQueueWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1908,7 +1908,7 @@
 		};
 		83426DFB1B7369F8005F4503 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CCADCB1B382FC3AB3F5417B7 /* Pods-AlliCrab-WaniKaniStudyQueueWidget.release.xcconfig */;
+			baseConfigurationReference = BBCF3ECF0B87DFFDC992AF24 /* Pods-WaniKaniStudyQueueWidget.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = WaniKaniStudyQueueWidget/WaniKaniStudyQueueWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1953,7 +1953,7 @@
 		};
 		8347BD101B725428000F99EF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA50A834327301E70D6EAFFE /* Pods-AlliCrab-WaniKaniKit.debug.xcconfig */;
+			baseConfigurationReference = F589CD6598ADC9C14516EDA8 /* Pods-AlliCrab-WaniKaniKit.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1977,7 +1977,7 @@
 		};
 		8347BD111B725428000F99EF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B17549E78CED0B840F2E70DC /* Pods-AlliCrab-WaniKaniKit.release.xcconfig */;
+			baseConfigurationReference = 728E381FCA9A171DA8D094C2 /* Pods-AlliCrab-WaniKaniKit.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -2001,7 +2001,7 @@
 		};
 		8347BD121B725428000F99EF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E35B7A28F5BA3D644A370752 /* Pods-WaniKaniKitTests.debug.xcconfig */;
+			baseConfigurationReference = 746F11E1BAB692DD46347209 /* Pods-WaniKaniKitTests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = WaniKaniKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -2014,7 +2014,7 @@
 		};
 		8347BD131B725428000F99EF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 93AE60655D5846E8718F9328 /* Pods-WaniKaniKitTests.release.xcconfig */;
+			baseConfigurationReference = 2691F2F6BB02AFAAF87B97D0 /* Pods-WaniKaniKitTests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = WaniKaniKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -2027,7 +2027,7 @@
 		};
 		83C8F9531B9B2E7F007CBFBF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CCB87E69C883875737A0FC7F /* Pods-AlliCrab-OperationKit.debug.xcconfig */;
+			baseConfigurationReference = 7B8E75A98632F4551749F0E1 /* Pods-AlliCrab-OperationKit.debug.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -2051,7 +2051,7 @@
 		};
 		83C8F9541B9B2E7F007CBFBF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 41FA43A6B63535AC57AAF8F6 /* Pods-AlliCrab-OperationKit.release.xcconfig */;
+			baseConfigurationReference = E51DE559F1671D22F1A275B7 /* Pods-AlliCrab-OperationKit.release.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

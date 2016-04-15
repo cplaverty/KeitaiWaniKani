@@ -48,12 +48,18 @@ public protocol IChartDataSet
     /// - returns: the first Entry object found at the given xIndex with binary search.
     /// If the no Entry at the specifed x-index is found, this method returns the Entry at the closest x-index.
     /// nil if no Entry object at that index.
+    func entryForXIndex(x: Int, rounding: ChartDataSetRounding) -> ChartDataEntry?
+    
+    /// - returns: the first Entry object found at the given xIndex with binary search.
+    /// If the no Entry at the specifed x-index is found, this method returns the Entry at the closest x-index.
+    /// nil if no Entry object at that index.
     func entryForXIndex(x: Int) -> ChartDataEntry?
     
     /// - returns: the array-index of the specified entry
     ///
     /// - parameter x: x-index of the entry to search for
-    func entryIndex(xIndex x: Int) -> Int
+    /// - parameter rounding: x-index of the entry to search for
+    func entryIndex(xIndex x: Int, rounding: ChartDataSetRounding) -> Int
     
     /// - returns: the array-index of the specified entry
     ///
@@ -137,7 +143,7 @@ public protocol IChartDataSet
     
     /// - returns: the color at the given index of the DataSet's color array.
     /// This prevents out-of-bounds by performing a modulus on the color index, so colours will repeat themselves.
-    func colorAt(var index: Int) -> NSUIColor
+    func colorAt(index: Int) -> NSUIColor
     
     func resetColors()
     
@@ -160,7 +166,7 @@ public protocol IChartDataSet
     var valueTextColor: NSUIColor { get set }
     
     /// - returns: the color at the specified index that is used for drawing the values inside the chart. Uses modulus internally.
-    func valueTextColorAt(var index: Int) -> NSUIColor
+    func valueTextColorAt(index: Int) -> NSUIColor
     
     /// the font for the value-text labels
     var valueFont: NSUIFont { get set }
