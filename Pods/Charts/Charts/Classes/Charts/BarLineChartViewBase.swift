@@ -8,7 +8,7 @@
 //  A port of MPAndroidChart for iOS
 //  Licensed under Apache License 2.0
 //
-//  https://github.com/danielgindi/ios-charts
+//  https://github.com/danielgindi/Charts
 //
 
 import Foundation
@@ -216,51 +216,54 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         
         // make sure the graph values and grid cannot be drawn outside the content-rect
         CGContextSaveGState(context)
-
         CGContextClipToRect(context, _viewPortHandler.contentRect)
         
         _xAxisRenderer?.renderGridLines(context: context)
         _leftYAxisRenderer?.renderGridLines(context: context)
         _rightYAxisRenderer?.renderGridLines(context: context)
         
-        if (_xAxis.isDrawLimitLinesBehindDataEnabled)
+        if _xAxis.isDrawLimitLinesBehindDataEnabled
         {
             _xAxisRenderer?.renderLimitLines(context: context)
         }
-        if (_leftAxis.isDrawLimitLinesBehindDataEnabled)
+        if _leftAxis.isDrawLimitLinesBehindDataEnabled
         {
             _leftYAxisRenderer?.renderLimitLines(context: context)
         }
-        if (_rightAxis.isDrawLimitLinesBehindDataEnabled)
+        if _rightAxis.isDrawLimitLinesBehindDataEnabled
         {
             _rightYAxisRenderer?.renderLimitLines(context: context)
         }
         
         renderer?.drawData(context: context)
-
+        
         // if highlighting is enabled
         if (valuesToHighlight())
         {
             renderer?.drawHighlighted(context: context, indices: _indicesToHighlight)
         }
-
-        // Removes clipping rectangle
+        
         CGContextRestoreGState(context)
         
         renderer!.drawExtras(context: context)
         
-        if (!_xAxis.isDrawLimitLinesBehindDataEnabled)
+        CGContextSaveGState(context)
+        CGContextClipToRect(context, _viewPortHandler.contentRect)
+        
+        if !_xAxis.isDrawLimitLinesBehindDataEnabled
         {
             _xAxisRenderer?.renderLimitLines(context: context)
         }
-        if (!_leftAxis.isDrawLimitLinesBehindDataEnabled)
+        if !_leftAxis.isDrawLimitLinesBehindDataEnabled
         {
             _leftYAxisRenderer?.renderLimitLines(context: context)
         }
-        if (!_rightAxis.isDrawLimitLinesBehindDataEnabled)
+        if !_rightAxis.isDrawLimitLinesBehindDataEnabled
         {
             _rightYAxisRenderer?.renderLimitLines(context: context)
         }
+        
+        CGContextRestoreGState(context)
         
         _xAxisRenderer.renderAxisLabels(context: context)
         _leftYAxisRenderer.renderAxisLabels(context: context)
@@ -325,8 +328,73 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         _xAxis.axisRange = .abs(_xAxis._axisMaximum - _xAxis._axisMinimum);
         
         // calculate axis range (min / max) according to provided data
-        _leftAxis.calcMinMax(min: _data?.getYMin(.Left) ?? 0.0, max: _data?.getYMax(.Left) ?? 0.0)
-        _rightAxis.calcMinMax(min: _data?.getYMin(.Right) ?? 0.0, max: _data?.getYMax(.Right) ?? 0.0)
+        _leftAxis.calculate(min: _data?.getYMin(.Left) ?? 0.0, max: _data?.getYMax(.Left) ?? 0.0)
+        _rightAxis.calculate(min: _data?.getYMin(.Right) ?? 0.0, max: _data?.getYMax(.Right) ?? 0.0)
+    }
+    
+    internal func calculateLegendOffsets(inout offsetLeft offsetLeft: CGFloat, inout offsetTop: CGFloat, inout offsetRight: CGFloat, inout offsetBottom: CGFloat)
+    {
+        // setup offsets for legend
+        if _legend !== nil && _legend.isEnabled && !_legend.drawInside
+        {
+            switch _legend.orientation
+            {
+            case .Vertical:
+                
+                switch _legend.horizontalAlignment
+                {
+                case .Left:
+                    offsetLeft += min(_legend.neededWidth, _viewPortHandler.chartWidth * _legend.maxSizePercent) + _legend.xOffset
+                    
+                case .Right:
+                    offsetRight += min(_legend.neededWidth, _viewPortHandler.chartWidth * _legend.maxSizePercent) + _legend.xOffset
+                    
+                case .Center:
+                    
+                    switch _legend.verticalAlignment
+                    {
+                    case .Top:
+                        offsetTop += min(_legend.neededHeight, _viewPortHandler.chartHeight * _legend.maxSizePercent) + _legend.yOffset
+                        if xAxis.isEnabled && xAxis.isDrawLabelsEnabled
+                        {
+                            offsetTop += xAxis.labelRotatedHeight
+                        }
+                        
+                    case .Bottom:
+                        offsetBottom += min(_legend.neededHeight, _viewPortHandler.chartHeight * _legend.maxSizePercent) + _legend.yOffset
+                        if xAxis.isEnabled && xAxis.isDrawLabelsEnabled
+                        {
+                            offsetBottom += xAxis.labelRotatedHeight
+                        }
+                        
+                    default:
+                        break;
+                    }
+                }
+                
+            case .Horizontal:
+                
+                switch _legend.verticalAlignment
+                {
+                case .Top:
+                    offsetTop += min(_legend.neededHeight, _viewPortHandler.chartHeight * _legend.maxSizePercent) + _legend.yOffset
+                    if xAxis.isEnabled && xAxis.isDrawLabelsEnabled
+                    {
+                        offsetTop += xAxis.labelRotatedHeight
+                    }
+                    
+                case .Bottom:
+                    offsetBottom += min(_legend.neededHeight, _viewPortHandler.chartHeight * _legend.maxSizePercent) + _legend.yOffset
+                    if xAxis.isEnabled && xAxis.isDrawLabelsEnabled
+                    {
+                        offsetBottom += xAxis.labelRotatedHeight
+                    }
+                    
+                default:
+                    break;
+                }
+            }
+        }
     }
     
     internal override func calculateOffsets()
@@ -338,42 +406,10 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
             var offsetTop = CGFloat(0.0)
             var offsetBottom = CGFloat(0.0)
             
-            // setup offsets for legend
-            if (_legend !== nil && _legend.isEnabled)
-            {
-                if (_legend.position == .RightOfChart
-                    || _legend.position == .RightOfChartCenter)
-                {
-                    offsetRight += min(_legend.neededWidth, _viewPortHandler.chartWidth * _legend.maxSizePercent) + _legend.xOffset * 2.0
-                }
-                if (_legend.position == .LeftOfChart
-                    || _legend.position == .LeftOfChartCenter)
-                {
-                    offsetLeft += min(_legend.neededWidth, _viewPortHandler.chartWidth * _legend.maxSizePercent) + _legend.xOffset * 2.0
-                }
-                else if (_legend.position == .BelowChartLeft
-                    || _legend.position == .BelowChartRight
-                    || _legend.position == .BelowChartCenter)
-                {
-                    // It's possible that we do not need this offset anymore as it
-                    //   is available through the extraOffsets, but changing it can mean
-                    //   changing default visibility for existing apps.
-                    let yOffset = _legend.textHeightMax
-                    
-                    offsetBottom += min(_legend.neededHeight + yOffset, _viewPortHandler.chartHeight * _legend.maxSizePercent)
-                }
-                else if (_legend.position == .AboveChartLeft
-                    || _legend.position == .AboveChartRight
-                    || _legend.position == .AboveChartCenter)
-                {
-                    // It's possible that we do not need this offset anymore as it
-                    //   is available through the extraOffsets, but changing it can mean
-                    //   changing default visibility for existing apps.
-                    let yOffset = _legend.textHeightMax
-                    
-                    offsetTop += min(_legend.neededHeight + yOffset, _viewPortHandler.chartHeight * _legend.maxSizePercent)
-                }
-            }
+            calculateLegendOffsets(offsetLeft: &offsetLeft,
+                                   offsetTop: &offsetTop,
+                                   offsetRight: &offsetRight,
+                                   offsetBottom: &offsetBottom)
             
             // offsets for y-labels
             if (leftAxis.needsOffset)
@@ -1562,6 +1598,12 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         return highlightPerDragEnabled
     }
     
+    /// Set this to `true` to make the highlight full-bar oriented, `false` to make it highlight single values
+    public var highlightFullBarEnabled: Bool = false
+    
+    /// - returns: true the highlight is be full-bar oriented, false if single-value
+    public var isHighlightFullBarEnabled: Bool { return highlightFullBarEnabled }
+    
     /// **default**: true
     /// - returns: true if drawing the grid background is enabled, false if not.
     public var isDrawGridBackgroundEnabled: Bool
@@ -1585,7 +1627,7 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
             return nil
         }
 
-        return self.highlighter?.getHighlight(x: Double(pt.x), y: Double(pt.y))
+        return self.highlighter?.getHighlight(x: pt.x, y: pt.y)
     }
 
     /// - returns: the x and y values in the chart at the given touch point
@@ -1894,7 +1936,7 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
     {
         var pt = CGPoint(x: viewPortHandler.contentLeft, y: viewPortHandler.contentBottom)
         getTransformer(.Left).pixelToValue(&pt)
-        return (pt.x <= 0.0) ? 0 : Int(round(pt.x + 1.0))
+        return (pt.x <= 0.0) ? 0 : Int(ceil(pt.x))
     }
     
     /// - returns: the highest x-index (value on the x-axis) that is still visible on the chart.
@@ -1910,6 +1952,6 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
             data = _data
             else { return Int(round(pt.x)) }
 
-        return min(data.xValCount - 1, Int(round(pt.x)))
+        return min(data.xValCount - 1, Int(floor(pt.x)))
     }
 }

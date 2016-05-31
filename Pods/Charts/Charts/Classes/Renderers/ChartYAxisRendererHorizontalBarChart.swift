@@ -8,7 +8,7 @@
 //  A port of MPAndroidChart for iOS
 //  Licensed under Apache License 2.0
 //
-//  https://github.com/danielgindi/ios-charts
+//  https://github.com/danielgindi/Charts
 //
 
 import Foundation
@@ -291,7 +291,7 @@ public class ChartYAxisRendererHorizontalBarChart: ChartYAxisRenderer
             let label = l.label
 
             // if drawing the limit-value label is enabled
-            if (label.characters.count > 0)
+            if (l.drawLabelEnabled && label.characters.count > 0)
             {
                 let labelLineHeight = l.valueFont.lineHeight
                 

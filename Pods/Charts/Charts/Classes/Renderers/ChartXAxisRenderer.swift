@@ -8,7 +8,7 @@
 //  A port of MPAndroidChart for iOS
 //  Licensed under Apache License 2.0
 //
-//  https://github.com/danielgindi/ios-charts
+//  https://github.com/danielgindi/Charts
 //
 
 import Foundation
@@ -332,7 +332,7 @@ public class ChartXAxisRenderer: ChartAxisRendererBase
         let label = limitLine.label
         
         // if drawing the limit-value label is enabled
-        if (label.characters.count > 0)
+        if (limitLine.drawLabelEnabled && label.characters.count > 0)
         {
             let labelLineHeight = limitLine.valueFont.lineHeight
             

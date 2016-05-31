@@ -8,7 +8,7 @@
 //  A port of MPAndroidChart for iOS
 //  Licensed under Apache License 2.0
 //
-//  https://github.com/danielgindi/ios-charts
+//  https://github.com/danielgindi/Charts
 //
 
 import Foundation
@@ -21,8 +21,8 @@ public class CombinedChartView: BarLineChartViewBase, LineChartDataProvider, Bar
     internal var _fillFormatter: ChartFillFormatter!
     
     /// enum that allows to specify the order in which the different data objects for the combined-chart are drawn
-    @objc
-    public enum CombinedChartDrawOrder: Int
+    @objc(CombinedChartDrawOrder)
+    public enum DrawOrder: Int
     {
         case Bar
         case Bubble
@@ -37,7 +37,10 @@ public class CombinedChartView: BarLineChartViewBase, LineChartDataProvider, Bar
         
         self.highlighter = CombinedHighlighter(chart: self)
         
-        /// WORKAROUND: Swift 2.0 compiler malfunctions when optimizations are enabled, and assigning directly to _fillFormatter causes a crash with a EXC_BAD_ACCESS. See https://github.com/danielgindi/ios-charts/issues/406
+        // Old default behaviour
+        self.highlightFullBarEnabled = true
+        
+        /// WORKAROUND: Swift 2.0 compiler malfunctions when optimizations are enabled, and assigning directly to _fillFormatter causes a crash with a EXC_BAD_ACCESS. See https://github.com/danielgindi/Charts/issues/406
         let workaroundFormatter = ChartDefaultFillFormatter()
         _fillFormatter = workaroundFormatter
         
@@ -224,7 +227,7 @@ public class CombinedChartView: BarLineChartViewBase, LineChartDataProvider, Bar
         }
         set
         {
-            (renderer as! CombinedChartRenderer!).drawOrder = newValue.map { CombinedChartDrawOrder(rawValue: $0)! }
+            (renderer as! CombinedChartRenderer!).drawOrder = newValue.map { DrawOrder(rawValue: $0)! }
         }
     }
 }

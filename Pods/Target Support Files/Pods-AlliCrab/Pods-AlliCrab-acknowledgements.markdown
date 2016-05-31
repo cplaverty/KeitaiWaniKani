@@ -25,7 +25,7 @@ SOFTWARE.
 
 ## Alamofire
 
-Copyright (c) 2014–2016 Alamofire Software Foundation (http://alamofire.org/)
+Copyright (c) 2014-2016 Alamofire Software Foundation (http://alamofire.org/)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -256,7 +256,7 @@ Apache License
 
 Software License Agreement (BSD License)
 
-Copyright (c) 2010-2015, Deusty, LLC
+Copyright (c) 2010-2016, Deusty, LLC
 All rights reserved.
 
 Redistribution and use of this software in source and binary forms,
