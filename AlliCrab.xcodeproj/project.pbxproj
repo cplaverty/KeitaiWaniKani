@@ -382,6 +382,7 @@
 		8347BDF51B72A556000F99EF /* GetVocabularyOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetVocabularyOperation.swift; sourceTree = "<group>"; };
 		8347BDFC1B72AE90000F99EF /* WaniKaniAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaniKaniAPI.swift; sourceTree = "<group>"; };
 		834802531B97A76500CC7461 /* ModelObjectUpdateCheckCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelObjectUpdateCheckCondition.swift; sourceTree = "<group>"; };
+		8349627D1CFE465D001C68E4 /* Snapfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; name = Snapfile; path = ../Snapfile; sourceTree = "<group>"; };
 		834C92521B7660390025D359 /* WaniKaniStudyQueueWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WaniKaniStudyQueueWidget.entitlements; sourceTree = "<group>"; };
 		834C92531B76603F0025D359 /* KeitaiWaniKani.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = KeitaiWaniKani.entitlements; sourceTree = "<group>"; };
 		8362E3611BCF11640062AC97 /* DownloadFileOperation+WaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DownloadFileOperation+WaniKani.swift"; sourceTree = "<group>"; };
@@ -663,6 +664,7 @@
 		8346E6111C497DF600068686 /* KeitaiWaniKaniUITests */ = {
 			isa = PBXGroup;
 			children = (
+				8349627D1CFE465D001C68E4 /* Snapfile */,
 				8346E61B1C497E8900068686 /* SnapshotHelper.swift */,
 				8346E6121C497DF600068686 /* SnapshotUITests.swift */,
 				8346E6141C497DF600068686 /* Info.plist */,
