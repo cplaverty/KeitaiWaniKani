@@ -46,15 +46,15 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             description: "Allows you to hide the reading and meaning mnemonics on the site.  Original script written by nibarius.",
             settingKey: ApplicationSettingKeys.userScriptHideMnemonicsEnabled),
         ScriptInfo(name: "WaniKani Reorder Ultimate",
-            description: "Allows you to reorder your lessons and reviews by type and level and also force reading/meaning first.  PLEASE USE RESPONSIBLY!  Original script written by xMunch.",
+            description: "Allows you to reorder your lessons and reviews by type and level, and also force reading/meaning first.  PLEASE USE RESPONSIBLY!  Original script written by xMunch.",
             settingKey: ApplicationSettingKeys.userScriptReorderUltimateEnabled),
-    ]
+        ]
     
     private let otherSettings: [ScriptInfo] = [
         ScriptInfo(name: "Disable Lesson Swipe",
             description: "Disables the horizontal swipe gesture on the info text during lessons to prevent it being accidentally triggered while scrolling.",
             settingKey: ApplicationSettingKeys.disableLessonSwipe),
-    ]
+        ]
     
     // MARK: - View Controller Lifecycle
     
@@ -63,6 +63,26 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         
         tableView.estimatedRowHeight = 90
         tableView.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        guard let tableViewSection = TableViewSections(rawValue: indexPath.section) else {
+            fatalError("Invalid section index \(indexPath.section) requested")
+        }
+        
+        switch tableViewSection {
+        case .UserScripts, .OtherSettings:
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! UserScriptTableViewCell
+            tableView.beginUpdates()
+            UIView.animateWithDuration(0.3) {
+                cell.toggleDescriptionVisibility();
+                cell.contentView.layoutIfNeeded()
+            }
+            tableView.endUpdates()
+        case .Feedback, .LogOut: break;
+        }
     }
     
     // MARK: - UITableViewDataSource
@@ -100,7 +120,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             case 0:
                 cell.textLabel?.text = "Send Feedback"
             case 1:
-                cell.textLabel?.text = "Leave A Review"
+                cell.textLabel?.text = "Leave a Review"
             default: fatalError("No cell defined for index path \(indexPath)")
             }
             cell.accessoryType = .DisclosureIndicator
@@ -122,7 +142,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         case .UserScripts: return "User Scripts"
         case .OtherSettings: return "Other Settings"
         case .Feedback: return "Feedback"
-        case .LogOut: return "Log Out"
+        case .LogOut: return nil
         }
     }
     
@@ -131,12 +151,14 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             fatalError("Invalid section index \(section) requested")
         }
         
-        if tableViewSection == TableViewSections.LogOut {
+        switch tableViewSection {
+        case .UserScripts, .OtherSettings: return nil
+        case .Feedback:
+            return "If you are having any issues with the app, please email me through the Send Feedback link above before leaving negative reviews.  I can't help you otherwise!"
+        case .LogOut:
             let (product, version, build) = self.productAndVersion
             return "\(product) version \(version) (build \(build))"
         }
-        
-        return nil
     }
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
@@ -164,8 +186,9 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         cell.settingName = userScript.name
         cell.settingDescription = userScript.description
         cell.applicationSettingKey = userScript.settingKey
-        cell.accessoryType = .None
-        cell.layoutIfNeeded()
+        cell.accessoryType = .DetailButton
+        cell.setToDefault()
+        cell.contentView.layoutIfNeeded()
         
         return cell
     }
