@@ -30,17 +30,14 @@ final class GetSRSDataItemOperation: GroupOperation, NSProgressReporting {
         
         progress.becomeCurrentWithPendingUnitCount(3)
         radicalsOperation = GetRadicalsOperation(resolver: resolver, databaseQueue: databaseQueue, downloadStrategy: downloadStrategy, networkObserver: networkObserver)
-        radicalsOperation.addProgressListenerForDestinationProgress(progress)
         progress.resignCurrent()
         
         progress.becomeCurrentWithPendingUnitCount(5)
         kanjiOperation = GetKanjiOperation(resolver: resolver, databaseQueue: databaseQueue, downloadStrategy: downloadStrategy, networkObserver: networkObserver)
-        kanjiOperation.addProgressListenerForDestinationProgress(progress)
         progress.resignCurrent()
         
         progress.becomeCurrentWithPendingUnitCount(8)
         vocabularyOperation = GetVocabularyOperation(resolver: resolver, databaseQueue: databaseQueue, downloadStrategy: downloadStrategy, networkObserver: networkObserver)
-        vocabularyOperation.addProgressListenerForDestinationProgress(progress)
         progress.resignCurrent()
         
         super.init(operations: [radicalsOperation, kanjiOperation, vocabularyOperation])

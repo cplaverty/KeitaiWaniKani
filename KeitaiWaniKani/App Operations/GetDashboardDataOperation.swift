@@ -45,7 +45,6 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         progress.becomeCurrentWithPendingUnitCount(1)
         studyQueueOperation = GetStudyQueueOperation(resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver)
         progress.resignCurrent()
-        studyQueueOperation.addProgressListenerForDestinationProgress(progress)
         if !forced {
             studyQueueOperation.addCondition(ModelObjectUpdateCheckCondition(lastUpdatedDate: WaniKaniAPI.lastRefreshTimeFromNow, coder: StudyQueue.coder, databaseQueue: databaseQueue))
         }
@@ -55,21 +54,18 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         progress.becomeCurrentWithPendingUnitCount(1)
         levelProgressionOperation = GetLevelProgressionOperation(resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver)
         progress.resignCurrent()
-        levelProgressionOperation.addProgressListenerForDestinationProgress(progress, localizedDescription: "Downloading data from WaniKani")
         levelProgressionOperation.addCondition(NoCancelledDependencies())
         levelProgressionOperation.addCondition(studyQueueIsUpdatedCondition)
         
         progress.becomeCurrentWithPendingUnitCount(1)
         srsDistributionOperation = GetSRSDistributionOperation(resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver)
         progress.resignCurrent()
-        srsDistributionOperation.addProgressListenerForDestinationProgress(progress, localizedDescription: "Downloading data from WaniKani")
         srsDistributionOperation.addCondition(NoCancelledDependencies())
         srsDistributionOperation.addCondition(studyQueueIsUpdatedCondition)
         
         progress.becomeCurrentWithPendingUnitCount(7)
         srsDataItemOperation = GetSRSDataItemOperation(resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver)
         progress.resignCurrent()
-        srsDataItemOperation.addProgressListenerForDestinationProgress(progress, localizedDescription: "Downloading data from WaniKani")
         srsDataItemOperation.addCondition(NoCancelledDependencies())
         srsDataItemOperation.addCondition(studyQueueIsUpdatedCondition)
         
@@ -85,13 +81,30 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         super.init(operations: [dummy, studyQueueOperation, levelProgressionOperation, srsDistributionOperation, srsDataItemOperation, reviewTimeNotificationOperation, reviewCountNotificationOperation])
         progress.cancellationHandler = { self.cancel() }
         
-        studyQueueOperation.addObserver(BlockObserver { _, _ in
-            guard let studyQueue = self.studyQueueOperation.parsed else { return }
+        studyQueueOperation.addObserver(
+            BlockObserver(
+                startHandler: { _ in
+                    self.progress.localizedDescription = "Downloading data from WaniKani"
+                    self.progress.localizedAdditionalDescription = "Checking for update..."
+                },
+                finishHandler:{ _, _ in
+                    guard let studyQueue = self.studyQueueOperation.parsed else { return }
+                    
+                    DDLogDebug("Badging app icon: \(studyQueue.reviewsAvailable)")
+                    let application = UIApplication.sharedApplication()
+                    application.applicationIconBadgeNumber = studyQueue.reviewsAvailable
+                }
+            ))
 
-            DDLogDebug("Badging app icon: \(studyQueue.reviewsAvailable)")
-            let application = UIApplication.sharedApplication()
-            application.applicationIconBadgeNumber = studyQueue.reviewsAvailable
-            })
+        srsDataItemOperation.addObserver(
+            BlockObserver(
+                startHandler: { _ in
+                    self.progress.localizedAdditionalDescription = "Downloading..."
+                },
+                finishHandler:{ _, _ in
+                    self.progress.localizedAdditionalDescription = "Done!"
+                }
+            ))
 
         if let delay = delay {
             progress.totalUnitCount += 1
@@ -100,7 +113,7 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
             let countdownObserver = DelayOperationIntervalCountdownObserver(notificationInterval: 1)
             progress.resignCurrent()
             delayOperation.addObserver(countdownObserver)
-            delayOperation.addProgressListenerForDestinationProgress(progress, sourceProgress: countdownObserver.progress, localizedDescription: "Will download data from WaniKani")
+            delayOperation.addProgressListenerForDestinationProgress(progress, sourceProgress: countdownObserver.progress)
             studyQueueOperation.addDependency(delayOperation)
             addOperation(delayOperation)
         }
@@ -211,7 +224,7 @@ class DelayOperationIntervalCountdownObserver: NSObject, OperationObserver, NSPr
     
     func timerTick(timer: NSTimer) {
         guard let endDate = endDate, let formattedTimeRemaining = formatter.stringFromTimeInterval(endDate.timeIntervalSinceNow + 1) else { return }
-        progress.localizedAdditionalDescription = "Starting in \(formattedTimeRemaining)..."
+        progress.localizedDescription = "WaniKani data download starting in \(formattedTimeRemaining)..."
     }
     
 }

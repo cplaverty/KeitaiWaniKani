@@ -87,7 +87,6 @@ public class GetListItemResourceOperation<Coder: protocol<ResourceHandler, JSOND
         
         progress.becomeCurrentWithPendingUnitCount(1)
         let parseOperation = ParseListItemOperation(coder: coder, inputDirectory: rootCacheDirectory, databaseQueue: databaseQueue)
-        parseOperation.addProgressListenerForDestinationProgress(progress, localizedDescription: "Parsing \(resource)")
         parseOperation.addCondition(NoCancelledDependencies())
         progress.resignCurrent()
         
@@ -102,7 +101,6 @@ public class GetListItemResourceOperation<Coder: protocol<ResourceHandler, JSOND
             if let batchDescription = batch.description {
                 progressDescription += " \(batchDescription)"
             }
-            downloadOperation.addProgressListenerForDestinationProgress(progress, localizedDescription: progressDescription)
             progress.resignCurrent()
             
             // These operations must be executed in order
