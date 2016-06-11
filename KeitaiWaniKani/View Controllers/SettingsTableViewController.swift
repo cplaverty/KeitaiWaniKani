@@ -154,7 +154,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         switch tableViewSection {
         case .UserScripts, .OtherSettings: return nil
         case .Feedback:
-            return "If you are having any issues with the app, please email me through the Send Feedback link above before leaving negative reviews.  I can't help you otherwise!"
+            return "App Store reviews are reset after every release.  Good reviews are appreciated, but please email me through the Send Feedback link if you're having any issues.  It's difficult to help you otherwise!"
         case .LogOut:
             let (product, version, build) = self.productAndVersion
             return "\(product) version \(version) (build \(build))"
