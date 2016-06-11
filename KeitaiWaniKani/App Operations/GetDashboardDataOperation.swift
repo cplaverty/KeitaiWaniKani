@@ -88,7 +88,15 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
                     self.progress.localizedAdditionalDescription = "Checking for update..."
                 },
                 finishHandler:{ _, _ in
-                    guard let studyQueue = self.studyQueueOperation.parsed else { return }
+                    let maybeStudyQueue = self.studyQueueOperation.parsed ?? { () -> StudyQueue? in
+                        do {
+                            return try databaseQueue.withDatabase { try SRSDataItemCoder.projectedStudyQueue($0) }
+                        } catch {
+                            DDLogWarn("Failed to calculate projectedStudyQueue to badge app icon: \(error)")
+                            return nil
+                        }
+                        }()
+                    guard let studyQueue = maybeStudyQueue else { return }
                     
                     DDLogDebug("Badging app icon: \(studyQueue.reviewsAvailable)")
                     let application = UIApplication.sharedApplication()
@@ -182,6 +190,15 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         
         // Ensure progress is 100%
         progress.completedUnitCount = progress.totalUnitCount
+    }
+    
+    private func projectedStudyQueue(databaseQueue: FMDatabaseQueue) -> StudyQueue? {
+        do {
+            return try databaseQueue.withDatabase { try SRSDataItemCoder.projectedStudyQueue($0) }
+        } catch {
+            DDLogWarn("Failed to calculate projectedStudyQueue to badge app icon: \(error)")
+            return nil
+        }
     }
 }
 
