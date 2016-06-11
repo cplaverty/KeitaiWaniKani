@@ -15,10 +15,7 @@ public class GetListItemResourceOperation<Coder: protocol<ResourceHandler, JSOND
     
     // MARK: - Properties
     
-    public let progress: NSProgress = {
-        let progress = NSProgress(totalUnitCount: -1)
-        return progress
-    }()
+    public let progress = NSProgress(totalUnitCount: 2)
     
     public private(set) var downloadOperations: [DownloadFileOperation]?
     public private(set) var parseOperation: ParseListItemOperation<Coder>?
