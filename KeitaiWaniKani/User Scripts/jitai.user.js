@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name        Jitai
-// @version     1.2.0
+// @version     1.3.0
 // @description Display WaniKani reviews in randomized fonts, for more varied reading training.
 // @author      Samuel (@obskyr)
 // @namespace   http://obskyr.io/
 // @homepageURL https://gist.github.com/obskyr/9f3c77cf6bf663792c6e
-// @icon        http://i.imgur.com/7uScPR4.png
+// @icon        http://i.imgur.com/qyuR9bD.png
 // @include     /^https?://(www\.)?wanikani\.com/review/session/?$/
 // @grant       none
 // ==/UserScript==
@@ -20,16 +20,16 @@
 
 var fonts = [
     // Default Windows fonts
-    "Meiryo",
-    "MS Gothic",
-    "MS Mincho",
+    "Meiryo, メイリオ",
+    "MS PGothic, ＭＳ Ｐゴシック, MS Gothic, ＭＳ ゴック",
+    "MS PMincho, ＭＳ Ｐ明朝, MS Mincho, ＭＳ 明朝",
     "Yu Gothic, YuGothic",
     "Yu Mincho, YuMincho",
     
     // Default OS X fonts
-    "Hiragino Kaku Gothic Pro",
-    "Hiragino Maru Gothic Pro",
-    "Hiragino Mincho Pro",
+    "Hiragino Kaku Gothic Pro, ヒラギノ角ゴ Pro W3",
+    "Hiragino Maru Gothic Pro, ヒラギノ丸ゴ Pro W3",
+    "Hiragino Mincho Pro, ヒラギノ明朝 Pro W3",
     
     // Common Linux fonts
     "Takao Gothic, TakaoGothic",
@@ -148,19 +148,19 @@ var jitai = {
         // to check that the font used can represent all the glyphs. The reason
         // the browser can't switch automatically is that some fonts report that
         // they have a glyph, when in fact they just show up blank.
+        var currentFont;
         if (glyphs) {
-            var currentFont = [];
             for (var i = 0; i < randomlyOrdered.length; i++) {
                 var fontName = randomlyOrdered[i];
                 if (canRepresentGlyphs(fontName, glyphs)) {
-                    currentFont.push(fontName);
+                    currentFont = fontName;
+                    break;
                 }
             }
         } else {
-            var currentFont = randomlyOrdered;
+            currentFont = randomlyOrdered.join(', ');
         }
         
-        currentFont = currentFont.join(', ');
         this.currentFont = currentFont;
         
         jitai.setHoverFont(jitai.defaultFont);
