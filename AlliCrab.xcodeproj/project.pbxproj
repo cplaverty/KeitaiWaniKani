@@ -115,6 +115,7 @@
 		8371D66A1C760D6F008AE534 /* showdown.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8371D65F1C76087F008AE534 /* showdown.min.js */; };
 		8371D66D1C764E6D008AE534 /* wkhidem.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 8371D66B1C764E64008AE534 /* wkhidem.user.js */; };
 		837BD4941B6E724200EDB325 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837BD4931B6E724200EDB325 /* WebViewController.swift */; };
+		8381A9C21D36CC1C00818CA6 /* WKWebView+KeitaiWaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8381A9C11D36CC1C00818CA6 /* WKWebView+KeitaiWaniKani.swift */; };
 		83829B421BB531D900CDED3F /* StubConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83829B411BB531D900CDED3F /* StubConditions.swift */; };
 		83829B441BB53E2E00CDED3F /* NoCancelledDependenciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83829B431BB53E2E00CDED3F /* NoCancelledDependenciesTests.swift */; };
 		8393CEAA1BA75DF5008701D6 /* DelayOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8393CEA91BA75DF5008701D6 /* DelayOperation.swift */; };
@@ -399,6 +400,7 @@
 		8371D6661C760D13008AE534 /* BundleResourceLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleResourceLoader.swift; sourceTree = "<group>"; };
 		8371D66B1C764E64008AE534 /* wkhidem.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkhidem.user.js; sourceTree = "<group>"; };
 		837BD4931B6E724200EDB325 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		8381A9C11D36CC1C00818CA6 /* WKWebView+KeitaiWaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WKWebView+KeitaiWaniKani.swift"; sourceTree = "<group>"; };
 		83829B411BB531D900CDED3F /* StubConditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubConditions.swift; sourceTree = "<group>"; };
 		83829B431BB53E2E00CDED3F /* NoCancelledDependenciesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCancelledDependenciesTests.swift; sourceTree = "<group>"; };
 		8393CEA91BA75DF5008701D6 /* DelayOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelayOperation.swift; sourceTree = "<group>"; };
@@ -835,6 +837,7 @@
 			children = (
 				83966D691BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift */,
 				83B611091BDC1F11008D305C /* UIWebView+KeitaiWaniKani.swift */,
+				8381A9C11D36CC1C00818CA6 /* WKWebView+KeitaiWaniKani.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1541,6 +1544,7 @@
 				83AB92D71B7C05F2006D08F2 /* GetSRSDataItemOperation.swift in Sources */,
 				833FECE91BADF0DD001C9260 /* WebViewBackForwardListTableViewController.swift in Sources */,
 				837BD4941B6E724200EDB325 /* WebViewController.swift in Sources */,
+				8381A9C21D36CC1C00818CA6 /* WKWebView+KeitaiWaniKani.swift in Sources */,
 				830EAB8A1B41DC7700EBF073 /* AppDelegate.swift in Sources */,
 				83966D6A1BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift in Sources */,
 				8347BDD91B7260B1000F99EF /* AlertOperation.swift in Sources */,
