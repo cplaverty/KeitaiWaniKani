@@ -26,6 +26,8 @@ if (userLogin !== null) {
 
 // Update navigation controller title
 function setTitleToCurrentQuizItem() {
+    if (typeof setWebViewPageTitle !== "function") return;
+    
     // "Fake" radicals can either be represented by a custom font using <i class="radical-xxx"> or an image
     if ($('#character img').length > 0 || $('#character i').length > 0) {
         setWebViewPageTitle('Radical');

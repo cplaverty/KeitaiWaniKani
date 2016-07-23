@@ -108,7 +108,7 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SRSDataItemInfoURL, let url = cell.srsDataItemInfoURL else { return }
         
-        self.presentViewController(SRSDataItemWebViewController.forURL(url) { $0.delegate = self }, animated: true, completion: nil)
+        self.presentViewController(WKWebViewController.forURL(url) { $0.delegate = self }, animated: true, completion: nil)
     }
     
     // MARK: - WKWebViewControllerDelegate

@@ -33,7 +33,7 @@ protocol WebViewControllerDelegate: class {
     func webViewControllerDidFinish(controller: WebViewController)
 }
 
-class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelegate, WebViewControllerDelegate, BundleResourceLoader {
+class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelegate, WebViewControllerDelegate, UIWebViewUserScriptSupport {
     
     class func forURL(URL: NSURL, @noescape configBlock: (WebViewController) -> Void) -> UINavigationController {
         let webViewController = self.init(URL: URL)
@@ -263,63 +263,12 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         
         if !userScriptsInjected {
             if let URL = webView.request?.URL {
-                injectUserScriptsForURL(URL)
+                userScriptsInjected = injectUserScriptsForURL(URL)
+                
+                if URL == WaniKaniURLs.lessonSession || URL == WaniKaniURLs.reviewSession {
+                    showBrowserInterface(false, animated: true)
+                }
             }
-        }
-    }
-    
-    func injectUserScriptsForURL(URL: NSURL) {
-        guard let webView = self.webView else { return }
-        
-        // Common user scripts
-        switch URL {
-        case WaniKaniURLs.loginPage:
-            DDLogDebug("Loading user scripts")
-            injectScript("common", inWebView: webView)
-            userScriptsInjected = true
-        case WaniKaniURLs.lessonSession:
-            showBrowserInterface(false, animated: true)
-            DDLogDebug("Loading user scripts")
-            injectScript("common", inWebView: webView)
-            injectStyleSheet("resize", inWebView: webView)
-            if ApplicationSettings.disableLessonSwipe {
-                injectScript("noswipe", inWebView: webView)
-            }
-            if ApplicationSettings.userScriptReorderUltimateEnabled {
-                injectScript("WKU.user", inWebView: webView)
-            }
-            userScriptsInjected = true
-        case WaniKaniURLs.reviewSession:
-            showBrowserInterface(false, animated: true)
-            DDLogDebug("Loading user scripts")
-            injectScript("common", inWebView: webView)
-            injectStyleSheet("resize", inWebView: webView)
-            if ApplicationSettings.userScriptJitaiEnabled {
-                injectScript("jitai.user", inWebView: webView)
-            }
-            if ApplicationSettings.userScriptIgnoreAnswerEnabled {
-                injectScript("wkoverride.user", inWebView: webView)
-            }
-            if ApplicationSettings.userScriptDoubleCheckEnabled {
-                injectScript("wkdoublecheck", inWebView: webView)
-            }
-            if ApplicationSettings.userScriptWaniKaniImproveEnabled {
-                injectStyleSheet("jquery.qtip.min", inWebView: webView)
-                injectScript("jquery.qtip.min", inWebView: webView)
-                injectScript("wkimprove", inWebView: webView)
-            }
-            if ApplicationSettings.userScriptMarkdownNotesEnabled {
-                injectScript("showdown.min", inWebView: webView)
-                injectScript("markdown.user", inWebView: webView)
-            }
-            if ApplicationSettings.userScriptHideMnemonicsEnabled {
-                injectScript("wkhidem.user", inWebView: webView)
-            }
-            if ApplicationSettings.userScriptReorderUltimateEnabled {
-                injectScript("WKU.user", inWebView: webView)
-            }
-            userScriptsInjected = true
-        default: break
         }
     }
     
@@ -445,27 +394,6 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         navigationItem.leftItemsSupplementBackButton = true
         navigationItem.leftBarButtonItems = [backButton, forwardButton]
         navigationItem.rightBarButtonItems = shouldIncludeDoneButton ? [doneButton, openInSafariButton, shareButton] : [openInSafariButton, shareButton]
-    }
-    
-    // MARK: - User Scripts
-    
-    func injectStyleSheet(name: String, inWebView webView: UIWebView) {
-        let contents = loadBundleResource(name, withExtension: "css", javascriptEncode: true)
-        
-        let script = "var style = document.createElement('style');style.setAttribute('type', 'text/css');style.appendChild(document.createTextNode('\(contents)'));document.head.appendChild(document.createComment('\(name).css'));document.head.appendChild(style);"
-        
-        if webView.stringByEvaluatingJavaScriptFromString(script) == nil {
-            DDLogError("Failed to add style sheet \(name).css")
-        }
-    }
-    
-    func injectScript(name: String, inWebView webView: UIWebView) {
-        let contents = loadBundleResource(name, withExtension: "js", javascriptEncode: true)
-        
-        let script = "var script = document.createElement('script');script.setAttribute('type', 'text/javascript');script.appendChild(document.createTextNode('\(contents)'));document.head.appendChild(document.createComment('\(name).js'));document.head.appendChild(script);"
-        if webView.stringByEvaluatingJavaScriptFromString(script) == nil {
-            DDLogError("Failed to add script \(name).js")
-        }
     }
     
     // MARK: - Implementation

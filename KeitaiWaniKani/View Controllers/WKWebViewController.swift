@@ -15,7 +15,7 @@ protocol WKWebViewControllerDelegate: class {
     func wkWebViewControllerDidFinish(controller: WKWebViewController)
 }
 
-class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate, WKWebViewControllerDelegate, WebViewBackForwardListTableViewControllerDelegate, BundleResourceLoader {
+class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate, WKWebViewControllerDelegate, WebViewBackForwardListTableViewControllerDelegate, WKWebViewUserScriptSupport {
     
     class func forURL(URL: NSURL, @noescape configBlock: (WKWebViewController) -> Void = { _ in }) -> UINavigationController {
         let wkWebViewController = self.init(URL: URL)
@@ -103,6 +103,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     private func createWebViewWithConfiguration(webViewConfiguration: WKWebViewConfiguration = defaultWebViewConfiguration) -> WKWebView {
         let webView = WKWebView(frame: CGRect.zero, configuration: webViewConfiguration)
+        webView.keyboardDisplayDoesNotRequireUserAction()
         webView.scrollView.delegate = self
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.navigationDelegate = self
@@ -240,24 +241,28 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     // MARK: - WKNavigationDelegate
     
-    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-        switch navigationAction.request.URL {
-        case WaniKaniURLs.subscription?:
-            self.showAlertWithTitle("Can not manage subscription", message: "Due to Apple App Store rules, you can not manage your subscription within the app.")
-            decisionHandler(.Cancel)
-        default:
-            decisionHandler(.Allow)
-        }
-    }
+//    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+//        switch navigationAction.request.URL {
+//        case WaniKaniURLs.subscription?:
+//            self.showAlertWithTitle("Can not manage subscription", message: "Due to Apple App Store rules, you can not manage your subscription within the app.")
+//            decisionHandler(.Cancel)
+//        default:
+//            decisionHandler(.Allow)
+//        }
+//    }
     
-    func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void) {
-        decisionHandler(.Allow)
-    }
+//    func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void) {
+//        decisionHandler(.Allow)
+//    }
     
     func webView(webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         if self.toolbarItems?.isEmpty == false {
             self.navigationController?.setToolbarHidden(false, animated: true)
+        }
+        webView.configuration.userContentController.removeAllUserScripts()
+        if let URL = webView.URL {
+            injectUserScriptsForURL(URL)
         }
     }
     
@@ -273,7 +278,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     private func showErrorDialog(error: NSError) {
         switch (error.domain, error.code) {
-            // Ignore navigation cancellation errors
+        // Ignore navigation cancellation errors
         case (NSURLErrorDomain, NSURLErrorCancelled), ("WebKitErrorDomain", 102):
             break
         default:
@@ -358,14 +363,6 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let userContentController = webView.configuration.userContentController
-        userContentController.removeAllUserScripts()
-        if let userScripts = getUserScripts() {
-            for script in userScripts {
-                userContentController.addUserScript(script)
-            }
-        }
-        
         self.view.addSubview(webView)
         self.view.addSubview(statusBarView)
         
@@ -432,19 +429,6 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         navigationItem.leftItemsSupplementBackButton = true
         navigationItem.leftBarButtonItems = [backButton, forwardButton]
         navigationItem.rightBarButtonItems = shouldIncludeDoneButton ? [doneButton, openInSafariButton, shareButton] : [openInSafariButton, shareButton]
-    }
-    
-    // MARK: - User Scripts
-    
-    func getUserScripts() -> [WKUserScript]? {
-        return nil
-    }
-    
-    func getUserScriptContent(name: String) -> String {
-        guard let scriptURL = NSBundle.mainBundle().URLForResource("\(name)", withExtension: "js") else {
-            fatalError("Count not find user script \(name).js in main bundle")
-        }
-        return try! String(contentsOfURL: scriptURL)
     }
     
     // MARK: - Implementation

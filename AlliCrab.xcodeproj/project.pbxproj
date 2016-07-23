@@ -109,7 +109,6 @@
 		836B2BAA1BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836B2BA91BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift */; };
 		836B2BAC1BA98C2900E7142D /* NoCancelledDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836B2BAB1BA98C2900E7142D /* NoCancelledDependencies.swift */; };
 		836CACC81BAB578600C8A945 /* StudyQueueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836CACC71BAB578600C8A945 /* StudyQueueTableViewCell.swift */; };
-		8371D6641C760ACE008AE534 /* SRSDataItemWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8371D6621C760A9D008AE534 /* SRSDataItemWebViewController.swift */; };
 		8371D6681C760D61008AE534 /* BundleResourceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8371D6661C760D13008AE534 /* BundleResourceLoader.swift */; };
 		8371D6691C760D6B008AE534 /* markdown.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 8371D65E1C76087F008AE534 /* markdown.user.js */; };
 		8371D66A1C760D6F008AE534 /* showdown.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8371D65F1C76087F008AE534 /* showdown.min.js */; };
@@ -125,6 +124,7 @@
 		839AA3DA1BE2BB8C006A05F3 /* jquery.qtip.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */; };
 		839AA3DC1BE2BC08006A05F3 /* resize.css in Resources */ = {isa = PBXBuildFile; fileRef = 839AA3DB1BE2BC08006A05F3 /* resize.css */; };
 		839D76AB1B9A3BC40037294C /* UserScriptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839D76AA1B9A3BC40037294C /* UserScriptTableViewCell.swift */; };
+		83A1F4101D43836A0045751F /* UserScriptSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1F40F1D43836A0045751F /* UserScriptSupport.swift */; };
 		83A23FE71BCD96C100060B66 /* String+WaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A23FE61BCD96C100060B66 /* String+WaniKani.swift */; };
 		83A597861BCC53EB0040C730 /* RetryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A597851BCC53EB0040C730 /* RetryOperation.swift */; };
 		83A597881BCC595E0040C730 /* RetryOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A597871BCC595E0040C730 /* RetryOperationTests.swift */; };
@@ -396,7 +396,6 @@
 		836CACC71BAB578600C8A945 /* StudyQueueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyQueueTableViewCell.swift; sourceTree = "<group>"; };
 		8371D65E1C76087F008AE534 /* markdown.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = markdown.user.js; sourceTree = "<group>"; };
 		8371D65F1C76087F008AE534 /* showdown.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = showdown.min.js; sourceTree = "<group>"; };
-		8371D6621C760A9D008AE534 /* SRSDataItemWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemWebViewController.swift; sourceTree = "<group>"; };
 		8371D6661C760D13008AE534 /* BundleResourceLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleResourceLoader.swift; sourceTree = "<group>"; };
 		8371D66B1C764E64008AE534 /* wkhidem.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkhidem.user.js; sourceTree = "<group>"; };
 		837BD4931B6E724200EDB325 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -410,6 +409,7 @@
 		839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.qtip.min.js; sourceTree = "<group>"; };
 		839AA3DB1BE2BC08006A05F3 /* resize.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = resize.css; sourceTree = "<group>"; };
 		839D76AA1B9A3BC40037294C /* UserScriptTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserScriptTableViewCell.swift; sourceTree = "<group>"; };
+		83A1F40F1D43836A0045751F /* UserScriptSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserScriptSupport.swift; sourceTree = "<group>"; };
 		83A23FE61BCD96C100060B66 /* String+WaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+WaniKani.swift"; sourceTree = "<group>"; };
 		83A597851BCC53EB0040C730 /* RetryOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryOperation.swift; sourceTree = "<group>"; };
 		83A597871BCC595E0040C730 /* RetryOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetryOperationTests.swift; sourceTree = "<group>"; };
@@ -612,6 +612,7 @@
 		832462C01B93687E00FB62C9 /* User Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				83A1F40F1D43836A0045751F /* UserScriptSupport.swift */,
 				83183BC51BECC4B300FAE0B6 /* common.js */,
 				83FC71D11C95877100B60C1C /* jitai.user.js */,
 				839AA3D71BE2BB8C006A05F3 /* jquery.qtip.min.css */,
@@ -639,7 +640,6 @@
 				83B155561B944B360022217E /* ReviewTimelineTableViewController.swift */,
 				83B1555A1B94A18D0022217E /* SettingsTableViewController.swift */,
 				831FF75B1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift */,
-				8371D6621C760A9D008AE534 /* SRSDataItemWebViewController.swift */,
 				833BF0BD1B4930A20038AAE3 /* UIViewControllerExtensions.swift */,
 				83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */,
 				83D7CF811BC15FCB00C1AFC4 /* WaniKaniReviewPageWebViewController.swift */,
@@ -1529,8 +1529,8 @@
 				831FF75C1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift in Sources */,
 				83B155591B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift in Sources */,
 				83B5CC4F1C47112F00979DAC /* UIBottomBorderedView.swift in Sources */,
-				8371D6641C760ACE008AE534 /* SRSDataItemWebViewController.swift in Sources */,
 				8331E5041B48525F005AF085 /* HomeScreenViewController.swift in Sources */,
+				83A1F4101D43836A0045751F /* UserScriptSupport.swift in Sources */,
 				83DC478C1B440A6200AD716C /* RubyLabel.swift in Sources */,
 				832462B91B930AC200FB62C9 /* ReviewCountNotificationOperation.swift in Sources */,
 				833BF0BE1B4930A20038AAE3 /* UIViewControllerExtensions.swift in Sources */,

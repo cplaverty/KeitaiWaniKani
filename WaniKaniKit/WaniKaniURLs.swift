@@ -22,6 +22,8 @@ public struct WaniKaniURLs {
     public static let lessonHome = NSURL(string: "lesson", relativeToURL: home)!.absoluteURL
     public static let lessonSession = NSURL(string: "lesson/session", relativeToURL: home)!.absoluteURL
 
+    public static let levelRoot = NSURL(string: "level/", relativeToURL: home)!.absoluteURL
     public static let radicalRoot = NSURL(string: "radicals/", relativeToURL: home)!.absoluteURL
     public static let kanjiRoot = NSURL(string: "kanji/", relativeToURL: home)!.absoluteURL
+    public static let vocabularyRoot = NSURL(string: "vocabulary/", relativeToURL: home)!.absoluteURL
 }
