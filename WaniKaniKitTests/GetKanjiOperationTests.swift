@@ -15,34 +15,34 @@ class GetKanjiOperationTests: DatabaseTestCase, ResourceHTTPStubs {
     func testKanjiLevel2Success() {
         // Check a Kanji with multiple meanings
         let expectedRicePaddyKanji = Kanji(character: "田",
-            meaning: "rice paddy, rice field, field",
-            onyomi: "でん",
-            kunyomi: "た",
-            importantReading: "kunyomi",
-            level: 2)
+                                           meaning: "rice paddy, rice field, field",
+                                           onyomi: "でん",
+                                           kunyomi: "た",
+                                           importantReading: "kunyomi",
+                                           level: 2)
         
         // Check a Kanji without kunyomi
         let expectedHeavenKanji = Kanji(character: "天",
-            meaning: "heaven",
-            onyomi: "てん",
-            importantReading: "onyomi",
-            level: 2,
-            userSpecificSRSData: UserSpecificSRSData(srsLevel: .Apprentice,
-                srsLevelNumeric: 4,
-                dateUnlocked: NSDate(timeIntervalSince1970: NSTimeInterval(1437918884)),
-                dateAvailable: NSDate(timeIntervalSince1970: NSTimeInterval(1438325100)),
-                burned: false,
-                meaningStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3),
-                readingStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3)))
+                                        meaning: "heaven",
+                                        onyomi: "てん",
+                                        importantReading: "onyomi",
+                                        level: 2,
+                                        userSpecificSRSData: UserSpecificSRSData(srsLevel: .Apprentice,
+                                            srsLevelNumeric: 4,
+                                            dateUnlocked: NSDate(timeIntervalSince1970: NSTimeInterval(1437918884)),
+                                            dateAvailable: NSDate(timeIntervalSince1970: NSTimeInterval(1438325100)),
+                                            burned: false,
+                                            meaningStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3),
+                                            readingStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3)))
         
-        let resourceResolver = WaniKaniAPIResourceResolver(forAPIKey: "TEST_API_KEY")
         let operationQueue = OperationQueue()
         
         stubForResource(Resource.Kanji, file: "Kanji Level 2")
-
+        defer { OHHTTPStubs.removeAllStubs() }
+        
         self.measureBlock() {
             let expect = self.expectationWithDescription("kanji")
-            let operation = GetKanjiOperation(resolver: resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
+            let operation = GetKanjiOperation(resolver: self.resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
             
             let completionObserver = BlockObserver(finishHandler: { (operation, errors) -> Void in
                 defer { expect.fulfill() }
@@ -78,13 +78,13 @@ class GetKanjiOperationTests: DatabaseTestCase, ResourceHTTPStubs {
     
     #if HAS_DOWNLOADED_DATA
     func testLoadByLevel() {
-        let resourceResolver = WaniKaniAPIResourceResolver(forAPIKey: "TEST_API_KEY")
         let operationQueue = OperationQueue()
         
         stubForResource(Resource.Kanji, file: "Kanji Levels 1-20")
-    
+        defer { OHHTTPStubs.removeAllStubs() }
+        
         let expect = self.expectationWithDescription("kanji")
-        let operation = GetKanjiOperation(resolver: resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
+        let operation = GetKanjiOperation(resolver: self.resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
         
         let completionObserver = BlockObserver(finishHandler: { (operation, errors) -> Void in
             defer { expect.fulfill() }
@@ -109,14 +109,14 @@ class GetKanjiOperationTests: DatabaseTestCase, ResourceHTTPStubs {
         let kanjiCount = 18 + 38 + 33 + 38 + 42 + 40 + 33 + 32 + 35 + 35 +
             38 + 37 + 37 + 32 + 33 + 35 + 33 + 29 + 34 + 32
         
-        let resourceResolver = WaniKaniAPIResourceResolver(forAPIKey: "TEST_API_KEY")
         let operationQueue = OperationQueue()
         
         stubForResource(Resource.Kanji, file: "Kanji Levels 1-20")
+        defer { OHHTTPStubs.removeAllStubs() }
         
         self.measureBlock() {
             let expect = self.expectationWithDescription("kanji")
-            let operation = GetKanjiOperation(resolver: resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
+            let operation = GetKanjiOperation(resolver: self.resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
             
             let completionObserver = BlockObserver(finishHandler: { (operation, errors) -> Void in
                 defer { expect.fulfill() }

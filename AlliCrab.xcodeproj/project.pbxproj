@@ -173,6 +173,7 @@
 		83E4A2B71C9820400053A7C0 /* WKU.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 83E4A2B61C9820400053A7C0 /* WKU.user.js */; };
 		83F32EA91BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */; };
 		83F32EAB1BDFCCFA00F2ABA0 /* wkdoublecheck.js in Resources */ = {isa = PBXBuildFile; fileRef = 83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */; };
+		83F9D2AB1D45205000B261F3 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F9D2AA1D45205000B261F3 /* DatabaseManager.swift */; };
 		83FC71BE1C95856600B60C1C /* ArmedBanana.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71BD1C95856600B60C1C /* ArmedBanana.ttf */; };
 		83FC71C01C9585BE00B60C1C /* chifont+.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71BF1C9585BE00B60C1C /* chifont+.ttf */; };
 		83FC71C91C9585F300B60C1C /* chigfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C11C9585F300B60C1C /* chigfont.ttf */; };
@@ -187,6 +188,7 @@
 		83FDC2B01BB529D2006AAB8E /* GroupOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FDC2AF1BB529D2006AAB8E /* GroupOperationTests.swift */; };
 		83FE7CD51BB9C1720006689F /* GetRadicalImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FE7CD41BB9C1720006689F /* GetRadicalImageOperation.swift */; };
 		860ADB1054FBDB22BE3A4100 /* Pods_WaniKaniStudyQueueWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BD3F41FB2875CDDAA24471 /* Pods_WaniKaniStudyQueueWidget.framework */; };
+		875E27A47CC3D4B69EDC1A7D /* Pods_OperationKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 724BCA48502D5C125E93B4D5 /* Pods_OperationKitTests.framework */; };
 		9A2B7C583E0B52F4598DF6FF /* Pods_AlliCrab_OperationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DAF8FF299A4FCE82A944858 /* Pods_AlliCrab_OperationKit.framework */; };
 		9FF9FC792E158819FA915260 /* Pods_WaniKaniKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAF2F8FE1898ACA2D134E239 /* Pods_WaniKaniKitTests.framework */; };
 		F8785A4F89A9D34C57C2926E /* Pods_AlliCrab_WaniKaniKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95C5EC65DDCE8A04239ED53 /* Pods_AlliCrab_WaniKaniKit.framework */; };
@@ -282,10 +284,13 @@
 		2691F2F6BB02AFAAF87B97D0 /* Pods-WaniKaniKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		2890FAE399F71469B0449BEA /* Pods-AlliCrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab.release.xcconfig"; sourceTree = "<group>"; };
 		37BD3F41FB2875CDDAA24471 /* Pods_WaniKaniStudyQueueWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaniKaniStudyQueueWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		564361D5394FB9ABE3B9CA27 /* Pods-OperationKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OperationKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OperationKitTests/Pods-OperationKitTests.release.xcconfig"; sourceTree = "<group>"; };
+		724BCA48502D5C125E93B4D5 /* Pods_OperationKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OperationKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		728E381FCA9A171DA8D094C2 /* Pods-AlliCrab-WaniKaniKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-WaniKaniKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-WaniKaniKit/Pods-AlliCrab-WaniKaniKit.release.xcconfig"; sourceTree = "<group>"; };
 		746F11E1BAB692DD46347209 /* Pods-WaniKaniKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7B8E75A98632F4551749F0E1 /* Pods-AlliCrab-OperationKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab-OperationKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab-OperationKit/Pods-AlliCrab-OperationKit.debug.xcconfig"; sourceTree = "<group>"; };
 		7DAF8FF299A4FCE82A944858 /* Pods_AlliCrab_OperationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlliCrab_OperationKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		81BC8E43B9801D1CDA0D5EAD /* Pods-OperationKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OperationKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OperationKitTests/Pods-OperationKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8304F8271BBD083A009D7054 /* DelayOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelayOperationTests.swift; sourceTree = "<group>"; };
 		8307F2511BB5ADB600BDDF10 /* ProjectedStudyQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectedStudyQueueTests.swift; sourceTree = "<group>"; };
 		8307F2561BB6049100BDDF10 /* StudyQueueIsUpdatedCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyQueueIsUpdatedCondition.swift; sourceTree = "<group>"; };
@@ -458,6 +463,7 @@
 		83E4A2B61C9820400053A7C0 /* WKU.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = WKU.user.js; sourceTree = "<group>"; };
 		83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaniKaniLoginWebViewController.swift; sourceTree = "<group>"; };
 		83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkdoublecheck.js; sourceTree = "<group>"; };
+		83F9D2AA1D45205000B261F3 /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		83FC71BD1C95856600B60C1C /* ArmedBanana.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArmedBanana.ttf; sourceTree = "<group>"; };
 		83FC71BF1C9585BE00B60C1C /* chifont+.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "chifont+.ttf"; sourceTree = "<group>"; };
 		83FC71C11C9585F300B60C1C /* chigfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chigfont.ttf; sourceTree = "<group>"; };
@@ -541,6 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83D550591BB489A9007442EF /* OperationKit.framework in Frameworks */,
+				875E27A47CC3D4B69EDC1A7D /* Pods_OperationKitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,6 +824,7 @@
 			isa = PBXGroup;
 			children = (
 				8371D6661C760D13008AE534 /* BundleResourceLoader.swift */,
+				83F9D2AA1D45205000B261F3 /* DatabaseManager.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -974,6 +982,7 @@
 				E95C5EC65DDCE8A04239ED53 /* Pods_AlliCrab_WaniKaniKit.framework */,
 				DAF2F8FE1898ACA2D134E239 /* Pods_WaniKaniKitTests.framework */,
 				37BD3F41FB2875CDDAA24471 /* Pods_WaniKaniStudyQueueWidget.framework */,
+				724BCA48502D5C125E93B4D5 /* Pods_OperationKitTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -991,6 +1000,8 @@
 				2691F2F6BB02AFAAF87B97D0 /* Pods-WaniKaniKitTests.release.xcconfig */,
 				06C450A9813CF2DE1860300D /* Pods-WaniKaniStudyQueueWidget.debug.xcconfig */,
 				BBCF3ECF0B87DFFDC992AF24 /* Pods-WaniKaniStudyQueueWidget.release.xcconfig */,
+				81BC8E43B9801D1CDA0D5EAD /* Pods-OperationKitTests.debug.xcconfig */,
+				564361D5394FB9ABE3B9CA27 /* Pods-OperationKitTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1145,9 +1156,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83D5505C1BB489A9007442EF /* Build configuration list for PBXNativeTarget "OperationKitTests" */;
 			buildPhases = (
+				A86667A8174539176D2DE816 /* [CP] Check Pods Manifest.lock */,
 				83D550501BB489A9007442EF /* Sources */,
 				83D550511BB489A9007442EF /* Frameworks */,
 				83D550521BB489A9007442EF /* Resources */,
+				569435F03C6C6080312162C8 /* [CP] Embed Pods Frameworks */,
+				6B806CBCAB8B3D4B404EB4D7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1201,7 +1215,6 @@
 					};
 					8347BD011B725428000F99EF = {
 						CreatedOnToolsVersion = 7.0;
-						TestTargetID = 830EAB851B41DC7700EBF073;
 					};
 					83C8F9491B9B2E7E007CBFBF = {
 						CreatedOnToolsVersion = 7.0;
@@ -1209,7 +1222,6 @@
 					};
 					83D550531BB489A9007442EF = {
 						CreatedOnToolsVersion = 7.0;
-						TestTargetID = 830EAB851B41DC7700EBF073;
 					};
 				};
 			};
@@ -1364,6 +1376,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		569435F03C6C6080312162C8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OperationKitTests/Pods-OperationKitTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6432691817AD74E220D58DAA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1377,6 +1404,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6B806CBCAB8B3D4B404EB4D7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OperationKitTests/Pods-OperationKitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		706BA19302996B8EC1145D4C /* [CP] Embed Pods Frameworks */ = {
@@ -1395,6 +1437,21 @@
 			showEnvVarsInLog = 0;
 		};
 		7834F8AC0DD44A2168C25E15 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A86667A8174539176D2DE816 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1510,6 +1567,7 @@
 				83F32EA91BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift in Sources */,
 				83BF363A1B52D24A0044F59B /* DashboardViewController.swift in Sources */,
 				8347BDE61B7260B1000F99EF /* ReviewTimeNotificationOperation.swift in Sources */,
+				83F9D2AB1D45205000B261F3 /* DatabaseManager.swift in Sources */,
 				831FF75C1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift in Sources */,
 				83B155591B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift in Sources */,
 				83B5CC4F1C47112F00979DAC /* UIBottomBorderedView.swift in Sources */,
@@ -1998,7 +2056,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.WaniKaniKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AlliCrab.app/AlliCrab";
 			};
 			name = Debug;
 		};
@@ -2011,7 +2068,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.WaniKaniKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AlliCrab.app/AlliCrab";
 			};
 			name = Release;
 		};
@@ -2065,25 +2121,25 @@
 		};
 		83D5505D1BB489A9007442EF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 81BC8E43B9801D1CDA0D5EAD /* Pods-OperationKitTests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = OperationKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.OperationKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AlliCrab.app/AlliCrab";
 			};
 			name = Debug;
 		};
 		83D5505E1BB489A9007442EF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 564361D5394FB9ABE3B9CA27 /* Pods-OperationKitTests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = OperationKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.OperationKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AlliCrab.app/AlliCrab";
 			};
 			name = Release;
 		};

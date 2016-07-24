@@ -6,11 +6,12 @@
 //
 
 import XCTest
+import OHHTTPStubs
 import OperationKit
 @testable import WaniKaniKit
 
 #if HAS_DOWNLOADED_DATA
-class ProjectedStudyQueueTests: DatabaseTestCase {
+class ProjectedStudyQueueTests: DatabaseTestCase, ResourceHTTPStubs {
     
     override func setUp() {
         super.setUp()
@@ -25,12 +26,14 @@ class ProjectedStudyQueueTests: DatabaseTestCase {
             try! StudyQueue.coder.save(studyQueue, toDatabase: database)
         }
         
-        let radicalsOperation = GetRadicalsOperation(resolver: TestFileResourceResolver(fileName: "SQPTRadicals"),
-            databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
-        let kanjiOperation = GetKanjiOperation(resolver: TestFileResourceResolver(fileName: "SQPTKanji"),
-            databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
-        let vocabularyOperation = GetVocabularyOperation(resolver: TestFileResourceResolver(fileName: "SQPTVocab"),
-            databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
+        stubForResource(Resource.Radicals, file: "SQPTRadicals")
+        stubForResource(Resource.Kanji, file: "SQPTKanji")
+        stubForResource(Resource.Vocabulary, file: "SQPTVocab")
+        defer { OHHTTPStubs.removeAllStubs() }
+        
+        let radicalsOperation = GetRadicalsOperation(resolver: self.resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
+        let kanjiOperation = GetKanjiOperation(resolver: self.resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
+        let vocabularyOperation = GetVocabularyOperation(resolver: self.resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
         
         radicalsOperation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors, but received: \(errors)")

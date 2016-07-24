@@ -11,7 +11,12 @@ target 'AlliCrab' do
     
     target 'OperationKit'
     target 'WaniKaniKit'
+    
     target 'WaniKaniStudyQueueWidget' do
+        inherit! :search_paths
+    end
+    
+    target 'OperationKitTests' do
         inherit! :search_paths
     end
     

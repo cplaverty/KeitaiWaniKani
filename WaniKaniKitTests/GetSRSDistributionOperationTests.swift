@@ -6,10 +6,11 @@
 //
 
 import XCTest
+import OHHTTPStubs
 import OperationKit
 @testable import WaniKaniKit
 
-class GetSRSDistributionOperationTests: DatabaseTestCase {
+class GetSRSDistributionOperationTests: DatabaseTestCase, ResourceHTTPStubs {
     
     func testSRSDistributionSuccess() {
         let countsBySRSLevel: [SRSLevel: SRSItemCounts] = [
@@ -18,15 +19,18 @@ class GetSRSDistributionOperationTests: DatabaseTestCase {
             .Master: SRSItemCounts(radicals: 0, kanji: 0, vocabulary: 0, total: 0),
             .Enlightened: SRSItemCounts(radicals: 0, kanji: 0, vocabulary: 0, total: 0),
             .Burned: SRSItemCounts(radicals: 0, kanji: 0, vocabulary: 0, total: 0),
-        ]
+            ]
+        
         let expectedSRSDistribution = SRSDistribution(countsBySRSLevel: countsBySRSLevel)!
         
-        let resourceResolver = TestFileResourceResolver(fileName: "SRS Distribution")
         let operationQueue = OperationQueue()
+        
+        stubForResource(Resource.SRSDistribution, file: "SRS Distribution")
+        defer { OHHTTPStubs.removeAllStubs() }
         
         self.measureBlock() {
             let expect = self.expectationWithDescription("SRSDistribution")
-            let operation = GetSRSDistributionOperation(resolver: resourceResolver, databaseQueue: self.databaseQueue)
+            let operation = GetSRSDistributionOperation(resolver: self.resourceResolver, databaseQueue: self.databaseQueue)
             
             let completionObserver = BlockObserver(finishHandler: { (operation, errors) -> Void in
                 defer { expect.fulfill() }

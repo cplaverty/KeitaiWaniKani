@@ -6,23 +6,26 @@
 //
 
 import XCTest
+import OHHTTPStubs
 import OperationKit
 @testable import WaniKaniKit
 
-class GetLevelProgressionOperationTests: DatabaseTestCase {
+class GetLevelProgressionOperationTests: DatabaseTestCase, ResourceHTTPStubs {
     
     func testLevelProgressionSuccess() {
         let expectedLevelProgression = LevelProgression(radicalsProgress: 25,
-            radicalsTotal: 35,
-            kanjiProgress: 7,
-            kanjiTotal: 38)
+                                                        radicalsTotal: 35,
+                                                        kanjiProgress: 7,
+                                                        kanjiTotal: 38)
         
-        let resourceResolver = TestFileResourceResolver(fileName: "Level Progression")
         let operationQueue = OperationQueue()
+        
+        stubForResource(Resource.LevelProgression, file: "Level Progression")
+        defer { OHHTTPStubs.removeAllStubs() }
         
         self.measureBlock() {
             let expect = self.expectationWithDescription("LevelProgression")
-            let operation = GetLevelProgressionOperation(resolver: resourceResolver, databaseQueue: self.databaseQueue)
+            let operation = GetLevelProgressionOperation(resolver: self.resourceResolver, databaseQueue: self.databaseQueue)
             
             let completionObserver = BlockObserver(finishHandler: { (operation, errors) -> Void in
                 defer { expect.fulfill() }
@@ -37,5 +40,5 @@ class GetLevelProgressionOperationTests: DatabaseTestCase {
         let levelProgression = try! databaseQueue.withDatabase { try LevelProgression.coder.loadFromDatabase($0) }
         XCTAssertEqual(levelProgression, expectedLevelProgression, "LevelProgression mismatch from database")
     }
-
+    
 }

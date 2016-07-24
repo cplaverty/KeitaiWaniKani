@@ -21,6 +21,7 @@ public enum ReachabilityConditionError: ErrorType {
 */
 public struct ReachabilityCondition: OperationCondition {
     public static let isMutuallyExclusive = false
+    public static var enabled = true
     
     public let URL: NSURL
     
@@ -34,6 +35,12 @@ public struct ReachabilityCondition: OperationCondition {
     }
     
     public func evaluateForOperation(operation: Operation, completion: OperationConditionResult -> Void) {
+        guard self.dynamicType.enabled else {
+            DDLogVerbose("Reachability check disabled - faking satisfied check")
+            completion(.Satisfied)
+            return
+        }
+        
         ReachabilityController.requestReachability(URL) { reachable in
             if reachable {
                 DDLogVerbose("Reachability check satisfied")

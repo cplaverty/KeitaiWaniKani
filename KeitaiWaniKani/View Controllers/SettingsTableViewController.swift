@@ -236,7 +236,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         ApplicationSettings.resetToDefaults()
         
         // Purge database
-        delegate.recreateDatabase()
+        delegate.databaseManager.recreateDatabase()
         
         // Clear web cookies
         let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()

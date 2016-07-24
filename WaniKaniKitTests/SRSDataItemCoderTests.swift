@@ -87,7 +87,7 @@ class SRSDataItemCoderTests: DatabaseTestCase, ResourceHTTPStubs {
             self.databaseQueue.inDatabase { database in
                 let levelTimeline = try! SRSDataItemCoder.levelTimeline(database)
                 XCTAssertEqual(levelTimeline.detail.count, 20)
-                XCTAssertNotNil(levelTimeline.averageLevelDuration)
+                XCTAssertNotNil(levelTimeline.stats?.mean)
             }
         }
     }

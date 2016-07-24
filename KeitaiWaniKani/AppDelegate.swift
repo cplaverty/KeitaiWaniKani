@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 ApplicationSettings.apiKeyVerified = false
             }
         
-            UserNotificationCondition.notificationsEnabled = false
+            UserNotificationCondition.enabled = false
         }
         
         UINavigationBar.appearance().tintColor = ApplicationSettings.globalTintColor()
@@ -69,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         if ApplicationSettings.purgeDatabase {
-            databaseQueue = self.dynamicType.createDatabaseQueue()
+            databaseManager.recreateDatabase()
         }
     }
     
@@ -137,81 +137,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - SQLite Database
     
-    lazy var databaseQueue: FMDatabaseQueue = AppDelegate.createDatabaseQueue()
+    lazy var databaseManager = DatabaseManager()
     
-    static var secureAppGroupPersistentStoreURL: NSURL = {
-        let fm = NSFileManager.defaultManager()
-        let directory = fm.containerURLForSecurityApplicationGroupIdentifier("group.uk.me.laverty.KeitaiWaniKani")!
-        return directory.URLByAppendingPathComponent("WaniKaniData.sqlite")
-        }()
+    var databaseQueue: FMDatabaseQueue { return databaseManager.databaseQueue }
     
-    func recreateDatabase() {
-        ApplicationSettings.purgeDatabase = true
-        databaseQueue = self.dynamicType.createDatabaseQueue()
-    }
-    
-    private static func createDatabaseQueue() -> FMDatabaseQueue {
-        DDLogInfo("Creating database queue using SQLite \(FMDatabase.sqliteLibVersion()) and FMDB \(FMDatabase.FMDBUserVersion())")
-        let storeURL = secureAppGroupPersistentStoreURL
-        
-        if ApplicationSettings.purgeDatabase {
-            DDLogInfo("Database purge requested.  Deleting database file at \(storeURL)")
-            do {
-                try NSFileManager.defaultManager().removeItemAtURL(storeURL)
-            } catch {
-                DDLogWarn("Ignoring error when trying to remove store at \(storeURL): \(error)")
-            }
-            ApplicationSettings.purgeDatabase = false
-        }
-        
-        var databaseQueue = createDatabaseQueueAtURL(storeURL)
-        if databaseQueue == nil || !isValidDatabaseQueue(databaseQueue!) {
-            // Our persistent store does not contain irreplaceable data. If we fail to add it, we can delete it and try again.
-            DDLogWarn("Failed to create FMDatabaseQueue.  Deleting and trying again.")
-            do {
-                try NSFileManager.defaultManager().removeItemAtURL(storeURL)
-            } catch {
-                DDLogWarn("Ignoring error when trying to remove store at \(storeURL): \(error)")
-            }
-            databaseQueue = self.createDatabaseQueueAtURL(storeURL)
-        }
-        
-        if let queue = databaseQueue {
-            return queue
-        }
-        
-        ApplicationSettings.purgeDatabase = true
-        fatalError("Failed to create database at \(storeURL)")
-    }
-    
-    private static func isValidDatabaseQueue(databaseQueue: FMDatabaseQueue) -> Bool {
-        return try! databaseQueue.withDatabase { $0.goodConnection() }
-    }
-    
-    private static func createDatabaseQueueAtURL(URL: NSURL) -> FMDatabaseQueue? {
-        assert(URL.fileURL, "createDatabaseQueueAtURL requires a file URL")
-        let path = URL.path!
-        DDLogInfo("Creating FMDatabaseQueue at \(path)")
-        if let databaseQueue = FMDatabaseQueue(path: path) {
-            var successful = false
-            databaseQueue.inDatabase { database in
-                do {
-                    try WaniKaniAPI.createTablesInDatabase(database)
-                    successful = true
-                } catch {
-                    DDLogError("Failed to create schema due to error: \(error)")
-                }
-            }
-            
-            if successful {
-                do {
-                    try URL.setResourceValue(true, forKey: NSURLIsExcludedFromBackupKey)
-                } catch {
-                    DDLogWarn("Ignoring error when trying to exclude store at \(URL) from backup: \(error)")
-                }
-                return databaseQueue
-            }
-        }
-        return nil
-    }
 }
