@@ -1021,14 +1021,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 830EABAE1B41DC7700EBF073 /* Build configuration list for PBXNativeTarget "AlliCrab" */;
 			buildPhases = (
-				2177945BD9E8CA74A7DABBD8 /* 📦 Check Pods Manifest.lock */,
+				2177945BD9E8CA74A7DABBD8 /* [CP] Check Pods Manifest.lock */,
 				830EAB821B41DC7700EBF073 /* Sources */,
 				830EAB831B41DC7700EBF073 /* Frameworks */,
 				830EAB841B41DC7700EBF073 /* Resources */,
 				832E174A1B459F3A00A67A3E /* Embed App Extensions */,
 				8347BD151B725428000F99EF /* Embed Frameworks */,
-				E002E4BACB837E8477C24598 /* 📦 Embed Pods Frameworks */,
-				E5350D91F449E457A0C44018 /* 📦 Copy Pods Resources */,
+				E002E4BACB837E8477C24598 /* [CP] Embed Pods Frameworks */,
+				E5350D91F449E457A0C44018 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1046,12 +1046,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83426DFC1B7369F8005F4503 /* Build configuration list for PBXNativeTarget "WaniKaniStudyQueueWidget" */;
 			buildPhases = (
-				AE2A74ED1B114724DDAD16C8 /* 📦 Check Pods Manifest.lock */,
+				AE2A74ED1B114724DDAD16C8 /* [CP] Check Pods Manifest.lock */,
 				83426DEA1B7369F8005F4503 /* Sources */,
 				83426DEB1B7369F8005F4503 /* Frameworks */,
 				83426DEC1B7369F8005F4503 /* Resources */,
-				76040B849F57B4BBE2EFA39C /* 📦 Embed Pods Frameworks */,
-				33045C2190CDBFDABD3A0DE1 /* 📦 Copy Pods Resources */,
+				76040B849F57B4BBE2EFA39C /* [CP] Embed Pods Frameworks */,
+				33045C2190CDBFDABD3A0DE1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1084,12 +1084,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8347BD141B725428000F99EF /* Build configuration list for PBXNativeTarget "WaniKaniKit" */;
 			buildPhases = (
-				6432691817AD74E220D58DAA /* 📦 Check Pods Manifest.lock */,
+				6432691817AD74E220D58DAA /* [CP] Check Pods Manifest.lock */,
 				8347BCF41B725428000F99EF /* Sources */,
 				8347BCF51B725428000F99EF /* Frameworks */,
 				8347BCF61B725428000F99EF /* Headers */,
 				8347BCF71B725428000F99EF /* Resources */,
-				D0D615A7402C9E911BC1307B /* 📦 Copy Pods Resources */,
+				D0D615A7402C9E911BC1307B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1104,12 +1104,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8347BD161B725428000F99EF /* Build configuration list for PBXNativeTarget "WaniKaniKitTests" */;
 			buildPhases = (
-				C43C047F07DDE291612294A8 /* 📦 Check Pods Manifest.lock */,
+				C43C047F07DDE291612294A8 /* [CP] Check Pods Manifest.lock */,
 				8347BCFE1B725428000F99EF /* Sources */,
 				8347BCFF1B725428000F99EF /* Frameworks */,
 				8347BD001B725428000F99EF /* Resources */,
-				706BA19302996B8EC1145D4C /* 📦 Embed Pods Frameworks */,
-				34675F6C305DD9F94C1F2520 /* 📦 Copy Pods Resources */,
+				706BA19302996B8EC1145D4C /* [CP] Embed Pods Frameworks */,
+				34675F6C305DD9F94C1F2520 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1126,12 +1126,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83C8F9551B9B2E7F007CBFBF /* Build configuration list for PBXNativeTarget "OperationKit" */;
 			buildPhases = (
-				7834F8AC0DD44A2168C25E15 /* 📦 Check Pods Manifest.lock */,
+				7834F8AC0DD44A2168C25E15 /* [CP] Check Pods Manifest.lock */,
 				83C8F9451B9B2E7E007CBFBF /* Sources */,
 				83C8F9461B9B2E7E007CBFBF /* Frameworks */,
 				83C8F9471B9B2E7E007CBFBF /* Headers */,
 				83C8F9481B9B2E7E007CBFBF /* Resources */,
-				AC3E9A3507D51E8F64EB3155 /* 📦 Copy Pods Resources */,
+				AC3E9A3507D51E8F64EB3155 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1320,14 +1320,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2177945BD9E8CA74A7DABBD8 /* 📦 Check Pods Manifest.lock */ = {
+		2177945BD9E8CA74A7DABBD8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1335,14 +1335,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		33045C2190CDBFDABD3A0DE1 /* 📦 Copy Pods Resources */ = {
+		33045C2190CDBFDABD3A0DE1 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1350,14 +1350,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaniKaniStudyQueueWidget/Pods-WaniKaniStudyQueueWidget-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		34675F6C305DD9F94C1F2520 /* 📦 Copy Pods Resources */ = {
+		34675F6C305DD9F94C1F2520 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1365,14 +1365,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6432691817AD74E220D58DAA /* 📦 Check Pods Manifest.lock */ = {
+		6432691817AD74E220D58DAA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1380,14 +1380,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		706BA19302996B8EC1145D4C /* 📦 Embed Pods Frameworks */ = {
+		706BA19302996B8EC1145D4C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1395,14 +1395,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		76040B849F57B4BBE2EFA39C /* 📦 Embed Pods Frameworks */ = {
+		76040B849F57B4BBE2EFA39C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1410,14 +1410,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaniKaniStudyQueueWidget/Pods-WaniKaniStudyQueueWidget-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7834F8AC0DD44A2168C25E15 /* 📦 Check Pods Manifest.lock */ = {
+		7834F8AC0DD44A2168C25E15 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1425,14 +1425,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		AC3E9A3507D51E8F64EB3155 /* 📦 Copy Pods Resources */ = {
+		AC3E9A3507D51E8F64EB3155 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1440,14 +1440,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlliCrab-OperationKit/Pods-AlliCrab-OperationKit-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		AE2A74ED1B114724DDAD16C8 /* 📦 Check Pods Manifest.lock */ = {
+		AE2A74ED1B114724DDAD16C8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1455,14 +1455,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		C43C047F07DDE291612294A8 /* 📦 Check Pods Manifest.lock */ = {
+		C43C047F07DDE291612294A8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1470,14 +1470,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		D0D615A7402C9E911BC1307B /* 📦 Copy Pods Resources */ = {
+		D0D615A7402C9E911BC1307B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1485,14 +1485,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlliCrab-WaniKaniKit/Pods-AlliCrab-WaniKaniKit-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E002E4BACB837E8477C24598 /* 📦 Embed Pods Frameworks */ = {
+		E002E4BACB837E8477C24598 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1500,14 +1500,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E5350D91F449E457A0C44018 /* 📦 Copy Pods Resources */ = {
+		E5350D91F449E457A0C44018 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
