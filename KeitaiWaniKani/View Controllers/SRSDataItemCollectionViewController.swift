@@ -117,4 +117,29 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
         controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    // MARK: - View Controller Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let blurEffect = UIBlurEffect(style: .ExtraLight)
+        
+        let backgroundView = UIView(frame: collectionView!.frame)
+        backgroundView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+        let imageView = UIImageView(image: UIImage(named: "Header"))
+        imageView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+        imageView.contentMode = .ScaleAspectFill
+        imageView.frame = backgroundView.frame
+        backgroundView.addSubview(imageView)
+        let visualEffectBlurView = UIVisualEffectView(effect: blurEffect)
+        visualEffectBlurView.frame = imageView.frame
+        visualEffectBlurView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+        backgroundView.addSubview(visualEffectBlurView)
+        let darkenView = UIView(frame: visualEffectBlurView.frame)
+        darkenView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+        darkenView.alpha = 0.1
+        darkenView.backgroundColor = ApplicationSettings.globalTintColor()
+        visualEffectBlurView.contentView.addSubview(darkenView)
+        collectionView!.backgroundView = backgroundView
+    }
 }
