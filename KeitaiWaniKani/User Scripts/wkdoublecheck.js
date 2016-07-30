@@ -228,7 +228,7 @@ function DoubleCheck(e){
     $("#additional-content ul").append('<li id="option-double-check" class="disabled"><span title="Change Result"><i class="icon-thumbs-up"></i></span></li>');
     
     var buttonCount = $("#additional-content ul li").length
-    $("#additional-content ul li").css("width", 97 / buttonCount + "%"); //make space in the buttons row
+    $("#additional-content ul li").css("width", 99 / buttonCount + "%"); //make space in the buttons row
     var customStyle = document.createElement("style");
     customStyle.innerHTML = "#answer-exception span:before {left: 40.5%}"; //get the arrow to point to the eye again
     document.head.appendChild(customStyle);
