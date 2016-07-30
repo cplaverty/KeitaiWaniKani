@@ -283,11 +283,11 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
                 progressView.setProgress(1.0, animated: false)
             }
             UIView.animateWithDuration(0.2, delay: 0.1, options: [.CurveEaseIn],
-                animations: {
-                    progressView.alpha = 0
+                                       animations: {
+                                        progressView.alpha = 0
                 },
-                completion: { _ in
-                    progressView.setProgress(0.0, animated: false)
+                                       completion: { _ in
+                                        progressView.setProgress(0.0, animated: false)
             })
         } else if progressViewIsHidden && !shouldHide {
             progressView.setProgress(0.0, animated: false)
@@ -396,7 +396,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             (.Master, masterCell.detailTextLabel),
             (.Enlightened, enlightenedCell.detailTextLabel),
             (.Burned, burnedCell.detailTextLabel),
-        ]
+            ]
         
         for (srsLevel, label) in pairs {
             let itemCounts = srsDistribution?.countsBySRSLevel[srsLevel] ?? SRSItemCounts.zero
@@ -606,7 +606,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             timer.tolerance = 1
             NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
             return timer
-            }()
+        }()
         updateStudyQueueTimer = {
             let nextFetchTime = WaniKaniAPI.nextRefreshTimeFromNow()
             
@@ -615,7 +615,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             timer.tolerance = 20
             NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSDefaultRunLoopMode)
             return timer
-            }()
+        }()
         
         // Database could have been updated from a background fetch.  Refresh it now in case.
         DDLogDebug("Enqueuing fetch of latest StudyQueue from database")
@@ -736,6 +736,11 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         visualEffectBlurView.frame = imageView.frame
         visualEffectBlurView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         backgroundView.addSubview(visualEffectBlurView)
+        let darkenView = UIView(frame: visualEffectBlurView.frame)
+        darkenView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+        darkenView.alpha = 0.1
+        darkenView.backgroundColor = ApplicationSettings.globalTintColor()
+        visualEffectBlurView.contentView.addSubview(darkenView)
         tableView.backgroundView = backgroundView
         tableView.separatorEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
         
@@ -892,7 +897,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     
     private func presentReviewPageWebViewControllerForURL(URL: NSURL) {
         let vc = WaniKaniReviewPageWebViewController.forURL(URL, configBlock: webViewControllerCommonConfiguration)
-
+        
         if self.dataRefreshOperation != nil {
             // Cancel data refresh operation because we're just going to restart it when the web view is dismissed
             DDLogDebug("Cancelling data refresh operation")
