@@ -75,6 +75,8 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     private var userScriptsInjected = false
     private var navigationBarSettings: NavigationBarSettings? = nil
     
+    var addressBarView: WebAddressBarView!
+    
     func createWebView() -> UIWebView {
         let webView = UIWebView(frame: self.view.bounds)
         webView.translatesAutoresizingMaskIntoConstraints = false
@@ -237,6 +239,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         // Start load of new page
         if requestStack.count == 1 {
             title = "Loading..."
+            addressBarView.loading = true
             self.navigationController?.setNavigationBarHidden(false, animated: true)
             if self.toolbarItems?.isEmpty == false {
                 self.navigationController?.setToolbarHidden(false, animated: true)
@@ -257,6 +260,8 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
             if let documentTitle = webView.stringByEvaluatingJavaScriptFromString("document.title") where !documentTitle.isEmpty {
                 title = documentTitle
             }
+            addressBarView.URL = webView.request?.URL
+            addressBarView.loading = false
             lastRequest = nil
         }
         updateUIFromWebView()
@@ -274,6 +279,8 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         DDLogWarn("Navigation failed: \(error)")
+        addressBarView.URL = webView.request?.URL
+        addressBarView.loading = false
         requestStack.removeAll()
         updateUIFromWebView()
         
@@ -335,6 +342,14 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         }
         
         configureForTraitCollection(self.traitCollection)
+        
+        if let nc = self.navigationController {
+            let navBar = nc.navigationBar
+            
+            addressBarView = WebAddressBarView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: navBar.bounds.width, height: 28)), forWebView: webView)
+            addressBarView.autoresizingMask = [.FlexibleWidth]
+            self.navigationItem.titleView = addressBarView
+        }
         
         if let url = self.URL {
             let request = NSURLRequest(URL: url)
