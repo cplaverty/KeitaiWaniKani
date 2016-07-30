@@ -163,25 +163,27 @@ var jitai = {
         
         this.currentFont = currentFont;
         
-        jitai.setHoverFont(jitai.defaultFont);
+        this.hoverFont = jitai.defaultFont;
         this.$characterSpan.css('font-family', currentFont);
     },
     
     setToDefaultFont: function(fontName) {
-        jitai.setHoverFont(jitai.currentFont);
+        this.hoverFont = jitai.currentFont;
         this.$characterSpan.css('font-family', '');
     },
     
-    setHoverFont: function(fontName) {
-        this.$hoverStyle.text("#character span:hover {font-family: " + fontName + " !important;}");
-    },
-    
-    init: function() {      
+    init: function() {
         this.$characterSpan = $('#character span');
         this.defaultFont = this.$characterSpan.css('font-family');
         
-        this.$hoverStyle = $('<style/>', {'type': 'text/css'});
-        $('head').append(this.$hoverStyle);
+        this.$characterSpan.on('touchstart', function(e) {
+            jitai.$characterSpan.css('font-family', jitai.hoverFont);
+            e.preventDefault()
+        });
+        this.$characterSpan.on('touchend touchcancel', function(e) {
+            jitai.$characterSpan.css('font-family', jitai.currentFont);
+            e.preventDefault()
+        });
         
         // answerChecker.evaluate is only called when checking the answer, which
         // is why we catch it, check for the "proceed to correct/incorrect display"
