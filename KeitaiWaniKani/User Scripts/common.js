@@ -18,9 +18,11 @@ $(document).on('click', '#timeout-close', function() {
 
 
 // Use email keyboard for user login input
-var userLogin = document.getElementById('user_login');
+var userLogin = $('#user_login');
 if (userLogin !== null) {
-    userLogin.type = 'email';
+    userLogin.prop('type', 'email');
+    userLogin.attr('style', 'width: 100%;');
+    userLogin.removeAttr('size');
 }
 
 
