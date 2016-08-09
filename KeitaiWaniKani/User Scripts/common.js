@@ -10,7 +10,8 @@ function GM_addStyle(cssContents) {
 // Add close button to timeout full-screen popup
 $('#timeout').prepend('<button id="timeout-close" type="button">&times;</button>');
 
-$(document).on('click', '#timeout-close', function() {
+$(document).on('touchstart', '#timeout-close', function(e) {
+    e.preventDefault();
     $('#timeout-idle').hide();
     $('#timeout-session-end').hide();
     $('#timeout').hide();
