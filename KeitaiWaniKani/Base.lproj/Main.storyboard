@@ -1325,8 +1325,8 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E3b-xk-eVV">
-                                                <rect key="frame" x="261" y="8" width="77" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
+                                                <rect key="frame" x="260" y="8" width="79" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>

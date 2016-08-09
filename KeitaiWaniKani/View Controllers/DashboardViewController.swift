@@ -128,6 +128,16 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     
     private let blurEffect = UIBlurEffect(style: .ExtraLight)
     
+    private var headerFont: UIFont {
+        if #available(iOS 9.0, *) {
+            return UIFont.preferredFontForTextStyle(UIFontTextStyleTitle2)
+        } else {
+            let headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+            let pointSize = headlineFont.pointSize * 1.3
+            return headlineFont.fontWithSize(pointSize)
+        }
+    }
+
     /// Formats percentages in truncated to whole percents (as the WK dashboard does)
     private lazy var percentFormatter: NSNumberFormatter = {
         let formatter = NSNumberFormatter()
@@ -649,7 +659,12 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     // MARK: - UITableViewDelegate
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44.0
+        let label = UILabel()
+        label.font = headerFont
+        label.text = "Currently Available"
+        label.sizeToFit()
+        
+        return label.bounds.height + 16
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -662,13 +677,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         label.backgroundColor = UIColor.clearColor()
         label.opaque = false
         label.textColor = UIColor.blackColor()
-        if #available(iOS 9.0, *) {
-            label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleTitle2)
-        } else {
-            let headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-            let pointSize = headlineFont.pointSize * 1.3
-            label.font = headlineFont.fontWithSize(pointSize)
-        }
+        label.font = headerFont
         let visualEffectVibrancyView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: blurEffect))
         visualEffectVibrancyView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         visualEffectVibrancyView.contentView.addSubview(label)

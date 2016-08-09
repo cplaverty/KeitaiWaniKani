@@ -59,6 +59,16 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
         navigationItem.title = title
     }
     
+    private var headerFont: UIFont {
+        if #available(iOS 9.0, *) {
+            return UIFont.preferredFontForTextStyle(UIFontTextStyleTitle2)
+        } else {
+            let headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+            let pointSize = headlineFont.pointSize * 1.3
+            return headlineFont.fontWithSize(pointSize)
+        }
+    }
+    
     // MARK: - UICollectionViewDataSource
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -97,6 +107,7 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
         
         if kind == UICollectionElementKindSectionHeader {
             let section = classifiedItems?.sections[indexPath.section]
+            view.headerLabel.font = headerFont
             view.headerLabel.text = section?.title
         } else {
             view.headerLabel.text = nil
@@ -109,6 +120,16 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
         guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SRSDataItemInfoURL, let url = cell.srsDataItemInfoURL else { return }
         
         self.presentViewController(WKWebViewController.forURL(url) { $0.delegate = self }, animated: true, completion: nil)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let label = UILabel()
+        label.font = headerFont
+        label.text = "Remaining to Level"
+        label.sizeToFit()
+        
+        let insets = (collectionViewLayout as! UICollectionViewFlowLayout).sectionInset
+        return CGSize(width: collectionView.bounds.width, height: label.bounds.height + insets.top + insets.bottom)
     }
     
     // MARK: - WKWebViewControllerDelegate
