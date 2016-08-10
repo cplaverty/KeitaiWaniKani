@@ -306,11 +306,11 @@
                         <sections>
                             <tableViewSection headerTitle="Currently Available" id="IXJ-9Z-xek">
                                 <cells>
-                                    <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="JLt-8t-Mj6" detailTextLabel="3JC-lr-YwP" rowHeight="54" style="IBUITableViewCellStyleValue1" id="0tK-Hn-2EY" userLabel="Available Lessons Table View Cell">
+                                    <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="JLt-8t-Mj6" detailTextLabel="3JC-lr-YwP" rowHeight="54" style="IBUITableViewCellStyleValue1" id="0tK-Hn-2EY" userLabel="Available Lessons Table View Cell">
                                         <rect key="frame" x="0.0" y="114" width="600" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0tK-Hn-2EY" id="y2C-Cd-Toz">
-                                            <rect key="frame" x="0.0" y="0.0" width="567" height="53"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Lessons" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JLt-8t-Mj6">
@@ -320,7 +320,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="–" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3JC-lr-YwP">
-                                                    <rect key="frame" x="552" y="12" width="13" height="29"/>
+                                                    <rect key="frame" x="572" y="12" width="13" height="29"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="24"/>
                                                     <nil key="highlightedColor"/>
@@ -329,11 +329,11 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
-                                    <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="54" id="ibl-3u-pf1" userLabel="Available Reviews Table View Cell">
+                                    <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="54" id="ibl-3u-pf1" userLabel="Available Reviews Table View Cell">
                                         <rect key="frame" x="0.0" y="168" width="600" height="54"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ibl-3u-pf1" id="5f3-5i-dh4">
-                                            <rect key="frame" x="0.0" y="0.0" width="567" height="53"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="53"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09X-aB-f1i">
@@ -342,12 +342,12 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="–" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rZG-oe-mqW">
-                                                    <rect key="frame" x="553" y="12" width="13" height="29"/>
+                                                    <rect key="frame" x="572" y="12" width="13" height="29"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="24"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdR-5Z-RHo">
-                                                    <rect key="frame" x="566" y="38" width="0.0" height="0.0"/>
+                                                    <rect key="frame" x="585" y="38" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -931,7 +931,6 @@
                         <outlet property="kanjiPercentageCompletionLabel" destination="qzt-xo-eMi" id="1ei-R6-vYF"/>
                         <outlet property="kanjiProgressView" destination="cua-34-Pgb" id="cAb-nK-v53"/>
                         <outlet property="kanjiTotalItemCountLabel" destination="u1G-5i-EcH" id="UDE-GH-TGP"/>
-                        <outlet property="lessonsCell" destination="0tK-Hn-2EY" id="5yC-D4-w1g"/>
                         <outlet property="masterCell" destination="nqQ-xO-h6n" id="aoE-mq-10c"/>
                         <outlet property="pendingLessonsLabel" destination="3JC-lr-YwP" id="jLM-w1-wKf"/>
                         <outlet property="radicalPercentageCompletionLabel" destination="85H-m6-unD" id="tnz-35-JN5"/>
@@ -940,7 +939,6 @@
                         <outlet property="reviewCountLabel" destination="rZG-oe-mqW" id="LDe-F3-lkc"/>
                         <outlet property="reviewTimeRemainingLabel" destination="hdR-5Z-RHo" id="LFg-1A-k1w"/>
                         <outlet property="reviewTitleLabel" destination="09X-aB-f1i" id="fcg-2d-7oa"/>
-                        <outlet property="reviewsCell" destination="ibl-3u-pf1" id="Tno-pL-wHT"/>
                         <outlet property="reviewsNextDayLabel" destination="b0I-Sx-tYc" id="8Hd-TW-8z0"/>
                         <outlet property="reviewsNextHourLabel" destination="O0E-3G-Ot2" id="oGt-BI-Eqr"/>
                     </connections>

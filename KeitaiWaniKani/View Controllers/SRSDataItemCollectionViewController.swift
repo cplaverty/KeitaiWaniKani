@@ -61,10 +61,10 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
     
     private var headerFont: UIFont {
         if #available(iOS 9.0, *) {
-            return UIFont.preferredFontForTextStyle(UIFontTextStyleTitle2)
+            return UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1)
         } else {
-            let headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-            let pointSize = headlineFont.pointSize * 1.3
+            let headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+            let pointSize = headlineFont.pointSize * 5.0 / 3.0
             return headlineFont.fontWithSize(pointSize)
         }
     }

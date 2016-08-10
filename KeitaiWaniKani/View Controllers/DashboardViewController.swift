@@ -132,7 +132,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         if #available(iOS 9.0, *) {
             return UIFont.preferredFontForTextStyle(UIFontTextStyleTitle2)
         } else {
-            let headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+            let headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
             let pointSize = headlineFont.pointSize * 1.3
             return headlineFont.fontWithSize(pointSize)
         }
@@ -175,11 +175,9 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     // MARK: Currently Available
     
     @IBOutlet weak var pendingLessonsLabel: UILabel!
-    @IBOutlet weak var lessonsCell: UITableViewCell!
     @IBOutlet weak var reviewTitleLabel: UILabel!
     @IBOutlet weak var reviewCountLabel: UILabel!
     @IBOutlet weak var reviewTimeRemainingLabel: UILabel!
-    @IBOutlet weak var reviewsCell: UITableViewCell!
     
     // MARK: Upcoming Reviews
     
@@ -315,19 +313,16 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         
         guard let studyQueue = self.studyQueue else {
             pendingLessonsLabel.text = "–"
-            lessonsCell.accessoryType = .DisclosureIndicator
             reviewTitleLabel.text = "Reviews"
             reviewCountLabel.text = "–"
             reviewTimeRemainingLabel.text = nil
             reviewsNextHourLabel.text = "–"
             reviewsNextDayLabel.text = "–"
-            reviewsCell.accessoryType = .DisclosureIndicator
             return
         }
         
         setCount(studyQueue.lessonsAvailable, forLabel: pendingLessonsLabel, availableColour: self.view.tintColor)
         pendingLessonsLabel.font = UIFont.systemFontOfSize(24, weight: studyQueue.lessonsAvailable > 0 ? UIFontWeightRegular : UIFontWeightThin)
-        lessonsCell.accessoryType = studyQueue.lessonsAvailable > 0 ? .DisclosureIndicator : .None
         
         setCount(studyQueue.reviewsAvailableNextHour, forLabel: reviewsNextHourLabel)
         setCount(studyQueue.reviewsAvailableNextDay, forLabel: reviewsNextDayLabel)
@@ -347,20 +342,17 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         
         switch studyQueue.formattedTimeToNextReview() {
         case .None, .Now:
-            reviewsCell.accessoryType = .DisclosureIndicator
             reviewTitleLabel.text = "Reviews"
             setCount(studyQueue.reviewsAvailable, forLabel: reviewCountLabel, availableColour: self.view.tintColor)
             reviewCountLabel.font = UIFont.systemFontOfSize(24, weight: UIFontWeightRegular)
             reviewTimeRemainingLabel.text = nil
         case .FormattedString(let formattedInterval):
-            reviewsCell.accessoryType = .None
             reviewTitleLabel.text = "Next Review"
             reviewCountLabel.text = studyQueue.formattedNextReviewDate()
             reviewCountLabel.textColor = UIColor.blackColor()
             reviewCountLabel.font = UIFont.systemFontOfSize(24, weight: UIFontWeightThin)
             reviewTimeRemainingLabel.text = formattedInterval
         case .UnformattedInterval(let secondsUntilNextReview):
-            reviewsCell.accessoryType = .None
             reviewTitleLabel.text = "Next Review"
             reviewCountLabel.text = studyQueue.formattedNextReviewDate()
             reviewCountLabel.textColor = UIColor.blackColor()
