@@ -2,19 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>ArmedBanana.ttf</string>
-		<string>chifont+.ttf</string>
-		<string>chigfont.ttf</string>
-		<string>cinecaption227.ttf</string>
-		<string>dartsfont.ttf</string>
-		<string>fc_fl.ttf</string>
-		<string>hkgokukaikk.ttf</string>
-		<string>Hosohuwafont.ttf</string>
-		<string>nagayama_kai08.otf</string>
-		<string>santyoume.ttf</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -28,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.1</string>
+	<string>2.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -45,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>54</string>
+	<string>55</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>org-appextension-feature-password-management</string>
@@ -65,6 +52,19 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ArmedBanana.ttf</string>
+		<string>chifont+.ttf</string>
+		<string>chigfont.ttf</string>
+		<string>cinecaption227.ttf</string>
+		<string>dartsfont.ttf</string>
+		<string>fc_fl.ttf</string>
+		<string>hkgokukaikk.ttf</string>
+		<string>Hosohuwafont.ttf</string>
+		<string>nagayama_kai08.otf</string>
+		<string>santyoume.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
