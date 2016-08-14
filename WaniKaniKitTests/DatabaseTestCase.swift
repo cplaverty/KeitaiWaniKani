@@ -24,14 +24,14 @@ class DatabaseTestCase: XCTestCase {
     }()
     
     var databaseQueue: FMDatabaseQueue! = nil
-    var databasePath: NSURL? = nil
+    var databasePath: URL? = nil
     
     override func setUp() {
         super.setUp()
         
         if useDatabaseFile {
-            let tempDirectory = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-            databasePath = tempDirectory.URLByAppendingPathComponent("\(NSUUID().UUIDString).sqlite")
+            let tempDirectory = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+            databasePath = tempDirectory.appendingPathComponent("\(UUID().uuidString).sqlite")
             print("Using file-based SQLite store: \(databasePath!)")
         } else {
             print("Using in-memory SQLite store")
@@ -40,8 +40,9 @@ class DatabaseTestCase: XCTestCase {
         databaseQueue = FMDatabaseQueue(path: databasePath?.path)
         
         databaseQueue.inDatabase { database in
+            XCTAssertNotNil(database, "Database is nil!")
             do {
-                try WaniKaniAPI.createTablesInDatabase(database)
+                try WaniKaniAPI.createTables(in: database!)
             } catch {
                 XCTFail("Could not create tables in database due to error: \(error)")
             }
@@ -54,11 +55,11 @@ class DatabaseTestCase: XCTestCase {
         
         if let databasePath = databasePath?.path {
             print("Deleting file-based SQLite store")
-            _ = try? NSFileManager.defaultManager().removeItemAtPath(databasePath)
+            _ = try? FileManager.default.removeItem(atPath: databasePath)
         }
         databasePath = nil
         
         OHHTTPStubs.removeAllStubs()
     }
-
+    
 }

@@ -17,7 +17,7 @@ final class SRSItemCountsCoder: JSONDecoder {
     
     // MARK: - JSONDecoder
     
-    func loadFromJSON(json: JSON) -> SRSItemCounts? {
+    func load(from json: JSON) -> SRSItemCounts? {
         let radicals = json["radicals"].intValue
         let kanji = json["kanji"].intValue
         let vocabulary = json["vocabulary"].intValue
@@ -39,25 +39,25 @@ public class SRSItemCountsItem {
         return "\(Columns.radicals) INT NOT NULL, " +
             "\(Columns.kanji) INT NOT NULL, " +
             "\(Columns.vocabulary) INT NOT NULL, " +
-        "\(Columns.total) INT NOT NULL"
+            "\(Columns.total) INT NOT NULL"
     }
     
     var columnNameList: [String] {
         return [Columns.radicals, Columns.kanji, Columns.vocabulary, Columns.total]
     }
     
-    lazy var columnNames: String = { self.columnNameList.joinWithSeparator(",") }()
+    lazy var columnNames: String = { self.columnNameList.joined(separator: ",") }()
     
     lazy var columnCount: Int = { self.columnNameList.count }()
     
-    func loadSRSItemCountsForRow(resultSet: FMResultSet) throws -> SRSItemCounts {
-        return SRSItemCounts(radicals: resultSet.longForColumn(Columns.radicals),
-            kanji: resultSet.longForColumn(Columns.kanji),
-            vocabulary: resultSet.longForColumn(Columns.vocabulary),
-            total: resultSet.longForColumn(Columns.total))
+    func loadSRSItemCountsForRow(_ resultSet: FMResultSet) throws -> SRSItemCounts {
+        return SRSItemCounts(radicals: resultSet.long(forColumn: Columns.radicals),
+                             kanji: resultSet.long(forColumn: Columns.kanji),
+                             vocabulary: resultSet.long(forColumn: Columns.vocabulary),
+                             total: resultSet.long(forColumn: Columns.total))
     }
     
-    func srsItemCountsColumnValues(data: SRSItemCounts) -> [AnyObject] {
+    func srsItemCountsColumnValues(_ data: SRSItemCounts) -> [AnyObject] {
         return [data.radicals, data.kanji, data.vocabulary, data.total]
     }
 }

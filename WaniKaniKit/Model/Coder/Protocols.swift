@@ -16,34 +16,34 @@ public protocol ResourceHandler {
 public protocol JSONDecoder {
     associatedtype ModelObject: Equatable
     
-    func loadFromJSON(json: JSON) -> ModelObject?
+    func load(from: JSON) -> ModelObject?
 }
 
 public protocol DatabaseCoder {
-    func createTable(database: FMDatabase, dropFirst: Bool) throws
-    func hasBeenUpdatedSince(since: NSDate, inDatabase database: FMDatabase) throws -> Bool
+    func createTable(in: FMDatabase, dropExisting: Bool) throws
+    func hasBeenUpdated(since: Date, in: FMDatabase) throws -> Bool
 }
 
 public protocol SingleItemDatabaseCoder: DatabaseCoder {
     associatedtype ModelObject: Equatable
     
-    func loadFromDatabase(database: FMDatabase) throws -> ModelObject?
-    func save(models: ModelObject, toDatabase database: FMDatabase) throws
+    func load(from: FMDatabase) throws -> ModelObject?
+    func save(_: ModelObject, to: FMDatabase) throws
 }
 
 public protocol ListItemDatabaseCoder: DatabaseCoder {
     associatedtype ModelObject: SRSDataItem, Equatable
     
-    func loadFromDatabase(database: FMDatabase) throws -> [ModelObject]
-    func save(models: [ModelObject], toDatabase database: FMDatabase) throws
+    func load(from: FMDatabase) throws -> [ModelObject]
+    func save(_: [ModelObject], to: FMDatabase) throws
     
-    func levelsNotUpdatedSince(since: NSDate, inDatabase database: FMDatabase) throws -> Set<Int>
-    func maxLevel(database: FMDatabase) throws -> Int
-    func possiblyStaleLevels(since: NSDate, inDatabase database: FMDatabase) throws -> Set<Int>
+    func levelsNotUpdated(since: Date, in: FMDatabase) throws -> Set<Int>
+    func maxLevel(in: FMDatabase) throws -> Int
+    func possiblyStaleLevels(since: Date, in: FMDatabase) throws -> Set<Int>
 }
 
 extension DatabaseCoder {
-    func createColumnValuePlaceholders(count: Int) -> String {
+    func createColumnValuePlaceholders(_ count: Int) -> String {
         guard count > 0 else {
             return ""
         }
@@ -52,7 +52,7 @@ extension DatabaseCoder {
         columnValuePlaceholders.reserveCapacity(count * 2 - 1)
         
         for _ in 1..<count {
-            columnValuePlaceholders.appendContentsOf(",?")
+            columnValuePlaceholders.append(",?")
         }
         
         return columnValuePlaceholders

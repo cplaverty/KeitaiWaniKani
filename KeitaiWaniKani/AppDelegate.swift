@@ -19,39 +19,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Application lifecycle
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Logging
         #if DEBUG
-            defaultDebugLevel = DDLogLevel.Verbose
+            defaultDebugLevel = DDLogLevel.verbose
         #else
-            defaultDebugLevel = DDLogLevel.Info
+            defaultDebugLevel = DDLogLevel.info
         #endif
         
-        DDLog.addLogger(DDASLLogger.sharedInstance())
-        DDLog.addLogger(DDTTYLogger.sharedInstance())
+        DDLog.add(DDASLLogger.sharedInstance())
+        DDLog.add(DDTTYLogger.sharedInstance())
         
-        let fileLogger = DDFileLogger()
+        let fileLogger = DDFileLogger()!
         fileLogger.rollingFrequency = 24 * 60 * 60 // 24 hour rolling
         fileLogger.logFileManager.maximumNumberOfLogFiles = 7
         
-        DDLog.addLogger(fileLogger)
+        DDLog.add(fileLogger)
         
         DDLogInfo("Starting new instance (logging level \(defaultDebugLevel))")
 
         // Check if we've been launched by Snapshot
-        if NSUserDefaults.standardUserDefaults().boolForKey("FASTLANE_SNAPSHOT") {
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             DDLogInfo("Detected snapshot run: setting login cookie and disabling notification prompts")
-            if let loginCookieValue = NSUserDefaults.standardUserDefaults().stringForKey("LOGIN_COOKIE") {
-            let loginCookie = NSHTTPCookie(properties: [
-                NSHTTPCookieDomain: "www.wanikani.com",
-                NSHTTPCookieName: "remember_user_token",
-                NSHTTPCookiePath: "/",
-                NSHTTPCookieSecure: "TRUE",
-                NSHTTPCookieValue: loginCookieValue
+            if let loginCookieValue = UserDefaults.standard.string(forKey: "LOGIN_COOKIE") {
+            let loginCookie = HTTPCookie(properties: [
+                HTTPCookiePropertyKey.domain: "www.wanikani.com",
+                HTTPCookiePropertyKey.name: "remember_user_token",
+                HTTPCookiePropertyKey.path: "/",
+                HTTPCookiePropertyKey.secure: "TRUE",
+                HTTPCookiePropertyKey.value: loginCookieValue
                 ])!
                 
                 DDLogDebug("Setting login cookie value \(loginCookieValue)")
-                NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(loginCookie)
+                HTTPCookieStorage.shared.setCookie(loginCookie)
                 ApplicationSettings.apiKeyVerified = false
             }
         
@@ -66,32 +66,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         if ApplicationSettings.purgeDatabase {
             databaseManager.recreateDatabase()
         }
     }
     
-    func applicationDidReceiveMemoryWarning(application: UIApplication) {
+    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
         DDLogInfo("Low memory warning: clearing statement cache")
-        databaseQueue.inDatabase { $0.clearCachedStatements() }
+        databaseQueue.inDatabase { $0?.clearCachedStatements() }
     }
     
-    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [String : AnyObject]) -> Bool {
         DDLogInfo("Opening due to url \(url)")
         return true
     }
     
     // MARK: - Background fetch
     
-    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         DDLogDebug("In background fetch handler")
         
         // We must have an API key set, or there's no data to fetch
         guard let apiKey = ApplicationSettings.apiKey else {
             DDLogDebug("Background fetch result = .NoData (No API key set)")
-            completionHandler(.NoData)
+            completionHandler(.noData)
             return
         }
         
@@ -108,13 +108,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if !fatalErrors.isEmpty {
                 DDLogDebug("Background fetch result = .Failed")
-                completionHandler(.Failed)
+                completionHandler(.failed)
             } else if operation.fetchRequired {
                 DDLogDebug("Background fetch result = .NewData")
-                completionHandler(.NewData)
+                completionHandler(.newData)
             } else {
                 DDLogDebug("Background fetch result = .NoData")
-                completionHandler(.NoData)
+                completionHandler(.noData)
             }
         }
         
@@ -129,8 +129,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Operation queue
     
-    lazy var operationQueue: OperationQueue = {
-        let oq = OperationQueue()
+    lazy var operationQueue: OperationKit.OperationQueue = {
+        let oq = OperationKit.OperationQueue()
         oq.name = "AlliCrab worker queue"
         return oq
         }()

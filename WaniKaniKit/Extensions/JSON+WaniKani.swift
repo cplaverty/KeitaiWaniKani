@@ -11,10 +11,10 @@ import SwiftyJSON
 extension JSON {
     
     //Optional date
-    public var date: NSDate? {
+    public var date: Date? {
         get {
-            if let timeInterval = self.double where timeInterval > 0 {
-                return NSDate(timeIntervalSince1970: timeInterval)
+            if let timeInterval = self.double, timeInterval > 0 {
+                return Date(timeIntervalSince1970: timeInterval)
             }
             return nil
         }
@@ -24,9 +24,9 @@ extension JSON {
     }
     
     //Non-optional date
-    public var dateValue: NSDate {
+    public var dateValue: Date {
         get {
-            return NSDate(timeIntervalSince1970: self.doubleValue)
+            return Date(timeIntervalSince1970: self.doubleValue)
         }
         set {
             self.doubleValue = newValue.timeIntervalSince1970

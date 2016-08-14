@@ -7,8 +7,8 @@
 
 import Foundation
 
-func date(year: Int, _ month: Int, _ day: Int, _ hour: Int, _ minute: Int, _ second: Int) -> NSDate {
-    let components = NSDateComponents()
+func date(_ year: Int, _ month: Int, _ day: Int, _ hour: Int, _ minute: Int, _ second: Int) -> Date {
+    var components = DateComponents()
     components.year = year
     components.month = month
     components.day = day
@@ -16,8 +16,8 @@ func date(year: Int, _ month: Int, _ day: Int, _ hour: Int, _ minute: Int, _ sec
     components.minute = minute
     components.second = second
     
-    let calendar = NSCalendar.autoupdatingCurrentCalendar()
-    guard let date = calendar.dateFromComponents(components) else {
+    let calendar = Calendar.autoupdatingCurrent
+    guard let date = calendar.date(from: components) else {
         fatalError("Invalid date components specified: \(components)")
     }
     

@@ -11,8 +11,8 @@ This file shows an example of implementing the OperationCondition protocol.
 import UIKit
 import CocoaLumberjack
 
-public enum UserNotificationConditionError: ErrorType {
-    case SettingsMismatch(currentSettings: UIUserNotificationSettings?, desiredSettings: UIUserNotificationSettings)
+public enum UserNotificationConditionError: Error {
+    case settingsMismatch(currentSettings: UIUserNotificationSettings?, desiredSettings: UIUserNotificationSettings)
 }
 
 /**
@@ -23,10 +23,10 @@ public struct UserNotificationCondition: OperationCondition {
     
     public enum Behavior {
         /// Merge the new `UIUserNotificationSettings` with the `currentUserNotificationSettings`.
-        case Merge
+        case merge
 
         /// Replace the `currentUserNotificationSettings` with the new `UIUserNotificationSettings`.
-        case Replace
+        case replace
     }
     
     public static let isMutuallyExclusive = false
@@ -51,28 +51,28 @@ public struct UserNotificationCondition: OperationCondition {
             `application`. You may also specify `.Replace`, which means the `settings` 
             will overwrite the existing settings.
     */
-    public init(settings: UIUserNotificationSettings, application: UIApplication, behavior: Behavior = .Merge) {
+    public init(settings: UIUserNotificationSettings, application: UIApplication, behavior: Behavior = .merge) {
         self.settings = settings
         self.application = application
         self.behavior = behavior
     }
     
-    public func dependencyForOperation(operation: Operation) -> NSOperation? {
+    public func dependency(forOperation operation: Operation) -> Foundation.Operation? {
         return self.dynamicType.enabled ? UserNotificationPermissionOperation(settings: settings, application: application, behavior: behavior) : nil
     }
     
-    public func evaluateForOperation(operation: Operation, completion: OperationConditionResult -> Void) {
+    public func evaluate(forOperation operation: Operation, completion: (OperationConditionResult) -> Void) {
         guard self.dynamicType.enabled else {
-            completion(.Failed(UserNotificationConditionError.SettingsMismatch(currentSettings: nil, desiredSettings: settings)))
+            completion(.failed(UserNotificationConditionError.settingsMismatch(currentSettings: nil, desiredSettings: settings)))
             return
         }
         
-        let current = application.currentUserNotificationSettings()
+        let current = application.currentUserNotificationSettings
         
-        if let current = current where current.contains(settings) {
-            completion(.Satisfied)
+        if let current = current, current.contains(settings) {
+            completion(.satisfied)
         } else {
-            completion(.Failed(UserNotificationConditionError.SettingsMismatch(currentSettings: current, desiredSettings: settings)))
+            completion(.failed(UserNotificationConditionError.settingsMismatch(currentSettings: current, desiredSettings: settings)))
         }
     }
     
@@ -93,22 +93,20 @@ private class UserNotificationPermissionOperation: Operation {
         self.behavior = behavior
         
         super.init()
-
+        
         addCondition(AlertPresentation())
     }
     
     override func execute() {
-        dispatch_async(dispatch_get_main_queue()) {
-            let current = self.application.currentUserNotificationSettings()
+        DispatchQueue.main.async {
+            let current = self.application.currentUserNotificationSettings
             
             let settingsToRegister: UIUserNotificationSettings
             
-            switch (current, self.behavior) {
-                case (let currentSettings?, .Merge):
-                    settingsToRegister = currentSettings.settingsByMerging(self.settings)
-
-                default:
-                    settingsToRegister = self.settings
+            if let currentSettings = current, self.behavior == .merge {
+                settingsToRegister = currentSettings.merged(with: self.settings)
+            } else {
+                settingsToRegister = self.settings
             }
             
             self.application.registerUserNotificationSettings(settingsToRegister)

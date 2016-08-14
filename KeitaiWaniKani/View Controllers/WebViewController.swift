@@ -17,26 +17,26 @@ private struct NavigationBarSettings {
     let hidesBarsWhenVerticallyCompact: Bool
     
     init(navigationController nc: UINavigationController) {
-        self.toolbarHidden = nc.toolbarHidden
+        self.toolbarHidden = nc.isToolbarHidden
         self.hidesBarsOnSwipe = nc.hidesBarsOnSwipe
         self.hidesBarsWhenVerticallyCompact = nc.hidesBarsWhenVerticallyCompact
     }
     
-    func applyToNavigationController(nc: UINavigationController) {
-        nc.toolbarHidden = self.toolbarHidden
+    func applyToNavigationController(_ nc: UINavigationController) {
+        nc.isToolbarHidden = self.toolbarHidden
         nc.hidesBarsOnSwipe = self.hidesBarsOnSwipe
         nc.hidesBarsWhenVerticallyCompact = self.hidesBarsWhenVerticallyCompact
     }
 }
 
 protocol WebViewControllerDelegate: class {
-    func webViewControllerDidFinish(controller: WebViewController)
+    func webViewControllerDidFinish(_ controller: WebViewController)
 }
 
 class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelegate, WebViewControllerDelegate, UIWebViewUserScriptSupport {
     
-    class func forURL(URL: NSURL, @noescape configBlock: (WebViewController) -> Void) -> UINavigationController {
-        let webViewController = self.init(URL: URL)
+    class func wrapped(url: URL, configBlock: @noescape (WebViewController) -> Void) -> UINavigationController {
+        let webViewController = self.init(url: url)
         configBlock(webViewController)
         
         let nc = UINavigationController(navigationBarClass: nil, toolbarClass: nil)
@@ -47,9 +47,9 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     // MARK: - Initialisers
     
-    required init(URL: NSURL) {
+    required init(url: URL) {
         super.init(nibName: nil, bundle: nil)
-        self.URL = URL
+        self.url = url
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,7 +60,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         webView?.delegate = nil
         backScreenEdgePanGesture?.removeTarget(self, action: nil)
         forwardScreenEdgePanGesture?.removeTarget(self, action: nil)
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
     // MARK: - Properties
@@ -69,9 +69,9 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     weak var delegate: WebViewControllerDelegate?
     var allowsBackForwardNavigationGestures: Bool { return true }
     
-    var URL: NSURL?
-    private var lastRequest: NSURLRequest? = nil
-    private(set) var requestStack: [NSURLRequest] = []
+    var url: URL?
+    private var lastRequest: URLRequest? = nil
+    private(set) var requestStack: [URLRequest] = []
     private var userScriptsInjected = false
     private var navigationBarSettings: NavigationBarSettings? = nil
     
@@ -82,7 +82,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.scrollView.delegate = self
         webView.delegate = self
-        webView.backgroundColor = UIColor.whiteColor()
+        webView.backgroundColor = UIColor.white
         webView.allowsInlineMediaPlayback = true
         webView.mediaPlaybackRequiresUserAction = false
         if #available(iOS 9.0, *) {
@@ -95,28 +95,28 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     weak var webView: UIWebView?
     
     lazy var statusBarView: UIView = {
-        let statusBarView = UIBottomBorderedView(color: UIColor.lightGrayColor(), width: 0.5)
-        statusBarView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: self.view.frame.size.width, height: 20))
-        statusBarView.autoresizingMask = .FlexibleWidth
+        let statusBarView = UIBottomBorderedView(color: UIColor.lightGray, width: 0.5)
+        statusBarView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: self.view.frame.width, height: 20))
+        statusBarView.autoresizingMask = .flexibleWidth
         statusBarView.backgroundColor = ApplicationSettings.globalBarTintColor()
         
         return statusBarView
     }()
     
     lazy var backButton: UIBarButtonItem = {
-        return UIBarButtonItem(image: UIImage(named: "ArrowLeft"), style: .Plain, target: self, action: #selector(backButtonTouched(_:forEvent:)))
+        return UIBarButtonItem(image: UIImage(named: "ArrowLeft"), style: .plain, target: self, action: #selector(backButtonTouched(_:forEvent:)))
     }()
     lazy var forwardButton: UIBarButtonItem = {
-        return UIBarButtonItem(image: UIImage(named: "ArrowRight"), style: .Plain, target: self, action: #selector(forwardButtonTouched(_:forEvent:)))
+        return UIBarButtonItem(image: UIImage(named: "ArrowRight"), style: .plain, target: self, action: #selector(forwardButtonTouched(_:forEvent:)))
     }()
     lazy var shareButton: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: #selector(share(_:)))
+        return UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
     }()
     lazy var openInSafariButton: UIBarButtonItem = {
-        return UIBarButtonItem(image: UIImage(named: "OpenInSafari"), style: .Plain, target: self, action: #selector(openInSafari(_:)))
+        return UIBarButtonItem(image: UIImage(named: "OpenInSafari"), style: .plain, target: self, action: #selector(openInSafari(_:)))
     }()
     lazy var doneButton: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(done(_:)))
+        return UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done(_:)))
     }()
     
     var shouldIncludeDoneButton: Bool {
@@ -128,19 +128,19 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     // MARK: - Actions
     
-    func done(sender: UIBarButtonItem) {
+    func done(_ sender: UIBarButtonItem) {
         delegate?.webViewControllerDidFinish(self)
     }
     
-    func share(sender: UIBarButtonItem) {
-        guard let webView = self.webView, let absoluteURL = webView.request?.URL?.absoluteURL else {
+    func share(_ sender: UIBarButtonItem) {
+        guard let webView = self.webView, let absoluteURL = webView.request?.url?.absoluteURL else {
             return
         }
         
         var activityItems: [AnyObject] = [absoluteURL]
-        let onePasswordExtension = OnePasswordExtension.sharedExtension()
+        let onePasswordExtension = OnePasswordExtension.shared()
         if onePasswordExtension.isAppExtensionAvailable() {
-            onePasswordExtension.createExtensionItemForWebView(webView) { extensionItem, error -> Void in
+            onePasswordExtension.createExtensionItem(forWebView: webView) { extensionItem, error -> Void in
                 if let error = error {
                     DDLogWarn("Failed to create 1Password extension item: \(error)")
                 } else if let extensionItem = extensionItem {
@@ -160,7 +160,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
                     if onePasswordExtension.isOnePasswordExtensionActivityType(activityType) {
                         onePasswordExtension.fillReturnedItems(returnedItems, intoWebView: webView) { success, error in
                             if !success {
-                                let errorDescription = error?.description ?? "(No error details)"
+                                let errorDescription = error?.localizedDescription ?? "(No error details)"
                                 DDLogWarn("Failed to fill password from password manager: \(errorDescription)")
                             }
                         }
@@ -172,15 +172,15 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         }
     }
     
-    func openInSafari(sender: UIBarButtonItem) {
-        guard let URL = webView?.request?.URL else {
+    func openInSafari(_ sender: UIBarButtonItem) {
+        guard let URL = webView?.request?.url else {
             return
         }
         
-        UIApplication.sharedApplication().openURL(URL)
+        UIApplication.shared.openURL(URL)
     }
     
-    func backButtonTouched(sender: UIBarButtonItem, forEvent event: UIEvent) {
+    func backButtonTouched(_ sender: UIBarButtonItem, forEvent event: UIEvent) {
         guard let webView = self.webView else { return }
         
         if webView.canGoBack {
@@ -188,7 +188,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         }
     }
     
-    func forwardButtonTouched(sender: UIBarButtonItem, forEvent event: UIEvent) {
+    func forwardButtonTouched(_ sender: UIBarButtonItem, forEvent event: UIEvent) {
         guard let webView = self.webView else { return }
         
         if webView.canGoForward {
@@ -196,41 +196,42 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         }
     }
     
-    func backScreenEdgePanGestureTriggered(gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
+    func backScreenEdgePanGestureTriggered(_ gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
         guard let webView = self.webView else { return }
         
-        if gestureRecognizer.state == .Ended && webView.canGoBack {
+        if gestureRecognizer.state == .ended && webView.canGoBack {
             webView.goBack()
         }
     }
     
-    func forwardScreenEdgePanGestureTriggered(gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
+    func forwardScreenEdgePanGestureTriggered(_ gestureRecognizer: UIScreenEdgePanGestureRecognizer) {
         guard let webView = self.webView else { return }
         
-        if gestureRecognizer.state == .Ended && webView.canGoForward {
+        if gestureRecognizer.state == .ended && webView.canGoForward {
             webView.goForward()
         }
     }
     
     // MARK: - UIWebViewDelegate
     
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         DDLogVerbose("shouldStartLoadWithRequest: \(request) navigationType: \(navigationType)")
         lastRequest = request
-        switch request.URL {
-        case WaniKaniURLs.subscription?:
-            self.showAlertWithTitle("Can not manage subscription", message: "Please use Safari to manage your subscription.")
-            return false
-        default:
-            return true
-        }
+//        switch request.url {
+//        case WaniKaniURLs.subscription?:
+//            self.showAlertWithTitle("Can not manage subscription", message: "Please use Safari to manage your subscription.")
+//            return false
+//        default:
+//            return true
+//        }
+        return true
     }
     
-    func webViewDidStartLoad(webView: UIWebView) {
+    func webViewDidStartLoad(_ webView: UIWebView) {
         if let request = lastRequest {
             requestStack.append(request)
-            if let requestURLStarted = request.URL
-                where requestURLStarted == WaniKaniURLs.loginPage || requestURLStarted == WaniKaniURLs.lessonSession || requestURLStarted == WaniKaniURLs.reviewSession {
+            if let requestURLStarted = request.url,
+                requestURLStarted == WaniKaniURLs.loginPage || requestURLStarted == WaniKaniURLs.lessonSession || requestURLStarted == WaniKaniURLs.reviewSession {
                     DDLogDebug("Clearing user script injection flag")
                     userScriptsInjected = false
             }
@@ -248,44 +249,45 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         updateUIFromWebView()
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
-        jsContext = webView.valueForKeyPath("documentView.webView.mainFrame.javaScriptContext") as? JSContext
-        let setTitle: @convention(block) String -> Void = { [weak self] title in self?.title = title }
-        jsContext?.setObject(unsafeBitCast(setTitle, AnyObject.self), forKeyedSubscript: "setWebViewPageTitle")
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        jsContext = webView.value(forKeyPath: "documentView.webView.mainFrame.javaScriptContext") as? JSContext
+        let setTitle: @convention(block) (String) -> Void = { [weak self] title in self?.title = title }
+        jsContext?.setObject(unsafeBitCast(setTitle, to: AnyObject.self), forKeyedSubscript: "setWebViewPageTitle")
         
         let requestFinished = requestStack.popLast()
         DDLogVerbose("webViewDidFinishLoad webView.request: \(requestFinished)")
         // Finish load of new page
         if requestStack.isEmpty {
-            if let documentTitle = webView.stringByEvaluatingJavaScriptFromString("document.title") where !documentTitle.isEmpty {
+            if let documentTitle = webView.stringByEvaluatingJavaScript(from: "document.title"), !documentTitle.isEmpty {
                 title = documentTitle
             }
-            addressBarView.URL = webView.request?.URL
+            addressBarView.url = webView.request?.url
             addressBarView.loading = false
             lastRequest = nil
         }
         updateUIFromWebView()
         
         if !userScriptsInjected {
-            if let URL = webView.request?.URL {
-                userScriptsInjected = injectUserScriptsForURL(URL)
+            if let url = webView.request?.url {
+                userScriptsInjected = injectUserScripts(forURL: url)
                 
-                if URL == WaniKaniURLs.lessonSession || URL == WaniKaniURLs.reviewSession {
+                if url == WaniKaniURLs.lessonSession || url == WaniKaniURLs.reviewSession {
                     showBrowserInterface(false, animated: true)
                 }
             }
         }
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         DDLogWarn("Navigation failed: \(error)")
-        addressBarView.URL = webView.request?.URL
+        addressBarView.url = webView.request?.url
         addressBarView.loading = false
         requestStack.removeAll()
         updateUIFromWebView()
         
-        if let error = error where error.domain != "WebKitErrorDomain" && error.code != 102 {
-            switch (error.domain, error.code) {
+        let nsError = error as NSError
+        if nsError.domain != "WebKitErrorDomain" && nsError.code != 102 {
+            switch (nsError.domain, nsError.code) {
                 // Ignore navigation cancellation errors
             case (NSURLErrorDomain, NSURLErrorCancelled), ("WebKitErrorDomain", 102):
                 break
@@ -297,8 +299,8 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     // MARK: - UIScrollViewDelegate
     
-    func scrollViewShouldScrollToTop(scrollView: UIScrollView) -> Bool {
-        guard let nc = navigationController where nc.navigationBarHidden else { return true }
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        guard let nc = navigationController, nc.isNavigationBarHidden else { return true }
         
         showBrowserInterface(true, animated: true)
         return false
@@ -306,7 +308,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     // MARK: - WebViewControllerDelegate
     
-    func webViewControllerDidFinish(controller: WebViewController) {
+    func webViewControllerDidFinish(_ controller: WebViewController) {
         self.delegate?.webViewControllerDidFinish(self)
     }
     
@@ -323,41 +325,41 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         self.webView = webView
         
         self.view.addSubview(webView)
-        NSLayoutConstraint(item: webView, attribute: .Top, relatedBy: .Equal, toItem: self.view, attribute: .Top, multiplier: 1, constant: 0).active = true
-        NSLayoutConstraint(item: webView, attribute: .Leading, relatedBy: .Equal, toItem: self.view, attribute: .Leading, multiplier: 1, constant: 0).active = true
-        NSLayoutConstraint(item: webView, attribute: .Trailing, relatedBy: .Equal, toItem: self.view, attribute: .Trailing, multiplier: 1, constant: 0).active = true
-        NSLayoutConstraint(item: webView, attribute: .Bottom, relatedBy: .Equal, toItem: self.view, attribute: .Bottom, multiplier: 1, constant: 0).active = true
+        NSLayoutConstraint(item: webView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: webView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: webView, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: webView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
 
         self.view.addSubview(statusBarView)
         
         if allowsBackForwardNavigationGestures {
             backScreenEdgePanGesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(backScreenEdgePanGestureTriggered(_:)))
-            backScreenEdgePanGesture!.edges = .Left
+            backScreenEdgePanGesture!.edges = .left
             forwardScreenEdgePanGesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(forwardScreenEdgePanGestureTriggered(_:)))
-            forwardScreenEdgePanGesture!.edges = .Right
+            forwardScreenEdgePanGesture!.edges = .right
             webView.scrollView.addGestureRecognizer(backScreenEdgePanGesture!)
             webView.scrollView.addGestureRecognizer(forwardScreenEdgePanGesture!)
-            webView.scrollView.panGestureRecognizer.requireGestureRecognizerToFail(backScreenEdgePanGesture!)
-            webView.scrollView.panGestureRecognizer.requireGestureRecognizerToFail(forwardScreenEdgePanGesture!)
+            webView.scrollView.panGestureRecognizer.require(toFail: backScreenEdgePanGesture!)
+            webView.scrollView.panGestureRecognizer.require(toFail: forwardScreenEdgePanGesture!)
         }
         
-        configureForTraitCollection(self.traitCollection)
+        configure(forTraitCollection: self.traitCollection)
         
         if let nc = self.navigationController {
             let navBar = nc.navigationBar
             
             addressBarView = WebAddressBarView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: navBar.bounds.width, height: 28)), forWebView: webView)
-            addressBarView.autoresizingMask = [.FlexibleWidth]
+            addressBarView.autoresizingMask = [.flexibleWidth]
             self.navigationItem.titleView = addressBarView
         }
         
-        if let url = self.URL {
-            let request = NSURLRequest(URL: url)
+        if let url = self.url {
+            let request = URLRequest(url: url)
             webView.loadRequest(request)
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if let nc = self.navigationController {
@@ -369,7 +371,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         if let nc = self.navigationController {
@@ -377,16 +379,16 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         }
     }
     
-    override func willTransitionToTraitCollection(newCollection: UITraitCollection, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         if newCollection.horizontalSizeClass != traitCollection.horizontalSizeClass || newCollection.verticalSizeClass != traitCollection.verticalSizeClass {
-            configureForTraitCollection(newCollection)
+            configure(forTraitCollection: newCollection)
         }
     }
     
     /// Sets the navigation bar and toolbar items based on the given UITraitCollection
-    func configureForTraitCollection(traitCollection: UITraitCollection) {
-        statusBarView.hidden = traitCollection.verticalSizeClass == .Compact
-        if traitCollection.horizontalSizeClass == .Compact && traitCollection.verticalSizeClass == .Regular {
+    func configure(forTraitCollection traitCollection: UITraitCollection) {
+        statusBarView.isHidden = traitCollection.verticalSizeClass == .compact
+        if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
             addToolbarItemsForCompactWidthRegularHeight()
         } else {
             addToolbarItemsForAllOtherTraitCollections()
@@ -398,7 +400,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         self.navigationController?.setToolbarHidden(false, animated: true)
         navigationItem.leftBarButtonItems = nil
         navigationItem.rightBarButtonItems = shouldIncludeDoneButton ? [doneButton] : nil
-        let flexibleSpace = { UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil) }
+        let flexibleSpace = { UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil) }
         setToolbarItems([backButton, flexibleSpace(), forwardButton, flexibleSpace(), shareButton, flexibleSpace(), openInSafariButton], animated: true)
     }
     
@@ -413,7 +415,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     // MARK: - Implementation
     
-    func presentActivityViewController(activityItems: [AnyObject], title: String?, sender: UIBarButtonItem, completionHandler: UIActivityViewControllerCompletionWithItemsHandler? = nil) {
+    func presentActivityViewController(_ activityItems: [AnyObject], title: String?, sender: UIBarButtonItem, completionHandler: UIActivityViewControllerCompletionWithItemsHandler? = nil) {
         let avc = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         avc.popoverPresentationController?.barButtonItem = sender;
         avc.completionWithItemsHandler = completionHandler
@@ -421,24 +423,24 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
             avc.setValue(title, forKey: "subject")
         }
         
-        navigationController?.presentViewController(avc, animated: true, completion: nil)
+        navigationController?.present(avc, animated: true, completion: nil)
     }
     
     private func updateUIFromWebView() {
         // Network indicator
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = webView?.loading ?? false
+        UIApplication.shared.isNetworkActivityIndicatorVisible = webView?.isLoading ?? false
         
         // Navigation buttons
-        backButton.enabled = webView?.canGoBack ?? false
-        forwardButton.enabled = webView?.canGoForward ?? false
-        shareButton.enabled = webView?.request?.URL != nil
-        openInSafariButton.enabled = webView?.request?.URL != nil
+        backButton.isEnabled = webView?.canGoBack ?? false
+        forwardButton.isEnabled = webView?.canGoForward ?? false
+        shareButton.isEnabled = webView?.request?.url != nil
+        openInSafariButton.isEnabled = webView?.request?.url != nil
     }
     
-    func fillUsing1Password(sender: AnyObject!) {
+    func fillUsing1Password(_ sender: AnyObject!) {
         guard let webView = self.webView else { return }
         
-        OnePasswordExtension.sharedExtension().fillItemIntoWebView(webView, forViewController: self, sender: sender, showOnlyLogins: true) { success, error in
+        OnePasswordExtension.shared().fillItem(intoWebView: webView, for: self, sender: sender, showOnlyLogins: true) { success, error in
             if (!success) {
                 DDLogWarn("Failed to fill password into webview: \(error)")
             } else {
@@ -447,7 +449,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         }
     }
     
-    func showBrowserInterface(showBrowserInterface: Bool, animated: Bool) {
+    func showBrowserInterface(_ showBrowserInterface: Bool, animated: Bool) {
         guard let nc = self.navigationController else { return }
         
         nc.setNavigationBarHidden(!showBrowserInterface, animated: animated)
@@ -461,12 +463,12 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
 extension UIWebViewNavigationType: CustomStringConvertible {
     public var description: String {
         switch self {
-        case LinkClicked: return "LinkClicked"
-        case FormSubmitted: return "FormSubmitted"
-        case BackForward: return "BackForward"
-        case Reload: return "Reload"
-        case FormResubmitted: return "FormResubmitted"
-        case Other: return "Other"
+        case .linkClicked: return "LinkClicked"
+        case .formSubmitted: return "FormSubmitted"
+        case .backForward: return "BackForward"
+        case .reload: return "Reload"
+        case .formResubmitted: return "FormResubmitted"
+        case .other: return "Other"
         }
     }
 }

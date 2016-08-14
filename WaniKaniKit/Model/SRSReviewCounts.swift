@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SRSReviewCounts: Equatable {
-    public let dateAvailable: NSDate
+    public let dateAvailable: Date
     public let itemCounts: SRSItemCounts
 }
 

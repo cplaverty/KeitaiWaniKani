@@ -17,14 +17,14 @@ class GetAPIKeyViewController: UIViewController, UITextFieldDelegate {
     }
 
     func preventInput() {
-        apiKeyTextField.enabled = false
-        doneBarButton.enabled = false
+        apiKeyTextField.isEnabled = false
+        doneBarButton.isEnabled = false
         activityIndicator.startAnimating()
     }
     
     func allowInput() {
-        apiKeyTextField.enabled = true
-        doneBarButton.enabled = true
+        apiKeyTextField.isEnabled = true
+        doneBarButton.isEnabled = true
         activityIndicator.stopAnimating()
     }
     
@@ -38,23 +38,23 @@ class GetAPIKeyViewController: UIViewController, UITextFieldDelegate {
         ApplicationSettings.apiKey = apiKey
         
         DDLogDebug("Checking validity of API key \(apiKey)")
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
             let finishHandler = BlockObserver(finishHandler: { _, operationErrors in
                 let errors = operationErrors.filter { error in
-                    if case UserNotificationConditionError.SettingsMismatch = error {
+                    if case UserNotificationConditionError.settingsMismatch = error {
                         return false
                     }
                     return true
                 }
                 
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     // Ignore user notification errors
                     self.allowInput()
                     if errors.isEmpty {
                         DDLogDebug("API key valid.  Dismissing view controller.")
-                        self.performSegueWithIdentifier(SegueIdentifiers.apiKeySet, sender: self)
+                        self.performSegue(withIdentifier: SegueIdentifiers.apiKeySet, sender: self)
                     } else {
-                        if errors.contains({ if case WaniKaniAPIError.UserNotFound = $0 { return true } else { return false } }) {
+                        if errors.contains(where: { if case WaniKaniAPIError.userNotFound = $0 { return true } else { return false } }) {
                             ApplicationSettings.apiKey = nil
                             self.showAlertWithTitle("Invalid API Key", message: "The API key you entered is invalid.  Please check and try again.")
                         } else {
@@ -66,7 +66,7 @@ class GetAPIKeyViewController: UIViewController, UITextFieldDelegate {
             })
             
             DDLogVerbose("Checking API key...")
-            let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let delegate = UIApplication.shared.delegate as! AppDelegate
             let resolver = WaniKaniAPI.resourceResolverForAPIKey(apiKey)
             let operation = GetStudyQueueOperation(resolver: resolver, databaseQueue: delegate.databaseQueue, parseOnly: true)
             operation.addObserver(finishHandler)
@@ -78,14 +78,14 @@ class GetAPIKeyViewController: UIViewController, UITextFieldDelegate {
     var aktfObserver: NSObjectProtocol?
     
     func observeTextField() {
-        let center = NSNotificationCenter.defaultCenter()
-        aktfObserver = center.addObserverForName(UITextFieldTextDidChangeNotification,
+        let center = NotificationCenter.default
+        aktfObserver = center.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange,
             object: apiKeyTextField,
-            queue: NSOperationQueue.mainQueue()) { _ in
+            queue: Foundation.OperationQueue.main) { _ in
                 if let text = self.apiKeyTextField?.text {
-                    self.doneBarButton.enabled = !text.characters.isEmpty
+                    self.doneBarButton.isEnabled = !text.characters.isEmpty
                 } else {
-                    self.doneBarButton.enabled = false
+                    self.doneBarButton.isEnabled = false
                 }
         }
     }
@@ -102,17 +102,17 @@ class GetAPIKeyViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Actions
     
-    @IBAction func cancel(sender: UIBarButtonItem) {
-        dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func done(sender: UIBarButtonItem) {
+    @IBAction func done(_ sender: UIBarButtonItem) {
         checkAPIKey()
     }
     
     // MARK: UITextFieldDelegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         checkAPIKey()
         return true
@@ -125,16 +125,16 @@ class GetAPIKeyViewController: UIViewController, UITextFieldDelegate {
         apiKeyTextField.becomeFirstResponder()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         apiKeyTextField?.text = ApplicationSettings.apiKey
         observeTextField()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if let observer = aktfObserver {
-            NSNotificationCenter.defaultCenter().removeObserver(observer)
+            NotificationCenter.default.removeObserver(observer)
         }
     }
     

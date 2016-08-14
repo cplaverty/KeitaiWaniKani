@@ -11,7 +11,7 @@ import FMDB
 import OperationKit
 import WaniKaniKit
 
-final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
+final class GetDashboardDataOperation: GroupOperation, ProgressReporting {
     
     let studyQueueOperation: GetStudyQueueOperation
     let levelProgressionOperation: GetLevelProgressionOperation
@@ -21,7 +21,7 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
     let reviewTimeNotificationOperation: ReviewTimeNotificationOperation
     let reviewCountNotificationOperation: ReviewCountNotificationOperation
     
-    let progress: NSProgress
+    let progress: Progress
     
     var fetchRequired: Bool {
         return studyQueueOperation.fetchRequired || levelProgressionOperation.fetchRequired || srsDistributionOperation.fetchRequired || srsDataItemOperation.fetchRequired
@@ -30,19 +30,19 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
     private var hasProducedAlert = false
     private let interactive: Bool
     
-    init(resolver: ResourceResolver, databaseQueue: FMDatabaseQueue, forcedFetch forced: Bool, isInteractive interactive: Bool, initialDelay delay: NSTimeInterval? = nil) {
+    init(resolver: ResourceResolver, databaseQueue: FMDatabaseQueue, forcedFetch forced: Bool, isInteractive interactive: Bool, initialDelay delay: TimeInterval? = nil) {
         self.interactive = interactive
         let networkObserver = NetworkObserver()
         
         // Dummy op to prompt for notification permissions
-        let dummy = BlockOperation {}
-        dummy.addCondition(UserNotificationCondition(settings: UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil), application: UIApplication.sharedApplication()))
+        let dummy = OperationKit.BlockOperation {}
+        dummy.addCondition(UserNotificationCondition(settings: UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil), application: UIApplication.shared))
         
-        progress = NSProgress(totalUnitCount: 10)
+        progress = Progress(totalUnitCount: 10)
         progress.localizedDescription = "Downloading data from WaniKani"
         progress.localizedAdditionalDescription = "Waiting..."
         
-        progress.becomeCurrentWithPendingUnitCount(1)
+        progress.becomeCurrent(withPendingUnitCount: 1)
         studyQueueOperation = GetStudyQueueOperation(resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver)
         progress.resignCurrent()
         if !forced {
@@ -51,19 +51,19 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         
         let studyQueueIsUpdatedCondition = StudyQueueIsUpdatedCondition(databaseQueue: databaseQueue)
         
-        progress.becomeCurrentWithPendingUnitCount(1)
+        progress.becomeCurrent(withPendingUnitCount: 1)
         levelProgressionOperation = GetLevelProgressionOperation(resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver)
         progress.resignCurrent()
         levelProgressionOperation.addCondition(NoCancelledDependencies())
         levelProgressionOperation.addCondition(studyQueueIsUpdatedCondition)
         
-        progress.becomeCurrentWithPendingUnitCount(1)
+        progress.becomeCurrent(withPendingUnitCount: 1)
         srsDistributionOperation = GetSRSDistributionOperation(resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver)
         progress.resignCurrent()
         srsDistributionOperation.addCondition(NoCancelledDependencies())
         srsDistributionOperation.addCondition(studyQueueIsUpdatedCondition)
         
-        progress.becomeCurrentWithPendingUnitCount(7)
+        progress.becomeCurrent(withPendingUnitCount: 7)
         srsDataItemOperation = GetSRSDataItemOperation(resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver)
         progress.resignCurrent()
         srsDataItemOperation.addCondition(NoCancelledDependencies())
@@ -99,7 +99,7 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
                     guard let studyQueue = maybeStudyQueue else { return }
                     
                     DDLogDebug("Badging app icon: \(studyQueue.reviewsAvailable)")
-                    let application = UIApplication.sharedApplication()
+                    let application = UIApplication.shared
                     application.applicationIconBadgeNumber = studyQueue.reviewsAvailable
                 }
             ))
@@ -117,7 +117,7 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         if let delay = delay {
             progress.totalUnitCount += 1
             let delayOperation = DelayOperation(interval: delay)
-            progress.becomeCurrentWithPendingUnitCount(1)
+            progress.becomeCurrent(withPendingUnitCount: 1)
             let countdownObserver = DelayOperationIntervalCountdownObserver(notificationInterval: 1)
             progress.resignCurrent()
             delayOperation.addObserver(countdownObserver)
@@ -129,7 +129,7 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         name = "Get Dashboard Data"
     }
     
-    override func operationDidFinish(operation: NSOperation, withErrors errors: [ErrorType]) {
+    override func operationDidFinish(_ operation: Foundation.Operation, withErrors errors: [Error]) {
         guard interactive else { return }
         guard let firstError = errors.filterNonFatalErrors().first else {
             return
@@ -138,7 +138,7 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         produceAlert(firstError)
     }
     
-    private func produceAlert(error: ErrorType) {
+    private func produceAlert(_ error: Error) {
         /*
         We only want to show the first error, since subsequent errors might
         be caused by the first.
@@ -148,22 +148,22 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         let alert = AlertOperation()
         
         switch error {
-        case ReachabilityConditionError.FailedToReachHost(host: let host):
+        case ReachabilityConditionError.failedToReachHost(host: let host):
             // We failed because the network isn't reachable.
             alert.title = "Unable to Connect"
             alert.message = "Cannot connect to \(host). Make sure your device is connected to the internet and try again."
             
-        case NSCocoaError.PropertyListReadCorruptError:
+        case CocoaError.propertyListReadCorruptError:
             // We failed because the JSON was malformed.
             alert.title = "Unable to Download"
             alert.message = "Cannot download WaniKani API data. Try again later."
             
-        case DownloadFileOperationError.InvalidHTTPResponse(URL: _, code: let code, message: let message):
+        case DownloadFileOperationError.invalidHTTPResponse(url: _, code: let code, message: let message):
             // We failed because the WaniKani site returned a non-2xx return code
             alert.title = "Invalid Response Code"
             alert.message = "WaniKani site returned an error code \(code) (\(message)). Try again later."
 
-        case TimeoutObserverError.TimeoutOccurred(interval: _):
+        case TimeoutObserverError.timeoutOccurred(interval: _):
             alert.title = "Operation Timed Out"
             alert.message = "A timeout occurred downloading data from the WaniKani site. Please try the operation again."
             
@@ -176,13 +176,13 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         hasProducedAlert = true
     }
     
-    override func finished(errors: [ErrorType]) {
+    override func finished(_ errors: [Error]) {
         super.finished(errors)
         
         let fatalErrors = errors.filterNonFatalErrors()
-        if !cancelled && fatalErrors.isEmpty {
+        if !isCancelled && fatalErrors.isEmpty {
             DDLogDebug("Updating last refresh time")
-            ApplicationSettings.lastRefreshTime = NSDate()
+            ApplicationSettings.lastRefreshTime = Date()
             ApplicationSettings.forceRefresh = false
         } else {
             DDLogDebug("Not updating last refresh time due to fatal operation errors: \(fatalErrors)")
@@ -192,7 +192,7 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
         progress.completedUnitCount = progress.totalUnitCount
     }
     
-    private func projectedStudyQueue(databaseQueue: FMDatabaseQueue) -> StudyQueue? {
+    private func projectedStudyQueue(_ databaseQueue: FMDatabaseQueue) -> StudyQueue? {
         do {
             return try databaseQueue.withDatabase { try SRSDataItemCoder.projectedStudyQueue($0) }
         } catch {
@@ -202,45 +202,45 @@ final class GetDashboardDataOperation: GroupOperation, NSProgressReporting {
     }
 }
 
-class DelayOperationIntervalCountdownObserver: NSObject, OperationObserver, NSProgressReporting {
-    let progress: NSProgress = NSProgress(totalUnitCount: 1)
+class DelayOperationIntervalCountdownObserver: NSObject, OperationObserver, ProgressReporting {
+    let progress: Progress = Progress(totalUnitCount: 1)
     
-    private let formatter: NSDateComponentsFormatter = {
-        let formatter = NSDateComponentsFormatter()
-        formatter.unitsStyle = .Abbreviated
+    private let formatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .abbreviated
         return formatter
         }()
-    private let notificationInterval: NSTimeInterval
-    private var notificationTimer: NSTimer?
-    private var endDate: NSDate?
+    private let notificationInterval: TimeInterval
+    private var notificationTimer: Foundation.Timer?
+    private var endDate: Date?
     
-    init(notificationInterval: NSTimeInterval) {
+    init(notificationInterval: TimeInterval) {
         self.notificationInterval = notificationInterval
     }
     
-    func operationDidStart(operation: Operation) {
+    func operationDidStart(_ operation: OperationKit.Operation) {
         guard let delayOperation = operation as? DelayOperation else { return }
         
         switch delayOperation.delay {
-        case .Interval(let interval): self.endDate = NSDate(timeIntervalSinceNow: interval)
-        case .Date(let endDate): self.endDate = endDate
+        case .interval(let interval): self.endDate = Date(timeIntervalSinceNow: interval)
+        case .date(let endDate): self.endDate = endDate
         }
         
-        notificationTimer = NSTimer(timeInterval: notificationInterval, target: self, selector: #selector(timerTick(_:)), userInfo: nil, repeats: true)
-        NSRunLoop.mainRunLoop().addTimer(notificationTimer!, forMode: NSDefaultRunLoopMode)
+        notificationTimer = Foundation.Timer(timeInterval: notificationInterval, target: self, selector: #selector(timerTick(_:)), userInfo: nil, repeats: true)
+        RunLoop.main.add(notificationTimer!, forMode: RunLoopMode.defaultRunLoopMode)
         notificationTimer!.fire()
     }
     
-    func operation(operation: Operation, didProduceOperation newOperation: NSOperation) {}
+    func operation(_ operation: OperationKit.Operation, didProduceOperation newOperation: Foundation.Operation) {}
     
-    func operationDidFinish(operation: Operation, errors: [ErrorType]) {
+    func operationDidFinish(_ operation: OperationKit.Operation, errors: [Error]) {
         progress.completedUnitCount = 1
         notificationTimer?.invalidate()
         notificationTimer = nil
     }
     
-    func timerTick(timer: NSTimer) {
-        guard let endDate = endDate, let formattedTimeRemaining = formatter.stringFromTimeInterval(endDate.timeIntervalSinceNow + 1) else { return }
+    func timerTick(_ timer: Foundation.Timer) {
+        guard let endDate = endDate, let formattedTimeRemaining = formatter.string(from: endDate.timeIntervalSinceNow + 1) else { return }
         progress.localizedDescription = "WaniKani data download starting in \(formattedTimeRemaining)..."
     }
     

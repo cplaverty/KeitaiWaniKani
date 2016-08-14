@@ -19,29 +19,19 @@ public struct LevelData: Equatable {
     }
     
     /// Calculate the bounded mean, ignoring durations in the upper and lower quartiles
-    private static func calculateAverageLevelDuration(detail: [LevelInfo]) -> LevelStats? {
+    private static func calculateAverageLevelDuration(_ detail: [LevelInfo]) -> LevelStats? {
         guard !detail.lazy.filter({ $0.endDate != nil }).isEmpty else { return nil }
         
         var durations = detail.flatMap { $0.duration }
-        durations.sortInPlace(<)
-        let boundedDurations = durations[interquartileRange(durations.count)]
+        durations.sort(by: <)
+        let boundedDurations = durations.interquartileRange()
         guard !boundedDurations.isEmpty else { return nil }
         
         let lowerQuartile = boundedDurations.first!
         let upperQuartile = boundedDurations.last!
-        let mean = boundedDurations.reduce(0.0, combine: +) / Double(boundedDurations.count)
+        let mean = boundedDurations.reduce(0.0, +) / Double(boundedDurations.count)
         
         return LevelStats(mean: mean, lowerQuartile: lowerQuartile, upperQuartile: upperQuartile)
-    }
-    
-    /// Grab the middle 50% of values, preferring lower values
-    private static func interquartileRange(itemCount: Int) -> Range<Int> {
-        guard itemCount > 0 else { return 0..<0 }
-        
-        let itemIndex = itemCount - 1
-        let lowerQuartileEdge = itemIndex / 4 + (itemIndex % 4 == 3 ? 1 : 0)
-        let upperQuartileEdge = itemIndex * 3 / 4 + (itemIndex == 1 ? 1 : 0)
-        return lowerQuartileEdge...upperQuartileEdge
     }
 }
 
@@ -52,11 +42,11 @@ public func ==(lhs: LevelData, rhs: LevelData) -> Bool {
 }
 
 public struct LevelStats: Equatable {
-    public let mean: NSTimeInterval
-    public let lowerQuartile: NSTimeInterval
-    public let upperQuartile: NSTimeInterval
+    public let mean: TimeInterval
+    public let lowerQuartile: TimeInterval
+    public let upperQuartile: TimeInterval
     
-    public init(mean: NSTimeInterval, lowerQuartile: NSTimeInterval, upperQuartile: NSTimeInterval) {
+    public init(mean: TimeInterval, lowerQuartile: TimeInterval, upperQuartile: TimeInterval) {
         self.mean = mean
         self.lowerQuartile = lowerQuartile
         self.upperQuartile = upperQuartile
@@ -71,15 +61,15 @@ public func ==(lhs: LevelStats, rhs: LevelStats) -> Bool {
 
 public struct LevelInfo: Equatable {
     public let level: Int
-    public let startDate: NSDate
-    public let endDate: NSDate?
+    public let startDate: Date
+    public let endDate: Date?
     
-    public var duration: NSTimeInterval? {
+    public var duration: TimeInterval? {
         guard let endDate = endDate else { return nil }
-        return endDate.timeIntervalSinceDate(startDate)
+        return endDate.timeIntervalSince(startDate)
     }
     
-    public init(level: Int, startDate: NSDate, endDate: NSDate?) {
+    public init(level: Int, startDate: Date, endDate: Date?) {
         self.level = level
         self.startDate = startDate
         self.endDate = endDate
@@ -94,11 +84,11 @@ public func ==(lhs: LevelInfo, rhs: LevelInfo) -> Bool {
 
 public struct ProjectedLevelInfo: Equatable {
     public let level: Int
-    public let startDate: NSDate
-    public let endDate: NSDate
+    public let startDate: Date
+    public let endDate: Date
     public let endDateBasedOnLockedItem: Bool
     
-    public init(level: Int, startDate: NSDate, endDate: NSDate, endDateBasedOnLockedItem: Bool) {
+    public init(level: Int, startDate: Date, endDate: Date, endDateBasedOnLockedItem: Bool) {
         self.level = level
         self.startDate = startDate
         self.endDate = endDate
@@ -111,4 +101,16 @@ public func ==(lhs: ProjectedLevelInfo, rhs: ProjectedLevelInfo) -> Bool {
         lhs.startDate == rhs.startDate &&
         lhs.endDate == rhs.endDate &&
         lhs.endDateBasedOnLockedItem == rhs.endDateBasedOnLockedItem
+}
+
+private extension Collection {
+    /// Grab the middle 50% of values, preferring lower values
+    private func interquartileRange() -> SubSequence {
+        guard self.count > 0 else { return self[startIndex..<startIndex] }
+        
+        let itemIndex = self.count - 1
+        let lowerQuartileEdge = index(startIndex, offsetBy: itemIndex / 4 + (itemIndex % 4 == 3 ? 1 : 0))
+        let upperQuartileEdge = index(startIndex, offsetBy: itemIndex * 3 / 4 + (itemIndex == 1 ? 1 : 0))
+        return self[lowerQuartileEdge...upperQuartileEdge]
+    }
 }

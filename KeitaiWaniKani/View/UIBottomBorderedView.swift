@@ -13,7 +13,7 @@ class UIBottomBorderedView: UIView {
     
     init(color: UIColor, width: CGFloat) {
         borderLayer = CALayer()
-        borderLayer.backgroundColor = color.CGColor
+        borderLayer.backgroundColor = color.cgColor
         borderWidth = width
         super.init(frame: CGRect.zero)
         self.layer.addSublayer(borderLayer)

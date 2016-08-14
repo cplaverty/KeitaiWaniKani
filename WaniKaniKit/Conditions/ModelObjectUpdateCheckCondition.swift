@@ -10,11 +10,11 @@ import CocoaLumberjack
 import FMDB
 import OperationKit
 
-public enum ModelObjectUpdateCheckConditionError: ErrorType {
-    case NoUpdateRequired(String)
+public enum ModelObjectUpdateCheckConditionError: Error {
+    case noUpdateRequired(String)
 }
 
-public typealias LastUpdatedDateDelegate = () -> NSDate?
+public typealias LastUpdatedDateDelegate = () -> Date?
 
 public struct ModelObjectUpdateCheckCondition<Coder: DatabaseCoder>: OperationCondition {
     public static var isMutuallyExclusive: Bool { return false }
@@ -29,21 +29,21 @@ public struct ModelObjectUpdateCheckCondition<Coder: DatabaseCoder>: OperationCo
         self.databaseQueue = databaseQueue
     }
     
-    public func dependencyForOperation(operation: Operation) -> NSOperation? {
+    public func dependency(forOperation operation: OperationKit.Operation) -> Foundation.Operation? {
         return nil
     }
     
-    public func evaluateForOperation(operation: Operation, completion: OperationConditionResult -> Void) {
+    public func evaluate(forOperation operation: OperationKit.Operation, completion: (OperationConditionResult) -> Void) {
         guard let lastUpdatedDate = self.lastUpdatedDate() else {
             DDLogDebug("\(self.dynamicType) bypassing update check")
-            completion(.Satisfied)
+            completion(.satisfied)
             return
         }
         
         DDLogDebug("Checking whether \(Coder.self) reports update since \(lastUpdatedDate)")
         let fetchRequired: Bool = try! databaseQueue.withDatabase { database in
             do {
-                return try !self.coder.hasBeenUpdatedSince(lastUpdatedDate, inDatabase: database)
+                return try !self.coder.hasBeenUpdated(since: lastUpdatedDate, in: database)
             } catch {
                 DDLogWarn("\(Coder.self).hasBeenUpdatedSince(\(lastUpdatedDate)) threw error: \(error)")
                 return true
@@ -52,9 +52,9 @@ public struct ModelObjectUpdateCheckCondition<Coder: DatabaseCoder>: OperationCo
         
         DDLogDebug("Fetch required for \(self.dynamicType)? \(fetchRequired)")
         if fetchRequired {
-            completion(.Satisfied)
+            completion(.satisfied)
         } else {
-            completion(.Failed(ModelObjectUpdateCheckConditionError.NoUpdateRequired("\(Coder.self)")))
+            completion(.failed(ModelObjectUpdateCheckConditionError.noUpdateRequired("\(Coder.self)")))
         }
     }
 }

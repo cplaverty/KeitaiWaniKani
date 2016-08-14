@@ -9,15 +9,15 @@ import Foundation
 
 public struct SRSDistribution: Equatable {
     public let countsBySRSLevel: [SRSLevel: SRSItemCounts]
-    public let lastUpdateTimestamp: NSDate
-
-    public init?(countsBySRSLevel: [SRSLevel: SRSItemCounts], lastUpdateTimestamp: NSDate? = nil) {
+    public let lastUpdateTimestamp: Date
+    
+    public init?(countsBySRSLevel: [SRSLevel: SRSItemCounts], lastUpdateTimestamp: Date? = nil) {
         if countsBySRSLevel.isEmpty {
             return nil
         }
-
+        
         self.countsBySRSLevel = countsBySRSLevel
-        self.lastUpdateTimestamp = lastUpdateTimestamp ?? NSDate()
+        self.lastUpdateTimestamp = lastUpdateTimestamp ?? Date()
     }
 }
 

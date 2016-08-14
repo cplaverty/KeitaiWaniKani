@@ -11,7 +11,7 @@ import FMDB
 import OperationKit
 import WaniKaniKit
 
-final class ReviewCountNotificationOperation: Operation {
+final class ReviewCountNotificationOperation: OperationKit.Operation {
     
     private let databaseQueue: FMDatabaseQueue
     
@@ -20,8 +20,8 @@ final class ReviewCountNotificationOperation: Operation {
         
         super.init()
         
-        let requestedNotificationSettings = UIUserNotificationSettings(forTypes: [.Badge], categories: nil)
-        let reviewCountNotificationCondition = UserNotificationCondition(settings: requestedNotificationSettings, application: UIApplication.sharedApplication())
+        let requestedNotificationSettings = UIUserNotificationSettings(types: [.badge], categories: nil)
+        let reviewCountNotificationCondition = UserNotificationCondition(settings: requestedNotificationSettings, application: UIApplication.shared)
         addCondition(reviewCountNotificationCondition)
     }
     
@@ -29,7 +29,7 @@ final class ReviewCountNotificationOperation: Operation {
         DDLogInfo("Fetching SRS data items for review count local notification scheduling")
         
         do {
-            guard let studyQueue = try databaseQueue.withDatabase({ try StudyQueue.coder.loadFromDatabase($0) }) else {
+            guard let studyQueue = try databaseQueue.withDatabase({ try StudyQueue.coder.load(from: $0) }) else {
                 DDLogWarn("Failed to schedule review count notification: no entries in study queue table")
                 finish()
                 return
@@ -43,10 +43,10 @@ final class ReviewCountNotificationOperation: Operation {
             let reviews = try databaseQueue.withDatabase({ try SRSDataItemCoder.reviewTimeline($0, since: studyQueue.lastUpdateTimestamp, rowLimit: 1) })
             
             // Cancel all notifications where we are the source
-            let application = UIApplication.sharedApplication()
+            let application = UIApplication.shared
             if let scheduledLocalNotifications = application.scheduledLocalNotifications {
                 for notification in scheduledLocalNotifications {
-                    if let userInfo = notification.userInfo where userInfo["source"] as? String == "\(self.dynamicType)" {
+                    if let userInfo = notification.userInfo, userInfo["source"] as? String == "\(self.dynamicType)" {
                         DDLogDebug("Cancelling existing local notification \(notification)")
                         application.cancelLocalNotification(notification)
                     }

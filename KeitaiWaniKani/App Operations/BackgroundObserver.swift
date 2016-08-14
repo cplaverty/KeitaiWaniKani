@@ -27,11 +27,11 @@ class BackgroundObserver: NSObject, OperationObserver {
         super.init()
         
         // We need to know when the application moves to/from the background.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didEnterBackground(_:)), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground(_:)), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(didEnterForeground(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didEnterForeground(_:)), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         
-        isInBackground = UIApplication.sharedApplication().applicationState == .Background
+        isInBackground = UIApplication.shared.applicationState == .background
         
         // If we're in the background already, immediately begin the background task.
         if isInBackground {
@@ -40,17 +40,17 @@ class BackgroundObserver: NSObject, OperationObserver {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    @objc func didEnterBackground(notification: NSNotification) {
+    @objc func didEnterBackground(_ notification: Notification) {
         if !isInBackground {
             isInBackground = true
             startBackgroundTask()
         }
     }
     
-    @objc func didEnterForeground(notification: NSNotification) {
+    @objc func didEnterForeground(_ notification: Notification) {
         if isInBackground {
             isInBackground = false
             endBackgroundTask()
@@ -59,7 +59,7 @@ class BackgroundObserver: NSObject, OperationObserver {
     
     private func startBackgroundTask() {
         if identifier == UIBackgroundTaskInvalid {
-            identifier = UIApplication.sharedApplication().beginBackgroundTaskWithName("BackgroundObserver", expirationHandler: {
+            identifier = UIApplication.shared.beginBackgroundTask(withName: "BackgroundObserver", expirationHandler: {
                 self.endBackgroundTask()
             })
         }
@@ -67,18 +67,18 @@ class BackgroundObserver: NSObject, OperationObserver {
     
     private func endBackgroundTask() {
         if identifier != UIBackgroundTaskInvalid {
-            UIApplication.sharedApplication().endBackgroundTask(identifier)
+            UIApplication.shared.endBackgroundTask(identifier)
             identifier = UIBackgroundTaskInvalid
         }
     }
     
     // MARK: Operation Observer
     
-    func operationDidStart(operation: Operation) { }
+    func operationDidStart(_ operation: OperationKit.Operation) { }
     
-    func operation(operation: Operation, didProduceOperation newOperation: NSOperation) { }
+    func operation(_ operation: OperationKit.Operation, didProduceOperation newOperation: Foundation.Operation) { }
 
-    func operationDidFinish(operation: Operation, errors: [ErrorType]) {
+    func operationDidFinish(_ operation: OperationKit.Operation, errors: [Error]) {
         endBackgroundTask()
     }
 }

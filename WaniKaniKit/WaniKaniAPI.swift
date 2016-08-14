@@ -41,13 +41,13 @@ private struct DatabaseMetadata {
 public struct WaniKaniDarwinNotificationCenter {
     public static let modelUpdateNotificationName = "uk.me.laverty.KeitaiWaniKani.ModelUpdate"
     
-    public static func notificationNameForModelObjectType(modelObjectType: String) -> String {
+    public static func notificationNameForModelObjectType(_ modelObjectType: String) -> String {
         return "\(modelUpdateNotificationName).\(modelObjectType)"
     }
     
-    public static func postModelUpdateMessage(modelObjectType: String) {
+    public static func postModelUpdateMessage(_ modelObjectType: String) {
         let nc = CFNotificationCenterGetDarwinNotifyCenter()
-        CFNotificationCenterPostNotification(nc, notificationNameForModelObjectType(modelObjectType), nil, nil, true)
+        CFNotificationCenterPostNotification(nc, CFNotificationName(notificationNameForModelObjectType(modelObjectType)), nil, nil, true)
     }
 }
 
@@ -55,51 +55,51 @@ public struct WaniKaniAPI {
     public static let updateMinuteCount = 15
     public static let refreshTimeOffsetSeconds = Int(arc4random_uniform(25)) + 5
     
-    public static func isAcceleratedLevel(level: Int) -> Bool {
+    public static func isAccelerated(level: Int) -> Bool {
         return level <= 2
     }
     
-    public static func lastRefreshTimeFromNow() -> NSDate {
-        return lastRefreshTimeFromDate(NSDate())
+    public static func lastRefreshTimeFromNow() -> Date {
+        return lastRefreshTime(from: Date())
     }
     
-    public static func lastRefreshTimeFromDate(baseDate: NSDate) -> NSDate {
-        let calendar = NSCalendar.autoupdatingCurrentCalendar()
-        let currentTimeComponents = calendar.components([.Minute, .Second], fromDate: baseDate)
-        let offsetComponents = NSDateComponents()
-        offsetComponents.minute = -(currentTimeComponents.minute % updateMinuteCount)
-        offsetComponents.second = -currentTimeComponents.second
-        return calendar.dateByAddingComponents(offsetComponents, toDate: baseDate, options: [])!
+    public static func lastRefreshTime(from baseDate: Date) -> Date {
+        let calendar = Calendar.autoupdatingCurrent
+        let currentTimeComponents = calendar.dateComponents([.minute, .second], from: baseDate)
+        var offsetComponents = DateComponents()
+        offsetComponents.minute = -(currentTimeComponents.minute! % updateMinuteCount)
+        offsetComponents.second = -currentTimeComponents.second!
+        return calendar.date(byAdding: offsetComponents, to: baseDate)!
     }
     
-    public static func nextRefreshTimeFromNow() -> NSDate {
-        return nextRefreshTimeFromDate(NSDate())
+    public static func nextRefreshTimeFromNow() -> Date {
+        return nextRefreshTime(from: Date())
     }
     
-    public static func nextRefreshTimeFromDate(baseDate: NSDate) -> NSDate {
-        let lastRefreshTime = self.lastRefreshTimeFromDate(baseDate)
+    public static func nextRefreshTime(from baseDate: Date) -> Date {
+        let lastRefreshTime = self.lastRefreshTime(from: baseDate)
         
-        let calendar = NSCalendar.autoupdatingCurrentCalendar()
+        let calendar = Calendar.autoupdatingCurrent
         // To allow for any kind of difference in time between local and the server, wait 'refreshTimeOffsetSeconds' past the "ideal" refresh time
-        let offsetComponents = NSDateComponents()
+        var offsetComponents = DateComponents()
         offsetComponents.minute = updateMinuteCount
         offsetComponents.second = refreshTimeOffsetSeconds
-        return calendar.dateByAddingComponents(offsetComponents, toDate: lastRefreshTime, options: [])!
+        return calendar.date(byAdding: offsetComponents, to: lastRefreshTime)!
     }
     
-    public static func needsRefresh(lastRefreshTime: NSDate) -> Bool {
+    public static func needsRefresh(since lastRefreshTime: Date) -> Bool {
         let mostRecentAPIDataChangeTime = WaniKaniAPI.lastRefreshTimeFromNow()
-        let secondsSinceLastRefreshTime = lastRefreshTime.timeIntervalSinceDate(mostRecentAPIDataChangeTime)
+        let secondsSinceLastRefreshTime = lastRefreshTime.timeIntervalSince(mostRecentAPIDataChangeTime)
         // Only update if we haven't updated since the last refresh time
         return secondsSinceLastRefreshTime <= 0
     }
     
-    public static func databaseIsCurrentVersion(database: FMDatabase) throws -> Bool {
+    public static func databaseIsCurrentVersion(_ database: FMDatabase) throws -> Bool {
         let metadata = try DatabaseMetadata(database: database)
         return metadata.databaseVersion == currentDatabaseVersion
     }
     
-    public static func createTablesInDatabase(database: FMDatabase) throws {
+    public static func createTables(in database: FMDatabase) throws {
         #if DEBUG
             database.crashOnErrors = true
         #endif
@@ -112,13 +112,13 @@ public struct WaniKaniAPI {
         if shouldDropTable {
             DDLogInfo("Upgrading database from version \(metadata.databaseVersion) to \(currentDatabaseVersion)")
         }
-        try UserInformation.coder.createTable(database, dropFirst: shouldDropTable)
-        try StudyQueue.coder.createTable(database, dropFirst: shouldDropTable)
-        try LevelProgression.coder.createTable(database, dropFirst: shouldDropTable)
-        try SRSDistribution.coder.createTable(database, dropFirst: shouldDropTable)
-        try Radical.coder.createTable(database, dropFirst: shouldDropTable)
-        try Kanji.coder.createTable(database, dropFirst: shouldDropTable)
-        try Vocabulary.coder.createTable(database, dropFirst: shouldDropTable)
+        try UserInformation.coder.createTable(in: database, dropExisting: shouldDropTable)
+        try StudyQueue.coder.createTable(in: database, dropExisting: shouldDropTable)
+        try LevelProgression.coder.createTable(in: database, dropExisting: shouldDropTable)
+        try SRSDistribution.coder.createTable(in: database, dropExisting: shouldDropTable)
+        try Radical.coder.createTable(in: database, dropExisting: shouldDropTable)
+        try Kanji.coder.createTable(in: database, dropExisting: shouldDropTable)
+        try Vocabulary.coder.createTable(in: database, dropExisting: shouldDropTable)
         metadata.databaseVersion = currentDatabaseVersion
         
         DDLogInfo("Vacuuming database")
@@ -127,62 +127,65 @@ public struct WaniKaniAPI {
         database.setShouldCacheStatements(true)
     }
     
-    public static func resourceResolverForAPIKey(apiKey: String) -> ResourceResolver {
-        return WaniKaniAPIResourceResolver(forAPIKey: apiKey)
+    public static func resourceResolverForAPIKey(_ apiKey: String) -> ResourceResolver {
+        return WaniKaniAPIResourceResolver(apiKey: apiKey)
     }
     
-    public static func minimumTimeFromSRSLevel(initialLevel: Int, toSRSLevel finalLevel: Int, fromDate baseDate: NSDate, isRadical: Bool, isAccelerated: Bool) -> NSDate? {
+    public static func minimumTime(fromSRSLevel initialLevel: Int, to finalLevel: Int, fromDate baseDate: Date, isRadical: Bool, isAccelerated: Bool) -> Date? {
         var guruDate = baseDate
-        let calendar = NSCalendar.autoupdatingCurrentCalendar()
+        let calendar = Calendar.autoupdatingCurrent
         for level in initialLevel..<finalLevel {
-            guard let timeForLevel = timeToNextReviewForSRSLevel(level, isRadical: isRadical, isAccelerated: isAccelerated) else { return nil }
-            guruDate = calendar.dateByAddingComponents(timeForLevel, toDate: guruDate, options: [])!
+            guard let timeForLevel = timeToNextReview(forSRSLevel: level, isRadical: isRadical, isAccelerated: isAccelerated) else { return nil }
+            guruDate = calendar.date(byAdding: timeForLevel, to: guruDate)!
         }
         
         return guruDate
     }
     
-    private static func timeToNextReviewForSRSLevel(srsLevelNumeric: Int, isRadical: Bool, isAccelerated: Bool) -> NSDateComponents? {
+    private static func timeToNextReview(forSRSLevel srsLevelNumeric: Int, isRadical: Bool, isAccelerated: Bool) -> DateComponents? {
         switch srsLevelNumeric {
         case 1 where isAccelerated:
-            let dc = NSDateComponents()
+            var dc = DateComponents()
             dc.hour = 2
             return dc
-        case 1, 2 where isAccelerated:
-            let dc = NSDateComponents()
+        case 1,
+             2 where isAccelerated:
+            var dc = DateComponents()
             dc.hour = 4
             return dc
-        case 2, 3 where isAccelerated:
-            let dc = NSDateComponents()
+        case 2,
+             3 where isAccelerated:
+            var dc = DateComponents()
             dc.hour = 8
             return dc
-        case 3, 4 where isAccelerated:
-            let dc = NSDateComponents()
+        case 3,
+             4 where isAccelerated:
+            var dc = DateComponents()
             dc.day = 1
             dc.hour = -1
             return dc
         case 4:
-            let dc = NSDateComponents()
+            var dc = DateComponents()
             dc.day = isRadical ? 2 : 3
             dc.hour = -1
             return dc
         case 5: // -> 6
-            let dc = NSDateComponents()
+            var dc = DateComponents()
             dc.day = 7
             dc.hour = -1
             return dc
         case 6: // -> 7
-            let dc = NSDateComponents()
+            var dc = DateComponents()
             dc.day = 14
             dc.hour = -1
             return dc
         case 7: // -> 8
-            let dc = NSDateComponents()
+            var dc = DateComponents()
             dc.month = 1
             dc.hour = -1
             return dc
         case 8: // -> 9
-            let dc = NSDateComponents()
+            var dc = DateComponents()
             dc.month = 4
             dc.hour = -1
             return dc

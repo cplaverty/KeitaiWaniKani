@@ -32,17 +32,17 @@ class WKWebAddressBarView: UIView {
         secureSiteIndicator.translatesAutoresizingMaskIntoConstraints = false
         addressLabel = UILabel()
         addressLabel.translatesAutoresizingMaskIntoConstraints = false
-        addressLabel.setContentCompressionResistancePriority(addressLabel.contentCompressionResistancePriorityForAxis(.Horizontal) - 1, forAxis: .Horizontal)
-        refreshButton = UIButton(type: .Custom)
+        addressLabel.setContentCompressionResistancePriority(addressLabel.contentCompressionResistancePriority(for: .horizontal) - 1, for: .horizontal)
+        refreshButton = UIButton(type: .custom)
         refreshButton.translatesAutoresizingMaskIntoConstraints = false
         
         super.init(frame: frame)
         
         self.layer.cornerRadius = 5
-        self.opaque = false
+        self.isOpaque = false
         self.backgroundColor = UIColor(white: 0.8, alpha: 0.5)
         
-        refreshButton.addTarget(self, action: #selector(stopOrRefreshWebView(_:)), forControlEvents: .TouchUpInside)
+        refreshButton.addTarget(self, action: #selector(stopOrRefreshWebView(_:)), for: .touchUpInside)
         
         for webViewObservedKey in webViewObservedKeys {
             webView.addObserver(self, forKeyPath: webViewObservedKey, options: [], context: &observationContext)
@@ -59,13 +59,13 @@ class WKWebAddressBarView: UIView {
             "refreshButton": refreshButton
         ]
         
-        NSLayoutConstraint(item: secureSiteIndicator, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 0).active = true
-        NSLayoutConstraint(item: addressLabel, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 0).active = true
-        NSLayoutConstraint(item: refreshButton, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 0).active = true
+        NSLayoutConstraint(item: secureSiteIndicator, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: addressLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: refreshButton, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: addressLabel, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0).active = true
-        NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(>=8)-[secureSiteIndicator]-[addressLabel]-(>=8)-[refreshButton]-|", options: [], metrics: nil, views: views))
-        NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=4)-[addressLabel]-(>=4)-|", options: [], metrics: nil, views: views))
+        NSLayoutConstraint(item: addressLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=8)-[secureSiteIndicator]-[addressLabel]-(>=8)-[refreshButton]-|", options: [], metrics: nil, views: views))
+        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(>=4)-[addressLabel]-(>=4)-|", options: [], metrics: nil, views: views))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -81,8 +81,8 @@ class WKWebAddressBarView: UIView {
     
     // MARK: - Update UI
     
-    func stopOrRefreshWebView(sender: UIButton) {
-        if webView.loading {
+    func stopOrRefreshWebView(_ sender: UIButton) {
+        if webView.isLoading {
             webView.stopLoading()
         } else {
             webView.reload()
@@ -91,28 +91,28 @@ class WKWebAddressBarView: UIView {
     
     private func updateUIFromWebView() {
         // Padlock
-        secureSiteIndicator.hidden = !webView.hasOnlySecureContent
+        secureSiteIndicator.isHidden = !webView.hasOnlySecureContent
         
         // URL
-        addressLabel.text = domainForURL(webView.URL)
+        addressLabel.text = domainForURL(webView.url)
         
         // Stop/Reload indicator
-        if webView.loading {
-            refreshButton.setImage(stopLoadingImage, forState: .Normal)
+        if webView.isLoading {
+            refreshButton.setImage(stopLoadingImage, for: UIControlState())
         } else {
-            refreshButton.setImage(reloadImage, forState: .Normal)
+            refreshButton.setImage(reloadImage, for: UIControlState())
         }
     }
     
     let hostPrefixesToStrip = ["m.", "www."]
-    private func domainForURL(URL: NSURL?) -> String? {
-        guard let host = URL?.host?.lowercaseString else {
+    private func domainForURL(_ URL: Foundation.URL?) -> String? {
+        guard let host = URL?.host?.lowercased() else {
             return nil
         }
         
         for prefix in hostPrefixesToStrip {
-            if let range = host.rangeOfString(prefix, options: [.AnchoredSearch]) {
-                return host.substringFromIndex(range.endIndex)
+            if let range = host.range(of: prefix, options: [.anchored]) {
+                return host.substring(from: range.upperBound)
             }
         }
         return host
@@ -120,9 +120,9 @@ class WKWebAddressBarView: UIView {
     
     // MARK: - Key-Value Observing
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
         guard context == &observationContext else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
         

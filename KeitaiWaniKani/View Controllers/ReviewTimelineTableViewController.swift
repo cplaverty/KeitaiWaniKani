@@ -13,15 +13,15 @@ class ReviewTimelineTableViewController: UITableViewController {
     
     // MARK: Properties
     
-    private let reviewDateFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
+    private let reviewDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
         formatter.doesRelativeDateFormatting = true
-        formatter.dateStyle = .FullStyle
-        formatter.timeStyle = .NoStyle
+        formatter.dateStyle = .full
+        formatter.timeStyle = .none
         return formatter
     }()
     
-    private var reviewTimelineByDate: [(NSDate, [SRSReviewCounts])]? {
+    private var reviewTimelineByDate: [(key: Date, value: [SRSReviewCounts])]? {
         didSet {
             tableView.reloadData()
         }
@@ -29,8 +29,8 @@ class ReviewTimelineTableViewController: UITableViewController {
     
     // MARK: Actions
     
-    @IBAction func queryChanged(sender: UISegmentedControl) {
-        loadReviewTimeline(sender.selectedSegmentIndex != 0)
+    @IBAction func queryChanged(_ sender: UISegmentedControl) {
+        loadReviewTimeline(currentLevelOnly: sender.selectedSegmentIndex != 0)
     }
     
     // MARK: View Controller Lifecycle
@@ -42,40 +42,41 @@ class ReviewTimelineTableViewController: UITableViewController {
         
         var items = self.toolbarItems ?? []
         
-        items.append(UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil))
-
+        items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
+        
         let segmentedControl = UISegmentedControl(items: ["All Reviews", "Current Level Only"])
-        segmentedControl.addTarget(self, action: #selector(queryChanged(_:)), forControlEvents: .ValueChanged)
+        segmentedControl.addTarget(self, action: #selector(queryChanged(_:)), for: .valueChanged)
         segmentedControl.selectedSegmentIndex = 0
         
         let segmentedControlBarButtonItem = UIBarButtonItem(customView: segmentedControl)
         items.append(segmentedControlBarButtonItem)
         
-        items.append(UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil))
+        items.append(UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil))
         
         self.setToolbarItems(items, animated: true)
         
         queryChanged(segmentedControl)
     }
-
+    
     private func loadReviewTimeline(currentLevelOnly: Bool) {
-        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)) {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        DispatchQueue.global(qos: .userInitiated).async {
             delegate.databaseQueue.inDatabase { [weak self] database in
+                guard let database = database else { fatalError("No database returned from queue!") }
                 do {
-                    let studyQueue = try StudyQueue.coder.loadFromDatabase(database)
+                    let studyQueue = try StudyQueue.coder.load(from: database)
                     var level: Int? = nil
                     if currentLevelOnly {
-                        let userInformation = try UserInformation.coder.loadFromDatabase(database)
+                        let userInformation = try UserInformation.coder.load(from: database)
                         level = userInformation?.level
                     }
                     let result = try SRSDataItemCoder.reviewTimelineByDate(database, since: studyQueue?.lastUpdateTimestamp, forLevel: level)
                     
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         self?.reviewTimelineByDate = result
                     }
                 } catch {
-                    self?.showAlertWithTitle("Failed to build review timeline", message: (error as NSError).localizedDescription)
+                    self?.showAlertWithTitle("Failed to build review timeline", message: error.localizedDescription)
                 }
             }
         }
@@ -83,11 +84,11 @@ class ReviewTimelineTableViewController: UITableViewController {
     
     // MARK: UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return reviewTimelineByDate?.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let reviewTimelineByDate = self.reviewTimelineByDate else {
             return 0
         }
@@ -95,9 +96,9 @@ class ReviewTimelineTableViewController: UITableViewController {
         return sectionRows.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ReviewDetail", forIndexPath: indexPath) as! ReviewTimelineEntryTableViewCell
-
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewDetail", for: indexPath) as! ReviewTimelineEntryTableViewCell
+        
         if let reviewTimelineByDate = self.reviewTimelineByDate {
             let (_, sectionRows) = reviewTimelineByDate[indexPath.section]
             cell.reviewCounts = sectionRows[indexPath.row]
@@ -109,7 +110,7 @@ class ReviewTimelineTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let reviewTimelineByDate = self.reviewTimelineByDate else {
             return nil
         }
@@ -118,8 +119,8 @@ class ReviewTimelineTableViewController: UITableViewController {
             return "Currently Available"
         } else {
             let totalForDay = entries.reduce(0) { $0 + $1.itemCounts.total }
-            let formattedDate = reviewDateFormatter.stringFromDate(date)
-            let formattedTotal = NSNumberFormatter.localizedStringFromNumber(totalForDay, numberStyle: .DecimalStyle)
+            let formattedDate = reviewDateFormatter.string(from: date)
+            let formattedTotal = NumberFormatter.localizedString(from: totalForDay, number: .decimal)
             return "\(formattedDate) (\(formattedTotal))"
         }
     }

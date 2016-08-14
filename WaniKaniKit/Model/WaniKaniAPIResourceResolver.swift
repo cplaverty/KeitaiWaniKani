@@ -11,31 +11,31 @@ final class WaniKaniAPIResourceResolver: ResourceResolver {
     let apiKey: String
     private let baseURL = WaniKaniURLs.apiBaseURL
     
-    init(forAPIKey apiKey: String) {
+    init(apiKey: String) {
         assert(!apiKey.isEmpty, "Must specify a non-empty API key")
         self.apiKey = apiKey
     }
     
-    func URLForResource(resource: Resource, withArgument argument: String?) -> NSURL {
-        let resourceKey = apiResourceName(resource)
+    func resolveURL(resource: Resource, withArgument argument: String?) -> URL {
+        let resourceKey = apiName(forResource: resource)
         let path = argument == nil || argument?.isEmpty == true ? "\(apiKey)/\(resourceKey)" : "\(apiKey)/\(resourceKey)/\(argument!)"
         
-        guard let url = NSURL(string: path, relativeToURL: baseURL) else {
+        guard let url = URL(string: path, relativeTo: baseURL) else {
             fatalError("Created an invalid URL: base: \(baseURL), path: \(path)")
         }
         
         return url
     }
     
-    private func apiResourceName(resource: Resource) -> String {
+    private func apiName(forResource resource: Resource) -> String {
         switch resource {
-        case .StudyQueue: return "study-queue"
-        case .UserInformation: return "user-information"
-        case .LevelProgression: return "level-progression"
-        case .SRSDistribution: return "srs-distribution"
-        case .Radicals: return "radicals"
-        case .Kanji: return "kanji"
-        case .Vocabulary: return "vocabulary"
+        case .studyQueue: return "study-queue"
+        case .userInformation: return "user-information"
+        case .levelProgression: return "level-progression"
+        case .srsDistribution: return "srs-distribution"
+        case .radicals: return "radicals"
+        case .kanji: return "kanji"
+        case .vocabulary: return "vocabulary"
         }
     }
 }

@@ -15,11 +15,11 @@ extension FMResultSet {
     
     @return `NSURL` value of the result set's column.
     */
-    func urlForColumn(columnName: String) -> NSURL? {
-        guard let stringValue = stringForColumn(columnName) else {
+    func urlForColumn(_ columnName: String) -> URL? {
+        guard let stringValue = string(forColumn: columnName) else {
             return nil
         }
-        return NSURL(string: stringValue)
+        return URL(string: stringValue)
     }
     
     /** Result set `NSURL` value for column.
@@ -28,11 +28,11 @@ extension FMResultSet {
     
     @return `NSURL` value of the result set's column.
     */
-    func urlForColumnIndex(columnIdx: Int32) -> NSURL? {
-        guard let stringValue = stringForColumnIndex(columnIdx) else {
+    func urlForColumnIndex(_ columnIdx: Int32) -> URL? {
+        guard let stringValue = string(forColumnIndex: columnIdx) else {
             return nil
         }
-        return NSURL(string: stringValue)
+        return URL(string: stringValue)
     }
 
     /** Result set `long` value for column.
@@ -41,11 +41,11 @@ extension FMResultSet {
     
     @return `long` value of the result set's column.
     */
-    func longForColumnOptional(columnName: String) -> Int? {
+    func longForColumnOptional(_ columnName: String) -> Int? {
         guard !columnIsNull(columnName) else {
             return nil
         }
-        return longForColumn(columnName)
+        return long(forColumn: columnName)
     }
     
     
@@ -55,22 +55,22 @@ extension FMResultSet {
     
     @return `long` value of the result set's column.
     */
-    func longForColumnIndexOptional(columnIdx: Int32) -> Int? {
+    func longForColumnIndexOptional(_ columnIdx: Int32) -> Int? {
         guard !columnIndexIsNull(columnIdx) else {
             return nil
         }
-        return longForColumnIndex(columnIdx)
+        return long(forColumnIndex: columnIdx)
     }
 }
 
 public extension FMDatabaseQueue {
 
-    public func withDatabase<T>(block: FMDatabase throws -> T) throws -> T {
+    public func withDatabase<T>(_ block: (FMDatabase) throws -> T) throws -> T {
         var t: T? = nil
-        var e: ErrorType? = nil
+        var e: Error? = nil
         self.inDatabase { database in
             do {
-                t = try block(database)
+                t = try block(database!)
             } catch {
                 e = error
             }
@@ -79,12 +79,12 @@ public extension FMDatabaseQueue {
         return t!
     }
     
-    public func withDatabase<T>(block: FMDatabase throws -> T?) throws -> T? {
+    public func withDatabase<T>(_ block: (FMDatabase) throws -> T?) throws -> T? {
         var t: T? = nil
-        var e: ErrorType? = nil
+        var e: Error? = nil
         self.inDatabase { database in
             do {
-                t = try block(database)
+                t = try block(database!)
             } catch {
                 e = error
             }

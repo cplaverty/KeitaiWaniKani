@@ -36,15 +36,15 @@ class LevelChartViewController: UIViewController {
         chartView.infoTextColor = ApplicationSettings.globalTintColor()
         
         let xAxis = chartView.xAxis
-        xAxis.labelFont = UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
-        xAxis.labelPosition = .Bottom
+        xAxis.labelFont = UIFont.preferredFont(forTextStyle: UIFontTextStyleCaption1)
+        xAxis.labelPosition = .bottom
         xAxis.drawGridLinesEnabled = false
         xAxis.setLabelsToSkip(0)
         
         let yAxis = chartView.leftAxis
-        yAxis.labelFont = UIFont.preferredFontForTextStyle(UIFontTextStyleCaption1)
+        yAxis.labelFont = UIFont.preferredFont(forTextStyle: UIFontTextStyleCaption1)
         yAxis.valueFormatter = {
-            let formatter = NSNumberFormatter()
+            let formatter = NumberFormatter()
             formatter.minimumFractionDigits = 0
             formatter.maximumFractionDigits = 2
             return formatter
@@ -68,13 +68,13 @@ class LevelChartViewController: UIViewController {
         guard let levelData = self.levelData else { return }
         
         let xVals = levelData.detail.map { "\($0.level)" }
-        let yVals = levelData.detail.enumerate().map { i, levelInfo -> BarChartDataEntry in
+        let yVals = levelData.detail.enumerated().map { i, levelInfo -> BarChartDataEntry in
             let duration = levelInfo.duration ?? -levelInfo.startDate.timeIntervalSinceNow
             return BarChartDataEntry(value: duration / SECONDS_PER_DAY, xIndex: i, data: duration)
         }
         
         let dataSet = BarChartDataSet(yVals: yVals, label: "Level Duration")
-        dataSet.valueFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+        dataSet.valueFont = UIFont.preferredFont(forTextStyle: UIFontTextStyleBody)
         dataSet.barSpace = 0.25
         dataSet.setColor(ApplicationSettings.globalTintColor())
         dataSet.valueFormatter = NSTimeIntervalNumberFormatter()
@@ -86,17 +86,17 @@ class LevelChartViewController: UIViewController {
     
 }
 
-private class NSTimeIntervalNumberFormatter: NSNumberFormatter {
-    let wrapped: NSDateComponentsFormatter = {
-        let formatter = NSDateComponentsFormatter()
-        formatter.allowedUnits = [.Day, .Hour]
+private class NSTimeIntervalNumberFormatter: NumberFormatter {
+    let wrapped: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.day, .hour]
         formatter.allowsFractionalUnits = true
         formatter.collapsesLargestUnit = true
-        formatter.unitsStyle = .Abbreviated
+        formatter.unitsStyle = .abbreviated
         return formatter
     }()
     
-    override func stringFromNumber(number: NSNumber) -> String? {
-        return wrapped.stringFromTimeInterval(number.doubleValue * SECONDS_PER_DAY)
+    override func string(from number: NSNumber) -> String? {
+        return wrapped.string(from: number.doubleValue * SECONDS_PER_DAY)
     }
 }

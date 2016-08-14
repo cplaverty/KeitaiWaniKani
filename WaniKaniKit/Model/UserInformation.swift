@@ -17,11 +17,11 @@ public struct UserInformation: Equatable {
     public let twitter: String?
     public let topicsCount: Int
     public let postsCount: Int
-    public let creationDate: NSDate
-    public let vacationDate: NSDate?
-    public let lastUpdateTimestamp: NSDate
-
-    public init(username: String, gravatar: String, level: Int, title: String, about: String? = nil, website: String? = nil, twitter: String? = nil, topicsCount: Int, postsCount: Int, creationDate: NSDate, vacationDate: NSDate? = nil, lastUpdateTimestamp: NSDate? = nil) {
+    public let creationDate: Date
+    public let vacationDate: Date?
+    public let lastUpdateTimestamp: Date
+    
+    public init(username: String, gravatar: String, level: Int, title: String, about: String? = nil, website: String? = nil, twitter: String? = nil, topicsCount: Int, postsCount: Int, creationDate: Date, vacationDate: Date? = nil, lastUpdateTimestamp: Date? = nil) {
         self.username = username
         self.gravatar = gravatar
         self.level = level
@@ -33,7 +33,7 @@ public struct UserInformation: Equatable {
         self.postsCount = postsCount
         self.creationDate = creationDate
         self.vacationDate = vacationDate
-        self.lastUpdateTimestamp = lastUpdateTimestamp ?? NSDate()
+        self.lastUpdateTimestamp = lastUpdateTimestamp ?? Date()
     }
 }
 

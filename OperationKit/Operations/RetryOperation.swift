@@ -8,16 +8,16 @@
 import Foundation
 import CocoaLumberjack
 
-public class RetryOperation<T: Operation>: GroupOperation, NSProgressReporting {
-    public let progress: NSProgress
+public class RetryOperation<T: Operation>: GroupOperation, ProgressReporting {
+    public let progress: Progress
     
     private let maximumRetryCount: Int
     private let createOperation: () -> T
-    private let shouldRetry: (T, [ErrorType]) -> Bool
+    private let shouldRetry: (T, [Error]) -> Bool
     private var numberOfRetries = 0
     
-    public init(maximumRetryCount: Int, @autoclosure(escaping) createOperation: () -> T, shouldRetry: (T, [ErrorType]) -> Bool) {
-        self.progress = NSProgress(totalUnitCount: 1)
+    public init(maximumRetryCount: Int, createOperation: @autoclosure(escaping) () -> T, shouldRetry: (T, [Error]) -> Bool) {
+        self.progress = Progress(totalUnitCount: 1)
         
         self.maximumRetryCount = maximumRetryCount
         self.createOperation = createOperation
@@ -28,10 +28,10 @@ public class RetryOperation<T: Operation>: GroupOperation, NSProgressReporting {
         name = "RetryOperation<\(T.self.dynamicType)>"
     }
     
-    public override func operationDidFinish(operation: NSOperation, withErrors errors: [ErrorType]) {
+    public override func operationDidFinish(_ operation: Foundation.Operation, withErrors errors: [Error]) {
         guard let op = operation as? T else { return }
         
-        if !self.cancelled && !errors.isEmpty && numberOfRetries < maximumRetryCount && shouldRetry(op, errors) {
+        if !self.isCancelled && !errors.isEmpty && numberOfRetries < maximumRetryCount && shouldRetry(op, errors) {
             numberOfRetries += 1
             progress.totalUnitCount = Int64(numberOfRetries + 1)
             progress.completedUnitCount = Int64(numberOfRetries)
@@ -40,7 +40,7 @@ public class RetryOperation<T: Operation>: GroupOperation, NSProgressReporting {
         }
     }
     
-    public override func finished(errors: [ErrorType]) {
+    public override func finished(_ errors: [Error]) {
         super.finished(errors)
         
         // Ensure progress is 100%

@@ -31,23 +31,24 @@ public final class RadicalCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder,
     
     // MARK: - ResourceHandler
     
-    public var resource: Resource { return .Radicals }
+    public var resource: Resource { return .radicals }
     
     // MARK: - JSONDecoder
     
-    public func loadFromJSON(json: JSON) -> Radical? {
-        guard let meaning = json[Columns.meaning].string,
-            level = json[Columns.level].int else {
+    public func load(from json: JSON) -> Radical? {
+        guard
+            let meaning = json[Columns.meaning].string,
+            let level = json[Columns.level].int else {
                 return nil
         }
         
-        let userSpecificSRSData = UserSpecificSRSData.coder.loadFromJSON(json[Columns.userSpecificSRSData])
+        let userSpecificSRSData = UserSpecificSRSData.coder.load(from: json[Columns.userSpecificSRSData])
         
         return Radical(character: json[Columns.character].string,
-            meaning: meaning,
-            image: json[Columns.image].URL,
-            level: level,
-            userSpecificSRSData: userSpecificSRSData)
+                       meaning: meaning,
+                       image: json[Columns.image].URL,
+                       level: level,
+                       userSpecificSRSData: userSpecificSRSData)
     }
     
     // MARK: - DatabaseCoder
@@ -65,8 +66,8 @@ public final class RadicalCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder,
         return [Columns.character, Columns.meaning, Columns.image, Columns.level, Columns.lastUpdateTimestamp] + super.columnNameList
     }
     
-    public func createTable(database: FMDatabase, dropFirst: Bool) throws {
-        if dropFirst {
+    public func createTable(in database: FMDatabase, dropExisting: Bool) throws {
+        if dropExisting {
             try database.executeUpdate("DROP TABLE IF EXISTS \(tableName)")
         }
         
@@ -79,11 +80,11 @@ public final class RadicalCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder,
         }
     }
     
-    public func loadFromDatabase(database: FMDatabase) throws -> [Radical] {
-        return try loadFromDatabase(database, forLevel: nil)
+    public func load(from database: FMDatabase) throws -> [Radical] {
+        return try load(from: database, level: nil)
     }
     
-    public func loadFromDatabase(database: FMDatabase, forLevel level: Int?) throws -> [Radical] {
+    public func load(from database: FMDatabase, level: Int?) throws -> [Radical] {
         var sql = "SELECT \(columnNames) FROM \(tableName)"
         if let level = level {
             sql += " WHERE \(Columns.level) = \(level)"
@@ -105,9 +106,9 @@ public final class RadicalCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder,
         return "INSERT OR REPLACE INTO \(self.tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
     }()
     
-    public func save(models: [Radical], toDatabase database: FMDatabase) throws {
-        let maxLevelToKeep = try! UserInformation.coder.loadFromDatabase(database)?.level ?? 0
-        let levelsToReplace = Set(models.map { $0.level }).sort()
+    public func save(_ models: [Radical], to database: FMDatabase) throws {
+        let maxLevelToKeep = try! UserInformation.coder.load(from: database)?.level ?? 0
+        let levelsToReplace = Set(models.map { $0.level }).sorted()
         let deleteSql = "DELETE FROM \(tableName) WHERE \(Columns.level) > ? OR \(Columns.level) IN (\(self.createColumnValuePlaceholders(levelsToReplace.count)))"
         try database.executeUpdate(deleteSql, values: [maxLevelToKeep] + levelsToReplace)
         
@@ -123,7 +124,7 @@ public final class RadicalCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder,
         }
     }
     
-    public func hasBeenUpdatedSince(since: NSDate, inDatabase database: FMDatabase) throws -> Bool {
+    public func hasBeenUpdated(since: Date, in database: FMDatabase) throws -> Bool {
         guard let earliestDate = try database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(tableName)") else {
             return false
         }
@@ -131,42 +132,42 @@ public final class RadicalCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder,
         return earliestDate >= since
     }
     
-    public func levelsNotUpdatedSince(since: NSDate, inDatabase database: FMDatabase) throws -> Set<Int> {
+    public func levelsNotUpdated(since: Date, in database: FMDatabase) throws -> Set<Int> {
         let sql = "SELECT DISTINCT \(Columns.level) FROM \(tableName) WHERE \(Columns.lastUpdateTimestamp) < ?"
         let resultSet = try database.executeQuery(sql, since)
         defer { resultSet.close() }
         
         var results = Set<Int>()
         while resultSet.next() {
-            results.insert(resultSet.longForColumnIndex(0))
+            results.insert(resultSet.long(forColumnIndex: 0))
         }
         return results
     }
     
-    public func maxLevel(database: FMDatabase) throws -> Int {
+    public func maxLevel(in database: FMDatabase) throws -> Int {
         return try database.longForQuery("SELECT MAX(\(Columns.level)) FROM \(tableName)") ?? 0
     }
     
-    public func possiblyStaleLevels(since: NSDate, inDatabase database: FMDatabase) throws -> Set<Int> {
+    public func possiblyStaleLevels(since: Date, in database: FMDatabase) throws -> Set<Int> {
         let sql = "SELECT DISTINCT \(Columns.level) FROM \(tableName) WHERE \(UserSpecificSRSDataColumns.dateAvailable) IS NULL OR (\(UserSpecificSRSDataColumns.dateAvailable) < ? AND \(UserSpecificSRSDataColumns.burned) = 0)"
         let resultSet = try database.executeQuery(sql, since)
         defer { resultSet.close() }
         
         var results = Set<Int>()
         while resultSet.next() {
-            results.insert(resultSet.longForColumnIndex(0))
+            results.insert(resultSet.long(forColumnIndex: 0))
         }
         return results
     }
     
-    private func loadModelObjectFromRow(resultSet: FMResultSet) throws -> Radical {
+    private func loadModelObjectFromRow(_ resultSet: FMResultSet) throws -> Radical {
         let srsData = try loadSRSDataForRow(resultSet)
-        return Radical(character: resultSet.stringForColumn(Columns.character) as String?,
-            meaning: resultSet.stringForColumn(Columns.meaning),
-            image: resultSet.urlForColumn(Columns.image),
-            level: resultSet.longForColumn(Columns.level),
-            userSpecificSRSData: srsData,
-            lastUpdateTimestamp: resultSet.dateForColumn(Columns.lastUpdateTimestamp))
+        return Radical(character: resultSet.string(forColumn: Columns.character),
+                       meaning: resultSet.string(forColumn: Columns.meaning),
+                       image: resultSet.urlForColumn(Columns.image),
+                       level: resultSet.long(forColumn: Columns.level),
+                       userSpecificSRSData: srsData,
+                       lastUpdateTimestamp: resultSet.date(forColumn: Columns.lastUpdateTimestamp))
     }
     
 }

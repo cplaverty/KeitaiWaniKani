@@ -22,11 +22,11 @@ class UserScriptTableViewCell: UITableViewCell {
     var applicationSettingKey: String? {
         didSet {
             if let applicationSettingKey = applicationSettingKey {
-                toggleSwitch.enabled = true
-                toggleSwitch.on = ApplicationSettings.userDefaults.boolForKey(applicationSettingKey)
+                toggleSwitch.isEnabled = true
+                toggleSwitch.isOn = ApplicationSettings.userDefaults.bool(forKey: applicationSettingKey)
             } else {
-                toggleSwitch.enabled = false
-                toggleSwitch.on = false
+                toggleSwitch.isEnabled = false
+                toggleSwitch.isOn = false
             }
         }
     }
@@ -41,9 +41,9 @@ class UserScriptTableViewCell: UITableViewCell {
     
     // MARK: Actions
     
-    @IBAction func toggleSwitch(sender: UISwitch) {
+    @IBAction func toggleSwitch(_ sender: UISwitch) {
         guard let applicationSettingKey = applicationSettingKey else { return }
-        ApplicationSettings.userDefaults.setBool(sender.on, forKey: applicationSettingKey)
+        ApplicationSettings.userDefaults.set(sender.isOn, forKey: applicationSettingKey)
     }
     
     func toggleDescriptionVisibility() {

@@ -13,28 +13,28 @@ public class GetRadicalImageOperation: GroupOperation {
     
     // MARK: - Properties
     
-    public let sourceURL: NSURL
-    public let destinationFileURL: NSURL
+    public let sourceURL: URL
+    public let destinationFileURL: URL
     public let downloadOperation: DownloadFileOperation
     
-    public static var parentDirectory: NSURL = {
-        let fm = NSFileManager.defaultManager()
-        let cachesDir = try! fm.URLForDirectory(.CachesDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
-        let parentDirectory = cachesDir.URLByAppendingPathComponent("RadicalImages", isDirectory: true)
-        if !fm.fileExistsAtPath(parentDirectory.path!) {
-            _ = try? fm.createDirectoryAtURL(parentDirectory, withIntermediateDirectories: true, attributes: nil)
+    public static var parentDirectory: URL = {
+        let fm = FileManager.default
+        let cachesDir = try! fm.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let parentDirectory = cachesDir.appendingPathComponent("RadicalImages", isDirectory: true)
+        if !fm.fileExists(atPath: parentDirectory.path) {
+            _ = try? fm.createDirectory(at: parentDirectory, withIntermediateDirectories: true, attributes: nil)
         }
         return parentDirectory
-        }()
+    }()
     
     // MARK: - Initialisers
     
-    public init(sourceURL: NSURL, networkObserver: OperationObserver? = nil) {
+    public init(sourceURL: URL, networkObserver: OperationObserver? = nil) {
         self.sourceURL = sourceURL
-        self.destinationFileURL = self.dynamicType.parentDirectory.URLByAppendingPathComponent(sourceURL.lastPathComponent!)
+        self.destinationFileURL = self.dynamicType.parentDirectory.appendingPathComponent(sourceURL.lastPathComponent)
         
         downloadOperation = DownloadFileOperation(sourceURL: sourceURL, destinationFileURL: destinationFileURL, networkObserver: networkObserver)
-        downloadOperation.addCondition(FileMissingCondition(fileURL: destinationFileURL))
+        downloadOperation.addCondition(FileMissingCondition(url: destinationFileURL))
         
         super.init(operations: [downloadOperation])
         addObserver(TimeoutObserver(timeout: self.dynamicType.runTimeoutInSeconds))

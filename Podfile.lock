@@ -1,6 +1,5 @@
 PODS:
   - 1PasswordExtension (1.8.3)
-  - Alamofire (3.4.1)
   - Charts (2.2.5):
     - Charts/Core (= 2.2.5)
   - Charts/Core (2.2.5)
@@ -33,23 +32,42 @@ PODS:
 
 DEPENDENCIES:
   - 1PasswordExtension
-  - Alamofire
-  - Charts
-  - CocoaLumberjack/Swift
+  - Charts (from `https://github.com/danielgindi/Charts.git`, branch `Swift-3.0`)
+  - CocoaLumberjack/Swift (from `https://github.com/cplaverty/CocoaLumberjack.git`)
   - FMDB
   - OHHTTPStubs
   - OHHTTPStubs/Swift
-  - SwiftyJSON
+  - SwiftyJSON (from `https://github.com/cplaverty/SwiftyJSON.git`, branch `swift3`)
+
+EXTERNAL SOURCES:
+  Charts:
+    :branch: Swift-3.0
+    :git: https://github.com/danielgindi/Charts.git
+  CocoaLumberjack:
+    :git: https://github.com/cplaverty/CocoaLumberjack.git
+  SwiftyJSON:
+    :branch: swift3
+    :git: https://github.com/cplaverty/SwiftyJSON.git
+
+CHECKOUT OPTIONS:
+  Charts:
+    :commit: 33e17835eda45615d888740ff975dc948ac1bd48
+    :git: https://github.com/danielgindi/Charts.git
+  CocoaLumberjack:
+    :commit: 1b62b42887476576e88f34ca6863320b889c3ce2
+    :git: https://github.com/cplaverty/CocoaLumberjack.git
+  SwiftyJSON:
+    :commit: 3fc94088ce46d2adcd2ee916b902328b3e8cb723
+    :git: https://github.com/cplaverty/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   1PasswordExtension: 8757dc3302353731dd3e678e63b5023a708783cb
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
-  CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
+  CocoaLumberjack: ce8405d1e5fd6be744c42107710da81b17b90d79
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   OHHTTPStubs: 592f74439d2d72615115cf99a954237a3fbe26e5
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: df74481bdd2a585bcb32034cbf6be4ffb3423c34
+PODFILE CHECKSUM: bdcf0cdb03da69adad20329811939238f8f7c360
 
 COCOAPODS: 1.1.0.beta.1

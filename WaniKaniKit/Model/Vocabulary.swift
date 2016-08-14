@@ -14,15 +14,15 @@ public struct Vocabulary: SRSDataItem, Equatable {
     public let kana: String
     public let level: Int
     public let userSpecificSRSData: UserSpecificSRSData?
-    public let lastUpdateTimestamp: NSDate
+    public let lastUpdateTimestamp: Date
     
-    public init(character: String, meaning: String, kana: String, level: Int, userSpecificSRSData: UserSpecificSRSData? = nil, lastUpdateTimestamp: NSDate? = nil) {
+    public init(character: String, meaning: String, kana: String, level: Int, userSpecificSRSData: UserSpecificSRSData? = nil, lastUpdateTimestamp: Date? = nil) {
         self.character = character
         self.meaning = meaning
         self.kana = kana
         self.level = level
         self.userSpecificSRSData = userSpecificSRSData
-        self.lastUpdateTimestamp = lastUpdateTimestamp ?? NSDate()
+        self.lastUpdateTimestamp = lastUpdateTimestamp ?? Date()
     }
 }
 

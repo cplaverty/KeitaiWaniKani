@@ -33,25 +33,25 @@ public class GroupOperation: Operation {
             }
         }
     }
-
-    private let internalQueue: OperationQueue = {
+    
+    let internalQueue: OperationQueue = {
         let oq = OperationQueue()
         oq.name = "\(self.dynamicType) internal queue"
         return oq
-        }()
-    private let startingOperation = NSBlockOperation() {}
-    private let finishingOperation = NSBlockOperation() {}
+    }()
+    private let startingOperation = Foundation.BlockOperation() {}
+    private let finishingOperation = Foundation.BlockOperation() {}
     
-    private var aggregatedErrors = [ErrorType]()
+    private var aggregatedErrors = [Error]()
     
-    public convenience init(operations: NSOperation...) {
+    public convenience init(operations: Foundation.Operation...) {
         self.init(operations: operations)
     }
     
-    public init(operations: [NSOperation]) {
+    public init(operations: [Foundation.Operation]) {
         super.init()
         
-        internalQueue.suspended = true
+        internalQueue.isSuspended = true
         internalQueue.delegate = self
         addOperation(startingOperation)
 
@@ -64,19 +64,19 @@ public class GroupOperation: Operation {
         DDLogVerbose("Cancelling group operation \(self.dynamicType)")
         super.cancel()
         internalQueue.cancelAllOperations()
-        if internalQueue.suspended {
-            internalQueue.suspended = false
+        if internalQueue.isSuspended {
+            internalQueue.isSuspended = false
         }
     }
     
     public override func execute() {
         DDLogVerbose("Executing group operation \(self.dynamicType)")
-        internalQueue.suspended = false
+        internalQueue.isSuspended = false
         addOperation(finishingOperation)
     }
     
-    public func addOperation(operation: NSOperation) {
-        assert(!finishingOperation.finished && !finishingOperation.executing, "cannot add new operations to a group after the group has completed")
+    public func addOperation(_ operation: Foundation.Operation) {
+        assert(!finishingOperation.isFinished && !finishingOperation.isExecuting, "cannot add new operations to a group after the group has completed")
         
         /*
         Some operation in this group has produced a new operation to execute.
@@ -106,24 +106,24 @@ public class GroupOperation: Operation {
         Errors aggregated through this method will be included in the final array
         of errors reported to observers and to the `finished(_:)` method.
     */
-    public final func aggregateError(error: ErrorType) {
+    public final func aggregateError(_ error: Error) {
         aggregatedErrors.append(error)
     }
     
-    public func operationDidFinish(operation: NSOperation, withErrors errors: [ErrorType]) {
+    public func operationDidFinish(_ operation: Foundation.Operation, withErrors errors: [Error]) {
         // For use by subclassers.
     }
 }
 
 extension GroupOperation: OperationQueueDelegate {
-    public final func operationQueue(operationQueue: OperationQueue, willAddOperation operation: NSOperation) {}
+    public final func operationQueue(_ operationQueue: OperationQueue, willAddOperation operation: Foundation.Operation) {}
     
-    public final func operationQueue(operationQueue: OperationQueue, operationDidFinish operation: NSOperation, withErrors errors: [ErrorType]) {
+    public final func operationQueue(_ operationQueue: OperationQueue, operationDidFinish operation: Foundation.Operation, withErrors errors: [Error]) {
         DDLogVerbose("Completed execution of \(operation.dynamicType) in group operation \(self.dynamicType)")
-        aggregatedErrors.appendContentsOf(errors)
+        aggregatedErrors.append(contentsOf: errors)
         
         if operation === finishingOperation {
-            internalQueue.suspended = true
+            internalQueue.isSuspended = true
             finish(aggregatedErrors)
         }
         else if operation !== startingOperation {

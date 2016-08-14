@@ -18,18 +18,18 @@ class SRSItemHeaderCollectionReusableView: UICollectionReusableView {
     
 }
 
-private let dateComponentsFormatter: NSDateComponentsFormatter = {
-    let formatter = NSDateComponentsFormatter()
-    formatter.allowedUnits = [.Year, .Month, .WeekOfMonth, .Day, .Hour, .Minute]
+private let dateComponentsFormatter: DateComponentsFormatter = {
+    let formatter = DateComponentsFormatter()
+    formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute]
     formatter.maximumUnitCount = 1
-    formatter.unitsStyle = .Abbreviated
-    formatter.zeroFormattingBehavior = [.DropLeading, .DropTrailing]
+    formatter.unitsStyle = .abbreviated
+    formatter.zeroFormattingBehavior = [.dropLeading, .dropTrailing]
     
     return formatter
     }()
 
 protocol SRSDataItemInfoURL {
-    var srsDataItemInfoURL: NSURL? { get }
+    var srsDataItemInfoURL: URL? { get }
 }
 
 private protocol SRSDataItemGuruProgressCollectionViewCell {
@@ -56,27 +56,27 @@ private extension SRSDataItemGuruProgressCollectionViewCell {
             return
         }
         
-        switch Formatter.formatTimeIntervalToDate(dataItem.userSpecificSRSData?.dateAvailable, formatter: dateComponentsFormatter) {
-        case .None:
+        switch WaniKaniKit.Formatter.formatTimeIntervalSinceNow(from: dataItem.userSpecificSRSData?.dateAvailable, formatter: dateComponentsFormatter) {
+        case .none:
             timeToNextReview.text = "Locked"
-        case .Now:
+        case .now:
             timeToNextReview.text = "Review now"
-        case .FormattedString(let formattedInterval):
+        case .formattedString(let formattedInterval):
             timeToNextReview.text = "Review: \(formattedInterval)"
-        case .UnformattedInterval(let secondsUntilNextReview):
-            timeToNextReview.text = "Review: \(NSNumberFormatter.localizedStringFromNumber(secondsUntilNextReview, numberStyle: .DecimalStyle))s"
+        case .unformattedInterval(let secondsUntilNextReview):
+            timeToNextReview.text = "Review: \(NumberFormatter.localizedString(from: secondsUntilNextReview, number: .decimal))s"
         }
         
-        switch Formatter.formatTimeIntervalToDate(dataItem.guruDate(nil), formatter: dateComponentsFormatter) {
-        case .None, .Now:
+        switch WaniKaniKit.Formatter.formatTimeIntervalSinceNow(from: dataItem.guruDate(nil), formatter: dateComponentsFormatter) {
+        case .none, .now:
             timeToGuru.text = nil
-        case .FormattedString(let formattedInterval):
+        case .formattedString(let formattedInterval):
             timeToGuru.text = "Guru: \(formattedInterval)"
-        case .UnformattedInterval(let secondsUntilNextReview):
-            timeToGuru.text = "Guru: \(NSNumberFormatter.localizedStringFromNumber(secondsUntilNextReview, numberStyle: .DecimalStyle))s"
+        case .unformattedInterval(let secondsUntilNextReview):
+            timeToGuru.text = "Guru: \(NumberFormatter.localizedString(from: secondsUntilNextReview, number: .decimal))s"
         }
         
-        let guruLevel = SRSLevel.Guru.numericLevelThreshold
+        let guruLevel = SRSLevel.guru.numericLevelThreshold
         let currentLevel = dataItem.userSpecificSRSData?.srsLevelNumeric ?? 0
         let percentComplete = min(Float(currentLevel) / Float(guruLevel), 1.0)
         
@@ -98,14 +98,14 @@ class RadicalGuruProgressCollectionViewCell: UICollectionViewCell, SRSDataItemGu
         }
     }
     
-    var srsDataItemInfoURL: NSURL? {
-        return dataItem.flatMap { NSURL(string: $0.meaning, relativeToURL: WaniKaniURLs.radicalRoot) }
+    var srsDataItemInfoURL: URL? {
+        return dataItem.flatMap { URL(string: $0.meaning, relativeTo: WaniKaniURLs.radicalRoot) }
     }
     
     private var getImageOperation: GetRadicalImageOperation? {
         willSet {
             guard let formerOperation = getImageOperation else { return }
-            if !formerOperation.finished { formerOperation.cancel() }
+            if !formerOperation.isFinished { formerOperation.cancel() }
         }
     }
     
@@ -132,37 +132,37 @@ class RadicalGuruProgressCollectionViewCell: UICollectionViewCell, SRSDataItemGu
         guard let dataItem = self.dataItem else {
             characterLabel.text = nil
             displayImageView.image = nil
-            if downloadProgressActivityIndicator.isAnimating() { downloadProgressActivityIndicator.stopAnimating() }
+            if downloadProgressActivityIndicator.isAnimating { downloadProgressActivityIndicator.stopAnimating() }
             return
         }
         
         if let displayCharacter = dataItem.character {
             characterLabel.text = displayCharacter
-            characterLabel.hidden = false
+            characterLabel.isHidden = false
             getImageOperation = nil
             displayImageView.image = nil
-            displayImageView.hidden = true
-            if downloadProgressActivityIndicator.isAnimating() { downloadProgressActivityIndicator.stopAnimating() }
+            displayImageView.isHidden = true
+            if downloadProgressActivityIndicator.isAnimating { downloadProgressActivityIndicator.stopAnimating() }
         } else if let displayImageURL = dataItem.image {
             let operation = GetRadicalImageOperation(sourceURL: displayImageURL, networkObserver: NetworkObserver())
             operation.addObserver(BlockObserver { [weak self] operation, errors in
                 guard let operation = operation as? GetRadicalImageOperation else { return }
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     // Only radicals have display images
                     if dataItem.image == operation.sourceURL {
                         self?.downloadProgressActivityIndicator.stopAnimating()
-                        self?.displayImageView.image = UIImage(contentsOfFile: operation.destinationFileURL.path!)
-                        self?.displayImageView.tintColor = UIColor.blackColor()
-                        self?.displayImageView.hidden = false
+                        self?.displayImageView.image = UIImage(contentsOfFile: operation.destinationFileURL.path)
+                        self?.displayImageView.tintColor = UIColor.black
+                        self?.displayImageView.isHidden = false
                     }
                     self?.getImageOperation = nil
                 }
                 })
-            let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let delegate = UIApplication.shared.delegate as! AppDelegate
             delegate.operationQueue.addOperation(operation)
             getImageOperation = operation
-            displayImageView.hidden = true
-            characterLabel.hidden = true
+            displayImageView.isHidden = true
+            characterLabel.isHidden = true
             downloadProgressActivityIndicator.startAnimating()
         } else {
             DDLogWarn("No display character nor image URL for radical \(dataItem)")
@@ -187,8 +187,8 @@ class KanjiGuruProgressCollectionViewCell: UICollectionViewCell, SRSDataItemGuru
         }
     }
     
-    var srsDataItemInfoURL: NSURL? {
-        return dataItem.flatMap { NSURL(string: $0.character.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLPathAllowedCharacterSet())!, relativeToURL: WaniKaniURLs.kanjiRoot) }
+    var srsDataItemInfoURL: URL? {
+        return dataItem.flatMap { URL(string: $0.character.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed)!, relativeTo: WaniKaniURLs.kanjiRoot) }
     }
     
     // MARK: - Outlets

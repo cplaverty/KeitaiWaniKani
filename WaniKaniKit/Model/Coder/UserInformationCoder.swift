@@ -32,28 +32,28 @@ public final class UserInformationCoder: ResourceHandler, JSONDecoder, SingleIte
     
     // MARK: - ResourceHandler
     
-    public var resource: Resource { return .UserInformation }
+    public var resource: Resource { return .userInformation }
     
     // MARK: - JSONDecoder
     
-    public func loadFromJSON(json: JSON) -> UserInformation? {
-        guard let username = json[Columns.username].string,
-            level = json[Columns.level].int
-            else {
+    public func load(from json: JSON) -> UserInformation? {
+        guard
+            let username = json[Columns.username].string,
+            let level = json[Columns.level].int else {
                 return nil
         }
         
         return UserInformation(username: username,
-            gravatar: json[Columns.gravatar].stringValue,
-            level: level,
-            title: json[Columns.title].stringValue,
-            about: json[Columns.about].string,
-            website: json[Columns.website].string,
-            twitter: json[Columns.twitter].string,
-            topicsCount: json[Columns.topicsCount].intValue,
-            postsCount: json[Columns.postsCount].intValue,
-            creationDate: json[Columns.creationDate].dateValue,
-            vacationDate: json[Columns.vacationDate].date)
+                               gravatar: json[Columns.gravatar].stringValue,
+                               level: level,
+                               title: json[Columns.title].stringValue,
+                               about: json[Columns.about].string,
+                               website: json[Columns.website].string,
+                               twitter: json[Columns.twitter].string,
+                               topicsCount: json[Columns.topicsCount].intValue,
+                               postsCount: json[Columns.postsCount].intValue,
+                               creationDate: json[Columns.creationDate].dateValue,
+                               vacationDate: json[Columns.vacationDate].date)
     }
     
     // MARK: - DatabaseCoder
@@ -72,43 +72,43 @@ public final class UserInformationCoder: ResourceHandler, JSONDecoder, SingleIte
             "\(Columns.postsCount) INT NOT NULL, " +
             "\(Columns.creationDate) INT NOT NULL, " +
             "\(Columns.vacationDate) INT, " +
-        "\(Columns.lastUpdateTimestamp) INT NOT NULL"
+            "\(Columns.lastUpdateTimestamp) INT NOT NULL"
     }
     
     var columnNameList: [String] {
         return [Columns.username, Columns.gravatar, Columns.level, Columns.title, Columns.about, Columns.website, Columns.twitter, Columns.topicsCount, Columns.postsCount, Columns.creationDate, Columns.vacationDate, Columns.lastUpdateTimestamp]
     }
     
-    lazy var columnNames: String = { self.columnNameList.joinWithSeparator(",") }()
+    lazy var columnNames: String = { self.columnNameList.joined(separator: ",") }()
     
     lazy var columnCount: Int = { self.columnNameList.count }()
     
-    public func createTable(database: FMDatabase, dropFirst: Bool) throws {
-        if dropFirst {
+    public func createTable(in database: FMDatabase, dropExisting: Bool) throws {
+        if dropExisting {
             try database.executeUpdate("DROP TABLE IF EXISTS \(self.dynamicType.tableName)")
         }
         
         try database.executeUpdate("CREATE TABLE IF NOT EXISTS \(self.dynamicType.tableName)(\(columnDefinitions))")
     }
     
-    public func loadFromDatabase(database: FMDatabase) throws -> UserInformation? {
+    public func load(from database: FMDatabase) throws -> UserInformation? {
         let resultSet = try database.executeQuery("SELECT \(columnNames) FROM \(self.dynamicType.tableName)")
         defer { resultSet.close() }
         
         var result: UserInformation? = nil
         if resultSet.next() {
-            result = UserInformation(username: resultSet.stringForColumn(Columns.username),
-                gravatar: resultSet.stringForColumn(Columns.gravatar),
-                level: resultSet.longForColumn(Columns.level),
-                title: resultSet.stringForColumn(Columns.title),
-                about: resultSet.stringForColumn(Columns.about),
-                website: resultSet.stringForColumn(Columns.website),
-                twitter: resultSet.stringForColumn(Columns.twitter),
-                topicsCount: resultSet.longForColumn(Columns.topicsCount),
-                postsCount: resultSet.longForColumn(Columns.postsCount),
-                creationDate: resultSet.dateForColumn(Columns.creationDate),
-                vacationDate: resultSet.dateForColumn(Columns.vacationDate),
-                lastUpdateTimestamp: resultSet.dateForColumn(Columns.lastUpdateTimestamp))
+            result = UserInformation(username: resultSet.string(forColumn: Columns.username),
+                                     gravatar: resultSet.string(forColumn: Columns.gravatar),
+                                     level: resultSet.long(forColumn: Columns.level),
+                                     title: resultSet.string(forColumn: Columns.title),
+                                     about: resultSet.string(forColumn: Columns.about),
+                                     website: resultSet.string(forColumn: Columns.website),
+                                     twitter: resultSet.string(forColumn: Columns.twitter),
+                                     topicsCount: resultSet.long(forColumn: Columns.topicsCount),
+                                     postsCount: resultSet.long(forColumn: Columns.postsCount),
+                                     creationDate: resultSet.date(forColumn: Columns.creationDate),
+                                     vacationDate: resultSet.date(forColumn: Columns.vacationDate),
+                                     lastUpdateTimestamp: resultSet.date(forColumn: Columns.lastUpdateTimestamp))
         }
         
         return result
@@ -119,7 +119,7 @@ public final class UserInformationCoder: ResourceHandler, JSONDecoder, SingleIte
         return "INSERT INTO \(self.dynamicType.tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
     }()
     
-    public func save(model: UserInformation, toDatabase database: FMDatabase) throws {
+    public func save(_ model: UserInformation, to database: FMDatabase) throws {
         try database.executeUpdate("DELETE FROM \(self.dynamicType.tableName)")
         
         let columnValues: [AnyObject] = [
@@ -140,7 +140,7 @@ public final class UserInformationCoder: ResourceHandler, JSONDecoder, SingleIte
         try database.executeUpdate(updateSQL, values: columnValues)
     }
     
-    public func hasBeenUpdatedSince(since: NSDate, inDatabase database: FMDatabase) throws -> Bool {
+    public func hasBeenUpdated(since: Date, in database: FMDatabase) throws -> Bool {
         guard let earliestDate = try database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(self.dynamicType.tableName)") else {
             return false
         }

@@ -11,19 +11,19 @@ import FMDB
 import SwiftyJSON
 import OperationKit
 
-public final class ParseListItemOperation<Coder: protocol<JSONDecoder, ListItemDatabaseCoder>>: Operation, WaniKaniAPIResourceParser, NSProgressReporting {
+public final class ParseListItemOperation<Coder: JSONDecoder & ListItemDatabaseCoder>: OperationKit.Operation, WaniKaniAPIResourceParser, ProgressReporting {
     
     // MARK: - Properties
     
-    public let inputDirectory: NSURL
+    public let inputDirectory: URL
     public let databaseQueue: FMDatabaseQueue
     public let coder: Coder
-    public let progress: NSProgress = NSProgress(totalUnitCount: -1)
+    public let progress: Progress = Progress(totalUnitCount: -1)
     public private(set) var parsed: [Coder.ModelObject]?
     
     // MARK: - Initialization
     
-    init(coder: Coder, inputDirectory: NSURL, databaseQueue: FMDatabaseQueue) {
+    init(coder: Coder, inputDirectory: URL, databaseQueue: FMDatabaseQueue) {
         self.coder = coder
         self.inputDirectory = inputDirectory
         self.databaseQueue = databaseQueue
@@ -40,7 +40,7 @@ public final class ParseListItemOperation<Coder: protocol<JSONDecoder, ListItemD
         progress.localizedAdditionalDescription = "Parsing..."
         
         do {
-            let jsonDocuments = try parseJSONInDirectoryAtURL(inputDirectory)
+            let jsonDocuments = try parseJSONInDirectory(url: inputDirectory)
             
             if !jsonDocuments.isEmpty {
                 try parse(jsonDocuments)
@@ -53,7 +53,7 @@ public final class ParseListItemOperation<Coder: protocol<JSONDecoder, ListItemD
         }
     }
     
-    public override func finished(errors: [ErrorType]) {
+    public override func finished(_ errors: [Error]) {
         super.finished(errors)
         
         // Ensure progress is 100%
@@ -62,15 +62,15 @@ public final class ParseListItemOperation<Coder: protocol<JSONDecoder, ListItemD
     
     // MARK: - Parse
     
-    private func parse(jsonDocuments: [JSON]) throws {
+    private func parse(_ jsonDocuments: [JSON]) throws {
         // The total unit count represents parsing and saving the user info, plus the "requested information" payload
         progress.completedUnitCount = 0
-        progress.totalUnitCount = Int64(jsonDocuments.count * 2) + 2
+        progress.totalUnitCount = Int64(jsonDocuments.count) * 2 + 2
         
         // Ensure progress is 100%
         defer { progress.completedUnitCount = progress.totalUnitCount }
         
-        var maybeError: ErrorType? = nil
+        var maybeError: Error? = nil
         var userInformation: UserInformation? = nil
         var parsed: [Coder.ModelObject]
         parsed = []
@@ -84,11 +84,11 @@ public final class ParseListItemOperation<Coder: protocol<JSONDecoder, ListItemD
             }
             
             if userInformation == nil {
-                userInformation = UserInformation.coder.loadFromJSON(json[WaniKaniAPIResourceKeys.userInformation])
+                userInformation = UserInformation.coder.load(from: json[WaniKaniAPIResourceKeys.userInformation])
             }
             progress.completedUnitCount += 1
             
-            parsed += jsonArray.flatMap { return coder.loadFromJSON($0) }
+            parsed += jsonArray.flatMap { return coder.load(from: $0) }
             progress.completedUnitCount += 1
         }
         
@@ -99,18 +99,18 @@ public final class ParseListItemOperation<Coder: protocol<JSONDecoder, ListItemD
             do {
                 if let item = userInformation {
                     DDLogDebug("Saving user information")
-                    try UserInformation.coder.save(item, toDatabase: db)
+                    try UserInformation.coder.save(item, to: db!)
                 }
                 self.progress.completedUnitCount += 1
                 
                 DDLogDebug("Saving data")
-                try self.coder.save(parsed, toDatabase: db)
+                try self.coder.save(parsed, to: db!)
                 self.progress.completedUnitCount += 1
                 
                 WaniKaniDarwinNotificationCenter.postModelUpdateMessage("\(Coder.ModelObject.self)")
             } catch {
                 DDLogWarn("Rolling back due to database error: \(error)")
-                rollback.memory = true
+                rollback?.pointee = true
                 maybeError = error
             }
         }

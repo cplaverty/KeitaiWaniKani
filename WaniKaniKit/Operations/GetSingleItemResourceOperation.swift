@@ -6,29 +6,28 @@
 //
 
 import Foundation
-import Alamofire
 import CocoaLumberjack
 import FMDB
 import SwiftyJSON
 import OperationKit
 
 /// A composite `Operation` to both download and parse resource data.
-public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSONDecoder, SingleItemDatabaseCoder>>: Operation, WaniKaniAPIResourceParser, NSProgressReporting {
+public class GetSingleItemResourceOperation<Coder: ResourceHandler & JSONDecoder & SingleItemDatabaseCoder>: OperationKit.Operation, WaniKaniAPIResourceParser, ProgressReporting {
     
     // MARK: - Properties
     
-    public let progress: NSProgress
+    public let progress: Progress
     
     public private(set) var parsed: Coder.ModelObject?
     
     public var fetchRequired: Bool {
-        return !cancelled
+        return !isCancelled
     }
     
     private let coder: Coder
     private let databaseQueue: FMDatabaseQueue
-    private let sourceURL: NSURL
-    private var request: Request?
+    private let sourceURL: URL
+    private var task: URLSessionTask?
     private let parseOnly: Bool
     
     // MARK: - Initialisers
@@ -39,9 +38,9 @@ public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSO
         self.parseOnly = parseOnly
         
         let resource = coder.resource
-        self.sourceURL = resolver.URLForResource(resource, withArgument: nil)
+        self.sourceURL = resolver.resolveURL(resource: resource, withArgument: nil)
         
-        progress = NSProgress(totalUnitCount: 3)
+        progress = Progress(totalUnitCount: 3)
         progress.localizedDescription = "Fetching \(resource)"
         progress.localizedAdditionalDescription = "Waiting..."
         
@@ -58,46 +57,66 @@ public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSO
     // MARK: - Operation
     
     public override func execute() {
-        DDLogDebug("Starting download of \(self.sourceURL)")
+        assert(task == nil, "Operation executed twice?")
+        
+        DDLogInfo("Starting download of \(self.sourceURL)")
         progress.localizedAdditionalDescription = "Connecting..."
-        request = Alamofire.request(.GET, self.sourceURL)
-            .validate()
-            .responseJSON { [progress] response in
-                progress.completedUnitCount = 1
-                defer { progress.completedUnitCount = progress.totalUnitCount }
-                DDLogDebug("Download of \(self.sourceURL) complete")
-                switch response.result {
-                case .Success(let value):
-                    do {
-                        let json = JSON(value)
-                        try self.throwForError(json)
-                        try self.parse(json)
-                        self.finish()
-                    } catch {
-                        self.finishWithError(error)
-                    }
-                case .Failure(let error):
-                    self.finishWithError(error)
-                }
+        
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForResource = TimeInterval(10 * 60) // Max resource timeout of 10 minutes
+        let session = URLSession(configuration: config, delegate: nil, delegateQueue: nil)
+        
+        task = session.dataTask(with: sourceURL) { (data, response, error) in
+            self.progress.completedUnitCount = 1
+            defer { self.progress.completedUnitCount = self.progress.totalUnitCount }
+            DDLogDebug("Download of \(self.sourceURL) complete")
+            if let error = error {
+                self.finishWithError(error)
+                return
+            }
+            
+            do {
+                let json = JSON(data: data!)
+                try self.throwForError(json)
+                try self.parse(json)
+                self.finish()
+            } catch {
+                self.finishWithError(error)
+            }
         }
+        task!.resume()
     }
     
     public override func cancel() {
         DDLogDebug("Cancelling download of \(self.sourceURL)")
         super.cancel()
-        request?.cancel()
+        task?.cancel()
+    }
+    
+    public override func finished(_ errors: [Error]) {
+        super.finished(errors)
+        
+        DDLogVerbose("Data operation for \(self.sourceURL) finished")
+        
+        // Ensure progress is 100%
+        if progress.totalUnitCount < 0 {
+            progress.completedUnitCount = 1
+            progress.totalUnitCount = 1
+        } else {
+            progress.completedUnitCount = progress.totalUnitCount
+        }
     }
     
     // MARK: - Parse
     
-    private func parse(json: JSON) throws {
-        var maybeError: ErrorType? = nil
+    private func parse(_ json: JSON) throws {
+        var maybeError: Error? = nil
         var userInformation: UserInformation? = nil
         var parsed: Coder.ModelObject?
         
-        userInformation = UserInformation.coder.loadFromJSON(json[WaniKaniAPIResourceKeys.userInformation])
+        userInformation = UserInformation.coder.load(from: json[WaniKaniAPIResourceKeys.userInformation])
         
-        parsed = coder.loadFromJSON(json[WaniKaniAPIResourceKeys.requestedInformation])
+        parsed = coder.load(from: json[WaniKaniAPIResourceKeys.requestedInformation])
         
         progress.completedUnitCount += 1
         
@@ -114,12 +133,12 @@ public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSO
             do {
                 if let item = userInformation {
                     DDLogDebug("Saving user information")
-                    try UserInformation.coder.save(item, toDatabase: db)
+                    try UserInformation.coder.save(item, to: db!)
                 }
                 
                 if let parsed = parsed {
                     DDLogDebug("Saving \(Coder.ModelObject.self) data")
-                    try self.coder.save(parsed, toDatabase: db)
+                    try self.coder.save(parsed, to: db!)
                 } else {
                     DDLogWarn("Not saving \(Coder.ModelObject.self) as no valid items were parsed")
                 }
@@ -129,7 +148,7 @@ public class GetSingleItemResourceOperation<Coder: protocol<ResourceHandler, JSO
                 WaniKaniDarwinNotificationCenter.postModelUpdateMessage("\(Coder.ModelObject.self)")
             } catch {
                 DDLogWarn("Rolling back due to database error: \(error)")
-                rollback.memory = true
+                rollback?.pointee = true
                 maybeError = error
             }
         }

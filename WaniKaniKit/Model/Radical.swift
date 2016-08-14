@@ -11,18 +11,18 @@ public struct Radical: SRSDataItem, Equatable {
     public let character: String?
     /// Primary key
     public let meaning: String
-    public let image: NSURL?
+    public let image: URL?
     public let level: Int
     public let userSpecificSRSData: UserSpecificSRSData?
-    public let lastUpdateTimestamp: NSDate
+    public let lastUpdateTimestamp: Date
     
-    public init(character: String? = nil, meaning: String, image: NSURL? = nil, level: Int, userSpecificSRSData: UserSpecificSRSData? = nil, lastUpdateTimestamp: NSDate? = nil) {
+    public init(character: String? = nil, meaning: String, image: URL? = nil, level: Int, userSpecificSRSData: UserSpecificSRSData? = nil, lastUpdateTimestamp: Date? = nil) {
         self.character = character
         self.meaning = meaning
         self.image = image
         self.level = level
         self.userSpecificSRSData = userSpecificSRSData
-        self.lastUpdateTimestamp = lastUpdateTimestamp ?? NSDate()
+        self.lastUpdateTimestamp = lastUpdateTimestamp ?? Date()
     }
 }
 

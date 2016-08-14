@@ -8,12 +8,12 @@
 import Foundation
 
 public enum Resource {
-    case UserInformation, StudyQueue, LevelProgression, SRSDistribution, Radicals, Kanji, Vocabulary
+    case userInformation, studyQueue, levelProgression, srsDistribution, radicals, kanji, vocabulary
     
-    var splitByLevel: Bool {
+    var shouldSplitDownloadByLevel: Bool {
         switch self {
-        case UserInformation, StudyQueue, LevelProgression, SRSDistribution, Radicals, Kanji: return false
-        case Vocabulary: return true
+        case .userInformation, .studyQueue, .levelProgression, .srsDistribution, .radicals, .kanji: return false
+        case .vocabulary: return true
         }
     }
 }
@@ -21,13 +21,13 @@ public enum Resource {
 extension Resource: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .UserInformation: return "User Information"
-        case .StudyQueue: return "Study Queue"
-        case .LevelProgression: return "Level Progression"
-        case .SRSDistribution: return "SRS Distribution"
-        case .Radicals: return "Radicals"
-        case .Kanji: return "Kanji"
-        case .Vocabulary: return "Vocabulary"
+        case .userInformation: return "User Information"
+        case .studyQueue: return "Study Queue"
+        case .levelProgression: return "Level Progression"
+        case .srsDistribution: return "SRS Distribution"
+        case .radicals: return "Radicals"
+        case .kanji: return "Kanji"
+        case .vocabulary: return "Vocabulary"
         }
     }
 }

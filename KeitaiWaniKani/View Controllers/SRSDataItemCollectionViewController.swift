@@ -21,7 +21,7 @@ private struct ClassifiedSRSDataItems {
     let sections: [Section]
     
     init(items: [SRSDataItem]) {
-        let items = items.sort(SRSDataItemSorting.byProgress)
+        let items = items.sorted(by: SRSDataItemSorting.byProgress)
         var sections: [Section] = []
         sections.reserveCapacity(2)
         
@@ -38,14 +38,14 @@ private struct ClassifiedSRSDataItems {
         self.sections = sections
     }
     
-    private static func isPending(item: SRSDataItem) -> Bool {
+    private static func isPending(_ item: SRSDataItem) -> Bool {
         guard let srsLevel = item.userSpecificSRSData?.srsLevelNumeric else { return true }
-        return srsLevel < SRSLevel.Guru.numericLevelThreshold
+        return srsLevel < SRSLevel.guru.numericLevelThreshold
     }
     
-    private static func isComplete(item: SRSDataItem) -> Bool {
+    private static func isComplete(_ item: SRSDataItem) -> Bool {
         guard let srsLevel = item.userSpecificSRSData?.srsLevelNumeric else { return false }
-        return srsLevel >= SRSLevel.Guru.numericLevelThreshold
+        return srsLevel >= SRSLevel.guru.numericLevelThreshold
     }
 }
 
@@ -54,45 +54,45 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
     // MARK: - Properties
     
     private var classifiedItems: ClassifiedSRSDataItems?
-    func setSRSDataItems(items: [SRSDataItem], withTitle title: String) {
+    func setSRSDataItems(_ items: [SRSDataItem], withTitle title: String) {
         classifiedItems = ClassifiedSRSDataItems(items: items)
         navigationItem.title = title
     }
     
     private var headerFont: UIFont {
         if #available(iOS 9.0, *) {
-            return UIFont.preferredFontForTextStyle(UIFontTextStyleTitle1)
+            return UIFont.preferredFont(forTextStyle: UIFontTextStyleTitle1)
         } else {
-            let headlineFont = UIFont.preferredFontForTextStyle(UIFontTextStyleBody)
+            let headlineFont = UIFont.preferredFont(forTextStyle: UIFontTextStyleBody)
             let pointSize = headlineFont.pointSize * 5.0 / 3.0
-            return headlineFont.fontWithSize(pointSize)
+            return headlineFont.withSize(pointSize)
         }
     }
     
     // MARK: - UICollectionViewDataSource
     
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         guard let classifiedItems = classifiedItems else { return 0 }
         return classifiedItems.sections.count
     }
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let classifiedItems = classifiedItems else { return 0 }
         
         return classifiedItems.sections[section].items.count
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let classifiedItems = classifiedItems {
             let item = classifiedItems.sections[indexPath.section].items[indexPath.row]
             
             switch item {
             case let radical as Radical:
-                let cell = collectionView.dequeueReusableCellWithReuseIdentifier(radicalReuseIdentifier, forIndexPath: indexPath) as! RadicalGuruProgressCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: radicalReuseIdentifier, for: indexPath) as! RadicalGuruProgressCollectionViewCell
                 cell.dataItem = radical
                 return cell
             case let kanji as Kanji:
-                let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kanjiReuseIdentifier, forIndexPath: indexPath) as! KanjiGuruProgressCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kanjiReuseIdentifier, for: indexPath) as! KanjiGuruProgressCollectionViewCell
                 cell.dataItem = kanji
                 return cell
             default: fatalError("Only Radicals and Kanji are supported by \(self.dynamicType)")
@@ -102,8 +102,8 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
         }
     }
     
-    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        let view = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerReuseIdentifier, forIndexPath: indexPath) as! SRSItemHeaderCollectionReusableView
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! SRSItemHeaderCollectionReusableView
         
         if kind == UICollectionElementKindSectionHeader {
             let section = classifiedItems?.sections[indexPath.section]
@@ -116,13 +116,13 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
         return view
     }
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        guard let cell = collectionView.cellForItemAtIndexPath(indexPath) as? SRSDataItemInfoURL, let url = cell.srsDataItemInfoURL else { return }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? SRSDataItemInfoURL, let url = cell.srsDataItemInfoURL else { return }
         
-        self.presentViewController(WKWebViewController.forURL(url) { $0.delegate = self }, animated: true, completion: nil)
+        self.present(WKWebViewController.forURL(url) { $0.delegate = self }, animated: true, completion: nil)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let label = UILabel()
         label.font = headerFont
         label.text = "Remaining to Level"
@@ -134,8 +134,8 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
     
     // MARK: - WKWebViewControllerDelegate
     
-    func wkWebViewControllerDidFinish(controller: WKWebViewController) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func wkWebViewControllerDidFinish(_ controller: WKWebViewController) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - View Controller Lifecycle
@@ -143,21 +143,21 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let blurEffect = UIBlurEffect(style: .ExtraLight)
+        let blurEffect = UIBlurEffect(style: .extraLight)
         
         let backgroundView = UIView(frame: collectionView!.frame)
-        backgroundView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-        let imageView = UIImageView(image: UIImage(named: "Header"))
-        imageView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-        imageView.contentMode = .ScaleAspectFill
+        backgroundView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        let imageView = UIImageView(image: UIImage(named: "Art03"))
+        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        imageView.contentMode = .scaleAspectFill
         imageView.frame = backgroundView.frame
         backgroundView.addSubview(imageView)
         let visualEffectBlurView = UIVisualEffectView(effect: blurEffect)
         visualEffectBlurView.frame = imageView.frame
-        visualEffectBlurView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+        visualEffectBlurView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         backgroundView.addSubview(visualEffectBlurView)
         let darkenView = UIView(frame: visualEffectBlurView.frame)
-        darkenView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+        darkenView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         darkenView.alpha = 0.1
         darkenView.backgroundColor = ApplicationSettings.globalTintColor()
         visualEffectBlurView.contentView.addSubview(darkenView)

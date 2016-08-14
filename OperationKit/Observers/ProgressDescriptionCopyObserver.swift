@@ -9,8 +9,8 @@ import Foundation
 import CocoaLumberjack
 
 public class ProgressDescriptionCopyObserver: NSObject, OperationObserver {
-    public let sourceProgress: NSProgress?
-    public let destinationProgress: NSProgress
+    public let sourceProgress: Progress?
+    public let destinationProgress: Progress
     public let localizedDescription: String?
     public let localizedAdditionalDescription: String?
 
@@ -24,7 +24,7 @@ public class ProgressDescriptionCopyObserver: NSObject, OperationObserver {
     
     // MARK: OperationObserver
     
-    public init(operation: Operation, sourceProgress: NSProgress? = nil, destinationProgress: NSProgress, localizedDescription: String? = nil, localizedAdditionalDescription: String? = nil) {
+    public init(operation: Operation, sourceProgress: Progress? = nil, destinationProgress: Progress, localizedDescription: String? = nil, localizedAdditionalDescription: String? = nil) {
         if sourceProgress == nil {
             assert(localizedDescription != nil, "Source progress must be set if localizedDescription is not provided")
             assert(localizedAdditionalDescription != nil, "Source progress must be set if localizedAdditionalDescription is not provided")
@@ -37,7 +37,7 @@ public class ProgressDescriptionCopyObserver: NSObject, OperationObserver {
         self.localizedAdditionalDescription = localizedAdditionalDescription
     }
     
-    public func operationDidStart(operation: Operation) {
+    public func operationDidStart(_ operation: Operation) {
         guard operation === self.operation else {
             return
         }
@@ -59,10 +59,10 @@ public class ProgressDescriptionCopyObserver: NSObject, OperationObserver {
         }
     }
     
-    public func operation(operation: Operation, didProduceOperation newOperation: NSOperation) {
+    public func operation(_ operation: Operation, didProduceOperation newOperation: Foundation.Operation) {
     }
     
-    public func operationDidFinish(operation: Operation, errors: [ErrorType]) {
+    public func operationDidFinish(_ operation: Operation, errors: [Error]) {
         guard operation === self.operation else {
             return
         }
@@ -79,9 +79,9 @@ public class ProgressDescriptionCopyObserver: NSObject, OperationObserver {
     
     // MARK: Key-Value Observing
     
-    public override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    public override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
         guard context == &observationContext else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
         
@@ -94,8 +94,8 @@ public class ProgressDescriptionCopyObserver: NSObject, OperationObserver {
 }
 
 public extension Operation {
-    public func addProgressListenerForDestinationProgress(destinationProgress: NSProgress, sourceProgress: NSProgress? = nil, localizedDescription: String? = nil, localizedAdditionalDescription: String? = nil) {
-        self.addObserver(ProgressDescriptionCopyObserver(operation: self, sourceProgress: sourceProgress ?? (self as? NSProgressReporting)?.progress,
+    public func addProgressListenerForDestinationProgress(_ destinationProgress: Progress, sourceProgress: Progress? = nil, localizedDescription: String? = nil, localizedAdditionalDescription: String? = nil) {
+        self.addObserver(ProgressDescriptionCopyObserver(operation: self, sourceProgress: sourceProgress ?? (self as? ProgressReporting)?.progress,
             destinationProgress: destinationProgress, localizedDescription: localizedDescription, localizedAdditionalDescription: localizedAdditionalDescription))
     }
 }

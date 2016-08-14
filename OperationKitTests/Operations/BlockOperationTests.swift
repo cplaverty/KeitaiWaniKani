@@ -14,45 +14,43 @@ class BlockOperationTests: XCTestCase {
         let operationQueue = createOperationQueue()
         
         var wasRun = false
-        let expectation = expectationWithDescription("operation")
-        let operation = BlockOperation {
+        let operation = OperationKit.BlockOperation {
             wasRun = true
         }
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
-            expectation.fulfill()
             })
         operationQueue.addOperation(operation)
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectations(timeout: 1, handler: nil)
         
         XCTAssertTrue(wasRun)
-        XCTAssertFalse(operation.ready)
-        XCTAssertFalse(operation.executing)
-        XCTAssertTrue(operation.finished)
-        XCTAssertFalse(operation.cancelled)
+        XCTAssertFalse(operation.isReady)
+        XCTAssertFalse(operation.isExecuting)
+        XCTAssertTrue(operation.isFinished)
+        XCTAssertFalse(operation.isCancelled)
     }
     
     func testCancelBeforeStart() {
         let operationQueue = createOperationQueue()
         
         var wasRun = false
-        let expectation = expectationWithDescription("operation")
-        let operation = BlockOperation {
+        let operation = OperationKit.BlockOperation {
             wasRun = true
         }
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
-            expectation.fulfill()
             })
         operation.cancel()
         operationQueue.addOperation(operation)
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectations(timeout: 1, handler: nil)
         
         XCTAssertFalse(wasRun)
-        XCTAssertFalse(operation.ready)
-        XCTAssertFalse(operation.executing)
-        XCTAssertTrue(operation.finished)
-        XCTAssertTrue(operation.cancelled)
+        XCTAssertFalse(operation.isReady)
+        XCTAssertFalse(operation.isExecuting)
+        XCTAssertTrue(operation.isFinished)
+        XCTAssertTrue(operation.isCancelled)
     }
     
 }

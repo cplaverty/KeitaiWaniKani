@@ -17,9 +17,9 @@ public struct Kanji: SRSDataItem, Equatable {
     public let importantReading: String
     public let level: Int
     public let userSpecificSRSData: UserSpecificSRSData?
-    public let lastUpdateTimestamp: NSDate
+    public let lastUpdateTimestamp: Date
     
-    public init(character: String, meaning: String, onyomi: String? = nil, kunyomi: String? = nil, nanori: String? = nil, importantReading: String, level: Int, userSpecificSRSData: UserSpecificSRSData? = nil, lastUpdateTimestamp: NSDate? = nil) {
+    public init(character: String, meaning: String, onyomi: String? = nil, kunyomi: String? = nil, nanori: String? = nil, importantReading: String, level: Int, userSpecificSRSData: UserSpecificSRSData? = nil, lastUpdateTimestamp: Date? = nil) {
         self.character = character
         self.meaning = meaning
         self.onyomi = onyomi
@@ -28,7 +28,7 @@ public struct Kanji: SRSDataItem, Equatable {
         self.importantReading = importantReading
         self.level = level
         self.userSpecificSRSData = userSpecificSRSData
-        self.lastUpdateTimestamp = lastUpdateTimestamp ?? NSDate()
+        self.lastUpdateTimestamp = lastUpdateTimestamp ?? Date()
     }
 }
 

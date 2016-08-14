@@ -15,17 +15,17 @@ struct AlwaysSatisfiedCondition: OperationCondition {
         // No op.
     }
     
-    func dependencyForOperation(operation: Operation) -> NSOperation? {
+    func dependency(forOperation operation: OperationKit.Operation) -> Foundation.Operation? {
         return nil
     }
     
-    func evaluateForOperation(operation: Operation, completion: OperationConditionResult -> Void) {
-        completion(.Satisfied)
+    func evaluate(forOperation operation: OperationKit.Operation, completion: (OperationConditionResult) -> Void) {
+        completion(.satisfied)
     }
 }
 
-enum AlwaysFailedConditionError: ErrorType {
-    case Error
+enum AlwaysFailedConditionError: Error {
+    case error
 }
 
 struct AlwaysFailedCondition: OperationCondition {
@@ -35,11 +35,11 @@ struct AlwaysFailedCondition: OperationCondition {
         // No op.
     }
     
-    func dependencyForOperation(operation: Operation) -> NSOperation? {
+    func dependency(forOperation operation: OperationKit.Operation) -> Foundation.Operation? {
         return nil
     }
     
-    func evaluateForOperation(operation: Operation, completion: OperationConditionResult -> Void) {
-        completion(.Failed(AlwaysFailedConditionError.Error))
+    func evaluate(forOperation operation: OperationKit.Operation, completion: (OperationConditionResult) -> Void) {
+        completion(.failed(AlwaysFailedConditionError.error))
     }
 }

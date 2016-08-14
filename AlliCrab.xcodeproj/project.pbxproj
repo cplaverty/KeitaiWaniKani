@@ -25,7 +25,6 @@
 		832427DD1BB6D0DB004777C9 /* WaniKaniAPIResourceParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832427DC1BB6D0DB004777C9 /* WaniKaniAPIResourceParser.swift */; };
 		832427DF1BB6D3C1004777C9 /* GetSingleItemResourceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832427DE1BB6D3C1004777C9 /* GetSingleItemResourceOperation.swift */; };
 		832462B91B930AC200FB62C9 /* ReviewCountNotificationOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832462B81B930AC100FB62C9 /* ReviewCountNotificationOperation.swift */; };
-		832462BB1B93224800FB62C9 /* NSDate+Comparable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832462BA1B93224800FB62C9 /* NSDate+Comparable.swift */; };
 		832462BD1B932ADF00FB62C9 /* SRSDataItemCoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832462BC1B932ADF00FB62C9 /* SRSDataItemCoderTests.swift */; };
 		832462BF1B935FB500FB62C9 /* SRSReviewCounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832462BE1B935FB500FB62C9 /* SRSReviewCounts.swift */; };
 		8326D2DE1BB7E52F006FF2D0 /* DownloadStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8326D2DD1BB7E52F006FF2D0 /* DownloadStrategy.swift */; };
@@ -311,7 +310,6 @@
 		832427DC1BB6D0DB004777C9 /* WaniKaniAPIResourceParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaniKaniAPIResourceParser.swift; sourceTree = "<group>"; };
 		832427DE1BB6D3C1004777C9 /* GetSingleItemResourceOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSingleItemResourceOperation.swift; sourceTree = "<group>"; };
 		832462B81B930AC100FB62C9 /* ReviewCountNotificationOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewCountNotificationOperation.swift; sourceTree = "<group>"; };
-		832462BA1B93224800FB62C9 /* NSDate+Comparable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Comparable.swift"; sourceTree = "<group>"; };
 		832462BC1B932ADF00FB62C9 /* SRSDataItemCoderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemCoderTests.swift; sourceTree = "<group>"; };
 		832462BE1B935FB500FB62C9 /* SRSReviewCounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSReviewCounts.swift; sourceTree = "<group>"; };
 		8326D2DD1BB7E52F006FF2D0 /* DownloadStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadStrategy.swift; sourceTree = "<group>"; };
@@ -740,7 +738,6 @@
 				836B2BA91BA97FDE00E7142D /* DDLogLevel+CustomStringConvertible.swift */,
 				8362E3611BCF11640062AC97 /* DownloadFileOperation+WaniKani.swift */,
 				8347BD441B725D46000F99EF /* JSON+WaniKani.swift */,
-				832462BA1B93224800FB62C9 /* NSDate+Comparable.swift */,
 				833074551BA8C609008E66E6 /* SequenceType+WaniKani.swift */,
 				83A23FE61BCD96C100060B66 /* String+WaniKani.swift */,
 			);
@@ -1184,12 +1181,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Chris Laverty";
 				TargetAttributes = {
 					830EAB851B41DC7700EBF073 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 5QAN68L9NX;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1202,6 +1200,7 @@
 					83426DED1B7369F8005F4503 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 5QAN68L9NX;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1210,21 +1209,26 @@
 					};
 					8346E60F1C497DF600068686 = {
 						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
 						TestTargetID = 830EAB851B41DC7700EBF073;
 					};
 					8347BCF81B725428000F99EF = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 5QAN68L9NX;
+						LastSwiftMigration = 0800;
 					};
 					8347BD011B725428000F99EF = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 					83C8F9491B9B2E7E007CBFBF = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = 5QAN68L9NX;
+						LastSwiftMigration = 0800;
 					};
 					83D550531BB489A9007442EF = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -1653,7 +1657,6 @@
 				8347BD981B725D46000F99EF /* ResourceResolver.swift in Sources */,
 				8347BDF61B72A556000F99EF /* GetKanjiOperation.swift in Sources */,
 				832427DF1BB6D3C1004777C9 /* GetSingleItemResourceOperation.swift in Sources */,
-				832462BB1B93224800FB62C9 /* NSDate+Comparable.swift in Sources */,
 				8347BD9A1B725D46000F99EF /* SRSItemCounts.swift in Sources */,
 				8347BD881B725D46000F99EF /* JSON+WaniKani.swift in Sources */,
 				8347BDED1B728CD8000F99EF /* GetListItemResourceOperation.swift in Sources */,
@@ -1835,8 +1838,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1880,8 +1885,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1909,17 +1916,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B876EA5824A6CCB6A689FA51 /* Pods-AlliCrab.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = KeitaiWaniKani/KeitaiWaniKani.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = KeitaiWaniKani/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.KeitaiWaniKani;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1927,17 +1935,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2890FAE399F71469B0449BEA /* Pods-AlliCrab.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = KeitaiWaniKani/KeitaiWaniKani.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = KeitaiWaniKani/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.KeitaiWaniKani;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1954,6 +1963,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1970,6 +1980,7 @@
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1981,6 +1992,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.KeitaiWaniKaniUITests;
 				PRODUCT_NAME = AlliCrabUITests;
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = AlliCrab;
 				USES_XCTRUNNER = YES;
 			};
@@ -1994,6 +2006,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.KeitaiWaniKaniUITests;
 				PRODUCT_NAME = AlliCrabUITests;
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = AlliCrab;
 				USES_XCTRUNNER = YES;
 			};
@@ -2006,7 +2019,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2017,6 +2030,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.WaniKaniKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2029,7 +2043,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2040,6 +2054,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.WaniKaniKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2049,11 +2064,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 746F11E1BAB692DD46347209 /* Pods-WaniKaniKitTests.debug.xcconfig */;
 			buildSettings = {
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				INFOPLIST_FILE = WaniKaniKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.WaniKaniKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -2061,11 +2077,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2691F2F6BB02AFAAF87B97D0 /* Pods-WaniKaniKitTests.release.xcconfig */;
 			buildSettings = {
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				INFOPLIST_FILE = WaniKaniKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.WaniKaniKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -2075,7 +2092,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2086,6 +2103,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.OperationKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2097,7 +2115,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2108,6 +2126,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.OperationKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2117,11 +2136,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81BC8E43B9801D1CDA0D5EAD /* Pods-OperationKitTests.debug.xcconfig */;
 			buildSettings = {
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				INFOPLIST_FILE = OperationKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.OperationKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -2129,11 +2149,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 564361D5394FB9ABE3B9CA27 /* Pods-OperationKitTests.release.xcconfig */;
 			buildSettings = {
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				INFOPLIST_FILE = OperationKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.OperationKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

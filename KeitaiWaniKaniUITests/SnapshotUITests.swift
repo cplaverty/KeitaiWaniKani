@@ -30,8 +30,8 @@ class SnapshotUITests: XCTestCase {
         
         // Dashboard
         let dashboard = app.navigationBars["Dashboard"]
-        expectationForPredicate(exists, evaluatedWithObject: dashboard, handler: nil)
-        waitForExpectationsWithTimeout(15, handler: nil)
+        expectation(for: exists, evaluatedWith: dashboard, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         XCTAssert(dashboard.exists, "Dashboard not loaded")
         
         sleep(10)
@@ -41,14 +41,14 @@ class SnapshotUITests: XCTestCase {
         
         // Review Timeline
         let allUpcomingReviewsText = tablesQuery.cells.staticTexts["All Upcoming Reviews"]
-        expectationForPredicate(hittable, evaluatedWithObject: allUpcomingReviewsText, handler: nil)
-        waitForExpectationsWithTimeout(15, handler: nil)
-        XCTAssert(allUpcomingReviewsText.hittable, "All Upcoming Reviews link not hittable")
+        expectation(for: hittable, evaluatedWith: allUpcomingReviewsText, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
+        XCTAssert(allUpcomingReviewsText.isHittable, "All Upcoming Reviews link not hittable")
         tablesQuery.cells.staticTexts["All Upcoming Reviews"].tap()
         
         let reviewTimeline = app.navigationBars["Review Timeline"]
-        expectationForPredicate(exists, evaluatedWithObject: reviewTimeline, handler: nil)
-        waitForExpectationsWithTimeout(15, handler: nil)
+        expectation(for: exists, evaluatedWith: reviewTimeline, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         XCTAssert(reviewTimeline.exists, "Review Timeline not loaded")
         snapshot("3 review-timeline", waitForLoadingIndicator: false)
         reviewTimeline.buttons["Dashboard"].tap()
@@ -56,8 +56,8 @@ class SnapshotUITests: XCTestCase {
         // Kanji
         tablesQuery.cells.staticTexts["Kanji"].tap()
         let kanji = app.navigationBars["Kanji"]
-        expectationForPredicate(exists, evaluatedWithObject: kanji, handler: nil)
-        waitForExpectationsWithTimeout(15, handler: nil)
+        expectation(for: exists, evaluatedWith: kanji, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         XCTAssert(kanji.exists, "Kanji not loaded")
         snapshot("4 kanji", waitForLoadingIndicator: false)
         kanji.buttons["Dashboard"].tap()

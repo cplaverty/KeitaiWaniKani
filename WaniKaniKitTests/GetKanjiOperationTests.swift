@@ -27,21 +27,21 @@ class GetKanjiOperationTests: DatabaseTestCase, ResourceHTTPStubs {
                                         onyomi: "てん",
                                         importantReading: "onyomi",
                                         level: 2,
-                                        userSpecificSRSData: UserSpecificSRSData(srsLevel: .Apprentice,
-                                            srsLevelNumeric: 4,
-                                            dateUnlocked: NSDate(timeIntervalSince1970: NSTimeInterval(1437918884)),
-                                            dateAvailable: NSDate(timeIntervalSince1970: NSTimeInterval(1438325100)),
-                                            burned: false,
-                                            meaningStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3),
-                                            readingStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3)))
+                                        userSpecificSRSData: UserSpecificSRSData(srsLevel: .apprentice,
+                                                                                 srsLevelNumeric: 4,
+                                                                                 dateUnlocked: Date(timeIntervalSince1970: TimeInterval(1437918884)),
+                                                                                 dateAvailable: Date(timeIntervalSince1970: TimeInterval(1438325100)),
+                                                                                 burned: false,
+                                                                                 meaningStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3),
+                                                                                 readingStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3)))
         
-        let operationQueue = OperationQueue()
+        let operationQueue = OperationKit.OperationQueue()
         
-        stubForResource(Resource.Kanji, file: "Kanji Level 2")
+        stubForResource(Resource.kanji, file: "Kanji Level 2")
         defer { OHHTTPStubs.removeAllStubs() }
         
-        self.measureBlock() {
-            let expect = self.expectationWithDescription("kanji")
+        self.measure() {
+            let expect = self.expectation(description: "kanji")
             let operation = GetKanjiOperation(resolver: self.resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
             
             let completionObserver = BlockObserver(finishHandler: { (operation, errors) -> Void in
@@ -51,12 +51,13 @@ class GetKanjiOperationTests: DatabaseTestCase, ResourceHTTPStubs {
             operation.addObserver(completionObserver)
             operationQueue.addOperation(operation)
             
-            self.waitForExpectationsWithTimeout(5.0, handler: nil)
+            self.waitForExpectations(timeout: 5.0, handler: nil)
         }
         
         databaseQueue.inDatabase { database in
+            XCTAssertNotNil(database, "Database is nil!")
             do {
-                let fromDatabase = try Kanji.coder.loadFromDatabase(database)
+                let fromDatabase = try Kanji.coder.load(from: database!)
                 XCTAssertEqual(fromDatabase.count, 38, "Failed to load all kanji")
                 
                 if let actualRicePaddyKanji = fromDatabase.filter({ $0.meaning == expectedRicePaddyKanji.meaning }).first {

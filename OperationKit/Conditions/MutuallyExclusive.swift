@@ -16,12 +16,12 @@ public struct MutuallyExclusive<T>: OperationCondition {
     
     public init() { }
     
-    public func dependencyForOperation(operation: Operation) -> NSOperation? {
+    public func dependency(forOperation operation: Operation) -> Foundation.Operation? {
         return nil
     }
     
-    public func evaluateForOperation(operation: Operation, completion: OperationConditionResult -> Void) {
-        completion(.Satisfied)
+    public func evaluate(forOperation operation: Operation, completion: (OperationConditionResult) -> Void) {
+        completion(.satisfied)
     }
 }
 

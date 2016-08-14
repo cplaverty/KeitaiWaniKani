@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension NSProgress {
+extension Progress {
     var finished: Bool {
         let completed = self.completedUnitCount
         let total = self.totalUnitCount

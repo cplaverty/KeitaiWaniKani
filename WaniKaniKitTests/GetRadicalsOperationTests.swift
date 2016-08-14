@@ -17,32 +17,32 @@ class GetRadicalsOperationTests: DatabaseTestCase, ResourceHTTPStubs {
         let expectedFinsRadical = Radical(character: "ハ",
                                           meaning: "fins",
                                           level: 1,
-                                          userSpecificSRSData: UserSpecificSRSData(srsLevel: .Guru,
-                                            srsLevelNumeric: 6,
-                                            dateUnlocked: NSDate(timeIntervalSince1970: NSTimeInterval(1436287262)),
-                                            dateAvailable: NSDate(timeIntervalSince1970: NSTimeInterval(1438280100)),
-                                            burned: false,
-                                            meaningStats: ItemStats(correctCount: 5, incorrectCount: 0, maxStreakLength: 5, currentStreakLength: 5)))
+                                          userSpecificSRSData: UserSpecificSRSData(srsLevel: .guru,
+                                                                                   srsLevelNumeric: 6,
+                                                                                   dateUnlocked: Date(timeIntervalSince1970: TimeInterval(1436287262)),
+                                                                                   dateAvailable: Date(timeIntervalSince1970: TimeInterval(1438280100)),
+                                                                                   burned: false,
+                                                                                   meaningStats: ItemStats(correctCount: 5, incorrectCount: 0, maxStreakLength: 5, currentStreakLength: 5)))
         
         // Check a radical with an image instead of a Unicode character
         let expectedStickRadical = Radical(meaning: "stick",
-                                           image: NSURL(string: "https://s3.amazonaws.com/s3.wanikani.com/images/radicals/802e9542627291d4282601ded41ad16ce915f60f.png"),
+                                           image: URL(string: "https://s3.amazonaws.com/s3.wanikani.com/images/radicals/802e9542627291d4282601ded41ad16ce915f60f.png"),
                                            level: 1,
-                                           userSpecificSRSData: UserSpecificSRSData(srsLevel: .Guru,
-                                            srsLevelNumeric: 6,
-                                            dateUnlocked: NSDate(timeIntervalSince1970: NSTimeInterval(1436287262)),
-                                            dateAvailable: NSDate(timeIntervalSince1970: NSTimeInterval(1438280100)),
-                                            burned: false,
-                                            meaningStats: ItemStats(correctCount: 5, incorrectCount: 0, maxStreakLength: 5, currentStreakLength: 5)))
+                                           userSpecificSRSData: UserSpecificSRSData(srsLevel: .guru,
+                                                                                    srsLevelNumeric: 6,
+                                                                                    dateUnlocked: Date(timeIntervalSince1970: TimeInterval(1436287262)),
+                                                                                    dateAvailable: Date(timeIntervalSince1970: TimeInterval(1438280100)),
+                                                                                    burned: false,
+                                                                                    meaningStats: ItemStats(correctCount: 5, incorrectCount: 0, maxStreakLength: 5, currentStreakLength: 5)))
         
         
-        let operationQueue = OperationQueue()
+        let operationQueue = OperationKit.OperationQueue()
         
-        stubForResource(Resource.Radicals, file: "Radicals Level 1")
+        stubForResource(Resource.radicals, file: "Radicals Level 1")
         defer { OHHTTPStubs.removeAllStubs() }
         
-        self.measureBlock() {
-            let expect = self.expectationWithDescription("radicals")
+        self.measure() {
+            let expect = self.expectation(description: "radicals")
             let operation = GetRadicalsOperation(resolver: self.resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
             
             let completionObserver = BlockObserver(finishHandler: { (operation, errors) -> Void in
@@ -52,12 +52,13 @@ class GetRadicalsOperationTests: DatabaseTestCase, ResourceHTTPStubs {
             operation.addObserver(completionObserver)
             operationQueue.addOperation(operation)
             
-            self.waitForExpectationsWithTimeout(5.0, handler: nil)
+            self.waitForExpectations(timeout: 5.0, handler: nil)
         }
         
         databaseQueue.inDatabase { database in
+            XCTAssertNotNil(database, "Database is nil!")
             do {
-                let fromDatabase = try Radical.coder.loadFromDatabase(database)
+                let fromDatabase = try Radical.coder.load(from: database!)
                 XCTAssertEqual(fromDatabase.count, 26, "Failed to load all radicals")
                 
                 if let actualFinsRadical = fromDatabase.filter({ $0.meaning == expectedFinsRadical.meaning }).first {

@@ -11,13 +11,13 @@ import CocoaLumberjack
 extension DDLogLevel: CustomStringConvertible {
     public var description: String {
         switch self {
-        case Off: return "Off"
-        case Error: return "Error"
-        case Warning: return "Warning"
-        case Info: return "Info"
-        case Debug: return "Debug"
-        case Verbose: return "Verbose"
-        case All: return "All"
+        case .off: return "Off"
+        case .error: return "Error"
+        case .warning: return "Warning"
+        case .info: return "Info"
+        case .debug: return "Debug"
+        case .verbose: return "Verbose"
+        case .all: return "All"
         }
     }
 }

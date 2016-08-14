@@ -8,12 +8,12 @@ A convenient extension to Foundation.NSOperation.
 
 import Foundation
 
-public extension NSOperation {
+public extension Foundation.Operation {
     /** 
         Add a completion block to be executed after the `NSOperation` enters the
         "finished" state.
     */
-    public func addCompletionBlock(block: Void -> Void) {
+    public func addCompletionBlock(_ block: (Void) -> Void) {
         if let existing = completionBlock {
             /*
                 If we already have a completion block, we construct a new one by
@@ -30,7 +30,7 @@ public extension NSOperation {
     }
 
     /// Add multiple depdendencies to the operation.
-    public func addDependencies(dependencies: [NSOperation]) {
+    public func addDependencies(_ dependencies: [Foundation.Operation]) {
         for dependency in dependencies {
             addDependency(dependency)
         }

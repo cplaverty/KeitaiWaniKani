@@ -18,9 +18,10 @@ final class UserSpecificSRSDataCoder: JSONDecoder {
     
     // MARK: - JSONDecoder
     
-    func loadFromJSON(json: JSON) -> UserSpecificSRSData? {
-        guard let srsLevelRawValue = json["srs"].string,
-            srsLevel = SRSLevel(rawValue: srsLevelRawValue) else {
+    func load(from json: JSON) -> UserSpecificSRSData? {
+        guard
+            let srsLevelRawValue = json["srs"].string,
+            let srsLevel = SRSLevel(rawValue: srsLevelRawValue) else {
                 return nil
         }
         
@@ -29,19 +30,19 @@ final class UserSpecificSRSDataCoder: JSONDecoder {
         let userSynonyms = json["user_synonyms"].arrayObject as? [String]
         
         return UserSpecificSRSData(srsLevel: srsLevel,
-            srsLevelNumeric: json["srs_numeric"].intValue,
-            dateUnlocked: json["unlocked_date"].date,
-            dateAvailable: json["available_date"].date,
-            burned: json["burned"].boolValue,
-            dateBurned: json["burned_date"].date,
-            meaningStats: meaningStats,
-            readingStats: readingStats,
-            meaningNote: json["meaning_note"].string,
-            readingNote: json["reading_note"].string,
-            userSynonyms: userSynonyms)
+                                   srsLevelNumeric: json["srs_numeric"].intValue,
+                                   dateUnlocked: json["unlocked_date"].date,
+                                   dateAvailable: json["available_date"].date,
+                                   burned: json["burned"].boolValue,
+                                   dateBurned: json["burned_date"].date,
+                                   meaningStats: meaningStats,
+                                   readingStats: readingStats,
+                                   meaningNote: json["meaning_note"].string,
+                                   readingNote: json["reading_note"].string,
+                                   userSynonyms: userSynonyms)
     }
     
-    private func createStats(json: JSON, prefixedBy prefix: String) -> ItemStats? {
+    private func createStats(_ json: JSON, prefixedBy prefix: String) -> ItemStats? {
         let correctCount = json["\(prefix)_correct"].int
         let incorrectCount = json["\(prefix)_incorrect"].int
         let maxStreakLength = json["\(prefix)_max_streak"].int
@@ -94,30 +95,30 @@ public class SRSDataItemCoder {
             "\(Columns.readingCurrentStreakLength) INT, " +
             "\(Columns.meaningNote) TEXT, " +
             "\(Columns.readingNote) TEXT, " +
-        "\(Columns.userSynonyms) TEXT"
+            "\(Columns.userSynonyms) TEXT"
     }
     
     var columnNameList: [String] {
         return [Columns.srsLevel,
-            Columns.srsLevelNumeric,
-            Columns.dateUnlocked,
-            Columns.dateAvailable,
-            Columns.burned,
-            Columns.dateBurned,
-            Columns.meaningCorrectCount,
-            Columns.meaningIncorrectCount,
-            Columns.meaningMaxStreakLength,
-            Columns.meaningCurrentStreakLength,
-            Columns.readingCorrectCount,
-            Columns.readingIncorrectCount,
-            Columns.readingMaxStreakLength,
-            Columns.readingCurrentStreakLength,
-            Columns.meaningNote,
-            Columns.readingNote,
-            Columns.userSynonyms]
+                Columns.srsLevelNumeric,
+                Columns.dateUnlocked,
+                Columns.dateAvailable,
+                Columns.burned,
+                Columns.dateBurned,
+                Columns.meaningCorrectCount,
+                Columns.meaningIncorrectCount,
+                Columns.meaningMaxStreakLength,
+                Columns.meaningCurrentStreakLength,
+                Columns.readingCorrectCount,
+                Columns.readingIncorrectCount,
+                Columns.readingMaxStreakLength,
+                Columns.readingCurrentStreakLength,
+                Columns.meaningNote,
+                Columns.readingNote,
+                Columns.userSynonyms]
     }
     
-    lazy var columnNames: String = { self.columnNameList.joinWithSeparator(",") }()
+    lazy var columnNames: String = { self.columnNameList.joined(separator: ",") }()
     
     lazy var columnCount: Int = { self.columnNameList.count }()
     
@@ -129,35 +130,36 @@ public class SRSDataItemCoder {
         self.tableName = tableName
     }
     
-    func loadSRSDataForRow(resultSet: FMResultSet) throws -> UserSpecificSRSData? {
-        guard let srsLevelRawValue = resultSet.stringForColumn(Columns.srsLevel),
-            srsLevel = SRSLevel(rawValue: srsLevelRawValue) else {
+    func loadSRSDataForRow(_ resultSet: FMResultSet) throws -> UserSpecificSRSData? {
+        guard
+            let srsLevelRawValue = resultSet.string(forColumn: Columns.srsLevel),
+            let srsLevel = SRSLevel(rawValue: srsLevelRawValue) else {
                 return nil
         }
         
         // TODO: userSynonyms
         return UserSpecificSRSData(srsLevel: srsLevel,
-            srsLevelNumeric: resultSet.longForColumn(Columns.srsLevelNumeric),
-            dateUnlocked: resultSet.dateForColumn(Columns.dateUnlocked),
-            dateAvailable: resultSet.dateForColumn(Columns.dateAvailable),
-            burned: resultSet.boolForColumn(Columns.burned),
-            dateBurned: resultSet.dateForColumn(Columns.dateBurned),
-            meaningStats: ItemStats(correctCount: resultSet.longForColumnOptional(Columns.meaningCorrectCount),
-                incorrectCount: resultSet.longForColumnOptional(Columns.meaningIncorrectCount),
-                maxStreakLength: resultSet.longForColumnOptional(Columns.meaningMaxStreakLength),
-                currentStreakLength: resultSet.longForColumnOptional(Columns.meaningCurrentStreakLength)),
-            readingStats: ItemStats(correctCount: resultSet.longForColumnOptional(Columns.readingCorrectCount),
-                incorrectCount: resultSet.longForColumnOptional(Columns.readingIncorrectCount),
-                maxStreakLength: resultSet.longForColumnOptional(Columns.readingMaxStreakLength),
-                currentStreakLength: resultSet.longForColumnOptional(Columns.readingCurrentStreakLength)),
-            meaningNote: resultSet.stringForColumn(Columns.meaningNote) as String?,
-            readingNote: resultSet.stringForColumn(Columns.readingNote) as String?,
-            userSynonyms: nil)
+                                   srsLevelNumeric: resultSet.long(forColumn: Columns.srsLevelNumeric),
+                                   dateUnlocked: resultSet.date(forColumn: Columns.dateUnlocked),
+                                   dateAvailable: resultSet.date(forColumn: Columns.dateAvailable),
+                                   burned: resultSet.bool(forColumn: Columns.burned),
+                                   dateBurned: resultSet.date(forColumn: Columns.dateBurned),
+                                   meaningStats: ItemStats(correctCount: resultSet.longForColumnOptional(Columns.meaningCorrectCount),
+                                                           incorrectCount: resultSet.longForColumnOptional(Columns.meaningIncorrectCount),
+                                                           maxStreakLength: resultSet.longForColumnOptional(Columns.meaningMaxStreakLength),
+                                                           currentStreakLength: resultSet.longForColumnOptional(Columns.meaningCurrentStreakLength)),
+                                   readingStats: ItemStats(correctCount: resultSet.longForColumnOptional(Columns.readingCorrectCount),
+                                                           incorrectCount: resultSet.longForColumnOptional(Columns.readingIncorrectCount),
+                                                           maxStreakLength: resultSet.longForColumnOptional(Columns.readingMaxStreakLength),
+                                                           currentStreakLength: resultSet.longForColumnOptional(Columns.readingCurrentStreakLength)),
+                                   meaningNote: resultSet.string(forColumn: Columns.meaningNote),
+                                   readingNote: resultSet.string(forColumn: Columns.readingNote),
+                                   userSynonyms: nil)
     }
     
-    func srsDataColumnValues(data: UserSpecificSRSData?) -> [AnyObject] {
+    func srsDataColumnValues(_ data: UserSpecificSRSData?) -> [AnyObject] {
         guard let data = data else {
-            return [AnyObject](count: self.dynamicType.columnCount, repeatedValue: NSNull())
+            return [AnyObject](repeating: NSNull(), count: self.dynamicType.columnCount)
         }
         
         return [
@@ -188,8 +190,8 @@ extension SRSDataItemCoder {
     private static var levelColumnName: String { return "level" }
     
     /// Takes an out-of-date StudyQueue and projects what it would look like from the SRS data if no reviews or lessons have been done
-    public static func projectedStudyQueue(database: FMDatabase, referenceDate now: NSDate = NSDate()) throws -> StudyQueue? {
-        guard let studyQueue = try StudyQueue.coder.loadFromDatabase(database) else {
+    public static func projectedStudyQueue(_ database: FMDatabase, referenceDate now: Date = Date()) throws -> StudyQueue? {
+        guard let studyQueue = try StudyQueue.coder.load(from: database) else {
             return nil
         }
         
@@ -198,9 +200,9 @@ extension SRSDataItemCoder {
             return studyQueue
         }
         
-        let calendar = NSCalendar.autoupdatingCurrentCalendar()
-        let inOneHour = calendar.dateByAddingUnit(.Hour, value: 1, toDate: now, options: [])
-        let inOneDay = calendar.dateByAddingUnit(.Day, value: 1, toDate: now, options: [])
+        let calendar = Calendar.autoupdatingCurrent
+        let inOneHour = calendar.date(byAdding: .hour, value: 1, to: now)
+        let inOneDay = calendar.date(byAdding: .day, value: 1, to: now)
         
         var reviewsAvailable = studyQueue.reviewsAvailable
         var reviewsAvailableNextHour = 0
@@ -218,14 +220,14 @@ extension SRSDataItemCoder {
         }
         
         return StudyQueue(lessonsAvailable: studyQueue.lessonsAvailable,
-            reviewsAvailable: reviewsAvailable,
-            nextReviewDate: studyQueue.nextReviewDate?.laterDate(now),
-            reviewsAvailableNextHour: reviewsAvailableNextHour,
-            reviewsAvailableNextDay: reviewsAvailableNextDay,
-            lastUpdateTimestamp: now)
+                          reviewsAvailable: reviewsAvailable,
+                          nextReviewDate: studyQueue.nextReviewDate.map { max($0, now) },
+                          reviewsAvailableNextHour: reviewsAvailableNextHour,
+                          reviewsAvailableNextDay: reviewsAvailableNextDay,
+                          lastUpdateTimestamp: now)
     }
     
-    public static func reviewTimeline(database: FMDatabase, since: NSDate? = nil, forLevel level: Int? = nil, rowLimit limit: Int? = nil) throws -> [SRSReviewCounts] {
+    public static func reviewTimeline(_ database: FMDatabase, since: Date? = nil, forLevel level: Int? = nil, rowLimit limit: Int? = nil) throws -> [SRSReviewCounts] {
         let radicalColumn = "radicals"
         let kanjiColumn = "kanji"
         let vocabularyColumn = "vocabulary"
@@ -249,7 +251,7 @@ extension SRSDataItemCoder {
         let sql = "WITH counts (\(Columns.dateAvailable), \(radicalColumn), \(kanjiColumn), \(vocabularyColumn)) AS " +
             "(\(radicalCountSQL) UNION ALL \(kanjiCountSQL) UNION ALL \(vocabularyCountSQL)) " +
             "SELECT \(Columns.dateAvailable), SUM(\(radicalColumn)) AS \(radicalColumn), SUM(\(kanjiColumn)) AS \(kanjiColumn), SUM(\(vocabularyColumn)) AS \(vocabularyColumn) " +
-        "FROM counts GROUP BY \(Columns.dateAvailable) ORDER BY \(Columns.dateAvailable) ASC\(limitStatement)"
+            "FROM counts GROUP BY \(Columns.dateAvailable) ORDER BY \(Columns.dateAvailable) ASC\(limitStatement)"
         
         guard let resultSet = database.executeQuery(sql, withParameterDictionary: queryArgs) else {
             throw database.lastError()
@@ -259,52 +261,52 @@ extension SRSDataItemCoder {
         var results = [SRSReviewCounts]()
         while resultSet.next() {
             results.append(
-                SRSReviewCounts(dateAvailable: resultSet.dateForColumn(Columns.dateAvailable),
-                    itemCounts: SRSItemCounts(
-                        radicals: resultSet.longForColumn(radicalColumn),
-                        kanji: resultSet.longForColumn(kanjiColumn),
-                        vocabulary: resultSet.longForColumn(vocabularyColumn))))
+                SRSReviewCounts(dateAvailable: resultSet.date(forColumn: Columns.dateAvailable),
+                                itemCounts: SRSItemCounts(
+                                    radicals: resultSet.long(forColumn: radicalColumn),
+                                    kanji: resultSet.long(forColumn: kanjiColumn),
+                                    vocabulary: resultSet.long(forColumn: vocabularyColumn))))
         }
         
         return results
     }
     
-    public static func reviewTimelineByDate(database: FMDatabase, since: NSDate? = nil, forLevel level: Int? = nil, rowLimit limit: Int? = nil) throws -> [(NSDate, [SRSReviewCounts])] {
+    public static func reviewTimelineByDate(_ database: FMDatabase, since: Date? = nil, forLevel level: Int? = nil, rowLimit limit: Int? = nil) throws -> [(key: Date, value: [SRSReviewCounts])] {
         let reviewTimeline = try self.reviewTimeline(database, since: since, forLevel: level, rowLimit: limit)
-        var reviewsByDate: [NSDate: [SRSReviewCounts]] = [:]
+        var reviewsByDate: [Date: [SRSReviewCounts]] = [:]
         
         for review in reviewTimeline {
-            let date = self.dateAtStartOfDayForDate(review.dateAvailable)
+            let date = self.dateAtStartOfDay(review.dateAvailable)
             if case nil = reviewsByDate[date]?.append(review) {
                 reviewsByDate[date] = [review]
             }
         }
         
-        return reviewsByDate.sort { $0.0 < $1.0 }
+        return reviewsByDate.sorted { $0.0 < $1.0 }
     }
     
-    public static func levelTimeline(database: FMDatabase) throws -> LevelData {
-        guard let userInfo = try UserInformation.coder.loadFromDatabase(database) else {
+    public static func levelTimeline(_ database: FMDatabase) throws -> LevelData {
+        guard let userInfo = try UserInformation.coder.load(from: database) else {
             return LevelData(detail: [], projectedCurrentLevel: nil)
         }
         
-        let now = NSDate()
-
-        var radicalUnlockDatesByLevel = try getUnlockDatesByLevelForTable(Radical.coder.tableName, database: database)
-        var kanjiUnlockDatesByLevel = try getUnlockDatesByLevelForTable(Kanji.coder.tableName, database: database)
+        let now = Date()
         
-        var startDates = [NSDate]()
+        var radicalUnlockDatesByLevel = try getUnlockDatesByLevel(tableName: Radical.coder.tableName, in: database)
+        var kanjiUnlockDatesByLevel = try getUnlockDatesByLevel(tableName: Kanji.coder.tableName, in: database)
+        
+        var startDates = [Date]()
         startDates.reserveCapacity(userInfo.level)
         
         for level in 1...userInfo.level {
-            let isAccelerated = WaniKaniAPI.isAcceleratedLevel(level)
+            let isAccelerated = WaniKaniAPI.isAccelerated(level: level)
             let radicalUnlockDates = radicalUnlockDatesByLevel[level] ?? []
             let kanjiUnlockDates = kanjiUnlockDatesByLevel[level] ?? []
             
-            let startOfPreviousLevel = startDates.last ?? NSDate.distantPast()
-            let eariestPossibleGuruDate = WaniKaniAPI.minimumTimeFromSRSLevel(1, toSRSLevel: SRSLevel.Guru.numericLevelThreshold, fromDate: startOfPreviousLevel, isRadical: true, isAccelerated: isAccelerated)
+            let startOfPreviousLevel = startDates.last ?? Date.distantPast
+            let eariestPossibleGuruDate = WaniKaniAPI.minimumTime(fromSRSLevel: 1, to: SRSLevel.guru.numericLevelThreshold, fromDate: startOfPreviousLevel, isRadical: true, isAccelerated: isAccelerated)
             
-            let minStartDate = (radicalUnlockDates + kanjiUnlockDates).lazy.flatMap { $0 }.filter { $0 > eariestPossibleGuruDate }.minElement()
+            let minStartDate = (radicalUnlockDates + kanjiUnlockDates).lazy.flatMap { $0 }.filter { $0 > eariestPossibleGuruDate }.min()
             startDates.append(minStartDate ?? now)
         }
         
@@ -313,21 +315,21 @@ extension SRSDataItemCoder {
         
         for level in 1...userInfo.level {
             let startDate = startDates[level - 1]
-            let endDate: NSDate? = startDates.count > level ? startDates[level] : nil
+            let endDate: Date? = startDates.count > level ? startDates[level] : nil
             levelInfos.append(LevelInfo(level: level, startDate: startDate, endDate: endDate))
         }
         
-        let projectedCurrentLevel = try currentLevelProjectionFromDatabase(database, forLevel: userInfo.level, startDate: startDates.last ?? now)
-
+        let projectedCurrentLevel = try currentLevelProjection(database, forLevel: userInfo.level, startDate: startDates.last ?? now)
+        
         return LevelData(detail: levelInfos, projectedCurrentLevel: projectedCurrentLevel)
     }
     
-    private static func currentLevelProjectionFromDatabase(database: FMDatabase, forLevel level: Int, startDate: NSDate) throws -> ProjectedLevelInfo? {
-        let currentLevelKanji = try Kanji.coder.loadFromDatabase(database, forLevel: level).sort(SRSDataItemSorting.byProgress)
+    private static func currentLevelProjection(_ database: FMDatabase, forLevel level: Int, startDate: Date) throws -> ProjectedLevelInfo? {
+        let currentLevelKanji = try Kanji.coder.load(from: database, level: level).sorted(by: SRSDataItemSorting.byProgress)
         guard !currentLevelKanji.isEmpty else { return nil }
         
-        let currentLevelRadicals = try Radical.coder.loadFromDatabase(database, forLevel: level).sort(SRSDataItemSorting.byProgress)
-        let now = NSDate()
+        let currentLevelRadicals = try Radical.coder.load(from: database, level: level).sorted(by: SRSDataItemSorting.byProgress)
+        let now = Date()
         let earliestGuruDateForAllRadicals = currentLevelRadicals.first?.guruDate(now) ?? now
         
         // You guru a level once at least 90% of all kanji is at Guru level or above, so skip past the first 10% of items
@@ -339,15 +341,15 @@ extension SRSDataItemCoder {
         return ProjectedLevelInfo(level: level, startDate: startDate, endDate: earliestLevellingDate, endDateBasedOnLockedItem: endDateBasedOnLockedItem)
     }
     
-    private static func getUnlockDatesByLevelForTable(tableName: String, database: FMDatabase) throws -> [Int: [NSDate?]] {
+    private static func getUnlockDatesByLevel(tableName: String, in database: FMDatabase) throws -> [Int: [Date?]] {
         let sql = "SELECT \(levelColumnName), \(Columns.dateUnlocked) FROM \(tableName) ORDER BY 1, 2"
         let resultSet = try database.executeQuery(sql)
         defer { resultSet.close() }
         
-        var unlockDatesByLevel: [Int: [NSDate?]] = [:]
+        var unlockDatesByLevel: [Int: [Date?]] = [:]
         while resultSet.next() {
-            let level = resultSet.longForColumn(levelColumnName)
-            let dateUnlocked = resultSet.dateForColumn(Columns.dateUnlocked)
+            let level = resultSet.long(forColumn: levelColumnName)
+            let dateUnlocked = resultSet.date(forColumn: Columns.dateUnlocked)
             if case nil = unlockDatesByLevel[level]?.append(dateUnlocked) {
                 unlockDatesByLevel[level] = [dateUnlocked]
             }
@@ -355,13 +357,12 @@ extension SRSDataItemCoder {
         return unlockDatesByLevel
     }
     
-    private static func dateAtStartOfDayForDate(date: NSDate) -> NSDate {
+    private static func dateAtStartOfDay(_ date: Date) -> Date {
         if date.timeIntervalSince1970 == 0 { return date }
         
-        let dayCalendarUnits: NSCalendarUnit = [ .Day, .Month, .Year, .Era ]
-        let calendar = NSCalendar.autoupdatingCurrentCalendar()
-        let dateComponents = calendar.components(dayCalendarUnits, fromDate: date)
-        return calendar.dateFromComponents(dateComponents)!
+        let calendar = Calendar.autoupdatingCurrent
+        let dateComponents = calendar.dateComponents([ .day, .month, .year, .era ], from: date)
+        return calendar.date(from: dateComponents)!
     }
     
 }

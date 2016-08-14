@@ -9,9 +9,9 @@ import Foundation
 import SwiftyJSON
 import CocoaLumberjack
 
-public enum WaniKaniAPIError: ErrorType {
-    case UserNotFound, InvalidArguments
-    case UnknownError(code: String, message: String?)
+public enum WaniKaniAPIError: Error {
+    case userNotFound, invalidArguments
+    case unknownError(code: String, message: String?)
 }
 
 struct WaniKaniAPIResourceKeys {
@@ -21,48 +21,48 @@ struct WaniKaniAPIResourceKeys {
 }
 
 protocol WaniKaniAPIResourceParser {
-    func parseJSONAtURL(URL: NSURL) throws -> JSON
-    func parseJSONInDirectoryAtURL(inputDirectory: NSURL) throws -> [JSON]
+    func parseJSON(url: URL) throws -> JSON
+    func parseJSONInDirectory(url: URL) throws -> [JSON]
 }
 
 extension WaniKaniAPIResourceParser {
     
-    func parseJSONInDirectoryAtURL(inputDirectory: NSURL) throws -> [JSON] {
+    func parseJSONInDirectory(url: URL) throws -> [JSON] {
         var jsonDocuments = [JSON]()
-        for inputFile in try NSFileManager.defaultManager().contentsOfDirectoryAtURL(inputDirectory, includingPropertiesForKeys: nil, options: []) {
-            let json = try parseJSONAtURL(inputFile)
+        for inputFile in try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: []) {
+            let json = try parseJSON(url: inputFile)
             jsonDocuments.append(json)
         }
         
         return jsonDocuments
     }
     
-    func parseJSONAtURL(URL: NSURL) throws -> JSON {
-        let stream = NSInputStream(URL: URL)!
+    func parseJSON(url: URL) throws -> JSON {
+        let stream = InputStream(url: url)!
         stream.open()
         defer { stream.close() }
         
-        if let streamError = stream.streamError where stream.streamStatus == .Error {
+        if let streamError = stream.streamError, stream.streamStatus == .error {
             throw streamError
         }
         
-        let json = JSON(try NSJSONSerialization.JSONObjectWithStream(stream, options: []))
+        let json = JSON(try JSONSerialization.jsonObject(with: stream, options: []))
         try throwForError(json)
         return json
     }
     
-    func throwForError(json: JSON) throws {
+    func throwForError(_ json: JSON) throws {
         if let code = json[WaniKaniAPIResourceKeys.error]["code"].string {
             let message = json[WaniKaniAPIResourceKeys.error]["message"].string
             DDLogWarn("Received API error \(code): \(message)")
             
             switch code {
             case "user_not_found":
-                throw WaniKaniAPIError.UserNotFound
+                throw WaniKaniAPIError.userNotFound
             case "invalid_arguments":
-                throw WaniKaniAPIError.InvalidArguments
+                throw WaniKaniAPIError.invalidArguments
             default:
-                throw WaniKaniAPIError.UnknownError(code: code, message: message)
+                throw WaniKaniAPIError.unknownError(code: code, message: message)
             }
         }
     }

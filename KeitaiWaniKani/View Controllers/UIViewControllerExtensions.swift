@@ -10,13 +10,13 @@ import CocoaLumberjack
 
 extension UIViewController {
 
-    func showAlertWithTitle(title: String, message: String, completion: (() -> Void)? = nil) {
-        dispatch_async(dispatch_get_main_queue()) {
+    func showAlertWithTitle(_ title: String, message: String, completion: (() -> Void)? = nil) {
+        DispatchQueue.main.async {
             DDLogInfo("Displaying alert with title \(title) and message \(message)")
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             
-            self.presentViewController(alert, animated: true, completion: completion)
+            self.present(alert, animated: true, completion: completion)
         }
     }
 
@@ -25,7 +25,7 @@ extension UIViewController {
 extension UIStoryboardSegue {
 
     var destinationContentViewController: UIViewController {
-        let dvc = self.destinationViewController
+        let dvc = self.destination
         if let nvc = dvc as? UINavigationController {
             return nvc.visibleViewController!
         } else {

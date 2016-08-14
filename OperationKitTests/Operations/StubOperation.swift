@@ -9,23 +9,23 @@ import XCTest
 @testable import OperationKit
 
 struct OperationWorkflows {
-    static let New: [Operation.State] = [.Initialized]
-    static let Pending: [Operation.State] = [.Initialized, .Pending]
-    static let Ready: [Operation.State] = [.Initialized, .Pending, .EvaluatingConditions, .Ready]
-    static let Executing: [Operation.State] = [.Initialized, .Pending, .EvaluatingConditions, .Ready, .Executing]
-    static let CancelledBeforeReady: [Operation.State] = [.Initialized, .Pending, .Finishing, .Finished]
-    static let CancelledByCondition: [Operation.State] = [.Initialized, .Pending, .EvaluatingConditions, .Finishing, .Finished]
-    static let CancelledAfterReady: [Operation.State] = [.Initialized, .Pending, .EvaluatingConditions, .Ready, .Finishing, .Finished]
-    static let Finished: [Operation.State] = [.Initialized, .Pending, .EvaluatingConditions, .Ready, .Executing, .Finishing, .Finished]
+    static let New: [OperationKit.Operation.State] = [.initialized]
+    static let Pending: [OperationKit.Operation.State] = [.initialized, .pending]
+    static let Ready: [OperationKit.Operation.State] = [.initialized, .pending, .evaluatingConditions, .ready]
+    static let Executing: [OperationKit.Operation.State] = [.initialized, .pending, .evaluatingConditions, .ready, .executing]
+    static let CancelledBeforeReady: [OperationKit.Operation.State] = [.initialized, .pending, .finishing, .finished]
+    static let CancelledByCondition: [OperationKit.Operation.State] = [.initialized, .pending, .evaluatingConditions, .finishing, .finished]
+    static let CancelledAfterReady: [OperationKit.Operation.State] = [.initialized, .pending, .evaluatingConditions, .ready, .finishing, .finished]
+    static let Finished: [OperationKit.Operation.State] = [.initialized, .pending, .evaluatingConditions, .ready, .executing, .finishing, .finished]
 }
 
-enum StubOperationError: ErrorType {
-    case Error
+enum StubOperationError: Error {
+    case error
 }
 
-class StubOperation: Operation {
+class StubOperation: OperationKit.Operation {
     private(set) var wasRun: Bool = false
-    private(set) var stateTransitions: [Operation.State] = []
+    private(set) var stateTransitions: [OperationKit.Operation.State] = []
     
     private let immediatelyFinish: Bool
     private let shouldFail: Bool
@@ -61,7 +61,7 @@ class StubOperation: Operation {
     
     private func markAsFinished() {
         if shouldFail {
-            finishWithError(StubOperationError.Error)
+            finishWithError(StubOperationError.error)
         } else {
             finish()
         }
@@ -69,13 +69,13 @@ class StubOperation: Operation {
 }
 
 class StubGroupOperation: GroupOperation {
-    private(set) var stateTransitions: [Operation.State] = []
+    private(set) var stateTransitions: [OperationKit.Operation.State] = []
     
-    convenience init(operations: NSOperation...) {
+    convenience init(operations: Foundation.Operation...) {
         self.init(operations: operations)
     }
     
-    init(immediatelyFinish: Bool = true, operations: [NSOperation]) {
+    init(immediatelyFinish: Bool = true, operations: [Foundation.Operation]) {
         super.init(operations: operations)
         stateTransitions.append(state)
     }
@@ -89,8 +89,8 @@ class StubGroupOperation: GroupOperation {
 
 extension XCTest {
     
-    func createOperationQueue() -> OperationQueue {
-        let operationQueue = OperationQueue()
+    func createOperationQueue() -> OperationKit.OperationQueue {
+        let operationQueue = OperationKit.OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
         return operationQueue
     }

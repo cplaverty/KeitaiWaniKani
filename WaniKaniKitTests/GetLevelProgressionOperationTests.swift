@@ -18,13 +18,13 @@ class GetLevelProgressionOperationTests: DatabaseTestCase, ResourceHTTPStubs {
                                                         kanjiProgress: 7,
                                                         kanjiTotal: 38)
         
-        let operationQueue = OperationQueue()
+        let operationQueue = OperationKit.OperationQueue()
         
-        stubForResource(Resource.LevelProgression, file: "Level Progression")
+        stubForResource(Resource.levelProgression, file: "Level Progression")
         defer { OHHTTPStubs.removeAllStubs() }
         
-        self.measureBlock() {
-            let expect = self.expectationWithDescription("LevelProgression")
+        self.measure() {
+            let expect = self.expectation(description: "LevelProgression")
             let operation = GetLevelProgressionOperation(resolver: self.resourceResolver, databaseQueue: self.databaseQueue)
             
             let completionObserver = BlockObserver(finishHandler: { (operation, errors) -> Void in
@@ -34,10 +34,10 @@ class GetLevelProgressionOperationTests: DatabaseTestCase, ResourceHTTPStubs {
             operation.addObserver(completionObserver)
             operationQueue.addOperation(operation)
             
-            self.waitForExpectationsWithTimeout(5.0, handler: nil)
+            self.waitForExpectations(timeout: 5.0, handler: nil)
         }
         
-        let levelProgression = try! databaseQueue.withDatabase { try LevelProgression.coder.loadFromDatabase($0) }
+        let levelProgression = try! databaseQueue.withDatabase { try LevelProgression.coder.load(from: $0) }
         XCTAssertEqual(levelProgression, expectedLevelProgression, "LevelProgression mismatch from database")
     }
     

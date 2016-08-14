@@ -11,34 +11,34 @@ import FMDB
 import OperationKit
 
 /// A composite `Operation` to both download and parse resource data.
-public class GetListItemResourceOperation<Coder: protocol<ResourceHandler, JSONDecoder, ListItemDatabaseCoder>>: GroupOperation, NSProgressReporting {
+public class GetListItemResourceOperation<Coder: ResourceHandler & JSONDecoder & ListItemDatabaseCoder>: GroupOperation, ProgressReporting {
     
     // MARK: - Properties
     
-    public let progress = NSProgress(totalUnitCount: 2)
+    public let progress = Progress(totalUnitCount: 2)
     
     public private(set) var downloadOperations: [DownloadFileOperation]?
     public private(set) var parseOperation: ParseListItemOperation<Coder>?
     public var fetchRequired: Bool {
         guard let downloadOperations = downloadOperations else { return false }
-        return downloadOperations.reduce(false) { $0 || !$1.cancelled }
+        return downloadOperations.reduce(false) { $0 || !$1.isCancelled }
     }
     
     private let coder: Coder
-    private let batchesForCoder: Coder -> [DownloadBatches]
+    private let batchesForCoder: (Coder) -> [DownloadBatches]
     private let resolver: ResourceResolver
     private let databaseQueue: FMDatabaseQueue
     private let networkObserver: OperationObserver?
-    private lazy var rootCacheDirectory: NSURL = {
-        let tempDirectory = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        return tempDirectory.URLByAppendingPathComponent("\(self.resource)/\(NSUUID().UUIDString)/")
-        }()
+    private lazy var rootCacheDirectory: URL = {
+        let tempDirectory = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+        return tempDirectory.appendingPathComponent("\(self.resource)/\(UUID().uuidString)/")
+    }()
     
     private let resource: Resource
     
     // MARK: - Initialisers
     
-    public init(coder: Coder, resolver: ResourceResolver, databaseQueue: FMDatabaseQueue, networkObserver: OperationObserver?, batchesForCoder: Coder -> [DownloadBatches]) {
+    public init(coder: Coder, resolver: ResourceResolver, databaseQueue: FMDatabaseQueue, networkObserver: OperationObserver?, batchesForCoder: (Coder) -> [DownloadBatches]) {
         self.resource = coder.resource
         self.batchesForCoder = batchesForCoder
         self.coder = coder
@@ -55,13 +55,13 @@ public class GetListItemResourceOperation<Coder: protocol<ResourceHandler, JSOND
             self.progress.localizedAdditionalDescription = "Finishing..."
             
             do {
-                for cacheFile in try NSFileManager.defaultManager().contentsOfDirectoryAtURL(self.rootCacheDirectory, includingPropertiesForKeys: nil, options: []) {
+                for cacheFile in try FileManager.default.contentsOfDirectory(at: self.rootCacheDirectory, includingPropertiesForKeys: nil, options: []) {
                     DDLogDebug("Cleaning up cache file \(cacheFile)")
-                    try NSFileManager.defaultManager().removeItemAtURL(cacheFile)
+                    try FileManager.default.removeItem(at: cacheFile)
                 }
                 DDLogDebug("Removing cache directory \(self.rootCacheDirectory)")
-                try NSFileManager.defaultManager().removeItemAtURL(self.rootCacheDirectory)
-            } catch NSCocoaError.FileNoSuchFileError {
+                try FileManager.default.removeItem(at: self.rootCacheDirectory)
+            } catch CocoaError.fileNoSuchFileError {
                 DDLogDebug("Ignoring failure to delete cache file in directory which didn't exist: \(self.rootCacheDirectory)")
             } catch {
                 DDLogWarn("Failed to clean up temporary file in \(self.rootCacheDirectory): \(error)")
@@ -82,17 +82,17 @@ public class GetListItemResourceOperation<Coder: protocol<ResourceHandler, JSOND
         
         progress.totalUnitCount = downloadBatches.count + 1
         
-        progress.becomeCurrentWithPendingUnitCount(1)
+        progress.becomeCurrent(withPendingUnitCount: 1)
         let parseOperation = ParseListItemOperation(coder: coder, inputDirectory: rootCacheDirectory, databaseQueue: databaseQueue)
         parseOperation.addCondition(NoCancelledDependencies())
         progress.resignCurrent()
         
         self.parseOperation = parseOperation
-
+        
         var downloadOperations = [DownloadFileOperation]()
         for batch in downloadBatches {
-            let cacheFile = rootCacheDirectory.URLByAppendingPathComponent(batch.description == nil ? "download.json" : "\(batch.description).json")
-            progress.becomeCurrentWithPendingUnitCount(1)
+            let cacheFile = rootCacheDirectory.appendingPathComponent(batch.description == nil ? "download.json" : "\(batch.description).json")
+            progress.becomeCurrent(withPendingUnitCount: 1)
             let downloadOperation = DownloadFileOperation(resolver: resolver, resource: resource, argument: batch.argument, destinationFileURL: cacheFile, networkObserver: networkObserver)
             var progressDescription = "Downloading \(resource)"
             if let batchDescription = batch.description {
@@ -114,14 +114,14 @@ public class GetListItemResourceOperation<Coder: protocol<ResourceHandler, JSOND
         if !downloadOperations.isEmpty {
             self.downloadOperations = downloadOperations
         }
-
+        
         addOperation(parseOperation)
         
         // This must be done last as it starts the internal queue
         super.execute()
     }
-
-    public override func operationDidFinish(operation: NSOperation, withErrors errors: [ErrorType]) {
+    
+    public override func operationDidFinish(_ operation: Foundation.Operation, withErrors errors: [Error]) {
         if errors.isEmpty {
             DDLogDebug("\(operation.self.dynamicType) finished with no errors")
         } else {
@@ -129,7 +129,7 @@ public class GetListItemResourceOperation<Coder: protocol<ResourceHandler, JSOND
         }
     }
     
-    public override func finished(errors: [ErrorType]) {
+    public override func finished(_ errors: [Error]) {
         super.finished(errors)
         
         // Ensure progress is 100%

@@ -10,12 +10,12 @@ import MessageUI
 import WebKit
 import CocoaLumberjack
 
-private let reviewURL = NSURL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1031055291&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software")!
+private let reviewURL = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1031055291&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software")!
 
 class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
     private enum TableViewSections: Int {
-        case UserScripts = 0, OtherSettings, Feedback, LogOut
+        case userScripts = 0, otherSettings, feedback, logOut
     }
     
     private struct ScriptInfo {
@@ -67,55 +67,55 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         guard let tableViewSection = TableViewSections(rawValue: indexPath.section) else {
             fatalError("Invalid section index \(indexPath.section) requested")
         }
         
         switch tableViewSection {
-        case .UserScripts, .OtherSettings:
-            let cell = tableView.cellForRowAtIndexPath(indexPath) as! UserScriptTableViewCell
+        case .userScripts, .otherSettings:
+            let cell = tableView.cellForRow(at: indexPath) as! UserScriptTableViewCell
             tableView.beginUpdates()
-            UIView.animateWithDuration(0.3) {
+            UIView.animate(withDuration: 0.3) {
                 cell.toggleDescriptionVisibility();
                 cell.contentView.layoutIfNeeded()
             }
             tableView.endUpdates()
-        case .Feedback, .LogOut: break;
+        case .feedback, .logOut: break;
         }
     }
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let tableViewSection = TableViewSections(rawValue: section) else {
             fatalError("Invalid section index \(section) requested")
         }
         
         switch tableViewSection {
-        case .UserScripts: return userScripts.count
-        case .OtherSettings: return otherSettings.count
-        case .Feedback: return 2
-        case .LogOut: return 1
+        case .userScripts: return userScripts.count
+        case .otherSettings: return otherSettings.count
+        case .feedback: return 2
+        case .logOut: return 1
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let tableViewSection = TableViewSections(rawValue: indexPath.section) else {
             fatalError("Invalid section index \(indexPath.section) requested")
         }
         
         switch tableViewSection {
-        case .UserScripts:
+        case .userScripts:
             return dequeueAndInitScriptCell(userScripts, forIndexPath: indexPath)
-        case .OtherSettings:
+        case .otherSettings:
             return dequeueAndInitScriptCell(otherSettings, forIndexPath: indexPath)
-        case .Feedback:
-            let cell = tableView.dequeueReusableCellWithIdentifier("Basic", forIndexPath: indexPath)
+        case .feedback:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Basic", for: indexPath)
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "Send Feedback"
@@ -123,70 +123,70 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
                 cell.textLabel?.text = "Leave a Review"
             default: fatalError("No cell defined for index path \(indexPath)")
             }
-            cell.accessoryType = .DisclosureIndicator
+            cell.accessoryType = .disclosureIndicator
             return cell
-        case .LogOut:
-            let cell = tableView.dequeueReusableCellWithIdentifier("Basic", forIndexPath: indexPath)
+        case .logOut:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Basic", for: indexPath)
             cell.textLabel?.text = "Log Out"
-            cell.accessoryType = .DisclosureIndicator
+            cell.accessoryType = .disclosureIndicator
             return cell
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let tableViewSection = TableViewSections(rawValue: section) else {
             fatalError("Invalid section index \(section) requested")
         }
         
         switch tableViewSection {
-        case .UserScripts: return "User Scripts"
-        case .OtherSettings: return "Other Settings"
-        case .Feedback: return "Feedback"
-        case .LogOut: return nil
+        case .userScripts: return "User Scripts"
+        case .otherSettings: return "Other Settings"
+        case .feedback: return "Feedback"
+        case .logOut: return nil
         }
     }
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         guard let tableViewSection = TableViewSections(rawValue: section) else {
             fatalError("Invalid section index \(section) requested")
         }
         
         switch tableViewSection {
-        case .UserScripts, .OtherSettings: return nil
-        case .Feedback:
+        case .userScripts, .otherSettings: return nil
+        case .feedback:
             return "App Store reviews are reset after every release.  Good reviews are appreciated, but please email me through the Send Feedback link if you're having any issues.  It's difficult to help you otherwise!"
-        case .LogOut:
+        case .logOut:
             let (product, version, build) = self.productAndVersion
             return "\(product) version \(version) (build \(build))"
         }
     }
     
-    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         guard let tableViewSection = TableViewSections(rawValue: indexPath.section) else {
             fatalError("Invalid section index \(indexPath.section) requested")
         }
         
         switch tableViewSection {
-        case .UserScripts, .OtherSettings: break
-        case .Feedback:
+        case .userScripts, .otherSettings: break
+        case .feedback:
             switch indexPath.row {
             case 0: sendMail()
             case 1: leaveReview()
             default: fatalError("No cell defined for index path \(indexPath)")
             }
-        case .LogOut: confirmLogOut()
+        case .logOut: confirmLogOut()
         }
         
         return nil
     }
     
-    private func dequeueAndInitScriptCell(scriptDetails: [ScriptInfo], forIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("UserScript", forIndexPath: indexPath) as! UserScriptTableViewCell
+    private func dequeueAndInitScriptCell(_ scriptDetails: [ScriptInfo], forIndexPath indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UserScript", for: indexPath) as! UserScriptTableViewCell
         let userScript = scriptDetails[indexPath.row]
         cell.settingName = userScript.name
         cell.settingDescription = userScript.description
         cell.applicationSettingKey = userScript.settingKey
-        cell.accessoryType = .DetailButton
+        cell.accessoryType = .detailButton
         cell.setToDefault()
         cell.contentView.layoutIfNeeded()
         
@@ -195,9 +195,9 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     
     // MARK: - MFMailComposeViewControllerDelegate
     
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         DDLogDebug("MFMailComposeViewController finished with result \(result): \(error)")
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Feedback
@@ -211,26 +211,26 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             vc.setToRecipients(["allicrab@icloud.com"])
             let (product, version, build) = self.productAndVersion
             vc.setSubject("\(product) feedback (v\(version) b\(build))")
-            self.presentViewController(vc, animated: true, completion: nil)
+            self.present(vc, animated: true, completion: nil)
         }
     }
     
     private func leaveReview() {
-        UIApplication.sharedApplication().openURL(reviewURL)
+        UIApplication.shared.openURL(reviewURL)
     }
     
     // MARK: - Log Out
     
     private func confirmLogOut() {
-        let alert = UIAlertController(title: "Are you sure you want to log out?", message: "Please note that logging out will remove all web cookies and user data, and will reset all settings to default.", preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "Log Out", style: .Destructive) { _ in self.performLogOut() })
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        let alert = UIAlertController(title: "Are you sure you want to log out?", message: "Please note that logging out will remove all web cookies and user data, and will reset all settings to default.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Log Out", style: .destructive) { _ in self.performLogOut() })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     private func performLogOut() {
-        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let delegate = UIApplication.shared.delegate as! AppDelegate
         
         // Reset app settings
         ApplicationSettings.resetToDefaults()
@@ -239,7 +239,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         delegate.databaseManager.recreateDatabase()
         
         // Clear web cookies
-        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        let cookieStorage = HTTPCookieStorage.shared
         if let cookies = cookieStorage.cookies {
             for cookie in cookies
             {
@@ -248,13 +248,13 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         }
         
         if #available(iOS 9.0, *) {
-            WKWebsiteDataStore.defaultDataStore().removeDataOfTypes(WKWebsiteDataStore.allWebsiteDataTypes(), modifiedSince: NSDate(timeIntervalSince1970: 0), completionHandler: {})
+            WKWebsiteDataStore.default().removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), modifiedSince: Date(timeIntervalSince1970: 0), completionHandler: {})
         } else {
             do {
-                let fm = NSFileManager.defaultManager()
-                let libraryPath = try fm.URLForDirectory(.LibraryDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
-                try fm.removeItemAtURL(NSURL(string: "Cookies", relativeToURL: libraryPath)!)
-                try fm.removeItemAtURL(NSURL(string: "WebKit", relativeToURL: libraryPath)!)
+                let fm = FileManager.default
+                let libraryPath = try fm.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+                try fm.removeItem(at: URL(string: "Cookies", relativeTo: libraryPath)!)
+                try fm.removeItem(at: URL(string: "WebKit", relativeTo: libraryPath)!)
             } catch {
                 DDLogWarn("Failed to remove cookies folder: \(error)")
             }
@@ -263,16 +263,16 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         delegate.webKitProcessPool = WKProcessPool()
         
         // Notifications
-        let application = UIApplication.sharedApplication()
+        let application = UIApplication.shared
         application.applicationIconBadgeNumber = 0
         application.cancelAllLocalNotifications()
         
         // Pop to home screen
-        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
     private var productAndVersion: (product: String, version: String, build: String) {
-        let infoDictionary = NSBundle.mainBundle().infoDictionary!
+        let infoDictionary = Bundle.main.infoDictionary!
         let productName = infoDictionary["CFBundleName"]! as! String
         let appVersion = infoDictionary["CFBundleShortVersionString"]! as! String
         let buildNumber = infoDictionary["CFBundleVersion"]! as! String

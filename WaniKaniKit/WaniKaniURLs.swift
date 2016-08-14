@@ -8,22 +8,22 @@
 import Foundation
 
 public struct WaniKaniURLs {
-    public static let home = NSURL(string: "https://www.wanikani.com/")!
-    public static let apiBaseURL = NSURL(string: "api/v1.4/user/", relativeToURL: home)!.absoluteURL
-    public static let loginPage = NSURL(string: "login", relativeToURL: home)!.absoluteURL
-    public static let dashboard = NSURL(string: "dashboard", relativeToURL: home)!.absoluteURL
-    public static let communityCentre = NSURL(string: "community", relativeToURL: home)!.absoluteURL
-    public static let account = NSURL(string: "account", relativeToURL: home)!.absoluteURL
-    public static let subscription = NSURL(string: "account/subscription", relativeToURL: home)!.absoluteURL
+    public static let home = URL(string: "https://www.wanikani.com/")!
+    public static let apiBaseURL = URL(string: "api/v1.4/user/", relativeTo: home)!.absoluteURL
+    public static let loginPage = URL(string: "login", relativeTo: home)!.absoluteURL
+    public static let dashboard = URL(string: "dashboard", relativeTo: home)!.absoluteURL
+    public static let communityCentre = URL(string: "community", relativeTo: home)!.absoluteURL
+    public static let account = URL(string: "account", relativeTo: home)!.absoluteURL
+    public static let subscription = URL(string: "account/subscription", relativeTo: home)!.absoluteURL
     
-    public static let reviewHome = NSURL(string: "review", relativeToURL: home)!.absoluteURL
-    public static let reviewSession = NSURL(string: "review/session", relativeToURL: home)!.absoluteURL
+    public static let reviewHome = URL(string: "review", relativeTo: home)!.absoluteURL
+    public static let reviewSession = URL(string: "review/session", relativeTo: home)!.absoluteURL
     
-    public static let lessonHome = NSURL(string: "lesson", relativeToURL: home)!.absoluteURL
-    public static let lessonSession = NSURL(string: "lesson/session", relativeToURL: home)!.absoluteURL
-
-    public static let levelRoot = NSURL(string: "level/", relativeToURL: home)!.absoluteURL
-    public static let radicalRoot = NSURL(string: "radicals/", relativeToURL: home)!.absoluteURL
-    public static let kanjiRoot = NSURL(string: "kanji/", relativeToURL: home)!.absoluteURL
-    public static let vocabularyRoot = NSURL(string: "vocabulary/", relativeToURL: home)!.absoluteURL
+    public static let lessonHome = URL(string: "lesson", relativeTo: home)!.absoluteURL
+    public static let lessonSession = URL(string: "lesson/session", relativeTo: home)!.absoluteURL
+    
+    public static let levelRoot = URL(string: "level/", relativeTo: home)!.absoluteURL
+    public static let radicalRoot = URL(string: "radicals/", relativeTo: home)!.absoluteURL
+    public static let kanjiRoot = URL(string: "kanji/", relativeTo: home)!.absoluteURL
+    public static let vocabularyRoot = URL(string: "vocabulary/", relativeTo: home)!.absoluteURL
 }

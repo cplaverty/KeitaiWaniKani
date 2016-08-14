@@ -25,15 +25,15 @@ public final class LevelProgressionCoder: ResourceHandler, JSONDecoder, SingleIt
     
     // MARK: - ResourceHandler
     
-    public var resource: Resource { return .LevelProgression }
+    public var resource: Resource { return .levelProgression }
     
     // MARK: - JSONDecoder
     
-    public func loadFromJSON(json: JSON) -> LevelProgression? {
+    public func load(from json: JSON) -> LevelProgression? {
         return LevelProgression(radicalsProgress: json[Columns.radicalsProgress].intValue,
-            radicalsTotal: json[Columns.radicalsTotal].intValue,
-            kanjiProgress: json[Columns.kanjiProgress].intValue,
-            kanjiTotal: json[Columns.kanjiTotal].intValue)
+                                radicalsTotal: json[Columns.radicalsTotal].intValue,
+                                kanjiProgress: json[Columns.kanjiProgress].intValue,
+                                kanjiTotal: json[Columns.kanjiTotal].intValue)
     }
     
     // MARK: - DatabaseCoder
@@ -45,36 +45,36 @@ public final class LevelProgressionCoder: ResourceHandler, JSONDecoder, SingleIt
             "\(Columns.radicalsTotal) INT NOT NULL, " +
             "\(Columns.kanjiProgress) INT NOT NULL, " +
             "\(Columns.kanjiTotal) INT NOT NULL, " +
-        "\(Columns.lastUpdateTimestamp) INT NOT NULL"
+            "\(Columns.lastUpdateTimestamp) INT NOT NULL"
     }
     
     var columnNameList: [String] {
         return [Columns.radicalsProgress, Columns.radicalsTotal, Columns.kanjiProgress, Columns.kanjiTotal, Columns.lastUpdateTimestamp]
     }
     
-    lazy var columnNames: String = { self.columnNameList.joinWithSeparator(",") }()
+    lazy var columnNames: String = { self.columnNameList.joined(separator: ",") }()
     
     lazy var columnCount: Int = { self.columnNameList.count }()
     
-    public func createTable(database: FMDatabase, dropFirst: Bool) throws {
-        if dropFirst {
+    public func createTable(in database: FMDatabase, dropExisting: Bool) throws {
+        if dropExisting {
             try database.executeUpdate("DROP TABLE IF EXISTS \(self.dynamicType.tableName)")
         }
         
         try database.executeUpdate("CREATE TABLE IF NOT EXISTS \(self.dynamicType.tableName)(\(columnDefinitions))")
     }
     
-    public func loadFromDatabase(database: FMDatabase) throws -> LevelProgression? {
+    public func load(from database: FMDatabase) throws -> LevelProgression? {
         let resultSet = try database.executeQuery("SELECT \(columnNames) FROM \(self.dynamicType.tableName)")
         defer { resultSet.close() }
         
         var result: LevelProgression? = nil
         if resultSet.next() {
-            result = LevelProgression(radicalsProgress: resultSet.longForColumn(Columns.radicalsProgress),
-                radicalsTotal: resultSet.longForColumn(Columns.radicalsTotal),
-                kanjiProgress: resultSet.longForColumn(Columns.kanjiProgress),
-                kanjiTotal: resultSet.longForColumn(Columns.kanjiTotal),
-                lastUpdateTimestamp: resultSet.dateForColumn(Columns.lastUpdateTimestamp) as NSDate)
+            result = LevelProgression(radicalsProgress: resultSet.long(forColumn: Columns.radicalsProgress),
+                                      radicalsTotal: resultSet.long(forColumn: Columns.radicalsTotal),
+                                      kanjiProgress: resultSet.long(forColumn: Columns.kanjiProgress),
+                                      kanjiTotal: resultSet.long(forColumn: Columns.kanjiTotal),
+                                      lastUpdateTimestamp: resultSet.date(forColumn: Columns.lastUpdateTimestamp))
         }
         
         return result
@@ -85,7 +85,7 @@ public final class LevelProgressionCoder: ResourceHandler, JSONDecoder, SingleIt
         return "INSERT INTO \(self.dynamicType.tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
     }()
     
-    public func save(model: LevelProgression, toDatabase database: FMDatabase) throws {
+    public func save(_ model: LevelProgression, to database: FMDatabase) throws {
         try database.executeUpdate("DELETE FROM \(self.dynamicType.tableName)")
         
         let columnValues: [AnyObject] = [
@@ -99,7 +99,7 @@ public final class LevelProgressionCoder: ResourceHandler, JSONDecoder, SingleIt
         try database.executeUpdate(updateSQL, values: columnValues)
     }
     
-    public func hasBeenUpdatedSince(since: NSDate, inDatabase database: FMDatabase) throws -> Bool {
+    public func hasBeenUpdated(since: Date, in database: FMDatabase) throws -> Bool {
         guard let earliestDate = try database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(self.dynamicType.tableName)") else {
             return false
         }

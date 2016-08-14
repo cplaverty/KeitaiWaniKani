@@ -27,18 +27,18 @@ public final class SRSDistributionCoder: SRSItemCountsItem, ResourceHandler, JSO
     
     // MARK: - ResourceHandler
     
-    public var resource: Resource { return .SRSDistribution }
+    public var resource: Resource { return .srsDistribution }
     
     // MARK: - JSONDecoder
     
-    public func loadFromJSON(json: JSON) -> SRSDistribution? {
+    public func load(from json: JSON) -> SRSDistribution? {
         guard let dictionary = json.dictionary else {
             return nil
         }
         
         var countsBySRSLevel = [SRSLevel: SRSItemCounts]()
         for (key, value) in dictionary {
-            if let srsLevel = SRSLevel(rawValue: key), itemCounts = SRSItemCounts.coder.loadFromJSON(value) {
+            if let srsLevel = SRSLevel(rawValue: key), let itemCounts = SRSItemCounts.coder.load(from: value) {
                 countsBySRSLevel[srsLevel] = itemCounts
             }
         }
@@ -60,30 +60,33 @@ public final class SRSDistributionCoder: SRSItemCountsItem, ResourceHandler, JSO
         return [Columns.srsLevel, Columns.lastUpdateTimestamp] + super.columnNameList
     }
     
-    public func createTable(database: FMDatabase, dropFirst: Bool) throws {
-        if dropFirst {
+    public func createTable(in database: FMDatabase, dropExisting: Bool) throws {
+        if dropExisting {
             try database.executeUpdate("DROP TABLE IF EXISTS \(self.dynamicType.tableName)")
         }
         
         try database.executeUpdate("CREATE TABLE IF NOT EXISTS \(self.dynamicType.tableName)(\(columnDefinitions))")
     }
     
-    public func loadFromDatabase(database: FMDatabase) throws -> SRSDistribution? {
+    public func load(from database: FMDatabase) throws -> SRSDistribution? {
         let resultSet = try database.executeQuery("SELECT \(columnNames) FROM \(self.dynamicType.tableName)")
         defer { resultSet.close() }
         
         var countsBySRSLevel = [SRSLevel: SRSItemCounts]()
-        var lastUpdateTimestamp: NSDate?
+        var lastUpdateTimestamp: Date?
         
         while resultSet.next() {
-            let srsLevelRawValue = resultSet.stringForColumn(Columns.srsLevel)
+            guard let srsLevelRawValue = resultSet.string(forColumn: Columns.srsLevel) else {
+                DDLogWarn("When creating SRSDistribution, missing column '\(Columns.srsLevel)'")
+                continue
+            }
             guard let srsLevel = SRSLevel(rawValue: srsLevelRawValue) else {
                 DDLogWarn("When creating SRSDistribution, ignoring unrecognised SRS level '\(srsLevelRawValue)'")
                 continue
             }
             let srsItemCounts = try loadSRSItemCountsForRow(resultSet)
             countsBySRSLevel[srsLevel] = srsItemCounts
-            lastUpdateTimestamp = resultSet.dateForColumn(Columns.lastUpdateTimestamp).laterDateIfNotNil(lastUpdateTimestamp)
+            lastUpdateTimestamp = resultSet.date(forColumn: Columns.lastUpdateTimestamp).laterDateIfNotNil(lastUpdateTimestamp)
         }
         
         return SRSDistribution(countsBySRSLevel: countsBySRSLevel, lastUpdateTimestamp: lastUpdateTimestamp)
@@ -94,7 +97,7 @@ public final class SRSDistributionCoder: SRSItemCountsItem, ResourceHandler, JSO
         return "INSERT INTO \(self.dynamicType.tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
     }()
     
-    public func save(model: SRSDistribution, toDatabase database: FMDatabase) throws {
+    public func save(_ model: SRSDistribution, to database: FMDatabase) throws {
         try database.executeUpdate("DELETE FROM \(self.dynamicType.tableName)")
         
         for (srsLevel, srsItemCounts) in model.countsBySRSLevel {
@@ -104,7 +107,7 @@ public final class SRSDistributionCoder: SRSItemCountsItem, ResourceHandler, JSO
         }
     }
     
-    public func hasBeenUpdatedSince(since: NSDate, inDatabase database: FMDatabase) throws -> Bool {
+    public func hasBeenUpdated(since: Date, in database: FMDatabase) throws -> Bool {
         guard let earliestDate = try database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(self.dynamicType.tableName)") else {
             return false
         }
@@ -113,11 +116,11 @@ public final class SRSDistributionCoder: SRSItemCountsItem, ResourceHandler, JSO
     }
 }
 
-private extension NSDate {
-    func laterDateIfNotNil(anotherDate: NSDate?) -> NSDate {
+private extension Date {
+    func laterDateIfNotNil(_ anotherDate: Date?) -> Date {
         guard let anotherDate = anotherDate else {
             return self
         }
-        return self.laterDate(anotherDate)
+        return max(self, anotherDate)
     }
 }

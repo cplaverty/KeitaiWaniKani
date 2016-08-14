@@ -10,7 +10,7 @@ import UIKit
 import OperationKit
 import WaniKaniKit
 
-class AlertOperation: Operation {
+class AlertOperation: OperationKit.Operation {
     
     // MARK: Properties
     
@@ -28,7 +28,7 @@ class AlertOperation: Operation {
     // MARK: Initialization
     
     init(presentationContext: UIViewController? = nil) {
-        self.presentationContext = presentationContext ?? UIApplication.sharedApplication().keyWindow?.rootViewController
+        self.presentationContext = presentationContext ?? UIApplication.shared.keyWindow?.rootViewController
         
         super.init()
         
@@ -42,7 +42,7 @@ class AlertOperation: Operation {
         addCondition(MutuallyExclusive<UIViewController>())
     }
     
-    func addAction(title: String, style: UIAlertActionStyle = .Default, handler: AlertOperation -> Void = { _ in }) {
+    func addAction(_ title: String, style: UIAlertActionStyle = .default, handler: (AlertOperation) -> Void = { _ in }) {
         let action = UIAlertAction(title: title, style: style) { [weak self] _ in
             if let strongSelf = self {
                 handler(strongSelf)
@@ -61,8 +61,8 @@ class AlertOperation: Operation {
             return
         }
         
-        dispatch_async(dispatch_get_main_queue()) {
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .Alert)
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             alertController.title = self.title
             alertController.message = self.message
             if self.actions.isEmpty {
@@ -70,7 +70,7 @@ class AlertOperation: Operation {
             }
             self.actions.forEach { alertController.addAction($0) }
             
-            presentationContext.presentViewController(alertController, animated: true, completion: nil)
+            presentationContext.present(alertController, animated: true, completion: nil)
         }
     }
 }

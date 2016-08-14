@@ -21,7 +21,7 @@ extension UIWebView {
         }
         
         // Guard in case this method is called twice on the same webview.
-        guard !(swizzledClassMapping as NSArray).containsObject(subview.dynamicType) else {
+        guard !(swizzledClassMapping as NSArray).contains(subview.dynamicType) else {
             return
         }
         
@@ -36,7 +36,7 @@ extension UIWebView {
             }
             
             let method = class_getInstanceMethod(self.dynamicType, #selector(noInputAccessoryView))
-            class_addMethod(newClass!, Selector("inputAccessoryView"), method_getImplementation(method), method_getTypeEncoding(method))
+            class_addMethod(newClass!, #selector(getter: UIResponder.inputAccessoryView), method_getImplementation(method), method_getTypeEncoding(method))
             
             objc_registerClassPair(newClass!)
             
@@ -47,21 +47,21 @@ extension UIWebView {
     }
     
     // http://stackoverflow.com/questions/28631317/how-to-disable-scrolling-entirely-in-a-wkwebview
-    func setScrollEnabled(enabled: Bool) {
-        self.scrollView.scrollEnabled = enabled
-        self.scrollView.panGestureRecognizer.enabled = enabled
+    func setScrollEnabled(_ enabled: Bool) {
+        self.scrollView.isScrollEnabled = enabled
+        self.scrollView.panGestureRecognizer.isEnabled = enabled
         self.scrollView.bounces = enabled
         
         for subview in self.subviews {
             if let subview = subview as? UIScrollView {
-                subview.scrollEnabled = enabled
+                subview.isScrollEnabled = enabled
                 subview.bounces = enabled
-                subview.panGestureRecognizer.enabled = enabled
+                subview.panGestureRecognizer.isEnabled = enabled
             }
         }
     }
     
-    func scrollToTop(animated: Bool) {
+    func scrollToTop(_ animated: Bool) {
         self.scrollView.setContentOffset(CGPoint(x: 0, y: -self.scrollView.contentInset.top), animated: animated)
     }
 

@@ -8,39 +8,39 @@
 import Foundation
 
 public enum FormattedTimeInterval {
-    case None, Now, FormattedString(String), UnformattedInterval(NSTimeInterval)
+    case none, now, formattedString(String), unformattedInterval(TimeInterval)
 }
 
 public struct Formatter {
     
-    private static let defaultFormatter: NSDateComponentsFormatter = {
-        let formatter = NSDateComponentsFormatter()
-        formatter.allowedUnits = [.Year, .Month, .WeekOfMonth, .Day, .Hour, .Minute]
+    private static let defaultFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute]
         formatter.maximumUnitCount = 2
-        formatter.unitsStyle = .Abbreviated
-        formatter.zeroFormattingBehavior = [.DropLeading, .DropTrailing]
+        formatter.unitsStyle = .abbreviated
+        formatter.zeroFormattingBehavior = [.dropLeading, .dropTrailing]
         
         return formatter
-        }()
+    }()
     
-    public static func formatTimeIntervalToDate(date: NSDate?, formatter: NSDateComponentsFormatter = defaultFormatter) -> FormattedTimeInterval {
+    public static func formatTimeIntervalSinceNow(from date: Date?, formatter: DateComponentsFormatter = defaultFormatter) -> FormattedTimeInterval {
         guard let nextReviewDate = date else {
-            return .None
+            return .none
         }
         
         let secondsUntilNextReview = nextReviewDate.timeIntervalSinceNow
         if secondsUntilNextReview <= 0 {
-            return .Now
+            return .now
         }
         
         // Since the default formatter only shows time remaining in minutes, round to the next whole minute before formatting
-        let roundedSecondsUntilNextReview = secondsUntilNextReview + ((60 - (secondsUntilNextReview % 60)) % 60)
-        if let formatted = formatter.stringFromTimeInterval(roundedSecondsUntilNextReview) {
-            return .FormattedString(formatted)
+        let roundedSecondsUntilNextReview = secondsUntilNextReview + (60 - secondsUntilNextReview.truncatingRemainder(dividingBy: 60)).truncatingRemainder(dividingBy: 60)
+        if let formatted = formatter.string(from: roundedSecondsUntilNextReview) {
+            return .formattedString(formatted)
         }
         
         // It's not entirely clear when the date component formatter can fail, so we add this failsafe in case
-        return .UnformattedInterval(secondsUntilNextReview)
+        return .unformattedInterval(secondsUntilNextReview)
     }
     
 }

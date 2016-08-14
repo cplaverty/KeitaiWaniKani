@@ -14,10 +14,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     
     // MARK: - Properties
     
-    private lazy var secureAppGroupPersistentStoreURL: NSURL = {
-        let fm = NSFileManager.defaultManager()
-        let directory = fm.containerURLForSecurityApplicationGroupIdentifier("group.uk.me.laverty.KeitaiWaniKani")!
-        return directory.URLByAppendingPathComponent("WaniKaniData.sqlite")
+    private lazy var secureAppGroupPersistentStoreURL: URL = {
+        let fm = FileManager.default
+        let directory = fm.containerURL(forSecurityApplicationGroupIdentifier: "group.uk.me.laverty.KeitaiWaniKani")!
+        return directory.appendingPathComponent("WaniKaniData.sqlite")
     }()
     
     private var studyQueue: StudyQueue? {
@@ -36,7 +36,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         
         tableView.estimatedRowHeight = 95
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.separatorEffect = UIVibrancyEffect.notificationCenterVibrancyEffect()
+        tableView.separatorEffect = UIVibrancyEffect.notificationCenter()
         
         let nc = CFNotificationCenterGetDarwinNotifyCenter()
         let observer = UnsafePointer<Void>(Unmanaged.passUnretained(self).toOpaque())
@@ -45,21 +45,21 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
             observer,
             { (_, observer, name, _, _) in
                 NSLog("Got notification for \(name)")
-                let mySelf = Unmanaged<TodayViewController>.fromOpaque(COpaquePointer(observer)).takeUnretainedValue()
+                let mySelf = Unmanaged<TodayViewController>.fromOpaque(observer!).takeUnretainedValue()
                 mySelf.updateStudyQueue()
             },
             WaniKaniDarwinNotificationCenter.notificationNameForModelObjectType("\(StudyQueue.self)"),
             nil,
-            .DeliverImmediately)
+            .deliverImmediately)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         updateStudyQueue()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         preferredContentSize = tableView.contentSize
@@ -73,76 +73,76 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     
     // MARK: - NCWidgetProviding
     
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
+    func widgetPerformUpdate(completionHandler: ((NCUpdateResult) -> Void)) {
         do {
             let oldStudyQueue = self.studyQueue
             studyQueue = try fetchStudyQueueFromDatabase()
             if studyQueue == oldStudyQueue {
                 NSLog("Study queue not updated")
-                completionHandler(.NoData)
+                completionHandler(.noData)
             } else {
                 NSLog("Study queue updated")
-                completionHandler(.NewData)
+                completionHandler(.newData)
             }
         } catch {
             NSLog("Error when refreshing study queue from today widget in completion handler: \(error)")
-            completionHandler(.Failed)
+            completionHandler(.failed)
         }
     }
     
     // MARK: - Implementation
     
     func updateStudyQueue() {
-        assert(NSThread.isMainThread(), "Study queue update must be done on the main thread")
+        assert(Thread.isMainThread, "Study queue update must be done on the main thread")
         if let studyQueue = try? self.fetchStudyQueueFromDatabase() {
             self.studyQueue = studyQueue
         }
     }
     
     func fetchStudyQueueFromDatabase() throws -> StudyQueue? {
-        let databasePath = secureAppGroupPersistentStoreURL.path!
-        guard NSFileManager.defaultManager().fileExistsAtPath(databasePath) else {
+        let databasePath = secureAppGroupPersistentStoreURL.path
+        guard FileManager.default.fileExists(atPath: databasePath) else {
             NSLog("No database exists at \(databasePath)")
             return nil
         }
         
         let database = FMDatabase(path: databasePath)
-        guard database.open() else {
-            let error = database.lastError()
+        guard (database?.open())! else {
+            let error = database?.lastError()
             NSLog("Database failed to open! \(error)")
-            throw error
+            throw error!
         }
-        defer { database.close() }
+        defer { database?.close() }
         
         NSLog("Fetching study queue from database")
-        return try SRSDataItemCoder.projectedStudyQueue(database)
+        return try SRSDataItemCoder.projectedStudyQueue(database!)
     }
     
     // MARK: - UITableViewDataSource
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let studyQueue = self.studyQueue {
-            let cell = tableView.dequeueReusableCellWithIdentifier("StudyQueue", forIndexPath: indexPath) as! StudyQueueTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "StudyQueue", for: indexPath) as! StudyQueueTableViewCell
             cell.studyQueue = studyQueue
             
             return cell
         } else {
-            return tableView.dequeueReusableCellWithIdentifier("NotLoggedIn", forIndexPath: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: "NotLoggedIn", for: indexPath)
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.extensionContext?.openURL(NSURL(string: "kwk://launch/reviews")!, completionHandler: nil)
-        dispatch_async(dispatch_get_main_queue()) {
-            self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.extensionContext?.open(URL(string: "kwk://launch/reviews")!, completionHandler: nil)
+        DispatchQueue.main.async {
+            self.tableView.deselectRow(at: indexPath, animated: false)
         }
     }
     

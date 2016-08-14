@@ -11,17 +11,17 @@ import XCTest
 class StudyQueueTests: XCTestCase {
     
     func testReviewDateSameDaySameTime() {
-        let referenceDate = date(2015, 1, 1, 12, 34, 30)
-        let nextReviewDate = date(2015, 1, 1, 12, 34, 30)
-
+        let referenceDate = date(2015, 1, 1, 12, 30, 34)
+        let nextReviewDate = date(2015, 1, 1, 12, 30, 34)
+        
         let studyQueue = StudyQueue(lessonsAvailable: 1, reviewsAvailable: 0, nextReviewDate: nextReviewDate, reviewsAvailableNextHour: 0, reviewsAvailableNextDay: 0)
         let formattedNextReviewDate = studyQueue.formattedNextReviewDate(referenceDate)
         XCTAssertEqual(formattedNextReviewDate, formatTimeOnly(nextReviewDate))
     }
     
     func testReviewDateSameDayDifferentTime() {
-        let referenceDate = date(2015, 1, 1, 12, 34, 30)
-        let nextReviewDate = date(2015, 1, 1, 18, 15, 0)
+        let referenceDate = date(2015, 1, 1, 12, 30, 34)
+        let nextReviewDate = date(2015, 1, 1, 18, 0, 15)
         
         let studyQueue = StudyQueue(lessonsAvailable: 1, reviewsAvailable: 0, nextReviewDate: nextReviewDate, reviewsAvailableNextHour: 0, reviewsAvailableNextDay: 0)
         let formattedNextReviewDate = studyQueue.formattedNextReviewDate(referenceDate)
@@ -29,7 +29,7 @@ class StudyQueueTests: XCTestCase {
     }
     
     func testReviewDateNextDayMidnight() {
-        let referenceDate = date(2015, 1, 1, 12, 34, 30)
+        let referenceDate = date(2015, 1, 1, 12, 30, 34)
         let nextReviewDate = date(2015, 1, 2, 0, 0, 0)
         
         let studyQueue = StudyQueue(lessonsAvailable: 1, reviewsAvailable: 0, nextReviewDate: nextReviewDate, reviewsAvailableNextHour: 0, reviewsAvailableNextDay: 0)
@@ -38,8 +38,8 @@ class StudyQueueTests: XCTestCase {
     }
     
     func testReviewDateNextDaySameTime() {
-        let referenceDate = date(2015, 1, 1, 12, 34, 30)
-        let nextReviewDate = date(2015, 1, 2, 12, 34, 30)
+        let referenceDate = date(2015, 1, 1, 12, 30, 34)
+        let nextReviewDate = date(2015, 1, 2, 12, 30, 34)
         
         let studyQueue = StudyQueue(lessonsAvailable: 1, reviewsAvailable: 0, nextReviewDate: nextReviewDate, reviewsAvailableNextHour: 0, reviewsAvailableNextDay: 0)
         let formattedNextReviewDate = studyQueue.formattedNextReviewDate(referenceDate)
@@ -47,20 +47,20 @@ class StudyQueueTests: XCTestCase {
     }
     
     func testReviewDateNextDayDifferentTime() {
-        let referenceDate = date(2015, 1, 1, 12, 34, 30)
-        let nextReviewDate = date(2015, 1, 2, 18, 15, 0)
+        let referenceDate = date(2015, 1, 1, 12, 30, 34)
+        let nextReviewDate = date(2015, 1, 2, 18, 0, 15)
         
         let studyQueue = StudyQueue(lessonsAvailable: 1, reviewsAvailable: 0, nextReviewDate: nextReviewDate, reviewsAvailableNextHour: 0, reviewsAvailableNextDay: 0)
         let formattedNextReviewDate = studyQueue.formattedNextReviewDate(referenceDate)
         XCTAssertEqual(formattedNextReviewDate, formatDateTime(nextReviewDate))
     }
     
-    private func formatDateTime(date: NSDate) -> String {
-        return NSDateFormatter.localizedStringFromDate(date, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
+    private func formatDateTime(_ date: Date) -> String {
+        return DateFormatter.localizedString(from: date, dateStyle: .medium, timeStyle: .short)
     }
     
-    private func formatTimeOnly(date: NSDate) -> String {
-        return NSDateFormatter.localizedStringFromDate(date, dateStyle: .NoStyle, timeStyle: .ShortStyle)
+    private func formatTimeOnly(_ date: Date) -> String {
+        return DateFormatter.localizedString(from: date, dateStyle: .none, timeStyle: .short)
     }
     
 }

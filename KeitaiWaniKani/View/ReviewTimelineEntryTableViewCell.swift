@@ -45,16 +45,16 @@ class ReviewTimelineEntryTableViewCell: UITableViewCell {
         totalCountLabel?.text = formatInteger(reviewCounts.itemCounts.total)
     }
     
-    private func formatTime(date: NSDate) -> String {
+    private func formatTime(_ date: Date) -> String {
         if date.timeIntervalSince1970 == 0 {
             return "Now"
         } else {
-            return NSDateFormatter.localizedStringFromDate(date, dateStyle: .NoStyle, timeStyle: .ShortStyle)
+            return DateFormatter.localizedString(from: date, dateStyle: .none, timeStyle: .short)
         }
     }
     
-    private func formatInteger(number: Int) -> String {
-        return NSNumberFormatter.localizedStringFromNumber(number, numberStyle: .DecimalStyle)
+    private func formatInteger(_ number: Int) -> String {
+        return NumberFormatter.localizedString(from: number, number: .decimal)
     }
     
 }

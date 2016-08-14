@@ -2,12 +2,11 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'AlliCrab' do
-    pod 'Alamofire'
     pod 'FMDB'
-    pod 'SwiftyJSON'
-    pod 'CocoaLumberjack/Swift'
+    pod 'SwiftyJSON', :git => 'https://github.com/cplaverty/SwiftyJSON.git', :branch => 'swift3'
+    pod 'CocoaLumberjack/Swift', :git => 'https://github.com/cplaverty/CocoaLumberjack.git'
     pod '1PasswordExtension'
-    pod 'Charts'
+    pod 'Charts', :git => 'https://github.com/danielgindi/Charts.git', :branch => 'Swift-3.0'
     
     target 'OperationKit'
     target 'WaniKaniKit'

@@ -15,37 +15,37 @@ class GetVocabularyOperationTests: DatabaseTestCase, ResourceHTTPStubs {
     func testVocabLevel1Success() {
         // Check a locked Vocab with multiple meanings
         let expectedArtificialVocab = Vocabulary(character: "人工",
-            meaning: "artificial, man made, human made, human work, human skill, artificially",
-            kana: "じんこう",
-            level: 1,
-            userSpecificSRSData: UserSpecificSRSData(srsLevel: .Apprentice,
-                srsLevelNumeric: 4,
-                dateUnlocked: NSDate(timeIntervalSince1970: NSTimeInterval(1436895207)),
-                dateAvailable: NSDate(timeIntervalSince1970: NSTimeInterval(1438173900)),
-                burned: false,
-                meaningStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3),
-                readingStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3)))
+                                                 meaning: "artificial, man made, human made, human work, human skill, artificially",
+                                                 kana: "じんこう",
+                                                 level: 1,
+                                                 userSpecificSRSData: UserSpecificSRSData(srsLevel: .apprentice,
+                                                                                          srsLevelNumeric: 4,
+                                                                                          dateUnlocked: Date(timeIntervalSince1970: TimeInterval(1436895207)),
+                                                                                          dateAvailable: Date(timeIntervalSince1970: TimeInterval(1438173900)),
+                                                                                          burned: false,
+                                                                                          meaningStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3),
+                                                                                          readingStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3)))
         
         // Check an unlocked, unburned Vocab
         let expectedNineThingsVocab = Vocabulary(character: "九つ",
-            meaning: "nine things",
-            kana: "ここのつ",
-            level: 1,
-            userSpecificSRSData: UserSpecificSRSData(srsLevel: .Apprentice,
-                srsLevelNumeric: 4,
-                dateUnlocked: NSDate(timeIntervalSince1970: NSTimeInterval(1436895229)),
-                dateAvailable: NSDate(timeIntervalSince1970: NSTimeInterval(1438206300)),
-                burned: false,
-                meaningStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3),
-                readingStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3)))
+                                                 meaning: "nine things",
+                                                 kana: "ここのつ",
+                                                 level: 1,
+                                                 userSpecificSRSData: UserSpecificSRSData(srsLevel: .apprentice,
+                                                                                          srsLevelNumeric: 4,
+                                                                                          dateUnlocked: Date(timeIntervalSince1970: TimeInterval(1436895229)),
+                                                                                          dateAvailable: Date(timeIntervalSince1970: TimeInterval(1438206300)),
+                                                                                          burned: false,
+                                                                                          meaningStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3),
+                                                                                          readingStats: ItemStats(correctCount: 3, incorrectCount: 0, maxStreakLength: 3, currentStreakLength: 3)))
         
-        let operationQueue = OperationQueue()
+        let operationQueue = OperationKit.OperationQueue()
         
-        stubForResource(Resource.Vocabulary, file: "Vocab Level 1")
+        stubForResource(Resource.vocabulary, file: "Vocab Level 1")
         defer { OHHTTPStubs.removeAllStubs() }
         
-        self.measureBlock() {
-            let expect = self.expectationWithDescription("vocabulary")
+        self.measure() {
+            let expect = self.expectation(description: "vocabulary")
             let operation = GetVocabularyOperation(resolver: self.resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
             
             let completionObserver = BlockObserver { (operation, errors) -> Void in
@@ -55,12 +55,13 @@ class GetVocabularyOperationTests: DatabaseTestCase, ResourceHTTPStubs {
             operation.addObserver(completionObserver)
             operationQueue.addOperation(operation)
             
-            self.waitForExpectationsWithTimeout(15.0, handler: nil)
+            self.waitForExpectations(timeout: 15.0, handler: nil)
         }
         
         databaseQueue.inDatabase { database in
+            XCTAssertNotNil(database, "Database is nil!")
             do {
-                let fromDatabase = try Vocabulary.coder.loadFromDatabase(database)
+                let fromDatabase = try Vocabulary.coder.load(from: database!)
                 XCTAssertEqual(fromDatabase.count, 42, "Failed to load all vocabulary")
                 
                 if let actualArtificialVocab = fromDatabase.filter({ $0.meaning == expectedArtificialVocab.meaning }).first {
@@ -86,7 +87,7 @@ class GetVocabularyOperationTests: DatabaseTestCase, ResourceHTTPStubs {
         
         stubForResource(Resource.Vocabulary, file: "Vocab Levels 1-20")
         defer { OHHTTPStubs.removeAllStubs() }
-    
+        
         let expect = self.expectationWithDescription("vocabulary")
         let operation = GetVocabularyOperation(resolver: self.resourceResolver, databaseQueue: self.databaseQueue, downloadStrategy: self.stubDownloadStrategy)
         

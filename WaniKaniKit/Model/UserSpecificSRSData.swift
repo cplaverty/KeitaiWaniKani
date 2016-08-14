@@ -8,19 +8,19 @@
 import Foundation
 
 public enum SRSLevel: String {
-    case Apprentice = "apprentice"
-    case Guru = "guru"
-    case Master = "master"
-    case Enlightened = "enlighten"
-    case Burned = "burned"
+    case apprentice = "apprentice"
+    case guru = "guru"
+    case master = "master"
+    case enlightened = "enlighten"
+    case burned = "burned"
     
     public var numericLevelThreshold: Int {
         switch self {
-        case Apprentice: return 1
-        case Guru: return 5
-        case Master: return 7
-        case Enlightened: return 8
-        case Burned: return 9
+        case .apprentice: return 1
+        case .guru: return 5
+        case .master: return 7
+        case .enlightened: return 8
+        case .burned: return 9
         }
     }
 }
@@ -53,17 +53,17 @@ public func ==(lhs: ItemStats, rhs: ItemStats) -> Bool {
 public struct UserSpecificSRSData: Equatable {
     public let srsLevel: SRSLevel
     public let srsLevelNumeric: Int
-    public let dateUnlocked: NSDate?
-    public let dateAvailable: NSDate?
+    public let dateUnlocked: Date?
+    public let dateAvailable: Date?
     public let burned: Bool
-    public let dateBurned: NSDate?
+    public let dateBurned: Date?
     public let meaningStats: ItemStats?
     public let readingStats: ItemStats?
     public let meaningNote: String?
     public let readingNote: String?
     public let userSynonyms: [String]?
     
-    public init(srsLevel: SRSLevel, srsLevelNumeric: Int, dateUnlocked: NSDate? = nil, dateAvailable: NSDate? = nil, burned: Bool, dateBurned: NSDate? = nil, meaningStats: ItemStats? = nil, readingStats: ItemStats? = nil, meaningNote: String? = nil, readingNote: String? = nil, userSynonyms: [String]? = nil) {
+    public init(srsLevel: SRSLevel, srsLevelNumeric: Int, dateUnlocked: Date? = nil, dateAvailable: Date? = nil, burned: Bool, dateBurned: Date? = nil, meaningStats: ItemStats? = nil, readingStats: ItemStats? = nil, meaningNote: String? = nil, readingNote: String? = nil, userSynonyms: [String]? = nil) {
         self.srsLevel = srsLevel
         self.srsLevelNumeric = srsLevelNumeric
         self.dateUnlocked = dateUnlocked
@@ -79,7 +79,7 @@ public struct UserSpecificSRSData: Equatable {
 }
 
 public func ==(lhs: UserSpecificSRSData, rhs: UserSpecificSRSData) -> Bool {
-    func compareOptionalArray(a: [String]?, to b: [String]?) -> Bool {
+    func compareOptionalArray(_ a: [String]?, to b: [String]?) -> Bool {
         if a == nil && b == nil {
             return true
         }
@@ -99,8 +99,8 @@ public func ==(lhs: UserSpecificSRSData, rhs: UserSpecificSRSData) -> Bool {
         lhs.readingStats == rhs.readingStats &&
         lhs.meaningNote == rhs.meaningNote &&
         lhs.readingNote == rhs.readingNote &&
-        // The line below makes the entire statement fail to compile.  Compiler bug?
-//        lhs.userSynonyms == rhs.userSynonyms
+        // The line below makes the entire statement fail to compile.  Awaiting support for Arrays of Equatables to be Equatable.
+        //lhs.userSynonyms == rhs.userSynonyms
         // Use nested comparison function for now
         compareOptionalArray(lhs.userSynonyms, to: rhs.userSynonyms)
 }

@@ -13,49 +13,47 @@ class FileMissingConditionTests: XCTestCase {
     func testMissingFile() {
         let operationQueue = createOperationQueue()
         
-        let tempDirectory = try! NSFileManager.defaultManager().URLForDirectory(.CachesDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
-        let missingFile = tempDirectory.URLByAppendingPathComponent("jfjlkjijofsjaklfjskfjsiofjsfjalk")
+        let tempDirectory = try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let missingFile = tempDirectory.appendingPathComponent("jfjlkjijofsjaklfjskfjsiofjsfjalk")
         
-        let expectation = expectationWithDescription("operation")
         let operation = StubOperation()
-        operation.addCondition(FileMissingCondition(fileURL: missingFile))
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        operation.addCondition(FileMissingCondition(url: missingFile))
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
-            expectation.fulfill()
             })
         
         operationQueue.addOperation(operation)
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
         
         XCTAssertEqual(operation.stateTransitions, OperationWorkflows.Finished)
         
-        XCTAssertFalse(operation.cancelled)
+        XCTAssertFalse(operation.isCancelled)
     }
     
     func testExistingFile() {
         let operationQueue = createOperationQueue()
         
-        let fm = NSFileManager.defaultManager()
-        let tempDirectory = try! fm.URLForDirectory(.CachesDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
-        let nonMissingFile = tempDirectory.URLByAppendingPathComponent(NSUUID().UUIDString)
-        fm.createFileAtPath(nonMissingFile.path!, contents: nil, attributes: nil)
-        defer { try! fm.removeItemAtPath(nonMissingFile.path!) }
+        let fm = FileManager.default
+        let tempDirectory = try! fm.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let nonMissingFile = tempDirectory.appendingPathComponent(UUID().uuidString)
+        fm.createFile(atPath: nonMissingFile.path, contents: nil, attributes: nil)
+        defer { try! fm.removeItem(atPath: nonMissingFile.path) }
         
-        let expectation = expectationWithDescription("operation")
         let operation = StubOperation()
-        operation.addCondition(FileMissingCondition(fileURL: nonMissingFile))
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        operation.addCondition(FileMissingCondition(url: nonMissingFile))
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertFalse(errors.isEmpty, "Expected errors on operation finish")
-            expectation.fulfill()
             })
         
         operationQueue.addOperation(operation)
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
         
         XCTAssertEqual(operation.stateTransitions, OperationWorkflows.CancelledAfterReady)
         
         XCTAssertFalse(operation.wasRun)
-        XCTAssertTrue(operation.cancelled)
+        XCTAssertTrue(operation.isCancelled)
     }
     
 }

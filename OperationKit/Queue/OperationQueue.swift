@@ -19,8 +19,8 @@ import Foundation
     `OperationQueue` and uses it to manage dependencies.
 */
 public protocol OperationQueueDelegate: class {
-    func operationQueue(operationQueue: OperationQueue, willAddOperation operation: NSOperation)
-    func operationQueue(operationQueue: OperationQueue, operationDidFinish operation: NSOperation, withErrors errors: [ErrorType])
+    func operationQueue(_ operationQueue: OperationQueue, willAddOperation operation: Foundation.Operation)
+    func operationQueue(_ operationQueue: OperationQueue, operationDidFinish operation: Foundation.Operation, withErrors errors: [Error])
 }
 
 /**
@@ -31,10 +31,10 @@ public protocol OperationQueueDelegate: class {
     - Extracting generated dependencies from operation conditions
     - Setting up dependencies to enforce mutual exclusivity
 */
-public class OperationQueue: NSOperationQueue {
+public class OperationQueue: Foundation.OperationQueue {
     weak var delegate: OperationQueueDelegate?
     
-    public override func addOperation(operation: NSOperation) {
+    public override func addOperation(_ operation: Foundation.Operation) {
         if let op = operation as? Operation {
             // Set up a `BlockObserver` to invoke the `OperationQueueDelegate` method.
             let delegate = BlockObserver(
@@ -52,7 +52,7 @@ public class OperationQueue: NSOperationQueue {
             
             // Extract any dependencies needed by this operation.
             let dependencies = op.conditions.flatMap {
-                $0.dependencyForOperation(op)
+                $0.dependency(forOperation: op)
             }
                 
             for dependency in dependencies {
@@ -75,10 +75,10 @@ public class OperationQueue: NSOperationQueue {
                 // Set up the mutual exclusivity dependencies.
                 let exclusivityController = ExclusivityController.sharedExclusivityController
 
-                exclusivityController.addOperation(op, categories: concurrencyCategories)
+                exclusivityController.add(op, categories: concurrencyCategories)
                 
                 op.addObserver(BlockObserver { operation, _ in
-                    exclusivityController.removeOperation(operation, categories: concurrencyCategories)
+                    exclusivityController.remove(operation, categories: concurrencyCategories)
                 })
             }
             
@@ -106,7 +106,7 @@ public class OperationQueue: NSOperationQueue {
         super.addOperation(operation)   
     }
     
-    public override func addOperations(operations: [NSOperation], waitUntilFinished wait: Bool) {
+    public override func addOperations(_ operations: [Foundation.Operation], waitUntilFinished wait: Bool) {
         /*
             The base implementation of this method does not call `addOperation()`,
             so we'll call it ourselves.

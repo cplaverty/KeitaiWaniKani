@@ -15,7 +15,7 @@ class WebAddressBarView: UIView {
     let addressLabel: UILabel
     let refreshButton: UIButton
     
-    var URL: NSURL? { didSet { updateUI() } }
+    var url: URL? { didSet { updateUI() } }
     var loading: Bool = false { didSet { updateUI() } }
     
     private let lockImage = UIImage(named: "NavigationBarLock")
@@ -32,17 +32,17 @@ class WebAddressBarView: UIView {
         secureSiteIndicator.translatesAutoresizingMaskIntoConstraints = false
         addressLabel = UILabel()
         addressLabel.translatesAutoresizingMaskIntoConstraints = false
-        addressLabel.setContentCompressionResistancePriority(addressLabel.contentCompressionResistancePriorityForAxis(.Horizontal) - 1, forAxis: .Horizontal)
-        refreshButton = UIButton(type: .Custom)
+        addressLabel.setContentCompressionResistancePriority(addressLabel.contentCompressionResistancePriority(for: .horizontal) - 1, for: .horizontal)
+        refreshButton = UIButton(type: .custom)
         refreshButton.translatesAutoresizingMaskIntoConstraints = false
         
         super.init(frame: frame)
         
         self.layer.cornerRadius = 5
-        self.opaque = false
+        self.isOpaque = false
         self.backgroundColor = UIColor(white: 0.8, alpha: 0.5)
         
-        refreshButton.addTarget(self, action: #selector(stopOrRefreshWebView(_:)), forControlEvents: .TouchUpInside)
+        refreshButton.addTarget(self, action: #selector(stopOrRefreshWebView(_:)), for: .touchUpInside)
         
         addSubview(secureSiteIndicator)
         addSubview(addressLabel)
@@ -54,13 +54,13 @@ class WebAddressBarView: UIView {
             "refreshButton": refreshButton
         ]
         
-        NSLayoutConstraint(item: secureSiteIndicator, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 0).active = true
-        NSLayoutConstraint(item: addressLabel, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 0).active = true
-        NSLayoutConstraint(item: refreshButton, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 0).active = true
+        NSLayoutConstraint(item: secureSiteIndicator, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: addressLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint(item: refreshButton, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0).isActive = true
         
-        NSLayoutConstraint(item: addressLabel, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0).active = true
-        NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(>=8)-[secureSiteIndicator]-[addressLabel]-(>=8)-[refreshButton]-|", options: [], metrics: nil, views: views))
-        NSLayoutConstraint.activateConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(>=4)-[addressLabel]-(>=4)-|", options: [], metrics: nil, views: views))
+        NSLayoutConstraint(item: addressLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0).isActive = true
+        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=8)-[secureSiteIndicator]-[addressLabel]-(>=8)-[refreshButton]-|", options: [], metrics: nil, views: views))
+        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(>=4)-[addressLabel]-(>=4)-|", options: [], metrics: nil, views: views))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -68,14 +68,14 @@ class WebAddressBarView: UIView {
     }
     
     deinit {
-        refreshButton.removeTarget(self, action: nil, forControlEvents: .AllEvents)
+        refreshButton.removeTarget(self, action: nil, for: .allEvents)
     }
     
     // MARK: - Update UI
     
-    func stopOrRefreshWebView(sender: UIButton) {
-        URL = webView.request?.URL
-        if webView.loading {
+    func stopOrRefreshWebView(_ sender: UIButton) {
+        url = webView.request?.url
+        if webView.isLoading {
             webView.stopLoading()
             loading = false
         } else {
@@ -86,31 +86,31 @@ class WebAddressBarView: UIView {
     }
     
     private func updateUI() {
-        assert(NSThread.isMainThread(), "Must be called on the main thread")
+        assert(Thread.isMainThread, "Must be called on the main thread")
         
         // Padlock
-        secureSiteIndicator.hidden = URL?.scheme != "https"
+        secureSiteIndicator.isHidden = url?.scheme != "https"
         
         // URL
-        addressLabel.text = domainForURL(URL)
+        addressLabel.text = domainForURL(url)
         
         // Stop/Reload indicator
         if loading {
-            refreshButton.setImage(stopLoadingImage, forState: .Normal)
+            refreshButton.setImage(stopLoadingImage, for: UIControlState())
         } else {
-            refreshButton.setImage(reloadImage, forState: .Normal)
+            refreshButton.setImage(reloadImage, for: UIControlState())
         }
     }
     
     let hostPrefixesToStrip = ["m.", "www."]
-    private func domainForURL(URL: NSURL?) -> String? {
-        guard let host = URL?.host?.lowercaseString else {
+    private func domainForURL(_ URL: Foundation.URL?) -> String? {
+        guard let host = URL?.host?.lowercased() else {
             return nil
         }
         
         for prefix in hostPrefixesToStrip {
-            if let range = host.rangeOfString(prefix, options: [.AnchoredSearch]) {
-                return host.substringFromIndex(range.endIndex)
+            if let range = host.range(of: prefix, options: [.anchored]) {
+                return host.substring(from: range.upperBound)
             }
         }
         return host

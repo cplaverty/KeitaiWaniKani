@@ -10,8 +10,8 @@ import Foundation
 import SystemConfiguration
 import CocoaLumberjack
 
-public enum ReachabilityConditionError: ErrorType {
-    case FailedToReachHost(host: String)
+public enum ReachabilityConditionError: Error {
+    case failedToReachHost(host: String)
 }
 
 /**
@@ -23,34 +23,33 @@ public struct ReachabilityCondition: OperationCondition {
     public static let isMutuallyExclusive = false
     public static var enabled = true
     
-    public let URL: NSURL
+    public let url: URL
     
-    
-    public init(URL: NSURL) {
-        self.URL = URL
+    public init(url: URL) {
+        self.url = url
     }
     
-    public func dependencyForOperation(operation: Operation) -> NSOperation? {
+    public func dependency(forOperation operation: Operation) -> Foundation.Operation? {
         return nil
     }
     
-    public func evaluateForOperation(operation: Operation, completion: OperationConditionResult -> Void) {
+    public func evaluate(forOperation operation: Operation, completion: (OperationConditionResult) -> Void) {
         guard self.dynamicType.enabled else {
             DDLogVerbose("Reachability check disabled - faking satisfied check")
-            completion(.Satisfied)
+            completion(.satisfied)
             return
         }
         
-        ReachabilityController.requestReachability(URL) { reachable in
+        ReachabilityController.requestReachability(url: url) { reachable in
             if reachable {
                 DDLogVerbose("Reachability check satisfied")
-                completion(.Satisfied)
+                completion(.satisfied)
             }
             else {
                 DDLogVerbose("Reachability check failed!")
-                let error = ReachabilityConditionError.FailedToReachHost(host: self.URL.host ?? "<unknown host>")
+                let error = ReachabilityConditionError.failedToReachHost(host: self.url.host ?? "<unknown host>")
                 
-                completion(.Failed(error))
+                completion(.failed(error))
             }
         }
     }
@@ -61,19 +60,19 @@ public struct ReachabilityCondition: OperationCondition {
 private class ReachabilityController {
     static var reachabilityRefs = [String: SCNetworkReachability]()
 
-    static let reachabilityQueue = dispatch_queue_create("Operations.Reachability", DISPATCH_QUEUE_SERIAL)
+    static let reachabilityQueue = DispatchQueue(label: "Operations.Reachability")
     
-    static func requestReachability(url: NSURL, completionHandler: (Bool) -> Void) {
-        if url.fileURL {
-            let fileExists = NSFileManager.defaultManager().fileExistsAtPath(url.path!)
+    static func requestReachability(url: URL, completionHandler: (Bool) -> Void) {
+        if url.isFileURL {
+            let fileExists = FileManager.default.fileExists(atPath: url.path)
             completionHandler(fileExists)
         } else if let host = url.host {
-            dispatch_async(reachabilityQueue) {
+            reachabilityQueue.async {
                 var ref = self.reachabilityRefs[host]
 
                 if ref == nil {
                     let hostString = host as NSString
-                    ref = SCNetworkReachabilityCreateWithName(nil, hostString.UTF8String)
+                    ref = SCNetworkReachabilityCreateWithName(nil, hostString.utf8String!)
                 }
                 
                 if let ref = ref {
@@ -88,7 +87,7 @@ private class ReachabilityController {
                             such as whether or not the connection would require 
                             VPN, a cellular connection, etc.
                         */
-                        reachable = flags.contains(.Reachable)
+                        reachable = flags.contains(.reachable)
                     }
                     completionHandler(reachable)
                 }

@@ -13,11 +13,11 @@ import OperationKit
 class GetStudyQueueOperationTests: DatabaseTestCase, ResourceHTTPStubs {
     
     func testBadAPIKey() {
-        stubForResource(Resource.StudyQueue, file: "Bad API Key")
+        stubForResource(Resource.studyQueue, file: "Bad API Key")
         defer { OHHTTPStubs.removeAllStubs() }
         
-        let expect = expectationWithDescription("studyQueue")
-        let operationQueue = OperationQueue()
+        let expect = expectation(description: "studyQueue")
+        let operationQueue = OperationKit.OperationQueue()
         let operation = GetStudyQueueOperation(resolver: resourceResolver, databaseQueue: databaseQueue)
         
         let completionObserver = BlockObserver(finishHandler: { (operation, errors) -> Void in
@@ -25,7 +25,7 @@ class GetStudyQueueOperationTests: DatabaseTestCase, ResourceHTTPStubs {
             XCTAssertEqual(errors.count, 1, "Expected exactly one error, but received: \(errors)")
             if let error = errors.first {
                 switch error {
-                case WaniKaniAPIError.UserNotFound: break
+                case WaniKaniAPIError.userNotFound: break
                 default:
                     XCTFail("Expected single WaniKaniAPIError.UserNotFound error, but got \(error)")
                 }
@@ -34,7 +34,7 @@ class GetStudyQueueOperationTests: DatabaseTestCase, ResourceHTTPStubs {
         operation.addObserver(completionObserver)
         operationQueue.addOperation(operation)
         
-        self.waitForExpectationsWithTimeout(5.0, handler: nil)
+        self.waitForExpectations(timeout: 5.0, handler: nil)
     }
     
     func testStudyQueueSuccess() {
@@ -46,21 +46,21 @@ class GetStudyQueueOperationTests: DatabaseTestCase, ResourceHTTPStubs {
                                                       twitter: "",
                                                       topicsCount: 0,
                                                       postsCount: 4,
-                                                      creationDate: NSDate(timeIntervalSince1970: NSTimeInterval(1402558829)))
+                                                      creationDate: Date(timeIntervalSince1970: TimeInterval(1402558829)))
         
         let expectedStudyQueue = StudyQueue(lessonsAvailable: 29,
                                             reviewsAvailable: 8,
-                                            nextReviewDate: NSDate(timeIntervalSince1970: NSTimeInterval(1438180831)),
+                                            nextReviewDate: Date(timeIntervalSince1970: TimeInterval(1438180831)),
                                             reviewsAvailableNextHour: 0,
                                             reviewsAvailableNextDay: 19)
         
-        let operationQueue = OperationQueue()
+        let operationQueue = OperationKit.OperationQueue()
         
-        stubForResource(Resource.StudyQueue, file: "Study Queue Success")
+        stubForResource(Resource.studyQueue, file: "Study Queue Success")
         defer { OHHTTPStubs.removeAllStubs() }
         
-        self.measureBlock() {
-            let expect = self.expectationWithDescription("studyQueue")
+        self.measure() {
+            let expect = self.expectation(description: "studyQueue")
             let operation = GetStudyQueueOperation(resolver: self.resourceResolver, databaseQueue: self.databaseQueue)
             
             let completionObserver = BlockObserver(finishHandler: { (operation, errors) -> Void in
@@ -70,13 +70,13 @@ class GetStudyQueueOperationTests: DatabaseTestCase, ResourceHTTPStubs {
             operation.addObserver(completionObserver)
             operationQueue.addOperation(operation)
             
-            self.waitForExpectationsWithTimeout(5.0, handler: nil)
+            self.waitForExpectations(timeout: 5.0, handler: nil)
         }
         
-        let userInformation = try! databaseQueue.withDatabase { try UserInformation.coder.loadFromDatabase($0) }
+        let userInformation = try! databaseQueue.withDatabase { try UserInformation.coder.load(from: $0) }
         XCTAssertEqual(userInformation, expectedUserInformation, "UserInformation mismatch from database")
         
-        let studyQueue = try! databaseQueue.withDatabase { try StudyQueue.coder.loadFromDatabase($0) }
+        let studyQueue = try! databaseQueue.withDatabase { try StudyQueue.coder.load(from: $0) }
         XCTAssertEqual(studyQueue, expectedStudyQueue, "StudyQueue mismatch from database")
     }
     
@@ -88,20 +88,20 @@ class GetStudyQueueOperationTests: DatabaseTestCase, ResourceHTTPStubs {
                                                       about: "",
                                                       topicsCount: 0,
                                                       postsCount: 0,
-                                                      creationDate: NSDate(timeIntervalSince1970: NSTimeInterval(1435328490)))
+                                                      creationDate: Date(timeIntervalSince1970: TimeInterval(1435328490)))
         
         let expectedStudyQueue = StudyQueue(lessonsAvailable: 26,
                                             reviewsAvailable: 0,
                                             reviewsAvailableNextHour: 0,
                                             reviewsAvailableNextDay: 0)
         
-        let operationQueue = OperationQueue()
+        let operationQueue = OperationKit.OperationQueue()
         
-        stubForResource(Resource.StudyQueue, file: "Study Queue New User")
+        stubForResource(Resource.studyQueue, file: "Study Queue New User")
         defer { OHHTTPStubs.removeAllStubs() }
         
-        self.measureBlock() {
-            let expect = self.expectationWithDescription("studyQueue")
+        self.measure() {
+            let expect = self.expectation(description: "studyQueue")
             let operation = GetStudyQueueOperation(resolver: self.resourceResolver, databaseQueue: self.databaseQueue)
             
             let completionObserver = BlockObserver(finishHandler: { (operation, errors) -> Void in
@@ -111,13 +111,13 @@ class GetStudyQueueOperationTests: DatabaseTestCase, ResourceHTTPStubs {
             operation.addObserver(completionObserver)
             operationQueue.addOperation(operation)
             
-            self.waitForExpectationsWithTimeout(5.0, handler: nil)
+            self.waitForExpectations(timeout: 5.0, handler: nil)
         }
         
-        let userInformation = try! databaseQueue.withDatabase { try UserInformation.coder.loadFromDatabase($0) }
+        let userInformation = try! databaseQueue.withDatabase { try UserInformation.coder.load(from: $0) }
         XCTAssertEqual(userInformation, expectedUserInformation, "UserInformation mismatch from database")
         
-        let studyQueue = try! databaseQueue.withDatabase { try StudyQueue.coder.loadFromDatabase($0) }
+        let studyQueue = try! databaseQueue.withDatabase { try StudyQueue.coder.load(from: $0) }
         XCTAssertEqual(studyQueue, expectedStudyQueue, "StudyQueue mismatch from database")
     }
     

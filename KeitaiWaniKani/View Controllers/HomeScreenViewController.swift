@@ -23,36 +23,36 @@ class HomeScreenViewController: UIViewController, WebViewControllerDelegate {
     
     // MARK: - Actions
     
-    @IBAction func loginButtonTouched(sender: UIButton) {
-        let wvc = WaniKaniLoginWebViewController.forURL(WaniKaniURLs.loginPage) { $0.delegate = self }
+    @IBAction func loginButtonTouched(_ sender: UIButton) {
+        let wvc = WaniKaniLoginWebViewController.wrapped(url: WaniKaniURLs.loginPage) { $0.delegate = self }
         
-        presentViewController(wvc, animated: true, completion: nil)
+        present(wvc, animated: true, completion: nil)
     }
     
-    @IBAction func apiKeySet(segue: UIStoryboardSegue) {
+    @IBAction func apiKeySet(_ segue: UIStoryboardSegue) {
         ApplicationSettings.apiKeyVerified = true
     }
     
     // MARK: - WebViewControllerDelegate
     
-    func webViewControllerDidFinish(controller: WebViewController) {
-        controller.dismissViewControllerAnimated(true, completion: nil)
+    func webViewControllerDidFinish(_ controller: WebViewController) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - View Controller Lifecycle
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         activityIndicator.startAnimating()
         validateAPIKey()
     }
 
     // Workaround to show the action sheet on WKWebView, which calls this on the root view controller
-    override func presentViewController(viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
         if let pvc = self.frontMostPresentedViewController {
-            pvc.presentViewController(viewControllerToPresent, animated: flag, completion: completion)
+            pvc.present(viewControllerToPresent, animated: flag, completion: completion)
         } else {
-            super.presentViewController(viewControllerToPresent, animated: flag, completion: completion)
+            super.present(viewControllerToPresent, animated: flag, completion: completion)
         }
     }
 
@@ -61,15 +61,15 @@ class HomeScreenViewController: UIViewController, WebViewControllerDelegate {
     func showLoginButtonsOnMainQueue() {
         ApplicationSettings.apiKeyVerified = false
         DDLogDebug("Background fetch interval = Never")
-        UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalNever)
-        dispatch_async(dispatch_get_main_queue()) {
-            self.buttonView.hidden = false
+        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalNever)
+        DispatchQueue.main.async {
+            self.buttonView.isHidden = false
         }
     }
     
     func validateAPIKey() {
         defer { activityIndicator.stopAnimating() }
-        guard let apiKey = ApplicationSettings.apiKey where !apiKey.isEmpty && ApplicationSettings.apiKeyVerified else {
+        guard let apiKey = ApplicationSettings.apiKey, !apiKey.isEmpty && ApplicationSettings.apiKeyVerified else {
             DDLogDebug("We either do not have an API Key, or it hasn't been verified")
             showLoginButtonsOnMainQueue()
             return
@@ -81,9 +81,9 @@ class HomeScreenViewController: UIViewController, WebViewControllerDelegate {
     
     func showDashboardOnMainQueue() {
         DDLogDebug("Background fetch interval = Minimum")
-        UIApplication.sharedApplication().setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
-        dispatch_async(dispatch_get_main_queue()) {
-            self.performSegueWithIdentifier(SegueIdentifiers.showDashboard, sender: self)
+        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: SegueIdentifiers.showDashboard, sender: self)
         }
     }
 

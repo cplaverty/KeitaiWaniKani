@@ -10,5 +10,5 @@ import Foundation
 public protocol ResourceResolver {
     var apiKey: String { get }
     /// Given a resource and argument, find the URL to load it.
-    func URLForResource(resource: Resource, withArgument argument: String?) -> NSURL
+    func resolveURL(resource: Resource, withArgument argument: String?) -> URL
 }

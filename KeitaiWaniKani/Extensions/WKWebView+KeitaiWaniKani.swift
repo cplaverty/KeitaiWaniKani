@@ -21,7 +21,7 @@ extension WKWebView {
         }
         
         // Guard in case this method is called twice on the same webview.
-        guard !(swizzledClassMapping as NSArray).containsObject(subview.dynamicType) else {
+        guard !(swizzledClassMapping as NSArray).contains(subview.dynamicType) else {
             return
         }
         
@@ -36,7 +36,7 @@ extension WKWebView {
             }
             
             let method = class_getInstanceMethod(self.dynamicType, #selector(noInputAccessoryView))
-            class_addMethod(newClass!, Selector("inputAccessoryView"), method_getImplementation(method), method_getTypeEncoding(method))
+            class_addMethod(newClass!, #selector(getter: UIResponder.inputAccessoryView), method_getImplementation(method), method_getTypeEncoding(method))
             
             objc_registerClassPair(newClass!)
             
@@ -47,16 +47,16 @@ extension WKWebView {
     }
     
     // http://stackoverflow.com/questions/28631317/how-to-disable-scrolling-entirely-in-a-wkwebview
-    func setScrollEnabled(enabled: Bool) {
-        self.scrollView.scrollEnabled = enabled
-        self.scrollView.panGestureRecognizer.enabled = enabled
+    func setScrollEnabled(_ enabled: Bool) {
+        self.scrollView.isScrollEnabled = enabled
+        self.scrollView.panGestureRecognizer.isEnabled = enabled
         self.scrollView.bounces = enabled
         
         for subview in self.subviews {
             if let subview = subview as? UIScrollView {
-                subview.scrollEnabled = enabled
+                subview.isScrollEnabled = enabled
                 subview.bounces = enabled
-                subview.panGestureRecognizer.enabled = enabled
+                subview.panGestureRecognizer.isEnabled = enabled
             }
             
             for subScrollView in subview.subviews {
@@ -69,23 +69,23 @@ extension WKWebView {
         }
     }
     
-    func scrollToTop(animated: Bool) {
+    func scrollToTop(_ animated: Bool) {
         self.scrollView.setContentOffset(CGPoint(x: 0, y: -self.scrollView.contentInset.top), animated: animated)
     }
     
     // Adapted from https://github.com/Telerik-Verified-Plugins/WKWebView/commit/04e8296adeb61f289f9c698045c19b62d080c7e3
     func keyboardDisplayDoesNotRequireUserAction() {
-        typealias SelectorImpType = @convention(c) (AnyObject!, Selector, objc_objectptr_t, CBool, CBool, AnyObject?) -> Void
+        typealias SelectorImpType = @convention(c) (AnyObject?, Selector, objc_objectptr_t, CBool, CBool, AnyObject?) -> Void
         
         let sel = sel_getUid("_startAssistingNode:userIsInteracting:blurPreviousNode:userObject:")
         let WKContentView: AnyClass? = NSClassFromString("WKContentView")
         let method = class_getInstanceMethod(WKContentView, sel)
         let originalImp = method_getImplementation(method)
-        let block: @convention(block) (AnyObject!, objc_objectptr_t, CBool, CBool, AnyObject?) -> Void = {
-            let chained = unsafeBitCast(originalImp, SelectorImpType.self)
-            chained($0, sel, $1, true, $3, $4)
+        let block: @convention(block) (AnyObject?, objc_objectptr_t, CBool, CBool, AnyObject?) -> Void = {
+            let chained = unsafeBitCast(originalImp, to: SelectorImpType.self)
+            chained($0, sel!, $1, true, $3, $4)
         }
-        let imp = imp_implementationWithBlock(unsafeBitCast(block, AnyObject.self))
+        let imp = imp_implementationWithBlock(unsafeBitCast(block, to: AnyObject.self))
         method_setImplementation(method, imp)
     }
 }

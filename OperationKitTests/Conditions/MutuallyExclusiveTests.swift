@@ -18,62 +18,59 @@ class MutuallyExclusiveTests: XCTestCase {
         let operationQueue = createOperationQueue()
         operationQueue.maxConcurrentOperationCount = 2
         
-        let expectation1 = expectationWithDescription("operation1")
         let operation1 = StubOperation(immediatelyFinish: false)
+        keyValueObservingExpectation(for: operation1, keyPath: "isFinished", expectedValue: true)
         operation1.addCondition(mutuallyExclusiveCondition)
         operation1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
-            
-            expectation1.fulfill()
             })
         
-        let expectation2 = expectationWithDescription("operation2")
         let operation2 = StubOperation()
+        keyValueObservingExpectation(for: operation2, keyPath: "isFinished", expectedValue: true)
         operation2.addCondition(mutuallyExclusiveCondition)
         operation2.addObserver(BlockObserver(
             startHandler: { op in
-                XCTAssertFalse(operation1.ready)
-                XCTAssertFalse(operation1.executing)
-                XCTAssertTrue(operation1.finished)
-                XCTAssertFalse(operation1.cancelled)
+                XCTAssertFalse(operation1.isReady)
+                XCTAssertFalse(operation1.isExecuting)
+                XCTAssertTrue(operation1.isFinished)
+                XCTAssertFalse(operation1.isCancelled)
             },
             finishHandler: { op, errors in
                 XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
-                expectation2.fulfill()
             }
             ))
         
         operationQueue.addOperation(operation1)
         operationQueue.addOperation(operation2)
         
-        NSThread.sleepForTimeInterval(0.5)
+        Thread.sleep(forTimeInterval: 0.5)
         
         XCTAssertEqual(operation1.stateTransitions, OperationWorkflows.Executing)
         XCTAssertEqual(operation2.stateTransitions, OperationWorkflows.Pending)
         
-        XCTAssertFalse(operation1.ready)
-        XCTAssertTrue(operation1.executing)
-        XCTAssertFalse(operation1.finished)
-        XCTAssertFalse(operation1.cancelled)
+        XCTAssertFalse(operation1.isReady)
+        XCTAssertTrue(operation1.isExecuting)
+        XCTAssertFalse(operation1.isFinished)
+        XCTAssertFalse(operation1.isCancelled)
         
-        XCTAssertFalse(operation2.ready)
-        XCTAssertFalse(operation2.executing)
-        XCTAssertFalse(operation2.finished)
-        XCTAssertFalse(operation2.cancelled)
+        XCTAssertFalse(operation2.isReady)
+        XCTAssertFalse(operation2.isExecuting)
+        XCTAssertFalse(operation2.isFinished)
+        XCTAssertFalse(operation2.isCancelled)
         
         operation1.finish()
         
-        waitForExpectationsWithTimeout(1, handler: nil)
+        waitForExpectations(timeout: 1, handler: nil)
         
-        XCTAssertFalse(operation1.ready)
-        XCTAssertFalse(operation1.executing)
-        XCTAssertTrue(operation1.finished)
-        XCTAssertFalse(operation1.cancelled)
+        XCTAssertFalse(operation1.isReady)
+        XCTAssertFalse(operation1.isExecuting)
+        XCTAssertTrue(operation1.isFinished)
+        XCTAssertFalse(operation1.isCancelled)
         
-        XCTAssertFalse(operation2.ready)
-        XCTAssertFalse(operation2.executing)
-        XCTAssertTrue(operation2.finished)
-        XCTAssertFalse(operation2.cancelled)
+        XCTAssertFalse(operation2.isReady)
+        XCTAssertFalse(operation2.isExecuting)
+        XCTAssertTrue(operation2.isFinished)
+        XCTAssertFalse(operation2.isCancelled)
     }
     
 }

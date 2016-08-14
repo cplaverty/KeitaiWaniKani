@@ -10,28 +10,28 @@ import Foundation
 public struct StudyQueue: Equatable {
     public let lessonsAvailable: Int
     public let reviewsAvailable: Int
-    private let actualNextReviewDate: NSDate?
-    public var nextReviewDate: NSDate? {
+    private let actualNextReviewDate: Date?
+    public var nextReviewDate: Date? {
         guard let actualNextReviewDate = actualNextReviewDate else { return nil }
         
-        // Provide a consistent NSDate when actualNextReviewDate is "Now"
+        // Provide a consistent Date when actualNextReviewDate is "Now"
         if reviewsAvailable > 0 && actualNextReviewDate <= lastUpdateTimestamp {
-            return NSDate.distantPast()
+            return Date.distantPast
         } else {
             return actualNextReviewDate
         }
     }
     public let reviewsAvailableNextHour: Int
     public let reviewsAvailableNextDay: Int
-    public let lastUpdateTimestamp: NSDate
+    public let lastUpdateTimestamp: Date
     
-    public init(lessonsAvailable: Int, reviewsAvailable: Int, nextReviewDate: NSDate? = nil, reviewsAvailableNextHour: Int, reviewsAvailableNextDay: Int, lastUpdateTimestamp: NSDate? = nil) {
+    public init(lessonsAvailable: Int, reviewsAvailable: Int, nextReviewDate: Date? = nil, reviewsAvailableNextHour: Int, reviewsAvailableNextDay: Int, lastUpdateTimestamp: Date? = nil) {
         self.lessonsAvailable = lessonsAvailable
         self.reviewsAvailable = reviewsAvailable
         self.actualNextReviewDate = nextReviewDate
         self.reviewsAvailableNextHour = reviewsAvailableNextHour
         self.reviewsAvailableNextDay = reviewsAvailableNextDay
-        self.lastUpdateTimestamp = lastUpdateTimestamp ?? NSDate()
+        self.lastUpdateTimestamp = lastUpdateTimestamp ?? Date()
     }
 }
 
@@ -44,36 +44,36 @@ public func ==(lhs: StudyQueue, rhs: StudyQueue) -> Bool {
 }
 
 public extension StudyQueue {
-    public func formattedNextReviewDate(referenceDate: NSDate = NSDate()) -> String? {
+    public func formattedNextReviewDate(_ referenceDate: Date = Date()) -> String? {
         guard let nextReviewDate = self.nextReviewDate else {
             return nil
         }
         
-        let calendar = NSCalendar.autoupdatingCurrentCalendar()
-        let formatter = NSDateFormatter()
+        let calendar = Calendar.autoupdatingCurrent
+        let formatter = DateFormatter()
         formatter.doesRelativeDateFormatting = true
-        formatter.dateStyle = calendar.isDate(referenceDate, inSameDayAsDate: nextReviewDate) ? .NoStyle : .MediumStyle
-        formatter.timeStyle = .ShortStyle
+        formatter.dateStyle = calendar.isDate(referenceDate, inSameDayAs: nextReviewDate) ? .none : .medium
+        formatter.timeStyle = .short
         
-        return formatter.stringFromDate(nextReviewDate)
+        return formatter.string(from: nextReviewDate)
     }
     
-    public static let timeToNextReviewFormatter: NSDateComponentsFormatter = {
-        let formatter = NSDateComponentsFormatter()
-        formatter.allowedUnits = [.Year, .Month, .WeekOfMonth, .Day, .Hour, .Minute]
+    public static let timeToNextReviewFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute]
         formatter.maximumUnitCount = 2
-        formatter.unitsStyle = .Abbreviated
-        formatter.zeroFormattingBehavior = [.DropLeading, .DropTrailing]
+        formatter.unitsStyle = .abbreviated
+        formatter.zeroFormattingBehavior = [.dropLeading, .dropTrailing]
         formatter.includesTimeRemainingPhrase = true
         
         return formatter
     }()
     
-    public func formattedTimeToNextReview(formatter: NSDateComponentsFormatter = timeToNextReviewFormatter) -> FormattedTimeInterval {
+    public func formattedTimeToNextReview(_ formatter: DateComponentsFormatter = timeToNextReviewFormatter) -> FormattedTimeInterval {
         guard reviewsAvailable == 0 else {
-            return .Now
+            return .now
         }
         
-        return Formatter.formatTimeIntervalToDate(self.nextReviewDate, formatter: formatter)
+        return Formatter.formatTimeIntervalSinceNow(from: self.nextReviewDate, formatter: formatter)
     }
 }

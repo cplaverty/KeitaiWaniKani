@@ -11,7 +11,7 @@ import FMDB
 import OperationKit
 import WaniKaniKit
 
-final class ReviewTimeNotificationOperation: Operation {
+final class ReviewTimeNotificationOperation: OperationKit.Operation {
     
     private let databaseQueue: FMDatabaseQueue
     
@@ -20,8 +20,8 @@ final class ReviewTimeNotificationOperation: Operation {
         
         super.init()
         
-        let requestedNotificationSettings = UIUserNotificationSettings(forTypes: [.Sound, .Alert], categories: nil)
-        let reviewTimeNotificationCondition = UserNotificationCondition(settings: requestedNotificationSettings, application: UIApplication.sharedApplication())
+        let requestedNotificationSettings = UIUserNotificationSettings(types: [.sound, .alert], categories: nil)
+        let reviewTimeNotificationCondition = UserNotificationCondition(settings: requestedNotificationSettings, application: UIApplication.shared)
         addCondition(reviewTimeNotificationCondition)
     }
     
@@ -29,22 +29,22 @@ final class ReviewTimeNotificationOperation: Operation {
         DDLogInfo("Fetching study queue for next review time local notification scheduling")
         
         do {
-            guard let studyQueue = try databaseQueue.withDatabase({ try StudyQueue.coder.loadFromDatabase($0) }) else {
+            guard let studyQueue = try databaseQueue.withDatabase({ try StudyQueue.coder.load(from: $0) }) else {
                 DDLogWarn("Failed to schedule review notification: no entries in study queue table")
                 finish()
                 return
             }
             
-            guard let nextReviewDate = studyQueue.nextReviewDate where nextReviewDate.timeIntervalSinceNow > 0 else {
+            guard let nextReviewDate = studyQueue.nextReviewDate, nextReviewDate.timeIntervalSinceNow > 0 else {
                 DDLogInfo("Not setting local notification: next review date not set or in the past (\(studyQueue.nextReviewDate))")
                 finish()
                 return
             }
             
-            let application = UIApplication.sharedApplication()
+            let application = UIApplication.shared
             if let scheduledLocalNotifications = application.scheduledLocalNotifications {
                 for notification in scheduledLocalNotifications {
-                    if let userInfo = notification.userInfo where userInfo["source"] as? String == "\(self.dynamicType)" {
+                    if let userInfo = notification.userInfo, userInfo["source"] as? String == "\(self.dynamicType)" {
                         DDLogDebug("Cancelling existing local notification \(notification)")
                         application.cancelLocalNotification(notification)
                     }

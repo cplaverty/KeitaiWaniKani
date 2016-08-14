@@ -12,12 +12,12 @@ class StudyQueueTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
-    private static let timeToNextReviewFormatter: NSDateComponentsFormatter = {
-        let formatter = NSDateComponentsFormatter()
-        formatter.allowedUnits = [.Year, .Month, .WeekOfMonth, .Day, .Hour, .Minute]
+    private static let timeToNextReviewFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute]
         formatter.maximumUnitCount = 1
-        formatter.unitsStyle = .Abbreviated
-        formatter.zeroFormattingBehavior = [.DropLeading, .DropTrailing]
+        formatter.unitsStyle = .abbreviated
+        formatter.zeroFormattingBehavior = [.dropLeading, .dropTrailing]
 
         return formatter
         }()
@@ -45,24 +45,24 @@ class StudyQueueTableViewCell: UITableViewCell {
         }
         
         switch studyQueue.formattedTimeToNextReview(self.dynamicType.timeToNextReviewFormatter) {
-        case .None:
+        case .none:
             timeToNextReviewLabel?.text = "–"
-        case .Now:
+        case .now:
             timeToNextReviewLabel?.text = "Now"
-        case .FormattedString(let formattedInterval):
+        case .formattedString(let formattedInterval):
             timeToNextReviewLabel?.text = formattedInterval
-        case .UnformattedInterval(let secondsUntilNextReview):
-            timeToNextReviewLabel?.text = "\(NSNumberFormatter.localizedStringFromNumber(secondsUntilNextReview, numberStyle: .DecimalStyle))s"
+        case .unformattedInterval(let secondsUntilNextReview):
+            timeToNextReviewLabel?.text = "\(NumberFormatter.localizedString(from: secondsUntilNextReview, number: .decimal))s"
         }
         
         if studyQueue.reviewsAvailable > 0 {
             associatedNameLabel?.text = "Reviews"
-            associatedValueLabel?.text = NSNumberFormatter.localizedStringFromNumber(studyQueue.reviewsAvailable, numberStyle: .DecimalStyle)
+            associatedValueLabel?.text = NumberFormatter.localizedString(from: studyQueue.reviewsAvailable, number: .decimal)
             return
         }
         
         associatedNameLabel?.text = "Next Day"
-        associatedValueLabel?.text = NSNumberFormatter.localizedStringFromNumber(studyQueue.reviewsAvailableNextDay, numberStyle: .DecimalStyle)
+        associatedValueLabel?.text = NumberFormatter.localizedString(from: studyQueue.reviewsAvailableNextDay, number: .decimal)
         return
     }
     

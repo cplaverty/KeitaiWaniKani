@@ -15,7 +15,7 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     
     override func createWebView() -> UIWebView {
         let webView = super.createWebView()
-        webView.dataDetectorTypes = .None
+        webView.dataDetectorTypes = UIDataDetectorTypes()
         webView.keyboardDisplayRequiresUserAction = false
         if #available(iOS 9.0, *) {
             webView.allowsLinkPreview = false
@@ -29,29 +29,29 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     // MARK: - Initialisers
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - UIWebViewDelegate
     
-    override func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        guard super.webView(webView, shouldStartLoadWithRequest: request, navigationType: navigationType) else {
+    override func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        guard super.webView(webView, shouldStartLoadWith: request, navigationType: navigationType) else {
             return false
         }
         
-        guard let URL = request.URL
-            where URL.path != WaniKaniURLs.reviewHome.path && URL.path != WaniKaniURLs.reviewSession.path &&
-                URL.path != WaniKaniURLs.lessonHome.path && URL.path != WaniKaniURLs.lessonSession.path else {
+        guard let url = request.url,
+            url.path != WaniKaniURLs.reviewHome.path && url.path != WaniKaniURLs.reviewSession.path &&
+                url.path != WaniKaniURLs.lessonHome.path && url.path != WaniKaniURLs.lessonSession.path else {
                     return true
         }
         
-        guard let referer = request.valueForHTTPHeaderField("Referer"),
-            let refererURL = NSURL(string: referer)
-            where (refererURL == WaniKaniURLs.reviewSession || refererURL == WaniKaniURLs.lessonSession) && navigationType == .LinkClicked else {
+        guard let referer = request.value(forHTTPHeaderField: "Referer"),
+            let refererURL = Foundation.URL(string: referer),
+            (refererURL == WaniKaniURLs.reviewSession || refererURL == WaniKaniURLs.lessonSession) && navigationType == .linkClicked else {
                 return true
         }
         
-        let newVC = self.dynamicType.init(URL: URL)
+        let newVC = self.dynamicType.init(url: url)
         newVC.delegate = self
         self.navigationController?.pushViewController(newVC, animated: true)
         
@@ -63,23 +63,23 @@ class WaniKaniReviewPageWebViewController: WebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         webView?.removeInputAccessoryView()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardDidShow(_:)), name: UIKeyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showBrowserInterface(webView?.request?.URL != WaniKaniURLs.lessonSession && webView?.request?.URL != WaniKaniURLs.reviewSession, animated: true)
+        showBrowserInterface(webView?.request?.url != WaniKaniURLs.lessonSession && webView?.request?.url != WaniKaniURLs.reviewSession, animated: true)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         ApplicationSettings.forceRefresh = true
     }
     
     // MARK: - Update UI
     
-    func keyboardDidShow(notification: NSNotification) {
-        guard let webView = self.webView, let URL = webView.request?.URL where URL == WaniKaniURLs.lessonSession || URL == WaniKaniURLs.reviewSession else { return }
+    func keyboardDidShow(_ notification: Notification) {
+        guard let webView = self.webView, let URL = webView.request?.url, URL == WaniKaniURLs.lessonSession || URL == WaniKaniURLs.reviewSession else { return }
         
         showBrowserInterface(false, animated: false)
         webView.scrollToTop(false)

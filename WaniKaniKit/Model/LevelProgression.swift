@@ -12,7 +12,7 @@ public struct LevelProgression: Equatable {
     public let radicalsTotal: Int
     public let kanjiProgress: Int
     public let kanjiTotal: Int
-    public let lastUpdateTimestamp: NSDate
+    public let lastUpdateTimestamp: Date
     
     public var radicalsFractionComplete: Double {
         return Double(radicalsProgress) / Double(radicalsTotal)
@@ -22,12 +22,12 @@ public struct LevelProgression: Equatable {
         return Double(kanjiProgress) / Double(kanjiTotal)
     }
     
-    public init(radicalsProgress: Int, radicalsTotal: Int, kanjiProgress: Int, kanjiTotal: Int, lastUpdateTimestamp: NSDate? = nil) {
+    public init(radicalsProgress: Int, radicalsTotal: Int, kanjiProgress: Int, kanjiTotal: Int, lastUpdateTimestamp: Date? = nil) {
         self.radicalsProgress = radicalsProgress
         self.radicalsTotal = radicalsTotal
         self.kanjiProgress = kanjiProgress
         self.kanjiTotal = kanjiTotal
-        self.lastUpdateTimestamp = lastUpdateTimestamp ?? NSDate()
+        self.lastUpdateTimestamp = lastUpdateTimestamp ?? Date()
     }
 }
 

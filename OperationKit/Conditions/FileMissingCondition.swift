@@ -7,30 +7,30 @@
 
 import Foundation
 
-public enum FileMissingConditionError: ErrorType {
-    case FileExists(NSURL)
+public enum FileMissingConditionError: Error {
+    case fileExists(URL)
 }
 
 public struct FileMissingCondition: OperationCondition {
     public static let isMutuallyExclusive = false
     
-    public let fileURL: NSURL
+    public let url: URL
     
-    public init(fileURL: NSURL) {
-        assert(fileURL.fileURL, "Destination URL must be a file path")
-        self.fileURL = fileURL
+    public init(url: URL) {
+        assert(url.isFileURL, "Destination URL must be a file path")
+        self.url = url
     }
     
-    public func dependencyForOperation(operation: Operation) -> NSOperation? {
+    public func dependency(forOperation operation: Operation) -> Foundation.Operation? {
         return nil
     }
     
     /// Evaluate the condition, to see if it has been satisfied or not.
-    public func evaluateForOperation(operation: Operation, completion: OperationConditionResult -> Void) {
-        if NSFileManager.defaultManager().fileExistsAtPath(fileURL.path!) {
-            completion(.Failed(FileMissingConditionError.FileExists(fileURL)))
+    public func evaluate(forOperation operation: Operation, completion: (OperationConditionResult) -> Void) {
+        if FileManager.default.fileExists(atPath: url.path) {
+            completion(.failed(FileMissingConditionError.fileExists(url)))
         } else {
-            completion(.Satisfied)
+            completion(.satisfied)
         }
     }
 

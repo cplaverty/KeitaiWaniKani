@@ -8,8 +8,8 @@ This file shows an example of implementing the OperationCondition protocol.
 
 import Foundation
 
-public enum NoCancelledDependenciesError: ErrorType {
-    case CancelledDependencies([NSOperation])
+public enum NoCancelledDependenciesError: Error {
+    case cancelledDependencies([Foundation.Operation])
 }
 
 /**
@@ -24,22 +24,22 @@ public struct NoCancelledDependencies: OperationCondition {
         // No op.
     }
     
-    public func dependencyForOperation(operation: Operation) -> NSOperation? {
+    public func dependency(forOperation operation: Operation) -> Foundation.Operation? {
         return nil
     }
     
-    public func evaluateForOperation(operation: Operation, completion: OperationConditionResult -> Void) {
+    public func evaluate(forOperation operation: Operation, completion: (OperationConditionResult) -> Void) {
         // Verify that all of the dependencies executed.
-        let cancelled = operation.dependencies.filter { $0.cancelled }
+        let cancelled = operation.dependencies.filter { $0.isCancelled }
 
         if !cancelled.isEmpty {
             // At least one dependency was cancelled; the condition was not satisfied.
-            let error = NoCancelledDependenciesError.CancelledDependencies(cancelled)
+            let error = NoCancelledDependenciesError.cancelledDependencies(cancelled)
             
-            completion(.Failed(error))
+            completion(.failed(error))
         }
         else {
-            completion(.Satisfied)
+            completion(.satisfied)
         }
     }
 }
