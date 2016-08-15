@@ -38,7 +38,7 @@ class GetAPIKeyViewController: UIViewController, UITextFieldDelegate {
         ApplicationSettings.apiKey = apiKey
         
         DDLogDebug("Checking validity of API key \(apiKey)")
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             let finishHandler = BlockObserver(finishHandler: { _, operationErrors in
                 let errors = operationErrors.filter { error in
                     if case UserNotificationConditionError.settingsMismatch = error {

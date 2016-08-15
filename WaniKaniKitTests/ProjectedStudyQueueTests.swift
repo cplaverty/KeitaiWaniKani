@@ -22,7 +22,7 @@ class ProjectedStudyQueueTests: DatabaseTestCase, ResourceHTTPStubs {
         let operationQueue = OperationQueue()
         
         self.databaseQueue.inDatabase { database in
-            let studyQueue = StudyQueue(lessonsAvailable: 38, reviewsAvailable: 0, nextReviewDate: NSDate(timeIntervalSince1970: 1443198600), reviewsAvailableNextHour: 19, reviewsAvailableNextDay: 42, lastUpdateTimestamp: NSDate(timeIntervalSince1970: 1443198500))
+            let studyQueue = StudyQueue(lessonsAvailable: 38, reviewsAvailable: 0, nextReviewDate: Date(timeIntervalSince1970: 1443198600), reviewsAvailableNextHour: 19, reviewsAvailableNextDay: 42, lastUpdateTimestamp: Date(timeIntervalSince1970: 1443198500))
             try! StudyQueue.coder.save(studyQueue, toDatabase: database)
         }
         
@@ -55,8 +55,8 @@ class ProjectedStudyQueueTests: DatabaseTestCase, ResourceHTTPStubs {
     }
     
     func testUnprojected() {
-        let referenceDate = NSDate(timeIntervalSince1970: 1443198500)
-        let expected = StudyQueue(lessonsAvailable: 38, reviewsAvailable: 0, nextReviewDate: NSDate(timeIntervalSince1970: 1443198600), reviewsAvailableNextHour: 19, reviewsAvailableNextDay: 42)
+        let referenceDate = Date(timeIntervalSince1970: 1443198500)
+        let expected = StudyQueue(lessonsAvailable: 38, reviewsAvailable: 0, nextReviewDate: Date(timeIntervalSince1970: 1443198600), reviewsAvailableNextHour: 19, reviewsAvailableNextDay: 42)
         
         self.measureBlock() {
             self.databaseQueue.inDatabase { database in
@@ -67,7 +67,7 @@ class ProjectedStudyQueueTests: DatabaseTestCase, ResourceHTTPStubs {
     }
     
     func testProjectedImmediatelyAfterNextReviewDate() {
-        let referenceDate = NSDate(timeIntervalSince1970: 1443198600)
+        let referenceDate = Date(timeIntervalSince1970: 1443198600)
         let expected = StudyQueue(lessonsAvailable: 38, reviewsAvailable: 13, nextReviewDate: referenceDate, reviewsAvailableNextHour: 6, reviewsAvailableNextDay: 29)
         
         self.measureBlock() {
@@ -79,7 +79,7 @@ class ProjectedStudyQueueTests: DatabaseTestCase, ResourceHTTPStubs {
     }
     
     func testProjectedAfterSecondBatch() {
-        let referenceDate = NSDate(timeIntervalSince1970: 1443199500)
+        let referenceDate = Date(timeIntervalSince1970: 1443199500)
         let expected = StudyQueue(lessonsAvailable: 38, reviewsAvailable: 18, nextReviewDate: referenceDate, reviewsAvailableNextHour: 1, reviewsAvailableNextDay: 27)
         
         self.measureBlock() {
@@ -91,7 +91,7 @@ class ProjectedStudyQueueTests: DatabaseTestCase, ResourceHTTPStubs {
     }
     
     func testProjectedAfterThirdBatch() {
-        let referenceDate = NSDate(timeIntervalSince1970: 1443200400)
+        let referenceDate = Date(timeIntervalSince1970: 1443200400)
         let expected = StudyQueue(lessonsAvailable: 38, reviewsAvailable: 19, nextReviewDate: referenceDate, reviewsAvailableNextHour: 0, reviewsAvailableNextDay: 34)
         
         self.measureBlock() {

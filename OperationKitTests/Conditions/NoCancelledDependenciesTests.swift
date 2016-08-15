@@ -9,18 +9,19 @@ import XCTest
 @testable import OperationKit
 
 class NoCancelledDependenciesTests: XCTestCase {
-
+    typealias Operation = OperationKit.Operation
+    
     func testWithNoCancellations() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let operation1 = StubOperation()
-        keyValueObservingExpectation(for: operation1, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let operation2 = StubOperation()
-        keyValueObservingExpectation(for: operation2, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation2.addCondition(NoCancelledDependencies())
         operation2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
@@ -28,7 +29,7 @@ class NoCancelledDependenciesTests: XCTestCase {
         operation2.addDependency(operation1)
         
         let operation3 = StubOperation()
-        keyValueObservingExpectation(for: operation3, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation3, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation3.addCondition(AlwaysSatisfiedCondition())
         operation3.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
@@ -38,9 +39,9 @@ class NoCancelledDependenciesTests: XCTestCase {
         operationQueue.addOperations([operation1, operation2, operation3], waitUntilFinished: false)
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertEqual(operation1.stateTransitions, OperationWorkflows.Finished)
-        XCTAssertEqual(operation2.stateTransitions, OperationWorkflows.Finished)
-        XCTAssertEqual(operation3.stateTransitions, OperationWorkflows.Finished)
+        XCTAssertEqual(operation1.stateTransitions, OperationWorkflows.finished)
+        XCTAssertEqual(operation2.stateTransitions, OperationWorkflows.finished)
+        XCTAssertEqual(operation3.stateTransitions, OperationWorkflows.finished)
         
         XCTAssertFalse(operation1.isCancelled)
         XCTAssertFalse(operation2.isCancelled)
@@ -48,16 +49,16 @@ class NoCancelledDependenciesTests: XCTestCase {
     }
     
     func testWithExplicitCancellationSerialDependencies() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let operation1 = StubOperation()
-        keyValueObservingExpectation(for: operation1, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let operation2 = StubOperation()
-        keyValueObservingExpectation(for: operation2, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation2.addCondition(NoCancelledDependencies())
         operation2.addObserver(BlockObserver { _, errors in
             XCTAssertFalse(errors.isEmpty, "Expected errors on operation finish")
@@ -65,7 +66,7 @@ class NoCancelledDependenciesTests: XCTestCase {
         operation2.addDependency(operation1)
         
         let operation3 = StubOperation()
-        keyValueObservingExpectation(for: operation3, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation3, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation3.addCondition(NoCancelledDependencies())
         operation3.addObserver(BlockObserver { _, errors in
             XCTAssertFalse(errors.isEmpty, "Expected errors on operation finish")
@@ -76,9 +77,9 @@ class NoCancelledDependenciesTests: XCTestCase {
         operationQueue.addOperations([operation1, operation2, operation3], waitUntilFinished: false)
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertEqual(operation1.stateTransitions, OperationWorkflows.CancelledBeforeReady)
-        XCTAssertEqual(operation2.stateTransitions, OperationWorkflows.CancelledAfterReady)
-        XCTAssertEqual(operation3.stateTransitions, OperationWorkflows.CancelledAfterReady)
+        XCTAssertEqual(operation1.stateTransitions, OperationWorkflows.cancelledBeforeReady)
+        XCTAssertEqual(operation2.stateTransitions, OperationWorkflows.cancelledAfterReady)
+        XCTAssertEqual(operation3.stateTransitions, OperationWorkflows.cancelledAfterReady)
         
         XCTAssertTrue(operation1.isCancelled)
         XCTAssertTrue(operation2.isCancelled)
@@ -86,16 +87,16 @@ class NoCancelledDependenciesTests: XCTestCase {
     }
     
     func testWithExplicitCancellationTreeDependencies() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let operation1 = StubOperation()
-        keyValueObservingExpectation(for: operation1, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let operation2 = StubOperation()
-        keyValueObservingExpectation(for: operation2, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation2.addCondition(NoCancelledDependencies())
         operation2.addObserver(BlockObserver { _, errors in
             XCTAssertFalse(errors.isEmpty, "Expected errors on operation finish")
@@ -103,7 +104,7 @@ class NoCancelledDependenciesTests: XCTestCase {
         operation2.addDependency(operation1)
         
         let operation3 = StubOperation()
-        keyValueObservingExpectation(for: operation3, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation3, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation3.addCondition(NoCancelledDependencies())
         operation3.addObserver(BlockObserver { _, errors in
             XCTAssertFalse(errors.isEmpty, "Expected errors on operation finish")
@@ -115,27 +116,27 @@ class NoCancelledDependenciesTests: XCTestCase {
         operationQueue.addOperations([operation1, operation2, operation3], waitUntilFinished: false)
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertEqual(operation1.stateTransitions, OperationWorkflows.CancelledBeforeReady)
-        XCTAssertEqual(operation2.stateTransitions, OperationWorkflows.CancelledAfterReady)
-        XCTAssertEqual(operation3.stateTransitions, OperationWorkflows.CancelledAfterReady)
+        XCTAssertEqual(operation1.stateTransitions, OperationWorkflows.cancelledBeforeReady)
+        XCTAssertEqual(operation2.stateTransitions, OperationWorkflows.cancelledAfterReady)
+        XCTAssertEqual(operation3.stateTransitions, OperationWorkflows.cancelledAfterReady)
         
         XCTAssertTrue(operation1.isCancelled)
         XCTAssertTrue(operation2.isCancelled)
         XCTAssertTrue(operation3.isCancelled)
     }
-
+    
     func testWithImplicitCancellationSerialDependencies() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let operation1 = StubOperation()
-        keyValueObservingExpectation(for: operation1, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation1.addCondition(AlwaysFailedCondition())
         operation1.addObserver(BlockObserver { _, errors in
             XCTAssertFalse(errors.isEmpty, "Expected errors on operation finish")
             })
         
         let operation2 = StubOperation()
-        keyValueObservingExpectation(for: operation2, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation2.addCondition(NoCancelledDependencies())
         operation2.addObserver(BlockObserver { _, errors in
             XCTAssertFalse(errors.isEmpty, "Expected errors on operation finish")
@@ -143,7 +144,7 @@ class NoCancelledDependenciesTests: XCTestCase {
         operation2.addDependency(operation1)
         
         let operation3 = StubOperation()
-        keyValueObservingExpectation(for: operation3, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation3, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation3.addCondition(NoCancelledDependencies())
         operation3.addObserver(BlockObserver { _, errors in
             XCTAssertFalse(errors.isEmpty, "Expected errors on operation finish")
@@ -153,9 +154,9 @@ class NoCancelledDependenciesTests: XCTestCase {
         operationQueue.addOperations([operation1, operation2, operation3], waitUntilFinished: false)
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertEqual(operation1.stateTransitions, OperationWorkflows.CancelledAfterReady)
-        XCTAssertEqual(operation2.stateTransitions, OperationWorkflows.CancelledAfterReady)
-        XCTAssertEqual(operation3.stateTransitions, OperationWorkflows.CancelledAfterReady)
+        XCTAssertEqual(operation1.stateTransitions, OperationWorkflows.cancelledAfterReady)
+        XCTAssertEqual(operation2.stateTransitions, OperationWorkflows.cancelledAfterReady)
+        XCTAssertEqual(operation3.stateTransitions, OperationWorkflows.cancelledAfterReady)
         
         XCTAssertTrue(operation1.isCancelled)
         XCTAssertTrue(operation2.isCancelled)

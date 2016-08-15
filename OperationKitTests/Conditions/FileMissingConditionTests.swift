@@ -9,15 +9,16 @@ import XCTest
 @testable import OperationKit
 
 class FileMissingConditionTests: XCTestCase {
+    typealias Operation = OperationKit.Operation
     
     func testMissingFile() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let tempDirectory = try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         let missingFile = tempDirectory.appendingPathComponent("jfjlkjijofsjaklfjskfjsiofjsfjalk")
         
         let operation = StubOperation()
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addCondition(FileMissingCondition(url: missingFile))
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
@@ -26,13 +27,13 @@ class FileMissingConditionTests: XCTestCase {
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.Finished)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.finished)
         
         XCTAssertFalse(operation.isCancelled)
     }
     
     func testExistingFile() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let fm = FileManager.default
         let tempDirectory = try! fm.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -41,7 +42,7 @@ class FileMissingConditionTests: XCTestCase {
         defer { try! fm.removeItem(atPath: nonMissingFile.path) }
         
         let operation = StubOperation()
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addCondition(FileMissingCondition(url: nonMissingFile))
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertFalse(errors.isEmpty, "Expected errors on operation finish")
@@ -50,7 +51,7 @@ class FileMissingConditionTests: XCTestCase {
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.CancelledAfterReady)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.cancelledAfterReady)
         
         XCTAssertFalse(operation.wasRun)
         XCTAssertTrue(operation.isCancelled)

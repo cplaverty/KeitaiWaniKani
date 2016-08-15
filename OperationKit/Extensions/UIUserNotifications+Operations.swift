@@ -32,10 +32,10 @@ extension UIUserNotificationSettings {
         let mergedTypes = types.union(settings.types)
         
         let myCategories = categories ?? []
-        var existingCategoriesByIdentifier = Dictionary(sequence: myCategories) { $0.identifier }
+        var existingCategoriesByIdentifier = Dictionary(myCategories) { $0.identifier }
         
         let newCategories = settings.categories ?? []
-        let newCategoriesByIdentifier = Dictionary(sequence: newCategories) { $0.identifier }
+        let newCategoriesByIdentifier = Dictionary(newCategories) { $0.identifier }
         
         for (newIdentifier, newCategory) in newCategoriesByIdentifier {
             existingCategoriesByIdentifier[newIdentifier] = newCategory

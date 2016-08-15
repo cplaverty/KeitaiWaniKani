@@ -52,7 +52,7 @@ public class OperationQueue: Foundation.OperationQueue {
             
             // Extract any dependencies needed by this operation.
             let dependencies = op.conditions.flatMap {
-                $0.dependency(forOperation: op)
+                $0.dependency(for: op)
             }
                 
             for dependency in dependencies {

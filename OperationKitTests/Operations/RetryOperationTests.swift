@@ -9,9 +9,10 @@ import XCTest
 @testable import OperationKit
 
 class RetryOperationTests: XCTestCase {
+    typealias Operation = OperationKit.Operation
     
     func testRunSuccessNoRetry() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         var operationsCreated: [StubOperation] = []
         let createOperation: () -> StubOperation = {
@@ -23,7 +24,7 @@ class RetryOperationTests: XCTestCase {
             XCTFail("Did not expect shouldRetry closure to be called: operation was successful")
             return true
         }
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver(
             produceHandler: { parent, child in
                 XCTFail("Expected RetryOperation not to produce any children, but it produced \(child)")
@@ -41,7 +42,7 @@ class RetryOperationTests: XCTestCase {
     }
     
     func testRunFailureRetry() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         var operationsCreated: [StubOperation] = []
         let createOperation: () -> StubOperation = {
@@ -52,7 +53,7 @@ class RetryOperationTests: XCTestCase {
         let operation = RetryOperation<StubOperation>(maximumRetryCount: 2, createOperation: createOperation()) { _, _ -> Bool in
             return true
         }
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver(
             finishHandler: { _, errors in
                 XCTAssertFalse(errors.isEmpty, "Expected errors on operation finish")
@@ -67,7 +68,7 @@ class RetryOperationTests: XCTestCase {
     }
     
     func testCancelBeforeStart() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         var operationsCreated: [StubOperation] = []
         let createOperation: () -> StubOperation = {
@@ -79,7 +80,7 @@ class RetryOperationTests: XCTestCase {
             XCTFail("Did not expect shouldRetry closure to be called: operation was successful")
             return true
         }
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver(
             produceHandler: { parent, child in
                 XCTFail("Expected RetryOperation not to produce any children, but it produced \(child)")
@@ -107,7 +108,7 @@ class RetryOperationTests: XCTestCase {
     }
     
     func testCancelAfterStart() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         var operationsCreated: [StubOperation] = []
         let childOperation1 = StubOperation(immediatelyFinish: true, shouldFail: true)
@@ -122,11 +123,11 @@ class RetryOperationTests: XCTestCase {
         let operation = RetryOperation<StubOperation>(maximumRetryCount: 2, createOperation: createOperation()) { _, _ -> Bool in
             return true
         }
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver(
             startHandler: { _ in
                 let when = DispatchTime.now() + 0.5
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).asyncAfter(deadline: when) {
+                DispatchQueue.global(qos: .default).asyncAfter(deadline: when) {
                     print("Cancelling operation")
                     operation.cancel()
                 }
@@ -139,9 +140,9 @@ class RetryOperationTests: XCTestCase {
         
         XCTAssertEqual(operationsCreated.count, 2)
         
-        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.Finished)
-        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.Finished)
-        XCTAssertEqual(childOperation3.stateTransitions, OperationWorkflows.New)
+        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.finished)
+        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.finished)
+        XCTAssertEqual(childOperation3.stateTransitions, OperationWorkflows.new)
         
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)

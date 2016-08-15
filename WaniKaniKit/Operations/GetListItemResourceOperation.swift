@@ -107,7 +107,7 @@ public class GetListItemResourceOperation<Coder: ResourceHandler & JSONDecoder &
                 downloadOperation.addCondition(NoCancelledDependencies())
             }
             
-            addOperation(downloadOperation)
+            add(downloadOperation)
             downloadOperations.append(downloadOperation)
         }
         
@@ -115,7 +115,7 @@ public class GetListItemResourceOperation<Coder: ResourceHandler & JSONDecoder &
             self.downloadOperations = downloadOperations
         }
         
-        addOperation(parseOperation)
+        add(parseOperation)
         
         // This must be done last as it starts the internal queue
         super.execute()

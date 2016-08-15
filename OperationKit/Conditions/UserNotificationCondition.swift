@@ -30,7 +30,7 @@ public struct UserNotificationCondition: OperationCondition {
     }
     
     public static let isMutuallyExclusive = false
-    public static var enabled = true
+    public static var isEnabled = true
     
     public let settings: UIUserNotificationSettings
     public let application: UIApplication
@@ -57,12 +57,12 @@ public struct UserNotificationCondition: OperationCondition {
         self.behavior = behavior
     }
     
-    public func dependency(forOperation operation: Operation) -> Foundation.Operation? {
-        return self.dynamicType.enabled ? UserNotificationPermissionOperation(settings: settings, application: application, behavior: behavior) : nil
+    public func dependency(for operation: Operation) -> Foundation.Operation? {
+        return self.dynamicType.isEnabled ? UserNotificationPermissionOperation(settings: settings, application: application, behavior: behavior) : nil
     }
     
-    public func evaluate(forOperation operation: Operation, completion: (OperationConditionResult) -> Void) {
-        guard self.dynamicType.enabled else {
+    public func evaluate(for operation: Operation, completion: (OperationConditionResult) -> Void) {
+        guard self.dynamicType.isEnabled else {
             completion(.failed(UserNotificationConditionError.settingsMismatch(currentSettings: nil, desiredSettings: settings)))
             return
         }

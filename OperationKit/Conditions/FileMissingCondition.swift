@@ -21,12 +21,12 @@ public struct FileMissingCondition: OperationCondition {
         self.url = url
     }
     
-    public func dependency(forOperation operation: Operation) -> Foundation.Operation? {
+    public func dependency(for operation: Operation) -> Foundation.Operation? {
         return nil
     }
     
     /// Evaluate the condition, to see if it has been satisfied or not.
-    public func evaluate(forOperation operation: Operation, completion: (OperationConditionResult) -> Void) {
+    public func evaluate(for operation: Operation, completion: (OperationConditionResult) -> Void) {
         if FileManager.default.fileExists(atPath: url.path) {
             completion(.failed(FileMissingConditionError.fileExists(url)))
         } else {

@@ -9,14 +9,15 @@ import XCTest
 @testable import OperationKit
 
 struct OperationWorkflows {
-    static let New: [OperationKit.Operation.State] = [.initialized]
-    static let Pending: [OperationKit.Operation.State] = [.initialized, .pending]
-    static let Ready: [OperationKit.Operation.State] = [.initialized, .pending, .evaluatingConditions, .ready]
-    static let Executing: [OperationKit.Operation.State] = [.initialized, .pending, .evaluatingConditions, .ready, .executing]
-    static let CancelledBeforeReady: [OperationKit.Operation.State] = [.initialized, .pending, .finishing, .finished]
-    static let CancelledByCondition: [OperationKit.Operation.State] = [.initialized, .pending, .evaluatingConditions, .finishing, .finished]
-    static let CancelledAfterReady: [OperationKit.Operation.State] = [.initialized, .pending, .evaluatingConditions, .ready, .finishing, .finished]
-    static let Finished: [OperationKit.Operation.State] = [.initialized, .pending, .evaluatingConditions, .ready, .executing, .finishing, .finished]
+    typealias Operation = OperationKit.Operation
+    static let new: [Operation.State] = [.initialized]
+    static let pending: [Operation.State] = [.initialized, .pending]
+    static let ready: [Operation.State] = [.initialized, .pending, .evaluatingConditions, .ready]
+    static let executing: [Operation.State] = [.initialized, .pending, .evaluatingConditions, .ready, .executing]
+    static let cancelledBeforeReady: [Operation.State] = [.initialized, .pending, .finishing, .finished]
+    static let cancelledByCondition: [Operation.State] = [.initialized, .pending, .evaluatingConditions, .finishing, .finished]
+    static let cancelledAfterReady: [Operation.State] = [.initialized, .pending, .evaluatingConditions, .ready, .finishing, .finished]
+    static let finished: [Operation.State] = [.initialized, .pending, .evaluatingConditions, .ready, .executing, .finishing, .finished]
 }
 
 enum StubOperationError: Error {
@@ -27,11 +28,11 @@ class StubOperation: OperationKit.Operation {
     private(set) var wasRun: Bool = false
     private(set) var stateTransitions: [OperationKit.Operation.State] = []
     
-    private let immediatelyFinish: Bool
+    private let shouldImmediatelyFinish: Bool
     private let shouldFail: Bool
     
     init(immediatelyFinish: Bool = true, shouldFail: Bool = false) {
-        self.immediatelyFinish = immediatelyFinish
+        self.shouldImmediatelyFinish = immediatelyFinish
         self.shouldFail = shouldFail
         
         super.init()
@@ -47,21 +48,21 @@ class StubOperation: OperationKit.Operation {
     
     override func execute() {
         wasRun = true
-        if immediatelyFinish {
+        if shouldImmediatelyFinish {
             markAsFinished()
         }
     }
     
     override func cancel() {
         super.cancel()
-        if !immediatelyFinish {
+        if !shouldImmediatelyFinish {
             markAsFinished()
         }
     }
     
     private func markAsFinished() {
         if shouldFail {
-            finishWithError(StubOperationError.error)
+            finish(withError: StubOperationError.error)
         } else {
             finish()
         }
@@ -71,11 +72,7 @@ class StubOperation: OperationKit.Operation {
 class StubGroupOperation: GroupOperation {
     private(set) var stateTransitions: [OperationKit.Operation.State] = []
     
-    convenience init(operations: Foundation.Operation...) {
-        self.init(operations: operations)
-    }
-    
-    init(immediatelyFinish: Bool = true, operations: [Foundation.Operation]) {
+    init(operations: Foundation.Operation...) {
         super.init(operations: operations)
         stateTransitions.append(state)
     }
@@ -89,7 +86,7 @@ class StubGroupOperation: GroupOperation {
 
 extension XCTest {
     
-    func createOperationQueue() -> OperationKit.OperationQueue {
+    func makeOperationQueue() -> OperationKit.OperationQueue {
         let operationQueue = OperationKit.OperationQueue()
         operationQueue.maxConcurrentOperationCount = 1
         return operationQueue

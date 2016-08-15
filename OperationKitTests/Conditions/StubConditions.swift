@@ -8,18 +8,21 @@
 import Foundation
 @testable import OperationKit
 
+typealias Operation = OperationKit.Operation
+
 struct AlwaysSatisfiedCondition: OperationCondition {
+
     static let isMutuallyExclusive = false
     
     init() {
         // No op.
     }
     
-    func dependency(forOperation operation: OperationKit.Operation) -> Foundation.Operation? {
+    func dependency(for operation: Operation) -> Foundation.Operation? {
         return nil
     }
     
-    func evaluate(forOperation operation: OperationKit.Operation, completion: (OperationConditionResult) -> Void) {
+    func evaluate(for operation: Operation, completion: (OperationConditionResult) -> Void) {
         completion(.satisfied)
     }
 }
@@ -35,11 +38,11 @@ struct AlwaysFailedCondition: OperationCondition {
         // No op.
     }
     
-    func dependency(forOperation operation: OperationKit.Operation) -> Foundation.Operation? {
+    func dependency(for operation: Operation) -> Foundation.Operation? {
         return nil
     }
     
-    func evaluate(forOperation operation: OperationKit.Operation, completion: (OperationConditionResult) -> Void) {
+    func evaluate(for operation: Operation, completion: (OperationConditionResult) -> Void) {
         completion(.failed(AlwaysFailedConditionError.error))
     }
 }

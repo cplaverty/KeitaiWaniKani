@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 ApplicationSettings.apiKeyVerified = false
             }
         
-            UserNotificationCondition.enabled = false
+            UserNotificationCondition.isEnabled = false
         }
         
         UINavigationBar.appearance().tintColor = ApplicationSettings.globalTintColor()

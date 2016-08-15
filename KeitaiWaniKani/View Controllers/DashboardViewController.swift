@@ -576,7 +576,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     }
     
     func fetchStudyQueueFromNetworkInBackground(forced: Bool, afterDelay delay: TimeInterval? = nil) {
-        DispatchQueue.global(qos: forced ? DispatchQoS.QoSClass.userInitiated : DispatchQoS.QoSClass.utility).async { [weak self] in
+        DispatchQueue.global(qos: forced ? .userInitiated : .utility).async { [weak self] in
             self?.fetchStudyQueueFromNetwork(forced: forced, afterDelay: delay)
         }
     }
@@ -626,7 +626,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         
         // Database could have been updated from a background fetch.  Refresh it now in case.
         DDLogDebug("Enqueuing fetch of latest StudyQueue from database")
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             self.fetchStudyQueueFromDatabase()
         }
     }

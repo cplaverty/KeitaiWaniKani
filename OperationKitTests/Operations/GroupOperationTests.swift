@@ -9,43 +9,44 @@ import XCTest
 @testable import OperationKit
 
 class GroupOperationTests: XCTestCase {
+    typealias Operation = OperationKit.Operation
     
     func testRunNoConditions() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let childOperation1 = StubOperation()
-        keyValueObservingExpectation(for: childOperation1, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: childOperation1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         childOperation1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation2 = StubOperation()
-        keyValueObservingExpectation(for: childOperation2, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: childOperation2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         childOperation2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation2.addDependency(childOperation1)
         
         let operation = StubGroupOperation(operations: childOperation1, childOperation2)
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         Thread.sleep(forTimeInterval: 0.5)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.New)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.new)
         XCTAssertEqual(operation.internalQueue.operationCount, 3)
-        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.Pending)
-        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.Pending)
+        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.pending)
+        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.pending)
         
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.Finished)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.finished)
         XCTAssertEqual(operation.internalQueue.operationCount, 0)
-        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.Finished)
-        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.Finished)
+        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.finished)
+        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.finished)
         
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)
@@ -66,50 +67,50 @@ class GroupOperationTests: XCTestCase {
     }
     
     func testCancelBeforeStart() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let childOperation1 = StubOperation()
-        keyValueObservingExpectation(for: childOperation1, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: childOperation1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         childOperation1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation2 = StubOperation()
-        keyValueObservingExpectation(for: childOperation2, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: childOperation2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         childOperation2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation2.addDependency(childOperation1)
         
         let operation = StubGroupOperation(operations: childOperation1, childOperation2)
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         Thread.sleep(forTimeInterval: 0.5)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.New)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.new)
         XCTAssertEqual(operation.internalQueue.operationCount, 3)
-        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.Pending)
-        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.Pending)
+        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.pending)
+        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.pending)
         
         operation.cancel()
         
         Thread.sleep(forTimeInterval: 0.5)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.New)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.new)
         XCTAssertEqual(operation.internalQueue.operationCount, 0)
-        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.CancelledBeforeReady)
-        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.CancelledBeforeReady)
+        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.cancelledBeforeReady)
+        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.cancelledBeforeReady)
         
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.CancelledBeforeReady)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.cancelledBeforeReady)
         XCTAssertEqual(operation.internalQueue.operationCount, 0)
-        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.CancelledBeforeReady)
-        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.CancelledBeforeReady)
+        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.cancelledBeforeReady)
+        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.cancelledBeforeReady)
         
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)
@@ -130,39 +131,39 @@ class GroupOperationTests: XCTestCase {
     }
     
     func testCancelAfterStart() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let childOperation1 = StubOperation()
-        keyValueObservingExpectation(for: childOperation1, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: childOperation1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         childOperation1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation2 = StubOperation(immediatelyFinish: false)
-        keyValueObservingExpectation(for: childOperation2, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: childOperation2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         childOperation2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation2.addDependency(childOperation1)
         
         let childOperation3 = StubOperation()
-        keyValueObservingExpectation(for: childOperation3, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: childOperation3, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         childOperation3.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation3.addDependency(childOperation2)
         
         let operation = StubGroupOperation(operations: childOperation1, childOperation2, childOperation3)
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver(
             startHandler: { _ in
                 let when = DispatchTime.now() + 0.5
                 DispatchQueue.global(qos: .default).asyncAfter(deadline: when) {
-                    XCTAssertEqual(operation.stateTransitions, OperationWorkflows.Executing)
+                    XCTAssertEqual(operation.stateTransitions, OperationWorkflows.executing)
                     XCTAssertEqual(operation.internalQueue.operationCount, 3)
-                    XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.Finished)
-                    XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.Executing)
-                    XCTAssertEqual(childOperation3.stateTransitions, OperationWorkflows.Pending)
+                    XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.finished)
+                    XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.executing)
+                    XCTAssertEqual(childOperation3.stateTransitions, OperationWorkflows.pending)
                     
                     XCTAssertFalse(operation.isReady)
                     XCTAssertTrue(operation.isExecuting)
@@ -197,21 +198,21 @@ class GroupOperationTests: XCTestCase {
         
         Thread.sleep(forTimeInterval: 0.5)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.New)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.new)
         XCTAssertEqual(operation.internalQueue.operationCount, 4)
-        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.Pending)
-        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.Pending)
+        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.pending)
+        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.pending)
         
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: 5, handler: nil)
         
         Thread.sleep(forTimeInterval: 0.5)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.Finished)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.finished)
         XCTAssertEqual(operation.internalQueue.operationCount, 0)
-        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.Finished)
-        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.Finished)
-        XCTAssertEqual(childOperation3.stateTransitions, OperationWorkflows.CancelledAfterReady)
+        XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.finished)
+        XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.finished)
+        XCTAssertEqual(childOperation3.stateTransitions, OperationWorkflows.cancelledAfterReady)
         
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)
@@ -238,72 +239,72 @@ class GroupOperationTests: XCTestCase {
     }
     
     func testRunNestedNoConditions() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let childOperation1_1 = StubOperation()
-        keyValueObservingExpectation(for: childOperation1_1, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: childOperation1_1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         childOperation1_1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation1_2 = StubOperation()
-        keyValueObservingExpectation(for: childOperation1_2, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: childOperation1_2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         childOperation1_2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation1_2.addDependency(childOperation1_1)
         
         let nested1 = StubGroupOperation(operations: childOperation1_1, childOperation1_2)
-        keyValueObservingExpectation(for: nested1, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: nested1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         nested1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation2_1 = StubOperation()
-        keyValueObservingExpectation(for: childOperation2_1, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: childOperation2_1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         childOperation2_1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation2_2 = StubOperation()
-        keyValueObservingExpectation(for: childOperation2_2, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: childOperation2_2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         childOperation2_2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation2_2.addDependency(childOperation2_1)
         
         let nested2 = StubGroupOperation(operations: childOperation2_1, childOperation2_2)
-        keyValueObservingExpectation(for: nested2, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: nested2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         nested2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let operation = StubGroupOperation(operations: nested1, nested2)
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         Thread.sleep(forTimeInterval: 0.5)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.New)
-        XCTAssertEqual(nested1.stateTransitions, OperationWorkflows.Pending)
-        XCTAssertEqual(childOperation1_1.stateTransitions, OperationWorkflows.Pending)
-        XCTAssertEqual(childOperation1_2.stateTransitions, OperationWorkflows.Pending)
-        XCTAssertEqual(nested2.stateTransitions, OperationWorkflows.Pending)
-        XCTAssertEqual(childOperation2_1.stateTransitions, OperationWorkflows.Pending)
-        XCTAssertEqual(childOperation2_2.stateTransitions, OperationWorkflows.Pending)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.new)
+        XCTAssertEqual(nested1.stateTransitions, OperationWorkflows.pending)
+        XCTAssertEqual(childOperation1_1.stateTransitions, OperationWorkflows.pending)
+        XCTAssertEqual(childOperation1_2.stateTransitions, OperationWorkflows.pending)
+        XCTAssertEqual(nested2.stateTransitions, OperationWorkflows.pending)
+        XCTAssertEqual(childOperation2_1.stateTransitions, OperationWorkflows.pending)
+        XCTAssertEqual(childOperation2_2.stateTransitions, OperationWorkflows.pending)
         
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.Finished)
-        XCTAssertEqual(nested1.stateTransitions, OperationWorkflows.Finished)
-        XCTAssertEqual(childOperation1_1.stateTransitions, OperationWorkflows.Finished)
-        XCTAssertEqual(childOperation1_2.stateTransitions, OperationWorkflows.Finished)
-        XCTAssertEqual(nested2.stateTransitions, OperationWorkflows.Finished)
-        XCTAssertEqual(childOperation2_1.stateTransitions, OperationWorkflows.Finished)
-        XCTAssertEqual(childOperation2_2.stateTransitions, OperationWorkflows.Finished)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.finished)
+        XCTAssertEqual(nested1.stateTransitions, OperationWorkflows.finished)
+        XCTAssertEqual(childOperation1_1.stateTransitions, OperationWorkflows.finished)
+        XCTAssertEqual(childOperation1_2.stateTransitions, OperationWorkflows.finished)
+        XCTAssertEqual(nested2.stateTransitions, OperationWorkflows.finished)
+        XCTAssertEqual(childOperation2_1.stateTransitions, OperationWorkflows.finished)
+        XCTAssertEqual(childOperation2_2.stateTransitions, OperationWorkflows.finished)
         
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)
@@ -346,84 +347,84 @@ class GroupOperationTests: XCTestCase {
     }
     
     func testRunNestedCancelBeforeStart() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let childOperation1_1 = StubOperation()
-        keyValueObservingExpectation(for: childOperation1_1, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: childOperation1_1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         childOperation1_1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation1_2 = StubOperation()
-        keyValueObservingExpectation(for: childOperation1_2, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: childOperation1_2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         childOperation1_2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation1_2.addDependency(childOperation1_1)
         
         let nested1 = StubGroupOperation(operations: childOperation1_1, childOperation1_2)
-        keyValueObservingExpectation(for: nested1, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: nested1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         nested1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation2_1 = StubOperation()
-        keyValueObservingExpectation(for: childOperation2_1, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: childOperation2_1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         childOperation2_1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation2_2 = StubOperation()
-        keyValueObservingExpectation(for: childOperation2_2, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: childOperation2_2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         childOperation2_2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation2_2.addDependency(childOperation2_1)
         
         let nested2 = StubGroupOperation(operations: childOperation2_1, childOperation2_2)
-        keyValueObservingExpectation(for: nested2, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: nested2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         nested2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let operation = StubGroupOperation(operations: nested1, nested2)
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         Thread.sleep(forTimeInterval: 0.5)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.New)
-        XCTAssertEqual(nested1.stateTransitions, OperationWorkflows.Pending)
-        XCTAssertEqual(childOperation1_1.stateTransitions, OperationWorkflows.Pending)
-        XCTAssertEqual(childOperation1_2.stateTransitions, OperationWorkflows.Pending)
-        XCTAssertEqual(nested2.stateTransitions, OperationWorkflows.Pending)
-        XCTAssertEqual(childOperation2_1.stateTransitions, OperationWorkflows.Pending)
-        XCTAssertEqual(childOperation2_2.stateTransitions, OperationWorkflows.Pending)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.new)
+        XCTAssertEqual(nested1.stateTransitions, OperationWorkflows.pending)
+        XCTAssertEqual(childOperation1_1.stateTransitions, OperationWorkflows.pending)
+        XCTAssertEqual(childOperation1_2.stateTransitions, OperationWorkflows.pending)
+        XCTAssertEqual(nested2.stateTransitions, OperationWorkflows.pending)
+        XCTAssertEqual(childOperation2_1.stateTransitions, OperationWorkflows.pending)
+        XCTAssertEqual(childOperation2_2.stateTransitions, OperationWorkflows.pending)
         
         operation.cancel()
         
         Thread.sleep(forTimeInterval: 0.5)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.New)
-        XCTAssertEqual(nested1.stateTransitions, OperationWorkflows.CancelledBeforeReady)
-        XCTAssertEqual(childOperation1_1.stateTransitions, OperationWorkflows.CancelledBeforeReady)
-        XCTAssertEqual(childOperation1_2.stateTransitions, OperationWorkflows.CancelledBeforeReady)
-        XCTAssertEqual(nested2.stateTransitions, OperationWorkflows.CancelledBeforeReady)
-        XCTAssertEqual(childOperation2_1.stateTransitions, OperationWorkflows.CancelledBeforeReady)
-        XCTAssertEqual(childOperation2_2.stateTransitions, OperationWorkflows.CancelledBeforeReady)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.new)
+        XCTAssertEqual(nested1.stateTransitions, OperationWorkflows.cancelledBeforeReady)
+        XCTAssertEqual(childOperation1_1.stateTransitions, OperationWorkflows.cancelledBeforeReady)
+        XCTAssertEqual(childOperation1_2.stateTransitions, OperationWorkflows.cancelledBeforeReady)
+        XCTAssertEqual(nested2.stateTransitions, OperationWorkflows.cancelledBeforeReady)
+        XCTAssertEqual(childOperation2_1.stateTransitions, OperationWorkflows.cancelledBeforeReady)
+        XCTAssertEqual(childOperation2_2.stateTransitions, OperationWorkflows.cancelledBeforeReady)
         
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.CancelledBeforeReady)
-        XCTAssertEqual(nested1.stateTransitions, OperationWorkflows.CancelledBeforeReady)
-        XCTAssertEqual(childOperation1_1.stateTransitions, OperationWorkflows.CancelledBeforeReady)
-        XCTAssertEqual(childOperation1_2.stateTransitions, OperationWorkflows.CancelledBeforeReady)
-        XCTAssertEqual(nested2.stateTransitions, OperationWorkflows.CancelledBeforeReady)
-        XCTAssertEqual(childOperation2_1.stateTransitions, OperationWorkflows.CancelledBeforeReady)
-        XCTAssertEqual(childOperation2_2.stateTransitions, OperationWorkflows.CancelledBeforeReady)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.cancelledBeforeReady)
+        XCTAssertEqual(nested1.stateTransitions, OperationWorkflows.cancelledBeforeReady)
+        XCTAssertEqual(childOperation1_1.stateTransitions, OperationWorkflows.cancelledBeforeReady)
+        XCTAssertEqual(childOperation1_2.stateTransitions, OperationWorkflows.cancelledBeforeReady)
+        XCTAssertEqual(nested2.stateTransitions, OperationWorkflows.cancelledBeforeReady)
+        XCTAssertEqual(childOperation2_1.stateTransitions, OperationWorkflows.cancelledBeforeReady)
+        XCTAssertEqual(childOperation2_2.stateTransitions, OperationWorkflows.cancelledBeforeReady)
         
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)

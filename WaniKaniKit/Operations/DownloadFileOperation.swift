@@ -93,7 +93,7 @@ public class DownloadFileOperation: OperationKit.Operation, URLSessionDownloadDe
         
         if let downloadError = downloadTask.error {
             DDLogDebug("Download task has error: \(downloadError)")
-            finishWithError(downloadError)
+            finish(withError: downloadError)
             return
         }
         
@@ -102,7 +102,7 @@ public class DownloadFileOperation: OperationKit.Operation, URLSessionDownloadDe
             DDLogDebug("Got HTTP status code \(statusCode): \(HTTPURLResponse.localizedString(forStatusCode: statusCode))")
             guard statusCode / 100 == 2 else {
                 let httpError = DownloadFileOperationError.invalidHTTPResponse(url: response.url!, code: statusCode, message: HTTPURLResponse.localizedString(forStatusCode: statusCode))
-                finishWithError(httpError)
+                finish(withError: httpError)
                 return
             }
         }
@@ -126,13 +126,13 @@ public class DownloadFileOperation: OperationKit.Operation, URLSessionDownloadDe
             try fm.moveItem(at: location, to: destinationFileURL)
             finish()
         } catch let error {
-            finishWithError(error)
+            finish(withError: error)
         }
     }
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         DDLogWarn("Download of \(self.sourceURL) failed: \(error)")
-        finishWithError(error)
+        finish(withError: error)
     }
     
     public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64) {

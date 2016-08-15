@@ -68,7 +68,7 @@ final class ReviewCountNotificationOperation: OperationKit.Operation {
             finish()
         } catch {
             DDLogError("Failed to schedule review count notifications due to error: \(error)")
-            finishWithError(error)
+            finish(withError: error)
         }
     }
     

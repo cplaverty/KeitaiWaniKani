@@ -36,7 +36,7 @@ public class RetryOperation<T: Operation>: GroupOperation, ProgressReporting {
             progress.totalUnitCount = Int64(numberOfRetries + 1)
             progress.completedUnitCount = Int64(numberOfRetries)
             DDLogDebug("Retrying failed operation \(operation) (\(self.numberOfRetries) of \(self.maximumRetryCount))")
-            addOperation(createOperation())
+            add(createOperation())
         }
     }
     

@@ -53,10 +53,10 @@ public class GroupOperation: Operation {
         
         internalQueue.isSuspended = true
         internalQueue.delegate = self
-        addOperation(startingOperation)
+        add(startingOperation)
 
         for operation in operations {
-            addOperation(operation)
+            add(operation)
         }
     }
     
@@ -72,10 +72,10 @@ public class GroupOperation: Operation {
     public override func execute() {
         DDLogVerbose("Executing group operation \(self.dynamicType)")
         internalQueue.isSuspended = false
-        addOperation(finishingOperation)
+        add(finishingOperation)
     }
     
-    public func addOperation(_ operation: Foundation.Operation) {
+    public func add(_ operation: Foundation.Operation) {
         assert(!finishingOperation.isFinished && !finishingOperation.isExecuting, "cannot add new operations to a group after the group has completed")
         
         /*

@@ -29,11 +29,11 @@ public struct ModelObjectUpdateCheckCondition<Coder: DatabaseCoder>: OperationCo
         self.databaseQueue = databaseQueue
     }
     
-    public func dependency(forOperation operation: OperationKit.Operation) -> Foundation.Operation? {
+    public func dependency(for operation: OperationKit.Operation) -> Foundation.Operation? {
         return nil
     }
     
-    public func evaluate(forOperation operation: OperationKit.Operation, completion: (OperationConditionResult) -> Void) {
+    public func evaluate(for operation: OperationKit.Operation, completion: (OperationConditionResult) -> Void) {
         guard let lastUpdatedDate = self.lastUpdatedDate() else {
             DDLogDebug("\(self.dynamicType) bypassing update check")
             completion(.satisfied)

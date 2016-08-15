@@ -9,19 +9,20 @@ import XCTest
 @testable import OperationKit
 
 class OperationTests: XCTestCase {
+    typealias Operation = OperationKit.Operation
     
     func testRunNoConditions() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let operation = StubOperation()
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.Finished)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.finished)
         
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)
@@ -30,17 +31,17 @@ class OperationTests: XCTestCase {
     }
     
     func testRunFailure() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let operation = StubOperation(shouldFail: true)
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertFalse(errors.isEmpty, "Expected errors on operation finish")
             })
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.Finished)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.finished)
         
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)
@@ -49,10 +50,10 @@ class OperationTests: XCTestCase {
     }
     
     func testRunSatisfiedCondition() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let operation = StubOperation()
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addCondition(AlwaysSatisfiedCondition())
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
@@ -60,7 +61,7 @@ class OperationTests: XCTestCase {
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.Finished)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.finished)
         
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)
@@ -69,10 +70,10 @@ class OperationTests: XCTestCase {
     }
     
     func testRunFailedCondition() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let operation = StubOperation()
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addCondition(AlwaysFailedCondition())
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertFalse(errors.isEmpty, "Expected condition errors on operation finish")
@@ -80,7 +81,7 @@ class OperationTests: XCTestCase {
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.CancelledAfterReady)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.cancelledAfterReady)
         
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)
@@ -89,10 +90,10 @@ class OperationTests: XCTestCase {
     }
     
     func testCancelBeforeStart() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let operation = StubOperation()
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.cancel()
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
@@ -100,7 +101,7 @@ class OperationTests: XCTestCase {
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: 5, handler: nil)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.CancelledBeforeReady)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.cancelledBeforeReady)
         
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)
@@ -109,14 +110,14 @@ class OperationTests: XCTestCase {
     }
     
     func testCancelAfterStart() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let operation = StubOperation(immediatelyFinish: false)
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver(
             startHandler: { _ in
                 let when = DispatchTime.now() + 0.5
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).asyncAfter(deadline: when) {
+                DispatchQueue.global(qos: .default).asyncAfter(deadline: when) {
                     print("Cancelling operation")
                     operation.cancel()
                 }
@@ -129,7 +130,7 @@ class OperationTests: XCTestCase {
         
         Thread.sleep(forTimeInterval: 0.5)
         
-        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.Finished)
+        XCTAssertEqual(operation.stateTransitions, OperationWorkflows.finished)
         
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)

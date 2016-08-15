@@ -9,15 +9,16 @@ import XCTest
 @testable import OperationKit
 
 class DelayOperationTests: XCTestCase {
+    typealias Operation = OperationKit.Operation
     
     func testRunWithInterval() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let interval: TimeInterval = 0.5
         let start = Date()
         var delay: TimeInterval? = nil
         let operation = DelayOperation(interval: interval)
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             delay = -start.timeIntervalSinceNow
@@ -33,14 +34,14 @@ class DelayOperationTests: XCTestCase {
     }
     
     func testRunWithDate() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let interval: TimeInterval = 0.5
         let start = Date()
         let end = Date().addingTimeInterval(interval)
         var delay: TimeInterval? = nil
         let operation = DelayOperation(until: end)
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             delay = -start.timeIntervalSinceNow
@@ -56,13 +57,13 @@ class DelayOperationTests: XCTestCase {
     }
     
     func testCancelBeforeStart() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let interval: TimeInterval = 0.5
         let start = Date()
         var delay: TimeInterval? = nil
         let operation = DelayOperation(interval: interval)
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             delay = -start.timeIntervalSinceNow
@@ -79,17 +80,17 @@ class DelayOperationTests: XCTestCase {
     }
     
     func testCancelAfterStart() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         let interval: TimeInterval = 0.5
         let start = Date()
         var delay: TimeInterval? = nil
         let operation = DelayOperation(interval: interval)
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver(
             startHandler: { _ in
                 let when = DispatchTime.now() + interval / 2
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).asyncAfter(deadline: when) {
+                DispatchQueue.global(qos: .default).asyncAfter(deadline: when) {
                     print("Cancelling operation")
                     delay = -start.timeIntervalSinceNow
                     operation.cancel()

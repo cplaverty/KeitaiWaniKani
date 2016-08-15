@@ -103,7 +103,7 @@ final class GetDashboardDataOperation: GroupOperation, ProgressReporting {
                     application.applicationIconBadgeNumber = studyQueue.reviewsAvailable
                 }
             ))
-
+        
         srsDataItemOperation.addObserver(
             BlockObserver(
                 startHandler: { _ in
@@ -113,7 +113,7 @@ final class GetDashboardDataOperation: GroupOperation, ProgressReporting {
                     self.progress.localizedAdditionalDescription = "Done!"
                 }
             ))
-
+        
         if let delay = delay {
             progress.totalUnitCount += 1
             let delayOperation = DelayOperation(interval: delay)
@@ -121,9 +121,9 @@ final class GetDashboardDataOperation: GroupOperation, ProgressReporting {
             let countdownObserver = DelayOperationIntervalCountdownObserver(notificationInterval: 1)
             progress.resignCurrent()
             delayOperation.addObserver(countdownObserver)
-            delayOperation.addProgressListenerForDestinationProgress(progress, sourceProgress: countdownObserver.progress)
+            delayOperation.addProgressListener(copyingTo: progress, from: countdownObserver.progress)
             studyQueueOperation.addDependency(delayOperation)
-            addOperation(delayOperation)
+            add(delayOperation)
         }
         
         name = "Get Dashboard Data"
@@ -140,9 +140,9 @@ final class GetDashboardDataOperation: GroupOperation, ProgressReporting {
     
     private func produceAlert(_ error: Error) {
         /*
-        We only want to show the first error, since subsequent errors might
-        be caused by the first.
-        */
+         We only want to show the first error, since subsequent errors might
+         be caused by the first.
+         */
         if hasProducedAlert { return }
         
         let alert = AlertOperation()
@@ -162,7 +162,7 @@ final class GetDashboardDataOperation: GroupOperation, ProgressReporting {
             // We failed because the WaniKani site returned a non-2xx return code
             alert.title = "Invalid Response Code"
             alert.message = "WaniKani site returned an error code \(code) (\(message)). Try again later."
-
+            
         case TimeoutObserverError.timeoutOccurred(interval: _):
             alert.title = "Operation Timed Out"
             alert.message = "A timeout occurred downloading data from the WaniKani site. Please try the operation again."
@@ -172,7 +172,7 @@ final class GetDashboardDataOperation: GroupOperation, ProgressReporting {
             return
         }
         
-        produceOperation(alert)
+        produce(alert)
         hasProducedAlert = true
     }
     
@@ -209,7 +209,7 @@ class DelayOperationIntervalCountdownObserver: NSObject, OperationObserver, Prog
         let formatter = DateComponentsFormatter()
         formatter.unitsStyle = .abbreviated
         return formatter
-        }()
+    }()
     private let notificationInterval: TimeInterval
     private var notificationTimer: Foundation.Timer?
     private var endDate: Date?

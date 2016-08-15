@@ -9,15 +9,16 @@ import XCTest
 @testable import OperationKit
 
 class BlockOperationTests: XCTestCase {
+    typealias Operation = OperationKit.Operation
     
     func testRunBlock() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         var wasRun = false
         let operation = OperationKit.BlockOperation {
             wasRun = true
         }
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
@@ -32,13 +33,13 @@ class BlockOperationTests: XCTestCase {
     }
     
     func testCancelBeforeStart() {
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         
         var wasRun = false
         let operation = OperationKit.BlockOperation {
             wasRun = true
         }
-        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })

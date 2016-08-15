@@ -21,7 +21,7 @@ public enum ReachabilityConditionError: Error {
 */
 public struct ReachabilityCondition: OperationCondition {
     public static let isMutuallyExclusive = false
-    public static var enabled = true
+    public static var isEnabled = true
     
     public let url: URL
     
@@ -29,18 +29,18 @@ public struct ReachabilityCondition: OperationCondition {
         self.url = url
     }
     
-    public func dependency(forOperation operation: Operation) -> Foundation.Operation? {
+    public func dependency(for operation: Operation) -> Foundation.Operation? {
         return nil
     }
     
-    public func evaluate(forOperation operation: Operation, completion: (OperationConditionResult) -> Void) {
-        guard self.dynamicType.enabled else {
+    public func evaluate(for operation: Operation, completion: (OperationConditionResult) -> Void) {
+        guard self.dynamicType.isEnabled else {
             DDLogVerbose("Reachability check disabled - faking satisfied check")
             completion(.satisfied)
             return
         }
         
-        ReachabilityController.requestReachability(url: url) { reachable in
+        ReachabilityController.requestReachability(for: url) { reachable in
             if reachable {
                 DDLogVerbose("Reachability check satisfied")
                 completion(.satisfied)
@@ -62,7 +62,7 @@ private class ReachabilityController {
 
     static let reachabilityQueue = DispatchQueue(label: "Operations.Reachability")
     
-    static func requestReachability(url: URL, completionHandler: (Bool) -> Void) {
+    static func requestReachability(for url: URL, completionHandler: (Bool) -> Void) {
         if url.isFileURL {
             let fileExists = FileManager.default.fileExists(atPath: url.path)
             completionHandler(fileExists)

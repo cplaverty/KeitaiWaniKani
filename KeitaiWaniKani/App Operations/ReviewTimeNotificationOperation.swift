@@ -63,7 +63,7 @@ final class ReviewTimeNotificationOperation: OperationKit.Operation {
             finish()
         } catch {
             DDLogError("Failed to schedule review notification due to error: \(error)")
-            finishWithError(error)
+            finish(withError: error)
         }
     }
 }

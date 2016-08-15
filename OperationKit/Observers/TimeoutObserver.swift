@@ -41,7 +41,7 @@ public struct TimeoutObserver: OperationObserver {
             if !operation.isFinished && !operation.isCancelled {
                 let error = TimeoutObserverError.timeoutOccurred(interval: self.timeout)
 
-                operation.cancelWithError(error)
+                operation.cancel(withError: error)
             }
         }
     }

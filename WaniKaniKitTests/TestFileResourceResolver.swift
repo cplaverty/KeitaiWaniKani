@@ -22,7 +22,7 @@ extension ResourceHTTPStubs {
     var resourceResolver: ResourceResolver { return testResourceResolver }
     
     func stubForResource(_ resouce: Resource, file: String) {
-        ReachabilityCondition.enabled = false
+        ReachabilityCondition.isEnabled = false
         let expectedURL = resourceResolver.resolveURL(resource: resouce, withArgument: nil)
         _ = stub(isHost(expectedURL.host!) && pathStartsWith(expectedURL.path)) { _ in
             let stubPath = OHPathForFile("WaniKani API Responses/\(file).json", BundleMark.self)

@@ -71,7 +71,7 @@ public class GetSingleItemResourceOperation<Coder: ResourceHandler & JSONDecoder
             defer { self.progress.completedUnitCount = self.progress.totalUnitCount }
             DDLogDebug("Download of \(self.sourceURL) complete")
             if let error = error {
-                self.finishWithError(error)
+                self.finish(withError: error)
                 return
             }
             
@@ -81,7 +81,7 @@ public class GetSingleItemResourceOperation<Coder: ResourceHandler & JSONDecoder
                 try self.parse(json)
                 self.finish()
             } catch {
-                self.finishWithError(error)
+                self.finish(withError: error)
             }
         }
         task!.resume()

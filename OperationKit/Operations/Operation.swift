@@ -60,7 +60,7 @@ public class Operation: Foundation.Operation {
         /// The `Operation` has finished executing.
         case finished
         
-        func canTransitionToState(_ target: State, isCancelled cancelled: Bool) -> Bool {
+        func canTransition(to target: State, isCancelled cancelled: Bool) -> Bool {
             switch (self, target) {
             case (.initialized, .pending):
                 return true
@@ -123,7 +123,7 @@ public class Operation: Foundation.Operation {
                     return
                 }
                 
-                assert(_state.canTransitionToState(newState, isCancelled: self.isCancelled), "Performing invalid state transition.")
+                assert(_state.canTransition(to: newState, isCancelled: self.isCancelled), "Performing invalid state transition.")
                 _state = newState
             }
             
@@ -210,10 +210,10 @@ public class Operation: Foundation.Operation {
         
         state = .evaluatingConditions
         
-        OperationConditionEvaluator.evaluate(conditions, operation: self) { failures in
+        OperationConditionEvaluator.evaluate(conditions, for: self) { failures in
             DDLogVerbose("Conditions evaluated for \(self.dynamicType), errors: \(failures)")
             if !failures.isEmpty {
-                self.cancelWithErrors(failures)
+                self.cancel(withErrors: failures)
             }
             self.state = .ready
         }
@@ -294,16 +294,16 @@ public class Operation: Foundation.Operation {
     }
     
     private var _internalErrors = [Error]()
-    public func cancelWithError(_ error: Error? = nil) {
+    public func cancel(withError error: Error? = nil) {
         if let error = error {
-            cancelWithErrors([error])
+            cancel(withErrors: [error])
         }
         else {
-            cancelWithErrors()
+            cancel(withErrors: [])
         }
     }
     
-    public func cancelWithErrors(_ errors: [Error] = []) {
+    public func cancel(withErrors errors: [Error] = []) {
         DDLogVerbose("Cancelling \(self.dynamicType), errors: \(errors)")
         if !errors.isEmpty {
             _internalErrors.append(contentsOf: errors)
@@ -312,7 +312,7 @@ public class Operation: Foundation.Operation {
         cancel()
     }
     
-    public final func produceOperation(_ operation: Foundation.Operation) {
+    public final func produce(_ operation: Foundation.Operation) {
         for observer in observers {
             observer.operation(self, didProduceOperation: operation)
         }
@@ -328,7 +328,7 @@ public class Operation: Foundation.Operation {
      for how an error from an `NSURLSession` is passed along via the
      `finishWithError()` method.
      */
-    public final func finishWithError(_ error: Error?) {
+    public final func finish(withError error: Error?) {
         if let error = error {
             finish([error])
         }

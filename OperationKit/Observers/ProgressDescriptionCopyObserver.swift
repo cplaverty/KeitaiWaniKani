@@ -94,7 +94,7 @@ public class ProgressDescriptionCopyObserver: NSObject, OperationObserver {
 }
 
 public extension Operation {
-    public func addProgressListenerForDestinationProgress(_ destinationProgress: Progress, sourceProgress: Progress? = nil, localizedDescription: String? = nil, localizedAdditionalDescription: String? = nil) {
+    public func addProgressListener(copyingTo destinationProgress: Progress, from sourceProgress: Progress? = nil, localizedDescription: String? = nil, localizedAdditionalDescription: String? = nil) {
         self.addObserver(ProgressDescriptionCopyObserver(operation: self, sourceProgress: sourceProgress ?? (self as? ProgressReporting)?.progress,
             destinationProgress: destinationProgress, localizedDescription: localizedDescription, localizedAdditionalDescription: localizedAdditionalDescription))
     }

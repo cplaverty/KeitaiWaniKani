@@ -49,7 +49,7 @@ public final class ParseListItemOperation<Coder: JSONDecoder & ListItemDatabaseC
             finish()
         } catch {
             DDLogError("Error occurred in \(self.dynamicType): \(error)")
-            finishWithError(error)
+            finish(withError: error)
         }
     }
     

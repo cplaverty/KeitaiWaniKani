@@ -29,10 +29,10 @@ public protocol OperationCondition {
             expressing that as multiple conditions. Alternatively, you could return
             a single `GroupOperation` that executes multiple operations internally.
     */
-    func dependency(forOperation operation: Operation) -> Foundation.Operation?
+    func dependency(for: Operation) -> Foundation.Operation?
     
     /// Evaluate the condition, to see if it has been satisfied or not.
-    func evaluate(forOperation operation: Operation, completion: (OperationConditionResult) -> Void)
+    func evaluate(for: Operation, completion: (OperationConditionResult) -> Void)
 }
 
 /**
@@ -59,7 +59,7 @@ public enum OperationConditionEvaluatorError: Error {
 }
 
 struct OperationConditionEvaluator {
-    static func evaluate(_ conditions: [OperationCondition], operation: Operation, completion: ([Error]) -> Void) {
+    static func evaluate(_ conditions: [OperationCondition], for operation: Operation, completion: ([Error]) -> Void) {
         // Check conditions.
         let conditionGroup = DispatchGroup()
 
@@ -68,7 +68,7 @@ struct OperationConditionEvaluator {
         // Ask each condition to evaluate and store its result in the "results" array.
         for (index, condition) in conditions.enumerated() {
             conditionGroup.enter()
-            condition.evaluate(forOperation: operation) { result in
+            condition.evaluate(for: operation) { result in
                 results[index] = result
                 conditionGroup.leave()
             }

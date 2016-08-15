@@ -9,24 +9,25 @@ import XCTest
 @testable import OperationKit
 
 class MutuallyExclusiveTests: XCTestCase {
+    typealias Operation = OperationKit.Operation
     
     func testMutualExclusion() {
         enum Test {}
         typealias TestMutualExclusion = MutuallyExclusive<Test>
         let mutuallyExclusiveCondition = MutuallyExclusive<TestMutualExclusion>()
         
-        let operationQueue = createOperationQueue()
+        let operationQueue = makeOperationQueue()
         operationQueue.maxConcurrentOperationCount = 2
         
         let operation1 = StubOperation(immediatelyFinish: false)
-        keyValueObservingExpectation(for: operation1, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation1.addCondition(mutuallyExclusiveCondition)
         operation1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let operation2 = StubOperation()
-        keyValueObservingExpectation(for: operation2, keyPath: "isFinished", expectedValue: true)
+        keyValueObservingExpectation(for: operation2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation2.addCondition(mutuallyExclusiveCondition)
         operation2.addObserver(BlockObserver(
             startHandler: { op in
@@ -45,8 +46,8 @@ class MutuallyExclusiveTests: XCTestCase {
         
         Thread.sleep(forTimeInterval: 0.5)
         
-        XCTAssertEqual(operation1.stateTransitions, OperationWorkflows.Executing)
-        XCTAssertEqual(operation2.stateTransitions, OperationWorkflows.Pending)
+        XCTAssertEqual(operation1.stateTransitions, OperationWorkflows.executing)
+        XCTAssertEqual(operation2.stateTransitions, OperationWorkflows.pending)
         
         XCTAssertFalse(operation1.isReady)
         XCTAssertTrue(operation1.isExecuting)

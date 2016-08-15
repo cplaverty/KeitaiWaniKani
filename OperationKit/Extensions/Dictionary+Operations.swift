@@ -19,7 +19,7 @@ extension Dictionary {
      be used as the key for the value in the `Dictionary`. If the closure
      returns `nil`, then the value will be omitted from the `Dictionary`.
      */
-    init<Sequence: Swift.Sequence>(sequence: Sequence, keyMapper: @noescape (Value) -> Key?) where Sequence.Iterator.Element == Value {
+    init<S: Sequence>(_ sequence: S, keyMapper: @noescape (Value) -> Key?) where S.Iterator.Element == Value {
         self.init()
         
         for item in sequence {
