@@ -28,7 +28,7 @@ public struct NoCancelledDependencies: OperationCondition {
         return nil
     }
     
-    public func evaluate(for operation: Operation, completion: (OperationConditionResult) -> Void) {
+    public func evaluate(for operation: Operation, completion: @escaping (OperationConditionResult) -> Void) {
         // Verify that all of the dependencies executed.
         let cancelled = operation.dependencies.filter { $0.isCancelled }
 

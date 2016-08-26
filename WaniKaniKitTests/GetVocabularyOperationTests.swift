@@ -41,7 +41,7 @@ class GetVocabularyOperationTests: DatabaseTestCase, ResourceHTTPStubs {
         
         let operationQueue = OperationKit.OperationQueue()
         
-        stubForResource(Resource.vocabulary, file: "Vocab Level 1")
+        stubRequest(for: .vocabulary, file: "Vocab Level 1")
         defer { OHHTTPStubs.removeAllStubs() }
         
         self.measure() {

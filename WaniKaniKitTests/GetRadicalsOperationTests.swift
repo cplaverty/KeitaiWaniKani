@@ -38,7 +38,7 @@ class GetRadicalsOperationTests: DatabaseTestCase, ResourceHTTPStubs {
         
         let operationQueue = OperationKit.OperationQueue()
         
-        stubForResource(Resource.radicals, file: "Radicals Level 1")
+        stubRequest(for: .radicals, file: "Radicals Level 1")
         defer { OHHTTPStubs.removeAllStubs() }
         
         self.measure() {

@@ -21,14 +21,14 @@ public struct StudyQueueIsUpdatedCondition: OperationCondition {
     
     public init(databaseQueue: FMDatabaseQueue) {
         self.databaseQueue = databaseQueue
-        self.projectedStudyQueue = self.dynamicType.projectedStudyQueue(databaseQueue)
+        self.projectedStudyQueue = type(of: self).projectedStudyQueue(databaseQueue)
     }
     
     public func dependency(for operation: OperationKit.Operation) -> Foundation.Operation? {
         return nil
     }
     
-    public func evaluate(for operation: OperationKit.Operation, completion: (OperationConditionResult) -> Void) {
+    public func evaluate(for operation: OperationKit.Operation, completion: @escaping (OperationConditionResult) -> Void) {
         guard let studyQueue = try! databaseQueue.withDatabase({ try StudyQueue.coder.load(from: $0) }) else {
             completion(.failed(StudyQueueIsUpdatedConditionError.missing))
             return

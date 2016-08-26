@@ -31,13 +31,13 @@ public class GetRadicalImageOperation: GroupOperation {
     
     public init(sourceURL: URL, networkObserver: OperationObserver? = nil) {
         self.sourceURL = sourceURL
-        self.destinationFileURL = self.dynamicType.parentDirectory.appendingPathComponent(sourceURL.lastPathComponent)
+        self.destinationFileURL = type(of: self).parentDirectory.appendingPathComponent(sourceURL.lastPathComponent)
         
         downloadOperation = DownloadFileOperation(sourceURL: sourceURL, destinationFileURL: destinationFileURL, networkObserver: networkObserver)
         downloadOperation.addCondition(FileMissingCondition(url: destinationFileURL))
         
         super.init(operations: [downloadOperation])
-        addObserver(TimeoutObserver(timeout: self.dynamicType.runTimeoutInSeconds))
+        addObserver(TimeoutObserver(timeout: type(of: self).runTimeoutInSeconds))
         
         name = "Get Radical Image"
     }

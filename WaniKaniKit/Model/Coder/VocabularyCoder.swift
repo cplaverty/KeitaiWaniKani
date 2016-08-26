@@ -111,7 +111,13 @@ public final class VocabularyCoder: SRSDataItemCoder, ResourceHandler, JSONDecod
         try database.executeUpdate(deleteSql, values: [maxLevelToKeep] + levelsToReplace)
         
         for model in models {
-            let columnValues: [AnyObject] = [model.character, model.meaning, model.kana, model.level, model.lastUpdateTimestamp] + srsDataColumnValues(model.userSpecificSRSData)
+            let columnValues: [AnyObject] = [
+                model.character as NSString,
+                model.meaning as NSString,
+                model.kana as NSString,
+                model.level as NSNumber,
+                model.lastUpdateTimestamp as NSDate
+                ] + srsDataColumnValues(model.userSpecificSRSData)
             
             try database.executeUpdate(updateSQL, values: columnValues)
         }
@@ -127,7 +133,7 @@ public final class VocabularyCoder: SRSDataItemCoder, ResourceHandler, JSONDecod
     
     public func levelsNotUpdated(since: Date, in database: FMDatabase) throws -> Set<Int> {
         let sql = "SELECT DISTINCT \(Columns.level) FROM \(tableName) WHERE \(Columns.lastUpdateTimestamp) < ?"
-        let resultSet = try database.executeQuery(sql, since)
+        let resultSet = try database.executeQuery(sql, since as NSDate)
         defer { resultSet.close() }
         
         var results = Set<Int>()
@@ -143,7 +149,7 @@ public final class VocabularyCoder: SRSDataItemCoder, ResourceHandler, JSONDecod
     
     public func possiblyStaleLevels(since: Date, in database: FMDatabase) throws -> Set<Int> {
         let sql = "SELECT DISTINCT \(Columns.level) FROM \(tableName) WHERE \(UserSpecificSRSDataColumns.dateAvailable) IS NULL OR (\(UserSpecificSRSDataColumns.dateAvailable) < ? AND \(UserSpecificSRSDataColumns.burned) = 0)"
-        let resultSet = try database.executeQuery(sql, since)
+        let resultSet = try database.executeQuery(sql, since as NSDate)
         defer { resultSet.close() }
         
         var results = Set<Int>()

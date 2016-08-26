@@ -85,14 +85,14 @@ public final class UserInformationCoder: ResourceHandler, JSONDecoder, SingleIte
     
     public func createTable(in database: FMDatabase, dropExisting: Bool) throws {
         if dropExisting {
-            try database.executeUpdate("DROP TABLE IF EXISTS \(self.dynamicType.tableName)")
+            try database.executeUpdate("DROP TABLE IF EXISTS \(type(of: self).tableName)")
         }
         
-        try database.executeUpdate("CREATE TABLE IF NOT EXISTS \(self.dynamicType.tableName)(\(columnDefinitions))")
+        try database.executeUpdate("CREATE TABLE IF NOT EXISTS \(type(of: self).tableName)(\(columnDefinitions))")
     }
     
     public func load(from database: FMDatabase) throws -> UserInformation? {
-        let resultSet = try database.executeQuery("SELECT \(columnNames) FROM \(self.dynamicType.tableName)")
+        let resultSet = try database.executeQuery("SELECT \(columnNames) FROM \(type(of: self).tableName)")
         defer { resultSet.close() }
         
         var result: UserInformation? = nil
@@ -116,32 +116,32 @@ public final class UserInformationCoder: ResourceHandler, JSONDecoder, SingleIte
     
     private lazy var updateSQL: String = {
         let columnValuePlaceholders = self.createColumnValuePlaceholders(self.columnCount)
-        return "INSERT INTO \(self.dynamicType.tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
+        return "INSERT INTO \(type(of: self).tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
     }()
     
     public func save(_ model: UserInformation, to database: FMDatabase) throws {
-        try database.executeUpdate("DELETE FROM \(self.dynamicType.tableName)")
+        try database.executeUpdate("DELETE FROM \(type(of: self).tableName)")
         
         let columnValues: [AnyObject] = [
-            model.username,
-            model.gravatar,
-            model.level,
-            model.title,
-            model.about ?? NSNull(),
-            model.website ?? NSNull(),
-            model.twitter ?? NSNull(),
-            model.topicsCount,
-            model.postsCount,
-            model.creationDate,
-            model.vacationDate ?? NSNull(),
-            model.lastUpdateTimestamp
+            model.username as NSString,
+            model.gravatar as NSString,
+            model.level as NSNumber,
+            model.title as NSString,
+            model.about as NSString? ?? NSNull(),
+            model.website as NSString? ?? NSNull(),
+            model.twitter as NSString? ?? NSNull(),
+            model.topicsCount as NSNumber,
+            model.postsCount as NSNumber,
+            model.creationDate as NSDate,
+            model.vacationDate as NSDate? ?? NSNull(),
+            model.lastUpdateTimestamp as NSDate
         ]
         
         try database.executeUpdate(updateSQL, values: columnValues)
     }
     
     public func hasBeenUpdated(since: Date, in database: FMDatabase) throws -> Bool {
-        guard let earliestDate = try database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(self.dynamicType.tableName)") else {
+        guard let earliestDate = try database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(type(of: self).tableName)") else {
             return false
         }
         

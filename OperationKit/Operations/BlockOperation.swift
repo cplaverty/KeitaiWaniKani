@@ -9,7 +9,7 @@ This code shows how to create a simple subclass of Operation.
 import Foundation
 
 /// A closure type that takes a closure as its parameter.
-public typealias OperationBlock = ((Void) -> Void) -> Void
+public typealias OperationBlock = (@escaping () -> Void) -> Void
 
 /// A sublcass of `Operation` to execute a closure.
 public class BlockOperation: Operation {
@@ -37,7 +37,7 @@ public class BlockOperation: Operation {
             the designated initializer). The operation will be automatically ended
             after the `mainQueueBlock` is executed.
     */
-    public convenience init(mainQueueBlock: (Void) -> Void) {
+    public convenience init(mainQueueBlock: @escaping (Void) -> Void) {
         self.init(block: { continuation in
             DispatchQueue.main.async {
                 mainQueueBlock()

@@ -22,8 +22,9 @@ public class DownloadFileOperation: OperationKit.Operation, URLSessionDownloadDe
     
     public let progress: Progress = {
         let p = Progress(totalUnitCount: -1)
-        p.kind = ProgressKind.file
-        p.setUserInfoObject(Progress.FileOperationKind.downloading, forKey: .fileOperationKindKey)
+        p.kind = .file
+        // TODO: This crashes the compiler :/ XCode 8b6
+//        p.setUserInfoObject(Progress.FileOperationKind.downloading, forKey: .fileOperationKindKey)
         return p
     }()
     

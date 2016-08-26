@@ -79,7 +79,7 @@ public class ProgressDescriptionCopyObserver: NSObject, OperationObserver {
     
     // MARK: Key-Value Observing
     
-    public override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
+    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard context == &observationContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return

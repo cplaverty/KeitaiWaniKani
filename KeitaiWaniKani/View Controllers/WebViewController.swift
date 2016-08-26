@@ -35,7 +35,7 @@ protocol WebViewControllerDelegate: class {
 
 class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelegate, WebViewControllerDelegate, UIWebViewUserScriptSupport {
     
-    class func wrapped(url: URL, configBlock: @noescape (WebViewController) -> Void) -> UINavigationController {
+    class func wrapped(url: URL, configBlock: (WebViewController) -> Void) -> UINavigationController {
         let webViewController = self.init(url: url)
         configBlock(webViewController)
         
@@ -137,7 +137,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
             return
         }
         
-        var activityItems: [AnyObject] = [absoluteURL]
+        var activityItems: [AnyObject] = [absoluteURL as NSURL]
         let onePasswordExtension = OnePasswordExtension.shared()
         if onePasswordExtension.isAppExtensionAvailable() {
             onePasswordExtension.createExtensionItem(forWebView: webView) { extensionItem, error -> Void in
@@ -157,7 +157,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
                         return
                     }
                     
-                    if onePasswordExtension.isOnePasswordExtensionActivityType(activityType) {
+                    if onePasswordExtension.isOnePasswordExtensionActivityType(activityType.map { $0.rawValue }) {
                         onePasswordExtension.fillReturnedItems(returnedItems, intoWebView: webView) { success, error in
                             if !success {
                                 let errorDescription = error?.localizedDescription ?? "(No error details)"
@@ -252,7 +252,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     func webViewDidFinishLoad(_ webView: UIWebView) {
         jsContext = webView.value(forKeyPath: "documentView.webView.mainFrame.javaScriptContext") as? JSContext
         let setTitle: @convention(block) (String) -> Void = { [weak self] title in self?.title = title }
-        jsContext?.setObject(unsafeBitCast(setTitle, to: AnyObject.self), forKeyedSubscript: "setWebViewPageTitle")
+        jsContext?.setObject(unsafeBitCast(setTitle, to: AnyObject.self), forKeyedSubscript: "setWebViewPageTitle" as NSString)
         
         let requestFinished = requestStack.popLast()
         DDLogVerbose("webViewDidFinishLoad webView.request: \(requestFinished)")
@@ -292,7 +292,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
             case (NSURLErrorDomain, NSURLErrorCancelled), ("WebKitErrorDomain", 102):
                 break
             default:
-                showAlertWithTitle("Failed to load page", message: error.localizedDescription ?? "Unknown error")
+                showAlertWithTitle("Failed to load page", message: error.localizedDescription)
             }
         }
     }

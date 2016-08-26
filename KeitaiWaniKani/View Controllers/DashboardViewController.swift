@@ -98,7 +98,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             }
             
             if formerProgress.fractionCompleted < 1 && formerProgress.isCancellable {
-                DDLogDebug("Cancelling incomplete operation \(UInt(ObjectIdentifier(formerDataRefreshOperation)))")
+                DDLogDebug("Cancelling incomplete operation \(UInt(bitPattern: ObjectIdentifier(formerDataRefreshOperation)))")
                 formerDataRefreshOperation.cancel()
             }
         }
@@ -130,9 +130,9 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     
     private var headerFont: UIFont {
         if #available(iOS 9.0, *) {
-            return UIFont.preferredFont(forTextStyle: UIFontTextStyleTitle2)
+            return UIFont.preferredFont(forTextStyle: .title2)
         } else {
-            let headlineFont = UIFont.preferredFont(forTextStyle: UIFontTextStyleBody)
+            let headlineFont = UIFont.preferredFont(forTextStyle: .body)
             let pointSize = headlineFont.pointSize * 1.3
             return headlineFont.withSize(pointSize)
         }
@@ -330,10 +330,10 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         setTimeToNextReview(studyQueue)
     }
     
-    private func setCount(_ count: Int, forLabel label: UILabel?, availableColour: UIColor = UIColor.black, unavailableColour: UIColor = UIColor.lightGray) {
+    private func setCount(_ count: Int, forLabel label: UILabel?, availableColour: UIColor = .black, unavailableColour: UIColor = .lightGray) {
         guard let label = label else { return }
         
-        label.text = NumberFormatter.localizedString(from: count, number: .decimal)
+        label.text = NumberFormatter.localizedString(from: NSNumber(value: count), number: .decimal)
         label.textColor = count > 0 ? availableColour : unavailableColour
     }
     
@@ -357,7 +357,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             reviewCountLabel.text = studyQueue.formattedNextReviewDate()
             reviewCountLabel.textColor = UIColor.black
             reviewCountLabel.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightThin)
-            reviewTimeRemainingLabel.text = "\(NumberFormatter.localizedString(from: secondsUntilNextReview, number: .decimal))s"
+            reviewTimeRemainingLabel.text = "\(NumberFormatter.localizedString(from: NSNumber(value: secondsUntilNextReview), number: .decimal))s"
         }
     }
     
@@ -382,11 +382,11 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         assert(Thread.isMainThread, "Must be called on the main thread")
         
         let fractionComplete = total == 0 ? 1.0 : Double(complete) / Double(total)
-        let formattedFractionComplete = percentFormatter.string(from: fractionComplete) ?? "–%"
+        let formattedFractionComplete = percentFormatter.string(from: NSNumber(value: fractionComplete)) ?? "–%"
         
         percentageCompletionLabel?.text = formattedFractionComplete
         progressView?.setProgress(Float(fractionComplete), animated: true)
-        totalItemCountLabel?.text = NumberFormatter.localizedString(from: total, number: .decimal)
+        totalItemCountLabel?.text = NumberFormatter.localizedString(from: NSNumber(value: total), number: .decimal)
     }
     
     func updateUI(srsDistribution: SRSDistribution?) {
@@ -402,7 +402,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         
         for (srsLevel, label) in pairs {
             let itemCounts = srsDistribution?.countsBySRSLevel[srsLevel] ?? SRSItemCounts.zero
-            let formattedCount = NumberFormatter.localizedString(from: itemCounts.total, number: .decimal)
+            let formattedCount = NumberFormatter.localizedString(from: NSNumber(value: itemCounts.total), number: .decimal)
             label?.text = formattedCount
         }
         
@@ -423,13 +423,13 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         }
         
         if let averageLevelDuration = levelData.stats?.mean {
-            let formattedAverageLevelDuration = averageLevelDurationFormatter.string(from: averageLevelDuration) ?? "\(NumberFormatter.localizedString(from: averageLevelDuration, number: .decimal))s"
+            let formattedAverageLevelDuration = averageLevelDurationFormatter.string(from: averageLevelDuration) ?? "\(NumberFormatter.localizedString(from: NSNumber(value: averageLevelDuration), number: .decimal))s"
             averageLevelTimeCell.detailTextLabel?.text = formattedAverageLevelDuration
         }
         
         let startDate = projectedCurrentLevel.startDate
         let timeSinceLevelStart = -startDate.timeIntervalSinceNow
-        let formattedTimeSinceLevelStart = averageLevelDurationFormatter.string(from: timeSinceLevelStart) ?? "\(NumberFormatter.localizedString(from: timeSinceLevelStart, number: .decimal))s"
+        let formattedTimeSinceLevelStart = averageLevelDurationFormatter.string(from: timeSinceLevelStart) ?? "\(NumberFormatter.localizedString(from: NSNumber(value: timeSinceLevelStart), number: .decimal))s"
         currentLevelTimeCell.detailTextLabel?.text = formattedTimeSinceLevelStart
         
         let expectedEndDate: Date
@@ -442,7 +442,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         }
         
         let timeUntilLevelCompletion = expectedEndDate.timeIntervalSinceNow
-        let formattedTimeUntilLevelCompletion = timeUntilLevelCompletion <= 0 ? "–" : averageLevelDurationFormatter.string(from: timeUntilLevelCompletion) ?? "\(NumberFormatter.localizedString(from: timeUntilLevelCompletion, number: .decimal))s"
+        let formattedTimeUntilLevelCompletion = timeUntilLevelCompletion <= 0 ? "–" : averageLevelDurationFormatter.string(from: timeUntilLevelCompletion) ?? "\(NumberFormatter.localizedString(from: NSNumber(value: timeUntilLevelCompletion), number: .decimal))s"
         
         currentLevelTimeRemainingCell.textLabel?.text = projectedCurrentLevel.endDateBasedOnLockedItem ? "Level Up In (Estimated)" : "Level Up In"
         currentLevelTimeRemainingCell.detailTextLabel?.text = formattedTimeUntilLevelCompletion
@@ -552,11 +552,11 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         // Operation finish
         let observer = BlockObserver(
             startHandler: { operation in
-                DDLogInfo("Fetching study queue (request ID \(UInt(ObjectIdentifier(operation))))...")
+                DDLogInfo("Fetching study queue (request ID \(UInt(bitPattern: ObjectIdentifier(operation))))...")
             },
             finishHandler: { [weak self] (operation, errors) in
                 let fatalErrors = errors.filterNonFatalErrors()
-                DDLogInfo("Study queue fetch complete (request ID \(UInt(ObjectIdentifier(operation)))): \(fatalErrors)")
+                DDLogInfo("Study queue fetch complete (request ID \(UInt(bitPattern: ObjectIdentifier(operation)))): \(fatalErrors)")
                 let operation = operation as! GetDashboardDataOperation
                 DispatchQueue.main.async {
                     // If this operation represents the currently tracked operation, then set to nil to mark as done
@@ -786,7 +786,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             
             progressDescriptionLabel = UILabel()
             progressDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-            progressDescriptionLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyleCaption2)
+            progressDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
             progressDescriptionLabel.backgroundColor = UIColor.clear
             progressDescriptionLabel.textColor = UIColor.black
             progressDescriptionLabel.textAlignment = .center
@@ -798,7 +798,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             
             progressAdditionalDescriptionLabel = UILabel()
             progressAdditionalDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-            progressAdditionalDescriptionLabel.font = UIFont.preferredFont(forTextStyle: UIFontTextStyleCaption2)
+            progressAdditionalDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
             progressAdditionalDescriptionLabel.backgroundColor = UIColor.clear
             progressAdditionalDescriptionLabel.textColor = UIColor.darkGray
             progressAdditionalDescriptionLabel.textAlignment = .center
@@ -853,7 +853,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         killTimers()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else {
             return
         }
@@ -928,7 +928,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     
     // MARK: - Key-Value Observing
     
-    override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard context == &dashboardViewControllerObservationContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return

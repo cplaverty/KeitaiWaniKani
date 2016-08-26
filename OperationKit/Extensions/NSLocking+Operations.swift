@@ -9,7 +9,7 @@
 import Foundation
 
 extension NSLocking {
-    func withCriticalScope<T>(_ block: @noescape (Void) -> T) -> T {
+    func withCriticalScope<T>(_ block: () -> T) -> T {
         lock()
         defer { unlock() }
         

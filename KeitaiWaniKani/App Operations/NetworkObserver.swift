@@ -102,7 +102,7 @@ class Timer {
     
     // MARK: Initialization
 
-    init(interval: TimeInterval, handler: ()->()) {
+    init(interval: TimeInterval, handler: @escaping () -> Void) {
         let when = DispatchTime.now() + interval
         
         DispatchQueue.main.asyncAfter(deadline: when) { [weak self] in

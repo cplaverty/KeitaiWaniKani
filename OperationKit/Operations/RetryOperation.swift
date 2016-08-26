@@ -16,7 +16,7 @@ public class RetryOperation<T: Operation>: GroupOperation, ProgressReporting {
     private let shouldRetry: (T, [Error]) -> Bool
     private var numberOfRetries = 0
     
-    public init(maximumRetryCount: Int, createOperation: @autoclosure(escaping) () -> T, shouldRetry: (T, [Error]) -> Bool) {
+    public init(maximumRetryCount: Int, createOperation: @autoclosure @escaping () -> T, shouldRetry: @escaping (T, [Error]) -> Bool) {
         self.progress = Progress(totalUnitCount: 1)
         
         self.maximumRetryCount = maximumRetryCount
@@ -25,7 +25,7 @@ public class RetryOperation<T: Operation>: GroupOperation, ProgressReporting {
         
         let initialOperation = createOperation()
         super.init(operations: [initialOperation])
-        name = "RetryOperation<\(T.self.dynamicType)>"
+        name = "RetryOperation<\(type(of: T.self))>"
     }
     
     public override func operationDidFinish(_ operation: Foundation.Operation, withErrors errors: [Error]) {

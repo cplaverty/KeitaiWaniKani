@@ -18,9 +18,9 @@ class StudyQueueTableViewCell: UITableViewCell {
         formatter.maximumUnitCount = 1
         formatter.unitsStyle = .abbreviated
         formatter.zeroFormattingBehavior = [.dropLeading, .dropTrailing]
-
+        
         return formatter
-        }()
+    }()
     
     var studyQueue: StudyQueue? {
         didSet {
@@ -44,7 +44,7 @@ class StudyQueueTableViewCell: UITableViewCell {
             return
         }
         
-        switch studyQueue.formattedTimeToNextReview(self.dynamicType.timeToNextReviewFormatter) {
+        switch studyQueue.formattedTimeToNextReview(type(of: self).timeToNextReviewFormatter) {
         case .none:
             timeToNextReviewLabel?.text = "–"
         case .now:
@@ -52,17 +52,17 @@ class StudyQueueTableViewCell: UITableViewCell {
         case .formattedString(let formattedInterval):
             timeToNextReviewLabel?.text = formattedInterval
         case .unformattedInterval(let secondsUntilNextReview):
-            timeToNextReviewLabel?.text = "\(NumberFormatter.localizedString(from: secondsUntilNextReview, number: .decimal))s"
+            timeToNextReviewLabel?.text = "\(NumberFormatter.localizedString(from: NSNumber(value: secondsUntilNextReview), number: .decimal))s"
         }
         
         if studyQueue.reviewsAvailable > 0 {
             associatedNameLabel?.text = "Reviews"
-            associatedValueLabel?.text = NumberFormatter.localizedString(from: studyQueue.reviewsAvailable, number: .decimal)
+            associatedValueLabel?.text = NumberFormatter.localizedString(from: NSNumber(value: studyQueue.reviewsAvailable), number: .decimal)
             return
         }
         
         associatedNameLabel?.text = "Next Day"
-        associatedValueLabel?.text = NumberFormatter.localizedString(from: studyQueue.reviewsAvailableNextDay, number: .decimal)
+        associatedValueLabel?.text = NumberFormatter.localizedString(from: NSNumber(value: studyQueue.reviewsAvailableNextDay), number: .decimal)
         return
     }
     

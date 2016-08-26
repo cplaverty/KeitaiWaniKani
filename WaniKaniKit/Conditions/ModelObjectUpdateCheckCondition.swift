@@ -33,9 +33,9 @@ public struct ModelObjectUpdateCheckCondition<Coder: DatabaseCoder>: OperationCo
         return nil
     }
     
-    public func evaluate(for operation: OperationKit.Operation, completion: (OperationConditionResult) -> Void) {
+    public func evaluate(for operation: OperationKit.Operation, completion: @escaping (OperationConditionResult) -> Void) {
         guard let lastUpdatedDate = self.lastUpdatedDate() else {
-            DDLogDebug("\(self.dynamicType) bypassing update check")
+            DDLogDebug("\(type(of: self)) bypassing update check")
             completion(.satisfied)
             return
         }
@@ -50,7 +50,7 @@ public struct ModelObjectUpdateCheckCondition<Coder: DatabaseCoder>: OperationCo
             }
         }
         
-        DDLogDebug("Fetch required for \(self.dynamicType)? \(fetchRequired)")
+        DDLogDebug("Fetch required for \(type(of: self))? \(fetchRequired)")
         if fetchRequired {
             completion(.satisfied)
         } else {

@@ -15,7 +15,7 @@ public struct LevelData: Equatable {
     public init(detail: [LevelInfo], projectedCurrentLevel: ProjectedLevelInfo?) {
         self.detail = detail
         self.projectedCurrentLevel = projectedCurrentLevel
-        self.stats = self.dynamicType.calculateAverageLevelDuration(detail)
+        self.stats = type(of: self).calculateAverageLevelDuration(detail)
     }
     
     /// Calculate the bounded mean, ignoring durations in the upper and lower quartiles
@@ -103,9 +103,9 @@ public func ==(lhs: ProjectedLevelInfo, rhs: ProjectedLevelInfo) -> Bool {
         lhs.endDateBasedOnLockedItem == rhs.endDateBasedOnLockedItem
 }
 
-private extension Collection {
+fileprivate extension Collection {
     /// Grab the middle 50% of values, preferring lower values
-    private func interquartileRange() -> SubSequence {
+    fileprivate func interquartileRange() -> SubSequence {
         guard self.count > 0 else { return self[startIndex..<startIndex] }
         
         let itemIndex = self.count - 1

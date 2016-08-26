@@ -15,6 +15,6 @@ public final class GetStudyQueueOperation: GetSingleItemResourceOperation<StudyQ
     public init(resolver: ResourceResolver, databaseQueue: FMDatabaseQueue, networkObserver: OperationObserver? = nil, parseOnly: Bool = false) {
         super.init(coder: StudyQueue.coder, resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver, parseOnly: parseOnly)
         
-        addObserver(TimeoutObserver(timeout: self.dynamicType.runTimeoutInSeconds))
+        addObserver(TimeoutObserver(timeout: type(of: self).runTimeoutInSeconds))
     }
 }

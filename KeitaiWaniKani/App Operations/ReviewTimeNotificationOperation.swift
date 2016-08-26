@@ -44,7 +44,7 @@ final class ReviewTimeNotificationOperation: OperationKit.Operation {
             let application = UIApplication.shared
             if let scheduledLocalNotifications = application.scheduledLocalNotifications {
                 for notification in scheduledLocalNotifications {
-                    if let userInfo = notification.userInfo, userInfo["source"] as? String == "\(self.dynamicType)" {
+                    if let userInfo = notification.userInfo, userInfo["source"] as? String == "\(type(of: self))" {
                         DDLogDebug("Cancelling existing local notification \(notification)")
                         application.cancelLocalNotification(notification)
                     }
@@ -56,7 +56,7 @@ final class ReviewTimeNotificationOperation: OperationKit.Operation {
             localNotification.fireDate = nextReviewDate
             localNotification.alertBody = "Review time!"
             localNotification.soundName = UILocalNotificationDefaultSoundName
-            localNotification.userInfo = ["source": "\(self.dynamicType)"]
+            localNotification.userInfo = ["source": "\(type(of: self))"]
             
             application.scheduleLocalNotification(localNotification)
             

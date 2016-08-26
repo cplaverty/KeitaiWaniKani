@@ -37,7 +37,7 @@ class GetKanjiOperationTests: DatabaseTestCase, ResourceHTTPStubs {
         
         let operationQueue = OperationKit.OperationQueue()
         
-        stubForResource(Resource.kanji, file: "Kanji Level 2")
+        stubRequest(for: .kanji, file: "Kanji Level 2")
         defer { OHHTTPStubs.removeAllStubs() }
         
         self.measure() {

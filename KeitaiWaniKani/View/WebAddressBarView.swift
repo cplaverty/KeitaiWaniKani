@@ -48,7 +48,7 @@ class WebAddressBarView: UIView {
         addSubview(addressLabel)
         addSubview(refreshButton)
         
-        let views = [
+        let views: [String : Any] = [
             "secureSiteIndicator": secureSiteIndicator,
             "addressLabel": addressLabel,
             "refreshButton": refreshButton

@@ -16,26 +16,26 @@ extension UIWebView {
     }
     
     func removeInputAccessoryView() {
-        guard let subview = scrollView.subviews.filter({ NSStringFromClass($0.dynamicType).hasPrefix("UIWeb") }).first else {
+        guard let subview = scrollView.subviews.filter({ NSStringFromClass(type(of: $0)).hasPrefix("UIWeb") }).first else {
             return
         }
         
         // Guard in case this method is called twice on the same webview.
-        guard !(swizzledClassMapping as NSArray).contains(subview.dynamicType) else {
+        guard !(swizzledClassMapping as NSArray).contains(type(of: subview)) else {
             return
         }
         
-        let className = "\(subview.dynamicType)_SwizzleHelper"
+        let className = "\(type(of: subview))_SwizzleHelper"
         var newClass: AnyClass? = NSClassFromString(className)
         
         if newClass == nil {
-            newClass = objc_allocateClassPair(subview.dynamicType, className, 0)
+            newClass = objc_allocateClassPair(type(of: subview), className, 0)
             
             guard newClass != nil else {
                 return
             }
             
-            let method = class_getInstanceMethod(self.dynamicType, #selector(noInputAccessoryView))
+            let method = class_getInstanceMethod(type(of: self), #selector(noInputAccessoryView))
             class_addMethod(newClass!, #selector(getter: UIResponder.inputAccessoryView), method_getImplementation(method), method_getTypeEncoding(method))
             
             objc_registerClassPair(newClass!)
@@ -64,5 +64,5 @@ extension UIWebView {
     func scrollToTop(_ animated: Bool) {
         self.scrollView.setContentOffset(CGPoint(x: 0, y: -self.scrollView.contentInset.top), animated: animated)
     }
-
+    
 }

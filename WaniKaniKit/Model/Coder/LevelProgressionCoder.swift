@@ -58,14 +58,14 @@ public final class LevelProgressionCoder: ResourceHandler, JSONDecoder, SingleIt
     
     public func createTable(in database: FMDatabase, dropExisting: Bool) throws {
         if dropExisting {
-            try database.executeUpdate("DROP TABLE IF EXISTS \(self.dynamicType.tableName)")
+            try database.executeUpdate("DROP TABLE IF EXISTS \(type(of: self).tableName)")
         }
         
-        try database.executeUpdate("CREATE TABLE IF NOT EXISTS \(self.dynamicType.tableName)(\(columnDefinitions))")
+        try database.executeUpdate("CREATE TABLE IF NOT EXISTS \(type(of: self).tableName)(\(columnDefinitions))")
     }
     
     public func load(from database: FMDatabase) throws -> LevelProgression? {
-        let resultSet = try database.executeQuery("SELECT \(columnNames) FROM \(self.dynamicType.tableName)")
+        let resultSet = try database.executeQuery("SELECT \(columnNames) FROM \(type(of: self).tableName)")
         defer { resultSet.close() }
         
         var result: LevelProgression? = nil
@@ -82,25 +82,25 @@ public final class LevelProgressionCoder: ResourceHandler, JSONDecoder, SingleIt
     
     private lazy var updateSQL: String = {
         let columnValuePlaceholders = self.createColumnValuePlaceholders(self.columnCount)
-        return "INSERT INTO \(self.dynamicType.tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
+        return "INSERT INTO \(type(of: self).tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
     }()
     
     public func save(_ model: LevelProgression, to database: FMDatabase) throws {
-        try database.executeUpdate("DELETE FROM \(self.dynamicType.tableName)")
+        try database.executeUpdate("DELETE FROM \(type(of: self).tableName)")
         
         let columnValues: [AnyObject] = [
-            model.radicalsProgress,
-            model.radicalsTotal,
-            model.kanjiProgress,
-            model.kanjiTotal,
-            model.lastUpdateTimestamp
+            model.radicalsProgress as NSNumber,
+            model.radicalsTotal as NSNumber,
+            model.kanjiProgress as NSNumber,
+            model.kanjiTotal as NSNumber,
+            model.lastUpdateTimestamp as NSDate
         ]
         
         try database.executeUpdate(updateSQL, values: columnValues)
     }
     
     public func hasBeenUpdated(since: Date, in database: FMDatabase) throws -> Bool {
-        guard let earliestDate = try database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(self.dynamicType.tableName)") else {
+        guard let earliestDate = try database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(type(of: self).tableName)") else {
             return false
         }
         

@@ -120,7 +120,7 @@ class ReviewTimelineTableViewController: UITableViewController {
         } else {
             let totalForDay = entries.reduce(0) { $0 + $1.itemCounts.total }
             let formattedDate = reviewDateFormatter.string(from: date)
-            let formattedTotal = NumberFormatter.localizedString(from: totalForDay, number: .decimal)
+            let formattedTotal = NumberFormatter.localizedString(from: NSNumber(value: totalForDay), number: .decimal)
             return "\(formattedDate) (\(formattedTotal))"
         }
     }

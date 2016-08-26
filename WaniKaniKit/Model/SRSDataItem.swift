@@ -32,13 +32,13 @@ public extension SRSDataItem {
         if initialLevel > guruNumericLevel { return nil }
         else if initialLevel == guruNumericLevel { return baseDate }
         
-        return WaniKaniAPI.minimumTime(fromSRSLevel: initialLevel, to: guruNumericLevel, fromDate: baseDate, isRadical: self.dynamicType.isRadical, isAccelerated: isAccelerated)
+        return WaniKaniAPI.minimumTime(fromSRSLevel: initialLevel, to: guruNumericLevel, fromDate: baseDate, isRadical: type(of: self).isRadical, isAccelerated: isAccelerated)
     }
     
     public func earliestPossibleGuruDate(_ unlockDateForLockedItems: Date? = nil) -> Date? {
         guard let baseDate = userSpecificSRSData?.dateUnlocked ?? unlockDateForLockedItems else { return nil }
         
-        return WaniKaniAPI.minimumTime(fromSRSLevel: 1, to: SRSLevel.guru.numericLevelThreshold, fromDate: baseDate, isRadical: self.dynamicType.isRadical, isAccelerated: isAccelerated)
+        return WaniKaniAPI.minimumTime(fromSRSLevel: 1, to: SRSLevel.guru.numericLevelThreshold, fromDate: baseDate, isRadical: type(of: self).isRadical, isAccelerated: isAccelerated)
     }
 }
 
@@ -46,9 +46,9 @@ public struct SRSDataItemSorting {
     public static func byProgress(_ lhs: SRSDataItem, _ rhs: SRSDataItem) -> Bool {
         let u1 = lhs.userSpecificSRSData, u2 = rhs.userSpecificSRSData
         if u1?.srsLevelNumeric == u2?.srsLevelNumeric {
-            return u1?.dateAvailable > u2?.dateAvailable
+            return (u1?.dateAvailable ?? Date.distantPast) > (u2?.dateAvailable ?? Date.distantPast)
         } else {
-            return u1?.srsLevelNumeric < u2?.srsLevelNumeric
+            return (u1?.srsLevelNumeric ?? Int.min) < (u2?.srsLevelNumeric ?? Int.min)
         }
     }
 }

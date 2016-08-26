@@ -13,7 +13,7 @@ import OperationKit
 class GetStudyQueueOperationTests: DatabaseTestCase, ResourceHTTPStubs {
     
     func testBadAPIKey() {
-        stubForResource(Resource.studyQueue, file: "Bad API Key")
+        stubRequest(for: .studyQueue, file: "Bad API Key")
         defer { OHHTTPStubs.removeAllStubs() }
         
         let expect = expectation(description: "studyQueue")
@@ -56,7 +56,7 @@ class GetStudyQueueOperationTests: DatabaseTestCase, ResourceHTTPStubs {
         
         let operationQueue = OperationKit.OperationQueue()
         
-        stubForResource(Resource.studyQueue, file: "Study Queue Success")
+        stubRequest(for: .studyQueue, file: "Study Queue Success")
         defer { OHHTTPStubs.removeAllStubs() }
         
         self.measure() {
@@ -97,7 +97,7 @@ class GetStudyQueueOperationTests: DatabaseTestCase, ResourceHTTPStubs {
         
         let operationQueue = OperationKit.OperationQueue()
         
-        stubForResource(Resource.studyQueue, file: "Study Queue New User")
+        stubRequest(for: .studyQueue, file: "Study Queue New User")
         defer { OHHTTPStubs.removeAllStubs() }
         
         self.measure() {

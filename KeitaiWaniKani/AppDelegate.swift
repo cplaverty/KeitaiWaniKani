@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Application lifecycle
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         // Logging
         #if DEBUG
             defaultDebugLevel = DDLogLevel.verbose
@@ -37,24 +37,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDLog.add(fileLogger)
         
         DDLogInfo("Starting new instance (logging level \(defaultDebugLevel))")
-
+        
         // Check if we've been launched by Snapshot
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             DDLogInfo("Detected snapshot run: setting login cookie and disabling notification prompts")
             if let loginCookieValue = UserDefaults.standard.string(forKey: "LOGIN_COOKIE") {
-            let loginCookie = HTTPCookie(properties: [
-                HTTPCookiePropertyKey.domain: "www.wanikani.com",
-                HTTPCookiePropertyKey.name: "remember_user_token",
-                HTTPCookiePropertyKey.path: "/",
-                HTTPCookiePropertyKey.secure: "TRUE",
-                HTTPCookiePropertyKey.value: loginCookieValue
-                ])!
+                let loginCookie = HTTPCookie(properties: [
+                    .domain: "www.wanikani.com",
+                    .name: "remember_user_token",
+                    .path: "/",
+                    .secure: "TRUE",
+                    .value: loginCookieValue
+                    ])!
                 
                 DDLogDebug("Setting login cookie value \(loginCookieValue)")
                 HTTPCookieStorage.shared.setCookie(loginCookie)
                 ApplicationSettings.apiKeyVerified = false
             }
-        
+            
             UserNotificationCondition.isEnabled = false
         }
         
@@ -78,14 +78,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         databaseQueue.inDatabase { $0?.clearCachedStatements() }
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [String : AnyObject]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         DDLogInfo("Opening due to url \(url)")
         return true
     }
     
     // MARK: - Background fetch
     
-    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         DDLogDebug("In background fetch handler")
         
         // We must have an API key set, or there's no data to fetch
@@ -102,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let completionHandlerOperationObserver = BlockObserver { operation, errors in
             guard let operation = operation as? GetDashboardDataOperation else { return }
             
-            DDLogDebug("Background run of \(operation.dynamicType) finished with errors \(errors)")
+            DDLogDebug("Background run of \(type(of: operation)) finished with errors \(errors)")
             // Check if any of these errors are non-fatal
             let fatalErrors = errors.filterNonFatalErrors()
             
@@ -133,7 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let oq = OperationKit.OperationQueue()
         oq.name = "AlliCrab worker queue"
         return oq
-        }()
+    }()
     
     // MARK: - SQLite Database
     

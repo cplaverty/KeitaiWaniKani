@@ -32,7 +32,7 @@ public protocol OperationCondition {
     func dependency(for: Operation) -> Foundation.Operation?
     
     /// Evaluate the condition, to see if it has been satisfied or not.
-    func evaluate(for: Operation, completion: (OperationConditionResult) -> Void)
+    func evaluate(for: Operation, completion: @escaping (OperationConditionResult) -> Void)
 }
 
 /**
@@ -59,7 +59,7 @@ public enum OperationConditionEvaluatorError: Error {
 }
 
 struct OperationConditionEvaluator {
-    static func evaluate(_ conditions: [OperationCondition], for operation: Operation, completion: ([Error]) -> Void) {
+    static func evaluate(_ conditions: [OperationCondition], for operation: Operation, completion: @escaping ([Error]) -> Void) {
         // Check conditions.
         let conditionGroup = DispatchGroup()
 

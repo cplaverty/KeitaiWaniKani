@@ -13,7 +13,7 @@ public extension Foundation.Operation {
         Add a completion block to be executed after the `NSOperation` enters the
         "finished" state.
     */
-    public func addCompletionBlock(_ block: (Void) -> Void) {
+    public func addCompletionBlock(_ block: @escaping () -> Void) {
         if let existing = completionBlock {
             /*
                 If we already have a completion block, we construct a new one by

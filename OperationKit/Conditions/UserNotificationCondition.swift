@@ -58,11 +58,11 @@ public struct UserNotificationCondition: OperationCondition {
     }
     
     public func dependency(for operation: Operation) -> Foundation.Operation? {
-        return self.dynamicType.isEnabled ? UserNotificationPermissionOperation(settings: settings, application: application, behavior: behavior) : nil
+        return type(of: self).isEnabled ? UserNotificationPermissionOperation(settings: settings, application: application, behavior: behavior) : nil
     }
     
-    public func evaluate(for operation: Operation, completion: (OperationConditionResult) -> Void) {
-        guard self.dynamicType.isEnabled else {
+    public func evaluate(for operation: Operation, completion: @escaping (OperationConditionResult) -> Void) {
+        guard type(of: self).isEnabled else {
             completion(.failed(UserNotificationConditionError.settingsMismatch(currentSettings: nil, desiredSettings: settings)))
             return
         }

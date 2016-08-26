@@ -112,7 +112,7 @@ public struct DownloadStrategy {
                 }
                 levelRange = staleLevels.sorted()
             } catch {
-                DDLogError("Failed to determine reduced fetch set for \(Coder.self.dynamicType): \(error)")
+                DDLogError("Failed to determine reduced fetch set for \(type(of: Coder.self)): \(error)")
             }
         }
         

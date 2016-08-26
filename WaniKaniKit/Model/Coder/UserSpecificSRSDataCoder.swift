@@ -53,7 +53,7 @@ final class UserSpecificSRSDataCoder: JSONDecoder {
 }
 
 public class SRSDataItemCoder {
-    private typealias Columns = UserSpecificSRSDataColumns
+    fileprivate typealias Columns = UserSpecificSRSDataColumns
     
     struct UserSpecificSRSDataColumns {
         static let srsLevel = "srs"
@@ -159,26 +159,26 @@ public class SRSDataItemCoder {
     
     func srsDataColumnValues(_ data: UserSpecificSRSData?) -> [AnyObject] {
         guard let data = data else {
-            return [AnyObject](repeating: NSNull(), count: self.dynamicType.columnCount)
+            return [AnyObject](repeating: NSNull(), count: type(of: self).columnCount)
         }
         
         return [
-            data.srsLevel.rawValue,
-            data.srsLevelNumeric,
-            data.dateUnlocked ?? NSNull(),
-            data.dateAvailable ?? NSNull(),
-            data.burned,
-            data.dateBurned ?? NSNull(),
-            data.meaningStats?.correctCount ?? NSNull(),
-            data.meaningStats?.incorrectCount ?? NSNull(),
-            data.meaningStats?.maxStreakLength ?? NSNull(),
-            data.meaningStats?.currentStreakLength ?? NSNull(),
-            data.readingStats?.correctCount ?? NSNull(),
-            data.readingStats?.incorrectCount ?? NSNull(),
-            data.readingStats?.maxStreakLength ?? NSNull(),
-            data.readingStats?.currentStreakLength ?? NSNull(),
-            data.meaningNote ?? NSNull(),
-            data.readingNote ?? NSNull(),
+            data.srsLevel.rawValue as NSString,
+            data.srsLevelNumeric as NSNumber,
+            data.dateUnlocked as NSDate? ?? NSNull(),
+            data.dateAvailable as NSDate? ?? NSNull(),
+            data.burned as NSNumber,
+            data.dateBurned as NSDate? ?? NSNull(),
+            data.meaningStats?.correctCount as NSNumber? ?? NSNull(),
+            data.meaningStats?.incorrectCount as NSNumber? ?? NSNull(),
+            data.meaningStats?.maxStreakLength as NSNumber? ?? NSNull(),
+            data.meaningStats?.currentStreakLength as NSNumber? ?? NSNull(),
+            data.readingStats?.correctCount as NSNumber? ?? NSNull(),
+            data.readingStats?.incorrectCount as NSNumber? ?? NSNull(),
+            data.readingStats?.maxStreakLength as NSNumber? ?? NSNull(),
+            data.readingStats?.currentStreakLength as NSNumber? ?? NSNull(),
+            data.meaningNote as NSString? ?? NSNull(),
+            data.readingNote as NSString? ?? NSNull(),
             NSNull() // TODO userSynonyms
         ]
     }
@@ -201,8 +201,8 @@ extension SRSDataItemCoder {
         }
         
         let calendar = Calendar.autoupdatingCurrent
-        let inOneHour = calendar.date(byAdding: .hour, value: 1, to: now)
-        let inOneDay = calendar.date(byAdding: .day, value: 1, to: now)
+        let inOneHour = calendar.date(byAdding: .hour, value: 1, to: now)!
+        let inOneDay = calendar.date(byAdding: .day, value: 1, to: now)!
         
         var reviewsAvailable = studyQueue.reviewsAvailable
         var reviewsAvailableNextHour = 0
@@ -235,12 +235,12 @@ extension SRSDataItemCoder {
         var whereStatement = "WHERE \(Columns.dateAvailable) IS NOT NULL AND \(Columns.burned) = 0"
         if let level = level {
             whereStatement += " AND \(levelColumnName) = :level"
-            queryArgs["level"] = level
+            queryArgs["level"] = level as NSNumber
         }
         let dateColumn: String
         if let since = since {
             dateColumn = "CASE WHEN \(Columns.dateAvailable) < :dateAvailable THEN 0 ELSE \(Columns.dateAvailable) END AS \(Columns.dateAvailable)"
-            queryArgs["dateAvailable"] = since.timeIntervalSince1970
+            queryArgs["dateAvailable"] = since.timeIntervalSince1970 as NSNumber
         } else {
             dateColumn = Columns.dateAvailable
         }
@@ -304,7 +304,7 @@ extension SRSDataItemCoder {
             let kanjiUnlockDates = kanjiUnlockDatesByLevel[level] ?? []
             
             let startOfPreviousLevel = startDates.last ?? Date.distantPast
-            let eariestPossibleGuruDate = WaniKaniAPI.minimumTime(fromSRSLevel: 1, to: SRSLevel.guru.numericLevelThreshold, fromDate: startOfPreviousLevel, isRadical: true, isAccelerated: isAccelerated)
+            let eariestPossibleGuruDate = WaniKaniAPI.minimumTime(fromSRSLevel: 1, to: SRSLevel.guru.numericLevelThreshold, fromDate: startOfPreviousLevel, isRadical: true, isAccelerated: isAccelerated) ?? Date.distantPast
             
             let minStartDate = (radicalUnlockDates + kanjiUnlockDates).lazy.flatMap { $0 }.filter { $0 > eariestPossibleGuruDate }.min()
             startDates.append(minStartDate ?? now)

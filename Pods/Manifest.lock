@@ -1,8 +1,5 @@
 PODS:
   - 1PasswordExtension (1.8.3)
-  - Charts (2.2.5):
-    - Charts/Core (= 2.2.5)
-  - Charts/Core (2.2.5)
   - CocoaLumberjack/Core (2.3.0)
   - CocoaLumberjack/Default (2.3.0):
     - CocoaLumberjack/Core
@@ -13,26 +10,25 @@ PODS:
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
-  - OHHTTPStubs (5.1.0):
-    - OHHTTPStubs/Default (= 5.1.0)
-  - OHHTTPStubs/Core (5.1.0)
-  - OHHTTPStubs/Default (5.1.0):
+  - OHHTTPStubs (5.2.0):
+    - OHHTTPStubs/Default (= 5.2.0)
+  - OHHTTPStubs/Core (5.2.0)
+  - OHHTTPStubs/Default (5.2.0):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (5.1.0):
+  - OHHTTPStubs/JSON (5.2.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (5.1.0):
+  - OHHTTPStubs/NSURLSession (5.2.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (5.1.0)
-  - OHHTTPStubs/Swift (5.1.0):
+  - OHHTTPStubs/OHPathHelpers (5.2.0)
+  - OHHTTPStubs/Swift (5.2.0):
     - OHHTTPStubs/Core
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - 1PasswordExtension
-  - Charts (from `https://github.com/danielgindi/Charts.git`, branch `Swift-3.0`)
   - CocoaLumberjack/Swift (from `https://github.com/cplaverty/CocoaLumberjack.git`)
   - FMDB
   - OHHTTPStubs
@@ -40,9 +36,6 @@ DEPENDENCIES:
   - SwiftyJSON (from `https://github.com/cplaverty/SwiftyJSON.git`, branch `swift3`)
 
 EXTERNAL SOURCES:
-  Charts:
-    :branch: Swift-3.0
-    :git: https://github.com/danielgindi/Charts.git
   CocoaLumberjack:
     :git: https://github.com/cplaverty/CocoaLumberjack.git
   SwiftyJSON:
@@ -50,24 +43,20 @@ EXTERNAL SOURCES:
     :git: https://github.com/cplaverty/SwiftyJSON.git
 
 CHECKOUT OPTIONS:
-  Charts:
-    :commit: 33e17835eda45615d888740ff975dc948ac1bd48
-    :git: https://github.com/danielgindi/Charts.git
   CocoaLumberjack:
-    :commit: 1b62b42887476576e88f34ca6863320b889c3ce2
+    :commit: ddd4c80bab5e51202f222ce0ce29d620f0e325dc
     :git: https://github.com/cplaverty/CocoaLumberjack.git
   SwiftyJSON:
-    :commit: 3fc94088ce46d2adcd2ee916b902328b3e8cb723
+    :commit: dfd77e0ffb4e9d8cf83d26093879834a432163ca
     :git: https://github.com/cplaverty/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   1PasswordExtension: 8757dc3302353731dd3e678e63b5023a708783cb
-  Charts: b48fcc8d7190de910ff9e9748f5360c8ea7856e5
   CocoaLumberjack: ce8405d1e5fd6be744c42107710da81b17b90d79
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
-  OHHTTPStubs: 592f74439d2d72615115cf99a954237a3fbe26e5
+  OHHTTPStubs: 29ae105797c3410112d10b217c8b7a55aab616b2
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: bdcf0cdb03da69adad20329811939238f8f7c360
+PODFILE CHECKSUM: c4c2550d03c76746c1e24d437978dbac9c781128
 
 COCOAPODS: 1.1.0.beta.1

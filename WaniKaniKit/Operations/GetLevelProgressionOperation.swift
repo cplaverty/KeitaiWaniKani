@@ -15,6 +15,6 @@ public final class GetLevelProgressionOperation: GetSingleItemResourceOperation<
     public init(resolver: ResourceResolver, databaseQueue: FMDatabaseQueue, networkObserver: OperationObserver? = nil) {
         super.init(coder: LevelProgression.coder, resolver: resolver, databaseQueue: databaseQueue, networkObserver: networkObserver)
         
-        addObserver(TimeoutObserver(timeout: self.dynamicType.runTimeoutInSeconds))
+        addObserver(TimeoutObserver(timeout: type(of: self).runTimeoutInSeconds))
     }
 }

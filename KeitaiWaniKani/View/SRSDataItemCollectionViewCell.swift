@@ -64,7 +64,7 @@ private extension SRSDataItemGuruProgressCollectionViewCell {
         case .formattedString(let formattedInterval):
             timeToNextReview.text = "Review: \(formattedInterval)"
         case .unformattedInterval(let secondsUntilNextReview):
-            timeToNextReview.text = "Review: \(NumberFormatter.localizedString(from: secondsUntilNextReview, number: .decimal))s"
+            timeToNextReview.text = "Review: \(NumberFormatter.localizedString(from: NSNumber(value: secondsUntilNextReview), number: .decimal))s"
         }
         
         switch WaniKaniKit.Formatter.formatTimeIntervalSinceNow(from: dataItem.guruDate(nil), formatter: dateComponentsFormatter) {
@@ -73,7 +73,7 @@ private extension SRSDataItemGuruProgressCollectionViewCell {
         case .formattedString(let formattedInterval):
             timeToGuru.text = "Guru: \(formattedInterval)"
         case .unformattedInterval(let secondsUntilNextReview):
-            timeToGuru.text = "Guru: \(NumberFormatter.localizedString(from: secondsUntilNextReview, number: .decimal))s"
+            timeToGuru.text = "Guru: \(NumberFormatter.localizedString(from: NSNumber(value: secondsUntilNextReview), number: .decimal))s"
         }
         
         let guruLevel = SRSLevel.guru.numericLevelThreshold

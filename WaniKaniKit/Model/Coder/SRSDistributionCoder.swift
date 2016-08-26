@@ -62,14 +62,14 @@ public final class SRSDistributionCoder: SRSItemCountsItem, ResourceHandler, JSO
     
     public func createTable(in database: FMDatabase, dropExisting: Bool) throws {
         if dropExisting {
-            try database.executeUpdate("DROP TABLE IF EXISTS \(self.dynamicType.tableName)")
+            try database.executeUpdate("DROP TABLE IF EXISTS \(type(of: self).tableName)")
         }
         
-        try database.executeUpdate("CREATE TABLE IF NOT EXISTS \(self.dynamicType.tableName)(\(columnDefinitions))")
+        try database.executeUpdate("CREATE TABLE IF NOT EXISTS \(type(of: self).tableName)(\(columnDefinitions))")
     }
     
     public func load(from database: FMDatabase) throws -> SRSDistribution? {
-        let resultSet = try database.executeQuery("SELECT \(columnNames) FROM \(self.dynamicType.tableName)")
+        let resultSet = try database.executeQuery("SELECT \(columnNames) FROM \(type(of: self).tableName)")
         defer { resultSet.close() }
         
         var countsBySRSLevel = [SRSLevel: SRSItemCounts]()
@@ -94,21 +94,21 @@ public final class SRSDistributionCoder: SRSItemCountsItem, ResourceHandler, JSO
     
     private lazy var updateSQL: String = {
         let columnValuePlaceholders = self.createColumnValuePlaceholders(self.columnCount)
-        return "INSERT INTO \(self.dynamicType.tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
+        return "INSERT INTO \(type(of: self).tableName)(\(self.columnNames)) VALUES (\(columnValuePlaceholders))"
     }()
     
     public func save(_ model: SRSDistribution, to database: FMDatabase) throws {
-        try database.executeUpdate("DELETE FROM \(self.dynamicType.tableName)")
+        try database.executeUpdate("DELETE FROM \(type(of: self).tableName)")
         
         for (srsLevel, srsItemCounts) in model.countsBySRSLevel {
-            let columnValues: [AnyObject] = [srsLevel.rawValue, model.lastUpdateTimestamp] + srsItemCountsColumnValues(srsItemCounts)
+            let columnValues: [AnyObject] = [srsLevel.rawValue as NSString, model.lastUpdateTimestamp as NSDate] + srsItemCountsColumnValues(srsItemCounts)
             
             try database.executeUpdate(updateSQL, values: columnValues)
         }
     }
     
     public func hasBeenUpdated(since: Date, in database: FMDatabase) throws -> Bool {
-        guard let earliestDate = try database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(self.dynamicType.tableName)") else {
+        guard let earliestDate = try database.dateForQuery("SELECT MIN(\(Columns.lastUpdateTimestamp)) FROM \(type(of: self).tableName)") else {
             return false
         }
         

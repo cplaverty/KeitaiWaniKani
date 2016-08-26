@@ -15,14 +15,14 @@ private struct DatabaseMetadata {
     var databaseVersion: Int {
         get {
             do {
-                return try database.longForQuery("SELECT value FROM \(tableName) where name = ?", "version") ?? 0
+                return try database.longForQuery("SELECT value FROM \(tableName) where name = ?", "version" as NSString) ?? 0
             } catch {
                 return 0
             }
         }
         set {
             do {
-                try database.executeUpdate("INSERT OR REPLACE INTO \(tableName)(name, value) VALUES (?, ?)", "version", newValue)
+                try database.executeUpdate("INSERT OR REPLACE INTO \(tableName)(name, value) VALUES (?, ?)", "version" as NSString, newValue as NSNumber)
             } catch {
                 DDLogWarn("Failed to update database version: \(error)")
             }
@@ -41,8 +41,8 @@ private struct DatabaseMetadata {
 public struct WaniKaniDarwinNotificationCenter {
     public static let modelUpdateNotificationName = "uk.me.laverty.KeitaiWaniKani.ModelUpdate"
     
-    public static func notificationNameForModelObjectType(_ modelObjectType: String) -> String {
-        return "\(modelUpdateNotificationName).\(modelObjectType)"
+    public static func notificationNameForModelObjectType(_ modelObjectType: String) -> NSString {
+        return "\(modelUpdateNotificationName).\(modelObjectType)" as NSString
     }
     
     public static func postModelUpdateMessage(_ modelObjectType: String) {
@@ -169,22 +169,22 @@ public struct WaniKaniAPI {
             dc.day = isRadical ? 2 : 3
             dc.hour = -1
             return dc
-        case 5: // -> 6
+        case 5:
             var dc = DateComponents()
             dc.day = 7
             dc.hour = -1
             return dc
-        case 6: // -> 7
+        case 6:
             var dc = DateComponents()
             dc.day = 14
             dc.hour = -1
             return dc
-        case 7: // -> 8
+        case 7:
             var dc = DateComponents()
             dc.month = 1
             dc.hour = -1
             return dc
-        case 8: // -> 9
+        case 8:
             var dc = DateComponents()
             dc.month = 4
             dc.hour = -1

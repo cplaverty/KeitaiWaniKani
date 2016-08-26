@@ -62,7 +62,7 @@ final class RubyLabel: UIView {
         for char in rubyCharacters {
             // Add chars
             let location = CFAttributedStringGetLength(attrString)
-            CFAttributedStringReplaceString(attrString, CFRangeMake(location, 0), char.characters)
+            CFAttributedStringReplaceString(attrString, CFRangeMake(location, 0), char.characters as CFString)
             let length = CFAttributedStringGetLength(attrString) - location
             let characterRange = CFRangeMake(location, length)
             
@@ -72,11 +72,11 @@ final class RubyLabel: UIView {
             defer { furiganaArray.deinitialize() }
             
             for i in 0..<furiganaArraySize {
-                // This probably isn't correct, but the Unmanaged<CFString> is not longer optional so ¯\_(ツ)_/¯
-                furiganaArray[i] = Unmanaged.passUnretained("")
+                // This probably isn't correct, but the Unmanaged<CFString> is no longer optional so ¯\_(ツ)_/¯
+                furiganaArray[i] = Unmanaged.passUnretained("" as CFString)
             }
             if let furigana = char.furigana {
-                furiganaArray[Int(CTRubyPosition.before.rawValue)] = Unmanaged.passUnretained(furigana)
+                furiganaArray[Int(CTRubyPosition.before.rawValue)] = Unmanaged.passUnretained(furigana as CFString)
             }
             
             let rubyRef = CTRubyAnnotationCreate(CTRubyAlignment.auto, CTRubyOverhang.auto, 0.5, furiganaArray)
@@ -86,17 +86,17 @@ final class RubyLabel: UIView {
 
         let wholeStringRange = CFRangeMake(0, CFAttributedStringGetLength(attrString))
         if let font = self.font {
-            CFAttributedStringSetAttribute(attrString, wholeStringRange, NSFontAttributeName, font);
+            CFAttributedStringSetAttribute(attrString, wholeStringRange, NSFontAttributeName as CFString, font);
         }
         if let textColor = self.textColor {
-            CFAttributedStringSetAttribute(attrString, wholeStringRange, NSForegroundColorAttributeName, textColor);
+            CFAttributedStringSetAttribute(attrString, wholeStringRange, NSForegroundColorAttributeName as CFString, textColor);
         }
         
         if orientation == .vertical {
             let para = NSMutableParagraphStyle()
             para.lineHeightMultiple = 1
 
-            CFAttributedStringSetAttribute(attrString, wholeStringRange, NSParagraphStyleAttributeName, para);
+            CFAttributedStringSetAttribute(attrString, wholeStringRange, NSParagraphStyleAttributeName as CFString, para);
             CFAttributedStringSetAttribute(attrString, wholeStringRange, kCTVerticalFormsAttributeName, NSNumber(value: true));
         }
         CFAttributedStringEndEditing(attrString);
@@ -127,7 +127,7 @@ final class RubyLabel: UIView {
             frameAttributes = nil
         }
         
-        let frame = CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(rubyString)), path, frameAttributes)
+        let frame = CTFramesetterCreateFrame(frameSetter, CFRangeMake(0, CFAttributedStringGetLength(rubyString)), path, frameAttributes as CFDictionary?)
 
         CTFrameDraw(frame, context)
     }
@@ -153,7 +153,7 @@ final class RubyLabel: UIView {
         let fitrange: UnsafeMutablePointer<CFRange>? = nil
         defer { fitrange?.deinitialize() }
 
-        let newSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, CFAttributedStringGetLength(rubyString)), frameAttributes, constraints, fitrange)
+        let newSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, CFAttributedStringGetLength(rubyString)), frameAttributes as CFDictionary?, constraints, fitrange)
         
         return newSize
     }

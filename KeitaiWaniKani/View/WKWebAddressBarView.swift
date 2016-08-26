@@ -53,7 +53,7 @@ class WKWebAddressBarView: UIView {
         addSubview(addressLabel)
         addSubview(refreshButton)
         
-        let views = [
+        let views: [String : Any] = [
             "secureSiteIndicator": secureSiteIndicator,
             "addressLabel": addressLabel,
             "refreshButton": refreshButton
@@ -120,13 +120,13 @@ class WKWebAddressBarView: UIView {
     
     // MARK: - Key-Value Observing
     
-    override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard context == &observationContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
         
-        if object === self.webView {
+        if object as AnyObject? === self.webView {
             updateUIFromWebView()
         }
     }

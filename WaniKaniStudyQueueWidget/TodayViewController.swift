@@ -39,7 +39,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         tableView.separatorEffect = UIVibrancyEffect.notificationCenter()
         
         let nc = CFNotificationCenterGetDarwinNotifyCenter()
-        let observer = UnsafePointer<Void>(Unmanaged.passUnretained(self).toOpaque())
+        let observer = UnsafeRawPointer(Unmanaged.passUnretained(self).toOpaque())
         
         CFNotificationCenterAddObserver(nc,
             observer,
@@ -67,7 +67,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     
     deinit {
         let nc = CFNotificationCenterGetDarwinNotifyCenter()
-        let observer = UnsafePointer<Void>(Unmanaged.passUnretained(self).toOpaque())
+        let observer = UnsafeRawPointer(Unmanaged.passUnretained(self).toOpaque())
         CFNotificationCenterRemoveEveryObserver(nc, observer)
     }
     

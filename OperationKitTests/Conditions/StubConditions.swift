@@ -22,7 +22,7 @@ struct AlwaysSatisfiedCondition: OperationCondition {
         return nil
     }
     
-    func evaluate(for operation: Operation, completion: (OperationConditionResult) -> Void) {
+    func evaluate(for operation: Operation, completion: @escaping (OperationConditionResult) -> Void) {
         completion(.satisfied)
     }
 }
@@ -42,7 +42,7 @@ struct AlwaysFailedCondition: OperationCondition {
         return nil
     }
     
-    func evaluate(for operation: Operation, completion: (OperationConditionResult) -> Void) {
+    func evaluate(for operation: Operation, completion: @escaping (OperationConditionResult) -> Void) {
         completion(.failed(AlwaysFailedConditionError.error))
     }
 }

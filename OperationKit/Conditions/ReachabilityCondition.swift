@@ -33,8 +33,8 @@ public struct ReachabilityCondition: OperationCondition {
         return nil
     }
     
-    public func evaluate(for operation: Operation, completion: (OperationConditionResult) -> Void) {
-        guard self.dynamicType.isEnabled else {
+    public func evaluate(for operation: Operation, completion: @escaping (OperationConditionResult) -> Void) {
+        guard type(of: self).isEnabled else {
             DDLogVerbose("Reachability check disabled - faking satisfied check")
             completion(.satisfied)
             return
@@ -62,7 +62,7 @@ private class ReachabilityController {
 
     static let reachabilityQueue = DispatchQueue(label: "Operations.Reachability")
     
-    static func requestReachability(for url: URL, completionHandler: (Bool) -> Void) {
+    static func requestReachability(for url: URL, completionHandler: @escaping (Bool) -> Void) {
         if url.isFileURL {
             let fileExists = FileManager.default.fileExists(atPath: url.path)
             completionHandler(fileExists)

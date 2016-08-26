@@ -46,7 +46,7 @@ public final class RadicalCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder,
         
         return Radical(character: json[Columns.character].string,
                        meaning: meaning,
-                       image: json[Columns.image].URL,
+                       image: json[Columns.image].url,
                        level: level,
                        userSpecificSRSData: userSpecificSRSData)
     }
@@ -114,11 +114,11 @@ public final class RadicalCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder,
         
         for model in models {
             let columnValues: [AnyObject] = [
-                model.character ?? NSNull(),
-                model.meaning,
-                model.image?.absoluteString ?? NSNull(),
-                model.level,
-                model.lastUpdateTimestamp] + srsDataColumnValues(model.userSpecificSRSData)
+                model.character as NSString? ?? NSNull(),
+                model.meaning as NSString,
+                model.image?.absoluteString as NSString? ?? NSNull(),
+                model.level as NSNumber,
+                model.lastUpdateTimestamp as NSDate] + srsDataColumnValues(model.userSpecificSRSData)
             
             try database.executeUpdate(updateSQL, values: columnValues)
         }
@@ -134,7 +134,7 @@ public final class RadicalCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder,
     
     public func levelsNotUpdated(since: Date, in database: FMDatabase) throws -> Set<Int> {
         let sql = "SELECT DISTINCT \(Columns.level) FROM \(tableName) WHERE \(Columns.lastUpdateTimestamp) < ?"
-        let resultSet = try database.executeQuery(sql, since)
+        let resultSet = try database.executeQuery(sql, since as NSDate)
         defer { resultSet.close() }
         
         var results = Set<Int>()
@@ -150,7 +150,7 @@ public final class RadicalCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder,
     
     public func possiblyStaleLevels(since: Date, in database: FMDatabase) throws -> Set<Int> {
         let sql = "SELECT DISTINCT \(Columns.level) FROM \(tableName) WHERE \(UserSpecificSRSDataColumns.dateAvailable) IS NULL OR (\(UserSpecificSRSDataColumns.dateAvailable) < ? AND \(UserSpecificSRSDataColumns.burned) = 0)"
-        let resultSet = try database.executeQuery(sql, since)
+        let resultSet = try database.executeQuery(sql, since as NSDate)
         defer { resultSet.close() }
         
         var results = Set<Int>()

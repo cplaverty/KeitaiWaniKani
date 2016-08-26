@@ -54,7 +54,7 @@ class ReviewTimelineEntryTableViewCell: UITableViewCell {
     }
     
     private func formatInteger(_ number: Int) -> String {
-        return NumberFormatter.localizedString(from: number, number: .decimal)
+        return NumberFormatter.localizedString(from: NSNumber(value: number), number: .decimal)
     }
     
 }

@@ -25,7 +25,7 @@ class GetSRSDistributionOperationTests: DatabaseTestCase, ResourceHTTPStubs {
         
         let operationQueue = OperationKit.OperationQueue()
         
-        stubForResource(Resource.srsDistribution, file: "SRS Distribution")
+        stubRequest(for: .srsDistribution, file: "SRS Distribution")
         defer { OHHTTPStubs.removeAllStubs() }
         
         self.measure() {

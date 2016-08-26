@@ -123,14 +123,14 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
         
         for model in models {
             let columnValues: [AnyObject] = [
-                model.character,
-                model.meaning,
-                model.onyomi ?? NSNull(),
-                model.kunyomi ?? NSNull(),
-                model.nanori ?? NSNull(),
-                model.importantReading,
-                model.level,
-                model.lastUpdateTimestamp
+                model.character as NSString,
+                model.meaning as NSString,
+                model.onyomi as NSString? ?? NSNull(),
+                model.kunyomi as NSString? ?? NSNull(),
+                model.nanori as NSString? ?? NSNull(),
+                model.importantReading as NSString,
+                model.level as NSNumber,
+                model.lastUpdateTimestamp as NSDate
                 ] + srsDataColumnValues(model.userSpecificSRSData)
             
             try database.executeUpdate(updateSQL, values: columnValues)
@@ -147,7 +147,7 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
     
     public func levelsNotUpdated(since: Date, in database: FMDatabase) throws -> Set<Int> {
         let sql = "SELECT DISTINCT \(Columns.level) FROM \(tableName) WHERE \(Columns.lastUpdateTimestamp) < ?"
-        let resultSet = try database.executeQuery(sql, since)
+        let resultSet = try database.executeQuery(sql, since as NSDate)
         defer { resultSet.close() }
         
         var results = Set<Int>()
@@ -163,7 +163,7 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
     
     public func possiblyStaleLevels(since: Date, in database: FMDatabase) throws -> Set<Int> {
         let sql = "SELECT DISTINCT \(Columns.level) FROM \(tableName) WHERE \(UserSpecificSRSDataColumns.dateAvailable) IS NULL OR (\(UserSpecificSRSDataColumns.dateAvailable) < ? AND \(UserSpecificSRSDataColumns.burned) = 0)"
-        let resultSet = try database.executeQuery(sql, since)
+        let resultSet = try database.executeQuery(sql, since as NSDate)
         defer { resultSet.close() }
         
         var results = Set<Int>()

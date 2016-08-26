@@ -17,7 +17,7 @@ protocol WKWebViewControllerDelegate: class {
 
 class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate, WKWebViewControllerDelegate, WebViewBackForwardListTableViewControllerDelegate, WKWebViewUserScriptSupport {
     
-    class func forURL(_ URL: Foundation.URL, configBlock: @noescape (WKWebViewController) -> Void = { _ in }) -> UINavigationController {
+    class func forURL(_ URL: Foundation.URL, configBlock: (WKWebViewController) -> Void = { _ in }) -> UINavigationController {
         let wkWebViewController = self.init(URL: URL)
         configBlock(wkWebViewController)
         
@@ -159,7 +159,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
             return
         }
         
-        var activityItems: [AnyObject] = [absoluteURL]
+        var activityItems: [AnyObject] = [absoluteURL as NSURL]
         let onePasswordExtension = OnePasswordExtension.shared()
         if onePasswordExtension.isAppExtensionAvailable() {
             onePasswordExtension.createExtensionItem(forWebView: webView) { extensionItem, error -> Void in
@@ -179,7 +179,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
                         return
                     }
                     
-                    if onePasswordExtension.isOnePasswordExtensionActivityType(activityType) {
+                    if onePasswordExtension.isOnePasswordExtensionActivityType(activityType.map { $0.rawValue }) {
                         onePasswordExtension.fillReturnedItems(returnedItems, intoWebView: self.webView) { success, error in
                             if !success {
                                 let errorDescription = error?.localizedDescription ?? "(No error details)"
@@ -241,19 +241,19 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     // MARK: - WKNavigationDelegate
     
-//    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-//        switch navigationAction.request.URL {
-//        case WaniKaniURLs.subscription?:
-//            self.showAlertWithTitle("Can not manage subscription", message: "Due to Apple App Store rules, you can not manage your subscription within the app.")
-//            decisionHandler(.Cancel)
-//        default:
-//            decisionHandler(.Allow)
-//        }
-//    }
+    //    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+    //        switch navigationAction.request.URL {
+    //        case WaniKaniURLs.subscription?:
+    //            self.showAlertWithTitle("Can not manage subscription", message: "Due to Apple App Store rules, you can not manage your subscription within the app.")
+    //            decisionHandler(.Cancel)
+    //        default:
+    //            decisionHandler(.Allow)
+    //        }
+    //    }
     
-//    func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void) {
-//        decisionHandler(.Allow)
-//    }
+    //    func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void) {
+    //        decisionHandler(.Allow)
+    //    }
     
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -276,20 +276,21 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         showErrorDialog(error)
     }
     
-    private func showErrorDialog(_ error: NSError) {
-        switch (error.domain, error.code) {
+    private func showErrorDialog(_ error: Error) {
+        let nserror = error as NSError
+        switch (nserror.domain, nserror.code) {
         // Ignore navigation cancellation errors
         case (NSURLErrorDomain, NSURLErrorCancelled), ("WebKitErrorDomain", 102):
             break
         default:
-            showAlertWithTitle("Failed to load page", message: error.localizedDescription ?? "Unknown error")
+            showAlertWithTitle("Failed to load page", message: error.localizedDescription)
         }
     }
     
     // MARK: - WKUIDelegate
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-        let newVC = self.dynamicType.init(configuration: configuration)
+        let newVC = type(of: self).init(configuration: configuration)
         newVC.delegate = self
         newVC.URL = navigationAction.request.url
         self.navigationController?.pushViewController(newVC, animated: true)
@@ -297,7 +298,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         return newVC.webView
     }
     
-    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: () -> Void) {
+    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let host = frame.request.url?.host ?? "web page"
         let title = "From \(host):"
         DispatchQueue.main.async {
@@ -309,7 +310,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         }
     }
     
-    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: (Bool) -> Void) {
+    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
         let host = frame.request.url?.host ?? "web page"
         let title = "From \(host):"
         DispatchQueue.main.async {
@@ -322,7 +323,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         }
     }
     
-    func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: (String?) -> Void) {
+    func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
         let host = frame.request.url?.host ?? "web page"
         let title = "From \(host):"
         DispatchQueue.main.async {
@@ -455,11 +456,11 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
                 self.progressView?.setProgress(1.0, animated: false)
             }
             UIView.animate(withDuration: 0.3, delay: 0.0, options: [.curveEaseIn],
-                animations: {
-                    self.progressView?.alpha = 0.0
+                           animations: {
+                            self.progressView?.alpha = 0.0
                 },
-                completion: { _ in
-                    self.progressView?.setProgress(0.0, animated: false)
+                           completion: { _ in
+                            self.progressView?.setProgress(0.0, animated: false)
             })
             
             progressViewIsHidden = true
@@ -501,13 +502,13 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     // MARK: - Key-Value Observing
     
-    override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard context == &WKWebViewControllerObservationContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
         
-        if object === self.webView {
+        if object as AnyObject? === self.webView {
             updateUIFromWebView()
         }
     }

@@ -15,19 +15,19 @@ import CocoaLumberjack
  extended readiness requirements, as well as notify many interested parties
  about interesting operation state changes
  */
-public class Operation: Foundation.Operation {
+open class Operation: Foundation.Operation {
     
     // use the KVO mechanism to indicate that changes to "state" affect other properties as well
     public class func keyPathsForValuesAffectingIsReady() -> Set<NSObject> {
-        return ["state", "isCancelled"]
+        return ["state" as NSString, "isCancelled" as NSString]
     }
     
     public class func keyPathsForValuesAffectingIsExecuting() -> Set<NSObject> {
-        return ["state"]
+        return ["state" as NSString]
     }
     
     public class func keyPathsForValuesAffectingIsFinished() -> Set<NSObject> {
-        return ["state"]
+        return ["state" as NSString]
     }
     
     // MARK: State Management
@@ -136,7 +136,7 @@ public class Operation: Foundation.Operation {
     private let readyLock = NSRecursiveLock()
     
     // Here is where we extend our definition of "readiness".
-    public override var isReady: Bool {
+    open override var isReady: Bool {
         var isReady = false
         
         readyLock.withCriticalScope {
@@ -186,22 +186,22 @@ public class Operation: Foundation.Operation {
     
     private var _cancelled = false
     
-    public override var isCancelled: Bool {
+    open override var isCancelled: Bool {
         return _cancelled || super.isCancelled
     }
     
-    public override func cancel() {
+    open override func cancel() {
         guard !isFinished else { return }
         
         _cancelled = true
         super.cancel()
     }
     
-    public override var isExecuting: Bool {
+    open override var isExecuting: Bool {
         return state == .executing
     }
     
-    public override var isFinished: Bool {
+    open override var isFinished: Bool {
         return state == .finished
     }
     
@@ -211,7 +211,7 @@ public class Operation: Foundation.Operation {
         state = .evaluatingConditions
         
         OperationConditionEvaluator.evaluate(conditions, for: self) { failures in
-            DDLogVerbose("Conditions evaluated for \(self.dynamicType), errors: \(failures)")
+            DDLogVerbose("Conditions evaluated for \(type(of: self)), errors: \(failures)")
             if !failures.isEmpty {
                 self.cancel(withErrors: failures)
             }
@@ -237,7 +237,7 @@ public class Operation: Foundation.Operation {
         observers.append(observer)
     }
     
-    public override func addDependency(_ operation: Foundation.Operation) {
+    open override func addDependency(_ operation: Foundation.Operation) {
         assert(state < .executing, "Dependencies cannot be modified after execution has begun.")
         
         super.addDependency(operation)
@@ -246,7 +246,7 @@ public class Operation: Foundation.Operation {
     // MARK: Execution and Cancellation
     
     public override final func start() {
-        DDLogVerbose("Starting \(self.dynamicType)")
+        DDLogVerbose("Starting \(type(of: self))")
         
         // NSOperation.start() contains important logic that shouldn't be bypassed.
         super.start()
@@ -261,7 +261,7 @@ public class Operation: Foundation.Operation {
         assert(state == .ready, "This operation must be performed on an operation queue.")
         
         if _internalErrors.isEmpty && !isCancelled {
-            DDLogVerbose("Executing \(self.dynamicType)")
+            DDLogVerbose("Executing \(type(of: self))")
             
             state = .executing
             
@@ -272,7 +272,7 @@ public class Operation: Foundation.Operation {
             execute()
         }
         else {
-            DDLogVerbose("Not executing \(self.dynamicType) due to cancellation (\(self.isCancelled)) or condition errors: \(self._internalErrors)")
+            DDLogVerbose("Not executing \(type(of: self)) due to cancellation (\(self.isCancelled)) or condition errors: \(self._internalErrors)")
             finish()
         }
     }
@@ -287,8 +287,8 @@ public class Operation: Foundation.Operation {
      finished its execution, and that operations dependent on yours can re-evaluate
      their readiness state.
      */
-    public func execute() {
-        print("\(self.dynamicType) must override `execute()`.")
+    open func execute() {
+        print("\(type(of: self)) must override `execute()`.")
         
         finish()
     }
@@ -303,8 +303,8 @@ public class Operation: Foundation.Operation {
         }
     }
     
-    public func cancel(withErrors errors: [Error] = []) {
-        DDLogVerbose("Cancelling \(self.dynamicType), errors: \(errors)")
+    open func cancel(withErrors errors: [Error] = []) {
+        DDLogVerbose("Cancelling \(type(of: self)), errors: \(errors)")
         if !errors.isEmpty {
             _internalErrors.append(contentsOf: errors)
         }
@@ -350,7 +350,7 @@ public class Operation: Foundation.Operation {
             let combinedErrors = _internalErrors + errors
             finished(combinedErrors)
             
-            DDLogVerbose("Finished \(self.dynamicType), all errors: \(combinedErrors)")
+            DDLogVerbose("Finished \(type(of: self)), all errors: \(combinedErrors)")
             
             for observer in observers {
                 observer.operationDidFinish(self, errors: combinedErrors)
@@ -366,7 +366,7 @@ public class Operation: Foundation.Operation {
      this method to potentially inform the user about an error when trying to
      bring up the Core Data stack.
      */
-    public func finished(_ errors: [Error]) {
+    open func finished(_ errors: [Error]) {
         // No op.
     }
     

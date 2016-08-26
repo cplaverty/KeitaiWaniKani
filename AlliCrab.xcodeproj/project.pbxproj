@@ -1916,7 +1916,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B876EA5824A6CCB6A689FA51 /* Pods-AlliCrab.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = KeitaiWaniKani/KeitaiWaniKani.entitlements;
@@ -1935,7 +1935,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2890FAE399F71469B0449BEA /* Pods-AlliCrab.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = KeitaiWaniKani/KeitaiWaniKani.entitlements;
@@ -2064,7 +2064,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 746F11E1BAB692DD46347209 /* Pods-WaniKaniKitTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = WaniKaniKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.WaniKaniKitTests;
@@ -2077,7 +2077,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2691F2F6BB02AFAAF87B97D0 /* Pods-WaniKaniKitTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = WaniKaniKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.WaniKaniKitTests;
@@ -2136,7 +2136,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 81BC8E43B9801D1CDA0D5EAD /* Pods-OperationKitTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = OperationKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.OperationKitTests;
@@ -2149,7 +2149,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 564361D5394FB9ABE3B9CA27 /* Pods-OperationKitTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = OperationKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.OperationKitTests;

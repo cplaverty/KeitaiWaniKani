@@ -25,12 +25,12 @@ private struct ClassifiedSRSDataItems {
         var sections: [Section] = []
         sections.reserveCapacity(2)
         
-        let pending = items.filter(self.dynamicType.isPending)
+        let pending = items.filter(type(of: self).isPending)
         if !pending.isEmpty {
             sections.append(Section(title: "Remaining to Level", items: pending))
         }
         
-        let complete = items.filter(self.dynamicType.isComplete)
+        let complete = items.filter(type(of: self).isComplete)
         if !complete.isEmpty {
             sections.append(Section(title: "Complete", items: complete))
         }
@@ -61,9 +61,9 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
     
     private var headerFont: UIFont {
         if #available(iOS 9.0, *) {
-            return UIFont.preferredFont(forTextStyle: UIFontTextStyleTitle1)
+            return UIFont.preferredFont(forTextStyle: .title1)
         } else {
-            let headlineFont = UIFont.preferredFont(forTextStyle: UIFontTextStyleBody)
+            let headlineFont = UIFont.preferredFont(forTextStyle: .body)
             let pointSize = headlineFont.pointSize * 5.0 / 3.0
             return headlineFont.withSize(pointSize)
         }
@@ -95,7 +95,7 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kanjiReuseIdentifier, for: indexPath) as! KanjiGuruProgressCollectionViewCell
                 cell.dataItem = kanji
                 return cell
-            default: fatalError("Only Radicals and Kanji are supported by \(self.dynamicType)")
+            default: fatalError("Only Radicals and Kanji are supported by \(type(of: self))")
             }
         } else {
             fatalError("Neither kanji or radicals set, yet it tried to dequeue a cell")

@@ -6,7 +6,7 @@ target 'AlliCrab' do
     pod 'SwiftyJSON', :git => 'https://github.com/cplaverty/SwiftyJSON.git', :branch => 'swift3'
     pod 'CocoaLumberjack/Swift', :git => 'https://github.com/cplaverty/CocoaLumberjack.git'
     pod '1PasswordExtension'
-    pod 'Charts', :git => 'https://github.com/danielgindi/Charts.git', :branch => 'Swift-3.0'
+    #pod 'Charts', :git => 'https://github.com/danielgindi/Charts.git', :branch => 'Swift-3.0'
     
     target 'OperationKit'
     target 'WaniKaniKit'

@@ -20,7 +20,7 @@ class GetLevelProgressionOperationTests: DatabaseTestCase, ResourceHTTPStubs {
         
         let operationQueue = OperationKit.OperationQueue()
         
-        stubForResource(Resource.levelProgression, file: "Level Progression")
+        stubRequest(for: .levelProgression, file: "Level Progression")
         defer { OHHTTPStubs.removeAllStubs() }
         
         self.measure() {

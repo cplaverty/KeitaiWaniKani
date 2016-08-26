@@ -51,7 +51,7 @@ class WaniKaniReviewPageWebViewController: WebViewController {
                 return true
         }
         
-        let newVC = self.dynamicType.init(url: url)
+        let newVC = type(of: self).init(url: url)
         newVC.delegate = self
         self.navigationController?.pushViewController(newVC, animated: true)
         

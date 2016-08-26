@@ -22,27 +22,27 @@ import CocoaLumberjack
     subsequent operations (still within the outer `GroupOperation`) that will all
     be executed before the rest of the operations in the initial chain of operations.
 */
-public class GroupOperation: Operation {
+open class GroupOperation: Operation {
     
-    public override var name: String? {
+    open override var name: String? {
         didSet {
             if let name = name {
                 internalQueue.name = "\(name) internal queue"
             } else {
-                internalQueue.name = "\(self.dynamicType) internal queue"
+                internalQueue.name = "\(type(of: self)) internal queue"
             }
         }
     }
     
     let internalQueue: OperationQueue = {
         let oq = OperationQueue()
-        oq.name = "\(self.dynamicType) internal queue"
+        oq.name = "\(type(of: self)) internal queue"
         return oq
     }()
-    private let startingOperation = Foundation.BlockOperation() {}
-    private let finishingOperation = Foundation.BlockOperation() {}
+    fileprivate let startingOperation = Foundation.BlockOperation() {}
+    fileprivate let finishingOperation = Foundation.BlockOperation() {}
     
-    private var aggregatedErrors = [Error]()
+    fileprivate var aggregatedErrors = [Error]()
     
     public convenience init(operations: Foundation.Operation...) {
         self.init(operations: operations)
@@ -60,8 +60,8 @@ public class GroupOperation: Operation {
         }
     }
     
-    public override func cancel() {
-        DDLogVerbose("Cancelling group operation \(self.dynamicType)")
+    open override func cancel() {
+        DDLogVerbose("Cancelling group operation \(type(of: self))")
         super.cancel()
         internalQueue.cancelAllOperations()
         if internalQueue.isSuspended {
@@ -69,8 +69,8 @@ public class GroupOperation: Operation {
         }
     }
     
-    public override func execute() {
-        DDLogVerbose("Executing group operation \(self.dynamicType)")
+    open override func execute() {
+        DDLogVerbose("Executing group operation \(type(of: self))")
         internalQueue.isSuspended = false
         add(finishingOperation)
     }
@@ -110,7 +110,7 @@ public class GroupOperation: Operation {
         aggregatedErrors.append(error)
     }
     
-    public func operationDidFinish(_ operation: Foundation.Operation, withErrors errors: [Error]) {
+    open func operationDidFinish(_ operation: Foundation.Operation, withErrors errors: [Error]) {
         // For use by subclassers.
     }
 }
@@ -119,7 +119,7 @@ extension GroupOperation: OperationQueueDelegate {
     public final func operationQueue(_ operationQueue: OperationQueue, willAddOperation operation: Foundation.Operation) {}
     
     public final func operationQueue(_ operationQueue: OperationQueue, operationDidFinish operation: Foundation.Operation, withErrors errors: [Error]) {
-        DDLogVerbose("Completed execution of \(operation.dynamicType) in group operation \(self.dynamicType)")
+        DDLogVerbose("Completed execution of \(type(of: operation)) in group operation \(type(of: self))")
         aggregatedErrors.append(contentsOf: errors)
         
         if operation === finishingOperation {

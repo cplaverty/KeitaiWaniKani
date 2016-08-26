@@ -38,7 +38,7 @@ public class GetListItemResourceOperation<Coder: ResourceHandler & JSONDecoder &
     
     // MARK: - Initialisers
     
-    public init(coder: Coder, resolver: ResourceResolver, databaseQueue: FMDatabaseQueue, networkObserver: OperationObserver?, batchesForCoder: (Coder) -> [DownloadBatches]) {
+    public init(coder: Coder, resolver: ResourceResolver, databaseQueue: FMDatabaseQueue, networkObserver: OperationObserver?, batchesForCoder: @escaping (Coder) -> [DownloadBatches]) {
         self.resource = coder.resource
         self.batchesForCoder = batchesForCoder
         self.coder = coder
@@ -123,9 +123,9 @@ public class GetListItemResourceOperation<Coder: ResourceHandler & JSONDecoder &
     
     public override func operationDidFinish(_ operation: Foundation.Operation, withErrors errors: [Error]) {
         if errors.isEmpty {
-            DDLogDebug("\(operation.self.dynamicType) finished with no errors")
+            DDLogDebug("\(type(of: operation.self)) finished with no errors")
         } else {
-            DDLogWarn("\(operation.self.dynamicType) finished with \(errors.count) error(s): \(errors)")
+            DDLogWarn("\(type(of: operation.self)) finished with \(errors.count) error(s): \(errors)")
         }
     }
     

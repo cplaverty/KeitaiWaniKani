@@ -58,6 +58,9 @@ public class SRSItemCountsItem {
     }
     
     func srsItemCountsColumnValues(_ data: SRSItemCounts) -> [AnyObject] {
-        return [data.radicals, data.kanji, data.vocabulary, data.total]
+        return [data.radicals as NSNumber,
+                data.kanji as NSNumber,
+                data.vocabulary as NSNumber,
+                data.total as NSNumber]
     }
 }
