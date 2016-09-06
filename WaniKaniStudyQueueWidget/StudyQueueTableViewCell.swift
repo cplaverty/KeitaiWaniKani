@@ -38,9 +38,6 @@ class StudyQueueTableViewCell: UITableViewCell {
     
     func updateUI() {
         guard let studyQueue = self.studyQueue else {
-            timeToNextReviewLabel?.text = "–"
-            associatedNameLabel?.text = nil
-            associatedValueLabel?.text = nil
             return
         }
         
@@ -66,4 +63,17 @@ class StudyQueueTableViewCell: UITableViewCell {
         return
     }
     
+    override func prepareForReuse() {
+        timeToNextReviewLabel?.text = "–"
+        associatedNameLabel?.text = nil
+        associatedValueLabel?.text = nil
+        
+        if #available(iOSApplicationExtension 9.0, *) {
+            timeToNextReviewLabel.font = UIFont.preferredFont(forTextStyle: .title1)
+            associatedValueLabel.font = UIFont.preferredFont(forTextStyle: .title1)
+        } else {
+            timeToNextReviewLabel.font = UIFont.systemFont(ofSize: 35, weight: UIFontWeightThin)
+            associatedValueLabel.font = UIFont.systemFont(ofSize: 35, weight: UIFontWeightThin)
+        }
+    }
 }

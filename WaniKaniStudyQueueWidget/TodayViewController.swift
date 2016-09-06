@@ -36,21 +36,28 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         
         tableView.estimatedRowHeight = 95
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.separatorEffect = UIVibrancyEffect.notificationCenter()
+        if #available(iOSApplicationExtension 10.0, *) {
+            // No table separator for iOS 10
+            tableView.separatorStyle = .none
+            tableView.separatorEffect = nil
+        } else {
+            tableView.separatorStyle = .singleLine
+            tableView.separatorEffect = UIVibrancyEffect.notificationCenter()
+        }
         
         let nc = CFNotificationCenterGetDarwinNotifyCenter()
         let observer = UnsafeRawPointer(Unmanaged.passUnretained(self).toOpaque())
         
         CFNotificationCenterAddObserver(nc,
-            observer,
-            { (_, observer, name, _, _) in
-                NSLog("Got notification for \(name)")
-                let mySelf = Unmanaged<TodayViewController>.fromOpaque(observer!).takeUnretainedValue()
-                mySelf.updateStudyQueue()
+                                        observer,
+                                        { (_, observer, name, _, _) in
+                                            NSLog("Got notification for \(name)")
+                                            let mySelf = Unmanaged<TodayViewController>.fromOpaque(observer!).takeUnretainedValue()
+                                            mySelf.updateStudyQueue()
             },
-            WaniKaniDarwinNotificationCenter.notificationNameForModelObjectType("\(StudyQueue.self)"),
-            nil,
-            .deliverImmediately)
+                                        WaniKaniDarwinNotificationCenter.notificationNameForModelObjectType("\(StudyQueue.self)"),
+                                        nil,
+                                        .deliverImmediately)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,16 +113,16 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
             return nil
         }
         
-        let database = FMDatabase(path: databasePath)
-        guard (database?.open())! else {
-            let error = database?.lastError()
+        let database = FMDatabase(path: databasePath)!
+        guard database.open() else {
+            let error = database.lastError()
             NSLog("Database failed to open! \(error)")
             throw error!
         }
-        defer { database?.close() }
+        defer { database.close() }
         
         NSLog("Fetching study queue from database")
-        return try SRSDataItemCoder.projectedStudyQueue(database!)
+        return try SRSDataItemCoder.projectedStudyQueue(database)
     }
     
     // MARK: - UITableViewDataSource
@@ -129,13 +136,24 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let identifier: String
         if let studyQueue = self.studyQueue {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "StudyQueue", for: indexPath) as! StudyQueueTableViewCell
+            if #available(iOSApplicationExtension 10.0, *) {
+                identifier = "StudyQueueLight"
+            } else {
+                identifier = "StudyQueueDark"
+            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! StudyQueueTableViewCell
             cell.studyQueue = studyQueue
             
             return cell
         } else {
-            return tableView.dequeueReusableCell(withIdentifier: "NotLoggedIn", for: indexPath)
+            if #available(iOSApplicationExtension 10.0, *) {
+                identifier = "NotLoggedInLight"
+            } else {
+                identifier = "NotLoggedInDark"
+            }
+            return tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
         }
     }
     
