@@ -11,11 +11,11 @@ import OperationKit
 import WaniKaniKit
 
 class GetAPIKeyViewController: UIViewController, UITextFieldDelegate {
-
+    
     struct SegueIdentifiers {
         static let apiKeySet = "APIKeySetManually"
     }
-
+    
     func preventInput() {
         apiKeyTextField.isEnabled = false
         doneBarButton.isEnabled = false
@@ -32,9 +32,9 @@ class GetAPIKeyViewController: UIViewController, UITextFieldDelegate {
         guard let apiKey = apiKeyTextField.text else {
             return
         }
-
+        
         preventInput()
-
+        
         ApplicationSettings.apiKey = apiKey
         
         DDLogDebug("Checking validity of API key \(apiKey)")
@@ -56,10 +56,10 @@ class GetAPIKeyViewController: UIViewController, UITextFieldDelegate {
                     } else {
                         if errors.contains(where: { if case WaniKaniAPIError.userNotFound = $0 { return true } else { return false } }) {
                             ApplicationSettings.apiKey = nil
-                            self.showAlertWithTitle("Invalid API Key", message: "The API key you entered is invalid.  Please check and try again.")
+                            self.showAlert(title:"Invalid API Key", message: "The API key you entered is invalid.  Please check and try again.")
                         } else {
-                            self.showAlertWithTitle("Unable to verify API Key",
-                                message: "An error occurred when attempting to validate the API Key.\nDetails: \(errors)")
+                            self.showAlert(title: "Unable to verify API Key",
+                                           message: "An error occurred when attempting to validate the API Key.\nDetails: \(errors)")
                         }
                     }
                 }
@@ -74,22 +74,22 @@ class GetAPIKeyViewController: UIViewController, UITextFieldDelegate {
             delegate.operationQueue.addOperation(operation)
         }
     }
-
+    
     var aktfObserver: NSObjectProtocol?
     
     func observeTextField() {
         let center = NotificationCenter.default
         aktfObserver = center.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange,
-            object: apiKeyTextField,
-            queue: Foundation.OperationQueue.main) { _ in
-                if let text = self.apiKeyTextField?.text {
-                    self.doneBarButton.isEnabled = !text.characters.isEmpty
-                } else {
-                    self.doneBarButton.isEnabled = false
-                }
+                                          object: apiKeyTextField,
+                                          queue: Foundation.OperationQueue.main) { _ in
+                                            if let text = self.apiKeyTextField?.text {
+                                                self.doneBarButton.isEnabled = !text.characters.isEmpty
+                                            } else {
+                                                self.doneBarButton.isEnabled = false
+                                            }
         }
     }
-
+    
     // MARK: Outlets
     
     @IBOutlet weak var doneBarButton: UIBarButtonItem!

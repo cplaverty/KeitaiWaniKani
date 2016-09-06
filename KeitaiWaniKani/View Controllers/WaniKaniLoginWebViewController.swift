@@ -61,7 +61,7 @@ class WaniKaniLoginWebViewController: WebViewController {
                             DDLogVerbose("Received script message API Key generation button \(result)")
                         } else {
                             DDLogWarn("Failed to click API Key generation button")
-                            self.showAlertWithTitle("Failed to generate API Key", message: "API Key could not be generated.  Please try again later.") { self.delegate?.webViewControllerDidFinish(self) }
+                            self.showAlert(title: "Failed to generate API Key", message: "API Key could not be generated.  Please try again later.") { self.delegate?.webViewControllerDidFinish(self) }
                         }
                         })
                     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in

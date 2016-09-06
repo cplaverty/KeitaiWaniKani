@@ -262,7 +262,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         }
         webView.configuration.userContentController.removeAllUserScripts()
         if let url = webView.url {
-            _ = injectUserScripts(forURL: url)
+            _ = injectUserScripts(for: url)
         }
     }
     
@@ -283,7 +283,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         case (NSURLErrorDomain, NSURLErrorCancelled), ("WebKitErrorDomain", 102):
             break
         default:
-            showAlertWithTitle("Failed to load page", message: error.localizedDescription)
+            showAlert(title: "Failed to load page", message: error.localizedDescription)
         }
     }
     

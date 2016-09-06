@@ -13,11 +13,11 @@ protocol UserScriptSupport {
     func injectScript(name: String)
     func injectStyleSheet(name: String)
     
-    func injectUserScripts(forURL: URL) -> Bool
+    func injectUserScripts(for: URL) -> Bool
 }
 
 extension UserScriptSupport {
-    func injectUserScripts(forURL url: URL) -> Bool {
+    func injectUserScripts(for url: URL) -> Bool {
         switch url {
         case WaniKaniURLs.loginPage:
             DDLogDebug("Loading user scripts")

@@ -76,7 +76,7 @@ class ReviewTimelineTableViewController: UITableViewController {
                         self?.reviewTimelineByDate = result
                     }
                 } catch {
-                    self?.showAlertWithTitle("Failed to build review timeline", message: error.localizedDescription)
+                    self?.showAlert(title: "Failed to build review timeline", message: error.localizedDescription)
                 }
             }
         }

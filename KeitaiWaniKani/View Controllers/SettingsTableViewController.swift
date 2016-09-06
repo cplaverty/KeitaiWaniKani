@@ -204,7 +204,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     
     private func sendMail() {
         if !MFMailComposeViewController.canSendMail() {
-            self.showAlertWithTitle("Unable to send mail", message: "Your device is not configured to send e-mail.  Please set up an email account and try again.")
+            self.showAlert(title: "Unable to send mail", message: "Your device is not configured to send e-mail.  Please set up an email account and try again.")
         } else {
             let vc = MFMailComposeViewController()
             vc.mailComposeDelegate = self

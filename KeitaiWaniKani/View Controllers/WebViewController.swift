@@ -232,8 +232,8 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
             requestStack.append(request)
             if let requestURLStarted = request.url,
                 requestURLStarted == WaniKaniURLs.loginPage || requestURLStarted == WaniKaniURLs.lessonSession || requestURLStarted == WaniKaniURLs.reviewSession {
-                    DDLogDebug("Clearing user script injection flag")
-                    userScriptsInjected = false
+                DDLogDebug("Clearing user script injection flag")
+                userScriptsInjected = false
             }
         }
         DDLogVerbose("webViewDidStartLoad webView.request: \(requestStack.last?.description ?? "<none>")")
@@ -269,7 +269,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         
         if !userScriptsInjected {
             if let url = webView.request?.url {
-                userScriptsInjected = injectUserScripts(forURL: url)
+                userScriptsInjected = injectUserScripts(for: url)
                 
                 if url == WaniKaniURLs.lessonSession || url == WaniKaniURLs.reviewSession {
                     showBrowserInterface(false, animated: true)
@@ -288,11 +288,11 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         let nsError = error as NSError
         if nsError.domain != "WebKitErrorDomain" && nsError.code != 102 {
             switch (nsError.domain, nsError.code) {
-                // Ignore navigation cancellation errors
+            // Ignore navigation cancellation errors
             case (NSURLErrorDomain, NSURLErrorCancelled), ("WebKitErrorDomain", 102):
                 break
             default:
-                showAlertWithTitle("Failed to load page", message: error.localizedDescription)
+                showAlert(title: "Failed to load page", message: error.localizedDescription)
             }
         }
     }
@@ -329,7 +329,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         NSLayoutConstraint(item: webView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint(item: webView, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
         NSLayoutConstraint(item: webView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-
+        
         self.view.addSubview(statusBarView)
         
         if allowsBackForwardNavigationGestures {

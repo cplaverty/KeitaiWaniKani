@@ -9,8 +9,8 @@ import UIKit
 import CocoaLumberjack
 
 extension UIViewController {
-
-    func showAlertWithTitle(_ title: String, message: String, completion: (() -> Void)? = nil) {
+    
+    func showAlert(title: String? = nil, message: String, completion: (() -> Void)? = nil) {
         DispatchQueue.main.async {
             DDLogInfo("Displaying alert with title \(title) and message \(message)")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -19,11 +19,11 @@ extension UIViewController {
             self.present(alert, animated: true, completion: completion)
         }
     }
-
+    
 }
 
 extension UIStoryboardSegue {
-
+    
     var destinationContentViewController: UIViewController {
         let dvc = self.destination
         if let nvc = dvc as? UINavigationController {
@@ -32,5 +32,5 @@ extension UIStoryboardSegue {
             return dvc
         }
     }
-
+    
 }
