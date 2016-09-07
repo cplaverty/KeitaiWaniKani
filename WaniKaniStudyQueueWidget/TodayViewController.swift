@@ -97,6 +97,15 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         }
     }
     
+    @available(iOSApplicationExtension 10.0, *)
+    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+        NSLog("widgetActiveDisplayModeDidChange: \(activeDisplayMode) - \(maxSize)")
+        if activeDisplayMode == .compact {
+            tableView.rowHeight = maxSize.height
+            preferredContentSize = maxSize
+        }
+    }
+    
     // MARK: - Implementation
     
     func updateStudyQueue() {
