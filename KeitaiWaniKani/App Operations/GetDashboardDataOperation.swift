@@ -153,7 +153,7 @@ final class GetDashboardDataOperation: GroupOperation, ProgressReporting {
             alert.title = "Unable to Connect"
             alert.message = "Cannot connect to \(host). Make sure your device is connected to the internet and try again."
             
-        case CocoaError.propertyListReadCorruptError:
+        case CocoaError.propertyListReadCorrupt:
             // We failed because the JSON was malformed.
             alert.title = "Unable to Download"
             alert.message = "Cannot download WaniKani API data. Try again later."

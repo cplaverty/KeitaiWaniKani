@@ -23,7 +23,7 @@ public struct ModelObjectUpdateCheckCondition<Coder: DatabaseCoder>: OperationCo
     private let coder: Coder
     private let databaseQueue: FMDatabaseQueue
     
-    public init(lastUpdatedDate: LastUpdatedDateDelegate, coder: Coder, databaseQueue: FMDatabaseQueue) {
+    public init(lastUpdatedDate: @escaping LastUpdatedDateDelegate, coder: Coder, databaseQueue: FMDatabaseQueue) {
         self.lastUpdatedDate = lastUpdatedDate
         self.coder = coder
         self.databaseQueue = databaseQueue

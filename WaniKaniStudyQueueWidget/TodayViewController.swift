@@ -80,7 +80,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     
     // MARK: - NCWidgetProviding
     
-    func widgetPerformUpdate(completionHandler: ((NCUpdateResult) -> Void)) {
+    func widgetPerformUpdate(completionHandler: @escaping (NCUpdateResult) -> Void) {
         do {
             let oldStudyQueue = self.studyQueue
             studyQueue = try fetchStudyQueueFromDatabase()

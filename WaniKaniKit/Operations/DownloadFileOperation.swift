@@ -112,7 +112,7 @@ public class DownloadFileOperation: OperationKit.Operation, URLSessionDownloadDe
         do {
             // If we already have a file at this location, just delete it.
             try fm.removeItem(at: destinationFileURL)
-        } catch CocoaError.fileNoSuchFileError {
+        } catch CocoaError.fileNoSuchFile {
             // Ignore errors if the file didn't exist
         } catch {
             DDLogWarn("Failed to remove destination file \(self.destinationFileURL): \(error)")

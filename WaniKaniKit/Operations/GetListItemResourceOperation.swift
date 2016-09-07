@@ -61,7 +61,7 @@ public class GetListItemResourceOperation<Coder: ResourceHandler & JSONDecoder &
                 }
                 DDLogDebug("Removing cache directory \(self.rootCacheDirectory)")
                 try FileManager.default.removeItem(at: self.rootCacheDirectory)
-            } catch CocoaError.fileNoSuchFileError {
+            } catch CocoaError.fileNoSuchFile {
                 DDLogDebug("Ignoring failure to delete cache file in directory which didn't exist: \(self.rootCacheDirectory)")
             } catch {
                 DDLogWarn("Failed to clean up temporary file in \(self.rootCacheDirectory): \(error)")
