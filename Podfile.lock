@@ -31,23 +31,29 @@ DEPENDENCIES:
   - 1PasswordExtension
   - CocoaLumberjack/Swift (from `https://github.com/cplaverty/CocoaLumberjack.git`)
   - FMDB
-  - OHHTTPStubs
-  - OHHTTPStubs/Swift
+  - OHHTTPStubs (from `https://github.com/AliSoftware/OHHTTPStubs.git`, branch `xcode8-gm`)
+  - OHHTTPStubs/Swift (from `https://github.com/AliSoftware/OHHTTPStubs.git`, branch `xcode8-gm`)
   - SwiftyJSON (from `https://github.com/cplaverty/SwiftyJSON.git`, branch `swift3`)
 
 EXTERNAL SOURCES:
   CocoaLumberjack:
     :git: https://github.com/cplaverty/CocoaLumberjack.git
+  OHHTTPStubs:
+    :branch: xcode8-gm
+    :git: https://github.com/AliSoftware/OHHTTPStubs.git
   SwiftyJSON:
     :branch: swift3
     :git: https://github.com/cplaverty/SwiftyJSON.git
 
 CHECKOUT OPTIONS:
   CocoaLumberjack:
-    :commit: ddd4c80bab5e51202f222ce0ce29d620f0e325dc
+    :commit: 9373aad2a15921da1e71645776ecd758bff40833
     :git: https://github.com/cplaverty/CocoaLumberjack.git
+  OHHTTPStubs:
+    :commit: d8596d5a9cd429d32077bbf30845f4e7a4bca0f8
+    :git: https://github.com/AliSoftware/OHHTTPStubs.git
   SwiftyJSON:
-    :commit: dfd77e0ffb4e9d8cf83d26093879834a432163ca
+    :commit: e18a2aa6d948505cfceaaaf8f7d8c7165b0af557
     :git: https://github.com/cplaverty/SwiftyJSON.git
 
 SPEC CHECKSUMS:
@@ -57,6 +63,6 @@ SPEC CHECKSUMS:
   OHHTTPStubs: 29ae105797c3410112d10b217c8b7a55aab616b2
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: c4c2550d03c76746c1e24d437978dbac9c781128
+PODFILE CHECKSUM: dee3be0be79a5170e7c49b358e7a86005e8f7851
 
-COCOAPODS: 1.1.0.beta.1
+COCOAPODS: 1.1.0.beta.2

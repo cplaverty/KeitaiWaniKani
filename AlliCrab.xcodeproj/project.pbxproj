@@ -1210,6 +1210,7 @@
 					8346E60F1C497DF600068686 = {
 						CreatedOnToolsVersion = 7.2;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 830EAB851B41DC7700EBF073;
 					};
 					8347BCF81B725428000F99EF = {
@@ -1219,7 +1220,9 @@
 					};
 					8347BD011B725428000F99EF = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 5QAN68L9NX;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					83C8F9491B9B2E7E007CBFBF = {
 						CreatedOnToolsVersion = 7.0;
@@ -1228,7 +1231,9 @@
 					};
 					83D550531BB489A9007442EF = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 5QAN68L9NX;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -1987,6 +1992,7 @@
 		8346E6171C497DF600068686 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = KeitaiWaniKaniUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -2001,6 +2007,7 @@
 		8346E6181C497DF600068686 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = KeitaiWaniKaniUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -2065,6 +2072,8 @@
 			baseConfigurationReference = 746F11E1BAB692DD46347209 /* Pods-WaniKaniKitTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5QAN68L9NX;
 				INFOPLIST_FILE = WaniKaniKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.WaniKaniKitTests;
@@ -2078,6 +2087,8 @@
 			baseConfigurationReference = 2691F2F6BB02AFAAF87B97D0 /* Pods-WaniKaniKitTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5QAN68L9NX;
 				INFOPLIST_FILE = WaniKaniKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.WaniKaniKitTests;
@@ -2137,6 +2148,8 @@
 			baseConfigurationReference = 81BC8E43B9801D1CDA0D5EAD /* Pods-OperationKitTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5QAN68L9NX;
 				INFOPLIST_FILE = OperationKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.OperationKitTests;
@@ -2150,6 +2163,8 @@
 			baseConfigurationReference = 564361D5394FB9ABE3B9CA27 /* Pods-OperationKitTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5QAN68L9NX;
 				INFOPLIST_FILE = OperationKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.OperationKitTests;
