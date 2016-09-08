@@ -217,6 +217,9 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         DDLogVerbose("shouldStartLoadWithRequest: \(request) navigationType: \(navigationType)")
         lastRequest = request
+        if requestStack.isEmpty {
+            addressBarView.url = request.url
+        }
 //        switch request.url {
 //        case WaniKaniURLs.subscription?:
 //            self.showAlertWithTitle("Can not manage subscription", message: "Please use Safari to manage your subscription.")
