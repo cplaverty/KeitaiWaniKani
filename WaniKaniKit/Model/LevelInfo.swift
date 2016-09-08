@@ -24,7 +24,7 @@ public struct LevelData: Equatable {
         
         var durations = detail.flatMap { $0.duration }
         durations.sort(by: <)
-        let boundedDurations = durations.interquartileRange()
+        let boundedDurations = durations.interquartileSequence()
         guard !boundedDurations.isEmpty else { return nil }
         
         let lowerQuartile = boundedDurations.first!
@@ -105,7 +105,7 @@ public func ==(lhs: ProjectedLevelInfo, rhs: ProjectedLevelInfo) -> Bool {
 
 fileprivate extension Collection {
     /// Grab the middle 50% of values, preferring lower values
-    fileprivate func interquartileRange() -> SubSequence {
+    fileprivate func interquartileSequence() -> SubSequence {
         guard self.count > 0 else { return self[startIndex..<startIndex] }
         
         let itemIndex = self.count - 1
