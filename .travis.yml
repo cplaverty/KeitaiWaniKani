@@ -1,5 +1,10 @@
 language: objective-c
+
 xcode_workspace: AlliCrab.xcworkspace
 xcode_scheme: AlliCrab
 
 osx_image: xcode8
+xcode_sdk: iphonesimulator10.0
+
+script:
+- xcodebuild clean build test -workspace AlliCrab.xcworkspace -scheme AlliCrab
