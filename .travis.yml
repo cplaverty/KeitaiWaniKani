@@ -1,0 +1,5 @@
+language: objective-c
+xcode_workspace: AlliCrab.xcworkspace
+xcode_scheme: AlliCrab
+
+osx_image: xcode8
