@@ -41,7 +41,7 @@ class GroupOperationTests: XCTestCase {
         XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.pending)
         
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operation.stateTransitions, OperationWorkflows.finished)
         XCTAssertEqual(operation.internalQueue.operationCount, 0)
@@ -105,7 +105,7 @@ class GroupOperationTests: XCTestCase {
         XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.cancelledBeforeReady)
         
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operation.stateTransitions, OperationWorkflows.cancelledBeforeReady)
         XCTAssertEqual(operation.internalQueue.operationCount, 0)
@@ -157,7 +157,7 @@ class GroupOperationTests: XCTestCase {
         keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
         operation.addObserver(BlockObserver(
             startHandler: { _ in
-                let when = DispatchTime.now() + 0.5
+                let when = DispatchTime.now() + 1
                 DispatchQueue.global(qos: .default).asyncAfter(deadline: when) {
                     XCTAssertEqual(operation.stateTransitions, OperationWorkflows.executing)
                     XCTAssertEqual(operation.internalQueue.operationCount, 3)
@@ -204,7 +204,7 @@ class GroupOperationTests: XCTestCase {
         XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.pending)
         
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         Thread.sleep(forTimeInterval: 0.5)
         
@@ -296,7 +296,7 @@ class GroupOperationTests: XCTestCase {
         XCTAssertEqual(childOperation2_2.stateTransitions, OperationWorkflows.pending)
         
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operation.stateTransitions, OperationWorkflows.finished)
         XCTAssertEqual(nested1.stateTransitions, OperationWorkflows.finished)
@@ -416,7 +416,7 @@ class GroupOperationTests: XCTestCase {
         XCTAssertEqual(childOperation2_2.stateTransitions, OperationWorkflows.cancelledBeforeReady)
         
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operation.stateTransitions, OperationWorkflows.cancelledBeforeReady)
         XCTAssertEqual(nested1.stateTransitions, OperationWorkflows.cancelledBeforeReady)

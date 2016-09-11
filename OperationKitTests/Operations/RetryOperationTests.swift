@@ -34,7 +34,7 @@ class RetryOperationTests: XCTestCase {
             }
             ))
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operationsCreated.count, 1)
         XCTAssertTrue(operation.isFinished)
@@ -60,7 +60,7 @@ class RetryOperationTests: XCTestCase {
             }
             ))
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operationsCreated.count, 3)
         XCTAssertTrue(operation.isFinished, "Expected retry operation to be finished")
@@ -91,7 +91,7 @@ class RetryOperationTests: XCTestCase {
             ))
         operation.cancel()
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operationsCreated.count, 1)
         
@@ -136,7 +136,7 @@ class RetryOperationTests: XCTestCase {
                 XCTAssertFalse(errors.isEmpty, "Expected errors on operation finish")
         }))
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operationsCreated.count, 2)
         

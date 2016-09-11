@@ -25,7 +25,7 @@ class FileMissingConditionTests: XCTestCase {
             })
         
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operation.stateTransitions, OperationWorkflows.finished)
         
@@ -49,7 +49,7 @@ class FileMissingConditionTests: XCTestCase {
             })
         
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operation.stateTransitions, OperationWorkflows.cancelledAfterReady)
         

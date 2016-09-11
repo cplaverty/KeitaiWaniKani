@@ -20,7 +20,7 @@ class OperationTests: XCTestCase {
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operation.stateTransitions, OperationWorkflows.finished)
         
@@ -39,7 +39,7 @@ class OperationTests: XCTestCase {
             XCTAssertFalse(errors.isEmpty, "Expected errors on operation finish")
             })
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operation.stateTransitions, OperationWorkflows.finished)
         
@@ -59,7 +59,7 @@ class OperationTests: XCTestCase {
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operation.stateTransitions, OperationWorkflows.finished)
         
@@ -79,7 +79,7 @@ class OperationTests: XCTestCase {
             XCTAssertFalse(errors.isEmpty, "Expected condition errors on operation finish")
             })
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operation.stateTransitions, OperationWorkflows.cancelledAfterReady)
         
@@ -99,7 +99,7 @@ class OperationTests: XCTestCase {
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operation.stateTransitions, OperationWorkflows.cancelledBeforeReady)
         
@@ -126,7 +126,7 @@ class OperationTests: XCTestCase {
                 XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
         }))
         operationQueue.addOperation(operation)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         Thread.sleep(forTimeInterval: 0.5)
         

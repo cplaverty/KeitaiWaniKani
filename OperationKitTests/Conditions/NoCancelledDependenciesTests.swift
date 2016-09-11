@@ -37,7 +37,7 @@ class NoCancelledDependenciesTests: XCTestCase {
         operation3.addDependency(operation2)
         
         operationQueue.addOperations([operation1, operation2, operation3], waitUntilFinished: false)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operation1.stateTransitions, OperationWorkflows.finished)
         XCTAssertEqual(operation2.stateTransitions, OperationWorkflows.finished)
@@ -75,7 +75,7 @@ class NoCancelledDependenciesTests: XCTestCase {
         
         operation1.cancel()
         operationQueue.addOperations([operation1, operation2, operation3], waitUntilFinished: false)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operation1.stateTransitions, OperationWorkflows.cancelledBeforeReady)
         XCTAssertEqual(operation2.stateTransitions, OperationWorkflows.cancelledAfterReady)
@@ -114,7 +114,7 @@ class NoCancelledDependenciesTests: XCTestCase {
         
         operation1.cancel()
         operationQueue.addOperations([operation1, operation2, operation3], waitUntilFinished: false)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operation1.stateTransitions, OperationWorkflows.cancelledBeforeReady)
         XCTAssertEqual(operation2.stateTransitions, OperationWorkflows.cancelledAfterReady)
@@ -152,7 +152,7 @@ class NoCancelledDependenciesTests: XCTestCase {
         operation3.addDependency(operation2)
         
         operationQueue.addOperations([operation1, operation2, operation3], waitUntilFinished: false)
-        waitForExpectations(timeout: 5, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
         
         XCTAssertEqual(operation1.stateTransitions, OperationWorkflows.cancelledAfterReady)
         XCTAssertEqual(operation2.stateTransitions, OperationWorkflows.cancelledAfterReady)
