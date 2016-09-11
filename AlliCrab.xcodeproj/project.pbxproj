@@ -15,6 +15,10 @@
 		830EAB8F1B41DC7700EBF073 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830EAB8D1B41DC7700EBF073 /* Main.storyboard */; };
 		830EAB911B41DC7700EBF073 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830EAB901B41DC7700EBF073 /* Assets.xcassets */; };
 		830EAB941B41DC7700EBF073 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830EAB921B41DC7700EBF073 /* LaunchScreen.storyboard */; };
+		8314366F1D8400A00024D4A9 /* ReorderSettingsItemOrderingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8314366E1D8400A00024D4A9 /* ReorderSettingsItemOrderingTableViewController.swift */; };
+		831436711D84010D0024D4A9 /* ReorderSettingsItemTypeOrderingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831436701D84010D0024D4A9 /* ReorderSettingsItemTypeOrderingTableViewController.swift */; };
+		831436731D8401560024D4A9 /* ReorderSettingsSortingPriorityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831436721D8401560024D4A9 /* ReorderSettingsSortingPriorityTableViewController.swift */; };
+		831436751D84017B0024D4A9 /* ReorderSettingsLevelOrderingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831436741D84017B0024D4A9 /* ReorderSettingsLevelOrderingTableViewController.swift */; };
 		83183BC41BECC1C300FAE0B6 /* wkoverride.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 83183BC31BECC1C300FAE0B6 /* wkoverride.user.js */; };
 		83183BC61BECC4B300FAE0B6 /* common.js in Resources */ = {isa = PBXBuildFile; fileRef = 83183BC51BECC4B300FAE0B6 /* common.js */; };
 		831E66881BC70E4E00EE34C1 /* SRSDataItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E66871BC70E4E00EE34C1 /* SRSDataItemTests.swift */; };
@@ -113,6 +117,7 @@
 		8371D6691C760D6B008AE534 /* markdown.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 8371D65E1C76087F008AE534 /* markdown.user.js */; };
 		8371D66A1C760D6F008AE534 /* showdown.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 8371D65F1C76087F008AE534 /* showdown.min.js */; };
 		8371D66D1C764E6D008AE534 /* wkhidem.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 8371D66B1C764E64008AE534 /* wkhidem.user.js */; };
+		83727E9D1C9B5A9A00D03F75 /* ReorderSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83727E9C1C9B5A9A00D03F75 /* ReorderSettingsTableViewController.swift */; };
 		837BD4941B6E724200EDB325 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837BD4931B6E724200EDB325 /* WebViewController.swift */; };
 		8381A9C21D36CC1C00818CA6 /* WKWebView+KeitaiWaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8381A9C11D36CC1C00818CA6 /* WKWebView+KeitaiWaniKani.swift */; };
 		83829B421BB531D900CDED3F /* StubConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83829B411BB531D900CDED3F /* StubConditions.swift */; };
@@ -173,6 +178,8 @@
 		83E4A2B71C9820400053A7C0 /* WKU.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 83E4A2B61C9820400053A7C0 /* WKU.user.js */; };
 		83F32EA91BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */; };
 		83F32EAB1BDFCCFA00F2ABA0 /* wkdoublecheck.js in Resources */ = {isa = PBXBuildFile; fileRef = 83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */; };
+		83F364361D018B1200213097 /* ReorderSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F364351D018B1200213097 /* ReorderSettings.swift */; };
+		83F364381D01A2D700213097 /* ReorderSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83F364371D01A2D700213097 /* ReorderSettings.storyboard */; };
 		83F9D2AB1D45205000B261F3 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F9D2AA1D45205000B261F3 /* DatabaseManager.swift */; };
 		83FC71BE1C95856600B60C1C /* ArmedBanana.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71BD1C95856600B60C1C /* ArmedBanana.ttf */; };
 		83FC71C01C9585BE00B60C1C /* chifont+.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71BF1C9585BE00B60C1C /* chifont+.ttf */; };
@@ -300,6 +307,10 @@
 		830EAB901B41DC7700EBF073 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		830EAB931B41DC7700EBF073 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		830EAB951B41DC7700EBF073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8314366E1D8400A00024D4A9 /* ReorderSettingsItemOrderingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReorderSettingsItemOrderingTableViewController.swift; sourceTree = "<group>"; };
+		831436701D84010D0024D4A9 /* ReorderSettingsItemTypeOrderingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReorderSettingsItemTypeOrderingTableViewController.swift; sourceTree = "<group>"; };
+		831436721D8401560024D4A9 /* ReorderSettingsSortingPriorityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReorderSettingsSortingPriorityTableViewController.swift; sourceTree = "<group>"; };
+		831436741D84017B0024D4A9 /* ReorderSettingsLevelOrderingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReorderSettingsLevelOrderingTableViewController.swift; sourceTree = "<group>"; };
 		83183BC31BECC1C300FAE0B6 /* wkoverride.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkoverride.user.js; sourceTree = "<group>"; };
 		83183BC51BECC4B300FAE0B6 /* common.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = common.js; sourceTree = "<group>"; };
 		831E66871BC70E4E00EE34C1 /* SRSDataItemTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSDataItemTests.swift; sourceTree = "<group>"; };
@@ -403,6 +414,7 @@
 		8371D65F1C76087F008AE534 /* showdown.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = showdown.min.js; sourceTree = "<group>"; };
 		8371D6661C760D13008AE534 /* BundleResourceLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleResourceLoader.swift; sourceTree = "<group>"; };
 		8371D66B1C764E64008AE534 /* wkhidem.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkhidem.user.js; sourceTree = "<group>"; };
+		83727E9C1C9B5A9A00D03F75 /* ReorderSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReorderSettingsTableViewController.swift; sourceTree = "<group>"; };
 		837BD4931B6E724200EDB325 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		8381A9C11D36CC1C00818CA6 /* WKWebView+KeitaiWaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WKWebView+KeitaiWaniKani.swift"; sourceTree = "<group>"; };
 		83829B411BB531D900CDED3F /* StubConditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StubConditions.swift; sourceTree = "<group>"; };
@@ -463,6 +475,8 @@
 		83E4A2B61C9820400053A7C0 /* WKU.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = WKU.user.js; sourceTree = "<group>"; };
 		83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaniKaniLoginWebViewController.swift; sourceTree = "<group>"; };
 		83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkdoublecheck.js; sourceTree = "<group>"; };
+		83F364351D018B1200213097 /* ReorderSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReorderSettings.swift; sourceTree = "<group>"; };
+		83F364371D01A2D700213097 /* ReorderSettings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReorderSettings.storyboard; sourceTree = "<group>"; };
 		83F9D2AA1D45205000B261F3 /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		83FC71BD1C95856600B60C1C /* ArmedBanana.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArmedBanana.ttf; sourceTree = "<group>"; };
 		83FC71BF1C9585BE00B60C1C /* chifont+.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "chifont+.ttf"; sourceTree = "<group>"; };
@@ -601,6 +615,7 @@
 				8347BDCA1B7260B1000F99EF /* App Operations */,
 				83966D681BAD9382005799E9 /* Extensions */,
 				83FC71BC1C95853100B60C1C /* Fonts */,
+				83F364341D018AE800213097 /* Model */,
 				832462C01B93687E00FB62C9 /* User Scripts */,
 				8371D6651C760CE9008AE534 /* Util */,
 				83DC478A1B4408FB00AD716C /* View */,
@@ -610,10 +625,23 @@
 				830EAB951B41DC7700EBF073 /* Info.plist */,
 				830EAB921B41DC7700EBF073 /* LaunchScreen.storyboard */,
 				830EAB8D1B41DC7700EBF073 /* Main.storyboard */,
+				83F364371D01A2D700213097 /* ReorderSettings.storyboard */,
 				83288CC11B45E808002B82B3 /* ApplicationSettings.swift */,
 				83CB3E0E1B5849EE00761D68 /* Settings.bundle */,
 			);
 			path = KeitaiWaniKani;
+			sourceTree = "<group>";
+		};
+		8314366D1D83FB970024D4A9 /* Reorder Settings */ = {
+			isa = PBXGroup;
+			children = (
+				83727E9C1C9B5A9A00D03F75 /* ReorderSettingsTableViewController.swift */,
+				8314366E1D8400A00024D4A9 /* ReorderSettingsItemOrderingTableViewController.swift */,
+				831436701D84010D0024D4A9 /* ReorderSettingsItemTypeOrderingTableViewController.swift */,
+				831436741D84017B0024D4A9 /* ReorderSettingsLevelOrderingTableViewController.swift */,
+				831436721D8401560024D4A9 /* ReorderSettingsSortingPriorityTableViewController.swift */,
+			);
+			path = "Reorder Settings";
 			sourceTree = "<group>";
 		};
 		832462C01B93687E00FB62C9 /* User Scripts */ = {
@@ -640,6 +668,7 @@
 		83354D8C1B484ADE007686D5 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8314366D1D83FB970024D4A9 /* Reorder Settings */,
 				83BF36391B52D24A0044F59B /* DashboardViewController.swift */,
 				83354D8D1B484C98007686D5 /* GetAPIKeyViewController.swift */,
 				8331E5031B48525F005AF085 /* HomeScreenViewController.swift */,
@@ -956,6 +985,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		83F364341D018AE800213097 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				83F364351D018B1200213097 /* ReorderSettings.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		83FC71BC1C95853100B60C1C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1267,6 +1304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8371D66A1C760D6F008AE534 /* showdown.min.js in Resources */,
+				83F364381D01A2D700213097 /* ReorderSettings.storyboard in Resources */,
 				8335185F1C8782170057E956 /* noswipe.js in Resources */,
 				83FC71CB1C9585F300B60C1C /* dartsfont.ttf in Resources */,
 				83183BC61BECC4B300FAE0B6 /* common.js in Resources */,
@@ -1575,15 +1613,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83F364361D018B1200213097 /* ReorderSettings.swift in Sources */,
 				8347BDE41B7260B1000F99EF /* NetworkObserver.swift in Sources */,
 				83F32EA91BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift in Sources */,
 				83BF363A1B52D24A0044F59B /* DashboardViewController.swift in Sources */,
+				83727E9D1C9B5A9A00D03F75 /* ReorderSettingsTableViewController.swift in Sources */,
 				8347BDE61B7260B1000F99EF /* ReviewTimeNotificationOperation.swift in Sources */,
 				83F9D2AB1D45205000B261F3 /* DatabaseManager.swift in Sources */,
 				831FF75C1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift in Sources */,
 				83B155591B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift in Sources */,
 				833FD4611D4D4377005BAE8C /* WebAddressBarView.swift in Sources */,
 				83B5CC4F1C47112F00979DAC /* UIBottomBorderedView.swift in Sources */,
+				8314366F1D8400A00024D4A9 /* ReorderSettingsItemOrderingTableViewController.swift in Sources */,
 				8331E5041B48525F005AF085 /* HomeScreenViewController.swift in Sources */,
 				83A1F4101D43836A0045751F /* UserScriptSupport.swift in Sources */,
 				83DC478C1B440A6200AD716C /* RubyLabel.swift in Sources */,
@@ -1593,7 +1634,9 @@
 				83B1555B1B94A18D0022217E /* SettingsTableViewController.swift in Sources */,
 				8347BDDA1B7260B1000F99EF /* BackgroundObserver.swift in Sources */,
 				8399BD601C68D388006FDBE8 /* LevelChartViewController.swift in Sources */,
+				831436731D8401560024D4A9 /* ReorderSettingsSortingPriorityTableViewController.swift in Sources */,
 				83288CC21B45E808002B82B3 /* ApplicationSettings.swift in Sources */,
+				831436711D84010D0024D4A9 /* ReorderSettingsItemTypeOrderingTableViewController.swift in Sources */,
 				83B155571B944B360022217E /* ReviewTimelineTableViewController.swift in Sources */,
 				8371D6681C760D61008AE534 /* BundleResourceLoader.swift in Sources */,
 				83AB92D71B7C05F2006D08F2 /* GetSRSDataItemOperation.swift in Sources */,
@@ -1605,6 +1648,7 @@
 				8347BDD91B7260B1000F99EF /* AlertOperation.swift in Sources */,
 				8347BDDC1B7260B1000F99EF /* GetDashboardDataOperation.swift in Sources */,
 				83B5CC4D1C470BE600979DAC /* WKWebAddressBarView.swift in Sources */,
+				831436751D84017B0024D4A9 /* ReorderSettingsLevelOrderingTableViewController.swift in Sources */,
 				83B5CC4B1C470B1800979DAC /* WKWebViewController.swift in Sources */,
 				83B6110A1BDC1F11008D305C /* UIWebView+KeitaiWaniKani.swift in Sources */,
 				831FF7601BB8861400C31FDF /* SRSDataItemCollectionViewCell.swift in Sources */,
