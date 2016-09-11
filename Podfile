@@ -21,8 +21,8 @@ target 'AlliCrab' do
     
     target 'WaniKaniKitTests' do
         inherit! :search_paths
-        pod 'OHHTTPStubs', :git => 'https://github.com/AliSoftware/OHHTTPStubs.git', :branch => 'xcode8-gm'
-        pod 'OHHTTPStubs/Swift', :git => 'https://github.com/AliSoftware/OHHTTPStubs.git', :branch => 'xcode8-gm'
+        pod 'OHHTTPStubs'
+        pod 'OHHTTPStubs/Swift'
     end
 end
 

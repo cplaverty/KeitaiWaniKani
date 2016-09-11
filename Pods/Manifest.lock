@@ -10,20 +10,20 @@ PODS:
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
-  - OHHTTPStubs (5.2.0):
-    - OHHTTPStubs/Default (= 5.2.0)
-  - OHHTTPStubs/Core (5.2.0)
-  - OHHTTPStubs/Default (5.2.0):
+  - OHHTTPStubs (5.2.1):
+    - OHHTTPStubs/Default (= 5.2.1)
+  - OHHTTPStubs/Core (5.2.1)
+  - OHHTTPStubs/Default (5.2.1):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (5.2.0):
+  - OHHTTPStubs/JSON (5.2.1):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (5.2.0):
+  - OHHTTPStubs/NSURLSession (5.2.1):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (5.2.0)
-  - OHHTTPStubs/Swift (5.2.0):
+  - OHHTTPStubs/OHPathHelpers (5.2.1)
+  - OHHTTPStubs/Swift (5.2.1):
     - OHHTTPStubs/Core
   - SwiftyJSON (2.3.2)
 
@@ -31,16 +31,13 @@ DEPENDENCIES:
   - 1PasswordExtension
   - CocoaLumberjack/Swift (from `https://github.com/cplaverty/CocoaLumberjack.git`)
   - FMDB
-  - OHHTTPStubs (from `https://github.com/AliSoftware/OHHTTPStubs.git`, branch `xcode8-gm`)
-  - OHHTTPStubs/Swift (from `https://github.com/AliSoftware/OHHTTPStubs.git`, branch `xcode8-gm`)
+  - OHHTTPStubs
+  - OHHTTPStubs/Swift
   - SwiftyJSON (from `https://github.com/cplaverty/SwiftyJSON.git`, branch `swift3`)
 
 EXTERNAL SOURCES:
   CocoaLumberjack:
     :git: https://github.com/cplaverty/CocoaLumberjack.git
-  OHHTTPStubs:
-    :branch: xcode8-gm
-    :git: https://github.com/AliSoftware/OHHTTPStubs.git
   SwiftyJSON:
     :branch: swift3
     :git: https://github.com/cplaverty/SwiftyJSON.git
@@ -49,9 +46,6 @@ CHECKOUT OPTIONS:
   CocoaLumberjack:
     :commit: 9373aad2a15921da1e71645776ecd758bff40833
     :git: https://github.com/cplaverty/CocoaLumberjack.git
-  OHHTTPStubs:
-    :commit: d8596d5a9cd429d32077bbf30845f4e7a4bca0f8
-    :git: https://github.com/AliSoftware/OHHTTPStubs.git
   SwiftyJSON:
     :commit: e18a2aa6d948505cfceaaaf8f7d8c7165b0af557
     :git: https://github.com/cplaverty/SwiftyJSON.git
@@ -60,9 +54,9 @@ SPEC CHECKSUMS:
   1PasswordExtension: 8757dc3302353731dd3e678e63b5023a708783cb
   CocoaLumberjack: ce8405d1e5fd6be744c42107710da81b17b90d79
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
-  OHHTTPStubs: 29ae105797c3410112d10b217c8b7a55aab616b2
+  OHHTTPStubs: 3a42f25c00563b71355ac73112ba2324e9e6cef4
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: dee3be0be79a5170e7c49b358e7a86005e8f7851
+PODFILE CHECKSUM: c4c2550d03c76746c1e24d437978dbac9c781128
 
 COCOAPODS: 1.1.0.beta.2
