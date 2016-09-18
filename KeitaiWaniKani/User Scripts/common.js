@@ -12,10 +12,33 @@ $('#timeout').prepend('<button id="timeout-close" type="button">&times;</button>
 
 $(document).on('touchstart', '#timeout-close', function(e) {
     e.preventDefault();
+    $("html, body").css("overflow", "");
     $('#timeout-idle').hide();
     $('#timeout-session-end').hide();
     $('#timeout').hide();
 });
+
+if (this.idleTime !== undefined) {
+    // Once the timeout screen is shown, every time the web view is resized overflow: hidden is set again.
+    // We overwrite idleTime.view so that this only happens if #timeout is visible
+    this.idleTime.view = function() {
+        var setTimeoutPadding = function() {
+            var t = $(window).innerHeight();
+            var e = $("#timeout div");
+            e.css("padding-top", (t - e.height()) / 2)
+            $("html, body").css("overflow", "hidden")
+        };
+        
+        $("#timeout").show();
+        $("#timeout-idle").show();
+        setTimeoutPadding();
+        $(window).resize(function() {
+            if ($("#timeout").is(":hidden")) return;
+            
+            setTimeoutPadding();
+        })
+    }
+}
 
 
 // Use email keyboard for user login input
@@ -25,34 +48,6 @@ if (userLogin !== null) {
     userLogin.attr('style', 'width: 100%;');
     userLogin.removeAttr('size');
 }
-
-
-// Update navigation controller title
-function setTitleToCurrentQuizItem() {
-    if (typeof setWebViewPageTitle !== "function") return;
-    
-    // "Fake" radicals can either be represented by a custom font using <i class="radical-xxx"> or an image
-    if ($('#character img').length > 0 || $('#character i').length > 0) {
-        setWebViewPageTitle('Radical');
-        return;
-    }
-    var quizItemText = $.trim($('#character').text());
-    setWebViewPageTitle(quizItemText);
-}
-
-var ob = new MutationObserver(setTitleToCurrentQuizItem);
-var reviews = document.getElementById('reviews')
-if (reviews !== null) {
-    console.log('Is reviewing');
-    ob.observe(reviews, {subtree: true, childList: true, attribute: false});
-} else {
-    var lessons = document.getElementById('main-info');
-    if (lessons !== null) {
-        console.log('Is new lessons');
-        ob.observe(lessons, {subtree: true, childList: true, attribute: false});
-    }
-}
-
 
 
 // Polyfills

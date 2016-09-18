@@ -65,7 +65,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     // MARK: - Properties
     
-    weak var jsContext: JSContext?
+//    weak var jsContext: JSContext?
     weak var delegate: WebViewControllerDelegate?
     var allowsBackForwardNavigationGestures: Bool { return true }
     
@@ -79,7 +79,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     func createWebView() -> UIWebView {
         let webView = UIWebView(frame: self.view.bounds)
-        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.scrollView.delegate = self
         webView.delegate = self
         webView.backgroundColor = UIColor.white
@@ -253,9 +253,9 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        jsContext = webView.value(forKeyPath: "documentView.webView.mainFrame.javaScriptContext") as? JSContext
-        let setTitle: @convention(block) (String) -> Void = { [weak self] title in self?.title = title }
-        jsContext?.setObject(unsafeBitCast(setTitle, to: AnyObject.self), forKeyedSubscript: "setWebViewPageTitle" as NSString)
+//        jsContext = webView.value(forKeyPath: "documentView.webView.mainFrame.javaScriptContext") as? JSContext
+//        let setTitle: @convention(block) (String) -> Void = { [weak self] title in self?.title = title }
+//        jsContext?.setObject(unsafeBitCast(setTitle, to: AnyObject.self), forKeyedSubscript: "setWebViewPageTitle" as NSString)
         
         let requestFinished = requestStack.popLast()
         DDLogVerbose("webViewDidFinishLoad webView.request: \(requestFinished)")
@@ -328,11 +328,6 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         self.webView = webView
         
         self.view.addSubview(webView)
-        NSLayoutConstraint(item: webView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: webView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: webView, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
-        NSLayoutConstraint(item: webView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
-        
         self.view.addSubview(statusBarView)
         
         if allowsBackForwardNavigationGestures {
