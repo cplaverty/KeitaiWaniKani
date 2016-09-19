@@ -65,7 +65,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     // MARK: - Properties
     
-//    weak var jsContext: JSContext?
+    weak var jsContext: JSContext?
     weak var delegate: WebViewControllerDelegate?
     var allowsBackForwardNavigationGestures: Bool { return true }
     
@@ -253,9 +253,14 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
-//        jsContext = webView.value(forKeyPath: "documentView.webView.mainFrame.javaScriptContext") as? JSContext
-//        let setTitle: @convention(block) (String) -> Void = { [weak self] title in self?.title = title }
-//        jsContext?.setObject(unsafeBitCast(setTitle, to: AnyObject.self), forKeyedSubscript: "setWebViewPageTitle" as NSString)
+        jsContext = webView.value(forKeyPath: "documentView.webView.mainFrame.javaScriptContext") as? JSContext
+        let endEditing: @convention(block) () -> Void = { [weak self] in
+            DispatchQueue.main.async {
+                DDLogVerbose("Forcing endEditing")
+                self?.webView?.endEditing(true)
+            }
+        }
+        jsContext?.setObject(unsafeBitCast(endEditing, to: AnyObject.self), forKeyedSubscript: "endEditing" as NSString)
         
         let requestFinished = requestStack.popLast()
         DDLogVerbose("webViewDidFinishLoad webView.request: \(requestFinished)")

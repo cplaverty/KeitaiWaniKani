@@ -18,9 +18,9 @@ $(document).on('touchstart', '#timeout-close', function(e) {
     $('#timeout').hide();
 });
 
+// Once the timeout screen is shown, every time the web view is resized overflow: hidden is set again.
+// We overwrite idleTime.view so that this only happens if #timeout is visible
 if (this.idleTime !== undefined) {
-    // Once the timeout screen is shown, every time the web view is resized overflow: hidden is set again.
-    // We overwrite idleTime.view so that this only happens if #timeout is visible
     this.idleTime.view = function() {
         var setTimeoutPadding = function() {
             var t = $(window).innerHeight();
@@ -36,8 +36,24 @@ if (this.idleTime !== undefined) {
             if ($("#timeout").is(":hidden")) return;
             
             setTimeoutPadding();
-        })
-    }
+        });
+    };
+}
+
+
+// Keyboard remains active even after ending editing of notes while in lessons.  Employ a sledgehammer to end editing.
+if (this.Notes !== undefined) {
+    var baseNotesClick = this.Notes.click;
+    this.Notes.click = function(e, t, n) {
+        baseNotesClick(e, t, n);
+        var s = $(".note-" + t);
+        s.on("click", function() {
+            s.find("button").on("click", function() {
+                console.log("force end editing");
+                endEditing();
+            });
+        });
+    };
 }
 
 
