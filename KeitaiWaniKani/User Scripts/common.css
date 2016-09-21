@@ -1,0 +1,29 @@
+#timeout-close {
+    cursor: pointer;
+    padding: 30px 40px;
+    background: 0 0;
+    border: 0;
+    float: right;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-shadow: rgb(0, 0, 0) 5px 5px 0px;
+}
+
+@media (max-width: 767px) {
+    #timeout-close {
+        padding: 15px 20px;
+    }
+}
+
+#additional-content ul {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+#additional-content ul li {
+    display: table-cell;
+    width: auto;
+}

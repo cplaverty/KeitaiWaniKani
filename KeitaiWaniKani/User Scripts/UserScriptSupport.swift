@@ -21,10 +21,12 @@ extension UserScriptSupport {
         switch url {
         case WaniKaniURLs.loginPage:
             DDLogDebug("Loading user scripts")
+            injectStyleSheet(name: "common")
             injectScript(name: "common")
             return true
         case WaniKaniURLs.lessonSession:
             DDLogDebug("Loading user scripts")
+            injectStyleSheet(name: "common")
             injectScript(name: "common")
             injectStyleSheet(name: "resize")
             if ApplicationSettings.disableLessonSwipe {
@@ -39,6 +41,7 @@ extension UserScriptSupport {
             return true
         case WaniKaniURLs.reviewSession:
             DDLogDebug("Loading user scripts")
+            injectStyleSheet(name: "common")
             injectScript(name: "common")
             injectStyleSheet(name: "resize")
             if ApplicationSettings.userScriptJitaiEnabled {
