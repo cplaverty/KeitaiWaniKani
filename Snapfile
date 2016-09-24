@@ -1,11 +1,9 @@
-# Uncomment the lines below you want to change by removing the # in the beginning
-
 # A list of devices you want to take the screenshots from
 devices([
+    "iPhone 4s",
+    "iPhone 5s",
     "iPhone 6",
     "iPhone 6 Plus",
-    "iPhone 5",
-    "iPhone 4s",
     "iPad Air",
     "iPad Pro"
 ])
@@ -23,11 +21,14 @@ scheme "AlliCrabUITests"
 # Where should the resulting screenshots be stored?
 output_directory "./screenshots"
 
-clear_previous_screenshots true # remove the '#' to clear all previously generated screenshots before creating new ones
+clear_previous_screenshots true
 
 app_identifier "uk.me.laverty.KeitaiWaniKani"
 reinstall_app true
 clear_previous_screenshots true
+number_of_retries 3
+skip_open_summary true
+ios_version "9.3"
 
 # Choose which project/workspace to use
 # project "./Project.xcodeproj"

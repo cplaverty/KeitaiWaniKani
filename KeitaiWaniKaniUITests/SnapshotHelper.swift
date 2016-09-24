@@ -25,9 +25,9 @@ func snapshot(_ name: String, waitForLoadingIndicator: Bool = true) {
     Snapshot.snapshot(name, waitForLoadingIndicator: waitForLoadingIndicator)
 }
 
-public class Snapshot: NSObject {
+open class Snapshot: NSObject {
 
-    public class func setupSnapshot(_ app: XCUIApplication) {
+    open class func setupSnapshot(_ app: XCUIApplication) {
         setLanguage(app)
         setLocale(app)
         setLaunchArguments(app)
@@ -63,7 +63,7 @@ public class Snapshot: NSObject {
             print("Couldn't detect/set locale...")
         }
         if locale.isEmpty {
-            locale = NSLocale(localeIdentifier: deviceLanguage).localeIdentifier
+            locale = Locale(identifier: deviceLanguage).identifier
         }
         app.launchArguments += ["-AppleLocale", "\"\(locale)\""]
     }
@@ -89,18 +89,27 @@ public class Snapshot: NSObject {
         }
     }
 
-    public class func snapshot(_ name: String, waitForLoadingIndicator: Bool = true) {
+    open class func snapshot(_ name: String, waitForLoadingIndicator: Bool = true) {
         if waitForLoadingIndicator {
             waitForLoadingIndicatorToDisappear()
         }
 
-        print("snapshot: \(name)") // more information about this, check out https://github.com/fastlane/snapshot
+        print("snapshot: \(name)") // more information about this, check out https://github.com/fastlane/fastlane/tree/master/snapshot#how-does-it-work
 
         sleep(1) // Waiting for the animation to be finished (kind of)
-        XCUIDevice.shared().orientation = .unknown
+
+        #if os(tvOS)
+            XCUIApplication().childrenMatchingType(.Browser).count
+        #else
+            XCUIDevice.shared().orientation = .unknown
+        #endif
     }
 
     class func waitForLoadingIndicatorToDisappear() {
+        #if os(tvOS)
+            return;
+        #endif
+
         let query = XCUIApplication().statusBars.children(matching: .other).element(boundBy: 1).children(matching: .other)
 
         while (0..<query.count).map({ query.element(boundBy: $0) }).contains(where: { $0.isLoadingIndicator }) {
@@ -111,7 +120,7 @@ public class Snapshot: NSObject {
 
     class func pathPrefix() -> NSString? {
         if let path = ProcessInfo().environment["SIMULATOR_HOST_HOME"] as NSString? {
-            return path.appendingPathComponent("Library/Caches/tools.fastlane") as NSString
+            return path.appendingPathComponent("Library/Caches/tools.fastlane") as NSString?
         }
         print("Couldn't find Snapshot configuration files at ~/Library/Caches/tools.fastlane")
         return nil
