@@ -31,10 +31,10 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             description: "Display WaniKani reviews in randomised fonts, for more varied reading training.  Original script written by obskyr.",
             settingKey: ApplicationSettingKeys.userScriptJitaiEnabled),
         ScriptInfo(name: "WaniKani Override",
-            description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  PLEASE USE RESPONSIBLY!  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script written by ruipgpinheiro.",
+            description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script written by ruipgpinheiro.",
             settingKey: ApplicationSettingKeys.userScriptIgnoreAnswerEnabled),
         ScriptInfo(name: "WaniKani Double Check",
-            description: "Adds a thumbs up/down button that permits incorrect answers to be marked correct, and correct answers to be marked incorrect.  PLEASE USE RESPONSIBLY!  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script written by Ethan.",
+            description: "Adds a thumbs up/down button that permits incorrect answers to be marked correct, and correct answers to be marked incorrect.  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script written by Ethan.",
             settingKey: ApplicationSettingKeys.userScriptDoubleCheckEnabled),
         ScriptInfo(name: "WaniKani Improve",
             description: "Automatically moves to the next item if the answer was correct (also known as \"lightning mode\").  Original script written by Seiji.",
@@ -46,7 +46,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
             description: "Allows you to hide the reading and meaning mnemonics on the site.  Original script written by nibarius.",
             settingKey: ApplicationSettingKeys.userScriptHideMnemonicsEnabled),
 //        ScriptInfo(name: "WaniKani Reorder Ultimate",
-//            description: "Allows you to reorder your lessons and reviews by type and level, and also force reading/meaning first.  PLEASE USE RESPONSIBLY!  Original script written by xMunch.",
+//            description: "Allows you to reorder your lessons and reviews by type and level, and also force reading/meaning first.  Original script written by xMunch.",
 //            settingKey: ApplicationSettingKeys.userScriptReorderUltimateEnabled),
         ]
     
@@ -154,7 +154,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         switch tableViewSection {
         case .userScripts, .otherSettings: return nil
         case .feedback:
-            return "App Store reviews are reset after every release.  Good reviews are appreciated, but please email me through the Send Feedback link if you're having any issues.  It's difficult to help you otherwise!"
+            return "App Store reviews are reset after every release.  Good reviews are always appreciated, but if you're experiencing any issues please email me through the Send Feedback link."
         case .logOut:
             let (product, version, build) = self.productAndVersion
             return "\(product) version \(version) (build \(build))"
