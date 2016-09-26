@@ -13,6 +13,10 @@ protocol ReorderSettingsTableViewControllerDelegate: class {
 
 class ReorderSettingsTableViewController: UITableViewController {
     
+    public enum ReorderSettingsType {
+        case reviews, lessons
+    }
+    
     private enum TableViewSections: Int {
         case basicSettings = 0, sortTypes, sortLevels, sortOrder
     }
@@ -20,6 +24,7 @@ class ReorderSettingsTableViewController: UITableViewController {
     // MARK: - Properties
     
     var settings: ReorderSettings = ReorderSettings()
+    var settingsType: ReorderSettingsType = .reviews
     
     weak var delegate: ReorderSettingsTableViewControllerDelegate?
     
@@ -54,6 +59,32 @@ class ReorderSettingsTableViewController: UITableViewController {
             settings.sortLevels = sender.isOn
         default: fatalError("Unexpected switch in switchValueChanged event!")
         }
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 && settingsType == .lessons {
+            return 0.1
+        }
+        
+        return super.tableView(tableView, heightForHeaderInSection: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 0 && settingsType == .lessons {
+            return 0.1
+        }
+        
+        return super.tableView(tableView, heightForFooterInSection: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 && settingsType == .lessons {
+            return 0
+        }
+        
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
     // MARK: - View Controller Lifecycle
