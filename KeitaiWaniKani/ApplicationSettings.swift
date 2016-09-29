@@ -26,11 +26,11 @@ struct ApplicationSettingKeys {
 
 struct ApplicationSettings {
     
-    static func globalTintColor() -> UIColor {
+    static var globalTintColor: UIColor {
         return UIColor(red: 29 / 255, green: 148 / 255, blue: 149 / 255, alpha: 1)
     }
     
-    static func globalBarTintColor() -> UIColor {
+    static var globalBarTintColor: UIColor {
         return UIColor(hue: 180 / 360, saturation: 0.05, brightness: 0.9, alpha: 1)
     }
     

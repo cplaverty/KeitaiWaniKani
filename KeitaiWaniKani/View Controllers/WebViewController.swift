@@ -98,7 +98,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         let statusBarView = UIBottomBorderedView(color: UIColor.lightGray, width: 0.5)
         statusBarView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: self.view.frame.width, height: 20))
         statusBarView.autoresizingMask = .flexibleWidth
-        statusBarView.backgroundColor = ApplicationSettings.globalBarTintColor()
+        statusBarView.backgroundColor = ApplicationSettings.globalBarTintColor
         
         return statusBarView
     }()

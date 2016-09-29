@@ -58,10 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserNotificationCondition.isEnabled = false
         }
         
-        UINavigationBar.appearance().tintColor = ApplicationSettings.globalTintColor()
-        UINavigationBar.appearance().barTintColor = ApplicationSettings.globalBarTintColor()
-        UIToolbar.appearance().tintColor = ApplicationSettings.globalTintColor()
-        UIToolbar.appearance().barTintColor = ApplicationSettings.globalBarTintColor()
+        UINavigationBar.appearance().tintColor = ApplicationSettings.globalTintColor
+        UINavigationBar.appearance().barTintColor = ApplicationSettings.globalBarTintColor
+        UIToolbar.appearance().tintColor = ApplicationSettings.globalTintColor
+        UIToolbar.appearance().barTintColor = ApplicationSettings.globalBarTintColor
         
         return true
     }

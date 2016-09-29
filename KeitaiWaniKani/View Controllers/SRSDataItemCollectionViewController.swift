@@ -159,7 +159,7 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
         let darkenView = UIView(frame: visualEffectBlurView.frame)
         darkenView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         darkenView.alpha = 0.1
-        darkenView.backgroundColor = ApplicationSettings.globalTintColor()
+        darkenView.backgroundColor = ApplicationSettings.globalTintColor
         visualEffectBlurView.contentView.addSubview(darkenView)
         collectionView!.backgroundView = backgroundView
     }
