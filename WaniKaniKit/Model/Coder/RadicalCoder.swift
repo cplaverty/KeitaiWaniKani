@@ -46,7 +46,7 @@ public final class RadicalCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder,
         
         return Radical(character: json[Columns.character].string,
                        meaning: meaning,
-                       image: json[Columns.image].url,
+                       image: json[Columns.image].URL,
                        level: level,
                        userSpecificSRSData: userSpecificSRSData)
     }

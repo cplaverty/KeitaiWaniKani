@@ -1,5 +1,5 @@
 PODS:
-  - 1PasswordExtension (1.8.3)
+  - 1PasswordExtension (1.8.4)
   - CocoaLumberjack/Core (3.0.0)
   - CocoaLumberjack/Default (3.0.0):
     - CocoaLumberjack/Core
@@ -25,7 +25,7 @@ PODS:
   - OHHTTPStubs/OHPathHelpers (5.2.1)
   - OHHTTPStubs/Swift (5.2.1):
     - OHHTTPStubs/Core
-  - SwiftyJSON (2.3.2)
+  - SwiftyJSON (3.1.0)
 
 DEPENDENCIES:
   - 1PasswordExtension
@@ -33,25 +33,15 @@ DEPENDENCIES:
   - FMDB
   - OHHTTPStubs
   - OHHTTPStubs/Swift
-  - SwiftyJSON (from `https://github.com/cplaverty/SwiftyJSON.git`, branch `swift3`)
-
-EXTERNAL SOURCES:
-  SwiftyJSON:
-    :branch: swift3
-    :git: https://github.com/cplaverty/SwiftyJSON.git
-
-CHECKOUT OPTIONS:
-  SwiftyJSON:
-    :commit: e18a2aa6d948505cfceaaaf8f7d8c7165b0af557
-    :git: https://github.com/cplaverty/SwiftyJSON.git
+  - SwiftyJSON
 
 SPEC CHECKSUMS:
-  1PasswordExtension: 8757dc3302353731dd3e678e63b5023a708783cb
+  1PasswordExtension: e775a29310c65851e5a6cec1afc349ab4e334e47
   CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   OHHTTPStubs: 3a42f25c00563b71355ac73112ba2324e9e6cef4
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  SwiftyJSON: 29b9f2a64f118c07e691667c2ba1efe536acfe0b
 
-PODFILE CHECKSUM: 6e6473a45d9af1a0d324ee181916e3adaaab69d5
+PODFILE CHECKSUM: 4efc20b2ce452ac3a02532b56b00bec38157a109
 
 COCOAPODS: 1.1.0.rc.2
