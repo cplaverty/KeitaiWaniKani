@@ -211,7 +211,7 @@ class DelayOperationIntervalCountdownObserver: NSObject, OperationObserver, Prog
         return formatter
     }()
     private let notificationInterval: TimeInterval
-    private var notificationTimer: Foundation.Timer?
+    private var notificationTimer: Timer?
     private var endDate: Date?
     
     init(notificationInterval: TimeInterval) {
@@ -226,7 +226,7 @@ class DelayOperationIntervalCountdownObserver: NSObject, OperationObserver, Prog
         case .date(let endDate): self.endDate = endDate
         }
         
-        notificationTimer = Foundation.Timer(timeInterval: notificationInterval, target: self, selector: #selector(timerTick(_:)), userInfo: nil, repeats: true)
+        notificationTimer = Timer(timeInterval: notificationInterval, target: self, selector: #selector(timerTick(_:)), userInfo: nil, repeats: true)
         RunLoop.main.add(notificationTimer!, forMode: RunLoopMode.defaultRunLoopMode)
         notificationTimer!.fire()
     }
@@ -239,7 +239,7 @@ class DelayOperationIntervalCountdownObserver: NSObject, OperationObserver, Prog
         notificationTimer = nil
     }
     
-    func timerTick(_ timer: Foundation.Timer) {
+    func timerTick(_ timer: Timer) {
         guard let endDate = endDate, let formattedTimeRemaining = formatter.string(from: endDate.timeIntervalSinceNow + 1) else { return }
         progress.localizedDescription = "WaniKani data download starting in \(formattedTimeRemaining)..."
     }

@@ -95,7 +95,7 @@ private class NetworkIndicatorController {
 }
 
 /// Essentially a cancellable `dispatch_after`.
-class Timer {
+private class Timer {
     // MARK: Properties
 
     private var isCancelled = false
