@@ -82,7 +82,6 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         guard let webView = self.webView, let URL = webView.request?.url, URL == WaniKaniURLs.lessonSession || URL == WaniKaniURLs.reviewSession else { return }
         
         showBrowserInterface(false, animated: false)
-        webView.scrollToTop(false)
     }
     
 }
