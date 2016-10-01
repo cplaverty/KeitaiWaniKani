@@ -129,6 +129,7 @@
 		839AA3D91BE2BB8C006A05F3 /* jquery.qtip.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 839AA3D71BE2BB8C006A05F3 /* jquery.qtip.min.css */; };
 		839AA3DA1BE2BB8C006A05F3 /* jquery.qtip.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */; };
 		839AA3DC1BE2BC08006A05F3 /* resize.css in Resources */ = {isa = PBXBuildFile; fileRef = 839AA3DB1BE2BC08006A05F3 /* resize.css */; };
+		839C526D1D9F2447003FAA94 /* getapikey.js in Resources */ = {isa = PBXBuildFile; fileRef = 839C526C1D9F2447003FAA94 /* getapikey.js */; };
 		839D76AB1B9A3BC40037294C /* UserScriptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839D76AA1B9A3BC40037294C /* UserScriptTableViewCell.swift */; };
 		83A1F4101D43836A0045751F /* UserScriptSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1F40F1D43836A0045751F /* UserScriptSupport.swift */; };
 		83A23FE71BCD96C100060B66 /* String+WaniKani.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A23FE61BCD96C100060B66 /* String+WaniKani.swift */; };
@@ -427,6 +428,7 @@
 		839AA3D71BE2BB8C006A05F3 /* jquery.qtip.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = jquery.qtip.min.css; sourceTree = "<group>"; };
 		839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.qtip.min.js; sourceTree = "<group>"; };
 		839AA3DB1BE2BC08006A05F3 /* resize.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = resize.css; sourceTree = "<group>"; };
+		839C526C1D9F2447003FAA94 /* getapikey.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = getapikey.js; sourceTree = "<group>"; };
 		839D76AA1B9A3BC40037294C /* UserScriptTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserScriptTableViewCell.swift; sourceTree = "<group>"; };
 		83A1F40F1D43836A0045751F /* UserScriptSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserScriptSupport.swift; sourceTree = "<group>"; };
 		83A23FE61BCD96C100060B66 /* String+WaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+WaniKani.swift"; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 				83A1F40F1D43836A0045751F /* UserScriptSupport.swift */,
 				832255C21D9267960023602E /* common.css */,
 				83183BC51BECC4B300FAE0B6 /* common.js */,
+				839C526C1D9F2447003FAA94 /* getapikey.js */,
 				83FC71D11C95877100B60C1C /* jitai.user.js */,
 				839AA3D71BE2BB8C006A05F3 /* jquery.qtip.min.css */,
 				839AA3D81BE2BB8C006A05F3 /* jquery.qtip.min.js */,
@@ -1309,6 +1312,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				839C526D1D9F2447003FAA94 /* getapikey.js in Resources */,
 				8371D66A1C760D6F008AE534 /* showdown.min.js in Resources */,
 				83F364381D01A2D700213097 /* ReorderSettings.storyboard in Resources */,
 				8335185F1C8782170057E956 /* noswipe.js in Resources */,

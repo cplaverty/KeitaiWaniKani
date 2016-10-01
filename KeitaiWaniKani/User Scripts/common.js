@@ -50,7 +50,13 @@ if (this.Notes !== undefined) {
         s.on("click", function() {
             s.find("button").on("click", function() {
                 console.log("force end editing");
-                endEditing();
+                if (window.webkit && window.webkit.messageHandlers) {
+                    // WKWebView
+                    window.webkit.messageHandlers.interop.postMessage("endEditing");
+                } else {
+                    // UIWebView
+                    endEditing();
+                }
             });
         });
     };

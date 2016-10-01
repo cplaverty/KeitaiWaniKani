@@ -30,13 +30,13 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     var progressAdditionalDescriptionLabel: UILabel!
     var progressView: UIProgressView!
     
-    private var updateUITimer: Foundation.Timer? {
+    private var updateUITimer: Timer? {
         willSet {
             updateUITimer?.invalidate()
         }
     }
     
-    private var updateStudyQueueTimer: Foundation.Timer? {
+    private var updateStudyQueueTimer: Timer? {
         willSet {
             updateStudyQueueTimer?.invalidate()
         }
@@ -583,7 +583,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     
     // MARK: - Timer Callbacks
     
-    func updateUITimerDidFire(_ timer: Foundation.Timer) {
+    func updateUITimerDidFire(_ timer: Timer) {
         guard let studyQueue = self.studyQueue else {
             return
         }
@@ -591,7 +591,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         setTimeToNextReview(studyQueue)
     }
     
-    func updateStudyQueueTimerDidFire(_ timer: Foundation.Timer) {
+    func updateStudyQueueTimerDidFire(_ timer: Timer) {
         // Don't schedule another fetch if one is still running
         guard self.overallProgress?.finished ?? true else { return }
         fetchStudyQueueFromNetworkInBackground(forced: false)
@@ -609,7 +609,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             components.minute = 1
             // Schedule timer for the top of every minute
             let nextFireTime = calendar.date(byAdding: components, to: referenceDate)!
-            let timer = Foundation.Timer(fireAt: nextFireTime, interval: 60, target: self, selector: #selector(updateUITimerDidFire(_:)), userInfo: nil, repeats: true)
+            let timer = Timer(fireAt: nextFireTime, interval: 60, target: self, selector: #selector(updateUITimerDidFire(_:)), userInfo: nil, repeats: true)
             timer.tolerance = 1
             RunLoop.main.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
             return timer
@@ -618,7 +618,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             let nextFetchTime = WaniKaniAPI.nextRefreshTimeFromNow()
             
             DDLogInfo("Will fetch study queue at \(nextFetchTime)")
-            let timer = Foundation.Timer(fireAt: nextFetchTime, interval: TimeInterval(WaniKaniAPI.updateMinuteCount * 60), target: self, selector: #selector(updateStudyQueueTimerDidFire(_:)), userInfo: nil, repeats: true)
+            let timer = Timer(fireAt: nextFetchTime, interval: TimeInterval(WaniKaniAPI.updateMinuteCount * 60), target: self, selector: #selector(updateStudyQueueTimerDidFire(_:)), userInfo: nil, repeats: true)
             timer.tolerance = 20
             RunLoop.main.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
             return timer
@@ -710,10 +710,10 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         case (.currentlyAvailable, 1): // Reviews
             showReviewsView()
         case (.links, 0): // Web Dashboard
-            let vc = WKWebViewController.forURL(WaniKaniURLs.dashboard, configBlock: wkWebViewControllerCommonConfiguration)
+            let vc = WKWebViewController.wrapped(url: WaniKaniURLs.dashboard) { $0.delegate = self }
             present(vc, animated: true, completion: nil)
         case (.links, 1): // Community Centre
-            let vc = WKWebViewController.forURL(WaniKaniURLs.communityCentre, configBlock: wkWebViewControllerCommonConfiguration)
+            let vc = WKWebViewController.wrapped(url: WaniKaniURLs.communityCentre) { $0.delegate = self }
             present(vc, animated: true, completion: nil)
         default: break
         }
@@ -895,16 +895,8 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         }
     }
     
-    private func webViewControllerCommonConfiguration(_ webViewController: WebViewController) {
-        webViewController.delegate = self
-    }
-    
-    private func wkWebViewControllerCommonConfiguration(_ webViewController: WKWebViewController) {
-        webViewController.delegate = self
-    }
-    
-    private func presentReviewPageWebViewController(url: Foundation.URL) {
-        let vc = WaniKaniReviewPageWebViewController.wrapped(url: url, configBlock: webViewControllerCommonConfiguration)
+    private func presentReviewPageWebViewController(url: URL) {
+        let vc = WaniKaniReviewPageWebViewController.wrapped(url: url) { $0.delegate = self }
         
         if self.dataRefreshOperation != nil {
             // Cancel data refresh operation because we're just going to restart it when the web view is dismissed

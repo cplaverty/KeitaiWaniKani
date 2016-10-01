@@ -119,7 +119,7 @@ class SRSDataItemCollectionViewController: UICollectionViewController, UICollect
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? SRSDataItemInfoURL, let url = cell.srsDataItemInfoURL else { return }
         
-        self.present(WKWebViewController.forURL(url) { $0.delegate = self }, animated: true, completion: nil)
+        self.present(WKWebViewController.wrapped(url: url) { $0.delegate = self }, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {

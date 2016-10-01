@@ -127,7 +127,9 @@ class WKWebAddressBarView: UIView {
         }
         
         if object as AnyObject? === self.webView {
-            updateUIFromWebView()
+            DispatchQueue.main.async { [weak self] in
+                self?.updateUIFromWebView()
+            }
         }
     }
     

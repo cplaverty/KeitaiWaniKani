@@ -10,7 +10,7 @@ import CocoaLumberjack
 import SwiftyJSON
 import WaniKaniKit
 
-class HomeScreenViewController: UIViewController, WebViewControllerDelegate {
+class HomeScreenViewController: UIViewController, WebViewControllerDelegate, WKWebViewControllerDelegate {
     
     struct SegueIdentifiers {
         static let showDashboard = "Show Dashboard"
@@ -39,6 +39,12 @@ class HomeScreenViewController: UIViewController, WebViewControllerDelegate {
         controller.dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - WKWebViewControllerDelegate
+    
+    func wkWebViewControllerDidFinish(_ controller: WKWebViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - View Controller Lifecycle
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,7 +52,7 @@ class HomeScreenViewController: UIViewController, WebViewControllerDelegate {
         activityIndicator.startAnimating()
         validateAPIKey()
     }
-
+    
     // Workaround to show the action sheet on WKWebView, which calls this on the root view controller
     override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
         if let pvc = self.frontMostPresentedViewController {
@@ -55,7 +61,7 @@ class HomeScreenViewController: UIViewController, WebViewControllerDelegate {
             super.present(viewControllerToPresent, animated: flag, completion: completion)
         }
     }
-
+    
     // MARK: - Update UI
     
     func showLoginButtonsOnMainQueue() {
@@ -86,7 +92,7 @@ class HomeScreenViewController: UIViewController, WebViewControllerDelegate {
             self.performSegue(withIdentifier: SegueIdentifiers.showDashboard, sender: self)
         }
     }
-
+    
 }
 
 private extension UIViewController {

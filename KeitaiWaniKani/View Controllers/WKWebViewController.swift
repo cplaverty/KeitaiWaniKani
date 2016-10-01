@@ -15,11 +15,15 @@ protocol WKWebViewControllerDelegate: class {
     func wkWebViewControllerDidFinish(_ controller: WKWebViewController)
 }
 
-class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate, WKWebViewControllerDelegate, WebViewBackForwardListTableViewControllerDelegate, WKWebViewUserScriptSupport {
+private struct MessageHandlerNames {
+    static let interop = "interop"
+}
+
+class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler, UIScrollViewDelegate, WKWebViewControllerDelegate, WebViewBackForwardListTableViewControllerDelegate, WKWebViewUserScriptSupport {
     
-    class func forURL(_ URL: Foundation.URL, configBlock: (WKWebViewController) -> Void = { _ in }) -> UINavigationController {
-        let wkWebViewController = self.init(URL: URL)
-        configBlock(wkWebViewController)
+    class func wrapped(url: URL, configBlock: ((WKWebViewController) -> Void)?) -> UINavigationController {
+        let wkWebViewController = self.init(url: url)
+        configBlock?(wkWebViewController)
         
         let nc = UINavigationController(navigationBarClass: nil, toolbarClass: nil)
         if wkWebViewController.toolbarItems?.isEmpty == false {
@@ -35,15 +39,14 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     // MARK: - Initialisers
     
-    required init(URL: Foundation.URL) {
+    required init(url: URL) {
         super.init(nibName: nil, bundle: nil)
-        self.webView = createWebViewWithConfiguration()
-        self.URL = URL
+        self.url = url
     }
     
     required init(configuration: WKWebViewConfiguration) {
         super.init(nibName: nil, bundle: nil)
-        self.webView = createWebViewWithConfiguration(configuration)
+        self.webViewConfiguration = configuration
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -65,24 +68,33 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     weak var delegate: WKWebViewControllerDelegate?
     
-    var URL: Foundation.URL?
-    
     var allowsBackForwardNavigationGestures: Bool { return true }
     
-    private static var defaultWebViewConfiguration: WKWebViewConfiguration = {
+    var url: URL?
+    
+    var webViewConfiguration: WKWebViewConfiguration?
+    
+    private var defaultWebViewConfiguration: WKWebViewConfiguration {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let config = WKWebViewConfiguration()
+        registerMessageHandlers(config.userContentController)
         config.allowsInlineMediaPlayback = true
         config.processPool = delegate.webKitProcessPool
+        
         if #available(iOS 9.0, *) {
             config.applicationNameForUserAgent = "KeitaiWaniKani"
+        }
+        
+        if #available(iOS 10.0, *) {
+            config.mediaTypesRequiringUserActionForPlayback = [.video]
+        } else if #available(iOS 9.0, *) {
             config.requiresUserActionForMediaPlayback = false
         } else {
             config.mediaPlaybackRequiresUserAction = false
         }
         
         return config
-    }()
+    }
     
     private var WKWebViewControllerObservationContext = 0
     
@@ -90,8 +102,8 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     private var progressViewIsHidden = true
     
     lazy var statusBarView: UIView = {
-        let statusBarView = UIBottomBorderedView(color: UIColor.lightGray, width: 0.5)
-        statusBarView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: self.view.frame.size.width, height: 20))
+        let statusBarView = UIBottomBorderedView(color: .lightGray, width: 0.5)
+        statusBarView.frame = CGRect(origin: .zero, size: CGSize(width: self.view.frame.width, height: 20))
         statusBarView.autoresizingMask = .flexibleWidth
         statusBarView.backgroundColor = ApplicationSettings.globalBarTintColor
         
@@ -99,19 +111,19 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     }()
     
     private let webViewObservedKeys = ["canGoBack", "canGoForward", "estimatedProgress", "loading", "URL"]
-    private(set) var webView: WKWebView!
+    private(set) weak var webView: WKWebView!
     
-    private func createWebViewWithConfiguration(_ webViewConfiguration: WKWebViewConfiguration = defaultWebViewConfiguration) -> WKWebView {
-        let webView = WKWebView(frame: CGRect.zero, configuration: webViewConfiguration)
-        webView.keyboardDisplayDoesNotRequireUserAction()
+    private func createWebView() -> WKWebView {
+        let webView = WKWebView(frame: self.view.bounds, configuration: webViewConfiguration ?? defaultWebViewConfiguration)
+        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.scrollView.delegate = self
-        webView.translatesAutoresizingMaskIntoConstraints = false
         webView.navigationDelegate = self
         webView.uiDelegate = self
         webView.allowsBackForwardNavigationGestures = self.allowsBackForwardNavigationGestures
         if #available(iOS 9.0, *) {
             webView.allowsLinkPreview = true
         }
+        webView.keyboardDisplayDoesNotRequireUserAction()
         
         for webViewObservedKey in self.webViewObservedKeys {
             webView.addObserver(self, forKeyPath: webViewObservedKey, options: [], context: &self.WKWebViewControllerObservationContext)
@@ -151,7 +163,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     // MARK: - Actions
     
     func done(_ sender: UIBarButtonItem) {
-        delegate?.wkWebViewControllerDidFinish(self)
+        finish()
     }
     
     func share(_ sender: UIBarButtonItem) {
@@ -241,20 +253,6 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     // MARK: - WKNavigationDelegate
     
-    //    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-    //        switch navigationAction.request.URL {
-    //        case WaniKaniURLs.subscription?:
-    //            self.showAlertWithTitle("Can not manage subscription", message: "Due to Apple App Store rules, you can not manage your subscription within the app.")
-    //            decisionHandler(.Cancel)
-    //        default:
-    //            decisionHandler(.Allow)
-    //        }
-    //    }
-    
-    //    func webView(webView: WKWebView, decidePolicyForNavigationResponse navigationResponse: WKNavigationResponse, decisionHandler: (WKNavigationResponsePolicy) -> Void) {
-    //        decisionHandler(.Allow)
-    //    }
-    
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         if self.toolbarItems?.isEmpty == false {
@@ -276,6 +274,16 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         showErrorDialog(error)
     }
     
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        guard let url = webView.url else { return }
+        
+        switch url {
+        case WaniKaniURLs.lessonSession, WaniKaniURLs.reviewSession:
+            showBrowserInterface(false, animated: true)
+        default: break
+        }
+    }
+    
     private func showErrorDialog(_ error: Error) {
         let nserror = error as NSError
         switch (nserror.domain, nserror.code) {
@@ -292,7 +300,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         let newVC = type(of: self).init(configuration: configuration)
         newVC.delegate = self
-        newVC.URL = navigationAction.request.url
+        newVC.url = navigationAction.request.url
         self.navigationController?.pushViewController(newVC, animated: true)
         
         return newVC.webView
@@ -337,6 +345,27 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         }
     }
     
+    // MARK: - WKScriptMessageHandler
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        guard message.name == MessageHandlerNames.interop else { return }
+        
+        guard let command = message.body as? String else {
+            DDLogWarn("Failed to convert message body! \(message.body)")
+            return
+        }
+        
+        switch command {
+        case "endEditing":
+            DispatchQueue.main.async { [weak self] in
+                DDLogVerbose("Calling endEditing")
+                self?.view?.endEditing(true)
+            }
+        default:
+            DDLogWarn("Received unhandled command \(command) in \(message.body)")
+        }
+    }
+    
     // MARK: - UIScrollViewDelegate
     
     func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
@@ -349,7 +378,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     // MARK: - WKWebViewControllerDelegate
     
     func wkWebViewControllerDidFinish(_ controller: WKWebViewController) {
-        self.delegate?.wkWebViewControllerDidFinish(self)
+        finish()
     }
     
     // MARK: - WebViewBackForwardListTableViewControllerDelegate
@@ -364,20 +393,20 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let webView = self.createWebView()
+        self.webView = webView
+        
         self.view.addSubview(webView)
         self.view.addSubview(statusBarView)
         
-        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
-        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "V:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
-        
-        configureForTraitCollection(self.traitCollection)
+        configureToolbars(for: self.traitCollection)
         
         if let nc = self.navigationController {
             let navBar = nc.navigationBar
             
             let progressView = UIProgressView(progressViewStyle: .default)
             progressView.translatesAutoresizingMaskIntoConstraints = false
-            progressView.trackTintColor = UIColor.clear
+            progressView.trackTintColor = .clear
             progressView.progress = 0.0
             progressView.alpha = 0.0
             navBar.addSubview(progressView)
@@ -387,12 +416,12 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
             NSLayoutConstraint(item: progressView, attribute: .trailing, relatedBy: .equal, toItem: navBar, attribute: .trailing, multiplier: 1, constant: 0).isActive = true
             NSLayoutConstraint(item: progressView, attribute: .bottom, relatedBy: .equal, toItem: navBar, attribute: .bottom, multiplier: 1, constant: 0).isActive = true
             
-            let addressBarView = WKWebAddressBarView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: navBar.bounds.width, height: 28)), forWebView: webView)
+            let addressBarView = WKWebAddressBarView(frame: CGRect(origin: .zero, size: CGSize(width: navBar.bounds.width, height: 28)), forWebView: webView)
             addressBarView.autoresizingMask = [.flexibleWidth]
             self.navigationItem.titleView = addressBarView
         }
         
-        if let url = self.URL {
+        if let url = self.url {
             let request = URLRequest(url: url)
             self.webView.load(request)
         }
@@ -400,12 +429,12 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         if newCollection.horizontalSizeClass != traitCollection.horizontalSizeClass || newCollection.verticalSizeClass != traitCollection.verticalSizeClass {
-            configureForTraitCollection(newCollection)
+            configureToolbars(for: newCollection)
         }
     }
     
     /// Sets the navigation bar and toolbar items based on the given UITraitCollection
-    func configureForTraitCollection(_ traitCollection: UITraitCollection) {
+    func configureToolbars(for traitCollection: UITraitCollection) {
         statusBarView.isHidden = traitCollection.verticalSizeClass == .compact
         if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
             addToolbarItemsForCompactWidthRegularHeight()
@@ -484,7 +513,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     func fillUsing1Password(_ sender: AnyObject!) {
         OnePasswordExtension.shared().fillItem(intoWebView: self.webView, for: self, sender: sender, showOnlyLogins: true) { success, error in
             if (!success) {
-                DDLogWarn("Failed to fill password into webview: <\(error)>")
+                DDLogWarn("Failed to fill password into webview: \(error)")
             } else {
                 DDLogDebug("Filled login using password manager")
             }
@@ -500,6 +529,21 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         }
     }
     
+    func finish() {
+        unregisterMessageHandlers(webView.configuration.userContentController)
+        delegate?.wkWebViewControllerDidFinish(self)
+    }
+    
+    func registerMessageHandlers(_ userContentController: WKUserContentController) {
+        DDLogVerbose("Registering command handler")
+        userContentController.add(self, name: MessageHandlerNames.interop)
+    }
+    
+    func unregisterMessageHandlers(_ userContentController: WKUserContentController) {
+        DDLogVerbose("Unregistering command handler")
+        userContentController.removeScriptMessageHandler(forName: MessageHandlerNames.interop)
+    }
+    
     // MARK: - Key-Value Observing
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -509,7 +553,9 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         }
         
         if object as AnyObject? === self.webView {
-            updateUIFromWebView()
+            DispatchQueue.main.async { [weak self] in
+                self?.updateUIFromWebView()
+            }
         }
     }
 }

@@ -35,9 +35,9 @@ protocol WebViewControllerDelegate: class {
 
 class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelegate, WebViewControllerDelegate, UIWebViewUserScriptSupport {
     
-    class func wrapped(url: URL, configBlock: (WebViewController) -> Void) -> UINavigationController {
+    class func wrapped(url: URL, configBlock: ((WebViewController) -> Void)?) -> UINavigationController {
         let webViewController = self.init(url: url)
-        configBlock(webViewController)
+        configBlock?(webViewController)
         
         let nc = UINavigationController(navigationBarClass: nil, toolbarClass: nil)
         nc.pushViewController(webViewController, animated: false)
@@ -77,12 +77,12 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     var addressBarView: WebAddressBarView!
     
-    func createWebView() -> UIWebView {
+    private func createWebView() -> UIWebView {
         let webView = UIWebView(frame: self.view.bounds)
         webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         webView.scrollView.delegate = self
         webView.delegate = self
-        webView.backgroundColor = UIColor.white
+        webView.backgroundColor = .white
         webView.allowsInlineMediaPlayback = true
         webView.mediaPlaybackRequiresUserAction = false
         if #available(iOS 9.0, *) {
@@ -95,8 +95,8 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     weak var webView: UIWebView?
     
     lazy var statusBarView: UIView = {
-        let statusBarView = UIBottomBorderedView(color: UIColor.lightGray, width: 0.5)
-        statusBarView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: self.view.frame.width, height: 20))
+        let statusBarView = UIBottomBorderedView(color: .lightGray, width: 0.5)
+        statusBarView.frame = CGRect(origin: .zero, size: CGSize(width: self.view.frame.width, height: 20))
         statusBarView.autoresizingMask = .flexibleWidth
         statusBarView.backgroundColor = ApplicationSettings.globalBarTintColor
         
@@ -220,13 +220,6 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         if requestStack.isEmpty {
             addressBarView.url = request.url
         }
-//        switch request.url {
-//        case WaniKaniURLs.subscription?:
-//            self.showAlertWithTitle("Can not manage subscription", message: "Please use Safari to manage your subscription.")
-//            return false
-//        default:
-//            return true
-//        }
         return true
     }
     
@@ -346,7 +339,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
             webView.scrollView.panGestureRecognizer.require(toFail: forwardScreenEdgePanGesture!)
         }
         
-        configure(forTraitCollection: self.traitCollection)
+        configureToolbars(for: self.traitCollection)
         
         if let nc = self.navigationController {
             let navBar = nc.navigationBar
@@ -384,12 +377,12 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         if newCollection.horizontalSizeClass != traitCollection.horizontalSizeClass || newCollection.verticalSizeClass != traitCollection.verticalSizeClass {
-            configure(forTraitCollection: newCollection)
+            configureToolbars(for: newCollection)
         }
     }
     
     /// Sets the navigation bar and toolbar items based on the given UITraitCollection
-    func configure(forTraitCollection traitCollection: UITraitCollection) {
+    func configureToolbars(for traitCollection: UITraitCollection) {
         statusBarView.isHidden = traitCollection.verticalSizeClass == .compact
         if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
             addToolbarItemsForCompactWidthRegularHeight()
