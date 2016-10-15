@@ -20,7 +20,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         static let levelDataChart = "Show Level Data Chart"
     }
     
-    private enum TableViewSections: Int {
+    private enum TableViewSection: Int {
         case currentlyAvailable = 0, nextReview = 1, levelProgress = 2, srsDistribution = 3, links = 4
     }
     
@@ -349,13 +349,13 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         case .formattedString(let formattedInterval):
             reviewTitleLabel.text = "Next Review"
             reviewCountLabel.text = studyQueue.formattedNextReviewDate()
-            reviewCountLabel.textColor = UIColor.black
+            reviewCountLabel.textColor = .black
             reviewCountLabel.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightThin)
             reviewTimeRemainingLabel.text = formattedInterval
         case .unformattedInterval(let secondsUntilNextReview):
             reviewTitleLabel.text = "Next Review"
             reviewCountLabel.text = studyQueue.formattedNextReviewDate()
-            reviewCountLabel.textColor = UIColor.black
+            reviewCountLabel.textColor = .black
             reviewCountLabel.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightThin)
             reviewTimeRemainingLabel.text = "\(NumberFormatter.localizedString(from: NSNumber(value: secondsUntilNextReview), number: .decimal))s"
         }
@@ -375,7 +375,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     func updateUI(userInformation: UserInformation?) {
         assert(Thread.isMainThread, "Must be called on the main thread")
         
-        self.tableView.reloadSections(IndexSet(integer: TableViewSections.levelProgress.rawValue), with: .none)
+        self.tableView.reloadSections(IndexSet(integer: TableViewSection.levelProgress.rawValue), with: .none)
     }
     
     func updateLevelProgressCellTo(_ complete: Int, ofTotal total: Int, percentageCompletionLabel: UILabel?, progressView: UIProgressView?, totalItemCountLabel: UILabel?) {
@@ -406,13 +406,13 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             label?.text = formattedCount
         }
         
-        self.tableView.reloadSections(IndexSet(integer: TableViewSections.srsDistribution.rawValue), with: .none)
+        self.tableView.reloadSections(IndexSet(integer: TableViewSection.srsDistribution.rawValue), with: .none)
     }
     
     func updateUI(levelData: LevelData?) {
         assert(Thread.isMainThread, "Must be called on the main thread")
         
-        defer { self.tableView.reloadSections(IndexSet(integer: TableViewSections.levelProgress.rawValue), with: .none) }
+        defer { self.tableView.reloadSections(IndexSet(integer: TableViewSection.levelProgress.rawValue), with: .none) }
         
         guard let levelData = levelData, let projectedCurrentLevel = levelData.projectedCurrentLevel else {
             averageLevelTimeCell.detailTextLabel?.text = "–"
@@ -665,20 +665,22 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let tableViewSection = TableViewSections(rawValue: section) else {
+        guard let tableViewSection = TableViewSection(rawValue: section) else {
             fatalError("Invalid section index \(section) requested")
         }
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.clear
+        label.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        label.backgroundColor = .clear
         label.isOpaque = false
-        label.textColor = UIColor.black
+        label.textColor = .black
         label.font = headerFont
         let visualEffectVibrancyView = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: blurEffect))
         visualEffectVibrancyView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         visualEffectVibrancyView.contentView.addSubview(label)
         visualEffectVibrancyView.contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        visualEffectVibrancyView.contentView.layoutMargins.left = tableView.separatorInset.left / 2
         
         NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-|", options: [], metrics: nil, views: ["label": label]))
         NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[label]", options: [], metrics: nil, views: ["label": label]))
@@ -700,7 +702,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let tableViewSection = TableViewSections(rawValue: indexPath.section) else {
+        guard let tableViewSection = TableViewSection(rawValue: indexPath.section) else {
             fatalError("Invalid section index \(indexPath.section) requested")
         }
         
@@ -764,7 +766,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         if let toolbar = self.navigationController?.toolbar {
             progressView = UIProgressView(progressViewStyle: .default)
             progressView.translatesAutoresizingMaskIntoConstraints = false
-            progressView.trackTintColor = UIColor.clear
+            progressView.trackTintColor = .clear
             progressView.progress = 0
             progressView.alpha = 0
             toolbar.addSubview(progressView)
@@ -787,8 +789,8 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             progressDescriptionLabel = UILabel()
             progressDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
             progressDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
-            progressDescriptionLabel.backgroundColor = UIColor.clear
-            progressDescriptionLabel.textColor = UIColor.black
+            progressDescriptionLabel.backgroundColor = .clear
+            progressDescriptionLabel.textColor = .black
             progressDescriptionLabel.textAlignment = .center
             statusView.addSubview(progressDescriptionLabel)
             NSLayoutConstraint(item: progressDescriptionLabel, attribute: .top, relatedBy: .equal, toItem: statusView, attribute: .top, multiplier: 1, constant: 0).isActive = true
@@ -799,8 +801,8 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
             progressAdditionalDescriptionLabel = UILabel()
             progressAdditionalDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
             progressAdditionalDescriptionLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
-            progressAdditionalDescriptionLabel.backgroundColor = UIColor.clear
-            progressAdditionalDescriptionLabel.textColor = UIColor.darkGray
+            progressAdditionalDescriptionLabel.backgroundColor = .clear
+            progressAdditionalDescriptionLabel.textColor = .darkGray
             progressAdditionalDescriptionLabel.textAlignment = .center
             statusView.addSubview(progressAdditionalDescriptionLabel)
             NSLayoutConstraint(item: progressAdditionalDescriptionLabel, attribute: .leading, relatedBy: .equal, toItem: statusView, attribute: .leading, multiplier: 1, constant: 0).isActive = true
