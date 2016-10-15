@@ -14,47 +14,15 @@ private let reviewURL = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZS
 
 class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
-    private enum TableViewSections: Int {
+    private enum TableViewSection: Int {
         case userScripts = 0, otherSettings, feedback, logOut
-    }
-    
-    private struct ScriptInfo {
-        let name: String
-        let description: String
-        let settingKey: String
     }
     
     // MARK: - Properties
     
-    private let userScripts: [ScriptInfo] = [
-        ScriptInfo(name: "Jitai",
-            description: "Display WaniKani reviews in randomised fonts, for more varied reading training.  Original script written by obskyr.",
-            settingKey: ApplicationSettingKeys.userScriptJitaiEnabled),
-        ScriptInfo(name: "WaniKani Override",
-            description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script written by ruipgpinheiro.",
-            settingKey: ApplicationSettingKeys.userScriptIgnoreAnswerEnabled),
-        ScriptInfo(name: "WaniKani Double Check",
-            description: "Adds a thumbs up/down button that permits incorrect answers to be marked correct, and correct answers to be marked incorrect.  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script written by Ethan.",
-            settingKey: ApplicationSettingKeys.userScriptDoubleCheckEnabled),
-        ScriptInfo(name: "WaniKani Improve",
-            description: "Automatically moves to the next item if the answer was correct (also known as \"lightning mode\").  Original script written by Seiji.",
-            settingKey: ApplicationSettingKeys.userScriptWaniKaniImproveEnabled),
-        ScriptInfo(name: "Markdown Notes",
-            description: "Allows you to write Markdown in the notes, which will be rendered as HTML when the page loads.  Original script written by rfindley.",
-            settingKey: ApplicationSettingKeys.userScriptMarkdownNotesEnabled),
-        ScriptInfo(name: "WaniKani Hide Mnemonics",
-            description: "Allows you to hide the reading and meaning mnemonics on the site.  Original script written by nibarius.",
-            settingKey: ApplicationSettingKeys.userScriptHideMnemonicsEnabled),
-//        ScriptInfo(name: "WaniKani Reorder Ultimate",
-//            description: "Allows you to reorder your lessons and reviews by type and level, and also force reading/meaning first.  Original script written by xMunch.",
-//            settingKey: ApplicationSettingKeys.userScriptReorderUltimateEnabled),
-        ]
+    private let userScripts = UserScriptDefinitions.community
     
-    private let otherSettings: [ScriptInfo] = [
-        ScriptInfo(name: "Disable Lesson Swipe",
-            description: "Disables the horizontal swipe gesture on the info text during lessons to prevent it being accidentally triggered while scrolling.",
-            settingKey: ApplicationSettingKeys.disableLessonSwipe),
-        ]
+    private let otherSettings = UserScriptDefinitions.custom
     
     // MARK: - View Controller Lifecycle
     
@@ -68,7 +36,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        guard let tableViewSection = TableViewSections(rawValue: indexPath.section) else {
+        guard let tableViewSection = TableViewSection(rawValue: indexPath.section) else {
             fatalError("Invalid section index \(indexPath.section) requested")
         }
         
@@ -92,7 +60,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let tableViewSection = TableViewSections(rawValue: section) else {
+        guard let tableViewSection = TableViewSection(rawValue: section) else {
             fatalError("Invalid section index \(section) requested")
         }
         
@@ -105,7 +73,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let tableViewSection = TableViewSections(rawValue: indexPath.section) else {
+        guard let tableViewSection = TableViewSection(rawValue: indexPath.section) else {
             fatalError("Invalid section index \(indexPath.section) requested")
         }
         
@@ -134,7 +102,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let tableViewSection = TableViewSections(rawValue: section) else {
+        guard let tableViewSection = TableViewSection(rawValue: section) else {
             fatalError("Invalid section index \(section) requested")
         }
         
@@ -147,7 +115,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        guard let tableViewSection = TableViewSections(rawValue: section) else {
+        guard let tableViewSection = TableViewSection(rawValue: section) else {
             fatalError("Invalid section index \(section) requested")
         }
         
@@ -162,7 +130,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        guard let tableViewSection = TableViewSections(rawValue: indexPath.section) else {
+        guard let tableViewSection = TableViewSection(rawValue: indexPath.section) else {
             fatalError("Invalid section index \(indexPath.section) requested")
         }
         
@@ -180,12 +148,10 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
         return nil
     }
     
-    private func dequeueAndInitScriptCell(_ scriptDetails: [ScriptInfo], forIndexPath indexPath: IndexPath) -> UITableViewCell {
+    private func dequeueAndInitScriptCell(_ scriptDetails: [UserScript], forIndexPath indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserScript", for: indexPath) as! UserScriptTableViewCell
         let userScript = scriptDetails[indexPath.row]
-        cell.settingName = userScript.name
-        cell.settingDescription = userScript.description
-        cell.applicationSettingKey = userScript.settingKey
+        cell.userScript = userScript
         cell.accessoryType = .detailButton
         cell.setToDefault()
         cell.contentView.layoutIfNeeded()

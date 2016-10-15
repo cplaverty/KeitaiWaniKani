@@ -178,6 +178,7 @@
 		83D9316B1BB9D2AA009DF31A /* FileMissingConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D9316A1BB9D2AA009DF31A /* FileMissingConditionTests.swift */; };
 		83DC478C1B440A6200AD716C /* RubyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC478B1B440A6200AD716C /* RubyLabel.swift */; };
 		83E4A2B71C9820400053A7C0 /* WKU.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 83E4A2B61C9820400053A7C0 /* WKU.user.js */; };
+		83E974CB1DB26F75007DD1D2 /* UserScripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E974CA1DB26F75007DD1D2 /* UserScripts.swift */; };
 		83F32EA91BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */; };
 		83F32EAB1BDFCCFA00F2ABA0 /* wkdoublecheck.js in Resources */ = {isa = PBXBuildFile; fileRef = 83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */; };
 		83F364361D018B1200213097 /* ReorderSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F364351D018B1200213097 /* ReorderSettings.swift */; };
@@ -477,6 +478,7 @@
 		83D9316A1BB9D2AA009DF31A /* FileMissingConditionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileMissingConditionTests.swift; sourceTree = "<group>"; };
 		83DC478B1B440A6200AD716C /* RubyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RubyLabel.swift; sourceTree = "<group>"; };
 		83E4A2B61C9820400053A7C0 /* WKU.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = WKU.user.js; sourceTree = "<group>"; };
+		83E974CA1DB26F75007DD1D2 /* UserScripts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserScripts.swift; sourceTree = "<group>"; };
 		83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaniKaniLoginWebViewController.swift; sourceTree = "<group>"; };
 		83F32EAA1BDFCCFA00F2ABA0 /* wkdoublecheck.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkdoublecheck.js; sourceTree = "<group>"; };
 		83F364351D018B1200213097 /* ReorderSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReorderSettings.swift; sourceTree = "<group>"; };
@@ -651,6 +653,7 @@
 		832462C01B93687E00FB62C9 /* User Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				83E974CA1DB26F75007DD1D2 /* UserScripts.swift */,
 				83A1F40F1D43836A0045751F /* UserScriptSupport.swift */,
 				832255C21D9267960023602E /* common.css */,
 				83183BC51BECC4B300FAE0B6 /* common.js */,
@@ -1649,6 +1652,7 @@
 				83288CC21B45E808002B82B3 /* ApplicationSettings.swift in Sources */,
 				831436711D84010D0024D4A9 /* ReorderSettingsItemTypeOrderingTableViewController.swift in Sources */,
 				83B155571B944B360022217E /* ReviewTimelineTableViewController.swift in Sources */,
+				83E974CB1DB26F75007DD1D2 /* UserScripts.swift in Sources */,
 				8371D6681C760D61008AE534 /* BundleResourceLoader.swift in Sources */,
 				83AB92D71B7C05F2006D08F2 /* GetSRSDataItemOperation.swift in Sources */,
 				833FECE91BADF0DD001C9260 /* WebViewBackForwardListTableViewController.swift in Sources */,

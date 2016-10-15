@@ -18,69 +18,15 @@ protocol UserScriptSupport {
 
 extension UserScriptSupport {
     func injectUserScripts(for url: URL) -> Bool {
-        switch url {
-        case WaniKaniURLs.loginPage:
-            DDLogDebug("Loading user scripts")
-            injectStyleSheet(name: "common")
-            injectScript(name: "common")
-            return true
-        case WaniKaniURLs.lessonSession:
-            DDLogDebug("Loading user scripts")
-            injectStyleSheet(name: "common")
-            injectScript(name: "common")
-            injectStyleSheet(name: "resize")
-            if ApplicationSettings.disableLessonSwipe {
-                injectScript(name: "noswipe")
-            }
-            if ApplicationSettings.userScriptHideMnemonicsEnabled {
-                injectScript(name: "wkhidem.user")
-            }
-            if ApplicationSettings.userScriptReorderUltimateEnabled {
-                injectScript(name: "WKU.user")
-            }
-            return true
-        case WaniKaniURLs.reviewSession:
-            DDLogDebug("Loading user scripts")
-            injectStyleSheet(name: "common")
-            injectScript(name: "common")
-            injectStyleSheet(name: "resize")
-            if ApplicationSettings.userScriptJitaiEnabled {
-                injectScript(name: "jitai.user")
-            }
-            if ApplicationSettings.userScriptIgnoreAnswerEnabled {
-                injectScript(name: "wkoverride.user")
-            }
-            if ApplicationSettings.userScriptDoubleCheckEnabled {
-                injectScript(name: "wkdoublecheck")
-            }
-            if ApplicationSettings.userScriptWaniKaniImproveEnabled {
-                injectStyleSheet(name: "jquery.qtip.min")
-                injectScript(name: "jquery.qtip.min")
-                injectScript(name: "wkimprove")
-            }
-            if ApplicationSettings.userScriptMarkdownNotesEnabled {
-                injectScript(name: "showdown.min")
-                injectScript(name: "markdown.user")
-            }
-            if ApplicationSettings.userScriptHideMnemonicsEnabled {
-                injectScript(name: "wkhidem.user")
-            }
-            if ApplicationSettings.userScriptReorderUltimateEnabled {
-                injectScript(name: "WKU.user")
-            }
-            return true
-        case _ where url.path.hasPrefix(WaniKaniURLs.levelRoot.path) || url.path.hasPrefix(WaniKaniURLs.radicalRoot.path) || url.path.hasPrefix(WaniKaniURLs.kanjiRoot.path) || url.path.hasPrefix(WaniKaniURLs.vocabularyRoot.path):
-            if ApplicationSettings.userScriptMarkdownNotesEnabled {
-                injectScript(name: "showdown.min")
-                injectScript(name: "markdown.user")
-            }
-            if ApplicationSettings.userScriptHideMnemonicsEnabled {
-                injectScript(name: "wkhidem.user")
-            }
-            return true
-        default:
-            return false
+        DDLogDebug("Loading user scripts")
+        var scriptsInjected = false
+        
+        for script in UserScriptDefinitions.all where script.canBeInjected(toPageAt: url) {
+            script.inject(into: self)
+            scriptsInjected = true
         }
+        
+        return scriptsInjected
     }
 }
 
