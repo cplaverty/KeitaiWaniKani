@@ -30,11 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DDLog.add(DDASLLogger.sharedInstance())
         DDLog.add(DDTTYLogger.sharedInstance())
         
-        let fileLogger = DDFileLogger()!
-        fileLogger.rollingFrequency = 24 * 60 * 60 // 24 hour rolling
-        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
-        
-        DDLog.add(fileLogger)
+        #if DEBUG
+            let fileLogger = DDFileLogger()!
+            fileLogger.rollingFrequency = TimeInterval(24 * 60 * 60) // 24 hour rolling
+            fileLogger.logFileManager.maximumNumberOfLogFiles = 7
+            
+            DDLog.add(fileLogger)
+        #endif
         
         DDLogInfo("Starting new instance (logging level \(defaultDebugLevel))")
         

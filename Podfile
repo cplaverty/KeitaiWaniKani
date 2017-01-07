@@ -3,10 +3,10 @@ use_frameworks!
 
 target 'AlliCrab' do
     pod 'FMDB'
-    pod 'SwiftyJSON'#, :git => 'https://github.com/cplaverty/SwiftyJSON.git', :branch => 'swift3'
+    pod 'SwiftyJSON'
     pod 'CocoaLumberjack/Swift'
     pod '1PasswordExtension'
-    #pod 'Charts', :git => 'https://github.com/danielgindi/Charts.git', :branch => 'Swift-3.0'
+    #pod 'Charts'
     
     target 'OperationKit'
     target 'WaniKaniKit'
