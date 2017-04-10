@@ -132,7 +132,7 @@ public class DownloadFileOperation: OperationKit.Operation, URLSessionDownloadDe
     }
     
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        DDLogWarn("Download of \(self.sourceURL) failed: \(error)")
+        DDLogWarn("Download of \(self.sourceURL) failed: \(String(describing: error))")
         finish(withError: error)
     }
     

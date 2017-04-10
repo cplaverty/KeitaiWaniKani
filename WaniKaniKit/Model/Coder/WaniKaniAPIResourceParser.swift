@@ -54,7 +54,7 @@ extension WaniKaniAPIResourceParser {
     func throwForError(_ json: JSON) throws {
         if let code = json[WaniKaniAPIResourceKeys.error]["code"].string {
             let message = json[WaniKaniAPIResourceKeys.error]["message"].string
-            DDLogWarn("Received API error \(code): \(message)")
+            DDLogWarn("Received API error \(code): \(message ?? "<no message>")")
             
             switch code {
             case "user_not_found":

@@ -36,7 +36,7 @@ final class ReviewTimeNotificationOperation: OperationKit.Operation {
             }
             
             guard let nextReviewDate = studyQueue.nextReviewDate, nextReviewDate.timeIntervalSinceNow > 0 else {
-                DDLogInfo("Not setting local notification: next review date not set or in the past (\(studyQueue.nextReviewDate))")
+                DDLogInfo("Not setting local notification: next review date not set or in the past (\(String(describing: studyQueue.nextReviewDate)))")
                 finish()
                 return
             }

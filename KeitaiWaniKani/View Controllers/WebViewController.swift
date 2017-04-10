@@ -256,7 +256,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         jsContext?.setObject(unsafeBitCast(endEditing, to: AnyObject.self), forKeyedSubscript: "endEditing" as NSString)
         
         let requestFinished = requestStack.popLast()
-        DDLogVerbose("webViewDidFinishLoad webView.request: \(requestFinished)")
+        DDLogVerbose("webViewDidFinishLoad webView.request: \(String(describing: requestFinished))")
         // Finish load of new page
         if requestStack.isEmpty {
             if let documentTitle = webView.stringByEvaluatingJavaScript(from: "document.title"), !documentTitle.isEmpty {
@@ -438,7 +438,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
         
         OnePasswordExtension.shared().fillItem(intoWebView: webView, for: self, sender: sender, showOnlyLogins: true) { success, error in
             if (!success) {
-                DDLogWarn("Failed to fill password into webview: \(error)")
+                DDLogWarn("Failed to fill password into webview: \(String(describing: error))")
             } else {
                 DDLogDebug("Filled login using password manager")
             }

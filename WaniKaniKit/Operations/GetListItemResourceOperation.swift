@@ -80,7 +80,7 @@ public class GetListItemResourceOperation<Coder: ResourceHandler & JSONDecoder &
             return
         }
         
-        progress.totalUnitCount = downloadBatches.count + 1
+        progress.totalUnitCount = Int64(downloadBatches.count + 1)
         
         progress.becomeCurrent(withPendingUnitCount: 1)
         let parseOperation = ParseListItemOperation(coder: coder, inputDirectory: rootCacheDirectory, databaseQueue: databaseQueue)
@@ -91,7 +91,7 @@ public class GetListItemResourceOperation<Coder: ResourceHandler & JSONDecoder &
         
         var downloadOperations = [DownloadFileOperation]()
         for batch in downloadBatches {
-            let cacheFile = rootCacheDirectory.appendingPathComponent(batch.description == nil ? "download.json" : "\(batch.description).json")
+            let cacheFile = rootCacheDirectory.appendingPathComponent("\(batch.description ?? "download").json")
             progress.becomeCurrent(withPendingUnitCount: 1)
             let downloadOperation = DownloadFileOperation(resolver: resolver, resource: resource, argument: batch.argument, destinationFileURL: cacheFile, networkObserver: networkObserver)
             var progressDescription = "Downloading \(resource)"

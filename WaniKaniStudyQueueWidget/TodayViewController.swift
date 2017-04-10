@@ -51,10 +51,10 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         CFNotificationCenterAddObserver(nc,
                                         observer,
                                         { (_, observer, name, _, _) in
-                                            NSLog("Got notification for \(name)")
+                                            NSLog("Got notification for \(String(describing: name))")
                                             let mySelf = Unmanaged<TodayViewController>.fromOpaque(observer!).takeUnretainedValue()
                                             mySelf.updateStudyQueue()
-            },
+                                        },
                                         WaniKaniDarwinNotificationCenter.notificationNameForModelObjectType("\(StudyQueue.self)"),
                                         nil,
                                         .deliverImmediately)
@@ -125,7 +125,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         let database = FMDatabase(path: databasePath)!
         guard database.open() else {
             let error = database.lastError()
-            NSLog("Database failed to open! \(error)")
+            NSLog("Database failed to open! \(String(describing: error))")
             throw error!
         }
         defer { database.close() }

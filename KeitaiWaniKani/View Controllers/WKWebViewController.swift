@@ -513,7 +513,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     func fillUsing1Password(_ sender: AnyObject!) {
         OnePasswordExtension.shared().fillItem(intoWebView: self.webView, for: self, sender: sender, showOnlyLogins: true) { success, error in
             if (!success) {
-                DDLogWarn("Failed to fill password into webview: \(error)")
+                DDLogWarn("Failed to fill password into webview: \(String(describing: error))")
             } else {
                 DDLogDebug("Filled login using password manager")
             }

@@ -12,7 +12,7 @@ extension UIViewController {
     
     func showAlert(title: String? = nil, message: String, completion: (() -> Void)? = nil) {
         DispatchQueue.main.async {
-            DDLogInfo("Displaying alert with title \(title) and message \(message)")
+            DDLogInfo("Displaying alert with title \(title ?? "<no title>") and message \(message)")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             

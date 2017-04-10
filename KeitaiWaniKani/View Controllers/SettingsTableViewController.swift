@@ -162,7 +162,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     // MARK: - MFMailComposeViewControllerDelegate
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        DDLogDebug("MFMailComposeViewController finished with result \(result): \(error)")
+        DDLogDebug("MFMailComposeViewController finished with result \(result): \(String(describing: error))")
         controller.dismiss(animated: true, completion: nil)
     }
     
