@@ -7,97 +7,91 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1296D7032FEB275246E0E2EB83D4E58C /* OHHTTPStubsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653550999D8EF631BFE5C4290EE30227 /* OHHTTPStubsSwift.swift */; };
+		01FF72AABCEAA2143D7A5EA4EB38698E /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = E3B809706BB909D4786DAED3F7AC417F /* DDFileLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0F0F7C77E9F90046EABF4AAE6E69729D /* CocoaLumberjack-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 51679479C7E52A8E1ABC1E4BE38DF321 /* CocoaLumberjack-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1296D7032FEB275246E0E2EB83D4E58C /* OHHTTPStubsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1AE2C79DB1705A050161A6D7824BEE /* OHHTTPStubsSwift.swift */; };
+		148B56527342C8FA9F1BE3411A8B9034 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BF2993E17051DE8F85449A6D4E6000 /* Foundation.framework */; };
 		1711F332E56E7889A18B6DB2218E5422 /* Pods-OperationKitTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C564F30B9928DE183D72EC2A70E7500 /* Pods-OperationKitTests-dummy.m */; };
-		1D6143C2795B7844207283783201C6DF /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 174C7318E44AADE6361E0C9E22C72A56 /* DDDispatchQueueLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1ED85E627E4D06AFA96600F569E455DB /* OHHTTPStubsMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = C4906D8550DAD2AEC910B492D90AA48B /* OHHTTPStubsMethodSwizzling.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		22554065FA07F1BFE5308A685394CB12 /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A0B91D6854E8D5A9B86175FE24C2C8F /* FMDatabaseQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1ED85E627E4D06AFA96600F569E455DB /* OHHTTPStubsMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E4869E16368A9212916B6A72B8DC629 /* OHHTTPStubsMethodSwizzling.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		22554065FA07F1BFE5308A685394CB12 /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = DA74F870D638360A45CD489B50067951 /* FMDatabaseQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		229797B4B96CEE3921CF1471BF45E2A7 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AF5C09EB5BB00A813549AC996FBBCA5 /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		231B5BAC2614E4B52FDA87BA9574DC0F /* Pods-AlliCrab-OperationKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 42C8BD4F7480CDE4064435B872D1F2FF /* Pods-AlliCrab-OperationKit-dummy.m */; };
-		264E980D8EF30353EB8E848EBDBDD462 /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B28689D4DF8FF9ED1E86794CDE818ED1 /* DDContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		2D568345BFB42ED6F63107391E102131 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BF2993E17051DE8F85449A6D4E6000 /* Foundation.framework */; };
-		2DF93E32CB27E214194EC9AC1FDD956B /* OHPathHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D013AA277A5E83F6FD191E521CDE982 /* OHPathHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2E3812F9A2BBB018029D1BE726E8E172 /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 3DEA545F6902C244FE02BAADCF9E1422 /* CocoaLumberjack.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		30C843C773BEE0CFF7FD41700500F02D /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 494CF9D0A846CA46D7D8A1DA1B22EAFA /* DDFileLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		313CF1E92A50A1EFDD9F2920C65E0283 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB6224E66BC9DF7B8C4526178BFE7C5 /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		3274C209E27D42B77E3246CF24875321 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51A91676F3F4D7B62CB299937577D83B /* CocoaLumberjack.swift */; };
+		2B58CEA83247AC818CC883A465F1A237 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A2C828F5357D80311C9388A5FC03B2A /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2B940BF4EF825495EB921424BD4D64E6 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD9C4214FFEAF03BC94BBCA5D2F42B9 /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2DF93E32CB27E214194EC9AC1FDD956B /* OHPathHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 1328D473FAE711D3ED4544ED1615316A /* OHPathHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		36B7EFD99C52F961A48656DB5FCEE9D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BF2993E17051DE8F85449A6D4E6000 /* Foundation.framework */; };
-		377D4A936A6EC841AA6DD4C5998C4987 /* 1PasswordExtension-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A507CF00BA385E449DA801A8266879C /* 1PasswordExtension-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		37F097E2269EF1BD238AD7449D796445 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 08F46C649E128C01ADA7CF77D98D7DFB /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		3BD01F8E61667B00047170FC27494FCE /* OHHTTPStubsResponse+JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B90D0DE1419E8134FE50E075B8709FD /* OHHTTPStubsResponse+JSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3BFB7483F9A9D5CCEA6E081223AD3995 /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = 98470C70160ABEE9AEB588C0782C8B1C /* DDLog+LOGV.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		377D4A936A6EC841AA6DD4C5998C4987 /* 1PasswordExtension-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F891446FB849577D24430CBB3DE6FF53 /* 1PasswordExtension-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		37F097E2269EF1BD238AD7449D796445 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E86DF1FA97A62BDF06FC8F406FB5C26 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		3BD01F8E61667B00047170FC27494FCE /* OHHTTPStubsResponse+JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = B5BF3F3C6B23D8D10DA8A2E1BF876623 /* OHHTTPStubsResponse+JSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3CE5F71027E50CF05D5D8F57C292FE5E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BF2993E17051DE8F85449A6D4E6000 /* Foundation.framework */; };
-		3E43906B70EB01C06F3AE17008B853B9 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = B645C81EA62220E9879661DD573AAF68 /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4519859D6A3732A5D95DD5810C76FEDF /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = C13387EF01BF173C8E261EE4632FA220 /* DDAssertMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4939394D90B945389E83ED0CC996E5C6 /* CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E814747D9CF809F598ADFAF0AA07681E /* CocoaLumberjack-dummy.m */; };
+		3DC3E3E57376D698D0DE217B59BDF7A6 /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 0297567427F23E5D23739F7025FFDBD4 /* DDTTYLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E43906B70EB01C06F3AE17008B853B9 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = A76464C2362C96635CFA3F2A8F56A3C2 /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3EA73DFCC1889F17CDCD8B8EEE59AC2D /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = EDC415B0D3CAD088EF20A0B76A2F1AE6 /* DDASLLogCapture.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		47917768D2DC959B98EE540092B1B78A /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A561A49BCF6979DC00D4864856A73B74 /* CocoaLumberjack.swift */; };
 		4B8426633283D3F81527E199FD1DB323 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BF2993E17051DE8F85449A6D4E6000 /* Foundation.framework */; };
+		4F9E4C1F48F56EB8C3E99A092B034250 /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = E21B10622D66A60A246AD5ECBEFDA6C5 /* CocoaLumberjack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		544E3FD2FFCAF76708AE09830A94D52E /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 6514957736F432AC573E0C4341B79EA3 /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		561F278CC948FB76E605EF0E641A8DA0 /* OnePasswordExtensionResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3CC9AF4DE796D93EE1B9BBA6C7C24813 /* OnePasswordExtensionResources.bundle */; };
 		56E9C948B10BB608E303040761E5DB0F /* Pods-OperationKitTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FF978DD65F29DC5068586EFD454541E2 /* Pods-OperationKitTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5B2D2776124EB00FAA69830A8EB015D3 /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 15A40DD8C73E7565D4FBBBFE4B25315F /* DDLegacyMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5BA61FFD060E57F79693F2341C329CDC /* OHHTTPStubs.h in Headers */ = {isa = PBXBuildFile; fileRef = 28C5706F6AF0D09A9A79E8B821483638 /* OHHTTPStubs.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5BA61FFD060E57F79693F2341C329CDC /* OHHTTPStubs.h in Headers */ = {isa = PBXBuildFile; fileRef = 78B7A671302FC519EB72D53DAA3840B8 /* OHHTTPStubs.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5DBA06FDF9703A3AEA432F37227B953A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BF2993E17051DE8F85449A6D4E6000 /* Foundation.framework */; };
-		5EE380A7279D88A3379246106091C83C /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 981DDE208A29FC67B10C5066F4EA5685 /* DDMultiFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		61EFCE6F758E6309A704C0CE501BD706 /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = 10CF25C0050581B72556DAC279C0F166 /* DDLog+LOGV.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		65117866A2F9F3F32B7C520B95330AB7 /* Pods-AlliCrab-WaniKaniKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A4CF30C992AF4063267FA88147734F0 /* Pods-AlliCrab-WaniKaniKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6A95A402804049CD798F10B7D08AB7D5 /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = B67A60439824E17C31AE7F576E1B199C /* DDASLLogCapture.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		6C9B33BB7CA816E3DDB0BD5AF81D90E2 /* OHHTTPStubs+NSURLSessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B8830E3ABDB65BF8E85ADCE8CF0A1922 /* OHHTTPStubs+NSURLSessionConfiguration.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		652A4A9AF953579A448FC3E13B3AC564 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E31B6541A4C974EC5BCF9056DAB1569 /* DDAbstractDatabaseLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6C9B33BB7CA816E3DDB0BD5AF81D90E2 /* OHHTTPStubs+NSURLSessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 87448BA3083AAA4893FB2039A64A42F7 /* OHHTTPStubs+NSURLSessionConfiguration.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		6D0306C3FBB09C9D203889BCE2775671 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BF2993E17051DE8F85449A6D4E6000 /* Foundation.framework */; };
-		6E7731E9F5ADE9B6CFCA43B9E4868356 /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DFB7D007E22332E449CD4B50A7AADDD /* DDMultiFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		73520CDD20012B4A245303CEA2B538B0 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04ADB2BF1D1C65720D6A03CF007B0485 /* MobileCoreServices.framework */; };
 		759839402D86CF7CB6CB5D6C88F8F94E /* Pods-WaniKaniStudyQueueWidget-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FEA1CC7EEBF3F4E0AE74878DAB9F3063 /* Pods-WaniKaniStudyQueueWidget-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		76BDFCB4E7BECB554EA7FBF9FC0D7576 /* OHHTTPStubs-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5662B0AC14B9008FB83F0F75B2E56B /* OHHTTPStubs-dummy.m */; };
-		772473B09DAEDAEF60A07EE6C8FD77FE /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 430A3CF19F6EE1C48C6960FBB8823691 /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		7D5B99D8E7B0F7F66CAD2AF394A3817B /* OnePasswordExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CCB171165E5F4FC25BA2ACF901CE826 /* OnePasswordExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		87ECA447DB887426665260651B7F147E /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 438CE52E79727C08E294D4C059F9EEE8 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		75EFFAEA5EAF2D2038A7FEA28DFFA711 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 77FAE761794A5D19D5CC5CD2314AA16D /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		76BDFCB4E7BECB554EA7FBF9FC0D7576 /* OHHTTPStubs-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 00122B63A4371418DAC1C2F279A83881 /* OHHTTPStubs-dummy.m */; };
+		7D5B99D8E7B0F7F66CAD2AF394A3817B /* OnePasswordExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C7B9DB73EE806A1FE3DD23FFC8842A0 /* OnePasswordExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8151B99E4EAFB8B6DCB51403AA3975FC /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 00617B03BDA5D667BA492544CDC8C63C /* DDLegacyMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		87ECA447DB887426665260651B7F147E /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B0D93DBB540351366ECCAD3CEEC64CA /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		89E7AFD8005065587CEA9F38FFDF98D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BF2993E17051DE8F85449A6D4E6000 /* Foundation.framework */; };
-		92C41C545FABD07F623CA2CA72F26D37 /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = C7D544DEABD7E4EFEDDAC13DBBC5E04D /* DDASLLogCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		937F4D62AE26411DAFFCB7BCED201500 /* Pods-WaniKaniKitTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C95FAF86F3CDCE7135A83926A98A9DAB /* Pods-WaniKaniKitTests-dummy.m */; };
-		9548720C4DE49F518770CFE2B11DF780 /* Compatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = C173FB88DC17849AB253EFF48F9B3E40 /* Compatibility.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		96E70B43FC04BC99AED1BBD4FB1D7581 /* FMDB-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 92F800F415DE862D51D7ECE10A65DDFF /* FMDB-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A0287B291EBDB986B559A411E92A0E3 /* 1PasswordExtension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D5A51B97BB081C4EFC705BEC3487578 /* 1PasswordExtension-dummy.m */; };
+		93CFC1814367258B35096978F69661E3 /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 77FFA01EC00A1A72EC94E8B520FE84B1 /* DDAssertMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9548720C4DE49F518770CFE2B11DF780 /* Compatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 22B20560A8103D1E0EEBC54C59917043 /* Compatibility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		96E70B43FC04BC99AED1BBD4FB1D7581 /* FMDB-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9374F3C428BA7AD5AC84C1429DCF350B /* FMDB-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9A0287B291EBDB986B559A411E92A0E3 /* 1PasswordExtension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 783A716E26DF56188F7E69E0834C9C6B /* 1PasswordExtension-dummy.m */; };
 		9A12C3A09B4243C957F33764FFA2E05F /* Pods-AlliCrab-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9A4B36D70C326284C56E380C7CF8E6 /* Pods-AlliCrab-dummy.m */; };
-		9B8D84996694C541CD3434386E0A081A /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = A379B73CFC9258CF140D9BEDDFB32D99 /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9C11A290C9C5866A185A54F1EC04E2BB /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBB8CC585A8FC16C8AB3DD547FF41A9 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		9DF6FAA2ADA721E6D72F5FB75CBB95B3 /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 961D62AA5D34F4AD3CF57269B9FE6D61 /* DDTTYLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A1B5D80A8998311B8C9043E6942925E6 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 788E989FD543206009B2E46FC9415024 /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		9B8D84996694C541CD3434386E0A081A /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = DCABD39C59CEA53D85A64F722BCA92E5 /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C11A290C9C5866A185A54F1EC04E2BB /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF1BF94E38EE354E0BEBCCD2E37ED01 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		A1B5D80A8998311B8C9043E6942925E6 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1FD35EAAF8D8F2859434E8FC72B940 /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		A4339AFCF9E3A6D68447A09BB2792D50 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BF2993E17051DE8F85449A6D4E6000 /* Foundation.framework */; };
 		A4BEC54CB9C0F732572289492E8911C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BF2993E17051DE8F85449A6D4E6000 /* Foundation.framework */; };
-		A548833BE5FAD40830428F36E77D0F52 /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = F24B2B665B76A90D7CF822B4F063F2B3 /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A65B51B819D87EA2E6F5A5ABE71C7FE6 /* NSURLRequest+HTTPBodyTesting.h in Headers */ = {isa = PBXBuildFile; fileRef = 16A73DE77D40D5385B1428F801C4A6E4 /* NSURLRequest+HTTPBodyTesting.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AA1B45B4D2846E39B3417598F3089DE9 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59AA8ED7412C5EA69C0A8F6B7ACD5A7 /* SwiftyJSON.swift */; };
-		AAEC3DDBD63163C44B217D72F96BF431 /* OHHTTPStubs.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D5526D18AE6CC7F45C0AC635AA4D2C6 /* OHHTTPStubs.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		AE3D655A5F6F57A1748BA3AC8C138CA8 /* OHHTTPStubs-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 98862E036CE7E9C2B200718A2561B5F8 /* OHHTTPStubs-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A548833BE5FAD40830428F36E77D0F52 /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = D09C9A2DF670EE11446EFB00ADD60193 /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A65B51B819D87EA2E6F5A5ABE71C7FE6 /* NSURLRequest+HTTPBodyTesting.h in Headers */ = {isa = PBXBuildFile; fileRef = E52FEA35FE082771D0C886F76EB1B9BD /* NSURLRequest+HTTPBodyTesting.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AA1B45B4D2846E39B3417598F3089DE9 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E69BA0DB7830E70CB91B529B1088751 /* SwiftyJSON.swift */; };
+		AAEC3DDBD63163C44B217D72F96BF431 /* OHHTTPStubs.m in Sources */ = {isa = PBXBuildFile; fileRef = 586922D67906B6965479C3FFA11A5D8B /* OHHTTPStubs.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		AE3D655A5F6F57A1748BA3AC8C138CA8 /* OHHTTPStubs-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 64A425630A29B406E5F6AB6E6C4D8BB2 /* OHHTTPStubs-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF4A65BCAA09BF23176B2CF7F644530E /* Pods-AlliCrab-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 35B2D1254CA0D40E52778C893E286B59 /* Pods-AlliCrab-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B96946C0FE04C1855D97067B7D17C1BE /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E27BADC72BA67E1201539DC4BCC9DE33 /* SwiftyJSON-dummy.m */; };
-		B9B0F25A186A07F5E9C6FB5B64D6F531 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1F8B6455E7F7EC728EA96CCAC938D2 /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B96946C0FE04C1855D97067B7D17C1BE /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5516BBF2FF1CCDAB4E5DDC29F7D6C6 /* SwiftyJSON-dummy.m */; };
 		BAEB04641E54A923ACB6BCBCC1379582 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BF2993E17051DE8F85449A6D4E6000 /* Foundation.framework */; };
 		BBC81BDB7615C93328B851A00299BE8C /* Pods-AlliCrab-WaniKaniKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F42A7388A712CDBA3627B53315B825E /* Pods-AlliCrab-WaniKaniKit-dummy.m */; };
-		BBF98824C62AC3D4E7727B83F3E8B0A3 /* OHPathHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0401D7A8779B19A77FEFC2CEE97F9799 /* OHPathHelpers.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		BBF98824C62AC3D4E7727B83F3E8B0A3 /* OHPathHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = D483DB32701819C31B2301C0E29AFE99 /* OHPathHelpers.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		BE4A831E111FE7491D2F711232CC3E38 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA1EE0ED384B608F3B8D1B616B9B2B1E /* UIKit.framework */; };
-		BE8DE3A815E6E1A63A7DF65976E9AB1E /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = FEAC03297343911D6902E5A9394BD2F5 /* DDLogMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C2760026B0588FFF5D13DA017EE76583 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FCC24560684F48973C917FC63AD2935 /* CFNetwork.framework */; };
-		C605A44DF96E7FCACF7D6E37B62F795D /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 073DE7FE26E2893F8C84D1795033E3B0 /* FMDatabasePool.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		C859ACDE3A825574D228280DE3C971D7 /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A844B3A4BCDACE3FA4FE4D67C216E87B /* DDDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		CB7C5EADDA9FC07B352A8A776DF86EC8 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C58F9AC3779216B55C0F459C5A9EEC /* DDLog.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		C605A44DF96E7FCACF7D6E37B62F795D /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5263BE4258A0A13B3DA84D771ACA78 /* FMDatabasePool.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		CA872D308A3D55E167A899B5C7CAA2FB /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 400DD4AB1CA58DC93B85FDBE5D4CBECD /* DDLogMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CC5C494F41165489529D5B796E37AEDA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41BF2993E17051DE8F85449A6D4E6000 /* Foundation.framework */; };
-		CCB74062CE0F4B8E5B7483599BC398DA /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E0AE9590A5D34E902E20492E8E4CBAB /* FMDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CCF2563BD4E035619F4899159D866C43 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = BCE31FA4A58DDADDEE2C2158A7FBF5E0 /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		CDF4CE481A3C924312F609D318B59E4C /* OHHTTPStubsMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 55BCEC673608CC13A6ACAFA56938677E /* OHHTTPStubsMethodSwizzling.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		D2F85028F5034C088A8466ABA3AEC3B9 /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 847917ABA86A0834EA6BFE38ACF45D99 /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D3440A6564BFF26677494876D40D0C2A /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 1841AE5AD20F68EBC3B72DAEEA0662B0 /* DDASLLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D5991941DC41DDDDDACAE0B5D47A4639 /* FMDB-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CC291A51C43B812C4BAEA610EC832F0C /* FMDB-dummy.m */; };
-		D5C4F61FF567A1A88BD5C0CDE5B0445B /* OnePasswordExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B3D8F64C1C9C5EC40C3DC09DEA5395B2 /* OnePasswordExtension.m */; };
-		D8E2A0AAEA738F45DE14228B3C94D908 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A67AA3081DF04D01B8FD2B853C62DCF /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		DC76380881C3DE10E318E7D7CD60A9B6 /* OHHTTPStubsResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 10039BB83A116970BF1FE5D8FE2C77F4 /* OHHTTPStubsResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DF522D54F2C5D3A19BB798D3923E44EF /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = CBB7842D35E9371F1331D29F44064B3C /* DDContextFilterLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CCB74062CE0F4B8E5B7483599BC398DA /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 48EF9F159B5393D950DD538862425C52 /* FMDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CD3CC90DE72A508147E8A0D2573F66B0 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 5291849E5E0D7DD2DF05E3411709C29E /* DDASLLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDF4CE481A3C924312F609D318B59E4C /* OHHTTPStubsMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = F31EC09A0ED129DF1853C8E4AD8DF63B /* OHHTTPStubsMethodSwizzling.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		D2F85028F5034C088A8466ABA3AEC3B9 /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1959ACD570AE7CC5F561F661EC155C6C /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5991941DC41DDDDDACAE0B5D47A4639 /* FMDB-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CCC587B1F69149E51AA662411BA8842 /* FMDB-dummy.m */; };
+		D5C4F61FF567A1A88BD5C0CDE5B0445B /* OnePasswordExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7076173BEB79F72B07BB254143452DDA /* OnePasswordExtension.m */; };
+		D893455E40788E757282B66749967EA2 /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E63AA4283ACD06F56B6BE8BB67075D6 /* DDLog.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		DC76380881C3DE10E318E7D7CD60A9B6 /* OHHTTPStubsResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B72D1E7D31E4602E22D6D133C581656 /* OHHTTPStubsResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E5622032EB5C9B8AF2B8A9C8F1D64461 /* CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BFFF24076DCA02FD1A33DD3D839F73A /* CocoaLumberjack-dummy.m */; };
 		EB2BCFEEDE55A01AA0EB659A5AE5689E /* Pods-AlliCrab-OperationKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F231AD3D9B142D78C547236714C5F55F /* Pods-AlliCrab-OperationKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EDFAE6A19644C9272E616E60A3C887FD /* Pods-WaniKaniKitTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9981EC3926ADCDD5EF3F32FCCAA842EA /* Pods-WaniKaniKitTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F0144187656247EC448E4A4E290EF20B /* Pods-WaniKaniStudyQueueWidget-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8CB0CAFD9B9008580746F0CED86B90 /* Pods-WaniKaniStudyQueueWidget-dummy.m */; };
-		F0519E5DCF092BD14BAEE4587BED9283 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FFBB94054235D014356DCEDAE9F4ADF /* DDAbstractDatabaseLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F11FAB91014130EE233A3429439D38D7 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = BA1816DA48C88A623567DF9CE8ACBEDD /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F2A20C707DE9EA319D2701D0E543F420 /* OHHTTPStubsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AC18641629A532BB77EFAD621D560D73 /* OHHTTPStubsResponse.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		F438661D55A3DFB0517904D9D6C4D634 /* 1Password.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42E03EEC2603225F3700497A705A0C6D /* 1Password.xcassets */; };
-		F71753B13D3D22D95DC74CF578F74B07 /* NSURLRequest+HTTPBodyTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B520B2DF5F5528F7893E56F76205A81 /* NSURLRequest+HTTPBodyTesting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		F847F31E3971B4F7F45953086B6431F6 /* OHHTTPStubsResponse+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A54478AB1A4764184F27D38160DEC56F /* OHHTTPStubsResponse+JSON.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		FAC69CC57D42C2834E8524F803CB381E /* CocoaLumberjack-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 94E11EA06F7490D9B0F87EB4245B31E1 /* CocoaLumberjack-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F11FAB91014130EE233A3429439D38D7 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 950A355D6B107F76A44B1E450ECF2E50 /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F2A20C707DE9EA319D2701D0E543F420 /* OHHTTPStubsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = A41A237A1548B7A1B890CAE91E8F7AC1 /* OHHTTPStubsResponse.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		F438661D55A3DFB0517904D9D6C4D634 /* 1Password.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 257CD2A0719EF19F4F2721C41B247F21 /* 1Password.xcassets */; };
+		F71753B13D3D22D95DC74CF578F74B07 /* NSURLRequest+HTTPBodyTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D0F008EFC312595D100FD153C150697 /* NSURLRequest+HTTPBodyTesting.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		F847F31E3971B4F7F45953086B6431F6 /* OHHTTPStubsResponse+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = F7A8C5E8BC0852B32861DC9D14D4FB43 /* OHHTTPStubsResponse+JSON.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		F8B7FA2F87CB773B7474F3D02FFA0E85 /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = FF900D8423D4B8F60F78AFED8AF0D532 /* DDASLLogCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,7 +120,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D7D6460167E9A0525598385B4C60B93C;
+			remoteGlobalIDString = 1192399218016C46455872C4313054CB;
 			remoteInfo = CocoaLumberjack;
 		};
 		3043618B579DC679CDB7A4EB7ABCC503 /* PBXContainerItemProxy */ = {
@@ -140,7 +134,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D7D6460167E9A0525598385B4C60B93C;
+			remoteGlobalIDString = 1192399218016C46455872C4313054CB;
 			remoteInfo = CocoaLumberjack;
 		};
 		42DB5E0AA1E3CF7867C9CC44382BFD20 /* PBXContainerItemProxy */ = {
@@ -161,7 +155,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D7D6460167E9A0525598385B4C60B93C;
+			remoteGlobalIDString = 1192399218016C46455872C4313054CB;
 			remoteInfo = CocoaLumberjack;
 		};
 		4F831C09B61AF09BCC524D885D3EDA30 /* PBXContainerItemProxy */ = {
@@ -196,7 +190,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D7D6460167E9A0525598385B4C60B93C;
+			remoteGlobalIDString = 1192399218016C46455872C4313054CB;
 			remoteInfo = CocoaLumberjack;
 		};
 		7FE9FD5F52D065981ECB3102E36FB5D8 /* PBXContainerItemProxy */ = {
@@ -231,7 +225,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D7D6460167E9A0525598385B4C60B93C;
+			remoteGlobalIDString = 1192399218016C46455872C4313054CB;
 			remoteInfo = CocoaLumberjack;
 		};
 		E6EFB784A9DC033E4F9241E322581732 /* PBXContainerItemProxy */ = {
@@ -258,164 +252,158 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		010126230F7E2252A3C1D04C4ABD25A6 /* FMDB.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = FMDB.modulemap; sourceTree = "<group>"; };
-		031182FDEB58B9BEDD57715B98F99ADC /* 1PasswordExtension-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "1PasswordExtension-prefix.pch"; sourceTree = "<group>"; };
-		0401D7A8779B19A77FEFC2CEE97F9799 /* OHPathHelpers.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHPathHelpers.m; path = OHHTTPStubs/Sources/OHPathHelpers/OHPathHelpers.m; sourceTree = "<group>"; };
+		00122B63A4371418DAC1C2F279A83881 /* OHHTTPStubs-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OHHTTPStubs-dummy.m"; sourceTree = "<group>"; };
+		00617B03BDA5D667BA492544CDC8C63C /* DDLegacyMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLegacyMacros.h; path = Classes/DDLegacyMacros.h; sourceTree = "<group>"; };
+		0297567427F23E5D23739F7025FFDBD4 /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Classes/DDTTYLogger.h; sourceTree = "<group>"; };
 		04ADB2BF1D1C65720D6A03CF007B0485 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		04FB4F7FF30A6A803071AB0AB273501B /* Pods_AlliCrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AlliCrab.framework; path = "Pods-AlliCrab.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		073DE7FE26E2893F8C84D1795033E3B0 /* FMDatabasePool.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = src/fmdb/FMDatabasePool.m; sourceTree = "<group>"; };
-		08F46C649E128C01ADA7CF77D98D7DFB /* FMDatabase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = src/fmdb/FMDatabase.m; sourceTree = "<group>"; };
-		0A0B91D6854E8D5A9B86175FE24C2C8F /* FMDatabaseQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = src/fmdb/FMDatabaseQueue.h; sourceTree = "<group>"; };
-		0CCB171165E5F4FC25BA2ACF901CE826 /* OnePasswordExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OnePasswordExtension.h; sourceTree = "<group>"; };
-		0D013AA277A5E83F6FD191E521CDE982 /* OHPathHelpers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHPathHelpers.h; path = OHHTTPStubs/Sources/OHPathHelpers/OHPathHelpers.h; sourceTree = "<group>"; };
+		0C287AEC42C5B71AA112212710E03C3E /* CocoaLumberjack.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = CocoaLumberjack.modulemap; sourceTree = "<group>"; };
 		0D9B3F895BEF90EBF56DA1F7DCBAD449 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = OHHTTPStubs.framework; path = OHHTTPStubs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0DFB7D007E22332E449CD4B50A7AADDD /* DDMultiFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDMultiFormatter.h; path = Classes/Extensions/DDMultiFormatter.h; sourceTree = "<group>"; };
-		10039BB83A116970BF1FE5D8FE2C77F4 /* OHHTTPStubsResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHHTTPStubsResponse.h; path = OHHTTPStubs/Sources/OHHTTPStubsResponse.h; sourceTree = "<group>"; };
+		0E69BA0DB7830E70CB91B529B1088751 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = "<group>"; };
+		10CF25C0050581B72556DAC279C0F166 /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Classes/DDLog+LOGV.h"; sourceTree = "<group>"; };
+		1328D473FAE711D3ED4544ED1615316A /* OHPathHelpers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHPathHelpers.h; path = OHHTTPStubs/Sources/OHPathHelpers/OHPathHelpers.h; sourceTree = "<group>"; };
 		13D805A1DC1C980B4E74EBBED14C060E /* Pods-OperationKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OperationKitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		15A40DD8C73E7565D4FBBBFE4B25315F /* DDLegacyMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLegacyMacros.h; path = Classes/DDLegacyMacros.h; sourceTree = "<group>"; };
-		16A73DE77D40D5385B1428F801C4A6E4 /* NSURLRequest+HTTPBodyTesting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSURLRequest+HTTPBodyTesting.h"; path = "OHHTTPStubs/Sources/NSURLSession/NSURLRequest+HTTPBodyTesting.h"; sourceTree = "<group>"; };
-		174C7318E44AADE6361E0C9E22C72A56 /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDDispatchQueueLogFormatter.h; path = Classes/Extensions/DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
-		1841AE5AD20F68EBC3B72DAEEA0662B0 /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = Classes/DDASLLogger.h; sourceTree = "<group>"; };
+		1959ACD570AE7CC5F561F661EC155C6C /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
 		1A49B5A7EA08E8D636DAB3B79E340E9E /* Pods_WaniKaniStudyQueueWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_WaniKaniStudyQueueWidget.framework; path = "Pods-WaniKaniStudyQueueWidget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A67AA3081DF04D01B8FD2B853C62DCF /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
 		1A7A42FDD03B27F3431C49CF89038E0B /* Pods-AlliCrab-OperationKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AlliCrab-OperationKit.release.xcconfig"; sourceTree = "<group>"; };
 		1AE2F7A532D58348E7120EC7DED895B9 /* Pods-AlliCrab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AlliCrab.debug.xcconfig"; sourceTree = "<group>"; };
-		1C13C32E04AC1A4A739E0FB9D4365B6E /* CocoaLumberjack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaLumberjack.xcconfig; sourceTree = "<group>"; };
+		1E4869E16368A9212916B6A72B8DC629 /* OHHTTPStubsMethodSwizzling.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHHTTPStubsMethodSwizzling.h; path = OHHTTPStubs/Sources/NSURLSession/OHHTTPStubsMethodSwizzling.h; sourceTree = "<group>"; };
+		1E86DF1FA97A62BDF06FC8F406FB5C26 /* FMDatabase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = src/fmdb/FMDatabase.m; sourceTree = "<group>"; };
+		1EC6874809D43BFB985DAC1FDF591220 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F5516BBF2FF1CCDAB4E5DDC29F7D6C6 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
 		220822B59BFBDC347D1F49EDA08130B3 /* Pods-WaniKaniStudyQueueWidget-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WaniKaniStudyQueueWidget-resources.sh"; sourceTree = "<group>"; };
+		22B20560A8103D1E0EEBC54C59917043 /* Compatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Compatibility.h; path = OHHTTPStubs/Sources/Compatibility.h; sourceTree = "<group>"; };
 		232DFF37EBDA505D6C425233C55CBC0F /* Pods-AlliCrab-WaniKaniKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AlliCrab-WaniKaniKit.debug.xcconfig"; sourceTree = "<group>"; };
+		257CD2A0719EF19F4F2721C41B247F21 /* 1Password.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = 1Password.xcassets; sourceTree = "<group>"; };
 		27FF30AC8EA96A97B07518D161C35AA5 /* Pods-OperationKitTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-OperationKitTests-resources.sh"; sourceTree = "<group>"; };
-		28C5706F6AF0D09A9A79E8B821483638 /* OHHTTPStubs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHHTTPStubs.h; path = OHHTTPStubs/Sources/OHHTTPStubs.h; sourceTree = "<group>"; };
 		29D077A9B8156826AAA1A3B68BCA6D1D /* Pods-AlliCrab-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AlliCrab-frameworks.sh"; sourceTree = "<group>"; };
-		2AB6224E66BC9DF7B8C4526178BFE7C5 /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
-		30284B998EE03A397BF5438EB699CBDD /* 1PasswordExtension.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = 1PasswordExtension.xcconfig; sourceTree = "<group>"; };
+		2ABF396B7E1A1888ED45D427637B19C2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31874A53D173A6108CBACCA9D8002D37 /* Pods-WaniKaniStudyQueueWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniStudyQueueWidget.release.xcconfig"; sourceTree = "<group>"; };
 		33D7E0C0BEEF070A481AE1346AC0E5AD /* Pods-WaniKaniKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		35B2D1254CA0D40E52778C893E286B59 /* Pods-AlliCrab-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AlliCrab-umbrella.h"; sourceTree = "<group>"; };
 		39E3F1566C5C5EEBA84473AF40C2EE03 /* Pods-AlliCrab-WaniKaniKit-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AlliCrab-WaniKaniKit-acknowledgements.markdown"; sourceTree = "<group>"; };
 		3A4CF30C992AF4063267FA88147734F0 /* Pods-AlliCrab-WaniKaniKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AlliCrab-WaniKaniKit-umbrella.h"; sourceTree = "<group>"; };
-		3A507CF00BA385E449DA801A8266879C /* 1PasswordExtension-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "1PasswordExtension-umbrella.h"; sourceTree = "<group>"; };
-		3B520B2DF5F5528F7893E56F76205A81 /* NSURLRequest+HTTPBodyTesting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSURLRequest+HTTPBodyTesting.m"; path = "OHHTTPStubs/Sources/NSURLSession/NSURLRequest+HTTPBodyTesting.m"; sourceTree = "<group>"; };
-		3B90D0DE1419E8134FE50E075B8709FD /* OHHTTPStubsResponse+JSON.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "OHHTTPStubsResponse+JSON.h"; path = "OHHTTPStubs/Sources/JSON/OHHTTPStubsResponse+JSON.h"; sourceTree = "<group>"; };
+		3B72D1E7D31E4602E22D6D133C581656 /* OHHTTPStubsResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHHTTPStubsResponse.h; path = OHHTTPStubs/Sources/OHHTTPStubsResponse.h; sourceTree = "<group>"; };
+		3BFFF24076DCA02FD1A33DD3D839F73A /* CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
 		3C69C04A0162CEA96A51E1BCD4978CF2 /* Pods-WaniKaniKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		3CC9AF4DE796D93EE1B9BBA6C7C24813 /* OnePasswordExtensionResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = OnePasswordExtensionResources.bundle; path = OnePasswordExtensionResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D5526D18AE6CC7F45C0AC635AA4D2C6 /* OHHTTPStubs.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHHTTPStubs.m; path = OHHTTPStubs/Sources/OHHTTPStubs.m; sourceTree = "<group>"; };
-		3DBB8CC585A8FC16C8AB3DD547FF41A9 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = src/fmdb/FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		3DEA545F6902C244FE02BAADCF9E1422 /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
-		3E0AE9590A5D34E902E20492E8E4CBAB /* FMDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = src/fmdb/FMDB.h; sourceTree = "<group>"; };
+		3DB3C0AA6A0DC8C8A25DC27A85BA8059 /* OHHTTPStubs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OHHTTPStubs.xcconfig; sourceTree = "<group>"; };
 		3FCC24560684F48973C917FC63AD2935 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		400DD4AB1CA58DC93B85FDBE5D4CBECD /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
 		41BF2993E17051DE8F85449A6D4E6000 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		423B092E6D68BEEE1560EE6559F46335 /* Pods-WaniKaniKitTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WaniKaniKitTests-resources.sh"; sourceTree = "<group>"; };
 		42C8BD4F7480CDE4064435B872D1F2FF /* Pods-AlliCrab-OperationKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AlliCrab-OperationKit-dummy.m"; sourceTree = "<group>"; };
-		42E03EEC2603225F3700497A705A0C6D /* 1Password.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = 1Password.xcassets; sourceTree = "<group>"; };
-		430A3CF19F6EE1C48C6960FBB8823691 /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Classes/DDTTYLogger.m; sourceTree = "<group>"; };
-		438CE52E79727C08E294D4C059F9EEE8 /* FMResultSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = src/fmdb/FMResultSet.m; sourceTree = "<group>"; };
 		480D50BDEFB541134722B1BED25EBF85 /* Pods-OperationKitTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-OperationKitTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		494CF9D0A846CA46D7D8A1DA1B22EAFA /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Classes/DDFileLogger.h; sourceTree = "<group>"; };
-		49E0F5EEE126D6B6F946EA6C22299C60 /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
+		48EF9F159B5393D950DD538862425C52 /* FMDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = src/fmdb/FMDB.h; sourceTree = "<group>"; };
+		4AF5C09EB5BB00A813549AC996FBBCA5 /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Classes/DDLog.h; sourceTree = "<group>"; };
+		4B0D93DBB540351366ECCAD3CEEC64CA /* FMResultSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = src/fmdb/FMResultSet.m; sourceTree = "<group>"; };
+		4C65C342B76988A1559EDF02C7C5B3B0 /* OHHTTPStubs-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubs-prefix.pch"; sourceTree = "<group>"; };
+		4CF1BF94E38EE354E0BEBCCD2E37ED01 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = src/fmdb/FMDatabaseAdditions.m; sourceTree = "<group>"; };
 		4CF68313011D76EE2BCC8BEC24C241FB /* Pods_AlliCrab_WaniKaniKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AlliCrab_WaniKaniKit.framework; path = "Pods-AlliCrab-WaniKaniKit.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		51A91676F3F4D7B62CB299937577D83B /* CocoaLumberjack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CocoaLumberjack.swift; path = Classes/CocoaLumberjack.swift; sourceTree = "<group>"; };
-		52E4EEEE2EB279D11B6191D18B65F5E0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51679479C7E52A8E1ABC1E4BE38DF321 /* CocoaLumberjack-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-umbrella.h"; sourceTree = "<group>"; };
+		5291849E5E0D7DD2DF05E3411709C29E /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = Classes/DDASLLogger.h; sourceTree = "<group>"; };
 		540687F6CAC80FF2A2004BAB1217FF87 /* Pods-AlliCrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AlliCrab.release.xcconfig"; sourceTree = "<group>"; };
 		5462CD15672223E548A0ECEF944B7448 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		55BCEC673608CC13A6ACAFA56938677E /* OHHTTPStubsMethodSwizzling.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHHTTPStubsMethodSwizzling.m; path = OHHTTPStubs/Sources/NSURLSession/OHHTTPStubsMethodSwizzling.m; sourceTree = "<group>"; };
 		577E6468681EA8AC4766B128D64C928E /* Pods-WaniKaniKitTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WaniKaniKitTests-frameworks.sh"; sourceTree = "<group>"; };
-		5C5662B0AC14B9008FB83F0F75B2E56B /* OHHTTPStubs-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OHHTTPStubs-dummy.m"; sourceTree = "<group>"; };
-		653550999D8EF631BFE5C4290EE30227 /* OHHTTPStubsSwift.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OHHTTPStubsSwift.swift; path = OHHTTPStubs/Sources/Swift/OHHTTPStubsSwift.swift; sourceTree = "<group>"; };
-		657FAC9CF1C3FA398F2577B693F144F7 /* OHHTTPStubs.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = OHHTTPStubs.modulemap; sourceTree = "<group>"; };
+		586922D67906B6965479C3FFA11A5D8B /* OHHTTPStubs.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHHTTPStubs.m; path = OHHTTPStubs/Sources/OHHTTPStubs.m; sourceTree = "<group>"; };
+		5AD9C4214FFEAF03BC94BBCA5D2F42B9 /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Classes/DDFileLogger.m; sourceTree = "<group>"; };
+		5F953012D1C2960242EEB6C6F2D04B51 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64A425630A29B406E5F6AB6E6C4D8BB2 /* OHHTTPStubs-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubs-umbrella.h"; sourceTree = "<group>"; };
+		6514957736F432AC573E0C4341B79EA3 /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
+		68BAD5FB83C59FD9E0BFCF1A6C81E64F /* FMDB.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = FMDB.modulemap; sourceTree = "<group>"; };
 		6AE63FBAC4B6E04E30CD6A3C9F996799 /* Pods-OperationKitTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-OperationKitTests-frameworks.sh"; sourceTree = "<group>"; };
+		6CCC587B1F69149E51AA662411BA8842 /* FMDB-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FMDB-dummy.m"; sourceTree = "<group>"; };
 		6E03EF51701913F6A1E0EE5C10C84674 /* Pods-OperationKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-OperationKitTests.release.xcconfig"; sourceTree = "<group>"; };
-		6E3F01C6D290012285E1BC81E9F8FE71 /* 1PasswordExtension.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = 1PasswordExtension.modulemap; sourceTree = "<group>"; };
+		6E63AA4283ACD06F56B6BE8BB67075D6 /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = Classes/DDLog.m; sourceTree = "<group>"; };
+		7076173BEB79F72B07BB254143452DDA /* OnePasswordExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = OnePasswordExtension.m; sourceTree = "<group>"; };
+		70CC9117FB09B00081C5F298763A170B /* FMDB-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-prefix.pch"; sourceTree = "<group>"; };
 		74F76CF3F6E691A0C7DE56EF5E4E2D44 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7518853937ABF03254E7B4B002D9B595 /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CocoaLumberjack.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76DCCCD29C1AA62B912D5263A516BA90 /* Pods-WaniKaniKitTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniKitTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		7781FF405614178736524D0F6D73480E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		788E989FD543206009B2E46FC9415024 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = src/fmdb/FMDatabaseQueue.m; sourceTree = "<group>"; };
+		77FAE761794A5D19D5CC5CD2314AA16D /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		77FFA01EC00A1A72EC94E8B520FE84B1 /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Classes/DDAssertMacros.h; sourceTree = "<group>"; };
+		783A716E26DF56188F7E69E0834C9C6B /* 1PasswordExtension-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "1PasswordExtension-dummy.m"; sourceTree = "<group>"; };
+		78B7A671302FC519EB72D53DAA3840B8 /* OHHTTPStubs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHHTTPStubs.h; path = OHHTTPStubs/Sources/OHHTTPStubs.h; sourceTree = "<group>"; };
 		78C9D4DF422E628219C5006424A4DEEB /* Pods-AlliCrab-OperationKit-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AlliCrab-OperationKit-acknowledgements.markdown"; sourceTree = "<group>"; };
-		7B1F8B6455E7F7EC728EA96CCAC938D2 /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Classes/DDLog.h; sourceTree = "<group>"; };
-		7D5A51B97BB081C4EFC705BEC3487578 /* 1PasswordExtension-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "1PasswordExtension-dummy.m"; sourceTree = "<group>"; };
+		7D0F008EFC312595D100FD153C150697 /* NSURLRequest+HTTPBodyTesting.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSURLRequest+HTTPBodyTesting.m"; path = "OHHTTPStubs/Sources/NSURLSession/NSURLRequest+HTTPBodyTesting.m"; sourceTree = "<group>"; };
 		7DA236FC06316E8646353E5964E243CA /* Pods-AlliCrab-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AlliCrab-acknowledgements.markdown"; sourceTree = "<group>"; };
 		7F42A7388A712CDBA3627B53315B825E /* Pods-AlliCrab-WaniKaniKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AlliCrab-WaniKaniKit-dummy.m"; sourceTree = "<group>"; };
-		7FFBB94054235D014356DCEDAE9F4ADF /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Classes/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		8149A671DE59FD3BFD421DFE86B993A9 /* FMDB.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FMDB.xcconfig; sourceTree = "<group>"; };
 		81820F7374FACD324F02FC9503C53FF8 /* Pods-AlliCrab-OperationKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AlliCrab-OperationKit.debug.xcconfig"; sourceTree = "<group>"; };
-		847917ABA86A0834EA6BFE38ACF45D99 /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
-		868F2312EE8B7EF0362E88CD01B3BEB2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		852FDB66C03A170F170EBBA8085600AA /* ResourceBundle-OnePasswordExtensionResources-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-OnePasswordExtensionResources-Info.plist"; sourceTree = "<group>"; };
+		87448BA3083AAA4893FB2039A64A42F7 /* OHHTTPStubs+NSURLSessionConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OHHTTPStubs+NSURLSessionConfiguration.m"; path = "OHHTTPStubs/Sources/NSURLSession/OHHTTPStubs+NSURLSessionConfiguration.m"; sourceTree = "<group>"; };
+		8A1FD35EAAF8D8F2859434E8FC72B940 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = src/fmdb/FMDatabaseQueue.m; sourceTree = "<group>"; };
+		8A2C828F5357D80311C9388A5FC03B2A /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Classes/DDTTYLogger.m; sourceTree = "<group>"; };
+		8B5263BE4258A0A13B3DA84D771ACA78 /* FMDatabasePool.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = src/fmdb/FMDatabasePool.m; sourceTree = "<group>"; };
 		8B7145A7866EFB23AA2698D36E73E75E /* Pods-AlliCrab-OperationKit-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AlliCrab-OperationKit-resources.sh"; sourceTree = "<group>"; };
-		8E9CD20308296241485D3D42FC4A8602 /* ResourceBundle-OnePasswordExtensionResources-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-OnePasswordExtensionResources-Info.plist"; sourceTree = "<group>"; };
-		92F800F415DE862D51D7ECE10A65DDFF /* FMDB-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-umbrella.h"; sourceTree = "<group>"; };
+		8C05B33AD32E81FD7DE558090CD0F936 /* 1PasswordExtension.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = 1PasswordExtension.modulemap; sourceTree = "<group>"; };
+		8E31B6541A4C974EC5BCF9056DAB1569 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Classes/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		90177A8ADBEFB409629A9E8FF316E443 /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
+		9371DF88F503E81A51FC2FF839BCF359 /* CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
+		9374F3C428BA7AD5AC84C1429DCF350B /* FMDB-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-umbrella.h"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		94E11EA06F7490D9B0F87EB4245B31E1 /* CocoaLumberjack-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-umbrella.h"; sourceTree = "<group>"; };
-		961D62AA5D34F4AD3CF57269B9FE6D61 /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Classes/DDTTYLogger.h; sourceTree = "<group>"; };
-		965A06AD7F3220CBD5E61C06216ABF24 /* OHHTTPStubs-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubs-prefix.pch"; sourceTree = "<group>"; };
-		96937962B91585BE9869A98AC924987E /* OHHTTPStubs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OHHTTPStubs.xcconfig; sourceTree = "<group>"; };
-		981DDE208A29FC67B10C5066F4EA5685 /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Classes/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
-		98470C70160ABEE9AEB588C0782C8B1C /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Classes/DDLog+LOGV.h"; sourceTree = "<group>"; };
-		98862E036CE7E9C2B200718A2561B5F8 /* OHHTTPStubs-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubs-umbrella.h"; sourceTree = "<group>"; };
+		950A355D6B107F76A44B1E450ECF2E50 /* FMDatabase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = src/fmdb/FMDatabase.h; sourceTree = "<group>"; };
+		9977DA90DD3BBCA49C7D60765DF6E05E /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
 		9981EC3926ADCDD5EF3F32FCCAA842EA /* Pods-WaniKaniKitTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WaniKaniKitTests-umbrella.h"; sourceTree = "<group>"; };
 		998FBB7E565C4315C94D141AB90D09BD /* FMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FMDB.framework; path = FMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B4C5CEC50780215CBC60DAF517670C2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C564F30B9928DE183D72EC2A70E7500 /* Pods-OperationKitTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-OperationKitTests-dummy.m"; sourceTree = "<group>"; };
-		9E07B61E371A5667C3EEE9653D1836A6 /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
+		9C7B9DB73EE806A1FE3DD23FFC8842A0 /* OnePasswordExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OnePasswordExtension.h; sourceTree = "<group>"; };
+		9C8C6A381B196924D69A2B758B128A85 /* CocoaLumberjack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaLumberjack.xcconfig; sourceTree = "<group>"; };
 		9E64F9CF479ACB0D964020362FAEB837 /* Pods-OperationKitTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-OperationKitTests.modulemap"; sourceTree = "<group>"; };
 		9FFEDF34828D12A1ACE6345717D99812 /* Pods-WaniKaniStudyQueueWidget-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniStudyQueueWidget-acknowledgements.plist"; sourceTree = "<group>"; };
-		A379B73CFC9258CF140D9BEDDFB32D99 /* FMDatabasePool.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = src/fmdb/FMDatabasePool.h; sourceTree = "<group>"; };
-		A54478AB1A4764184F27D38160DEC56F /* OHHTTPStubsResponse+JSON.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OHHTTPStubsResponse+JSON.m"; path = "OHHTTPStubs/Sources/JSON/OHHTTPStubsResponse+JSON.m"; sourceTree = "<group>"; };
-		A5D1A24B2CEA92421257006132227C03 /* FMDB.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FMDB.xcconfig; sourceTree = "<group>"; };
+		A41A237A1548B7A1B890CAE91E8F7AC1 /* OHHTTPStubsResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHHTTPStubsResponse.m; path = OHHTTPStubs/Sources/OHHTTPStubsResponse.m; sourceTree = "<group>"; };
+		A561A49BCF6979DC00D4864856A73B74 /* CocoaLumberjack.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CocoaLumberjack.swift; path = Classes/CocoaLumberjack.swift; sourceTree = "<group>"; };
 		A60C380DDBDC933D96C97E29D12D729D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A76464C2362C96635CFA3F2A8F56A3C2 /* FMResultSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = src/fmdb/FMResultSet.h; sourceTree = "<group>"; };
 		A770DCE52B9C9A8731B9F0CE58F4016A /* Pods-AlliCrab-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AlliCrab-acknowledgements.plist"; sourceTree = "<group>"; };
-		A844B3A4BCDACE3FA4FE4D67C216E87B /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDDispatchQueueLogFormatter.m; path = Classes/Extensions/DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
-		AA156D1A9AAA0D2A45D39CAB9FF1F941 /* CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
 		AA8CB0CAFD9B9008580746F0CED86B90 /* Pods-WaniKaniStudyQueueWidget-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WaniKaniStudyQueueWidget-dummy.m"; sourceTree = "<group>"; };
-		AAEAB16AD01AC4163743E7FA6ADC789F /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
-		AC18641629A532BB77EFAD621D560D73 /* OHHTTPStubsResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHHTTPStubsResponse.m; path = OHHTTPStubs/Sources/OHHTTPStubsResponse.m; sourceTree = "<group>"; };
+		AE09FB52ABE0B1C7A67D58830F409547 /* 1PasswordExtension-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "1PasswordExtension-prefix.pch"; sourceTree = "<group>"; };
+		AE3DA6F9ED7DE70B83BDE8B218DC7694 /* OHHTTPStubs.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = OHHTTPStubs.modulemap; sourceTree = "<group>"; };
 		AF47F2A6623C1F5045EBA9913139EC25 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyJSON.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B247B85AF1223B8BC7FED18EDEFE69D6 /* Pods-AlliCrab-WaniKaniKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AlliCrab-WaniKaniKit.release.xcconfig"; sourceTree = "<group>"; };
-		B28689D4DF8FF9ED1E86794CDE818ED1 /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDContextFilterLogFormatter.m; path = Classes/Extensions/DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
-		B3D8F64C1C9C5EC40C3DC09DEA5395B2 /* OnePasswordExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = OnePasswordExtension.m; sourceTree = "<group>"; };
 		B407B10097C88C3122CD367A8A041D48 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B645C81EA62220E9879661DD573AAF68 /* FMResultSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = src/fmdb/FMResultSet.h; sourceTree = "<group>"; };
-		B67A60439824E17C31AE7F576E1B199C /* DDASLLogCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogCapture.m; path = Classes/DDASLLogCapture.m; sourceTree = "<group>"; };
-		B6C58F9AC3779216B55C0F459C5A9EEC /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = Classes/DDLog.m; sourceTree = "<group>"; };
+		B5BF3F3C6B23D8D10DA8A2E1BF876623 /* OHHTTPStubsResponse+JSON.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "OHHTTPStubsResponse+JSON.h"; path = "OHHTTPStubs/Sources/JSON/OHHTTPStubsResponse+JSON.h"; sourceTree = "<group>"; };
 		B7769484D4AE67F501E2859D217ACAF0 /* Pods-AlliCrab-OperationKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-AlliCrab-OperationKit.modulemap"; sourceTree = "<group>"; };
-		B8830E3ABDB65BF8E85ADCE8CF0A1922 /* OHHTTPStubs+NSURLSessionConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OHHTTPStubs+NSURLSessionConfiguration.m"; path = "OHHTTPStubs/Sources/NSURLSession/OHHTTPStubs+NSURLSessionConfiguration.m"; sourceTree = "<group>"; };
-		BA1816DA48C88A623567DF9CE8ACBEDD /* FMDatabase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = src/fmdb/FMDatabase.h; sourceTree = "<group>"; };
 		BA23D7C00B110B3E922E10589B7965AC /* Pods_AlliCrab_OperationKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AlliCrab_OperationKit.framework; path = "Pods-AlliCrab-OperationKit.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAAAD97339EB58917984A6286B545C67 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB9A4B36D70C326284C56E380C7CF8E6 /* Pods-AlliCrab-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AlliCrab-dummy.m"; sourceTree = "<group>"; };
-		BCE31FA4A58DDADDEE2C2158A7FBF5E0 /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Classes/DDFileLogger.m; sourceTree = "<group>"; };
 		BE398969E99AC75F5FA823E0CCA2976C /* Pods_OperationKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_OperationKitTests.framework; path = "Pods-OperationKitTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C13387EF01BF173C8E261EE4632FA220 /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Classes/DDAssertMacros.h; sourceTree = "<group>"; };
-		C173FB88DC17849AB253EFF48F9B3E40 /* Compatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Compatibility.h; path = OHHTTPStubs/Sources/Compatibility.h; sourceTree = "<group>"; };
 		C4342708367884580B234CF6FECD4BC1 /* Pods-AlliCrab-WaniKaniKit-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AlliCrab-WaniKaniKit-resources.sh"; sourceTree = "<group>"; };
-		C4906D8550DAD2AEC910B492D90AA48B /* OHHTTPStubsMethodSwizzling.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHHTTPStubsMethodSwizzling.h; path = OHHTTPStubs/Sources/NSURLSession/OHHTTPStubsMethodSwizzling.h; sourceTree = "<group>"; };
 		C4E0193B98D31469C52D45038645BE33 /* Pods-AlliCrab.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-AlliCrab.modulemap"; sourceTree = "<group>"; };
-		C59AA8ED7412C5EA69C0A8F6B7ACD5A7 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = "<group>"; };
 		C66B39D30108CAD0CE5DE1AFF61AA17F /* Pods-WaniKaniStudyQueueWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniStudyQueueWidget.debug.xcconfig"; sourceTree = "<group>"; };
 		C6B03CBECB09D36655885BF94F56C02A /* Pods_WaniKaniKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_WaniKaniKitTests.framework; path = "Pods-WaniKaniKitTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7D544DEABD7E4EFEDDAC13DBBC5E04D /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Classes/DDASLLogCapture.h; sourceTree = "<group>"; };
 		C95FAF86F3CDCE7135A83926A98A9DAB /* Pods-WaniKaniKitTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WaniKaniKitTests-dummy.m"; sourceTree = "<group>"; };
 		C9D2099012F50815E271220670FDA5D2 /* Pods-AlliCrab-OperationKit-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AlliCrab-OperationKit-acknowledgements.plist"; sourceTree = "<group>"; };
 		CA1EE0ED384B608F3B8D1B616B9B2B1E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		CBA073BF21A5834C92E64018A5278239 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CBB7842D35E9371F1331D29F44064B3C /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
-		CC291A51C43B812C4BAEA610EC832F0C /* FMDB-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FMDB-dummy.m"; sourceTree = "<group>"; };
 		CDCB62B98DAD06FEC2362319A62B01BD /* Pods-WaniKaniStudyQueueWidget-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WaniKaniStudyQueueWidget-acknowledgements.markdown"; sourceTree = "<group>"; };
-		D12AC13FC1C2A96C8E5859843AF37DF6 /* CocoaLumberjack.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = CocoaLumberjack.modulemap; sourceTree = "<group>"; };
-		D15E327382ED244D1DE7D78445E7FB30 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D09C9A2DF670EE11446EFB00ADD60193 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = src/fmdb/FMDatabaseAdditions.h; sourceTree = "<group>"; };
 		D24B6B73D99F98C5CD0CF9FBE8D4687D /* Pods-WaniKaniStudyQueueWidget.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-WaniKaniStudyQueueWidget.modulemap"; sourceTree = "<group>"; };
+		D483DB32701819C31B2301C0E29AFE99 /* OHPathHelpers.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHPathHelpers.m; path = OHHTTPStubs/Sources/OHPathHelpers/OHPathHelpers.m; sourceTree = "<group>"; };
+		DA74F870D638360A45CD489B50067951 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = src/fmdb/FMDatabaseQueue.h; sourceTree = "<group>"; };
 		DAE902FC155E2149661AF1B7577FBFCC /* Pods-AlliCrab-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AlliCrab-resources.sh"; sourceTree = "<group>"; };
+		DCABD39C59CEA53D85A64F722BCA92E5 /* FMDatabasePool.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = src/fmdb/FMDatabasePool.h; sourceTree = "<group>"; };
 		DDEB4A5B4BECB32F2755290AFDF0FED2 /* Pods-WaniKaniKitTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-WaniKaniKitTests.modulemap"; sourceTree = "<group>"; };
 		DDFE5C7B242426C419190821B9E0543B /* Pods-AlliCrab-WaniKaniKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-AlliCrab-WaniKaniKit.modulemap"; sourceTree = "<group>"; };
-		E27BADC72BA67E1201539DC4BCC9DE33 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
+		E21B10622D66A60A246AD5ECBEFDA6C5 /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
 		E36216D61A6B0A928F661FB4FB5D2FBD /* Pods-OperationKitTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-OperationKitTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		E3B809706BB909D4786DAED3F7AC417F /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Classes/DDFileLogger.h; sourceTree = "<group>"; };
+		E52FEA35FE082771D0C886F76EB1B9BD /* NSURLRequest+HTTPBodyTesting.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSURLRequest+HTTPBodyTesting.h"; path = "OHHTTPStubs/Sources/NSURLSession/NSURLRequest+HTTPBodyTesting.h"; sourceTree = "<group>"; };
 		E6734366D01638BB4C14E41079A604C2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E814747D9CF809F598ADFAF0AA07681E /* CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
 		EB0EA7A3E48FF8AEF88AD8C006224108 /* OnePasswordExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = OnePasswordExtension.framework; path = 1PasswordExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBABC5EDB5739E9FB4CB4ACE0805284F /* Pods-WaniKaniKitTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WaniKaniKitTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		ED4F5F8E016A6340D5CAB0CE1B155A16 /* Pods-AlliCrab-WaniKaniKit-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AlliCrab-WaniKaniKit-acknowledgements.plist"; sourceTree = "<group>"; };
-		F082DE0FC1193A23ADC4AFD7F6573E18 /* FMDB-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-prefix.pch"; sourceTree = "<group>"; };
+		EDC415B0D3CAD088EF20A0B76A2F1AE6 /* DDASLLogCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogCapture.m; path = Classes/DDASLLogCapture.m; sourceTree = "<group>"; };
+		EF3D5C06A046F97E418600B2FD3E4CFD /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
 		F231AD3D9B142D78C547236714C5F55F /* Pods-AlliCrab-OperationKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AlliCrab-OperationKit-umbrella.h"; sourceTree = "<group>"; };
-		F24B2B665B76A90D7CF822B4F063F2B3 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = src/fmdb/FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		F31EC09A0ED129DF1853C8E4AD8DF63B /* OHHTTPStubsMethodSwizzling.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHHTTPStubsMethodSwizzling.m; path = OHHTTPStubs/Sources/NSURLSession/OHHTTPStubsMethodSwizzling.m; sourceTree = "<group>"; };
+		F3A0C26D1EC5788161E479FFED19FEE6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F3C415648318CDEAB30F4B25F65FDB9B /* 1PasswordExtension.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = 1PasswordExtension.xcconfig; sourceTree = "<group>"; };
+		F7A8C5E8BC0852B32861DC9D14D4FB43 /* OHHTTPStubsResponse+JSON.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OHHTTPStubsResponse+JSON.m"; path = "OHHTTPStubs/Sources/JSON/OHHTTPStubsResponse+JSON.m"; sourceTree = "<group>"; };
+		F891446FB849577D24430CBB3DE6FF53 /* 1PasswordExtension-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "1PasswordExtension-umbrella.h"; sourceTree = "<group>"; };
+		FE1AE2C79DB1705A050161A6D7824BEE /* OHHTTPStubsSwift.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = OHHTTPStubsSwift.swift; path = OHHTTPStubs/Sources/Swift/OHHTTPStubsSwift.swift; sourceTree = "<group>"; };
 		FEA1CC7EEBF3F4E0AE74878DAB9F3063 /* Pods-WaniKaniStudyQueueWidget-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WaniKaniStudyQueueWidget-umbrella.h"; sourceTree = "<group>"; };
-		FEAC03297343911D6902E5A9394BD2F5 /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
+		FF900D8423D4B8F60F78AFED8AF0D532 /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Classes/DDASLLogCapture.h; sourceTree = "<group>"; };
 		FF978DD65F29DC5068586EFD454541E2 /* Pods-OperationKitTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-OperationKitTests-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -463,14 +451,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		87BF17DF65F7BB4DBBCE9038FEF77D9D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2D568345BFB42ED6F63107391E102131 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8A1C4A2FFA1B5D082DD6854475EAE176 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -510,6 +490,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EB5F6E04C47727A6CCD8FAE44E0B077F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				148B56527342C8FA9F1BE3411A8B9034 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EEFB61A65EB8DA6653B544822EB9CE44 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -521,36 +509,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01E01EC86B0FB011E3D4E74DFF4D0C90 /* Support Files */ = {
+		0266135019D49BC7D3253509083E93A1 /* 1PasswordExtension */ = {
 			isa = PBXGroup;
 			children = (
-				D12AC13FC1C2A96C8E5859843AF37DF6 /* CocoaLumberjack.modulemap */,
-				1C13C32E04AC1A4A739E0FB9D4365B6E /* CocoaLumberjack.xcconfig */,
-				E814747D9CF809F598ADFAF0AA07681E /* CocoaLumberjack-dummy.m */,
-				AA156D1A9AAA0D2A45D39CAB9FF1F941 /* CocoaLumberjack-prefix.pch */,
-				94E11EA06F7490D9B0F87EB4245B31E1 /* CocoaLumberjack-umbrella.h */,
-				D15E327382ED244D1DE7D78445E7FB30 /* Info.plist */,
+				9C7B9DB73EE806A1FE3DD23FFC8842A0 /* OnePasswordExtension.h */,
+				7076173BEB79F72B07BB254143452DDA /* OnePasswordExtension.m */,
+				7678254C171282E949462E828AA754C3 /* Resources */,
+				9118C91F4CF2A0813A69A8ED935D31CF /* Support Files */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/CocoaLumberjack";
+			name = 1PasswordExtension;
+			path = 1PasswordExtension;
 			sourceTree = "<group>";
 		};
-		06150F284535DC2E14CF69AF316F506D /* Core */ = {
+		0E2B4CA63FF12950235B6479183661C7 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
-				C173FB88DC17849AB253EFF48F9B3E40 /* Compatibility.h */,
-				28C5706F6AF0D09A9A79E8B821483638 /* OHHTTPStubs.h */,
-				3D5526D18AE6CC7F45C0AC635AA4D2C6 /* OHHTTPStubs.m */,
-				10039BB83A116970BF1FE5D8FE2C77F4 /* OHHTTPStubsResponse.h */,
-				AC18641629A532BB77EFAD621D560D73 /* OHHTTPStubsResponse.m */,
-			);
-			name = Core;
-			sourceTree = "<group>";
-		};
-		083D162C88B179009CCC4DE55F5DE68E /* Swift */ = {
-			isa = PBXGroup;
-			children = (
-				653550999D8EF631BFE5C4290EE30227 /* OHHTTPStubsSwift.swift */,
+				A561A49BCF6979DC00D4864856A73B74 /* CocoaLumberjack.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -561,24 +535,6 @@
 				BEF200450D64AAA9B7F9697AE9BC2CDB /* iOS */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		266376AA98A7971962F8C1F9CE776A2C /* FMDB */ = {
-			isa = PBXGroup;
-			children = (
-				96FE1B914D3613B49F9C872CA1CA00DC /* standard */,
-				D9DB44E836DBA9783FBE90BCCF855EA9 /* Support Files */,
-			);
-			name = FMDB;
-			path = FMDB;
-			sourceTree = "<group>";
-		};
-		2763D740B264339DA5FE5024E62D8146 /* Swift */ = {
-			isa = PBXGroup;
-			children = (
-				51A91676F3F4D7B62CB299937577D83B /* CocoaLumberjack.swift */,
-			);
-			name = Swift;
 			sourceTree = "<group>";
 		};
 		49883CE764BC53E1FEAE8DED88ADCF80 /* Pods-WaniKaniStudyQueueWidget */ = {
@@ -598,13 +554,16 @@
 			path = "Target Support Files/Pods-WaniKaniStudyQueueWidget";
 			sourceTree = "<group>";
 		};
-		4C21F2E1A79133588A8E9FF27A407058 /* OHPathHelpers */ = {
+		4B4D79FBEA3621BB2588D563A8A5CDAE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0D013AA277A5E83F6FD191E521CDE982 /* OHPathHelpers.h */,
-				0401D7A8779B19A77FEFC2CEE97F9799 /* OHPathHelpers.m */,
+				0266135019D49BC7D3253509083E93A1 /* 1PasswordExtension */,
+				ADF4B569F8A97AD56D556FDDA9553336 /* CocoaLumberjack */,
+				E1F8E1A46297EB6A9AA29948AE994637 /* FMDB */,
+				8AAE839B50F4F00BCE4BDCC73D770BBC /* OHHTTPStubs */,
+				9ED34F21A8CFB2F8737A8A2C99BB7788 /* SwiftyJSON */,
 			);
-			name = OHPathHelpers;
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		59D59FE2B79892EE2CF327E7EFDC4632 /* Targets Support Files */ = {
@@ -620,55 +579,52 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		6A61FCD3754C072A82DCE8404FE6449D /* Core */ = {
+		5CA98B7504047BBA2AB013543B12032B /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				7FFBB94054235D014356DCEDAE9F4ADF /* DDAbstractDatabaseLogger.h */,
-				1A67AA3081DF04D01B8FD2B853C62DCF /* DDAbstractDatabaseLogger.m */,
-				C7D544DEABD7E4EFEDDAC13DBBC5E04D /* DDASLLogCapture.h */,
-				B67A60439824E17C31AE7F576E1B199C /* DDASLLogCapture.m */,
-				1841AE5AD20F68EBC3B72DAEEA0662B0 /* DDASLLogger.h */,
-				2AB6224E66BC9DF7B8C4526178BFE7C5 /* DDASLLogger.m */,
-				C13387EF01BF173C8E261EE4632FA220 /* DDAssertMacros.h */,
-				494CF9D0A846CA46D7D8A1DA1B22EAFA /* DDFileLogger.h */,
-				BCE31FA4A58DDADDEE2C2158A7FBF5E0 /* DDFileLogger.m */,
-				15A40DD8C73E7565D4FBBBFE4B25315F /* DDLegacyMacros.h */,
-				7B1F8B6455E7F7EC728EA96CCAC938D2 /* DDLog.h */,
-				B6C58F9AC3779216B55C0F459C5A9EEC /* DDLog.m */,
-				98470C70160ABEE9AEB588C0782C8B1C /* DDLog+LOGV.h */,
-				FEAC03297343911D6902E5A9394BD2F5 /* DDLogMacros.h */,
-				961D62AA5D34F4AD3CF57269B9FE6D61 /* DDTTYLogger.h */,
-				430A3CF19F6EE1C48C6960FBB8823691 /* DDTTYLogger.m */,
+				22B20560A8103D1E0EEBC54C59917043 /* Compatibility.h */,
+				78B7A671302FC519EB72D53DAA3840B8 /* OHHTTPStubs.h */,
+				586922D67906B6965479C3FFA11A5D8B /* OHHTTPStubs.m */,
+				3B72D1E7D31E4602E22D6D133C581656 /* OHHTTPStubsResponse.h */,
+				A41A237A1548B7A1B890CAE91E8F7AC1 /* OHHTTPStubsResponse.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
 		};
-		716FED426DEB2223C7C0595B096789D2 /* Support Files */ = {
+		64BA5B42A9C12B6E910C5267F92C3E9F /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				868F2312EE8B7EF0362E88CD01B3BEB2 /* Info.plist */,
-				AAEAB16AD01AC4163743E7FA6ADC789F /* SwiftyJSON.modulemap */,
-				9E07B61E371A5667C3EEE9653D1836A6 /* SwiftyJSON.xcconfig */,
-				E27BADC72BA67E1201539DC4BCC9DE33 /* SwiftyJSON-dummy.m */,
-				49E0F5EEE126D6B6F946EA6C22299C60 /* SwiftyJSON-prefix.pch */,
-				847917ABA86A0834EA6BFE38ACF45D99 /* SwiftyJSON-umbrella.h */,
+				BAAAD97339EB58917984A6286B545C67 /* Info.plist */,
+				90177A8ADBEFB409629A9E8FF316E443 /* SwiftyJSON.modulemap */,
+				EF3D5C06A046F97E418600B2FD3E4CFD /* SwiftyJSON.xcconfig */,
+				1F5516BBF2FF1CCDAB4E5DDC29F7D6C6 /* SwiftyJSON-dummy.m */,
+				9977DA90DD3BBCA49C7D60765DF6E05E /* SwiftyJSON-prefix.pch */,
+				1959ACD570AE7CC5F561F661EC155C6C /* SwiftyJSON-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/SwiftyJSON";
 			sourceTree = "<group>";
 		};
-		78694A7697F1DEEA7D522F2C886601C3 /* OHHTTPStubs */ = {
+		6B6FF0A1CA6F91AC6BFD3DCB02FB8913 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				06150F284535DC2E14CF69AF316F506D /* Core */,
-				C9A7EA1F18C9D90FC9ACA49F72F505E2 /* JSON */,
-				F6C6B95F010CCA8F640DE2ED6A374900 /* NSURLSession */,
-				4C21F2E1A79133588A8E9FF27A407058 /* OHPathHelpers */,
-				BF9243B3FFFADE582DE30D4E545F9689 /* Support Files */,
-				083D162C88B179009CCC4DE55F5DE68E /* Swift */,
+				68BAD5FB83C59FD9E0BFCF1A6C81E64F /* FMDB.modulemap */,
+				8149A671DE59FD3BFD421DFE86B993A9 /* FMDB.xcconfig */,
+				6CCC587B1F69149E51AA662411BA8842 /* FMDB-dummy.m */,
+				70CC9117FB09B00081C5F298763A170B /* FMDB-prefix.pch */,
+				9374F3C428BA7AD5AC84C1429DCF350B /* FMDB-umbrella.h */,
+				5F953012D1C2960242EEB6C6F2D04B51 /* Info.plist */,
 			);
-			name = OHHTTPStubs;
-			path = OHHTTPStubs;
+			name = "Support Files";
+			path = "../Target Support Files/FMDB";
+			sourceTree = "<group>";
+		};
+		7678254C171282E949462E828AA754C3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				257CD2A0719EF19F4F2721C41B247F21 /* 1Password.xcassets */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -676,10 +632,24 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				14B8B9B15ECBE87983FF987239AB2D7B /* Frameworks */,
-				C17C423AA986C9ACF4378ECCDAABF955 /* Pods */,
+				4B4D79FBEA3621BB2588D563A8A5CDAE /* Pods */,
 				B1C8ED58E096D1F8CE49C56BAA060170 /* Products */,
 				59D59FE2B79892EE2CF327E7EFDC4632 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		85C8A512CCB9EC7C4B38BCB2E9DDEBEB /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				2ABF396B7E1A1888ED45D427637B19C2 /* Info.plist */,
+				AE3DA6F9ED7DE70B83BDE8B218DC7694 /* OHHTTPStubs.modulemap */,
+				3DB3C0AA6A0DC8C8A25DC27A85BA8059 /* OHHTTPStubs.xcconfig */,
+				00122B63A4371418DAC1C2F279A83881 /* OHHTTPStubs-dummy.m */,
+				4C65C342B76988A1559EDF02C7C5B3B0 /* OHHTTPStubs-prefix.pch */,
+				64A425630A29B406E5F6AB6E6C4D8BB2 /* OHHTTPStubs-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/OHHTTPStubs";
 			sourceTree = "<group>";
 		};
 		860970FEE734BC58D0C9B6E60B87D3B2 /* Pods-WaniKaniKitTests */ = {
@@ -700,34 +670,41 @@
 			path = "Target Support Files/Pods-WaniKaniKitTests";
 			sourceTree = "<group>";
 		};
-		96FE1B914D3613B49F9C872CA1CA00DC /* standard */ = {
+		8AAE839B50F4F00BCE4BDCC73D770BBC /* OHHTTPStubs */ = {
 			isa = PBXGroup;
 			children = (
-				BA1816DA48C88A623567DF9CE8ACBEDD /* FMDatabase.h */,
-				08F46C649E128C01ADA7CF77D98D7DFB /* FMDatabase.m */,
-				F24B2B665B76A90D7CF822B4F063F2B3 /* FMDatabaseAdditions.h */,
-				3DBB8CC585A8FC16C8AB3DD547FF41A9 /* FMDatabaseAdditions.m */,
-				A379B73CFC9258CF140D9BEDDFB32D99 /* FMDatabasePool.h */,
-				073DE7FE26E2893F8C84D1795033E3B0 /* FMDatabasePool.m */,
-				0A0B91D6854E8D5A9B86175FE24C2C8F /* FMDatabaseQueue.h */,
-				788E989FD543206009B2E46FC9415024 /* FMDatabaseQueue.m */,
-				3E0AE9590A5D34E902E20492E8E4CBAB /* FMDB.h */,
-				B645C81EA62220E9879661DD573AAF68 /* FMResultSet.h */,
-				438CE52E79727C08E294D4C059F9EEE8 /* FMResultSet.m */,
+				5CA98B7504047BBA2AB013543B12032B /* Core */,
+				BD42327957836AD68E2B8AF22687C4CA /* JSON */,
+				CCD298CB10EB67238C3358BC4476F717 /* NSURLSession */,
+				CFFC18CA2D27EF75EDBCAC9E30F996E6 /* OHPathHelpers */,
+				85C8A512CCB9EC7C4B38BCB2E9DDEBEB /* Support Files */,
+				8E6F510D0324F97C01FCB25B66109891 /* Swift */,
 			);
-			name = standard;
+			name = OHHTTPStubs;
+			path = OHHTTPStubs;
 			sourceTree = "<group>";
 		};
-		9919C117A76AA925B1BB0BD4A6641BE1 /* 1PasswordExtension */ = {
+		8E6F510D0324F97C01FCB25B66109891 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
-				0CCB171165E5F4FC25BA2ACF901CE826 /* OnePasswordExtension.h */,
-				B3D8F64C1C9C5EC40C3DC09DEA5395B2 /* OnePasswordExtension.m */,
-				B6B12EF20617CAA5482641901B1A04FA /* Resources */,
-				DF77CB01CBB79DF43604109272BCE72F /* Support Files */,
+				FE1AE2C79DB1705A050161A6D7824BEE /* OHHTTPStubsSwift.swift */,
 			);
-			name = 1PasswordExtension;
-			path = 1PasswordExtension;
+			name = Swift;
+			sourceTree = "<group>";
+		};
+		9118C91F4CF2A0813A69A8ED935D31CF /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8C05B33AD32E81FD7DE558090CD0F936 /* 1PasswordExtension.modulemap */,
+				F3C415648318CDEAB30F4B25F65FDB9B /* 1PasswordExtension.xcconfig */,
+				783A716E26DF56188F7E69E0834C9C6B /* 1PasswordExtension-dummy.m */,
+				AE09FB52ABE0B1C7A67D58830F409547 /* 1PasswordExtension-prefix.pch */,
+				F891446FB849577D24430CBB3DE6FF53 /* 1PasswordExtension-umbrella.h */,
+				1EC6874809D43BFB985DAC1FDF591220 /* Info.plist */,
+				852FDB66C03A170F170EBBA8085600AA /* ResourceBundle-OnePasswordExtensionResources-Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/1PasswordExtension";
 			sourceTree = "<group>";
 		};
 		9967272AFC36D2FC916A7BE401E1AD07 /* Pods-OperationKitTests */ = {
@@ -748,6 +725,27 @@
 			path = "Target Support Files/Pods-OperationKitTests";
 			sourceTree = "<group>";
 		};
+		9ED34F21A8CFB2F8737A8A2C99BB7788 /* SwiftyJSON */ = {
+			isa = PBXGroup;
+			children = (
+				0E69BA0DB7830E70CB91B529B1088751 /* SwiftyJSON.swift */,
+				64BA5B42A9C12B6E910C5267F92C3E9F /* Support Files */,
+			);
+			name = SwiftyJSON;
+			path = SwiftyJSON;
+			sourceTree = "<group>";
+		};
+		ADF4B569F8A97AD56D556FDDA9553336 /* CocoaLumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				D06E72941C4E7124662964BAD413692B /* Default */,
+				D93631FFF04F9637A68E4ADF98C20B52 /* Support Files */,
+				0E2B4CA63FF12950235B6479183661C7 /* Swift */,
+			);
+			name = CocoaLumberjack;
+			path = CocoaLumberjack;
+			sourceTree = "<group>";
+		};
 		B1C8ED58E096D1F8CE49C56BAA060170 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -765,14 +763,6 @@
 				AF47F2A6623C1F5045EBA9913139EC25 /* SwiftyJSON.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		B6B12EF20617CAA5482641901B1A04FA /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				42E03EEC2603225F3700497A705A0C6D /* 1Password.xcassets */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		BAFB48C49CA5BCCEB5C0F49DB6ED8AF9 /* Pods-AlliCrab */ = {
@@ -810,6 +800,15 @@
 			path = "Target Support Files/Pods-AlliCrab-WaniKaniKit";
 			sourceTree = "<group>";
 		};
+		BD42327957836AD68E2B8AF22687C4CA /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				B5BF3F3C6B23D8D10DA8A2E1BF876623 /* OHHTTPStubsResponse+JSON.h */,
+				F7A8C5E8BC0852B32861DC9D14D4FB43 /* OHHTTPStubsResponse+JSON.m */,
+			);
+			name = JSON;
+			sourceTree = "<group>";
+		};
 		BEF200450D64AAA9B7F9697AE9BC2CDB /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -819,20 +818,6 @@
 				CA1EE0ED384B608F3B8D1B616B9B2B1E /* UIKit.framework */,
 			);
 			name = iOS;
-			sourceTree = "<group>";
-		};
-		BF9243B3FFFADE582DE30D4E545F9689 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				52E4EEEE2EB279D11B6191D18B65F5E0 /* Info.plist */,
-				657FAC9CF1C3FA398F2577B693F144F7 /* OHHTTPStubs.modulemap */,
-				96937962B91585BE9869A98AC924987E /* OHHTTPStubs.xcconfig */,
-				5C5662B0AC14B9008FB83F0F75B2E56B /* OHHTTPStubs-dummy.m */,
-				965A06AD7F3220CBD5E61C06216ABF24 /* OHHTTPStubs-prefix.pch */,
-				98862E036CE7E9C2B200718A2561B5F8 /* OHHTTPStubs-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/OHHTTPStubs";
 			sourceTree = "<group>";
 		};
 		C1527ECDD3E8FFBA18DE99FB5D943C88 /* Pods-AlliCrab-OperationKit */ = {
@@ -852,110 +837,91 @@
 			path = "Target Support Files/Pods-AlliCrab-OperationKit";
 			sourceTree = "<group>";
 		};
-		C17C423AA986C9ACF4378ECCDAABF955 /* Pods */ = {
+		CCD298CB10EB67238C3358BC4476F717 /* NSURLSession */ = {
 			isa = PBXGroup;
 			children = (
-				9919C117A76AA925B1BB0BD4A6641BE1 /* 1PasswordExtension */,
-				F8240349300F5C6F2D30D0684FDE32EF /* CocoaLumberjack */,
-				266376AA98A7971962F8C1F9CE776A2C /* FMDB */,
-				78694A7697F1DEEA7D522F2C886601C3 /* OHHTTPStubs */,
-				CBA03E8501F5F60D4601C968EED9065A /* SwiftyJSON */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		C5C8D46228B408D6954BC04AD9389E6D /* Default */ = {
-			isa = PBXGroup;
-			children = (
-				3DEA545F6902C244FE02BAADCF9E1422 /* CocoaLumberjack.h */,
-			);
-			name = Default;
-			sourceTree = "<group>";
-		};
-		C9A7EA1F18C9D90FC9ACA49F72F505E2 /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				3B90D0DE1419E8134FE50E075B8709FD /* OHHTTPStubsResponse+JSON.h */,
-				A54478AB1A4764184F27D38160DEC56F /* OHHTTPStubsResponse+JSON.m */,
-			);
-			name = JSON;
-			sourceTree = "<group>";
-		};
-		CBA03E8501F5F60D4601C968EED9065A /* SwiftyJSON */ = {
-			isa = PBXGroup;
-			children = (
-				C59AA8ED7412C5EA69C0A8F6B7ACD5A7 /* SwiftyJSON.swift */,
-				716FED426DEB2223C7C0595B096789D2 /* Support Files */,
-			);
-			name = SwiftyJSON;
-			path = SwiftyJSON;
-			sourceTree = "<group>";
-		};
-		CE9812E15AF1F2166E88E41261BEF27A /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				CBB7842D35E9371F1331D29F44064B3C /* DDContextFilterLogFormatter.h */,
-				B28689D4DF8FF9ED1E86794CDE818ED1 /* DDContextFilterLogFormatter.m */,
-				174C7318E44AADE6361E0C9E22C72A56 /* DDDispatchQueueLogFormatter.h */,
-				A844B3A4BCDACE3FA4FE4D67C216E87B /* DDDispatchQueueLogFormatter.m */,
-				0DFB7D007E22332E449CD4B50A7AADDD /* DDMultiFormatter.h */,
-				981DDE208A29FC67B10C5066F4EA5685 /* DDMultiFormatter.m */,
-			);
-			name = Extensions;
-			sourceTree = "<group>";
-		};
-		D9DB44E836DBA9783FBE90BCCF855EA9 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				010126230F7E2252A3C1D04C4ABD25A6 /* FMDB.modulemap */,
-				A5D1A24B2CEA92421257006132227C03 /* FMDB.xcconfig */,
-				CC291A51C43B812C4BAEA610EC832F0C /* FMDB-dummy.m */,
-				F082DE0FC1193A23ADC4AFD7F6573E18 /* FMDB-prefix.pch */,
-				92F800F415DE862D51D7ECE10A65DDFF /* FMDB-umbrella.h */,
-				7781FF405614178736524D0F6D73480E /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/FMDB";
-			sourceTree = "<group>";
-		};
-		DF77CB01CBB79DF43604109272BCE72F /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				6E3F01C6D290012285E1BC81E9F8FE71 /* 1PasswordExtension.modulemap */,
-				30284B998EE03A397BF5438EB699CBDD /* 1PasswordExtension.xcconfig */,
-				7D5A51B97BB081C4EFC705BEC3487578 /* 1PasswordExtension-dummy.m */,
-				031182FDEB58B9BEDD57715B98F99ADC /* 1PasswordExtension-prefix.pch */,
-				3A507CF00BA385E449DA801A8266879C /* 1PasswordExtension-umbrella.h */,
-				CBA073BF21A5834C92E64018A5278239 /* Info.plist */,
-				8E9CD20308296241485D3D42FC4A8602 /* ResourceBundle-OnePasswordExtensionResources-Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/1PasswordExtension";
-			sourceTree = "<group>";
-		};
-		F6C6B95F010CCA8F640DE2ED6A374900 /* NSURLSession */ = {
-			isa = PBXGroup;
-			children = (
-				16A73DE77D40D5385B1428F801C4A6E4 /* NSURLRequest+HTTPBodyTesting.h */,
-				3B520B2DF5F5528F7893E56F76205A81 /* NSURLRequest+HTTPBodyTesting.m */,
-				B8830E3ABDB65BF8E85ADCE8CF0A1922 /* OHHTTPStubs+NSURLSessionConfiguration.m */,
-				C4906D8550DAD2AEC910B492D90AA48B /* OHHTTPStubsMethodSwizzling.h */,
-				55BCEC673608CC13A6ACAFA56938677E /* OHHTTPStubsMethodSwizzling.m */,
+				E52FEA35FE082771D0C886F76EB1B9BD /* NSURLRequest+HTTPBodyTesting.h */,
+				7D0F008EFC312595D100FD153C150697 /* NSURLRequest+HTTPBodyTesting.m */,
+				87448BA3083AAA4893FB2039A64A42F7 /* OHHTTPStubs+NSURLSessionConfiguration.m */,
+				1E4869E16368A9212916B6A72B8DC629 /* OHHTTPStubsMethodSwizzling.h */,
+				F31EC09A0ED129DF1853C8E4AD8DF63B /* OHHTTPStubsMethodSwizzling.m */,
 			);
 			name = NSURLSession;
 			sourceTree = "<group>";
 		};
-		F8240349300F5C6F2D30D0684FDE32EF /* CocoaLumberjack */ = {
+		CFFC18CA2D27EF75EDBCAC9E30F996E6 /* OHPathHelpers */ = {
 			isa = PBXGroup;
 			children = (
-				6A61FCD3754C072A82DCE8404FE6449D /* Core */,
-				C5C8D46228B408D6954BC04AD9389E6D /* Default */,
-				CE9812E15AF1F2166E88E41261BEF27A /* Extensions */,
-				01E01EC86B0FB011E3D4E74DFF4D0C90 /* Support Files */,
-				2763D740B264339DA5FE5024E62D8146 /* Swift */,
+				1328D473FAE711D3ED4544ED1615316A /* OHPathHelpers.h */,
+				D483DB32701819C31B2301C0E29AFE99 /* OHPathHelpers.m */,
 			);
-			name = CocoaLumberjack;
-			path = CocoaLumberjack;
+			name = OHPathHelpers;
+			sourceTree = "<group>";
+		};
+		D06E72941C4E7124662964BAD413692B /* Default */ = {
+			isa = PBXGroup;
+			children = (
+				E21B10622D66A60A246AD5ECBEFDA6C5 /* CocoaLumberjack.h */,
+				8E31B6541A4C974EC5BCF9056DAB1569 /* DDAbstractDatabaseLogger.h */,
+				77FAE761794A5D19D5CC5CD2314AA16D /* DDAbstractDatabaseLogger.m */,
+				FF900D8423D4B8F60F78AFED8AF0D532 /* DDASLLogCapture.h */,
+				EDC415B0D3CAD088EF20A0B76A2F1AE6 /* DDASLLogCapture.m */,
+				5291849E5E0D7DD2DF05E3411709C29E /* DDASLLogger.h */,
+				6514957736F432AC573E0C4341B79EA3 /* DDASLLogger.m */,
+				77FFA01EC00A1A72EC94E8B520FE84B1 /* DDAssertMacros.h */,
+				E3B809706BB909D4786DAED3F7AC417F /* DDFileLogger.h */,
+				5AD9C4214FFEAF03BC94BBCA5D2F42B9 /* DDFileLogger.m */,
+				00617B03BDA5D667BA492544CDC8C63C /* DDLegacyMacros.h */,
+				4AF5C09EB5BB00A813549AC996FBBCA5 /* DDLog.h */,
+				6E63AA4283ACD06F56B6BE8BB67075D6 /* DDLog.m */,
+				10CF25C0050581B72556DAC279C0F166 /* DDLog+LOGV.h */,
+				400DD4AB1CA58DC93B85FDBE5D4CBECD /* DDLogMacros.h */,
+				0297567427F23E5D23739F7025FFDBD4 /* DDTTYLogger.h */,
+				8A2C828F5357D80311C9388A5FC03B2A /* DDTTYLogger.m */,
+			);
+			name = Default;
+			sourceTree = "<group>";
+		};
+		D4A70EB73F0D56EC3EB52D4C675635CB /* standard */ = {
+			isa = PBXGroup;
+			children = (
+				950A355D6B107F76A44B1E450ECF2E50 /* FMDatabase.h */,
+				1E86DF1FA97A62BDF06FC8F406FB5C26 /* FMDatabase.m */,
+				D09C9A2DF670EE11446EFB00ADD60193 /* FMDatabaseAdditions.h */,
+				4CF1BF94E38EE354E0BEBCCD2E37ED01 /* FMDatabaseAdditions.m */,
+				DCABD39C59CEA53D85A64F722BCA92E5 /* FMDatabasePool.h */,
+				8B5263BE4258A0A13B3DA84D771ACA78 /* FMDatabasePool.m */,
+				DA74F870D638360A45CD489B50067951 /* FMDatabaseQueue.h */,
+				8A1FD35EAAF8D8F2859434E8FC72B940 /* FMDatabaseQueue.m */,
+				48EF9F159B5393D950DD538862425C52 /* FMDB.h */,
+				A76464C2362C96635CFA3F2A8F56A3C2 /* FMResultSet.h */,
+				4B0D93DBB540351366ECCAD3CEEC64CA /* FMResultSet.m */,
+			);
+			name = standard;
+			sourceTree = "<group>";
+		};
+		D93631FFF04F9637A68E4ADF98C20B52 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0C287AEC42C5B71AA112212710E03C3E /* CocoaLumberjack.modulemap */,
+				9C8C6A381B196924D69A2B758B128A85 /* CocoaLumberjack.xcconfig */,
+				3BFFF24076DCA02FD1A33DD3D839F73A /* CocoaLumberjack-dummy.m */,
+				9371DF88F503E81A51FC2FF839BCF359 /* CocoaLumberjack-prefix.pch */,
+				51679479C7E52A8E1ABC1E4BE38DF321 /* CocoaLumberjack-umbrella.h */,
+				F3A0C26D1EC5788161E479FFED19FEE6 /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/CocoaLumberjack";
+			sourceTree = "<group>";
+		};
+		E1F8E1A46297EB6A9AA29948AE994637 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				D4A70EB73F0D56EC3EB52D4C675635CB /* standard */,
+				6B6FF0A1CA6F91AC6BFD3DCB02FB8913 /* Support Files */,
+			);
+			name = FMDB;
+			path = FMDB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -989,28 +955,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF4A65BCAA09BF23176B2CF7F644530E /* Pods-AlliCrab-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7B0D5C64F440D82B22AA081CDD42A838 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FAC69CC57D42C2834E8524F803CB381E /* CocoaLumberjack-umbrella.h in Headers */,
-				2E3812F9A2BBB018029D1BE726E8E172 /* CocoaLumberjack.h in Headers */,
-				F0519E5DCF092BD14BAEE4587BED9283 /* DDAbstractDatabaseLogger.h in Headers */,
-				92C41C545FABD07F623CA2CA72F26D37 /* DDASLLogCapture.h in Headers */,
-				D3440A6564BFF26677494876D40D0C2A /* DDASLLogger.h in Headers */,
-				4519859D6A3732A5D95DD5810C76FEDF /* DDAssertMacros.h in Headers */,
-				DF522D54F2C5D3A19BB798D3923E44EF /* DDContextFilterLogFormatter.h in Headers */,
-				1D6143C2795B7844207283783201C6DF /* DDDispatchQueueLogFormatter.h in Headers */,
-				30C843C773BEE0CFF7FD41700500F02D /* DDFileLogger.h in Headers */,
-				5B2D2776124EB00FAA69830A8EB015D3 /* DDLegacyMacros.h in Headers */,
-				3BFB7483F9A9D5CCEA6E081223AD3995 /* DDLog+LOGV.h in Headers */,
-				B9B0F25A186A07F5E9C6FB5B64D6F531 /* DDLog.h in Headers */,
-				BE8DE3A815E6E1A63A7DF65976E9AB1E /* DDLogMacros.h in Headers */,
-				6E7731E9F5ADE9B6CFCA43B9E4868356 /* DDMultiFormatter.h in Headers */,
-				9DF6FAA2ADA721E6D72F5FB75CBB95B3 /* DDTTYLogger.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1053,6 +997,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DF2B9A313605D77EF6D72A26377C7E58 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F0F7C77E9F90046EABF4AAE6E69729D /* CocoaLumberjack-umbrella.h in Headers */,
+				4F9E4C1F48F56EB8C3E99A092B034250 /* CocoaLumberjack.h in Headers */,
+				652A4A9AF953579A448FC3E13B3AC564 /* DDAbstractDatabaseLogger.h in Headers */,
+				F8B7FA2F87CB773B7474F3D02FFA0E85 /* DDASLLogCapture.h in Headers */,
+				CD3CC90DE72A508147E8A0D2573F66B0 /* DDASLLogger.h in Headers */,
+				93CFC1814367258B35096978F69661E3 /* DDAssertMacros.h in Headers */,
+				01FF72AABCEAA2143D7A5EA4EB38698E /* DDFileLogger.h in Headers */,
+				8151B99E4EAFB8B6DCB51403AA3975FC /* DDLegacyMacros.h in Headers */,
+				61EFCE6F758E6309A704C0CE501BD706 /* DDLog+LOGV.h in Headers */,
+				229797B4B96CEE3921CF1471BF45E2A7 /* DDLog.h in Headers */,
+				CA872D308A3D55E167A899B5C7CAA2FB /* DDLogMacros.h in Headers */,
+				3DC3E3E57376D698D0DE217B59BDF7A6 /* DDTTYLogger.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E6964A5E2330B6EED426C0B137AB9A85 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1080,6 +1043,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		1192399218016C46455872C4313054CB /* CocoaLumberjack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E181F0624AF96FF3278ED2C7E9042A89 /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */;
+			buildPhases = (
+				A62A93ED0938F12AE89F16DA46C8C105 /* Sources */,
+				EB5F6E04C47727A6CCD8FAE44E0B077F /* Frameworks */,
+				DF2B9A313605D77EF6D72A26377C7E58 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CocoaLumberjack;
+			productName = CocoaLumberjack;
+			productReference = 7518853937ABF03254E7B4B002D9B595 /* CocoaLumberjack.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		251BAD17812F7EBF6532EACF66F941C3 /* FMDB */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5B0566FF0CE681AC326D316CEC45A8CF /* Build configuration list for PBXNativeTarget "FMDB" */;
@@ -1233,23 +1213,6 @@
 			productReference = 3CC9AF4DE796D93EE1B9BBA6C7C24813 /* OnePasswordExtensionResources.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		D7D6460167E9A0525598385B4C60B93C /* CocoaLumberjack */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FBDE95F31BB5C8E3E394881D5DDEDAD3 /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */;
-			buildPhases = (
-				E75EDD22F7051F22AA1BE2737DF3DCBC /* Sources */,
-				87BF17DF65F7BB4DBBCE9038FEF77D9D /* Frameworks */,
-				7B0D5C64F440D82B22AA081CDD42A838 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = CocoaLumberjack;
-			productName = CocoaLumberjack;
-			productReference = 7518853937ABF03254E7B4B002D9B595 /* CocoaLumberjack.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		E1B7EC9083F43091092793A096E99914 /* 1PasswordExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC832FE42CED17D95AB9121435F389F7 /* Build configuration list for PBXNativeTarget "1PasswordExtension" */;
@@ -1330,7 +1293,7 @@
 			targets = (
 				E1B7EC9083F43091092793A096E99914 /* 1PasswordExtension */,
 				D228286947C78954173BBDCC39A652CD /* 1PasswordExtension-OnePasswordExtensionResources */,
-				D7D6460167E9A0525598385B4C60B93C /* CocoaLumberjack */,
+				1192399218016C46455872C4313054CB /* CocoaLumberjack */,
 				251BAD17812F7EBF6532EACF66F941C3 /* FMDB */,
 				748F1C7F61D88F3FB355A8E829489671 /* OHHTTPStubs */,
 				77F05076927EF9112492138102E39508 /* Pods-AlliCrab */,
@@ -1426,6 +1389,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A62A93ED0938F12AE89F16DA46C8C105 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5622032EB5C9B8AF2B8A9C8F1D64461 /* CocoaLumberjack-dummy.m in Sources */,
+				47917768D2DC959B98EE540092B1B78A /* CocoaLumberjack.swift in Sources */,
+				75EFFAEA5EAF2D2038A7FEA28DFFA711 /* DDAbstractDatabaseLogger.m in Sources */,
+				3EA73DFCC1889F17CDCD8B8EEE59AC2D /* DDASLLogCapture.m in Sources */,
+				544E3FD2FFCAF76708AE09830A94D52E /* DDASLLogger.m in Sources */,
+				2B940BF4EF825495EB921424BD4D64E6 /* DDFileLogger.m in Sources */,
+				D893455E40788E757282B66749967EA2 /* DDLog.m in Sources */,
+				2B58CEA83247AC818CC883A465F1A237 /* DDTTYLogger.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D94858D600E69288339419A8660D072D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1448,24 +1426,6 @@
 			files = (
 				B96946C0FE04C1855D97067B7D17C1BE /* SwiftyJSON-dummy.m in Sources */,
 				AA1B45B4D2846E39B3417598F3089DE9 /* SwiftyJSON.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E75EDD22F7051F22AA1BE2737DF3DCBC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4939394D90B945389E83ED0CC996E5C6 /* CocoaLumberjack-dummy.m in Sources */,
-				3274C209E27D42B77E3246CF24875321 /* CocoaLumberjack.swift in Sources */,
-				D8E2A0AAEA738F45DE14228B3C94D908 /* DDAbstractDatabaseLogger.m in Sources */,
-				6A95A402804049CD798F10B7D08AB7D5 /* DDASLLogCapture.m in Sources */,
-				313CF1E92A50A1EFDD9F2920C65E0283 /* DDASLLogger.m in Sources */,
-				264E980D8EF30353EB8E848EBDBDD462 /* DDContextFilterLogFormatter.m in Sources */,
-				C859ACDE3A825574D228280DE3C971D7 /* DDDispatchQueueLogFormatter.m in Sources */,
-				CCF2563BD4E035619F4899159D866C43 /* DDFileLogger.m in Sources */,
-				CB7C5EADDA9FC07B352A8A776DF86EC8 /* DDLog.m in Sources */,
-				5EE380A7279D88A3379246106091C83C /* DDMultiFormatter.m in Sources */,
-				772473B09DAEDAEF60A07EE6C8FD77FE /* DDTTYLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1496,13 +1456,13 @@
 		1FAC3D7B11F43F7C826DAEDEDEF3921B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CocoaLumberjack;
-			target = D7D6460167E9A0525598385B4C60B93C /* CocoaLumberjack */;
+			target = 1192399218016C46455872C4313054CB /* CocoaLumberjack */;
 			targetProxy = 336C242EE1D73CB77B46D5FE8A21E305 /* PBXContainerItemProxy */;
 		};
 		212DEB20F058D63DCD405D7CCB81142A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CocoaLumberjack;
-			target = D7D6460167E9A0525598385B4C60B93C /* CocoaLumberjack */;
+			target = 1192399218016C46455872C4313054CB /* CocoaLumberjack */;
 			targetProxy = 7AE17D001798DBE97316133B92CC561E /* PBXContainerItemProxy */;
 		};
 		247A975D210F256C88FAA21A84EC583F /* PBXTargetDependency */ = {
@@ -1532,7 +1492,7 @@
 		56AC255032684E9A1C4F9D481FBBF640 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CocoaLumberjack;
-			target = D7D6460167E9A0525598385B4C60B93C /* CocoaLumberjack */;
+			target = 1192399218016C46455872C4313054CB /* CocoaLumberjack */;
 			targetProxy = D4F1F7E54ED62EFFADD9FD91181A6B2D /* PBXContainerItemProxy */;
 		};
 		5BE28334FD1DAC165AC6A11A6DA4FF92 /* PBXTargetDependency */ = {
@@ -1580,7 +1540,7 @@
 		A537E85E548CAFB81B1A4C065D2DA739 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CocoaLumberjack;
-			target = D7D6460167E9A0525598385B4C60B93C /* CocoaLumberjack */;
+			target = 1192399218016C46455872C4313054CB /* CocoaLumberjack */;
 			targetProxy = 1DFC6DC0AD4BC20BFEDAB25C7AACF18C /* PBXContainerItemProxy */;
 		};
 		B8D8AAC163E0D2F05A8E0CF768419049 /* PBXTargetDependency */ = {
@@ -1610,7 +1570,7 @@
 		F790647608922B103681EB75311367A8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CocoaLumberjack;
-			target = D7D6460167E9A0525598385B4C60B93C /* CocoaLumberjack */;
+			target = 1192399218016C46455872C4313054CB /* CocoaLumberjack */;
 			targetProxy = 47692E52E65A2578B672D1A4C54A77EA /* PBXContainerItemProxy */;
 		};
 		F9B37BD31B53AAF1CB8807B3B2F5600B /* PBXTargetDependency */ = {
@@ -1668,7 +1628,7 @@
 		};
 		067FFA5793D7ADD29C657261A74894F0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30284B998EE03A397BF5438EB699CBDD /* 1PasswordExtension.xcconfig */;
+			baseConfigurationReference = F3C415648318CDEAB30F4B25F65FDB9B /* 1PasswordExtension.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1845,9 +1805,9 @@
 			};
 			name = Release;
 		};
-		2B170CEC3A3C71EDAF4A9A227838AAD9 /* Debug */ = {
+		31C627C78399FB2D52E860AFAF385B64 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C13C32E04AC1A4A739E0FB9D4365B6E /* CocoaLumberjack.xcconfig */;
+			baseConfigurationReference = 9C8C6A381B196924D69A2B758B128A85 /* CocoaLumberjack.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1881,7 +1841,7 @@
 		};
 		36F0A4CA9B6F0929E28BE91BE1381471 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30284B998EE03A397BF5438EB699CBDD /* 1PasswordExtension.xcconfig */;
+			baseConfigurationReference = F3C415648318CDEAB30F4B25F65FDB9B /* 1PasswordExtension.xcconfig */;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/1PasswordExtension";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1937,9 +1897,43 @@
 			};
 			name = Release;
 		};
+		4C96F47638A085946ECC97F00048A91A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C8C6A381B196924D69A2B758B128A85 /* CocoaLumberjack.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CocoaLumberjack/CocoaLumberjack-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CocoaLumberjack/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/CocoaLumberjack/CocoaLumberjack.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = CocoaLumberjack;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		50B5244F268A80C97279EB7A206B2F3A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96937962B91585BE9869A98AC924987E /* OHHTTPStubs.xcconfig */;
+			baseConfigurationReference = 3DB3C0AA6A0DC8C8A25DC27A85BA8059 /* OHHTTPStubs.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1972,7 +1966,7 @@
 		};
 		5599B4CE5197DF79AE0E72757B7E8A1E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A5D1A24B2CEA92421257006132227C03 /* FMDB.xcconfig */;
+			baseConfigurationReference = 8149A671DE59FD3BFD421DFE86B993A9 /* FMDB.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2003,40 +1997,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		5A1CE19755E7AB833A8024B87E26A8D0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C13C32E04AC1A4A739E0FB9D4365B6E /* CocoaLumberjack.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/CocoaLumberjack/CocoaLumberjack-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CocoaLumberjack/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/CocoaLumberjack/CocoaLumberjack.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = CocoaLumberjack;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
 		};
 		5B0CFD02B855B4D7D5843149875A9B8A /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -2076,7 +2036,7 @@
 		};
 		5B25F99C125B1F6949D09ED721AB654A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96937962B91585BE9869A98AC924987E /* OHHTTPStubs.xcconfig */;
+			baseConfigurationReference = 3DB3C0AA6A0DC8C8A25DC27A85BA8059 /* OHHTTPStubs.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -2181,7 +2141,7 @@
 		};
 		8A084BCFD1C63D72B10FBF5EDF0A2D3D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9E07B61E371A5667C3EEE9653D1836A6 /* SwiftyJSON.xcconfig */;
+			baseConfigurationReference = EF3D5C06A046F97E418600B2FD3E4CFD /* SwiftyJSON.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2215,7 +2175,7 @@
 		};
 		951C6340A1AF1782F84C1E891298DF99 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30284B998EE03A397BF5438EB699CBDD /* 1PasswordExtension.xcconfig */;
+			baseConfigurationReference = F3C415648318CDEAB30F4B25F65FDB9B /* 1PasswordExtension.xcconfig */;
 			buildSettings = {
 				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/1PasswordExtension";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2306,7 +2266,7 @@
 		};
 		BF190716F3F37B38967776E8ED1F1421 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A5D1A24B2CEA92421257006132227C03 /* FMDB.xcconfig */;
+			baseConfigurationReference = 8149A671DE59FD3BFD421DFE86B993A9 /* FMDB.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2340,7 +2300,7 @@
 		};
 		C0B0B974580B4315E3EE75FF0124C583 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9E07B61E371A5667C3EEE9653D1836A6 /* SwiftyJSON.xcconfig */;
+			baseConfigurationReference = EF3D5C06A046F97E418600B2FD3E4CFD /* SwiftyJSON.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2374,7 +2334,7 @@
 		};
 		CD2C7000AE117BA7E00EF7B614DABCC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30284B998EE03A397BF5438EB699CBDD /* 1PasswordExtension.xcconfig */;
+			baseConfigurationReference = F3C415648318CDEAB30F4B25F65FDB9B /* 1PasswordExtension.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -2609,6 +2569,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		E181F0624AF96FF3278ED2C7E9042A89 /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				31C627C78399FB2D52E860AFAF385B64 /* Debug */,
+				4C96F47638A085946ECC97F00048A91A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E5F48615C67F85C0B1F4B17E09846E00 /* Build configuration list for PBXNativeTarget "1PasswordExtension-OnePasswordExtensionResources" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2623,15 +2592,6 @@
 			buildConfigurations = (
 				8A084BCFD1C63D72B10FBF5EDF0A2D3D /* Debug */,
 				C0B0B974580B4315E3EE75FF0124C583 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FBDE95F31BB5C8E3E394881D5DDEDAD3 /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2B170CEC3A3C71EDAF4A9A227838AAD9 /* Debug */,
-				5A1CE19755E7AB833A8024B87E26A8D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

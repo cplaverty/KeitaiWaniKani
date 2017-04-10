@@ -1,30 +1,26 @@
 PODS:
   - 1PasswordExtension (1.8.4)
-  - CocoaLumberjack/Core (3.0.0)
-  - CocoaLumberjack/Default (3.0.0):
-    - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (3.0.0):
+  - CocoaLumberjack/Default (3.1.0)
+  - CocoaLumberjack/Swift (3.1.0):
     - CocoaLumberjack/Default
-  - CocoaLumberjack/Swift (3.0.0):
-    - CocoaLumberjack/Extensions
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
-  - OHHTTPStubs (5.2.3):
-    - OHHTTPStubs/Default (= 5.2.3)
-  - OHHTTPStubs/Core (5.2.3)
-  - OHHTTPStubs/Default (5.2.3):
+  - OHHTTPStubs (6.0.0):
+    - OHHTTPStubs/Default (= 6.0.0)
+  - OHHTTPStubs/Core (6.0.0)
+  - OHHTTPStubs/Default (6.0.0):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (5.2.3):
+  - OHHTTPStubs/JSON (6.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (5.2.3):
+  - OHHTTPStubs/NSURLSession (6.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (5.2.3)
-  - OHHTTPStubs/Swift (5.2.3):
-    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (6.0.0)
+  - OHHTTPStubs/Swift (6.0.0):
+    - OHHTTPStubs/Default
   - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
@@ -37,9 +33,9 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   1PasswordExtension: e775a29310c65851e5a6cec1afc349ab4e334e47
-  CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
+  CocoaLumberjack: 8311463ddf9ee86a06ef92a071dd656c89244500
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
-  OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
+  OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
 PODFILE CHECKSUM: 368142d0c58363e27d56ab7b092df43b6a1aca06

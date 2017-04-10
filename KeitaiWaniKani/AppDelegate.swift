@@ -27,8 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaultDebugLevel = DDLogLevel.info
         #endif
         
-        DDLog.add(DDASLLogger.sharedInstance())
-        DDLog.add(DDTTYLogger.sharedInstance())
+        DDLog.add(DDASLLogger.sharedInstance)
+        DDLog.add(DDTTYLogger.sharedInstance)
         
         #if DEBUG
             let fileLogger = DDFileLogger()!
