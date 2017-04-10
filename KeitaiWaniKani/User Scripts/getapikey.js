@@ -1,5 +1,5 @@
-$.get('/account').done(function(data, textStatus, jqXHR) {
-    var apiKey = $(data).find('#api-button').parent().find('input').attr('value');
+$.get('/settings/account').done(function(data, textStatus, jqXHR) {
+    var apiKey = $(data).find('#user_api_key').attr('value');
     if (typeof apiKey === 'string') {
         window.webkit.messageHandlers.apiKey.postMessage(apiKey);
     }

@@ -12,8 +12,8 @@ public struct WaniKaniURLs {
     public static let apiBaseURL = URL(string: "api/v1.4/user/", relativeTo: home)!.absoluteURL
     public static let loginPage = URL(string: "login", relativeTo: home)!.absoluteURL
     public static let dashboard = URL(string: "dashboard", relativeTo: home)!.absoluteURL
-    public static let communityCentre = URL(string: "community", relativeTo: home)!.absoluteURL
-    public static let account = URL(string: "account", relativeTo: home)!.absoluteURL
+    public static let communityCentre = URL(string: "https://community.wanikani.com/")!
+    public static let account = URL(string: "settings/account", relativeTo: home)!.absoluteURL
     public static let subscription = URL(string: "account/subscription", relativeTo: home)!.absoluteURL
     
     public static let reviewHome = URL(string: "review", relativeTo: home)!.absoluteURL
