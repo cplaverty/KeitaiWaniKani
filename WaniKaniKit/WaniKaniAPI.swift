@@ -131,42 +131,42 @@ public struct WaniKaniAPI {
         return WaniKaniAPIResourceResolver(apiKey: apiKey)
     }
     
-    public static func minimumTime(fromSRSLevel initialLevel: Int, to finalLevel: Int, fromDate baseDate: Date, isRadical: Bool, isAccelerated: Bool) -> Date? {
+    public static func minimumTime(fromSRSLevel initialLevel: Int, to finalLevel: Int, fromDate baseDate: Date, isAcceleratedLevel: Bool) -> Date? {
         var guruDate = baseDate
         let calendar = Calendar.autoupdatingCurrent
         for level in initialLevel..<finalLevel {
-            guard let timeForLevel = timeToNextReview(forSRSLevel: level, isRadical: isRadical, isAccelerated: isAccelerated) else { return nil }
+            guard let timeForLevel = timeToNextReview(forSRSLevel: level, isAcceleratedLevel: isAcceleratedLevel) else { return nil }
             guruDate = calendar.date(byAdding: timeForLevel, to: guruDate)!
         }
         
         return guruDate
     }
     
-    private static func timeToNextReview(forSRSLevel srsLevelNumeric: Int, isRadical: Bool, isAccelerated: Bool) -> DateComponents? {
+    private static func timeToNextReview(forSRSLevel srsLevelNumeric: Int, isAcceleratedLevel: Bool) -> DateComponents? {
         switch srsLevelNumeric {
-        case 1 where isAccelerated:
+        case 1 where isAcceleratedLevel:
             var dc = DateComponents()
             dc.hour = 2
             return dc
         case 1,
-             2 where isAccelerated:
+             2 where isAcceleratedLevel:
             var dc = DateComponents()
             dc.hour = 4
             return dc
         case 2,
-             3 where isAccelerated:
+             3 where isAcceleratedLevel:
             var dc = DateComponents()
             dc.hour = 8
             return dc
         case 3,
-             4 where isAccelerated:
+             4 where isAcceleratedLevel:
             var dc = DateComponents()
             dc.day = 1
             dc.hour = -1
             return dc
         case 4:
             var dc = DateComponents()
-            dc.day = isRadical ? 2 : 3
+            dc.day = 2
             dc.hour = -1
             return dc
         case 5:

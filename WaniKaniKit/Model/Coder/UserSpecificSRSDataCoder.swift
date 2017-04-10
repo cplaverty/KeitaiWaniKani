@@ -299,12 +299,12 @@ extension SRSDataItemCoder {
         startDates.reserveCapacity(userInfo.level)
         
         for level in 1...userInfo.level {
-            let isAccelerated = WaniKaniAPI.isAccelerated(level: level)
+            let isAcceleratedLevel = WaniKaniAPI.isAccelerated(level: level)
             let radicalUnlockDates = radicalUnlockDatesByLevel[level] ?? []
             let kanjiUnlockDates = kanjiUnlockDatesByLevel[level] ?? []
             
             let startOfPreviousLevel = startDates.last ?? Date.distantPast
-            let eariestPossibleGuruDate = WaniKaniAPI.minimumTime(fromSRSLevel: 1, to: SRSLevel.guru.numericLevelThreshold, fromDate: startOfPreviousLevel, isRadical: true, isAccelerated: isAccelerated) ?? Date.distantPast
+            let eariestPossibleGuruDate = WaniKaniAPI.minimumTime(fromSRSLevel: 1, to: SRSLevel.guru.numericLevelThreshold, fromDate: startOfPreviousLevel, isAcceleratedLevel: isAcceleratedLevel) ?? Date.distantPast
             
             let minStartDate = (radicalUnlockDates + kanjiUnlockDates).lazy.flatMap { $0 }.filter { $0 > eariestPossibleGuruDate }.min()
             startDates.append(minStartDate ?? now)

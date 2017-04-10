@@ -19,8 +19,7 @@ public protocol SRSDataItem {
 }
 
 public extension SRSDataItem {
-    private static var isRadical: Bool { return self == Radical.self }
-    private var isAccelerated: Bool { return WaniKaniAPI.isAccelerated(level: level) }
+    private var isAcceleratedLevel: Bool { return WaniKaniAPI.isAccelerated(level: level) }
     
     public func guruDate(_ unlockDateForLockedItems: Date?) -> Date? {
         // Assume best case scenario: the next review is performed as soon as it becomes available (or now, if available now) and is successful
@@ -32,13 +31,13 @@ public extension SRSDataItem {
         if initialLevel > guruNumericLevel { return nil }
         else if initialLevel == guruNumericLevel { return baseDate }
         
-        return WaniKaniAPI.minimumTime(fromSRSLevel: initialLevel, to: guruNumericLevel, fromDate: baseDate, isRadical: type(of: self).isRadical, isAccelerated: isAccelerated)
+        return WaniKaniAPI.minimumTime(fromSRSLevel: initialLevel, to: guruNumericLevel, fromDate: baseDate, isAcceleratedLevel: isAcceleratedLevel)
     }
     
     public func earliestPossibleGuruDate(_ unlockDateForLockedItems: Date? = nil) -> Date? {
         guard let baseDate = userSpecificSRSData?.dateUnlocked ?? unlockDateForLockedItems else { return nil }
         
-        return WaniKaniAPI.minimumTime(fromSRSLevel: 1, to: SRSLevel.guru.numericLevelThreshold, fromDate: baseDate, isRadical: type(of: self).isRadical, isAccelerated: isAccelerated)
+        return WaniKaniAPI.minimumTime(fromSRSLevel: 1, to: SRSLevel.guru.numericLevelThreshold, fromDate: baseDate, isAcceleratedLevel: isAcceleratedLevel)
     }
 }
 
