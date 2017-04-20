@@ -102,37 +102,37 @@ struct UserScriptDefinitions {
     
     static let community: [UserScript] = [
         UserScript(name: "Jitai",
-                   description: "Display WaniKani reviews in randomised fonts, for more varied reading training.  Original script written by obskyr.",
-                   forumLink: URL(string: "https://www.wanikani.com/chat/api-and-third-party-apps/12858")!,
+                   description: "Display WaniKani reviews in randomised fonts, for more varied reading training.  Script by obskyr.",
+                   forumLink:  forumURL(withRelativePath: "/t/Jitai-字体-The-font-randomizer-that-fits/12617"),
                    settingKey: ApplicationSettingKeys.userScriptJitaiEnabled,
                    scriptNames: ["jitai.user"],
                    injectionRules: [.ExactMatch(WaniKaniURLs.reviewSession)]),
         
         UserScript(name: "WaniKani Override",
-                   description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script written by ruipgpinheiro.",
-                   forumLink: URL(string: "https://www.wanikani.com/chat/api-and-third-party-apps/2940")!,
+                   description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  This script is intended to be used to correct genuine mistakes, like typographical errors.  Script by ruipgpinheiro.",
+                   forumLink: forumURL(withRelativePath: "/t/Wanikani-Override-Userscript-112-Ignore-Answer-Button-No-longer-supported/2846"),
                    settingKey: ApplicationSettingKeys.userScriptIgnoreAnswerEnabled,
                    scriptNames: ["wkoverride.user"],
                    injectionRules: [.ExactMatch(WaniKaniURLs.reviewSession)]),
         
         UserScript(name: "WaniKani Double Check",
-                   description: "Adds a thumbs up/down button that permits incorrect answers to be marked correct, and correct answers to be marked incorrect.  This script is intended to be used to correct genuine mistakes, like typographical errors.  Original script written by Ethan.",
-                   forumLink: URL(string: "https://www.wanikani.com/chat/api-and-third-party-apps/8598")!,
+                   description: "Adds a thumbs up/down button that permits incorrect answers to be marked correct, and correct answers to be marked incorrect.  This script is intended to be used to correct genuine mistakes, like typographical errors.  Script by Ethan.",
+                   forumLink: forumURL(withRelativePath: "/t/UserScript-WaniKani-Double-Check/8396"),
                    settingKey: ApplicationSettingKeys.userScriptDoubleCheckEnabled,
                    scriptNames: ["wkdoublecheck"],
                    injectionRules: [.ExactMatch(WaniKaniURLs.reviewSession)]),
         
         UserScript(name: "WaniKani Improve",
-                   description: "Automatically moves to the next item if the answer was correct (also known as \"lightning mode\").  Original script written by Seiji.",
-                   forumLink: URL(string: "https://www.wanikani.com/chat/api-and-third-party-apps/2952")!,
+                   description: "Automatically moves to the next item if the answer was correct (also known as \"lightning mode\").  Script by Seiji.",
+                   forumLink: forumURL(withRelativePath: "/t/WaniKani-Improve-222-—-faster-and-smarter-reviews/2858"),
                    settingKey: ApplicationSettingKeys.userScriptWaniKaniImproveEnabled,
                    stylesheetNames: ["jquery.qtip.min"],
                    scriptNames: ["jquery.qtip.min", "wkimprove"],
                    injectionRules: [.ExactMatch(WaniKaniURLs.reviewSession)]),
         
         UserScript(name: "Markdown Notes",
-                   description: "Allows you to write Markdown in the notes, which will be rendered as HTML when the page loads.  Original script written by rfindley.",
-                   forumLink: URL(string: "https://www.wanikani.com/chat/api-and-third-party-apps/11698")!,
+                   description: "Allows you to write Markdown in the notes, which will be rendered as HTML when the page loads.  Script by rfindley.",
+                   forumLink: forumURL(withRelativePath: "/t/Userscript-Markdown-Notes-updated/11462"),
                    settingKey: ApplicationSettingKeys.userScriptMarkdownNotesEnabled,
                    scriptNames: ["showdown.min", "markdown.user"],
                    injectionRules: [.ExactMatch(WaniKaniURLs.reviewSession),
@@ -140,8 +140,8 @@ struct UserScriptDefinitions {
                                     .StartsWith(WaniKaniURLs.kanjiRoot), .StartsWith(WaniKaniURLs.vocabularyRoot)]),
         
         UserScript(name: "WaniKani Hide Mnemonics",
-                   description: "Allows you to hide the reading and meaning mnemonics on the site.  Original script written by nibarius.",
-                   forumLink: URL(string: "https://www.wanikani.com/chat/api-and-third-party-apps/4021")!,
+                   description: "Allows you to hide the reading and meaning mnemonics on the site.  Script by nibarius.",
+                   forumLink: forumURL(withRelativePath: "/t/Userscript-WaniKani-hide-mnemonics/3923"),
                    settingKey: ApplicationSettingKeys.userScriptHideMnemonicsEnabled,
                    scriptNames: ["wkhidem.user"],
                    injectionRules: [.ExactMatch(WaniKaniURLs.lessonSession), .ExactMatch(WaniKaniURLs.reviewSession),
@@ -149,13 +149,18 @@ struct UserScriptDefinitions {
                                     .StartsWith(WaniKaniURLs.kanjiRoot), .StartsWith(WaniKaniURLs.vocabularyRoot)]),
         
 //        UserScript(name: "WaniKani Reorder Ultimate",
-//                   description: "Allows you to reorder your lessons and reviews by type and level, and also force reading/meaning first.  Original script written by xMunch.",
-//                   forumLink: URL(string: "https://www.wanikani.com/chat/api-and-third-party-apps/8471"),
+//                   description: "Allows you to reorder your lessons and reviews by type and level, and also force reading/meaning first.  Script by xMunch.",
+//                   forumLink: forumURL(withRelativePath: "/t/Wanikani-Reorder-Ultimate/8269"),
 //                   settingKey: ApplicationSettingKeys.userScriptReorderUltimateEnabled,
 //                   scriptNames: ["WKU.user"],
 //                   injectionRules: [.ExactMatch(WaniKaniURLs.lessonSession), .ExactMatch(WaniKaniURLs.reviewSession)]),
-        ]
+    ]
     
     static let all = alwaysEnabled + custom + community
     
+    private static func forumURL(withRelativePath path: String) -> URL {
+        guard let path = path.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed) else { fatalError("Unable to encode path '{path}'!") }
+        
+        return URL(string: path, relativeTo: WaniKaniURLs.communityCentre)!.absoluteURL
+    }
 }
