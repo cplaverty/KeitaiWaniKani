@@ -82,7 +82,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         config.processPool = delegate.webKitProcessPool
         
         if #available(iOS 9.0, *) {
-            config.applicationNameForUserAgent = "KeitaiWaniKani"
+            config.applicationNameForUserAgent = "Mobile AlliCrab"
         }
         
         if #available(iOS 10.0, *) {
@@ -307,9 +307,9 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
-        let host = frame.request.url?.host ?? "web page"
-        let title = "From \(host):"
         DispatchQueue.main.async {
+            let host = frame.request.url?.host ?? "web page"
+            let title = "From \(host):"
             DDLogInfo("Displaying alert with title \(title) and message \(message)")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in completionHandler() })
@@ -319,9 +319,9 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     }
     
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
-        let host = frame.request.url?.host ?? "web page"
-        let title = "From \(host):"
         DispatchQueue.main.async {
+            let host = frame.request.url?.host ?? "web page"
+            let title = "From \(host):"
             DDLogInfo("Displaying alert with title \(title) and message \(message)")
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in completionHandler(true) })
@@ -332,9 +332,9 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     }
     
     func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
-        let host = frame.request.url?.host ?? "web page"
-        let title = "From \(host):"
         DispatchQueue.main.async {
+            let host = frame.request.url?.host ?? "web page"
+            let title = "From \(host):"
             DDLogInfo("Displaying input panel with title \(title) and message \(prompt)")
             let alert = UIAlertController(title: title, message: prompt, preferredStyle: .alert)
             alert.addTextField { $0.text = defaultText }
