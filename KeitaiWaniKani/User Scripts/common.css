@@ -17,13 +17,16 @@
     }
 }
 
-#additional-content ul {
+#additional-content {
     display: table;
     table-layout: fixed;
-    width: 100%;
+    width: calc(100% - 20px);
+}
+
+#additional-content ul {
+    display: table-row;
 }
 
 #additional-content ul li {
     display: table-cell;
-    width: auto;
 }
