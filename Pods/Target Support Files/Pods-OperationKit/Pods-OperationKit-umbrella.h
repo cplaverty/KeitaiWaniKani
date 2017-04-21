@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_AlliCrab_WaniKaniKitVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_AlliCrab_WaniKaniKitVersionString[];
+FOUNDATION_EXPORT double Pods_OperationKitVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_OperationKitVersionString[];
 

@@ -1,29 +1,23 @@
 platform :ios, '8.0'
 use_frameworks!
 
+pod 'FMDB'
+pod 'SwiftyJSON'
+pod 'CocoaLumberjack/Swift'
+
+target 'OperationKit'
+target 'WaniKaniKit'
+
 target 'AlliCrab' do
-    pod 'FMDB'
-    pod 'SwiftyJSON'
-    pod 'CocoaLumberjack/Swift'
     pod '1PasswordExtension'
-    #pod 'Charts'
-    
-    target 'OperationKit'
-    target 'WaniKaniKit'
-    
-    target 'WaniKaniStudyQueueWidget' do
-        inherit! :search_paths
-    end
-    
-    target 'OperationKitTests' do
-        inherit! :search_paths
-    end
-    
-    target 'WaniKaniKitTests' do
-        inherit! :search_paths
-        pod 'OHHTTPStubs'
-        pod 'OHHTTPStubs/Swift'
-    end
+end
+
+target 'WaniKaniStudyQueueWidget'
+
+target 'OperationKitTests'
+target 'WaniKaniKitTests' do
+    pod 'OHHTTPStubs'
+    pod 'OHHTTPStubs/Swift'
 end
 
 post_install do |installer|
