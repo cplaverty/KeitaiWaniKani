@@ -41,28 +41,6 @@ if (this.idleTime !== undefined) {
 }
 
 
-// Keyboard remains active even after ending editing of notes while in lessons.  Employ a sledgehammer to end editing.
-if (this.Notes !== undefined) {
-    var baseNotesClick = this.Notes.click;
-    this.Notes.click = function(e, t, n) {
-        baseNotesClick(e, t, n);
-        var s = $(".note-" + t);
-        s.on("click", function() {
-            s.find("button").on("click", function() {
-                console.log("force end editing");
-                if (window.webkit && window.webkit.messageHandlers) {
-                    // WKWebView
-                    window.webkit.messageHandlers.interop.postMessage("endEditing");
-                } else {
-                    // UIWebView
-                    endEditing();
-                }
-            });
-        });
-    };
-}
-
-
 // Use email keyboard for user login input
 var userLogin = $('#user_login');
 if (userLogin !== null) {

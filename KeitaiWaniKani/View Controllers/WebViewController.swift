@@ -95,8 +95,7 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
     weak var webView: UIWebView?
     
     lazy var statusBarView: UIView = {
-        let statusBarView = UIBottomBorderedView(color: .lightGray, width: 0.5)
-        statusBarView.frame = CGRect(origin: .zero, size: CGSize(width: self.view.frame.width, height: 20))
+        let statusBarView = UIBottomBorderedView(frame: UIApplication.shared.statusBarFrame, color: .lightGray, width: 0.5)
         statusBarView.autoresizingMask = .flexibleWidth
         statusBarView.backgroundColor = ApplicationSettings.globalBarTintColor
         

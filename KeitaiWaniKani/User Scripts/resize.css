@@ -1,9 +1,7 @@
-/* Reviews */
-#reviews #question #character {
-    padding: 5px 0;
+header #main-info #meaning {
+    padding: 0;
 }
 
-/* Lessons */
 #main-info {
     padding: 10px 0;
 }
@@ -16,14 +14,10 @@ header #main-info #character {
     padding: 0;
 }
 
-footer, #lessons-hotkey-footer {
-    display: none !important;
-}
-
 #lessons #supplement-info button.audio-btn {
     margin: 0;
-    padding: 0 0.5em;
-    font-size: 1.5em;
+    padding: 0 0.5rem;
+    font-size: 1.5rem;
     vertical-align: middle;
 }
 
@@ -33,24 +27,18 @@ footer, #lessons-hotkey-footer {
     /* 3.5" iPhone */
     @media (min-width: 320px) and (max-width: 767px) {
         #reviews #question #character, #lessons header #main-info #character {
-            font-size: 2.75em !important;
-            line-height: 2.15em !important;
+            font-size: 8vh !important; line-height: 18vh !important; padding: 10px 0 0;
         }
     }
     
     /* 4" iPhone */
     @media (min-width: 320px) and (max-width: 767px) and (min-height: 481px) {
         #question #question-type h1 {
-            font-size: 1em;
+            font-size: 1rem;
         }
         
         #answer-form input[type=text], #answer-form button {
             font-size: 0.85em;
-        }
-        
-        #reviews #question #character, #lessons header #main-info #character {
-            font-size: 3.25em !important;
-            line-height: 2.5em !important;
         }
     }
     
@@ -61,6 +49,7 @@ footer, #lessons-hotkey-footer {
         }
         
         #answer-exception {
+            top: 2.8em;
             font-size: 0.8em;
         }
         
@@ -68,30 +57,8 @@ footer, #lessons-hotkey-footer {
             font-size: 1em;
         }
         
-        #question #question-type h1 {
-            font-size: 1.25em
-        }
-        
         #answer-form input[type=text], #answer-form button {
-            font-size: 1em;
-        }
-        
-        #reviews #question #character, #lessons header #main-info #character {
-            font-size: 3.75em !important;
-        }
-    }
-    
-    /* 5.5" iPhone */
-    @media (min-width: 414px) and (max-width: 767px) {
-        #reviews #question #character, #lessons header #main-info #character {
-            font-size: 4.25em !important;
-        }
-    }
-    
-    /* iPad */
-    @media (min-width: 768px) and (max-width: 1024px) {
-        #reviews #question #character, #lessons header #main-info #character {
-            font-size: 140px !important; line-height: 300px !important;
+            font-size: 1.25rem;
         }
     }
     
@@ -99,37 +66,6 @@ footer, #lessons-hotkey-footer {
 
 /* Landscape */
 @media only screen and (orientation: landscape) {
-    
-    /* 3.5" and 4" iPhone */
-    @media (max-height: 375px) {
-        #answer-form input[type=text], #answer-form button {
-            height: 2.25em;
-        }
-    }
-    
-    @media (min-height: 320px) and (max-height: 1003px) {
-        #lessons header #main-info #character {
-            font-size: 24px !important; line-height: 46px !important;
-        }
-        
-        #reviews #question #character {
-            font-size: 28px !important; line-height: 56px !important;
-        }
-    }
-    
-    /* 4.7" iPhone */
-    @media (min-height: 375px) and (max-height: 1003px) {
-        #reviews #question #character, #lessons header #main-info #character {
-            font-size: 40px !important; line-height: 78px !important;
-        }
-    }
-    
-    /* 5.5" iPhone */
-    @media (min-height: 414px) and (max-height: 1003px) {
-        #reviews #question #character, #lessons header #main-info #character {
-            font-size: 48px !important; line-height: 108px !important;
-        }
-    }
     
     /* iPad (minus status bar) */
     @media (min-height: 748px) and (max-height: 1003px) {
@@ -163,15 +99,19 @@ footer, #lessons-hotkey-footer {
         font-size: 100%;
     }
     
-    #answer-form {
-        font-size: 1.25em;
+    #summary-button, #header-buttons {
+        font-size: 1rem;
     }
     
-    #summary-button, #header-buttons, #reviews #stats, #lessons #stats {
-        font-size: 14px;
+    #reviews #stats, #lessons #stats {
+        font-size: 0.85rem;
     }
     
     #additional-content ul li span {
-        font-size: 1em;
+        font-size: 1rem;
+    }
+    
+    #additional-content ul li.active:before {
+        bottom: -1rem;
     }
 }

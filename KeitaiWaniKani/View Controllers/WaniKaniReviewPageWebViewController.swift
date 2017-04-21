@@ -16,28 +16,20 @@ class WaniKaniReviewPageWebViewController: WKWebViewController {
     
     override var allowsBackForwardNavigationGestures: Bool { return false }
     
-    // MARK: - Initialisers
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     // MARK: - View Controller Lifecycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        webView.removeInputAccessoryView()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         showBrowserInterface(webView.url != WaniKaniURLs.lessonSession && webView.url != WaniKaniURLs.reviewSession, animated: true)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         ApplicationSettings.forceRefresh = true
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Update UI
@@ -45,7 +37,7 @@ class WaniKaniReviewPageWebViewController: WKWebViewController {
     func keyboardDidShow(_ notification: Notification) {
         guard let url = webView.url, url == WaniKaniURLs.lessonSession || url == WaniKaniURLs.reviewSession else { return }
         
-        showBrowserInterface(false, animated: false)
+        showBrowserInterface(false, animated: true)
     }
     
 }

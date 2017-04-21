@@ -102,12 +102,11 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     private var progressViewIsHidden = true
     
     lazy var statusBarView: UIView = {
-        let statusBarView = UIBottomBorderedView(color: .lightGray, width: 0.5)
-        statusBarView.frame = CGRect(origin: .zero, size: CGSize(width: self.view.frame.width, height: 20))
-        statusBarView.autoresizingMask = .flexibleWidth
-        statusBarView.backgroundColor = ApplicationSettings.globalBarTintColor
+        let view = UIBottomBorderedView(frame: UIApplication.shared.statusBarFrame, color: .lightGray, width: 0.5)
+        view.autoresizingMask = .flexibleWidth
+        view.backgroundColor = ApplicationSettings.globalBarTintColor
         
-        return statusBarView
+        return view
     }()
     
     private let webViewObservedKeys = ["canGoBack", "canGoForward", "estimatedProgress", "loading", "URL"]
@@ -115,8 +114,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     private func createWebView() -> WKWebView {
         let webView = WKWebView(frame: self.view.bounds, configuration: webViewConfiguration ?? defaultWebViewConfiguration)
-        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        webView.scrollView.delegate = self
+        webView.translatesAutoresizingMaskIntoConstraints = false
         webView.navigationDelegate = self
         webView.uiDelegate = self
         webView.allowsBackForwardNavigationGestures = self.allowsBackForwardNavigationGestures
@@ -356,11 +354,6 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         }
         
         switch command {
-        case "endEditing":
-            DispatchQueue.main.async { [weak self] in
-                DDLogVerbose("Calling endEditing")
-                self?.view?.endEditing(true)
-            }
         default:
             DDLogWarn("Received unhandled command \(command) in \(message.body)")
         }
@@ -398,6 +391,11 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         
         self.view.addSubview(webView)
         self.view.addSubview(statusBarView)
+        
+        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "V:|[statusBarView]", options: [], metrics: nil, views: ["statusBarView": statusBarView]))
+        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "H:|[statusBarView]|", options: [], metrics: nil, views: ["statusBarView": statusBarView]))
+        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "V:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
+        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
         
         configureToolbars(for: self.traitCollection)
         
@@ -487,7 +485,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
             UIView.animate(withDuration: 0.3, delay: 0.0, options: [.curveEaseIn],
                            animations: {
                             self.progressView?.alpha = 0.0
-                },
+            },
                            completion: { _ in
                             self.progressView?.setProgress(0.0, animated: false)
             })
