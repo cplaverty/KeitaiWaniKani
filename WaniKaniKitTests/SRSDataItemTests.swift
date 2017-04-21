@@ -17,7 +17,7 @@ class SRSDataItemTests: XCTestCase {
                            level: 4)
         
         let lockedGuruDate = locked.guruDate(date(2016, 1, 1, 0, 0, 0))
-        let lockedExpectedGuruDate = date(2016, 1, 5, 10, 0, 0)
+        let lockedExpectedGuruDate = date(2016, 1, 4, 10, 0, 0)
         XCTAssertEqual(lockedGuruDate, lockedExpectedGuruDate)
     }
     
@@ -33,7 +33,7 @@ class SRSDataItemTests: XCTestCase {
                                                                            burned: false))
         
         let newlyUnlockedGuruDate = newlyUnlocked.guruDate(nil)
-        let newlyUnlockedExpectedGuruDate = date(2020, 2, 5, 6, 0, 0)
+        let newlyUnlockedExpectedGuruDate = date(2020, 2, 4, 6, 0, 0)
         XCTAssertEqual(newlyUnlockedGuruDate, newlyUnlockedExpectedGuruDate)
     }
     
@@ -120,7 +120,7 @@ class SRSDataItemTests: XCTestCase {
                            level: 4)
         
         let lockedGuruDate = locked.earliestPossibleGuruDate(date(2016, 1, 1, 0, 0, 0))
-        let lockedExpectedGuruDate = date(2016, 1, 5, 10, 0, 0)
+        let lockedExpectedGuruDate = date(2016, 1, 4, 10, 0, 0)
         XCTAssertEqual(lockedGuruDate, lockedExpectedGuruDate)
     }
     
@@ -136,7 +136,7 @@ class SRSDataItemTests: XCTestCase {
                                                                            burned: false))
         
         let newlyUnlockedGuruDate = newlyUnlocked.earliestPossibleGuruDate(nil)
-        let newlyUnlockedExpectedGuruDate = date(2016, 1, 5, 10, 0, 0)
+        let newlyUnlockedExpectedGuruDate = date(2016, 1, 4, 10, 0, 0)
         XCTAssertEqual(newlyUnlockedGuruDate, newlyUnlockedExpectedGuruDate)
     }
     
@@ -152,7 +152,7 @@ class SRSDataItemTests: XCTestCase {
                                                                         burned: false))
         
         let nearlyGuruDate = nearlyGuru.earliestPossibleGuruDate(nil)
-        let nearlyGuruExpectedDate = date(2016, 1, 5, 10, 0, 0)
+        let nearlyGuruExpectedDate = date(2016, 1, 4, 10, 0, 0)
         XCTAssertEqual(nearlyGuruDate, nearlyGuruExpectedDate)
     }
     
@@ -168,7 +168,7 @@ class SRSDataItemTests: XCTestCase {
                                                                       burned: false))
         
         let masteredGuruDate = mastered.earliestPossibleGuruDate(nil)
-        let masteredExpectedGuruDate = date(2016, 1, 5, 10, 0, 0)
+        let masteredExpectedGuruDate = date(2016, 1, 4, 10, 0, 0)
         XCTAssertEqual(masteredGuruDate, masteredExpectedGuruDate)
     }
     
