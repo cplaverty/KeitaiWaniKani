@@ -17,9 +17,8 @@ class DatabaseTestCase: XCTestCase {
     }
     
     lazy var stubDownloadStrategy: DownloadStrategy = {
-        var strategy = DownloadStrategy(databaseQueue: self.databaseQueue)
+        var strategy = DownloadStrategy(databaseQueue: self.databaseQueue, batchSizes: BatchSizes(radicals: 100, kanji: 100, vocabulary: 100))
         strategy.maxLevel = 100
-        strategy.levelFetchBatchSize = 100
         return strategy
     }()
     

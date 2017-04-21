@@ -14,6 +14,18 @@ public struct DownloadBatches {
     let argument: String?
 }
 
+public struct BatchSizes {
+    let radicals: Int
+    let kanji: Int
+    let vocabulary: Int
+    
+    public init(radicals: Int, kanji: Int, vocabulary: Int) {
+        self.radicals = radicals
+        self.kanji = kanji
+        self.vocabulary = vocabulary
+    }
+}
+
 public struct DownloadStrategy {
     private struct State {
         let userInformation: UserInformation?
@@ -26,65 +38,40 @@ public struct DownloadStrategy {
         }
     }
     
-    public var levelFetchBatchSize = 20
-    
     // Intended as an override for unit tests, so they don't have to insert a UserInformation into the database
     var maxLevel: Int?
     
     private let databaseQueue: FMDatabaseQueue
+    private let batchSizes: BatchSizes
     
-    public init(databaseQueue: FMDatabaseQueue) {
+    public init(databaseQueue: FMDatabaseQueue, batchSizes: BatchSizes) {
         self.databaseQueue = databaseQueue
+        self.batchSizes = batchSizes
     }
     
     public func batches(coder: RadicalCoder) -> [DownloadBatches] {
-        let currentState = State(databaseQueue: self.databaseQueue)
-        guard let levelRange = staleLevels(coder: coder, currentState: currentState) else {
-            // Download everything
-            return [DownloadBatches(description: nil, argument: nil)]
-        }
-        
-        if levelRange.isEmpty {
-            DDLogDebug("All radical levels up to date")
-            return []
-        } else {
-            let argument = levelArrayToArgument(levelRange)
-            DDLogDebug("Will fetch radicals for levels \(argument)")
-            return [DownloadBatches(description: nil, argument: argument)]
-        }
+        return calculateBatches(coder: coder, withMaxBatchSize: batchSizes.radicals)
     }
     
     public func batches(coder: KanjiCoder) -> [DownloadBatches] {
-        let currentState = State(databaseQueue: self.databaseQueue)
-        guard let levelRange = staleLevels(coder: coder, currentState: currentState) else {
-            // Download everything
-            return [DownloadBatches(description: nil, argument: nil)]
-        }
-        
-        if levelRange.isEmpty {
-            DDLogDebug("All kanji levels up to date")
-            return []
-        } else {
-            let argument = levelArrayToArgument(levelRange)
-            DDLogDebug("Will fetch kanji for levels \(argument)")
-            return [DownloadBatches(description: nil, argument: argument)]
-        }
+        return calculateBatches(coder: coder, withMaxBatchSize: batchSizes.kanji)
     }
     
     public func batches(coder: VocabularyCoder) -> [DownloadBatches] {
+        return calculateBatches(coder: coder, withMaxBatchSize: batchSizes.vocabulary)
+    }
+    
+    private func calculateBatches<Coder: ListItemDatabaseCoder>(coder: Coder, withMaxBatchSize batchSize: Int) -> [DownloadBatches] {
         let currentState = State(databaseQueue: self.databaseQueue)
-        let levelRange = staleLevels(coder: coder, currentState: currentState) ?? Array(1...(maxLevel ?? currentState.userInformation!.level))
-        
-        let arguments = stride(from: 0, to: levelRange.count, by: levelFetchBatchSize).map { start -> String in
-            let end = min(levelRange.count - 1, start + levelFetchBatchSize - 1)
-            return levelArrayToArgument(levelRange[start...end])
+        let levels = staleLevels(coder: coder, currentState: currentState) ?? Array(1...(maxLevel ?? currentState.userInformation!.level))
+        let arguments = stride(from: 0, to: levels.count, by: batchSize).map { start -> String in
+            let end = min(levels.count - 1, start + batchSize - 1)
+            return levelArrayToArgument(levels[start...end])
         }
         
         if arguments.isEmpty {
-            DDLogDebug("All vocabulary levels up to date")
             return []
         } else {
-            DDLogDebug("Will fetch vocabulary with batches \(arguments)")
             return arguments.enumerated().map { (index, element) in
                 DownloadBatches(description: arguments.count == 1 ? nil : "(batch \(index + 1) of \(arguments.count))", argument: element)
             }
