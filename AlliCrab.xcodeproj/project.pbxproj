@@ -186,7 +186,6 @@
 		83F364361D018B1200213097 /* ReorderSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F364351D018B1200213097 /* ReorderSettings.swift */; };
 		83F364381D01A2D700213097 /* ReorderSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83F364371D01A2D700213097 /* ReorderSettings.storyboard */; };
 		83F9D2AB1D45205000B261F3 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F9D2AA1D45205000B261F3 /* DatabaseManager.swift */; };
-		83FC71BE1C95856600B60C1C /* ArmedBanana.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71BD1C95856600B60C1C /* ArmedBanana.ttf */; };
 		83FC71C01C9585BE00B60C1C /* chifont+.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71BF1C9585BE00B60C1C /* chifont+.ttf */; };
 		83FC71C91C9585F300B60C1C /* chigfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C11C9585F300B60C1C /* chigfont.ttf */; };
 		83FC71CA1C9585F300B60C1C /* cinecaption227.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C21C9585F300B60C1C /* cinecaption227.ttf */; };
@@ -484,7 +483,6 @@
 		83F364351D018B1200213097 /* ReorderSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReorderSettings.swift; sourceTree = "<group>"; };
 		83F364371D01A2D700213097 /* ReorderSettings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReorderSettings.storyboard; sourceTree = "<group>"; };
 		83F9D2AA1D45205000B261F3 /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
-		83FC71BD1C95856600B60C1C /* ArmedBanana.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ArmedBanana.ttf; sourceTree = "<group>"; };
 		83FC71BF1C9585BE00B60C1C /* chifont+.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "chifont+.ttf"; sourceTree = "<group>"; };
 		83FC71C11C9585F300B60C1C /* chigfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chigfont.ttf; sourceTree = "<group>"; };
 		83FC71C21C9585F300B60C1C /* cinecaption227.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = cinecaption227.ttf; sourceTree = "<group>"; };
@@ -1007,7 +1005,6 @@
 		83FC71BC1C95853100B60C1C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				83FC71BD1C95856600B60C1C /* ArmedBanana.ttf */,
 				83FC71BF1C9585BE00B60C1C /* chifont+.ttf */,
 				83FC71C11C9585F300B60C1C /* chigfont.ttf */,
 				83FC71C21C9585F300B60C1C /* cinecaption227.ttf */,
@@ -1328,7 +1325,6 @@
 				8371D66D1C764E6D008AE534 /* wkhidem.user.js in Resources */,
 				83FC71CE1C9585F300B60C1C /* Hosohuwafont.ttf in Resources */,
 				839AA3DC1BE2BC08006A05F3 /* resize.css in Resources */,
-				83FC71BE1C95856600B60C1C /* ArmedBanana.ttf in Resources */,
 				83E4A2B71C9820400053A7C0 /* WKU.user.js in Resources */,
 				83FC71D01C9585F300B60C1C /* santyoume.ttf in Resources */,
 				83FC71CD1C9585F300B60C1C /* hkgokukaikk.ttf in Resources */,
