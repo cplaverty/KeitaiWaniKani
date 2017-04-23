@@ -176,7 +176,11 @@ class WebViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelega
             return
         }
         
-        UIApplication.shared.openURL(URL)
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(URL)
+        } else {
+            UIApplication.shared.openURL(URL)
+        }
     }
     
     func backButtonTouched(_ sender: UIBarButtonItem, forEvent event: UIEvent) {

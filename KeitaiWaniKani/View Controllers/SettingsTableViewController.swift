@@ -10,8 +10,6 @@ import MessageUI
 import WebKit
 import CocoaLumberjack
 
-private let reviewURL = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1031055291&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software")!
-
 class SettingsTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
     private enum TableViewSection: Int {
@@ -182,7 +180,19 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     }
     
     private func leaveReview() {
-        UIApplication.shared.openURL(reviewURL)
+        if #available(iOS 10.0, *) {
+            let reviewURL = URL(string: "itms-apps://itunes.apple.com/app/id1031055291?action=write-review")!
+            UIApplication.shared.open(reviewURL) { success in
+                if !success {
+                    DispatchQueue.main.async {
+                        self.showAlert(message: "Thank you for your interest in leaving a review. However, the review page failed to open.")
+                    }
+                }
+            }
+        } else {
+            let reviewURL = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1031055291&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software")!
+            UIApplication.shared.openURL(reviewURL)
+        }
     }
     
     // MARK: - Log Out
