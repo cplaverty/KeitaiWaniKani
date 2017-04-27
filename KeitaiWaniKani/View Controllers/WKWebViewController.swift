@@ -15,8 +15,10 @@ protocol WKWebViewControllerDelegate: class {
     func wkWebViewControllerDidFinish(_ controller: WKWebViewController)
 }
 
-private struct MessageHandlerNames {
-    static let interop = "interop"
+private enum MessageHandlerName: String {
+    case interop = "interop"
+    
+    static let all: [MessageHandlerName] = [.interop]
 }
 
 class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler, UIScrollViewDelegate, WKWebViewControllerDelegate, WebViewBackForwardListTableViewControllerDelegate, WKWebViewUserScriptSupport {
@@ -131,12 +133,10 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     }
     
     lazy var backButton: UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(named: "ArrowLeft"), style: .plain, target: self, action: #selector(backButtonTouched(_:forEvent:)))
-        return item
+        return UIBarButtonItem(image: UIImage(named: "ArrowLeft"), style: .plain, target: self, action: #selector(backButtonTouched(_:forEvent:)))
     }()
     lazy var forwardButton: UIBarButtonItem = {
-        let item = UIBarButtonItem(image: UIImage(named: "ArrowRight"), style: .plain, target: self, action: #selector(forwardButtonTouched(_:forEvent:)))
-        return item
+        return UIBarButtonItem(image: UIImage(named: "ArrowRight"), style: .plain, target: self, action: #selector(forwardButtonTouched(_:forEvent:)))
     }()
     lazy var shareButton: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
@@ -145,18 +145,10 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         return UIBarButtonItem(image: UIImage(named: "OpenInSafari"), style: .plain, target: self, action: #selector(openInSafari(_:)))
     }()
     lazy var doneButton: UIBarButtonItem = {
-        return UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done(_:)))
+        return UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(done(_:)))
     }()
     
-    var shouldIncludeDoneButton: Bool {
-        guard let nc = self.navigationController else { return false }
-        
-        let isFirst = nc.viewControllers.first == self
-        let presentingVC = self.presentingViewController
-        let presentedVC = presentingVC?.presentedViewController
-        
-        return isFirst && presentedVC == nc
-    }
+    private var shouldIncludeDoneButton: Bool = false
     
     // MARK: - Actions
     
@@ -350,16 +342,23 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     // MARK: - WKScriptMessageHandler
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        guard message.name == MessageHandlerNames.interop else { return }
-        
-        guard let command = message.body as? String else {
-            DDLogWarn("Failed to convert message body! \(message.body)")
+        guard let messageName = MessageHandlerName(rawValue: message.name) else {
+            DDLogWarn("Received unhandled message name \(message.name) with \(message.body)")
             return
         }
         
-        switch command {
-        default:
-            DDLogWarn("Received unhandled command \(command) in \(message.body)")
+        switch messageName {
+        case .interop:
+            guard let command = message.body as? String else {
+                DDLogWarn("Failed to convert message body! \(message.body)")
+                return
+            }
+            
+            switch command {
+            default:
+                DDLogWarn("Received unhandled command \(command) in \(message.body)")
+            }
+            break
         }
     }
     
@@ -401,9 +400,9 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "V:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
         NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
         
-        configureToolbars(for: self.traitCollection)
-        
         if let nc = self.navigationController {
+            shouldIncludeDoneButton = nc == self.presentingViewController?.presentedViewController && nc.viewControllers.first == self
+            
             let navBar = nc.navigationBar
             
             let progressView = UIProgressView(progressViewStyle: .default)
@@ -422,6 +421,8 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
             addressBarView.autoresizingMask = [.flexibleWidth]
             self.navigationItem.titleView = addressBarView
         }
+        
+        configureToolbars(for: self.traitCollection)
         
         if let url = self.url {
             let request = URLRequest(url: url)
@@ -448,8 +449,8 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     /// For iPhone in portrait
     func addToolbarItemsForCompactWidthRegularHeight() {
         self.navigationController?.setToolbarHidden(false, animated: true)
-        navigationItem.leftBarButtonItems = nil
-        navigationItem.rightBarButtonItems = shouldIncludeDoneButton ? [doneButton] : nil
+        navigationItem.leftBarButtonItems = customLeftBarButtonItems
+        navigationItem.rightBarButtonItems = customRightBarButtonItems
         let flexibleSpace = { UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil) }
         setToolbarItems([backButton, flexibleSpace(), forwardButton, flexibleSpace(), shareButton, flexibleSpace(), openInSafariButton], animated: true)
     }
@@ -459,8 +460,35 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         self.navigationController?.setToolbarHidden(true, animated: true)
         setToolbarItems(nil, animated: true)
         navigationItem.leftItemsSupplementBackButton = true
-        navigationItem.leftBarButtonItems = [backButton, forwardButton]
-        navigationItem.rightBarButtonItems = shouldIncludeDoneButton ? [doneButton, openInSafariButton, shareButton] : [openInSafariButton, shareButton]
+        navigationItem.leftBarButtonItems = customLeftBarButtonItems + [backButton, forwardButton]
+        navigationItem.rightBarButtonItems = customRightBarButtonItems + [openInSafariButton, shareButton]
+    }
+    
+    var customLeftBarButtonItems: [UIBarButtonItem] {
+        var buttons: [UIBarButtonItem] = []
+        buttons.reserveCapacity(1)
+        
+        if #available(iOS 10.0, *) {
+            if shouldIncludeDoneButton {
+                buttons.append(doneButton)
+            }
+        }
+        
+        return buttons
+    }
+    
+    var customRightBarButtonItems: [UIBarButtonItem] {
+        var buttons: [UIBarButtonItem] = []
+        buttons.reserveCapacity(1)
+        
+        if #available(iOS 10.0, *) {
+        } else {
+            if shouldIncludeDoneButton {
+                buttons.append(doneButton)
+            }
+        }
+        
+        return buttons
     }
     
     // MARK: - Implementation
@@ -506,6 +534,7 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         }
         
         // Navigation buttons
+        configureToolbars(for: traitCollection)
         backButton.isEnabled = webView.canGoBack
         forwardButton.isEnabled = webView.canGoForward
         shareButton.isEnabled = !webView.isLoading && webView.url != nil
@@ -537,13 +566,17 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
     }
     
     func registerMessageHandlers(_ userContentController: WKUserContentController) {
-        DDLogVerbose("Registering command handler")
-        userContentController.add(self, name: MessageHandlerNames.interop)
+        DDLogVerbose("Registering command handlers")
+        for name in MessageHandlerName.all {
+            userContentController.add(self, name: name.rawValue)
+        }
     }
     
     func unregisterMessageHandlers(_ userContentController: WKUserContentController) {
-        DDLogVerbose("Unregistering command handler")
-        userContentController.removeScriptMessageHandler(forName: MessageHandlerNames.interop)
+        DDLogVerbose("Unregistering command handlers")
+        for name in MessageHandlerName.all {
+            userContentController.removeScriptMessageHandler(forName: name.rawValue)
+        }
     }
     
     // MARK: - Key-Value Observing
