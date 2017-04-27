@@ -66,7 +66,7 @@ extension ReorderSettings {
             Keys.sortLevels: sortLevels,
             Keys.oneByOne: oneByOne,
             Keys.priority: NSDictionary(
-                objects: (1..<itemPriority.count).map { NSNumber(value: $0) },
+                objects: (1...itemPriority.count).map { NSNumber(value: $0) },
                 forKeys: itemPriority.map { $0.rawValue as NSString }
             ),
             Keys.questionTypeMode: questionTypeMode.rawValue,
@@ -74,5 +74,9 @@ extension ReorderSettings {
             ])
         
         return json.rawString()
+    }
+    
+    func levelPriorityJSON() -> String? {
+        return JSON(levelPriority).rawString()
     }
 }
