@@ -47,6 +47,8 @@ if (userLogin !== null) {
     userLogin.prop('type', 'email');
     userLogin.attr('style', 'width: 100%;');
     userLogin.removeAttr('size');
+    
+    $('#new_user').attr('novalidate', 'novalidate');
 }
 
 
