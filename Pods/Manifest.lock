@@ -1,7 +1,7 @@
 PODS:
   - 1PasswordExtension (1.8.4)
-  - CocoaLumberjack/Default (3.1.0)
-  - CocoaLumberjack/Swift (3.1.0):
+  - CocoaLumberjack/Default (3.2.0)
+  - CocoaLumberjack/Swift (3.2.0):
     - CocoaLumberjack/Default
   - FMDB (2.6.2):
     - FMDB/standard (= 2.6.2)
@@ -33,11 +33,11 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   1PasswordExtension: e775a29310c65851e5a6cec1afc349ab4e334e47
-  CocoaLumberjack: 8311463ddf9ee86a06ef92a071dd656c89244500
+  CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   OHHTTPStubs: 752f9b11fd810a15162d50f11c06ff94f8e012eb
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
 PODFILE CHECKSUM: 3b774b373676113c85f187c7f2c637a56b1436a9
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1

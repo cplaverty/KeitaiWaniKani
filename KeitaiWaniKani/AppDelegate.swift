@@ -27,8 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             defaultDebugLevel = DDLogLevel.info
         #endif
         
-        DDLog.add(DDASLLogger.sharedInstance)
-        DDLog.add(DDTTYLogger.sharedInstance)
+        if #available(iOS 10, *) {
+            DDLog.add(DDOSLogger.sharedInstance)
+        } else {
+            DDLog.add(DDASLLogger.sharedInstance)
+            DDLog.add(DDTTYLogger.sharedInstance)
+        }
         
         #if DEBUG
             let fileLogger = DDFileLogger()!
