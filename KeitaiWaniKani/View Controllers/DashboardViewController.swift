@@ -676,29 +676,40 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         label.isOpaque = false
         label.textColor = .black
         label.font = headerFont
-        let visualEffectVibrancyView = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: blurEffect))
-        visualEffectVibrancyView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        visualEffectVibrancyView.contentView.addSubview(label)
-        visualEffectVibrancyView.contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        visualEffectVibrancyView.contentView.layoutMargins.left = tableView.separatorInset.left / 2
-        
-        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-|", options: [], metrics: nil, views: ["label": label]))
-        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[label]", options: [], metrics: nil, views: ["label": label]))
         
         switch tableViewSection {
-        case .currentlyAvailable: label.text = "Currently Available"
-        case .nextReview: label.text = "Upcoming Reviews"
+        case .currentlyAvailable:
+            label.text = "Currently Available"
+        case .nextReview:
+            label.text = "Upcoming Reviews"
         case .levelProgress:
             if let level = userInformation?.level {
                 label.text = "Level \(level) Progress"
             } else {
                 label.text = "Level Progress"
             }
-        case .srsDistribution: label.text = "SRS Item Distribution"
-        case .links: label.text = "Links"
+        case .srsDistribution:
+            label.text = "SRS Item Distribution"
+        case .links:
+            label.text = "Links"
         }
         
-        return visualEffectVibrancyView
+        let containerView: UIView
+        if UIAccessibilityIsReduceTransparencyEnabled() {
+            containerView = UIView(frame: .zero)
+            containerView.addSubview(label)
+        } else {
+            let visualEffectVibrancyView = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: blurEffect))
+            visualEffectVibrancyView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+            visualEffectVibrancyView.contentView.addSubview(label)
+            visualEffectVibrancyView.contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+            visualEffectVibrancyView.contentView.layoutMargins.left = tableView.separatorInset.left / 2
+            containerView = visualEffectVibrancyView
+        }
+        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "V:[label]-|", options: [], metrics: nil, views: ["label": label]))
+        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[label]", options: [], metrics: nil, views: ["label": label]))
+        
+        return containerView
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -732,6 +743,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground(_:)), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterForeground(_:)), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reduceTransparencyStatusDidChange(_:)), name: NSNotification.Name.UIAccessibilityReduceTransparencyStatusDidChange, object: nil)
         
         let backgroundView = UIView(frame: tableView.frame)
         backgroundView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
@@ -918,6 +930,10 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     func didEnterForeground(_ notification: Notification) {
         startTimers()
         updateUI()
+    }
+    
+    func reduceTransparencyStatusDidChange(_ notification: Notification) {
+        tableView.reloadData()
     }
     
     // MARK: - Key-Value Observing
