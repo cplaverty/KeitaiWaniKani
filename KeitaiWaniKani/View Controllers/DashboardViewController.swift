@@ -551,12 +551,11 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         
         // Operation finish
         let observer = BlockObserver(
-            startHandler: { operation in
-                DDLogInfo("Fetching study queue (request ID \(UInt(bitPattern: ObjectIdentifier(operation))))...")
-            },
+            startHandler: { operation in DDLogInfo("Fetching study queue (request ID \(UInt(bitPattern: ObjectIdentifier(operation))))...") },
             finishHandler: { [weak self] (operation, errors) in
                 let fatalErrors = errors.filterNonFatalErrors()
                 DDLogInfo("Study queue fetch complete (request ID \(UInt(bitPattern: ObjectIdentifier(operation)))): \(fatalErrors)")
+                
                 let operation = operation as! GetDashboardDataOperation
                 DispatchQueue.main.async {
                     // If this operation represents the currently tracked operation, then set to nil to mark as done
@@ -564,7 +563,22 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
                         self?.dataRefreshOperation = nil
                     }
                 }
-            })
+                
+                if errors.contains(where: { if case WaniKaniAPIError.userNotFound = $0 { return true } else { return false } }) {
+                    DDLogWarn("Logging out due to user not found")
+                    let delegate = UIApplication.shared.delegate as! AppDelegate
+                    
+                    delegate.performLogOut()
+                    
+                    DispatchQueue.main.async {
+                        // Pop to home screen
+                        self?.navigationController?.dismiss(animated: true) {
+                            delegate.window?.rootViewController?.showAlert(title: "Invalid API Key", message: "WaniKani has reported that your API key is now invalid.  Please log in again.")
+                        }
+                    }
+                }
+            }
+        )
         operation.addObserver(observer)
         DDLogInfo("Enqueuing fetch of latest study queue")
         

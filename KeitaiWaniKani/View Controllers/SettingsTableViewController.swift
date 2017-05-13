@@ -208,40 +208,7 @@ class SettingsTableViewController: UITableViewController, MFMailComposeViewContr
     private func performLogOut() {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         
-        // Reset app settings
-        ApplicationSettings.resetToDefaults()
-        
-        // Purge database
-        delegate.databaseManager.recreateDatabase()
-        
-        // Clear web cookies
-        let cookieStorage = HTTPCookieStorage.shared
-        if let cookies = cookieStorage.cookies {
-            for cookie in cookies
-            {
-                cookieStorage.deleteCookie(cookie)
-            }
-        }
-        
-        if #available(iOS 9.0, *) {
-            WKWebsiteDataStore.default().removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), modifiedSince: Date(timeIntervalSince1970: 0), completionHandler: {})
-        } else {
-            do {
-                let fm = FileManager.default
-                let libraryPath = try fm.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-                try fm.removeItem(at: URL(string: "Cookies", relativeTo: libraryPath)!)
-                try fm.removeItem(at: URL(string: "WebKit", relativeTo: libraryPath)!)
-            } catch {
-                DDLogWarn("Failed to remove cookies folder: \(error)")
-            }
-        }
-        
-        delegate.webKitProcessPool = WKProcessPool()
-        
-        // Notifications
-        let application = UIApplication.shared
-        application.applicationIconBadgeNumber = 0
-        application.cancelAllLocalNotifications()
+        delegate.performLogOut()
         
         // Pop to home screen
         self.navigationController?.dismiss(animated: true, completion: nil)

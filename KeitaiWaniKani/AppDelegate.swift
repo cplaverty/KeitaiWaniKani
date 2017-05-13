@@ -59,6 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 DDLogDebug("Setting login cookie value \(loginCookieValue)")
                 HTTPCookieStorage.shared.setCookie(loginCookie)
                 ApplicationSettings.apiKeyVerified = false
+            } else {
+                fatalError("LOGIN_COOKIE not set!")
             }
             
             UserNotificationCondition.isEnabled = false
@@ -146,5 +148,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var databaseManager = DatabaseManager()
     
     var databaseQueue: FMDatabaseQueue { return databaseManager.databaseQueue }
+    
+    // MARK: - Utitlity methods
+    
+    public func performLogOut() {
+        // Reset app settings
+        ApplicationSettings.resetToDefaults()
+        
+        // Clear web cookies
+        let cookieStorage = HTTPCookieStorage.shared
+        if let cookies = cookieStorage.cookies {
+            for cookie in cookies
+            {
+                cookieStorage.deleteCookie(cookie)
+            }
+        }
+        
+        if #available(iOS 9.0, *) {
+            WKWebsiteDataStore.default().removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), modifiedSince: Date(timeIntervalSince1970: 0), completionHandler: {})
+        } else {
+            do {
+                let fm = FileManager.default
+                let libraryPath = try fm.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+                try fm.removeItem(at: URL(string: "Cookies", relativeTo: libraryPath)!)
+                try fm.removeItem(at: URL(string: "WebKit", relativeTo: libraryPath)!)
+            } catch {
+                DDLogWarn("Failed to remove cookies folder: \(error)")
+            }
+        }
+        
+        webKitProcessPool = WKProcessPool()
+        
+        // Notifications
+        let application = UIApplication.shared
+        application.applicationIconBadgeNumber = 0
+        application.cancelAllLocalNotifications()
+        
+        // Purge database
+        databaseQueue.inDatabase { _ in
+            self.databaseManager.recreateDatabase()
+        }
+    }
     
 }
