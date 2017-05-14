@@ -685,7 +685,6 @@
 				83B155561B944B360022217E /* ReviewTimelineTableViewController.swift */,
 				83B1555A1B94A18D0022217E /* SettingsTableViewController.swift */,
 				831FF75B1BB87C9200C31FDF /* SRSDataItemCollectionViewController.swift */,
-				833BF0BD1B4930A20038AAE3 /* UIViewControllerExtensions.swift */,
 				83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */,
 				83D7CF811BC15FCB00C1AFC4 /* WaniKaniReviewPageWebViewController.swift */,
 				833FECE81BADF0DD001C9260 /* WebViewBackForwardListTableViewController.swift */,
@@ -881,6 +880,7 @@
 			isa = PBXGroup;
 			children = (
 				83966D691BAD945A005799E9 /* NSProgress+KeitaiWaniKani.swift */,
+				833BF0BD1B4930A20038AAE3 /* UIViewControllerExtensions.swift */,
 				83B611091BDC1F11008D305C /* UIWebView+KeitaiWaniKani.swift */,
 				8381A9C11D36CC1C00818CA6 /* WKWebView+KeitaiWaniKani.swift */,
 			);
