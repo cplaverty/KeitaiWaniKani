@@ -573,7 +573,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
                     DispatchQueue.main.async {
                         // Pop to home screen
                         self?.navigationController?.dismiss(animated: true) {
-                            delegate.window?.rootViewController?.showAlert(title: "Invalid API Key", message: "WaniKani has reported that your API key is now invalid.  Please log in again.")
+                            UIApplication.shared.keyWindow?.rootViewController?.showAlert(title: "Invalid API Key", message: "WaniKani has reported that your API key is now invalid.  Please log in again.")
                         }
                     }
                 }
