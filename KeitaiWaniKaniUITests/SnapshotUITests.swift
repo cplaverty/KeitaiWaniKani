@@ -35,7 +35,7 @@ class SnapshotUITests: XCTestCase {
         XCTAssert(dashboard.exists, "Dashboard not loaded")
         
         sleep(10)
-        snapshot("1 dashboard", waitForLoadingIndicator: false)
+        snapshot("1 dashboard")
         
         let tablesQuery = app.tables
         
@@ -50,7 +50,7 @@ class SnapshotUITests: XCTestCase {
         expectation(for: exists, evaluatedWith: reviewTimeline, handler: nil)
         waitForExpectations(timeout: 15, handler: nil)
         XCTAssert(reviewTimeline.exists, "Review Timeline not loaded")
-        snapshot("3 review-timeline", waitForLoadingIndicator: false)
+        snapshot("3 review-timeline")
         reviewTimeline.buttons["Dashboard"].tap()
         
         // Kanji
@@ -59,13 +59,13 @@ class SnapshotUITests: XCTestCase {
         expectation(for: exists, evaluatedWith: kanji, handler: nil)
         waitForExpectations(timeout: 15, handler: nil)
         XCTAssert(kanji.exists, "Kanji not loaded")
-        snapshot("4 kanji", waitForLoadingIndicator: false)
+        snapshot("4 kanji")
         kanji.buttons["Dashboard"].tap()
         
         // Review Page
         tablesQuery.cells.staticTexts["Reviews"].tap()
         sleep(5)
-        snapshot("2 review-page", waitForLoadingIndicator: false)
+        snapshot("2 review-page")
     }
     
 }
