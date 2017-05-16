@@ -83,6 +83,10 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         config.allowsInlineMediaPlayback = true
         config.processPool = delegate.webKitProcessPool
         
+        if #available(iOS 10.0, *) {
+            config.ignoresViewportScaleLimits = true
+        }
+        
         if #available(iOS 9.0, *) {
             config.applicationNameForUserAgent = "Mobile AlliCrab"
         }
