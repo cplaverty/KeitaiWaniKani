@@ -231,7 +231,6 @@ function WKO_ignoreAnswer()
             $('#answer-form fieldset').removeClass('WKO_ignored');
             $('#answer-form fieldset').addClass('incorrect');
         }
-        $('html, body').animate({ scrollTop: 0 }, 'fast');
         return true;
     }
     catch (err) {
@@ -251,6 +250,7 @@ function bindHotkey()
                 case 126: //iOS WKWebView '~'
                 case 176: //Firefox '~'
                 case 192: //Chrome '~'
+                case 27: // ESC Button
                     event.stopPropagation();
                     event.preventDefault();
                     if ($('#user-response').is(':disabled'))

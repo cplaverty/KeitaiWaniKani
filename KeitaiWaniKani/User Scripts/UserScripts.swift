@@ -109,7 +109,7 @@ struct UserScriptDefinitions {
                    injectionRules: [.ExactMatch(WaniKaniURLs.reviewSession)]),
         
         UserScript(name: "WaniKani Override",
-                   description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  This script is intended to be used to correct genuine mistakes, like typographical errors.  Script by ruipgpinheiro.",
+                   description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  This script is intended to be used to correct genuine mistakes, like typographical errors.  Script by ruipgpinheiro, updated by Mempo.",
                    forumLink: forumURL(withRelativePath: "/t/Wanikani-Override-Userscript-112-Ignore-Answer-Button-No-longer-supported/2846"),
                    settingKey: ApplicationSettingKeys.userScriptIgnoreAnswerEnabled,
                    scriptNames: ["wkoverride.user"],
