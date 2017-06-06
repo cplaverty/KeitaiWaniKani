@@ -169,6 +169,7 @@ var jitai = {
     
     setToDefaultFont: function(fontName) {
         this.hoverFont = jitai.currentFont;
+        this.currentFont = jitai.defaultFont;
         this.$characterSpan.css('font-family', '');
     },
     
