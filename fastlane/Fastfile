@@ -1,0 +1,126 @@
+# Must change
+ENV["APP_IDENTIFIER"] = "uk.me.laverty.KeitaiWaniKani" # set your custom bundle identifier
+ENV["APPLE_ID"] = "yourEmail@example.com" # set your Apple ID email
+
+# Customizable
+appIDAppName = "AlliCrab"
+appGroupName = "AlliCrab App Group"
+
+# default values - Don't change these values
+waniKaniStudyQueueWidgetAppend = ".WaniKaniStudyQueueWidget"
+groupPrepend = "group."
+
+defaultAlliCrabIdentifier = "uk.me.laverty.KeitaiWaniKani"
+defaultWaniKaniStudyQueueWidgetIdentifier = defaultAlliCrabIdentifier + waniKaniStudyQueueWidgetAppend
+defaultGroupIdentifier = groupPrepend + defaultAlliCrabIdentifier
+
+alliCrabInfoPlist = "KeitaiWaniKani/Info.plist"
+waniKaniStudyQueueWidgetInfoPlist = "WaniKaniStudyQueueWidget/Info.plist"
+alliCrabEntitlementsFile = "KeitaiWaniKani/KeitaiWaniKani.entitlements"
+waniKaniStudyQueueWidgetEntitlementsFile = "WaniKaniStudyQueueWidget/WaniKaniStudyQueueWidget.entitlements"
+# end - default values
+
+app_identifier = ENV["APP_IDENTIFIER"]
+
+# Customise this file, documentation can be found here:
+# https://github.com/fastlane/fastlane/tree/master/fastlane/docs
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.37.0"
+
+default_platform :ios
+
+platform :ios do
+  
+  desc "Create AppID, App Groups, and change Bundle Identifiers, entitlements"
+  desc "This will create and use the new AppID, App Groups on the Apple developer portal 
+  and change Bundle Identifiers for this project which is necessary to run the project on your side."
+  lane :setupID do
+  	userWaniKaniStudyQueueWidgetIdentifier = app_identifier + waniKaniStudyQueueWidgetAppend
+  	userGroupIdentifier = groupPrepend + app_identifier
+
+	# Create AppID
+  	produce(
+  		app_identifier: "#{app_identifier}",
+  		app_name: "#{appIDAppName}",
+  		skip_itc: true,
+
+  		enable_services: {
+  			app_group: "on"
+  		}
+  	)
+
+  	# create App Group
+  	sh "fastlane produce group -g #{userGroupIdentifier} -n #{appGroupName}"
+  	sh "fastlane produce associate_group -a #{app_identifier} #{userGroupIdentifier}"
+
+  	update_app_group_identifiers(
+		  entitlements_file: "#{alliCrabEntitlementsFile}",
+		  app_group_identifiers: ["#{userGroupIdentifier}"]
+    )
+
+    update_app_group_identifiers(
+      entitlements_file: "#{waniKaniStudyQueueWidgetEntitlementsFile}",
+      app_group_identifiers: ["#{userGroupIdentifier}"]
+    )
+
+  	# Change CFBundleIdentifier for 'AlliCrab' target
+  	update_app_identifier(
+  		plist_path: alliCrabInfoPlist,
+  		app_identifier: app_identifier
+  	)
+
+	# Change CFBundleIdentifier for 'WaniKaniStudyQueueWidget' extension
+  	update_app_identifier(
+  		plist_path: waniKaniStudyQueueWidgetInfoPlist,
+  		app_identifier: userWaniKaniStudyQueueWidgetIdentifier
+  	)
+
+  end
+
+  desc "Reset to default AppID, App Groups, and Bundle identifiers"
+  desc "This will reset the identifiers to the default values as on the Github repository. 
+  Does not remove the created AppIDs or App Groups from the developer portal."
+  lane :resetID do 
+
+  	update_app_group_identifiers(
+		  entitlements_file: "#{alliCrabEntitlementsFile}",
+		  app_group_identifiers: ["#{defaultGroupIdentifier}"]
+	  )
+
+    update_app_group_identifiers(
+      entitlements_file: "#{waniKaniStudyQueueWidgetEntitlementsFile}",
+      app_group_identifiers: ["#{defaultGroupIdentifier}"]
+    )
+
+  	# Reset CFBundleIdentifier for 'AlliCrab' target
+  	update_app_identifier(
+  		plist_path: alliCrabInfoPlist,
+  		app_identifier: defaultAlliCrabIdentifier
+  	)
+
+	# Reset CFBundleIdentifier for 'WaniKaniStudyQueueWidget' extension
+  	update_app_identifier(
+  		plist_path: waniKaniStudyQueueWidgetInfoPlist,
+  		app_identifier: defaultWaniKaniStudyQueueWidgetIdentifier
+  	)
+
+  end
+  
+end
+
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used. No personal data is recorded. 
+# Learn more at https://github.com/fastlane/fastlane#metrics

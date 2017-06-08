@@ -21,3 +21,18 @@ Features:
 * Lists upcoming reviews in the review timeline
 * Progress for current-level radicals and kanji, including time until next review and quickest time to Guru
 * Notification Centre widget
+
+## How to get started
+Since the project uses an app extension / widget, you'd have to create a new App Group, AppID on the Apple developer portal, and change the app bundle identifiers in the main target and app extension. However, a [fastlane](https://github.com/fastlane/fastlane) lane has been be prepared to take care of all that for you. Here's what you need to do:
+- Have a registered Apple Developer Account.
+- Install [fastlane](https://github.com/fastlane/fastlane)
+- Clone / download the project
+- Open the file in "fastlane/Fastfile"
+- In the Fastfile, set your own bundle identifier and Apple ID at the very top of the document
+- Run `fastlane setupID` using the command line
+- Select your signing identity for the `AlliCrab` and `WaniKaniStudyQueueWidget` targets.
+- You should now be able to run the project on your device!
+
+You can use `fastlane resetID` to reset the bundle identifiers to the default values again, which may be useful if you want to submit pull requests without your custom bundle identifiers.
+
+You can run `git update-index --assume-unchanged fastlane/Fastfile` if you want to keep changes of Fastfile locally without having to push them. (`Use git update-index --no-assume-unchanged fastlane/Fastfile` to undo this.)
