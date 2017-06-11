@@ -80,7 +80,7 @@ $('<div id="wki_srs_popup_wrapper"><div class="wki_srs_popup_icon"><i class="ico
 
 $('<span id="wki_combo_display"><i class="icon-trophy"></i><span id="wki_combo" title="Current combo of right answers">0</span> <span id="wki_combo_record" title="Record of right answers in a row"></span></span> ').insertBefore('#stats i.icon-thumbs-up');
 
-//$('<div id="wki_config_button"><span class="wki_tooltip" rel="wki_settings_info"><span id="wki_settings_info" class="wki_hidden">Click to access WaniKani Improve settings menu</span><i class="icon-cogs"></i> WKI 2.2.2</span></div>').insertBefore('#hotkeys');
+$('<div id="wki_config_button"><span class="wki_tooltip" rel="wki_settings_info"><span id="wki_settings_info" class="wki_hidden">Click to access WaniKani Improve settings menu</span><i class="icon-cogs"></i> WKI 2.2.2</span></div>').insertBefore('#hotkeys');
 
 $('<div id="wki_modal_background"></div>').css({ position: 'absolute', top: $(document).scrollTop(), left: 0, height: $(document).height(), width: '100%', opacity: 0.7, backgroundColor: '#000000', zIndex: 5000, display: 'none' }).appendTo('body');
 
@@ -111,6 +111,13 @@ else
 
 function checkAnswer()
 {
+    if(!$('#answer-form form fieldset').hasClass('correct') && !$('#answer-form form fieldset').hasClass('incorrect'))
+    {
+        // renderPostAnswer not run yet
+        setTimeout(checkAnswer, 50);
+        return false;
+    }
+
     wki_submitted_answer = $('#user-response').val();
     
     if(!wki_submitted_answer)
