@@ -18,7 +18,11 @@ public class DatabaseManager {
     
     static var secureAppGroupPersistentStoreURL: URL = {
         let fm = FileManager.default
-        let directory = fm.containerURL(forSecurityApplicationGroupIdentifier: "group.uk.me.laverty.KeitaiWaniKani")!
+        guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
+            fatalError("Can't find bundle identifier")
+        }
+        let groupIdentifier = "group.\(bundleIdentifier)"
+        let directory = fm.containerURL(forSecurityApplicationGroupIdentifier: groupIdentifier)!
         return directory.appendingPathComponent("WaniKaniData.sqlite")
     }()
     
