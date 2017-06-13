@@ -165,10 +165,10 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         return formatter
     }()
     
-    private var databaseQueue: FMDatabaseQueue {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        return delegate.databaseQueue
-    }
+    private var databaseManager: DatabaseManager!
+    private var databaseQueue: FMDatabaseQueue { return databaseManager.databaseQueue }
+    
+    private var operationQueue: OperationKit.OperationQueue!
     
     // MARK: - Outlets
     
@@ -452,7 +452,6 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     
     func fetchStudyQueueFromDatabase() {
         databaseQueue.inDatabase { database in
-            guard let database = database else { fatalError("No database returned from queue!") }
             do {
                 let userInformation = try UserInformation.coder.load(from: database)
                 let studyQueue = try StudyQueue.coder.load(from: database)
@@ -490,15 +489,13 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         }
         
         DDLogInfo("Checking whether study queue needs refreshed (forced? \(forced))")
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let databaseQueue = delegate.databaseQueue
+        let databaseQueue = self.databaseQueue
         let resolver = WaniKaniAPI.resourceResolverForAPIKey(apiKey)
         let operation = GetDashboardDataOperation(resolver: resolver, databaseQueue: databaseQueue, forcedFetch: forced, isInteractive: true, initialDelay: delay)
         
         // Study queue
         let studyQueueObserver = BlockObserver { [weak self] _ in
             databaseQueue.inDatabase { database in
-                guard let database = database else { fatalError("No database returned from queue!") }
                 let userInformation = try! UserInformation.coder.load(from: database)
                 let studyQueue = try! StudyQueue.coder.load(from: database)
                 DispatchQueue.main.async {
@@ -513,7 +510,6 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         // Level progression
         let levelProgressionObserver = BlockObserver { [weak self] _ in
             databaseQueue.inDatabase { database in
-                guard let database = database else { fatalError("No database returned from queue!") }
                 let levelProgression = try! LevelProgression.coder.load(from: database)
                 DispatchQueue.main.async {
                     self?.levelProgression = levelProgression
@@ -526,7 +522,6 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         // SRS Distribution
         let srsDistributionObserver = BlockObserver { [weak self] _ in
             databaseQueue.inDatabase { database in
-                guard let database = database else { fatalError("No database returned from queue!") }
                 let srsDistribution = try! SRSDistribution.coder.load(from: database)
                 DispatchQueue.main.async {
                     self?.srsDistribution = srsDistribution
@@ -539,7 +534,6 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         // SRS Data
         let srsDataObserver = BlockObserver { [weak self] _ in
             databaseQueue.inDatabase { database in
-                guard let database = database else { fatalError("No database returned from queue!") }
                 let levelData = try! SRSDataItemCoder.levelTimeline(database)
                 DispatchQueue.main.async {
                     self?.levelData = levelData
@@ -565,12 +559,12 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
                 }
                 
                 if errors.contains(where: { if case WaniKaniAPIError.userNotFound = $0 { return true } else { return false } }) {
-                    DDLogWarn("Logging out due to user not found")
-                    let delegate = UIApplication.shared.delegate as! AppDelegate
-                    
-                    delegate.performLogOut()
-                    
                     DispatchQueue.main.async {
+                        DDLogWarn("Logging out due to user not found")
+                        let delegate = UIApplication.shared.delegate as! AppDelegate
+                        
+                        delegate.performLogOut()
+                        
                         // Pop to home screen
                         self?.navigationController?.dismiss(animated: true) {
                             UIApplication.shared.keyWindow?.rootViewController?.showAlert(title: "Invalid API Key", message: "WaniKani has reported that your API key is now invalid.  Please log in again.")
@@ -582,7 +576,7 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         operation.addObserver(observer)
         DDLogInfo("Enqueuing fetch of latest study queue")
         
-        delegate.operationQueue.addOperation(operation)
+        operationQueue.addOperation(operation)
         
         DispatchQueue.main.async { [weak self] in
             self?.dataRefreshOperation = operation
@@ -755,6 +749,10 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        databaseManager = delegate.databaseManager
+        operationQueue = delegate.operationQueue
+
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterBackground(_:)), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(didEnterForeground(_:)), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reduceTransparencyStatusDidChange(_:)), name: NSNotification.Name.UIAccessibilityReduceTransparencyStatusDidChange, object: nil)
@@ -890,7 +888,6 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         case SegueIdentifiers.radicalsProgress:
             if let vc = segue.destinationContentViewController as? SRSDataItemCollectionViewController {
                 self.databaseQueue.inDatabase { database in
-                    guard let database = database else { fatalError("No database returned from queue!") }
                     do {
                         if let userInformation = try UserInformation.coder.load(from: database) {
                             let radicals = try Radical.coder.load(from: database, level: userInformation.level)
@@ -904,7 +901,6 @@ class DashboardViewController: UITableViewController, WebViewControllerDelegate,
         case SegueIdentifiers.kanjiProgress:
             if let vc = segue.destinationContentViewController as? SRSDataItemCollectionViewController {
                 self.databaseQueue.inDatabase { database in
-                    guard let database = database else { fatalError("No database returned from queue!") }
                     do {
                         if let userInformation = try UserInformation.coder.load(from: database) {
                             let kanji = try Kanji.coder.load(from: database, level: userInformation.level)

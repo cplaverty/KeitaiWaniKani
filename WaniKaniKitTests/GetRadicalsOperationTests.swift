@@ -58,7 +58,7 @@ class GetRadicalsOperationTests: DatabaseTestCase, ResourceHTTPStubs {
         databaseQueue.inDatabase { database in
             XCTAssertNotNil(database, "Database is nil!")
             do {
-                let fromDatabase = try Radical.coder.load(from: database!)
+                let fromDatabase = try Radical.coder.load(from: database)
                 XCTAssertEqual(fromDatabase.count, 26, "Failed to load all radicals")
                 
                 if let actualFinsRadical = fromDatabase.filter({ $0.meaning == expectedFinsRadical.meaning }).first {

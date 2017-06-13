@@ -83,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
         DDLogInfo("Low memory warning: clearing statement cache")
-        databaseQueue.inDatabase { $0?.clearCachedStatements() }
+        databaseManager.clearCachedStatements()
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {

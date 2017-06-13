@@ -61,7 +61,7 @@ class GetVocabularyOperationTests: DatabaseTestCase, ResourceHTTPStubs {
         databaseQueue.inDatabase { database in
             XCTAssertNotNil(database, "Database is nil!")
             do {
-                let fromDatabase = try Vocabulary.coder.load(from: database!)
+                let fromDatabase = try Vocabulary.coder.load(from: database)
                 XCTAssertEqual(fromDatabase.count, 42, "Failed to load all vocabulary")
                 
                 if let actualArtificialVocab = fromDatabase.filter({ $0.meaning == expectedArtificialVocab.meaning }).first {

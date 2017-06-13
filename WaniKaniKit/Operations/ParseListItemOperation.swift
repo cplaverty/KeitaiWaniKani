@@ -95,22 +95,22 @@ public final class ParseListItemOperation<Coder: JSONDecoder & ListItemDatabaseC
         DDLogInfo("Parsed \(parsed.count) \(Coder.ModelObject.self) item(s).  Adding to database...")
         progress.localizedAdditionalDescription = "Saving..."
         
-        databaseQueue.inTransaction { (db, rollback) -> Void in
+        databaseQueue.inTransaction { (db, rollback) in
             do {
                 if let item = userInformation {
                     DDLogDebug("Saving user information")
-                    try UserInformation.coder.save(item, to: db!)
+                    try UserInformation.coder.save(item, to: db)
                 }
                 self.progress.completedUnitCount += 1
                 
                 DDLogDebug("Saving data")
-                try self.coder.save(parsed, to: db!)
+                try self.coder.save(parsed, to: db)
                 self.progress.completedUnitCount += 1
                 
                 WaniKaniDarwinNotificationCenter.postModelUpdateMessage("\(Coder.ModelObject.self)")
             } catch {
                 DDLogWarn("Rolling back due to database error: \(error)")
-                rollback?.pointee = true
+                rollback.pointee = true
                 maybeError = error
             }
         }

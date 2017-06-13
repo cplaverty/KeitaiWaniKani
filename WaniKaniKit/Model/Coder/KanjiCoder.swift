@@ -175,12 +175,12 @@ public final class KanjiCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder, L
     
     private func loadModelObjectFromRow(_ resultSet: FMResultSet) throws -> Kanji {
         let srsData = try loadSRSDataForRow(resultSet)
-        return Kanji(character: resultSet.string(forColumn: Columns.character),
-                     meaning: resultSet.string(forColumn: Columns.meaning),
+        return Kanji(character: resultSet.string(forColumn: Columns.character)!,
+                     meaning: resultSet.string(forColumn: Columns.meaning)!,
                      onyomi: resultSet.string(forColumn: Columns.onyomi),
                      kunyomi: resultSet.string(forColumn: Columns.kunyomi),
                      nanori: resultSet.string(forColumn: Columns.nanori),
-                     importantReading: resultSet.string(forColumn: Columns.importantReading),
+                     importantReading: resultSet.string(forColumn: Columns.importantReading)!,
                      level: resultSet.long(forColumn: Columns.level),
                      userSpecificSRSData: srsData,
                      lastUpdateTimestamp: resultSet.date(forColumn: Columns.lastUpdateTimestamp))

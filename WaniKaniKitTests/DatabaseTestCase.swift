@@ -41,7 +41,7 @@ class DatabaseTestCase: XCTestCase {
         databaseQueue.inDatabase { database in
             XCTAssertNotNil(database, "Database is nil!")
             do {
-                try WaniKaniAPI.createTables(in: database!)
+                try WaniKaniAPI.createTables(in: database)
             } catch {
                 XCTFail("Could not create tables in database due to error: \(error)")
             }

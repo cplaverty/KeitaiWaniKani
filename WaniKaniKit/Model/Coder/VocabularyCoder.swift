@@ -161,9 +161,9 @@ public final class VocabularyCoder: SRSDataItemCoder, ResourceHandler, JSONDecod
     
     private func loadModelObjectFromRow(_ resultSet: FMResultSet) throws -> Vocabulary {
         let srsData = try loadSRSDataForRow(resultSet)
-        return Vocabulary(character: resultSet.string(forColumn: Columns.character),
-                          meaning: resultSet.string(forColumn: Columns.meaning),
-                          kana: resultSet.string(forColumn: Columns.kana),
+        return Vocabulary(character: resultSet.string(forColumn: Columns.character)!,
+                          meaning: resultSet.string(forColumn: Columns.meaning)!,
+                          kana: resultSet.string(forColumn: Columns.kana)!,
                           level: resultSet.long(forColumn: Columns.level),
                           userSpecificSRSData: srsData,
                           lastUpdateTimestamp: resultSet.date(forColumn: Columns.lastUpdateTimestamp))

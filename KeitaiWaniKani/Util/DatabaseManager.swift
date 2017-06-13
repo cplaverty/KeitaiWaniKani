@@ -17,18 +17,21 @@ public class DatabaseManager {
     }
     
     static var secureAppGroupPersistentStoreURL: URL = {
-        let fm = FileManager.default
         guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
             fatalError("Can't find bundle identifier")
         }
         let groupIdentifier = "group.\(bundleIdentifier)"
-        let directory = fm.containerURL(forSecurityApplicationGroupIdentifier: groupIdentifier)!
+        let directory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupIdentifier)!
         return directory.appendingPathComponent("WaniKaniData.sqlite")
     }()
     
     func recreateDatabase() {
         ApplicationSettings.purgeDatabase = true
         databaseQueue = DatabaseManager.createDatabaseQueue()
+    }
+    
+    func clearCachedStatements() {
+        databaseQueue.inDatabase { $0.clearCachedStatements() }
     }
     
     private static func createDatabaseQueue() -> FMDatabaseQueue {
@@ -66,35 +69,33 @@ public class DatabaseManager {
     }
     
     private static func isValidDatabaseQueue(_ databaseQueue: FMDatabaseQueue) -> Bool {
-        return try! databaseQueue.withDatabase { $0.goodConnection() }
+        return (try? databaseQueue.withDatabase { $0.goodConnection }) ?? false
     }
     
     private static func createDatabaseQueue(url: URL) -> FMDatabaseQueue? {
         assert(url.isFileURL, "createDatabaseQueueAtURL requires a file URL")
-        let path = url.path
-        DDLogInfo("Creating FMDatabaseQueue at \(path)")
-        if let databaseQueue = FMDatabaseQueue(path: path) {
-            var successful = false
-            databaseQueue.inDatabase { database in
-                do {
-                    try WaniKaniAPI.createTables(in: database!)
-                    successful = true
-                } catch {
-                    DDLogError("Failed to create schema due to error: \(error)")
-                }
+        var url = url
+        DDLogInfo("Creating FMDatabaseQueue at \(url)")
+        let databaseQueue = FMDatabaseQueue(url: url)
+        var successful = false
+        databaseQueue.inDatabase { database in
+            do {
+                try WaniKaniAPI.createTables(in: database)
+                successful = true
+            } catch {
+                DDLogError("Failed to create schema due to error: \(error)")
             }
-            
-            if successful {
-                do {
-                    var resourceValues = URLResourceValues()
-                    resourceValues.isExcludedFromBackup = true
-                    var newURL = url
-                    try newURL.setResourceValues(resourceValues)
-                } catch {
-                    DDLogWarn("Ignoring error when trying to exclude store at \(url) from backup: \(error)")
-                }
-                return databaseQueue
+        }
+        
+        if successful {
+            do {
+                var resourceValues = URLResourceValues()
+                resourceValues.isExcludedFromBackup = true
+                try url.setResourceValues(resourceValues)
+            } catch {
+                DDLogWarn("Ignoring error when trying to exclude store at \(url) from backup: \(error)")
             }
+            return databaseQueue
         }
         return nil
     }

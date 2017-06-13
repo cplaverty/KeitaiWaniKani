@@ -261,7 +261,7 @@ extension SRSDataItemCoder {
         var results = [SRSReviewCounts]()
         while resultSet.next() {
             results.append(
-                SRSReviewCounts(dateAvailable: resultSet.date(forColumn: Columns.dateAvailable),
+                SRSReviewCounts(dateAvailable: resultSet.date(forColumn: Columns.dateAvailable)!,
                                 itemCounts: SRSItemCounts(
                                     radicals: resultSet.long(forColumn: radicalColumn),
                                     kanji: resultSet.long(forColumn: kanjiColumn),

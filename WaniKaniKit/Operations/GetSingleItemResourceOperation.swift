@@ -129,16 +129,16 @@ public class GetSingleItemResourceOperation<Coder: ResourceHandler & JSONDecoder
         DDLogInfo("Parsed \(Coder.ModelObject.self).  Adding to database...")
         progress.localizedAdditionalDescription = "Saving..."
         
-        databaseQueue.inTransaction { (db, rollback) -> Void in
+        databaseQueue.inTransaction { (db, rollback) in
             do {
                 if let item = userInformation {
                     DDLogDebug("Saving user information")
-                    try UserInformation.coder.save(item, to: db!)
+                    try UserInformation.coder.save(item, to: db)
                 }
                 
                 if let parsed = parsed {
                     DDLogDebug("Saving \(Coder.ModelObject.self) data")
-                    try self.coder.save(parsed, to: db!)
+                    try self.coder.save(parsed, to: db)
                 } else {
                     DDLogWarn("Not saving \(Coder.ModelObject.self) as no valid items were parsed")
                 }
@@ -148,7 +148,7 @@ public class GetSingleItemResourceOperation<Coder: ResourceHandler & JSONDecoder
                 WaniKaniDarwinNotificationCenter.postModelUpdateMessage("\(Coder.ModelObject.self)")
             } catch {
                 DDLogWarn("Rolling back due to database error: \(error)")
-                rollback?.pointee = true
+                rollback.pointee = true
                 maybeError = error
             }
         }

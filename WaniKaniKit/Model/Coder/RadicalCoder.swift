@@ -163,7 +163,7 @@ public final class RadicalCoder: SRSDataItemCoder, ResourceHandler, JSONDecoder,
     private func loadModelObjectFromRow(_ resultSet: FMResultSet) throws -> Radical {
         let srsData = try loadSRSDataForRow(resultSet)
         return Radical(character: resultSet.string(forColumn: Columns.character),
-                       meaning: resultSet.string(forColumn: Columns.meaning),
+                       meaning: resultSet.string(forColumn: Columns.meaning)!,
                        image: resultSet.urlForColumn(Columns.image),
                        level: resultSet.long(forColumn: Columns.level),
                        userSpecificSRSData: srsData,

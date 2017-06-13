@@ -86,12 +86,12 @@ public struct DownloadStrategy {
         let staleDate = Calendar.autoupdatingCurrent.date(byAdding: .weekOfYear, value: -2, to: referenceDate)!
         
         var levelRange: [Int]? = nil
-        databaseQueue.inDatabase {
+        databaseQueue.inDatabase { db in
             do {
-                var staleLevels = try coder.levelsNotUpdated(since: staleDate, in: $0!)
-                staleLevels.formUnion(try coder.possiblyStaleLevels(since: studyQueue.lastUpdateTimestamp, in: $0!))
+                var staleLevels = try coder.levelsNotUpdated(since: staleDate, in: db)
+                staleLevels.formUnion(try coder.possiblyStaleLevels(since: studyQueue.lastUpdateTimestamp, in: db))
                 staleLevels.insert(currentLevel)
-                let maxSavedLevel = try coder.maxLevel(in: $0!)
+                let maxSavedLevel = try coder.maxLevel(in: db)
                 if maxSavedLevel < currentLevel {
                     staleLevels.formUnion((maxSavedLevel + 1)...currentLevel)
                 } else {

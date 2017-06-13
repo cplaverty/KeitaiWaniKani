@@ -57,7 +57,7 @@ class GetKanjiOperationTests: DatabaseTestCase, ResourceHTTPStubs {
         databaseQueue.inDatabase { database in
             XCTAssertNotNil(database, "Database is nil!")
             do {
-                let fromDatabase = try Kanji.coder.load(from: database!)
+                let fromDatabase = try Kanji.coder.load(from: database)
                 XCTAssertEqual(fromDatabase.count, 38, "Failed to load all kanji")
                 
                 if let actualRicePaddyKanji = fromDatabase.filter({ $0.meaning == expectedRicePaddyKanji.meaning }).first {

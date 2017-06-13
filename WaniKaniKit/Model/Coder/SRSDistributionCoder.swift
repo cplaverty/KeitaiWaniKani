@@ -86,7 +86,7 @@ public final class SRSDistributionCoder: SRSItemCountsItem, ResourceHandler, JSO
             }
             let srsItemCounts = try loadSRSItemCountsForRow(resultSet)
             countsBySRSLevel[srsLevel] = srsItemCounts
-            lastUpdateTimestamp = resultSet.date(forColumn: Columns.lastUpdateTimestamp).laterDateIfNotNil(lastUpdateTimestamp)
+            lastUpdateTimestamp = max(resultSet.date(forColumn: Columns.lastUpdateTimestamp), lastUpdateTimestamp)
         }
         
         return SRSDistribution(countsBySRSLevel: countsBySRSLevel, lastUpdateTimestamp: lastUpdateTimestamp)
@@ -116,11 +116,12 @@ public final class SRSDistributionCoder: SRSItemCountsItem, ResourceHandler, JSO
     }
 }
 
-private extension Date {
-    func laterDateIfNotNil(_ anotherDate: Date?) -> Date {
-        guard let anotherDate = anotherDate else {
-            return self
-        }
-        return max(self, anotherDate)
+private func max<T>(_ x: T?, _ y: T?) -> T? where T : Comparable {
+    guard let x = x else {
+        return y
     }
+    guard let y = y else {
+        return x
+    }
+    return max(x, y)
 }

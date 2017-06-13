@@ -97,16 +97,16 @@ public final class UserInformationCoder: ResourceHandler, JSONDecoder, SingleIte
         
         var result: UserInformation? = nil
         if resultSet.next() {
-            result = UserInformation(username: resultSet.string(forColumn: Columns.username),
-                                     gravatar: resultSet.string(forColumn: Columns.gravatar),
+            result = UserInformation(username: resultSet.string(forColumn: Columns.username)!,
+                                     gravatar: resultSet.string(forColumn: Columns.gravatar)!,
                                      level: resultSet.long(forColumn: Columns.level),
-                                     title: resultSet.string(forColumn: Columns.title),
+                                     title: resultSet.string(forColumn: Columns.title)!,
                                      about: resultSet.string(forColumn: Columns.about),
                                      website: resultSet.string(forColumn: Columns.website),
                                      twitter: resultSet.string(forColumn: Columns.twitter),
                                      topicsCount: resultSet.long(forColumn: Columns.topicsCount),
                                      postsCount: resultSet.long(forColumn: Columns.postsCount),
-                                     creationDate: resultSet.date(forColumn: Columns.creationDate),
+                                     creationDate: resultSet.date(forColumn: Columns.creationDate)!,
                                      vacationDate: resultSet.date(forColumn: Columns.vacationDate),
                                      lastUpdateTimestamp: resultSet.date(forColumn: Columns.lastUpdateTimestamp))
         }

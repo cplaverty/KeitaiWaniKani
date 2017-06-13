@@ -60,9 +60,9 @@ class ReviewTimelineTableViewController: UITableViewController {
     
     private func loadReviewTimeline(currentLevelOnly: Bool) {
         let delegate = UIApplication.shared.delegate as! AppDelegate
+        let databaseQueue = delegate.databaseQueue
         DispatchQueue.global(qos: .userInitiated).async {
-            delegate.databaseQueue.inDatabase { [weak self] database in
-                guard let database = database else { fatalError("No database returned from queue!") }
+            databaseQueue.inDatabase { [weak self] database in
                 do {
                     let studyQueue = try StudyQueue.coder.load(from: database)
                     var level: Int? = nil

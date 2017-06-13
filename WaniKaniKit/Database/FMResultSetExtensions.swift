@@ -70,7 +70,7 @@ public extension FMDatabaseQueue {
         var e: Error? = nil
         self.inDatabase { database in
             do {
-                t = try block(database!)
+                t = try block(database)
             } catch {
                 e = error
             }
@@ -84,7 +84,7 @@ public extension FMDatabaseQueue {
         var e: Error? = nil
         self.inDatabase { database in
             do {
-                t = try block(database!)
+                t = try block(database)
             } catch {
                 e = error
             }
