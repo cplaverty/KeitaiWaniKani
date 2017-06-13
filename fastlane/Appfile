@@ -1,5 +1,7 @@
-app_identifier ENV["APP_IDENTIFIER"]
-apple_id ENV["APPLE_ID"]
+app_identifier "uk.me.laverty.KeitaiWaniKani"
+apple_id "chris@laverty.uk"
+
+team_id "5QAN68L9NX"
 
 # you can even provide different app identifiers, Apple IDs and team names per lane:
 # More information: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Appfile.md

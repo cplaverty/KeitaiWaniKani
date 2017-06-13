@@ -30,22 +30,39 @@ xcode-select --install
 
 # Available Actions
 ## iOS
+### ios test
+```
+fastlane ios test
+```
+Runs all the tests
+### ios beta
+```
+fastlane ios beta
+```
+Submit a new Beta Build to Apple TestFlight
+
+This will also make sure the profile is up to date
+### ios screenshots
+```
+fastlane ios screenshots
+```
+Create app screenshots for the App Store
 ### ios setupID
 ```
 fastlane ios setupID
 ```
-Create AppID, App Groups, and change Bundle Identifiers, entitlements
+Create App ID and App Group, and change Bundle Identifiers and entitlements
 
-This will create and use the new AppID, App Groups on the Apple developer portal 
-  and change Bundle Identifiers for this project which is necessary to run the project on your side.
+Before running, change the apple_id and team_id configuration values in Appfile.  You may also wish to customise the app_identifier.
+
+This will create and use a new App ID and App Group on the Apple Developer Portal.  It will also change Bundle Identifiers to match the app_identifier in the Appfile.
 ### ios resetID
 ```
 fastlane ios resetID
 ```
 Reset to default AppID, App Groups, and Bundle identifiers
 
-This will reset the identifiers to the default values as on the Github repository. 
-  Does not remove the created AppIDs or App Groups from the developer portal.
+This will reset the identifiers to the default values as on the GitHub repository.  Does not remove the created App IDs or App Groups from the developer portal.
 
 ----
 

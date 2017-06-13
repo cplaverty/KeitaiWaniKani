@@ -328,6 +328,10 @@
 		832462BE1B935FB500FB62C9 /* SRSReviewCounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRSReviewCounts.swift; sourceTree = "<group>"; };
 		8326D2DD1BB7E52F006FF2D0 /* DownloadStrategy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadStrategy.swift; sourceTree = "<group>"; };
 		83288CC11B45E808002B82B3 /* ApplicationSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationSettings.swift; sourceTree = "<group>"; };
+		832DE6C91EF0053000372EB8 /* Appfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = Appfile; sourceTree = "<group>"; };
+		832DE6CA1EF0053000372EB8 /* Deliverfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = Deliverfile; sourceTree = "<group>"; };
+		832DE6CB1EF0053000372EB8 /* Fastfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = Fastfile; sourceTree = "<group>"; };
+		832DE6CC1EF0053000372EB8 /* Snapfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; path = Snapfile; sourceTree = "<group>"; };
 		832E173F1B459F3A00A67A3E /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		833074551BA8C609008E66E6 /* SequenceType+WaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SequenceType+WaniKani.swift"; sourceTree = "<group>"; };
 		8331E5031B48525F005AF085 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
@@ -402,7 +406,6 @@
 		8347BDF51B72A556000F99EF /* GetVocabularyOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetVocabularyOperation.swift; sourceTree = "<group>"; };
 		8347BDFC1B72AE90000F99EF /* WaniKaniAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaniKaniAPI.swift; sourceTree = "<group>"; };
 		834802531B97A76500CC7461 /* ModelObjectUpdateCheckCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelObjectUpdateCheckCondition.swift; sourceTree = "<group>"; };
-		8349627D1CFE465D001C68E4 /* Snapfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; name = Snapfile; path = ../Snapfile; sourceTree = "<group>"; };
 		834C92521B7660390025D359 /* WaniKaniStudyQueueWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = WaniKaniStudyQueueWidget.entitlements; sourceTree = "<group>"; };
 		834C92531B76603F0025D359 /* KeitaiWaniKani.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = KeitaiWaniKani.entitlements; sourceTree = "<group>"; };
 		8362E3611BCF11640062AC97 /* DownloadFileOperation+WaniKani.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DownloadFileOperation+WaniKani.swift"; sourceTree = "<group>"; };
@@ -587,6 +590,7 @@
 			isa = PBXGroup;
 			children = (
 				83FC71D31C95C60500B60C1C /* README.md */,
+				832DE6C81EF004DD00372EB8 /* fastlane */,
 				83C8F94B1B9B2E7E007CBFBF /* OperationKit */,
 				8347BCFA1B725428000F99EF /* WaniKaniKit */,
 				830EAB881B41DC7700EBF073 /* KeitaiWaniKani */,
@@ -674,6 +678,19 @@
 			path = "User Scripts";
 			sourceTree = "<group>";
 		};
+		832DE6C81EF004DD00372EB8 /* fastlane */ = {
+			isa = PBXGroup;
+			children = (
+				832DE6C91EF0053000372EB8 /* Appfile */,
+				832DE6CA1EF0053000372EB8 /* Deliverfile */,
+				832DE6CB1EF0053000372EB8 /* Fastfile */,
+				832DE6CC1EF0053000372EB8 /* Snapfile */,
+			);
+			indentWidth = 2;
+			path = fastlane;
+			sourceTree = "<group>";
+			tabWidth = 2;
+		};
 		83354D8C1B484ADE007686D5 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -710,7 +727,6 @@
 		8346E6111C497DF600068686 /* KeitaiWaniKaniUITests */ = {
 			isa = PBXGroup;
 			children = (
-				8349627D1CFE465D001C68E4 /* Snapfile */,
 				8346E61B1C497E8900068686 /* SnapshotHelper.swift */,
 				8346E6121C497DF600068686 /* SnapshotUITests.swift */,
 				8346E6141C497DF600068686 /* Info.plist */,

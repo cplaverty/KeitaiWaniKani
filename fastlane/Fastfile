@@ -1,27 +1,3 @@
-# Must change
-ENV["APP_IDENTIFIER"] = "uk.me.laverty.KeitaiWaniKani" # set your custom bundle identifier
-ENV["APPLE_ID"] = "yourEmail@example.com" # set your Apple ID email
-
-# Customizable
-appIDAppName = "AlliCrab"
-appGroupName = "AlliCrab App Group"
-
-# default values - Don't change these values
-waniKaniStudyQueueWidgetAppend = ".WaniKaniStudyQueueWidget"
-groupPrepend = "group."
-
-defaultAlliCrabIdentifier = "uk.me.laverty.KeitaiWaniKani"
-defaultWaniKaniStudyQueueWidgetIdentifier = defaultAlliCrabIdentifier + waniKaniStudyQueueWidgetAppend
-defaultGroupIdentifier = groupPrepend + defaultAlliCrabIdentifier
-
-alliCrabInfoPlist = "KeitaiWaniKani/Info.plist"
-waniKaniStudyQueueWidgetInfoPlist = "WaniKaniStudyQueueWidget/Info.plist"
-alliCrabEntitlementsFile = "KeitaiWaniKani/KeitaiWaniKani.entitlements"
-waniKaniStudyQueueWidgetEntitlementsFile = "WaniKaniStudyQueueWidget/WaniKaniStudyQueueWidget.entitlements"
-# end - default values
-
-app_identifier = ENV["APP_IDENTIFIER"]
-
 # Customise this file, documentation can be found here:
 # https://github.com/fastlane/fastlane/tree/master/fastlane/docs
 # All available actions: https://docs.fastlane.tools/actions
@@ -35,87 +11,118 @@ app_identifier = ENV["APP_IDENTIFIER"]
 
 # This is the minimum version number required.
 # Update this, if you use features of a newer version
-fastlane_version "2.37.0"
+fastlane_version "2.38.1"
 
 default_platform :ios
 
+app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+
 platform :ios do
-  
-  desc "Create AppID, App Groups, and change Bundle Identifiers, entitlements"
-  desc "This will create and use the new AppID, App Groups on the Apple developer portal 
-  and change Bundle Identifiers for this project which is necessary to run the project on your side."
+  desc "Runs all the tests"
+  lane :test do
+    scan(scheme: "AlliCrab")
+  end
+
+  desc "Submit a new Beta Build to Apple TestFlight"
+  desc "This will also make sure the profile is up to date"
+  lane :beta do
+    ensure_git_status_clean
+    increment_build_number
+    # match(type: "appstore") # more information: https://codesigning.guide
+    gym(scheme: "AlliCrab")
+    pilot
+  end
+
+  desc "Create app screenshots for the App Store"
+  lane :screenshots do
+    snapshot
+  end
+
+  desc "Create App ID and App Group, and change Bundle Identifiers and entitlements"
+  desc "Before running, change the apple_id and team_id configuration values in Appfile.  You may also wish to customise the app_identifier."
+  desc "This will create and use a new App ID and App Group on the Apple Developer Portal.  It will also change Bundle Identifiers to match the app_identifier in the Appfile."
   lane :setupID do
-  	userWaniKaniStudyQueueWidgetIdentifier = app_identifier + waniKaniStudyQueueWidgetAppend
-  	userGroupIdentifier = groupPrepend + app_identifier
+    app_name = "AlliCrab"
+    app_group_name = "AlliCrab App Group"
+    app_group_identifier = "group." + app_identifier
+    
+    UI.message "This will set up a new App '#{app_name}' with App ID '#{app_identifier}' in the Apple Developer Portal."
+    if !UI.confirm("Are you sure you would like to continue?")
+      UI.error "Cancelling"
+      next
+    end
+    
+    # Create App Group
+    sh "fastlane produce group -g '#{app_group_identifier}' -n '#{app_group_name}'"
+    
+    # Create App ID
+    produce(
+      app_identifier: app_identifier,
+      app_name: app_name,
+      skip_itc: true,
 
-	# Create AppID
-  	produce(
-  		app_identifier: "#{app_identifier}",
-  		app_name: "#{appIDAppName}",
-  		skip_itc: true,
-
-  		enable_services: {
-  			app_group: "on"
-  		}
-  	)
-
-  	# create App Group
-  	sh "fastlane produce group -g #{userGroupIdentifier} -n #{appGroupName}"
-  	sh "fastlane produce associate_group -a #{app_identifier} #{userGroupIdentifier}"
-
-  	update_app_group_identifiers(
-		  entitlements_file: "#{alliCrabEntitlementsFile}",
-		  app_group_identifiers: ["#{userGroupIdentifier}"]
+      enable_services: {
+        app_group: "on"
+      }
     )
-
-    update_app_group_identifiers(
-      entitlements_file: "#{waniKaniStudyQueueWidgetEntitlementsFile}",
-      app_group_identifiers: ["#{userGroupIdentifier}"]
+    
+    # Associate App Group with App ID
+    sh "fastlane produce associate_group -a '#{app_identifier}' '#{app_group_identifier}'"
+    
+    update_local_app_identifiers(
+      app_identifier: app_identifier
     )
-
-  	# Change CFBundleIdentifier for 'AlliCrab' target
-  	update_app_identifier(
-  		plist_path: alliCrabInfoPlist,
-  		app_identifier: app_identifier
-  	)
-
-	# Change CFBundleIdentifier for 'WaniKaniStudyQueueWidget' extension
-  	update_app_identifier(
-  		plist_path: waniKaniStudyQueueWidgetInfoPlist,
-  		app_identifier: userWaniKaniStudyQueueWidgetIdentifier
-  	)
-
+    
+    UI.success "App ID and App Groups created!"
   end
 
   desc "Reset to default AppID, App Groups, and Bundle identifiers"
-  desc "This will reset the identifiers to the default values as on the Github repository. 
-  Does not remove the created AppIDs or App Groups from the developer portal."
-  lane :resetID do 
-
-  	update_app_group_identifiers(
-		  entitlements_file: "#{alliCrabEntitlementsFile}",
-		  app_group_identifiers: ["#{defaultGroupIdentifier}"]
-	  )
-
-    update_app_group_identifiers(
-      entitlements_file: "#{waniKaniStudyQueueWidgetEntitlementsFile}",
-      app_group_identifiers: ["#{defaultGroupIdentifier}"]
+  desc "This will reset the identifiers to the default values as on the GitHub repository.  Does not remove the created App IDs or App Groups from the developer portal."
+  lane :resetID do
+    default_app_identifier = "uk.me.laverty.KeitaiWaniKani"
+    
+    update_local_app_identifiers(
+      app_identifier: default_app_identifier
     )
-
-  	# Reset CFBundleIdentifier for 'AlliCrab' target
-  	update_app_identifier(
-  		plist_path: alliCrabInfoPlist,
-  		app_identifier: defaultAlliCrabIdentifier
-  	)
-
-	# Reset CFBundleIdentifier for 'WaniKaniStudyQueueWidget' extension
-  	update_app_identifier(
-  		plist_path: waniKaniStudyQueueWidgetInfoPlist,
-  		app_identifier: defaultWaniKaniStudyQueueWidgetIdentifier
-  	)
-
+    
+    if app_identifier != default_app_identifier
+      UI.important "Remember to revert app_identifier in Appfile to the default value!"
+    end
   end
-  
+
+  private_lane :update_local_app_identifiers do |options|
+    app_identifier = options[:app_identifier]
+    today_widget_app_identifier = app_identifier + ".WaniKaniStudyQueueWidget"
+    app_group_identifier = "group." + app_identifier
+    app_group_identifiers = [app_group_identifier]
+    
+    update_app_group_identifiers(
+      entitlements_file: "KeitaiWaniKani/KeitaiWaniKani.entitlements",
+      app_group_identifiers: app_group_identifiers
+    )
+    
+    update_app_group_identifiers(
+      entitlements_file: "WaniKaniStudyQueueWidget/WaniKaniStudyQueueWidget.entitlements",
+      app_group_identifiers: app_group_identifiers
+    )
+    
+    UI.message "Updated entitlements app group identifiers to #{app_group_identifiers}"
+    
+    # Set CFBundleIdentifier for 'AlliCrab' target
+    update_app_identifier(
+      plist_path: "KeitaiWaniKani/Info.plist",
+      app_identifier: app_identifier
+    )
+    
+    # Set CFBundleIdentifier for 'WaniKaniStudyQueueWidget' extension
+    update_app_identifier(
+      plist_path: "WaniKaniStudyQueueWidget/Info.plist",
+      app_identifier: today_widget_app_identifier
+    )
+    
+    UI.message "App bundle identifiers updated"
+  end
+
 end
 
 

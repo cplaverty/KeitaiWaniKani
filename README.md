@@ -1,5 +1,4 @@
 # Mobile AlliCrab
-### Formerly known as KeitaiWaniKani
 
 This unofficial app for [WaniKani](https://www.wanikani.com) improves the experience of doing WaniKani lessons and reviews while on iOS devices.  Please note that a WaniKani account is required to use this app.
 
@@ -23,16 +22,15 @@ Features:
 * Notification Centre widget
 
 ## How to get started
-Since the project uses an app extension / widget, you'd have to create a new App Group, AppID on the Apple developer portal, and change the app bundle identifiers in the main target and app extension. However, a [fastlane](https://github.com/fastlane/fastlane) lane has been be prepared to take care of all that for you. Here's what you need to do:
+Since the project uses an app extension with a shared App Group, you'll have to create a new App Group and App ID using the Apple Developer Portal, then change the app bundle identifiers in the main target and app extension to match. A [fastlane](https://github.com/fastlane/fastlane) lane has been be prepared to take care of all that for you. Here's what you need to do:
 - Have a registered Apple Developer Account.
 - Install [fastlane](https://github.com/fastlane/fastlane)
 - Clone / download the project
-- Open the file in "fastlane/Fastfile"
-- In the Fastfile, set your own bundle identifier and Apple ID at the very top of the document
+- Edit "fastlane/Appfile" and set your own bundle identifier, plus set your Apple ID and Team ID
 - Run `fastlane setupID` using the command line
 - Select your signing identity for the `AlliCrab` and `WaniKaniStudyQueueWidget` targets.
 - You should now be able to run the project on your device!
 
 You can use `fastlane resetID` to reset the bundle identifiers to the default values again, which may be useful if you want to submit pull requests without your custom bundle identifiers.
 
-You can run `git update-index --assume-unchanged fastlane/Fastfile` if you want to keep changes of Fastfile locally without having to push them. (`Use git update-index --no-assume-unchanged fastlane/Fastfile` to undo this.)
+You can run `git update-index --assume-unchanged fastlane/Appfile` if you want to keep changes of Appfile locally without having to push them. (`Use git update-index --no-assume-unchanged fastlane/Appfile` to undo this.)
