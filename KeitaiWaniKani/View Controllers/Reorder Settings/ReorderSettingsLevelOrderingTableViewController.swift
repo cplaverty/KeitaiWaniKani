@@ -1,6 +1,6 @@
 //
 //  ReorderSettingsLevelOrderingTableViewController.swift
-//  KeitaiWaniKani
+//  AlliCrab
 //
 //  Copyright © 2016 Chris Laverty. All rights reserved.
 //

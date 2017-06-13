@@ -1,6 +1,6 @@
 //
 //  WaniKaniAPIResourceParser.swift
-//  KeitaiWaniKani
+//  WaniKaniKit
 //
 //  Copyright © 2015 Chris Laverty. All rights reserved.
 //
