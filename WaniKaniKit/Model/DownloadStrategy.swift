@@ -15,11 +15,11 @@ public struct DownloadBatches {
 }
 
 public struct BatchSizes {
-    let radicals: Int
-    let kanji: Int
-    let vocabulary: Int
+    let radicals: Int?
+    let kanji: Int?
+    let vocabulary: Int?
     
-    public init(radicals: Int, kanji: Int, vocabulary: Int) {
+    public init(radicals: Int? = nil, kanji: Int? = nil, vocabulary: Int? = nil) {
         self.radicals = radicals
         self.kanji = kanji
         self.vocabulary = vocabulary
@@ -61,12 +61,17 @@ public struct DownloadStrategy {
         return calculateBatches(coder: coder, withMaxBatchSize: batchSizes.vocabulary)
     }
     
-    private func calculateBatches<Coder: ListItemDatabaseCoder>(coder: Coder, withMaxBatchSize batchSize: Int) -> [DownloadBatches] {
+    private func calculateBatches<Coder: ListItemDatabaseCoder>(coder: Coder, withMaxBatchSize batchSize: Int?) -> [DownloadBatches] {
         let currentState = State(databaseQueue: self.databaseQueue)
         let levels = staleLevels(coder: coder, currentState: currentState) ?? Array(1...(maxLevel ?? currentState.userInformation!.level))
-        let arguments = stride(from: 0, to: levels.count, by: batchSize).map { start -> String in
-            let end = min(levels.count - 1, start + batchSize - 1)
-            return levelArrayToArgument(levels[start...end])
+        let arguments: [String]
+        if let batchSize = batchSize, batchSize < levels.count {
+            arguments = stride(from: 0, to: levels.count, by: batchSize).map { start -> String in
+                let end = min(levels.count - 1, start + batchSize - 1)
+                return levelArrayToArgument(levels[start...end])
+            }
+        } else {
+            arguments = [levelArrayToArgument(levels)]
         }
         
         if arguments.isEmpty {

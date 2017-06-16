@@ -26,7 +26,7 @@ final class GetSRSDataItemOperation: GroupOperation, ProgressReporting {
         progress.localizedDescription = "Downloading SRS data"
         progress.localizedAdditionalDescription = "Waiting..."
         
-        let downloadStrategy = DownloadStrategy(databaseQueue: databaseQueue, batchSizes: BatchSizes(radicals: 30, kanji: 20, vocabulary: 5))
+        let downloadStrategy = DownloadStrategy(databaseQueue: databaseQueue, batchSizes: BatchSizes(vocabulary: 15))
         
         progress.becomeCurrent(withPendingUnitCount: 3)
         radicalsOperation = GetRadicalsOperation(resolver: resolver, databaseQueue: databaseQueue, downloadStrategy: downloadStrategy, networkObserver: networkObserver)
