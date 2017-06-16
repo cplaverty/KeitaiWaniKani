@@ -18,7 +18,7 @@ class FileMissingConditionTests: XCTestCase {
         let missingFile = tempDirectory.appendingPathComponent("jfjlkjijofsjaklfjskfjsiofjsfjalk")
         
         let operation = StubOperation()
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addCondition(FileMissingCondition(url: missingFile))
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
@@ -42,7 +42,7 @@ class FileMissingConditionTests: XCTestCase {
         defer { try! fm.removeItem(atPath: nonMissingFile.path) }
         
         let operation = StubOperation()
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addCondition(FileMissingCondition(url: nonMissingFile))
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertFalse(errors.isEmpty, "Expected errors on operation finish")

@@ -15,20 +15,20 @@ class GroupOperationTests: XCTestCase {
         let operationQueue = makeOperationQueue()
         
         let childOperation1 = StubOperation()
-        keyValueObservingExpectation(for: childOperation1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: childOperation1, keyPath: "isFinished", expectedValue: true)
         childOperation1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation2 = StubOperation()
-        keyValueObservingExpectation(for: childOperation2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: childOperation2, keyPath: "isFinished", expectedValue: true)
         childOperation2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation2.addDependency(childOperation1)
         
         let operation = StubGroupOperation(operations: childOperation1, childOperation2)
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
@@ -70,20 +70,20 @@ class GroupOperationTests: XCTestCase {
         let operationQueue = makeOperationQueue()
         
         let childOperation1 = StubOperation()
-        keyValueObservingExpectation(for: childOperation1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: childOperation1, keyPath: "isFinished", expectedValue: true)
         childOperation1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation2 = StubOperation()
-        keyValueObservingExpectation(for: childOperation2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: childOperation2, keyPath: "isFinished", expectedValue: true)
         childOperation2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation2.addDependency(childOperation1)
         
         let operation = StubGroupOperation(operations: childOperation1, childOperation2)
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
@@ -134,27 +134,27 @@ class GroupOperationTests: XCTestCase {
         let operationQueue = makeOperationQueue()
         
         let childOperation1 = StubOperation()
-        keyValueObservingExpectation(for: childOperation1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: childOperation1, keyPath: "isFinished", expectedValue: true)
         childOperation1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation2 = StubOperation(immediatelyFinish: false)
-        keyValueObservingExpectation(for: childOperation2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: childOperation2, keyPath: "isFinished", expectedValue: true)
         childOperation2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation2.addDependency(childOperation1)
         
         let childOperation3 = StubOperation()
-        keyValueObservingExpectation(for: childOperation3, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: childOperation3, keyPath: "isFinished", expectedValue: true)
         childOperation3.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation3.addDependency(childOperation2)
         
         let operation = StubGroupOperation(operations: childOperation1, childOperation2, childOperation3)
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver(
             startHandler: { _ in
                 let when = DispatchTime.now() + 1
@@ -212,7 +212,7 @@ class GroupOperationTests: XCTestCase {
         XCTAssertEqual(operation.internalQueue.operationCount, 0)
         XCTAssertEqual(childOperation1.stateTransitions, OperationWorkflows.finished)
         XCTAssertEqual(childOperation2.stateTransitions, OperationWorkflows.finished)
-        XCTAssertEqual(childOperation3.stateTransitions, OperationWorkflows.cancelledAfterReady)
+        XCTAssertEqual(childOperation3.stateTransitions, OperationWorkflows.cancelledBeforeReady)
         
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)
@@ -242,45 +242,45 @@ class GroupOperationTests: XCTestCase {
         let operationQueue = makeOperationQueue()
         
         let childOperation1_1 = StubOperation()
-        keyValueObservingExpectation(for: childOperation1_1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: childOperation1_1, keyPath: "isFinished", expectedValue: true)
         childOperation1_1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation1_2 = StubOperation()
-        keyValueObservingExpectation(for: childOperation1_2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: childOperation1_2, keyPath: "isFinished", expectedValue: true)
         childOperation1_2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation1_2.addDependency(childOperation1_1)
         
         let nested1 = StubGroupOperation(operations: childOperation1_1, childOperation1_2)
-        keyValueObservingExpectation(for: nested1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: nested1, keyPath: "isFinished", expectedValue: true)
         nested1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation2_1 = StubOperation()
-        keyValueObservingExpectation(for: childOperation2_1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: childOperation2_1, keyPath: "isFinished", expectedValue: true)
         childOperation2_1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation2_2 = StubOperation()
-        keyValueObservingExpectation(for: childOperation2_2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: childOperation2_2, keyPath: "isFinished", expectedValue: true)
         childOperation2_2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation2_2.addDependency(childOperation2_1)
         
         let nested2 = StubGroupOperation(operations: childOperation2_1, childOperation2_2)
-        keyValueObservingExpectation(for: nested2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: nested2, keyPath: "isFinished", expectedValue: true)
         nested2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let operation = StubGroupOperation(operations: nested1, nested2)
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
@@ -350,45 +350,45 @@ class GroupOperationTests: XCTestCase {
         let operationQueue = makeOperationQueue()
         
         let childOperation1_1 = StubOperation()
-        keyValueObservingExpectation(for: childOperation1_1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: childOperation1_1, keyPath: "isFinished", expectedValue: true)
         childOperation1_1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation1_2 = StubOperation()
-        keyValueObservingExpectation(for: childOperation1_2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: childOperation1_2, keyPath: "isFinished", expectedValue: true)
         childOperation1_2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation1_2.addDependency(childOperation1_1)
         
         let nested1 = StubGroupOperation(operations: childOperation1_1, childOperation1_2)
-        keyValueObservingExpectation(for: nested1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: nested1, keyPath: "isFinished", expectedValue: true)
         nested1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation2_1 = StubOperation()
-        keyValueObservingExpectation(for: childOperation2_1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: childOperation2_1, keyPath: "isFinished", expectedValue: true)
         childOperation2_1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let childOperation2_2 = StubOperation()
-        keyValueObservingExpectation(for: childOperation2_2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: childOperation2_2, keyPath: "isFinished", expectedValue: true)
         childOperation2_2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         childOperation2_2.addDependency(childOperation2_1)
         
         let nested2 = StubGroupOperation(operations: childOperation2_1, childOperation2_2)
-        keyValueObservingExpectation(for: nested2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: nested2, keyPath: "isFinished", expectedValue: true)
         nested2.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let operation = StubGroupOperation(operations: nested1, nested2)
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })

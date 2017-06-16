@@ -18,7 +18,7 @@ class DelayOperationTests: XCTestCase {
         let start = Date()
         var delay: TimeInterval? = nil
         let operation = DelayOperation(interval: interval)
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             delay = -start.timeIntervalSinceNow
@@ -26,11 +26,16 @@ class DelayOperationTests: XCTestCase {
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: interval + 0.5, handler: nil)
         
-        XCTAssertGreaterThanOrEqual(delay!, interval)
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)
         XCTAssertTrue(operation.isFinished)
         XCTAssertFalse(operation.isCancelled)
+        
+        if let delay = delay {
+            XCTAssertGreaterThanOrEqual(delay, interval)
+        } else {
+            XCTFail("Delay not set!  Implies operation not run")
+        }
     }
     
     func testRunWithDate() {
@@ -41,7 +46,7 @@ class DelayOperationTests: XCTestCase {
         let end = Date().addingTimeInterval(interval)
         var delay: TimeInterval? = nil
         let operation = DelayOperation(until: end)
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             delay = -start.timeIntervalSinceNow
@@ -49,11 +54,16 @@ class DelayOperationTests: XCTestCase {
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: interval + 0.5, handler: nil)
         
-        XCTAssertGreaterThanOrEqual(delay!, interval)
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)
         XCTAssertTrue(operation.isFinished)
         XCTAssertFalse(operation.isCancelled)
+        
+        if let delay = delay {
+            XCTAssertGreaterThanOrEqual(delay, interval)
+        } else {
+            XCTFail("Delay not set!  Implies operation not run")
+        }
     }
     
     func testCancelBeforeStart() {
@@ -63,7 +73,7 @@ class DelayOperationTests: XCTestCase {
         let start = Date()
         var delay: TimeInterval? = nil
         let operation = DelayOperation(interval: interval)
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             delay = -start.timeIntervalSinceNow
@@ -72,11 +82,16 @@ class DelayOperationTests: XCTestCase {
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: interval + 0.5, handler: nil)
         
-        XCTAssertLessThan(delay!, interval)
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)
         XCTAssertTrue(operation.isFinished)
         XCTAssertTrue(operation.isCancelled)
+        
+        if let delay = delay {
+            XCTAssertLessThan(delay, interval)
+        } else {
+            XCTFail("Delay not set!  Implies operation not run")
+        }
     }
     
     func testCancelAfterStart() {
@@ -86,7 +101,7 @@ class DelayOperationTests: XCTestCase {
         let start = Date()
         var delay: TimeInterval? = nil
         let operation = DelayOperation(interval: interval)
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver(
             startHandler: { _ in
                 let when = DispatchTime.now() + interval / 2
@@ -102,11 +117,16 @@ class DelayOperationTests: XCTestCase {
         operationQueue.addOperation(operation)
         waitForExpectations(timeout: interval + 0.5, handler: nil)
         
-        XCTAssertLessThan(delay!, interval)
         XCTAssertFalse(operation.isReady)
         XCTAssertFalse(operation.isExecuting)
         XCTAssertTrue(operation.isFinished)
         XCTAssertTrue(operation.isCancelled)
+        
+        if let delay = delay {
+            XCTAssertLessThan(delay, interval)
+        } else {
+            XCTFail("Delay not set!  Implies operation not started")
+        }
     }
     
 }

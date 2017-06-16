@@ -20,14 +20,14 @@ class MutuallyExclusiveTests: XCTestCase {
         operationQueue.maxConcurrentOperationCount = 2
         
         let operation1 = StubOperation(immediatelyFinish: false)
-        keyValueObservingExpectation(for: operation1, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation1, keyPath: "isFinished", expectedValue: true)
         operation1.addCondition(mutuallyExclusiveCondition)
         operation1.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
         
         let operation2 = StubOperation()
-        keyValueObservingExpectation(for: operation2, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation2, keyPath: "isFinished", expectedValue: true)
         operation2.addCondition(mutuallyExclusiveCondition)
         operation2.addObserver(BlockObserver(
             startHandler: { op in

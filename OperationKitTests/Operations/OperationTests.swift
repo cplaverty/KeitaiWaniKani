@@ -15,7 +15,7 @@ class OperationTests: XCTestCase {
         let operationQueue = makeOperationQueue()
         
         let operation = StubOperation()
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
@@ -34,7 +34,7 @@ class OperationTests: XCTestCase {
         let operationQueue = makeOperationQueue()
         
         let operation = StubOperation(shouldFail: true)
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertFalse(errors.isEmpty, "Expected errors on operation finish")
             })
@@ -53,7 +53,7 @@ class OperationTests: XCTestCase {
         let operationQueue = makeOperationQueue()
         
         let operation = StubOperation()
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addCondition(AlwaysSatisfiedCondition())
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
@@ -73,7 +73,7 @@ class OperationTests: XCTestCase {
         let operationQueue = makeOperationQueue()
         
         let operation = StubOperation()
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addCondition(AlwaysFailedCondition())
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertFalse(errors.isEmpty, "Expected condition errors on operation finish")
@@ -93,7 +93,7 @@ class OperationTests: XCTestCase {
         let operationQueue = makeOperationQueue()
         
         let operation = StubOperation()
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.cancel()
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
@@ -113,7 +113,7 @@ class OperationTests: XCTestCase {
         let operationQueue = makeOperationQueue()
         
         let operation = StubOperation(immediatelyFinish: false)
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver(
             startHandler: { _ in
                 let when = DispatchTime.now() + 0.5

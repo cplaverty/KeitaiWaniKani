@@ -18,7 +18,7 @@ class BlockOperationTests: XCTestCase {
         let operation = OperationKit.BlockOperation {
             wasRun = true
         }
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
@@ -39,7 +39,7 @@ class BlockOperationTests: XCTestCase {
         let operation = OperationKit.BlockOperation {
             wasRun = true
         }
-        keyValueObservingExpectation(for: operation, keyPath: #keyPath(Operation.isFinished), expectedValue: true)
+        keyValueObservingExpectation(for: operation, keyPath: "isFinished", expectedValue: true)
         operation.addObserver(BlockObserver { _, errors in
             XCTAssertTrue(errors.isEmpty, "Expected no errors on operation finish")
             })
