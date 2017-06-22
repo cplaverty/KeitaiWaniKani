@@ -49,6 +49,7 @@ if (userLogin !== null) {
     userLogin.removeAttr('size');
     
     $('#new_user').attr('novalidate', 'novalidate');
+    $('#user_remember_me').prop('checked', true);
 }
 
 
