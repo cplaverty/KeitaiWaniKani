@@ -593,11 +593,11 @@
 				832DE6C81EF004DD00372EB8 /* fastlane */,
 				83C8F94B1B9B2E7E007CBFBF /* OperationKit */,
 				8347BCFA1B725428000F99EF /* WaniKaniKit */,
-				830EAB881B41DC7700EBF073 /* KeitaiWaniKani */,
+				830EAB881B41DC7700EBF073 /* AlliCrab */,
 				83426DF01B7369F8005F4503 /* WaniKaniStudyQueueWidget */,
 				83D550551BB489A9007442EF /* OperationKitTests */,
 				8347BD081B725428000F99EF /* WaniKaniKitTests */,
-				8346E6111C497DF600068686 /* KeitaiWaniKaniUITests */,
+				8346E6111C497DF600068686 /* AlliCrabUITests */,
 				830EAB871B41DC7700EBF073 /* Products */,
 				ADDCBC75FC6B4CD69BBD2594 /* Frameworks */,
 				D6FC4AF6B61CADE8A5960BDC /* Pods */,
@@ -618,7 +618,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		830EAB881B41DC7700EBF073 /* KeitaiWaniKani */ = {
+		830EAB881B41DC7700EBF073 /* AlliCrab */ = {
 			isa = PBXGroup;
 			children = (
 				8347BDCA1B7260B1000F99EF /* App Operations */,
@@ -639,7 +639,7 @@
 				83F364371D01A2D700213097 /* ReorderSettings.storyboard */,
 				83CB3E0E1B5849EE00761D68 /* Settings.bundle */,
 			);
-			path = KeitaiWaniKani;
+			path = AlliCrab;
 			sourceTree = "<group>";
 		};
 		8314366D1D83FB970024D4A9 /* Reorder Settings */ = {
@@ -708,9 +708,8 @@
 				837BD4931B6E724200EDB325 /* WebViewController.swift */,
 				83B5CC4A1C470B1800979DAC /* WKWebViewController.swift */,
 			);
-			name = "View Controllers";
-			path = "KeitaiWaniKani/View Controllers";
-			sourceTree = SOURCE_ROOT;
+			path = "View Controllers";
+			sourceTree = "<group>";
 		};
 		83426DF01B7369F8005F4503 /* WaniKaniStudyQueueWidget */ = {
 			isa = PBXGroup;
@@ -724,14 +723,14 @@
 			path = WaniKaniStudyQueueWidget;
 			sourceTree = "<group>";
 		};
-		8346E6111C497DF600068686 /* KeitaiWaniKaniUITests */ = {
+		8346E6111C497DF600068686 /* AlliCrabUITests */ = {
 			isa = PBXGroup;
 			children = (
 				8346E61B1C497E8900068686 /* SnapshotHelper.swift */,
 				8346E6121C497DF600068686 /* SnapshotUITests.swift */,
 				8346E6141C497DF600068686 /* Info.plist */,
 			);
-			path = KeitaiWaniKaniUITests;
+			path = AlliCrabUITests;
 			sourceTree = "<group>";
 		};
 		8347BCFA1B725428000F99EF /* WaniKaniKit */ = {
@@ -2000,11 +1999,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = KeitaiWaniKani/KeitaiWaniKani.entitlements;
+				CODE_SIGN_ENTITLEMENTS = AlliCrab/KeitaiWaniKani.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5QAN68L9NX;
-				INFOPLIST_FILE = KeitaiWaniKani/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/AlliCrab/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.KeitaiWaniKani;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2019,11 +2018,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = KeitaiWaniKani/KeitaiWaniKani.entitlements;
+				CODE_SIGN_ENTITLEMENTS = AlliCrab/KeitaiWaniKani.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5QAN68L9NX;
-				INFOPLIST_FILE = KeitaiWaniKani/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/AlliCrab/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.KeitaiWaniKani;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2071,7 +2070,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5QAN68L9NX;
-				INFOPLIST_FILE = KeitaiWaniKaniUITests/Info.plist;
+				INFOPLIST_FILE = AlliCrabUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.KeitaiWaniKaniUITests;
@@ -2086,7 +2085,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 5QAN68L9NX;
-				INFOPLIST_FILE = KeitaiWaniKaniUITests/Info.plist;
+				INFOPLIST_FILE = AlliCrabUITests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.KeitaiWaniKaniUITests;
