@@ -178,7 +178,6 @@
 		83D7CF821BC15FCB00C1AFC4 /* WaniKaniReviewPageWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D7CF811BC15FCB00C1AFC4 /* WaniKaniReviewPageWebViewController.swift */; };
 		83D931691BB9CC66009DF31A /* FileMissingCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D931681BB9CC66009DF31A /* FileMissingCondition.swift */; };
 		83D9316B1BB9D2AA009DF31A /* FileMissingConditionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D9316A1BB9D2AA009DF31A /* FileMissingConditionTests.swift */; };
-		83DC478C1B440A6200AD716C /* RubyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC478B1B440A6200AD716C /* RubyLabel.swift */; };
 		83E4A2B71C9820400053A7C0 /* WKU.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 83E4A2B61C9820400053A7C0 /* WKU.user.js */; };
 		83E974CB1DB26F75007DD1D2 /* UserScripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E974CA1DB26F75007DD1D2 /* UserScripts.swift */; };
 		83F32EA91BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */; };
@@ -478,7 +477,6 @@
 		83D7CF811BC15FCB00C1AFC4 /* WaniKaniReviewPageWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = WaniKaniReviewPageWebViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		83D931681BB9CC66009DF31A /* FileMissingCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileMissingCondition.swift; sourceTree = "<group>"; };
 		83D9316A1BB9D2AA009DF31A /* FileMissingConditionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileMissingConditionTests.swift; sourceTree = "<group>"; };
-		83DC478B1B440A6200AD716C /* RubyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RubyLabel.swift; sourceTree = "<group>"; };
 		83E4A2B61C9820400053A7C0 /* WKU.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = WKU.user.js; sourceTree = "<group>"; };
 		83E974CA1DB26F75007DD1D2 /* UserScripts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UserScripts.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		83F32EA81BDED14C00F2ABA0 /* WaniKaniLoginWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = WaniKaniLoginWebViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -999,7 +997,6 @@
 			isa = PBXGroup;
 			children = (
 				83B155581B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift */,
-				83DC478B1B440A6200AD716C /* RubyLabel.swift */,
 				831FF75F1BB8861400C31FDF /* SRSDataItemCollectionViewCell.swift */,
 				83B5CC4E1C47112F00979DAC /* UIBottomBorderedView.swift */,
 				839D76AA1B9A3BC40037294C /* UserScriptTableViewCell.swift */,
@@ -1243,7 +1240,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Chris Laverty";
 				TargetAttributes = {
 					830EAB851B41DC7700EBF073 = {
@@ -1656,7 +1653,6 @@
 				8314366F1D8400A00024D4A9 /* ReorderSettingsItemOrderingTableViewController.swift in Sources */,
 				8331E5041B48525F005AF085 /* HomeScreenViewController.swift in Sources */,
 				83A1F4101D43836A0045751F /* UserScriptSupport.swift in Sources */,
-				83DC478C1B440A6200AD716C /* RubyLabel.swift in Sources */,
 				832462B91B930AC200FB62C9 /* ReviewCountNotificationOperation.swift in Sources */,
 				833BF0BE1B4930A20038AAE3 /* UIViewControllerExtensions.swift in Sources */,
 				839D76AB1B9A3BC40037294C /* UserScriptTableViewCell.swift in Sources */,
@@ -1912,14 +1908,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1960,14 +1962,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

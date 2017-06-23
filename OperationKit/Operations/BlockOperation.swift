@@ -37,7 +37,7 @@ public class BlockOperation: Operation {
             the designated initializer). The operation will be automatically ended
             after the `mainQueueBlock` is executed.
     */
-    public convenience init(mainQueueBlock: @escaping (Void) -> Void) {
+    public convenience init(mainQueueBlock: @escaping () -> Void) {
         self.init(block: { continuation in
             DispatchQueue.main.async {
                 mainQueueBlock()
