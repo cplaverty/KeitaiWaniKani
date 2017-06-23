@@ -98,9 +98,10 @@ final class GetDashboardDataOperation: GroupOperation, ProgressReporting {
                         }()
                     guard let studyQueue = maybeStudyQueue else { return }
                     
-                    DDLogDebug("Badging app icon: \(studyQueue.reviewsAvailable)")
-                    let application = UIApplication.shared
-                    application.applicationIconBadgeNumber = studyQueue.reviewsAvailable
+                    DispatchQueue.main.async {
+                        DDLogDebug("Badging app icon: \(studyQueue.reviewsAvailable)")
+                        UIApplication.shared.applicationIconBadgeNumber = studyQueue.reviewsAvailable
+                    }
                 }
             ))
         
