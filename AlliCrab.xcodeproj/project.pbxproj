@@ -144,6 +144,9 @@
 		83B155571B944B360022217E /* ReviewTimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B155561B944B360022217E /* ReviewTimelineTableViewController.swift */; };
 		83B155591B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B155581B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift */; };
 		83B1555B1B94A18D0022217E /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B1555A1B94A18D0022217E /* SettingsTableViewController.swift */; };
+		83B23A4A1F045AA500B3EA23 /* n_chifont+.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83B23A491F045AA500B3EA23 /* n_chifont+.ttf */; };
+		83B23A4C1F0461A800B3EA23 /* santyoume.otf in Resources */ = {isa = PBXBuildFile; fileRef = 83B23A4B1F0461A800B3EA23 /* santyoume.otf */; };
+		83B23A4E1F04657800B3EA23 /* cinecaption2.28.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83B23A4D1F04657800B3EA23 /* cinecaption2.28.ttf */; };
 		83B5CC4B1C470B1800979DAC /* WKWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B5CC4A1C470B1800979DAC /* WKWebViewController.swift */; };
 		83B5CC4D1C470BE600979DAC /* WKWebAddressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B5CC4C1C470BE600979DAC /* WKWebAddressBarView.swift */; };
 		83B5CC4F1C47112F00979DAC /* UIBottomBorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B5CC4E1C47112F00979DAC /* UIBottomBorderedView.swift */; };
@@ -185,15 +188,11 @@
 		83F364361D018B1200213097 /* ReorderSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F364351D018B1200213097 /* ReorderSettings.swift */; };
 		83F364381D01A2D700213097 /* ReorderSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83F364371D01A2D700213097 /* ReorderSettings.storyboard */; };
 		83F9D2AB1D45205000B261F3 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F9D2AA1D45205000B261F3 /* DatabaseManager.swift */; };
-		83FC71C01C9585BE00B60C1C /* chifont+.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71BF1C9585BE00B60C1C /* chifont+.ttf */; };
 		83FC71C91C9585F300B60C1C /* chigfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C11C9585F300B60C1C /* chigfont.ttf */; };
-		83FC71CA1C9585F300B60C1C /* cinecaption227.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C21C9585F300B60C1C /* cinecaption227.ttf */; };
 		83FC71CB1C9585F300B60C1C /* dartsfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C31C9585F300B60C1C /* dartsfont.ttf */; };
 		83FC71CC1C9585F300B60C1C /* fc_fl.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C41C9585F300B60C1C /* fc_fl.ttf */; };
 		83FC71CD1C9585F300B60C1C /* hkgokukaikk.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C51C9585F300B60C1C /* hkgokukaikk.ttf */; };
 		83FC71CE1C9585F300B60C1C /* Hosohuwafont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C61C9585F300B60C1C /* Hosohuwafont.ttf */; };
-		83FC71CF1C9585F300B60C1C /* nagayama_kai08.otf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C71C9585F300B60C1C /* nagayama_kai08.otf */; };
-		83FC71D01C9585F300B60C1C /* santyoume.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71C81C9585F300B60C1C /* santyoume.ttf */; };
 		83FC71D21C95877100B60C1C /* jitai.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 83FC71D11C95877100B60C1C /* jitai.user.js */; };
 		83FDC2B01BB529D2006AAB8E /* GroupOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FDC2AF1BB529D2006AAB8E /* GroupOperationTests.swift */; };
 		83FE7CD51BB9C1720006689F /* GetRadicalImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FE7CD41BB9C1720006689F /* GetRadicalImageOperation.swift */; };
@@ -443,6 +442,9 @@
 		83B155561B944B360022217E /* ReviewTimelineTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ReviewTimelineTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		83B155581B944CCE0022217E /* ReviewTimelineEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ReviewTimelineEntryTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		83B1555A1B94A18D0022217E /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SettingsTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		83B23A491F045AA500B3EA23 /* n_chifont+.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "n_chifont+.ttf"; sourceTree = "<group>"; };
+		83B23A4B1F0461A800B3EA23 /* santyoume.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = santyoume.otf; sourceTree = "<group>"; };
+		83B23A4D1F04657800B3EA23 /* cinecaption2.28.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = cinecaption2.28.ttf; sourceTree = "<group>"; };
 		83B5CC4A1C470B1800979DAC /* WKWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = WKWebViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		83B5CC4C1C470BE600979DAC /* WKWebAddressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = WKWebAddressBarView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		83B5CC4E1C47112F00979DAC /* UIBottomBorderedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UIBottomBorderedView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -484,15 +486,11 @@
 		83F364351D018B1200213097 /* ReorderSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ReorderSettings.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		83F364371D01A2D700213097 /* ReorderSettings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReorderSettings.storyboard; sourceTree = "<group>"; };
 		83F9D2AA1D45205000B261F3 /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DatabaseManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		83FC71BF1C9585BE00B60C1C /* chifont+.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "chifont+.ttf"; sourceTree = "<group>"; };
 		83FC71C11C9585F300B60C1C /* chigfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chigfont.ttf; sourceTree = "<group>"; };
-		83FC71C21C9585F300B60C1C /* cinecaption227.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = cinecaption227.ttf; sourceTree = "<group>"; };
 		83FC71C31C9585F300B60C1C /* dartsfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = dartsfont.ttf; sourceTree = "<group>"; };
 		83FC71C41C9585F300B60C1C /* fc_fl.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fc_fl.ttf; sourceTree = "<group>"; };
 		83FC71C51C9585F300B60C1C /* hkgokukaikk.ttf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hkgokukaikk.ttf; sourceTree = "<group>"; };
 		83FC71C61C9585F300B60C1C /* Hosohuwafont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hosohuwafont.ttf; sourceTree = "<group>"; };
-		83FC71C71C9585F300B60C1C /* nagayama_kai08.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = nagayama_kai08.otf; sourceTree = "<group>"; };
-		83FC71C81C9585F300B60C1C /* santyoume.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = santyoume.ttf; sourceTree = "<group>"; };
 		83FC71D11C95877100B60C1C /* jitai.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jitai.user.js; sourceTree = "<group>"; };
 		83FC71D31C95C60500B60C1C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		83FDC2AF1BB529D2006AAB8E /* GroupOperationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupOperationTests.swift; sourceTree = "<group>"; };
@@ -1017,15 +1015,14 @@
 		83FC71BC1C95853100B60C1C /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				83FC71BF1C9585BE00B60C1C /* chifont+.ttf */,
 				83FC71C11C9585F300B60C1C /* chigfont.ttf */,
-				83FC71C21C9585F300B60C1C /* cinecaption227.ttf */,
+				83B23A4D1F04657800B3EA23 /* cinecaption2.28.ttf */,
 				83FC71C31C9585F300B60C1C /* dartsfont.ttf */,
 				83FC71C41C9585F300B60C1C /* fc_fl.ttf */,
 				83FC71C51C9585F300B60C1C /* hkgokukaikk.ttf */,
 				83FC71C61C9585F300B60C1C /* Hosohuwafont.ttf */,
-				83FC71C71C9585F300B60C1C /* nagayama_kai08.otf */,
-				83FC71C81C9585F300B60C1C /* santyoume.ttf */,
+				83B23A491F045AA500B3EA23 /* n_chifont+.ttf */,
+				83B23A4B1F0461A800B3EA23 /* santyoume.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -1338,23 +1335,22 @@
 				83FC71CE1C9585F300B60C1C /* Hosohuwafont.ttf in Resources */,
 				839AA3DC1BE2BC08006A05F3 /* resize.css in Resources */,
 				83E4A2B71C9820400053A7C0 /* WKU.user.js in Resources */,
-				83FC71D01C9585F300B60C1C /* santyoume.ttf in Resources */,
 				83FC71CD1C9585F300B60C1C /* hkgokukaikk.ttf in Resources */,
 				83FC71C91C9585F300B60C1C /* chigfont.ttf in Resources */,
-				83FC71C01C9585BE00B60C1C /* chifont+.ttf in Resources */,
 				83CB3E0F1B5849EE00761D68 /* Settings.bundle in Resources */,
-				83FC71CF1C9585F300B60C1C /* nagayama_kai08.otf in Resources */,
 				83183BC41BECC1C300FAE0B6 /* wkoverride.user.js in Resources */,
 				830EAB941B41DC7700EBF073 /* LaunchScreen.storyboard in Resources */,
+				83B23A4E1F04657800B3EA23 /* cinecaption2.28.ttf in Resources */,
 				83FC71D21C95877100B60C1C /* jitai.user.js in Resources */,
 				83FC71CC1C9585F300B60C1C /* fc_fl.ttf in Resources */,
+				83B23A4A1F045AA500B3EA23 /* n_chifont+.ttf in Resources */,
 				836639521BDB9F9E00BD0B92 /* wkimprove.js in Resources */,
 				839AA3DA1BE2BB8C006A05F3 /* jquery.qtip.min.js in Resources */,
+				83B23A4C1F0461A800B3EA23 /* santyoume.otf in Resources */,
 				839AA3D91BE2BB8C006A05F3 /* jquery.qtip.min.css in Resources */,
 				832255C31D9267960023602E /* common.css in Resources */,
 				83F32EAB1BDFCCFA00F2ABA0 /* wkdoublecheck.js in Resources */,
 				830EAB911B41DC7700EBF073 /* Assets.xcassets in Resources */,
-				83FC71CA1C9585F300B60C1C /* cinecaption227.ttf in Resources */,
 				830EAB8F1B41DC7700EBF073 /* Main.storyboard in Resources */,
 				8371D6691C760D6B008AE534 /* markdown.user.js in Resources */,
 			);

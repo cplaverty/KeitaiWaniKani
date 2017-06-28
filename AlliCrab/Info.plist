@@ -56,15 +56,14 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>chifont+.ttf</string>
 		<string>chigfont.ttf</string>
-		<string>cinecaption227.ttf</string>
+		<string>cinecaption2.28.ttf</string>
 		<string>dartsfont.ttf</string>
 		<string>fc_fl.ttf</string>
 		<string>hkgokukaikk.ttf</string>
 		<string>Hosohuwafont.ttf</string>
-		<string>nagayama_kai08.otf</string>
-		<string>santyoume.ttf</string>
+		<string>n_chifont+.ttf</string>
+		<string>santyoume.otf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

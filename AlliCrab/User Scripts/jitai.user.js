@@ -55,7 +55,7 @@ var fonts = [
     "A-OTF Shin Maru Go Pro",
     "Hosofuwafont",
     "ChihayaGothic",
-    "'chifont+', chifont",
+    "'Nchifont+'",
     "darts font",
     "santyoume-font",
     "FC-Flower",
