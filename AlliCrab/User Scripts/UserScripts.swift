@@ -25,6 +25,7 @@ class UserScript {
     let name: String
     let description: String
     let forumLink: URL?
+    let requiresFonts: Bool
     private let settingKey: String?
     private let stylesheetNames: [String]?
     private let scriptNames: [String]?
@@ -41,11 +42,12 @@ class UserScript {
         }
     }
     
-    fileprivate init(name: String, description: String, forumLink: URL? = nil, settingKey: String? = nil, stylesheetNames: [String]? = nil, scriptNames: [String]? = nil, injectionRules: [UserScriptInjectionRule]) {
+    fileprivate init(name: String, description: String, forumLink: URL? = nil, settingKey: String? = nil, requiresFonts: Bool = false, stylesheetNames: [String]? = nil, scriptNames: [String]? = nil, injectionRules: [UserScriptInjectionRule]) {
         self.name = name
         self.description = description
         self.forumLink = forumLink
         self.settingKey = settingKey
+        self.requiresFonts = requiresFonts
         self.stylesheetNames = stylesheetNames
         self.scriptNames = scriptNames
         self.injectionRules = injectionRules
@@ -105,6 +107,7 @@ struct UserScriptDefinitions {
                    description: "Display WaniKani reviews in randomised fonts, for more varied reading training.  Script by obskyr.",
                    forumLink:  forumURL(withRelativePath: "/t/Jitai-字体-The-font-randomizer-that-fits/12617"),
                    settingKey: ApplicationSettingKeys.userScriptJitaiEnabled,
+                   requiresFonts: true,
                    scriptNames: ["jitai.user"],
                    injectionRules: [.ExactMatch(WaniKaniURLs.reviewSession)]),
         

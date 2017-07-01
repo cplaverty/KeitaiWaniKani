@@ -12,6 +12,7 @@ import WaniKaniKit
 protocol UserScriptSupport {
     func injectScript(name: String)
     func injectStyleSheet(name: String)
+    func injectBundledFontReferences()
     
     func injectUserScripts(for: URL) -> Bool
 }
@@ -20,8 +21,13 @@ extension UserScriptSupport {
     func injectUserScripts(for url: URL) -> Bool {
         DDLogDebug("Loading user scripts")
         var scriptsInjected = false
+        var bundledFontReferencesInjected = false
         
         for script in UserScriptDefinitions.all where script.canBeInjected(toPageAt: url) {
+            if script.requiresFonts && !bundledFontReferencesInjected {
+                injectBundledFontReferences()
+                bundledFontReferencesInjected = true
+            }
             script.inject(into: self)
             scriptsInjected = true
         }
@@ -29,6 +35,17 @@ extension UserScriptSupport {
         return scriptsInjected
     }
 }
+
+private let fonts = [
+    "ChihayaGothic": "chigfont.ttf",
+    "cinecaption": "cinecaption2.28.ttf",
+    "darts font": "dartsfont.ttf",
+    "FC-Flower": "fc_fl.ttf",
+    "HakusyuKaisyoExtraBold_kk": "hkgokukaikk.ttf",
+    "Hosofuwafont": "Hosohuwafont.ttf",
+    "Nchifont+": "n_chifont+.ttf",
+    "santyoume-font": "santyoume.otf"
+]
 
 // MARK: - UIWebView
 
@@ -61,6 +78,10 @@ extension UIWebViewUserScriptSupport {
             DDLogError("Failed to add script \(name).js")
         }
     }
+    
+    func injectBundledFontReferences() {
+        // Nothing to do for UIWebView since this is in-process
+    }
 }
 
 // MARK: - WKWebView
@@ -72,17 +93,37 @@ protocol WKWebViewUserScriptSupport: UserScriptSupport, BundleResourceLoader {
 extension WKWebViewUserScriptSupport {
     func injectStyleSheet(name: String) {
         DDLogDebug("Loading stylesheet \(name).css")
-        let cssContents = loadBundleResource(name: name, withExtension: "css", javascriptEncode: true)
-        let contents = "var style = document.createElement('style');style.setAttribute('type', 'text/css');style.appendChild(document.createTextNode('\(cssContents)'));document.head.appendChild(document.createComment('\(name).css'));document.head.appendChild(style);"
-        let script = WKUserScript(source: contents, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        
-        webView.configuration.userContentController.addUserScript(script)
+        let contents = loadBundleResource(name: name, withExtension: "css", javascriptEncode: true)
+        injectStyleSheet(title: "\(name).css", contents: contents)
     }
     
     func injectScript(name: String) {
         DDLogDebug("Loading script \(name).js")
-        let contents = loadBundleResource(name: name, withExtension: "js", javascriptEncode: false)
-        let script = WKUserScript(source: contents, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        let source = loadBundleResource(name: name, withExtension: "js", javascriptEncode: false)
+        let script = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        
+        webView.configuration.userContentController.addUserScript(script)
+    }
+    
+    func injectBundledFontReferences() {
+        for (fontFamily, font) in fonts {
+            if let path = Bundle.main.path(forResource: font, ofType: nil) {
+                let isOpentype = font.hasSuffix("otf")
+                let mimeType = isOpentype ? "font/opentype" : "font/ttf"
+                let fontFormat = isOpentype ? "opentype" : "truetype"
+                let url = URL(fileURLWithPath: path)
+                if let data = try? Data(contentsOf: url) {
+                    DDLogDebug("Adding \(fontFamily)...")
+                    let source = "@font-face { font-family: \"\(fontFamily)\"; src: url(data:\(mimeType);base64,\(data.base64EncodedString())) format(\"\(fontFormat)\"); }"
+                    injectStyleSheet(title: "font: \(fontFamily)", contents: source)
+                }
+            }
+        }
+    }
+    
+    private func injectStyleSheet(title: String, contents: String) {
+        let source = "var style = document.createElement('style');style.setAttribute('type', 'text/css');style.appendChild(document.createTextNode('\(contents)'));document.head.appendChild(document.createComment('\(title)'));document.head.appendChild(style);"
+        let script = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         
         webView.configuration.userContentController.addUserScript(script)
     }

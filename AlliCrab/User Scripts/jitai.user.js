@@ -10,90 +10,19 @@
 // @grant       none
 // ==/UserScript==
 
-/*
-    To control which fonts to choose from, edit this list.
-    If you feel too many fonts of a certain type are showing
-    up, remove a few of those from the list. If you've got
-    fonts that aren't in the list that you'd like to be used,
-    add their names and they'll be in the rotation.
-*/
-
-var fonts = [
-    // Default Windows fonts
-    "Meiryo, メイリオ",
-    "MS PGothic, ＭＳ Ｐゴシック, MS Gothic, ＭＳ ゴック",
-    "MS PMincho, ＭＳ Ｐ明朝, MS Mincho, ＭＳ 明朝",
-    "Yu Gothic, YuGothic",
-    "Yu Mincho, YuMincho",
-    
-    // Default OS X fonts
+var existingFonts = [
     "Hiragino Kaku Gothic Pro, ヒラギノ角ゴ Pro W3",
     "Hiragino Maru Gothic Pro, ヒラギノ丸ゴ Pro W3",
     "Hiragino Mincho Pro, ヒラギノ明朝 Pro W3",
-    
-    // Common Linux fonts
-    "Takao Gothic, TakaoGothic",
-    "Takao Mincho, TakaoMincho",
-    "Sazanami Gothic",
-    "Sazanami Mincho",
-    "Kochi Gothic",
-    "Kochi Mincho",
-    "Dejima Mincho",
-    "Ume Gothic",
-    "Ume Mincho",
-    
-    // Other Japanese fonts people use.
-    // You might want to try some of these!
-    "EPSON 行書体Ｍ",
-    "EPSON 正楷書体Ｍ",
-    "EPSON 教科書体Ｍ",
-    "EPSON 太明朝体Ｂ",
-    "EPSON 太行書体Ｂ",
-    "EPSON 丸ゴシック体Ｍ",
-    "cinecaption",
-    "nagayama_kai",
-    "A-OTF Shin Maru Go Pro",
-    "Hosofuwafont",
     "ChihayaGothic",
-    "'Nchifont+'",
+    "cinecaption",
     "darts font",
-    "santyoume-font",
     "FC-Flower",
-    "ArmedBanana", // This one is completely absurd. I recommend it.
     "HakusyuKaisyoExtraBold_kk",
-    "aoyagireisyosimo2, AoyagiKouzanFont2OTF",
-    "aquafont",
-    
-    // Add your fonts here!
-    "Fake font name that you can change",
-    "Another fake font name",
-    "Just add them like this!",
-    "Quotes around the name, comma after."
-];
-
-var existingFonts = [];
-for (var i = 0; i < fonts.length; i++) {
-    var fontName = fonts[i];
-    if (fontExists(fontName)) {
-        existingFonts.push(fontName);
-    }
-}
-
-function fontExists(fontName) {
-    // Approach from kirupa.com/html5/detect_whether_font_is_installed.htm - thanks!
-    // Will return false for the browser's default monospace font, sadly.
-    var canvas = document.createElement('canvas');
-    var context = canvas.getContext("2d");
-    var text = "wim-—l~ツ亻".repeat(100); // Characters with widths that often vary between fonts.
-    
-    context.font = "72px monospace";
-    var defaultWidth = context.measureText(text).width;
-    
-    context.font = "72px " + fontName + ", monospace";
-    var testWidth = context.measureText(text).width;
-    
-    return testWidth != defaultWidth;
-}
+    "Hosofuwafont",
+    "'Nchifont+'",
+    "santyoume-font"
+    ];
 
 function canRepresentGlyphs(fontName, glyphs) {
     var canvas = document.createElement('canvas');
