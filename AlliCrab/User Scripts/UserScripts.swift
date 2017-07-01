@@ -118,12 +118,12 @@ struct UserScriptDefinitions {
                    scriptNames: ["wkoverride.user"],
                    injectionRules: [.ExactMatch(WaniKaniURLs.reviewSession)]),
         
-        UserScript(name: "WaniKani Double Check",
-                   description: "Adds a thumbs up/down button that permits incorrect answers to be marked correct, and correct answers to be marked incorrect.  This script is intended to be used to correct genuine mistakes, like typographical errors.  Script by Ethan.",
-                   forumLink: forumURL(withRelativePath: "/t/UserScript-WaniKani-Double-Check/8396"),
-                   settingKey: ApplicationSettingKeys.userScriptDoubleCheckEnabled,
-                   scriptNames: ["wkdoublecheck"],
-                   injectionRules: [.ExactMatch(WaniKaniURLs.reviewSession)]),
+//        UserScript(name: "WaniKani Double Check",
+//                   description: "Adds a thumbs up/down button that permits incorrect answers to be marked correct, and correct answers to be marked incorrect.  This script is intended to be used to correct genuine mistakes, like typographical errors.  Script by Ethan.",
+//                   forumLink: forumURL(withRelativePath: "/t/UserScript-WaniKani-Double-Check/8396"),
+//                   settingKey: ApplicationSettingKeys.userScriptDoubleCheckEnabled,
+//                   scriptNames: ["wkdoublecheck"],
+//                   injectionRules: [.ExactMatch(WaniKaniURLs.reviewSession)]),
         
         UserScript(name: "WaniKani Improve",
                    description: "Automatically moves to the next item if the answer was correct (also known as \"lightning mode\").  Script by Seiji.",
