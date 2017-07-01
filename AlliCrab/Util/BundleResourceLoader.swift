@@ -22,6 +22,6 @@ extension BundleResourceLoader {
     }
     
     private func encodeForJavascript(_ string: String) -> String {
-        return string.unicodeScalars.map { $0.escaped(asASCII: false) }.joined(separator: "")
+        return string.unicodeScalars.lazy.map { $0.escaped(asASCII: false) }.joined(separator: "")
     }
 }
