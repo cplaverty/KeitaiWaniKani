@@ -256,10 +256,11 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         if self.toolbarItems?.isEmpty == false {
             self.navigationController?.setToolbarHidden(false, animated: true)
         }
-        webView.configuration.userContentController.removeAllUserScripts()
-        if let url = webView.url {
-            _ = injectUserScripts(for: url)
-        }
+        injectUserScripts(to: webView)
+    }
+    
+    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+        injectUserScripts(to: webView)
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
@@ -279,6 +280,13 @@ class WKWebViewController: UIViewController, WKNavigationDelegate, WKUIDelegate,
         case WaniKaniURLs.lessonSession, WaniKaniURLs.reviewSession:
             showBrowserInterface(false, animated: true)
         default: break
+        }
+    }
+    
+    private func injectUserScripts(to webView: WKWebView) {
+        webView.configuration.userContentController.removeAllUserScripts()
+        if let url = webView.url {
+            _ = injectUserScripts(for: url)
         }
     }
     
