@@ -67,7 +67,14 @@ public struct UserNotificationCondition: OperationCondition {
             return
         }
         
-        let current = application.currentUserNotificationSettings
+        var current: UIUserNotificationSettings? = nil
+        if Thread.isMainThread {
+            current = application.currentUserNotificationSettings
+        } else {
+            DispatchQueue.main.sync {
+                current = application.currentUserNotificationSettings
+            }
+        }
         
         if let current = current, current.contains(settings) {
             completion(.satisfied)
