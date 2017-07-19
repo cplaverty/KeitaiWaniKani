@@ -24,6 +24,22 @@ var existingFonts = [
     "santyoume-font"
     ];
 
+function fontExists(fontName) {
+    // Approach from kirupa.com/html5/detect_whether_font_is_installed.htm - thanks!
+    // Will return false for the browser's default monospace font, sadly.
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext("2d");
+    var text = "wim-—l~ツ亻".repeat(100); // Characters with widths that often vary between fonts.
+    
+    context.font = "72px monospace";
+    var defaultWidth = context.measureText(text).width;
+    
+    context.font = "72px " + fontName + ", monospace";
+    var testWidth = context.measureText(text).width;
+    
+    return testWidth != defaultWidth;
+}
+
 function canRepresentGlyphs(fontName, glyphs) {
     var canvas = document.createElement('canvas');
     canvas.width = 50;
@@ -103,6 +119,9 @@ var jitai = {
     },
     
     init: function() {
+        // Force fonts to load
+        existingFonts.forEach(fontExists);
+        
         this.$characterSpan = $('#character span');
         this.defaultFont = this.$characterSpan.css('font-family');
         

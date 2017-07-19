@@ -114,7 +114,7 @@ extension WKWebViewUserScriptSupport {
                 let url = URL(fileURLWithPath: path)
                 if let data = try? Data(contentsOf: url) {
                     DDLogDebug("Adding \(fontFamily)...")
-                    let source = "@font-face { font-family: \"\(fontFamily)\"; src: url(data:\(mimeType);base64,\(data.base64EncodedString())) format(\"\(fontFormat)\"); }"
+                    let source = "@font-face { font-family: \"\(fontFamily)\"; src: local(\"\(fontFamily)\") url(data:\(mimeType);base64,\(data.base64EncodedString())) format(\"\(fontFormat)\"); }"
                     injectStyleSheet(title: "font: \(fontFamily)", contents: source)
                 }
             }
