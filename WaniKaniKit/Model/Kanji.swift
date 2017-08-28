@@ -2,43 +2,40 @@
 //  Kanji.swift
 //  WaniKaniKit
 //
-//  Copyright © 2015 Chris Laverty. All rights reserved.
+//  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-import Foundation
-
-public struct Kanji: SRSDataItem, Equatable {
-    /// Primary key
-    public let character: String
-    public let meaning: String
-    public let onyomi: String?
-    public let kunyomi: String?
-    public let nanori: String?
-    public let importantReading: String
+public struct Kanji: ResourceCollectionItemData, Subject {
     public let level: Int
-    public let userSpecificSRSData: UserSpecificSRSData?
-    public let lastUpdateTimestamp: Date
+    public let createdAt: Date
+    public let slug: String
+    public let character: String
+    public let meanings: [Meaning]
+    public let readings: [Reading]
+    public let componentSubjectIDs: [Int]
+    public let documentURL: URL
     
-    public init(character: String, meaning: String, onyomi: String? = nil, kunyomi: String? = nil, nanori: String? = nil, importantReading: String, level: Int, userSpecificSRSData: UserSpecificSRSData? = nil, lastUpdateTimestamp: Date? = nil) {
-        self.character = character
-        self.meaning = meaning
-        self.onyomi = onyomi
-        self.kunyomi = kunyomi
-        self.nanori = nanori
-        self.importantReading = importantReading
-        self.level = level
-        self.userSpecificSRSData = userSpecificSRSData
-        self.lastUpdateTimestamp = lastUpdateTimestamp ?? Date()
+    private enum CodingKeys: String, CodingKey {
+        case level
+        case createdAt = "created_at"
+        case slug
+        case character
+        case meanings
+        case readings
+        case componentSubjectIDs = "component_subject_ids"
+        case documentURL = "document_url"
     }
 }
 
-public func ==(lhs: Kanji, rhs: Kanji) -> Bool {
-    return lhs.character == rhs.character &&
-        lhs.meaning == rhs.meaning &&
-        lhs.onyomi == rhs.onyomi &&
-        lhs.kunyomi == rhs.kunyomi &&
-        lhs.nanori == rhs.nanori &&
-        lhs.importantReading == rhs.importantReading &&
-        lhs.level == rhs.level &&
-        lhs.userSpecificSRSData == rhs.userSpecificSRSData
+extension Kanji: Equatable {
+    public static func ==(lhs: Kanji, rhs: Kanji) -> Bool {
+        return lhs.level == rhs.level
+            && lhs.createdAt == rhs.createdAt
+            && lhs.slug == rhs.slug
+            && lhs.character == rhs.character
+            && lhs.meanings == rhs.meanings
+            && lhs.readings == rhs.readings
+            && lhs.componentSubjectIDs == rhs.componentSubjectIDs
+            && lhs.documentURL == rhs.documentURL
+    }
 }

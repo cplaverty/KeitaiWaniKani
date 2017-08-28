@@ -1,6 +1,0 @@
-framework module Pods_OperationKitTests {
-  umbrella header "Pods-OperationKitTests-umbrella.h"
-
-  export *
-  module * { export * }
-}

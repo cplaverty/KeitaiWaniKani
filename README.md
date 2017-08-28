@@ -26,6 +26,7 @@ Since the project uses an app extension with a shared App Group, you'll have to 
 - Clone / download the project
 - Edit "fastlane/Appfile" and set your own bundle identifier, plus set your Apple ID and Team ID
 - Run `fastlane setupID` using the command line
+- Change the groupIdentifier variable in initialiser of AppGroupDatabaseConnectionFactory in WaniKaniKit/Database/DatabaseConnectionFactory.swift
 - Select your signing identity for the `AlliCrab` and `WaniKaniStudyQueueWidget` targets.
 - You should now be able to run the project on your device!
 

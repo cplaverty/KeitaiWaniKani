@@ -2,34 +2,43 @@
 //  Vocabulary.swift
 //  WaniKaniKit
 //
-//  Copyright © 2015 Chris Laverty. All rights reserved.
+//  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-import Foundation
-
-public struct Vocabulary: SRSDataItem, Equatable {
-    /// Primary key
-    public let character: String
-    public let meaning: String
-    public let kana: String
+public struct Vocabulary: ResourceCollectionItemData, Subject {
     public let level: Int
-    public let userSpecificSRSData: UserSpecificSRSData?
-    public let lastUpdateTimestamp: Date
+    public let createdAt: Date
+    public let slug: String
+    public let characters: String
+    public let meanings: [Meaning]
+    public let readings: [Reading]
+    public let partsOfSpeech: [String]
+    public let componentSubjectIDs: [Int]
+    public let documentURL: URL
     
-    public init(character: String, meaning: String, kana: String, level: Int, userSpecificSRSData: UserSpecificSRSData? = nil, lastUpdateTimestamp: Date? = nil) {
-        self.character = character
-        self.meaning = meaning
-        self.kana = kana
-        self.level = level
-        self.userSpecificSRSData = userSpecificSRSData
-        self.lastUpdateTimestamp = lastUpdateTimestamp ?? Date()
+    private enum CodingKeys: String, CodingKey {
+        case level
+        case createdAt = "created_at"
+        case slug
+        case characters
+        case meanings
+        case readings
+        case partsOfSpeech = "parts_of_speech"
+        case componentSubjectIDs = "component_subject_ids"
+        case documentURL = "document_url"
     }
 }
 
-public func ==(lhs: Vocabulary, rhs: Vocabulary) -> Bool {
-    return lhs.character == rhs.character &&
-        lhs.meaning == rhs.meaning &&
-        lhs.kana == rhs.kana &&
-        lhs.level == rhs.level &&
-        lhs.userSpecificSRSData == rhs.userSpecificSRSData
+extension Vocabulary: Equatable {
+    public static func ==(lhs: Vocabulary, rhs: Vocabulary) -> Bool {
+        return lhs.level == rhs.level
+            && lhs.createdAt == rhs.createdAt
+            && lhs.slug == rhs.slug
+            && lhs.characters == rhs.characters
+            && lhs.meanings == rhs.meanings
+            && lhs.readings == rhs.readings
+            && lhs.partsOfSpeech == rhs.partsOfSpeech
+            && lhs.componentSubjectIDs == rhs.componentSubjectIDs
+            && lhs.documentURL == rhs.documentURL
+    }
 }

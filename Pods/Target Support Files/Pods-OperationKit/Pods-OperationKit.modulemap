@@ -1,6 +1,0 @@
-framework module Pods_OperationKit {
-  umbrella header "Pods-OperationKit-umbrella.h"
-
-  export *
-  module * { export * }
-}

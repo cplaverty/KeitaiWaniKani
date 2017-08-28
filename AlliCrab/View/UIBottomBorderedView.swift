@@ -2,7 +2,7 @@
 //  UIBottomBorderedView.swift
 //  AlliCrab
 //
-//  Copyright © 2016 Chris Laverty. All rights reserved.
+//  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
 import UIKit

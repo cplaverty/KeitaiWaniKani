@@ -97,7 +97,7 @@ platform :ios do
     app_group_identifiers = [app_group_identifier]
     
     update_app_group_identifiers(
-      entitlements_file: "KeitaiWaniKani/KeitaiWaniKani.entitlements",
+      entitlements_file: "AlliCrab/AlliCrab.entitlements",
       app_group_identifiers: app_group_identifiers
     )
     
@@ -110,7 +110,7 @@ platform :ios do
     
     # Set CFBundleIdentifier for 'AlliCrab' target
     update_app_identifier(
-      plist_path: "KeitaiWaniKani/Info.plist",
+      plist_path: "AlliCrab/Info.plist",
       app_identifier: app_identifier
     )
     

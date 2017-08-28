@@ -1,3 +1,0 @@
-# WaniKaniKitTests
-
-Please note there are tests that require live data from [WaniKani](https://www.wanikani.com). I have only included data from levels 1 and 2, since this information is free for anyone that signs up for an account.  Several tests require data up to level 20, but since this is paid content I have elected not to include it.  Those tests will fail until I can create some dummy data for them to parse.

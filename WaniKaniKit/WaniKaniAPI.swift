@@ -2,195 +2,328 @@
 //  WaniKaniAPI.swift
 //  WaniKaniKit
 //
-//  Copyright © 2015 Chris Laverty. All rights reserved.
+//  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-import Foundation
-import CocoaLumberjack
-import FMDB
+import os
 
-private let currentDatabaseVersion = 1
+public protocol WaniKaniAPIProtocol {
+    func fetchResource(ofType type: StandaloneResourceRequestType, completionHandler: @escaping (StandaloneResource?, Error?) -> Void) -> Progress
+    func fetchResource(ofType type: ResourceCollectionItemRequestType, completionHandler: @escaping (ResourceCollectionItem?, Error?) -> Void) -> Progress
+    func fetchResourceCollection(ofType type: ResourceCollectionRequestType, completionHandler: @escaping (ResourceCollection?, Error?) -> Bool) -> Progress
+}
 
-private struct DatabaseMetadata {
-    var databaseVersion: Int {
-        get {
-            do {
-                return try database.longForQuery("SELECT value FROM \(tableName) where name = ?", "version" as NSString) ?? 0
-            } catch {
-                return 0
-            }
+public protocol NetworkActivityDelegate: class {
+    func networkActivityDidStart()
+    func networkActivityDidFinish()
+}
+
+private class Request {
+    let progress: Progress
+    var tasks = [URLSessionDataTask]()
+    
+    init() {
+        progress = Progress(totalUnitCount: -1)
+        progress.isCancellable = true
+        progress.isPausable = true
+        
+        progress.cancellationHandler = cancel
+        progress.pausingHandler = suspend
+        progress.resumingHandler = resume
+    }
+    
+    deinit {
+        if #available(iOS 10, *) {
+            os_log("Marking progress complete for request (was %jd of %jd)", type: .debug, progress.completedUnitCount, progress.totalUnitCount)
         }
-        set {
-            do {
-                try database.executeUpdate("INSERT OR REPLACE INTO \(tableName)(name, value) VALUES (?, ?)", "version" as NSString, newValue as NSNumber)
-            } catch {
-                DDLogWarn("Failed to update database version: \(error)")
-            }
+        progress.totalUnitCount = min(progress.totalUnitCount, 1)
+        progress.completedUnitCount = min(progress.totalUnitCount, 1)
+    }
+    
+    var isCancelled: Bool {
+        return progress.isCancelled
+    }
+    
+    var isPaused: Bool {
+        return progress.isPaused
+    }
+    
+    func cancel() {
+        tasks.forEach { task in
+            task.cancel()
         }
     }
     
-    private let tableName = "kwk_metadata"
-    private let database: FMDatabase
+    func suspend() {
+        tasks.forEach { task in
+            task.suspend()
+        }
+    }
     
-    init(database: FMDatabase) throws {
-        self.database = database
-        try database.executeUpdate("CREATE TABLE IF NOT EXISTS \(self.tableName)(name TEXT PRIMARY KEY, value TEXT)")
+    func resume() {
+        tasks.forEach { task in
+            task.resume()
+        }
     }
 }
 
-public struct WaniKaniDarwinNotificationCenter {
-    public static let modelUpdateNotificationName = "uk.me.laverty.KeitaiWaniKani.ModelUpdate"
+public class WaniKaniAPI: WaniKaniAPIProtocol {
+    public let apiKey: String
     
-    public static func notificationNameForModelObjectType(_ modelObjectType: String) -> NSString {
-        return "\(modelUpdateNotificationName).\(modelObjectType)" as NSString
-    }
+    public weak var networkActivityDelegate: NetworkActivityDelegate?
     
-    public static func postModelUpdateMessage(_ modelObjectType: String) {
-        let nc = CFNotificationCenterGetDarwinNotifyCenter()
-        CFNotificationCenterPostNotification(nc, CFNotificationName(notificationNameForModelObjectType(modelObjectType)), nil, nil, true)
-    }
-}
-
-public struct WaniKaniAPI {
-    public static let updateMinuteCount = 15
-    public static let refreshTimeOffsetSeconds = Int(arc4random_uniform(25)) + 5
+    private let endpoints: Endpoints
+    private let decoder: ResourceDecoder
+    private let session: URLSession
     
-    public static func isAccelerated(level: Int) -> Bool {
-        return level <= 2
-    }
-    
-    public static func lastRefreshTimeFromNow() -> Date {
-        return lastRefreshTime(from: Date())
-    }
-    
-    public static func lastRefreshTime(from baseDate: Date) -> Date {
-        let calendar = Calendar.autoupdatingCurrent
-        let currentTimeComponents = calendar.dateComponents([.minute, .second], from: baseDate)
-        var offsetComponents = DateComponents()
-        offsetComponents.minute = -(currentTimeComponents.minute! % updateMinuteCount)
-        offsetComponents.second = -currentTimeComponents.second!
-        return calendar.date(byAdding: offsetComponents, to: baseDate)!
-    }
-    
-    public static func nextRefreshTimeFromNow() -> Date {
-        return nextRefreshTime(from: Date())
-    }
-    
-    public static func nextRefreshTime(from baseDate: Date) -> Date {
-        let lastRefreshTime = self.lastRefreshTime(from: baseDate)
+    public init(apiKey: String,
+                endpoints: Endpoints = Endpoints.default,
+                decoder: ResourceDecoder = WaniKaniResourceDecoder()) {
+        self.apiKey = apiKey
+        self.endpoints = endpoints
+        self.decoder = decoder
         
-        let calendar = Calendar.autoupdatingCurrent
-        // To allow for any kind of difference in time between local and the server, wait 'refreshTimeOffsetSeconds' past the "ideal" refresh time
-        var offsetComponents = DateComponents()
-        offsetComponents.minute = updateMinuteCount
-        offsetComponents.second = refreshTimeOffsetSeconds
-        return calendar.date(byAdding: offsetComponents, to: lastRefreshTime)!
-    }
-    
-    public static func needsRefresh(since lastRefreshTime: Date) -> Bool {
-        let mostRecentAPIDataChangeTime = WaniKaniAPI.lastRefreshTimeFromNow()
-        let secondsSinceLastRefreshTime = lastRefreshTime.timeIntervalSince(mostRecentAPIDataChangeTime)
-        // Only update if we haven't updated since the last refresh time
-        return secondsSinceLastRefreshTime <= 0
-    }
-    
-    public static func databaseIsCurrentVersion(_ database: FMDatabase) throws -> Bool {
-        let metadata = try DatabaseMetadata(database: database)
-        return metadata.databaseVersion == currentDatabaseVersion
-    }
-    
-    public static func createTables(in database: FMDatabase) throws {
-        #if DEBUG
-            database.crashOnErrors = true
-        #endif
-        
-        var metadata = try DatabaseMetadata(database: database)
-        
-        let shouldDropTable = metadata.databaseVersion != currentDatabaseVersion
-        
-        DDLogInfo("Database at version \(metadata.databaseVersion)")
-        if shouldDropTable {
-            DDLogInfo("Upgrading database from version \(metadata.databaseVersion) to \(currentDatabaseVersion)")
-        }
-        try UserInformation.coder.createTable(in: database, dropExisting: shouldDropTable)
-        try StudyQueue.coder.createTable(in: database, dropExisting: shouldDropTable)
-        try LevelProgression.coder.createTable(in: database, dropExisting: shouldDropTable)
-        try SRSDistribution.coder.createTable(in: database, dropExisting: shouldDropTable)
-        try Radical.coder.createTable(in: database, dropExisting: shouldDropTable)
-        try Kanji.coder.createTable(in: database, dropExisting: shouldDropTable)
-        try Vocabulary.coder.createTable(in: database, dropExisting: shouldDropTable)
-        metadata.databaseVersion = currentDatabaseVersion
-        
-        DDLogInfo("Vacuuming database")
-        try database.executeUpdate("VACUUM")
-        
-        database.shouldCacheStatements = true
-    }
-    
-    public static func resourceResolverForAPIKey(_ apiKey: String) -> ResourceResolver {
-        return WaniKaniAPIResourceResolver(apiKey: apiKey)
-    }
-    
-    public static func minimumTime(fromSRSLevel initialLevel: Int, to finalLevel: Int, fromDate baseDate: Date, isAcceleratedLevel: Bool) -> Date? {
-        var guruDate = baseDate
-        let calendar = Calendar.autoupdatingCurrent
-        for level in initialLevel..<finalLevel {
-            guard let timeForLevel = timeToNextReview(forSRSLevel: level, isAcceleratedLevel: isAcceleratedLevel) else { return nil }
-            guruDate = calendar.date(byAdding: timeForLevel, to: guruDate)!
+        let config = URLSessionConfiguration.default
+        if #available(iOS 11.0, *) {
+            config.waitsForConnectivity = true
         }
         
-        return guruDate
+        session = URLSession(configuration: config)
     }
     
-    private static func timeToNextReview(forSRSLevel srsLevelNumeric: Int, isAcceleratedLevel: Bool) -> DateComponents? {
-        switch srsLevelNumeric {
-        case 1 where isAcceleratedLevel:
-            var dc = DateComponents()
-            dc.hour = 2
-            return dc
-        case 1,
-             2 where isAcceleratedLevel:
-            var dc = DateComponents()
-            dc.hour = 4
-            return dc
-        case 2,
-             3 where isAcceleratedLevel:
-            var dc = DateComponents()
-            dc.hour = 8
-            return dc
-        case 3,
-             4 where isAcceleratedLevel:
-            var dc = DateComponents()
-            dc.day = 1
-            dc.hour = -1
-            return dc
-        case 4:
-            var dc = DateComponents()
-            dc.day = 2
-            dc.hour = -1
-            return dc
-        case 5:
-            var dc = DateComponents()
-            dc.day = 7
-            dc.hour = -1
-            return dc
-        case 6:
-            var dc = DateComponents()
-            dc.day = 14
-            dc.hour = -1
-            return dc
-        case 7:
-            var dc = DateComponents()
-            dc.month = 1
-            dc.hour = -1
-            return dc
-        case 8:
-            var dc = DateComponents()
-            dc.month = 4
-            dc.hour = -1
-            return dc
-        default: return nil
+    deinit {
+        session.invalidateAndCancel()
+    }
+    
+    public func fetchResource(ofType type: StandaloneResourceRequestType, completionHandler: @escaping (StandaloneResource?, Error?) -> Void) -> Progress {
+        return fetchResource(with: type.url(from: endpoints), completionHandler: completionHandler)
+    }
+    
+    public func fetchResource(ofType type: ResourceCollectionItemRequestType, completionHandler: @escaping (ResourceCollectionItem?, Error?) -> Void) -> Progress {
+        return fetchResource(with: type.url(from: endpoints), completionHandler: completionHandler)
+    }
+    
+    private func fetchResource<T: Decodable>(with url: URL, completionHandler: @escaping (T?, Error?) -> Void) -> Progress {
+        let progress = Progress(totalUnitCount: 1)
+        progress.isCancellable = true
+        progress.isPausable = true
+        
+        let task = dataTask(with: url) { (data, response, error) in
+            defer { progress.completedUnitCount = 1 }
+            do {
+                let resource = try self.parseResource(T.self, data: data, response: response, error: error)
+                completionHandler(resource, error)
+            } catch let error as URLError where error.code == .cancelled {
+                // Ignore cancellation errors
+            } catch {
+                completionHandler(nil, error)
+            }
+        }
+        progress.cancellationHandler = { task.cancel() }
+        progress.pausingHandler = { task.suspend() }
+        progress.resumingHandler = { task.resume() }
+        
+        task.resume()
+        
+        return progress
+    }
+    
+    public func fetchResourceCollection(ofType type: ResourceCollectionRequestType, completionHandler: @escaping (ResourceCollection?, Error?) -> Bool) -> Progress {
+        let request = Request()
+        
+        let task = fetchResourceCollection(with: type.url(from: endpoints), request: request, allPagesFetched: false, completionHandler: completionHandler)
+        request.tasks.append(task)
+        
+        return request.progress
+    }
+    
+    private func fetchResourceCollection(with url: URL, request: Request, allPagesFetched: Bool, completionHandler: @escaping (ResourceCollection?, Error?) -> Bool) -> URLSessionDataTask {
+        let task = dataTask(with: url) { (data, response, error) in
+            defer { request.progress.completedUnitCount += 1 }
+            do {
+                let resources = try self.parseResource(ResourceCollection.self, data: data, response: response, error: error)
+                
+                if let pages = resources?.pages {
+                    request.progress.totalUnitCount = Int64(pages.lastNumber)
+                    
+                    guard !request.isCancelled else { return }
+                    
+                    if !allPagesFetched {
+                        if let allPages = self.getAllLocations(for: pages) {
+                            allPages.forEach { nextPage in
+                                request.tasks.append(self.fetchResourceCollection(with: nextPage, request: request, allPagesFetched: true, completionHandler: completionHandler))
+                            }
+                        } else if let nextPage = pages.nextURL {
+                            request.tasks.append(self.fetchResourceCollection(with: nextPage, request: request, allPagesFetched: false, completionHandler: completionHandler))
+                        }
+                    }
+                } else {
+                    request.progress.totalUnitCount = 1
+                }
+                
+                guard !request.isCancelled else { return }
+                
+                let shouldGetNextPage = completionHandler(resources, error)
+                if !shouldGetNextPage {
+                    request.cancel()
+                }
+            } catch let error as URLError where error.code == .cancelled {
+                // Do not notify errors due to cancellation
+            } catch {
+                _ = completionHandler(nil, error)
+            }
+        }
+        
+        if !request.isCancelled && !request.isPaused {
+            task.resume()
+        }
+        
+        return task
+    }
+    
+    private func getAllLocations(for pages: ResourceCollection.Pages) -> [URL]? {
+        let pageQueryItemName = "page"
+        guard let nextPage = pages.nextURL else {
+            return []
+        }
+        
+        guard let urlComponents = URLComponents(url: nextPage, resolvingAgainstBaseURL: true),
+            let queryItem = urlComponents.queryItems,
+            let pageQueryItemIndex = queryItem.index(where: { queryItem in queryItem.name == pageQueryItemName }) else {
+                return nil
+        }
+        
+        let startingPage = queryItem[pageQueryItemIndex].value.flatMap { Int($0) } ?? pages.currentNumber + 1
+        
+        let pages: [URL] = (startingPage...pages.lastNumber).map { pageNumber in
+            var newComponents = urlComponents
+            newComponents.queryItems![pageQueryItemIndex] = URLQueryItem(name: "page", value: String(pageNumber))
+            return newComponents.url!
+        }
+        
+        return pages
+    }
+    
+    private func parseResource<T: Decodable>(_ type: T.Type, data: Data?, response: URLResponse?, error: Error?) throws -> T? {
+        if let error = error {
+            throw error
+        }
+        
+        let httpResponse = response as? HTTPURLResponse
+        let httpStatusCode: Int = httpResponse?.statusCode ?? 200
+        let httpStatusCodeDescription = HTTPURLResponse.localizedString(forStatusCode: httpStatusCode)
+        
+        if #available(iOS 10.0, *) {
+            if let data = data {
+                os_log("Response: %@ (%d), %{iec-bytes}d received", type: .debug, httpStatusCodeDescription, httpStatusCode, data.count)
+            } else {
+                os_log("Response: %@ (%d) <no data>", type: .debug, httpStatusCodeDescription, httpStatusCode)
+            }
+        }
+        
+        switch httpStatusCode {
+        case 200:
+            guard let data = data else { throw WaniKaniAPIError.noContent }
+            return try self.decoder.decode(type, from: data)
+        case 304:
+            return nil
+        case 400..<500:
+            let errorMessage: String
+            if let data = data, let error = try? self.decoder.decode(APIError.self, from: data) {
+                errorMessage = error.message
+            } else {
+                errorMessage = httpStatusCodeDescription
+            }
+            
+            if #available(iOS 10.0, *) {
+                os_log("Error message received: %@", type: .debug, errorMessage)
+            }
+            
+            switch httpStatusCode {
+            case 401:
+                throw WaniKaniAPIError.invalidAPIKey
+            case 404:
+                throw WaniKaniAPIError.resourceNotFound
+            default:
+                throw WaniKaniAPIError.unknownError(httpStatusCode: httpStatusCode, message: errorMessage)
+            }
+        default:
+            throw WaniKaniAPIError.unhandledStatusCode(httpStatusCode: httpStatusCode, data: data)
         }
     }
     
+    private func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+        var urlRequest = URLRequest(url: url)
+        urlRequest.setValue("Token token=\(apiKey)", forHTTPHeaderField: "Authorization")
+        
+        if #available(iOS 10.0, *) {
+            os_log("Initiating request for %@", type: .debug, url.absoluteString)
+        }
+        
+        let task = session.dataTask(with: urlRequest, completionHandler: completionHandler)
+        addTaskStateListener(task)
+        
+        return task
+    }
+    
+    private func addTaskStateListener(_ task: URLSessionTask) {
+        guard let networkActivityDelegate = self.networkActivityDelegate else {
+            return
+        }
+        
+        var running = false
+        var observer: NSKeyValueObservation! = nil
+        observer = task.observe(\.state) { (task, change) in
+            DispatchQueue.main.async {
+                switch task.state {
+                case .running:
+                    guard !running else {
+                        if #available(iOS 10.0, *) {
+                            os_log("Ignoring duplicate state change for task with identifier %d triggering network activity start", type: .debug, task.taskIdentifier)
+                        }
+                        return
+                    }
+                    if #available(iOS 10.0, *) {
+                        os_log("Task with identifier %d triggering network activity start", type: .debug, task.taskIdentifier)
+                    }
+                    networkActivityDelegate.networkActivityDidStart()
+                    running = true
+                case .suspended:
+                    guard running else {
+                        if #available(iOS 10.0, *) {
+                            os_log("Ignoring duplicate state change for task with identifier %d triggering network activity finish", type: .debug, task.taskIdentifier)
+                        }
+                        return
+                    }
+                    if #available(iOS 10.0, *) {
+                        os_log("Task with identifier %d triggering network activity finish", type: .debug, task.taskIdentifier)
+                    }
+                    networkActivityDelegate.networkActivityDidFinish()
+                    running = false
+                case .canceling, .completed:
+                    guard running else {
+                        if #available(iOS 10.0, *) {
+                            os_log("Ignoring duplicate state change for task with identifier %d triggering network activity finish (terminal state)", type: .debug, task.taskIdentifier)
+                        }
+                        return
+                    }
+                    if #available(iOS 10.0, *) {
+                        os_log("Task with identifier %d triggering network activity finish (terminal state)", type: .debug, task.taskIdentifier)
+                    }
+                    guard running else { return }
+                    networkActivityDelegate.networkActivityDidFinish()
+                    running = false
+                    observer.invalidate()
+                }
+            }
+        }
+    }
+    
+    private struct APIError: Codable {
+        let message: String
+        
+        private enum CodingKeys: String, CodingKey {
+            case message = "error"
+        }
+    }
 }

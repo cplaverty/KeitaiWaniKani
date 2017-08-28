@@ -2,34 +2,58 @@
 //  Radical.swift
 //  WaniKaniKit
 //
-//  Copyright © 2015 Chris Laverty. All rights reserved.
+//  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-import Foundation
-
-public struct Radical: SRSDataItem, Equatable {
-    public let character: String?
-    /// Primary key
-    public let meaning: String
-    public let image: URL?
-    public let level: Int
-    public let userSpecificSRSData: UserSpecificSRSData?
-    public let lastUpdateTimestamp: Date
+public struct Radical: ResourceCollectionItemData {
+    public struct CharacterImage: Codable {
+        public let contentType: String
+        public let url: URL
+        
+        private enum CodingKeys: String, CodingKey {
+            case contentType = "content_type"
+            case url
+        }
+    }
     
-    public init(character: String? = nil, meaning: String, image: URL? = nil, level: Int, userSpecificSRSData: UserSpecificSRSData? = nil, lastUpdateTimestamp: Date? = nil) {
-        self.character = character
-        self.meaning = meaning
-        self.image = image
-        self.level = level
-        self.userSpecificSRSData = userSpecificSRSData
-        self.lastUpdateTimestamp = lastUpdateTimestamp ?? Date()
+    public let level: Int
+    public let createdAt: Date
+    public let slug: String
+    public let character: String?
+    public let characterImages: [CharacterImage]
+    public let meanings: [Meaning]
+    public let documentURL: URL
+    
+    private enum CodingKeys: String, CodingKey {
+        case level
+        case createdAt = "created_at"
+        case slug
+        case character
+        case characterImages = "character_images"
+        case meanings
+        case documentURL = "document_url"
     }
 }
 
-public func ==(lhs: Radical, rhs: Radical) -> Bool {
-    return lhs.character == rhs.character &&
-        lhs.meaning == rhs.meaning &&
-        lhs.image == rhs.image &&
-        lhs.level == rhs.level &&
-        lhs.userSpecificSRSData == rhs.userSpecificSRSData
+extension Radical: Subject {
+    public var componentSubjectIDs: [Int] { return [] }
+}
+
+extension Radical: Equatable {
+    public static func ==(lhs: Radical, rhs: Radical) -> Bool {
+        return lhs.level == rhs.level
+            && lhs.createdAt == rhs.createdAt
+            && lhs.slug == rhs.slug
+            && lhs.character == rhs.character
+            && lhs.characterImages == rhs.characterImages
+            && lhs.meanings == rhs.meanings
+            && lhs.documentURL == rhs.documentURL
+    }
+}
+
+extension Radical.CharacterImage: Equatable {
+    public static func ==(lhs: Radical.CharacterImage, rhs: Radical.CharacterImage) -> Bool {
+        return lhs.contentType == rhs.contentType
+            && lhs.url == rhs.url
+    }
 }

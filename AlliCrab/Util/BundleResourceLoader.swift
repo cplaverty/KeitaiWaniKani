@@ -2,10 +2,10 @@
 //  BundleResourceLoader.swift
 //  AlliCrab
 //
-//  Copyright © 2016 Chris Laverty. All rights reserved.
+//  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol BundleResourceLoader {
     func loadBundleResource(name: String, withExtension: String, javascriptEncode: Bool) -> String

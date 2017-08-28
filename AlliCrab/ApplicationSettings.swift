@@ -2,114 +2,93 @@
 //  ApplicationSettings.swift
 //  AlliCrab
 //
-//  Copyright © 2015 Chris Laverty. All rights reserved.
+//  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-import Foundation
 import WaniKaniKit
 
-struct ApplicationSettingKeys {
-    static let apiKey = "apiKey"
-    static let apiKeyVerified = "apiKeyVerified"
-    static let purgeDatabase = "purgeDatabase"
-    static let disableLessonSwipe = "disableLessonSwipe"
-    static let lastRefreshTime = "lastRefreshTime"
-    static let forceRefresh = "forceRefresh"
-    static let userScriptJitaiEnabled = "userScript-Jitai"
-    static let userScriptIgnoreAnswerEnabled = "userScript-IgnoreAnswer"
-    static let userScriptDoubleCheckEnabled = "userScript-DoubleCheck"
-    static let userScriptWaniKaniImproveEnabled = "userScript-WaniKaniImprove"
-    static let userScriptMarkdownNotesEnabled = "userScript-MarkdownNotes"
-    static let userScriptHideMnemonicsEnabled = "userScript-HideMnemonics"
-    static let userScriptReorderUltimateEnabled = "userScript-ReorderUltimate"
+enum ApplicationSettingKey: String {
+    case apiKey = "apiKeyV2"
+    case purgeDatabase = "purgeDatabase"
+    case disableLessonSwipe = "disableLessonSwipe"
+    case userScriptJitaiEnabled = "userScript-Jitai"
+    case userScriptIgnoreAnswerEnabled = "userScript-IgnoreAnswer"
+    case userScriptDoubleCheckEnabled = "userScript-DoubleCheck"
+    case userScriptWaniKaniImproveEnabled = "userScript-WaniKaniImprove"
+    case userScriptMarkdownNotesEnabled = "userScript-MarkdownNotes"
+    case userScriptHideMnemonicsEnabled = "userScript-HideMnemonics"
+    case userScriptReorderUltimateEnabled = "userScript-ReorderUltimate"
 }
 
-struct ApplicationSettings {
-    
-    static var globalTintColor: UIColor {
+extension UIColor {
+    class var globalTintColor: UIColor {
         return UIColor(red: 29 / 255, green: 148 / 255, blue: 149 / 255, alpha: 1)
     }
     
-    static var globalBarTintColor: UIColor {
+    class var globalBarTintColor: UIColor {
         return UIColor(hue: 180 / 360, saturation: 0.05, brightness: 0.9, alpha: 1)
     }
-    
+}
+
+struct ApplicationSettings {
     static var userDefaults: UserDefaults {
         return UserDefaults.standard
     }
     
     static var apiKey: String? {
-        get { return userDefaults.string(forKey: ApplicationSettingKeys.apiKey) }
-        set { userDefaults.set(newValue, forKey: ApplicationSettingKeys.apiKey) }
-    }
-    
-    static var apiKeyVerified: Bool {
-        get { return userDefaults.bool(forKey: ApplicationSettingKeys.apiKeyVerified) }
-        set { userDefaults.set(newValue, forKey: ApplicationSettingKeys.apiKeyVerified) }
+        get { return userDefaults.string(forKey: .apiKey) }
+        set { userDefaults.set(newValue, forKey: .apiKey) }
     }
     
     static var purgeDatabase: Bool {
-        get { return userDefaults.bool(forKey: ApplicationSettingKeys.purgeDatabase) }
-        set { userDefaults.set(newValue, forKey: ApplicationSettingKeys.purgeDatabase) }
+        get { return userDefaults.bool(forKey: .purgeDatabase) }
+        set { userDefaults.set(newValue, forKey: .purgeDatabase) }
     }
     
     static var disableLessonSwipe: Bool {
-        get { return userDefaults.bool(forKey: ApplicationSettingKeys.disableLessonSwipe) }
-        set { userDefaults.set(newValue, forKey: ApplicationSettingKeys.disableLessonSwipe) }
-    }
-    
-    static var lastRefreshTime: Date? {
-        get { return userDefaults.object(forKey: ApplicationSettingKeys.lastRefreshTime) as? Date }
-        set { userDefaults.set(newValue, forKey: ApplicationSettingKeys.lastRefreshTime) }
-    }
-    
-    static var forceRefresh: Bool {
-        get { return userDefaults.bool(forKey: ApplicationSettingKeys.forceRefresh) }
-        set { userDefaults.set(newValue, forKey: ApplicationSettingKeys.forceRefresh) }
+        get { return userDefaults.bool(forKey: .disableLessonSwipe) }
+        set { userDefaults.set(newValue, forKey: .disableLessonSwipe) }
     }
     
     static var userScriptJitaiEnabled: Bool {
-        get { return userDefaults.bool(forKey: ApplicationSettingKeys.userScriptJitaiEnabled) }
-        set { userDefaults.set(newValue, forKey: ApplicationSettingKeys.userScriptJitaiEnabled) }
+        get { return userDefaults.bool(forKey: .userScriptJitaiEnabled) }
+        set { userDefaults.set(newValue, forKey: .userScriptJitaiEnabled) }
     }
     
     static var userScriptIgnoreAnswerEnabled: Bool {
-        get { return userDefaults.bool(forKey: ApplicationSettingKeys.userScriptIgnoreAnswerEnabled) }
-        set { userDefaults.set(newValue, forKey: ApplicationSettingKeys.userScriptIgnoreAnswerEnabled) }
+        get { return userDefaults.bool(forKey: .userScriptIgnoreAnswerEnabled) }
+        set { userDefaults.set(newValue, forKey: .userScriptIgnoreAnswerEnabled) }
     }
     
     static var userScriptDoubleCheckEnabled: Bool {
-        get { return userDefaults.bool(forKey: ApplicationSettingKeys.userScriptDoubleCheckEnabled) }
-        set { userDefaults.set(newValue, forKey: ApplicationSettingKeys.userScriptDoubleCheckEnabled) }
+        get { return userDefaults.bool(forKey: .userScriptDoubleCheckEnabled) }
+        set { userDefaults.set(newValue, forKey: .userScriptDoubleCheckEnabled) }
     }
     
     static var userScriptWaniKaniImproveEnabled: Bool {
-        get { return userDefaults.bool(forKey: ApplicationSettingKeys.userScriptWaniKaniImproveEnabled) }
-        set { userDefaults.set(newValue, forKey: ApplicationSettingKeys.userScriptWaniKaniImproveEnabled) }
+        get { return userDefaults.bool(forKey: .userScriptWaniKaniImproveEnabled) }
+        set { userDefaults.set(newValue, forKey: .userScriptWaniKaniImproveEnabled) }
     }
     
     static var userScriptMarkdownNotesEnabled: Bool {
-        get { return userDefaults.bool(forKey: ApplicationSettingKeys.userScriptMarkdownNotesEnabled) }
-        set { userDefaults.set(newValue, forKey: ApplicationSettingKeys.userScriptMarkdownNotesEnabled) }
+        get { return userDefaults.bool(forKey: .userScriptMarkdownNotesEnabled) }
+        set { userDefaults.set(newValue, forKey: .userScriptMarkdownNotesEnabled) }
     }
     
     static var userScriptHideMnemonicsEnabled: Bool {
-        get { return userDefaults.bool(forKey: ApplicationSettingKeys.userScriptHideMnemonicsEnabled) }
-        set { userDefaults.set(newValue, forKey: ApplicationSettingKeys.userScriptHideMnemonicsEnabled) }
+        get { return userDefaults.bool(forKey: .userScriptHideMnemonicsEnabled) }
+        set { userDefaults.set(newValue, forKey: .userScriptHideMnemonicsEnabled) }
     }
     
     static var userScriptReorderUltimateEnabled: Bool {
-        get { return userDefaults.bool(forKey: ApplicationSettingKeys.userScriptReorderUltimateEnabled) }
-        set { userDefaults.set(newValue, forKey: ApplicationSettingKeys.userScriptReorderUltimateEnabled) }
+        get { return userDefaults.bool(forKey: .userScriptReorderUltimateEnabled) }
+        set { userDefaults.set(newValue, forKey: .userScriptReorderUltimateEnabled) }
     }
     
     static func resetToDefaults() {
         apiKey = nil
-        apiKeyVerified = false
         purgeDatabase = false
         disableLessonSwipe = false
-        lastRefreshTime = nil
-        forceRefresh = false
         userScriptJitaiEnabled = false
         userScriptIgnoreAnswerEnabled = false
         userScriptDoubleCheckEnabled = false
@@ -120,18 +99,40 @@ struct ApplicationSettings {
     }
 }
 
-extension ApplicationSettings {
-    
-    static func nextRefreshTime() -> Date {
-        // Find the next refresh boundary
-        return WaniKaniAPI.nextRefreshTimeFromNow()
+extension UserDefaults {
+    func set(_ value: Any?, forKey defaultName: ApplicationSettingKey) {
+        set(value, forKey: defaultName.rawValue)
     }
     
-    static func needsRefresh() -> Bool {
-        if forceRefresh { return true }
-        guard let lastRefreshTime = self.lastRefreshTime else { return true }
-        
-        return WaniKaniAPI.needsRefresh(since: lastRefreshTime)
+    func set(_ value: Int, forKey defaultName: ApplicationSettingKey) {
+        set(value, forKey: defaultName.rawValue)
     }
     
+    func set(_ value: Float, forKey defaultName: ApplicationSettingKey) {
+        set(value, forKey: defaultName.rawValue)
+    }
+    
+    func set(_ value: Double, forKey defaultName: ApplicationSettingKey) {
+        set(value, forKey: defaultName.rawValue)
+    }
+    
+    func set(_ value: Bool, forKey defaultName: ApplicationSettingKey) {
+        set(value, forKey: defaultName.rawValue)
+    }
+    
+    func set(_ url: URL?, forKey defaultName: ApplicationSettingKey) {
+        set(url, forKey: defaultName.rawValue)
+    }
+    
+    func object(forKey defaultName: ApplicationSettingKey) -> Any? {
+        return object(forKey: defaultName.rawValue)
+    }
+    
+    func string(forKey defaultName: ApplicationSettingKey) -> String? {
+        return string(forKey: defaultName.rawValue)
+    }
+    
+    func bool(forKey defaultName: ApplicationSettingKey) -> Bool {
+        return bool(forKey: defaultName.rawValue)
+    }
 }

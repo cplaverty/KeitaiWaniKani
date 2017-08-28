@@ -1,30 +1,23 @@
 //
 //  TodayViewController.swift
-//  AlliCrab
+//  WaniKaniStudyQueueWidget
 //
-//  Copyright © 2015 Chris Laverty. All rights reserved.
+//  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
 import UIKit
 import NotificationCenter
-import FMDB
 import WaniKaniKit
 
 class TodayViewController: UITableViewController, NCWidgetProviding {
     
     // MARK: - Properties
     
-    private lazy var secureAppGroupPersistentStoreURL: URL = {
-        let fm = FileManager.default
-        let directory = fm.containerURL(forSecurityApplicationGroupIdentifier: "group.uk.me.laverty.KeitaiWaniKani")!
-        return directory.appendingPathComponent("WaniKaniData.sqlite")
-    }()
-    
     private var studyQueue: StudyQueue? {
         didSet {
-            if studyQueue != oldValue {
-                tableView.reloadData()
-                preferredContentSize = tableView.contentSize
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.preferredContentSize = self.tableView.contentSize
             }
         }
     }
@@ -48,22 +41,19 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         let nc = CFNotificationCenterGetDarwinNotifyCenter()
         let observer = UnsafeRawPointer(Unmanaged.passUnretained(self).toOpaque())
         
-        CFNotificationCenterAddObserver(nc,
-                                        observer,
-                                        { (_, observer, name, _, _) in
-                                            NSLog("Got notification for \(String(describing: name))")
-                                            let mySelf = Unmanaged<TodayViewController>.fromOpaque(observer!).takeUnretainedValue()
-                                            mySelf.updateStudyQueue()
-                                        },
-                                        WaniKaniDarwinNotificationCenter.notificationNameForModelObjectType("\(StudyQueue.self)"),
-                                        nil,
-                                        .deliverImmediately)
+        let callback: CFNotificationCallback = { (_, observer, name, _, _) in
+            NSLog("Got notification for \(name?.rawValue as String? ?? "<none>")")
+            let mySelf = Unmanaged<TodayViewController>.fromOpaque(observer!).takeUnretainedValue()
+            _ = try? mySelf.updateStudyQueue()
+        }
+        
+        CFNotificationCenterAddObserver(nc, observer, callback, CFNotificationName.waniKaniAssignmentsDidChange.rawValue, nil, .deliverImmediately)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        updateStudyQueue()
+        _ = try? updateStudyQueue()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -82,15 +72,17 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     
     func widgetPerformUpdate(completionHandler: @escaping (NCUpdateResult) -> Void) {
         do {
-            let oldStudyQueue = self.studyQueue
-            studyQueue = try fetchStudyQueueFromDatabase()
-            if studyQueue == oldStudyQueue {
-                NSLog("Study queue not updated")
-                completionHandler(.noData)
-            } else {
+            let changed = try updateStudyQueue()
+            if changed {
                 NSLog("Study queue updated")
                 completionHandler(.newData)
+            } else {
+                NSLog("Study queue not updated")
+                completionHandler(.noData)
             }
+        } catch ResourceRepositoryError.noDatabase {
+            NSLog("Database does not exist")
+            completionHandler(.noData)
         } catch {
             NSLog("Error when refreshing study queue from today widget in completion handler: \(error)")
             completionHandler(.failed)
@@ -99,7 +91,7 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     
     @available(iOSApplicationExtension 10.0, *)
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
-        NSLog("widgetActiveDisplayModeDidChange: \(activeDisplayMode) - \(maxSize)")
+        NSLog("widgetActiveDisplayModeDidChange: activeDisplayMode = \(activeDisplayMode), maxSize = \(maxSize)")
         if activeDisplayMode == .compact {
             tableView.rowHeight = maxSize.height
             preferredContentSize = maxSize
@@ -108,30 +100,21 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
     
     // MARK: - Implementation
     
-    func updateStudyQueue() {
-        assert(Thread.isMainThread, "Study queue update must be done on the main thread")
-        if let studyQueue = try? self.fetchStudyQueueFromDatabase() {
+    func updateStudyQueue() throws -> Bool {
+        let databaseManager = DatabaseManager(factory: AppGroupDatabaseConnectionFactory())
+        guard databaseManager.open(readOnly: true) else {
+            return false
+        }
+        
+        let resourceRepository = ResourceRepositoryReader(databaseManager: databaseManager)
+        
+        let studyQueue = try resourceRepository.studyQueue()
+        if studyQueue != self.studyQueue {
             self.studyQueue = studyQueue
-        }
-    }
-    
-    func fetchStudyQueueFromDatabase() throws -> StudyQueue? {
-        let databasePath = secureAppGroupPersistentStoreURL.path
-        guard FileManager.default.fileExists(atPath: databasePath) else {
-            NSLog("No database exists at \(databasePath)")
-            return nil
+            return true
         }
         
-        let database = FMDatabase(path: databasePath)
-        guard database.open() else {
-            let error = database.lastError()
-            NSLog("Database failed to open! \(error)")
-            throw error
-        }
-        defer { database.close() }
-        
-        NSLog("Fetching study queue from database")
-        return try SRSDataItemCoder.projectedStudyQueue(database)
+        return false
     }
     
     // MARK: - UITableViewDataSource
@@ -166,11 +149,9 @@ class TodayViewController: UITableViewController, NCWidgetProviding {
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         self.extensionContext?.open(URL(string: "kwk://launch/reviews")!, completionHandler: nil)
-        DispatchQueue.main.async {
-            self.tableView.deselectRow(at: indexPath, animated: false)
-        }
+        return nil
     }
     
 }

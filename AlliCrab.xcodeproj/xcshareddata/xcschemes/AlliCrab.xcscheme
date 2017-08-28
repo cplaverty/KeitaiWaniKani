@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "830EAB851B41DC7700EBF073"
+               BlueprintIdentifier = "8364CB5C1F27F28D002DBE6B"
                BuildableName = "AlliCrab.app"
                BlueprintName = "AlliCrab"
                ReferencedContainer = "container:AlliCrab.xcodeproj">
@@ -34,9 +34,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "83D550531BB489A9007442EF"
-               BuildableName = "OperationKitTests.xctest"
-               BlueprintName = "OperationKitTests"
+               BlueprintIdentifier = "8364CB7B1F27F28D002DBE6B"
+               BuildableName = "AlliCrabUITests.xctest"
+               BlueprintName = "AlliCrabUITests"
                ReferencedContainer = "container:AlliCrab.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -44,19 +44,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8347BD011B725428000F99EF"
+               BlueprintIdentifier = "834B61A71F2BF01600825630"
                BuildableName = "WaniKaniKitTests.xctest"
                BlueprintName = "WaniKaniKitTests"
-               ReferencedContainer = "container:AlliCrab.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8346E60F1C497DF600068686"
-               BuildableName = "AlliCrabUITests.xctest"
-               BlueprintName = "AlliCrabUITests"
                ReferencedContainer = "container:AlliCrab.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -64,7 +54,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "830EAB851B41DC7700EBF073"
+            BlueprintIdentifier = "8364CB5C1F27F28D002DBE6B"
             BuildableName = "AlliCrab.app"
             BlueprintName = "AlliCrab"
             ReferencedContainer = "container:AlliCrab.xcodeproj">
@@ -88,7 +78,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "830EAB851B41DC7700EBF073"
+            BlueprintIdentifier = "8364CB5C1F27F28D002DBE6B"
             BuildableName = "AlliCrab.app"
             BlueprintName = "AlliCrab"
             ReferencedContainer = "container:AlliCrab.xcodeproj">
@@ -107,7 +97,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "830EAB851B41DC7700EBF073"
+            BlueprintIdentifier = "8364CB5C1F27F28D002DBE6B"
             BuildableName = "AlliCrab.app"
             BlueprintName = "AlliCrab"
             ReferencedContainer = "container:AlliCrab.xcodeproj">

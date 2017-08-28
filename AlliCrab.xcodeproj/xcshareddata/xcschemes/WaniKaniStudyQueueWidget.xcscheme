@@ -15,7 +15,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "83426DED1B7369F8005F4503"
+               BlueprintIdentifier = "834230A71F3E0A51000E83FE"
                BuildableName = "WaniKaniStudyQueueWidget.appex"
                BlueprintName = "WaniKaniStudyQueueWidget"
                ReferencedContainer = "container:AlliCrab.xcodeproj">
@@ -29,7 +29,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "830EAB851B41DC7700EBF073"
+               BlueprintIdentifier = "8364CB5C1F27F28D002DBE6B"
                BuildableName = "AlliCrab.app"
                BlueprintName = "AlliCrab"
                ReferencedContainer = "container:AlliCrab.xcodeproj">
@@ -44,23 +44,13 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8346E60F1C497DF600068686"
-               BuildableName = "AlliCrabUITests.xctest"
-               BlueprintName = "AlliCrabUITests"
-               ReferencedContainer = "container:AlliCrab.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "830EAB851B41DC7700EBF073"
-            BuildableName = "AlliCrab.app"
-            BlueprintName = "AlliCrab"
+            BlueprintIdentifier = "834230A71F3E0A51000E83FE"
+            BuildableName = "WaniKaniStudyQueueWidget.appex"
+            BlueprintName = "WaniKaniStudyQueueWidget"
             ReferencedContainer = "container:AlliCrab.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -79,16 +69,26 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.springboard">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "830EAB851B41DC7700EBF073"
-            BuildableName = "AlliCrab.app"
-            BlueprintName = "AlliCrab"
+            BlueprintIdentifier = "834230A71F3E0A51000E83FE"
+            BuildableName = "WaniKaniStudyQueueWidget.appex"
+            BlueprintName = "WaniKaniStudyQueueWidget"
             ReferencedContainer = "container:AlliCrab.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "834230A71F3E0A51000E83FE"
+            BuildableName = "WaniKaniStudyQueueWidget.appex"
+            BlueprintName = "WaniKaniStudyQueueWidget"
+            ReferencedContainer = "container:AlliCrab.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -103,7 +103,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "830EAB851B41DC7700EBF073"
+            BlueprintIdentifier = "8364CB5C1F27F28D002DBE6B"
             BuildableName = "AlliCrab.app"
             BlueprintName = "AlliCrab"
             ReferencedContainer = "container:AlliCrab.xcodeproj">
