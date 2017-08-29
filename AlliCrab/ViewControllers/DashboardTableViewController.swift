@@ -24,6 +24,7 @@ class DashboardTableViewController: UITableViewController {
     }
     
     private enum SegueIdentifier: String {
+        case settings = "Settings"
         case reviewTimeline = "ReviewTimeline"
         case assignmentProgression = "AssignmentProgression"
     }
@@ -33,6 +34,8 @@ class DashboardTableViewController: UITableViewController {
     }
     
     // MARK: - Properties
+    
+    private let minimumFetchInterval = 15 * .oneMinute
     
     private let lastUpdateDateRelativeFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
@@ -63,6 +66,7 @@ class DashboardTableViewController: UITableViewController {
     private var updateUITimer: Timer?
     private var notificationObservers: [NSObjectProtocol]?
     private var progressContainerView: ProgressReportingBarButtonItemView!
+    private var shouldForceDataReload = false
     
     // MARK: - Initialisers
     
@@ -81,6 +85,24 @@ class DashboardTableViewController: UITableViewController {
     
     @IBAction func refresh(_ sender: UIRefreshControl) {
         updateData(minimumFetchInterval: 0, showAlertOnErrors: true)
+    }
+    
+    @IBAction func presentLessonsViewController() {
+        let vc = WaniKaniReviewPageWebViewController.wrapped(url: WaniKaniURL.lessonSession) { controller in
+            controller.delegate = self
+        }
+        present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func presentReviewsViewController() {
+        let vc = WaniKaniReviewPageWebViewController.wrapped(url: WaniKaniURL.reviewSession) { controller in
+            controller.delegate = self
+        }
+        present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func presentSettingsViewController() {
+        performSegue(withIdentifier: SegueIdentifier.settings.rawValue, sender: nil)
     }
     
     // MARK: - UITableViewDataSource
@@ -283,12 +305,10 @@ class DashboardTableViewController: UITableViewController {
         case .available:
             switch indexPath.row {
             case 0:
-                let vc = WaniKaniReviewPageWebViewController.wrapped(url: WaniKaniURL.lessonSession)
-                present(vc, animated: true, completion: nil)
+                presentLessonsViewController()
                 return nil
             case 1:
-                let vc = WaniKaniReviewPageWebViewController.wrapped(url: WaniKaniURL.reviewSession)
-                present(vc, animated: true, completion: nil)
+                presentReviewsViewController()
                 return nil
             default: break
             }
@@ -348,7 +368,6 @@ class DashboardTableViewController: UITableViewController {
             return
         }
         
-        let minimumFetchInterval = 15 * .oneMinute
         let lastUpdate = resourceRepository.lastAppDataUpdateDate
         if let lastUpdate = lastUpdate, Date().timeIntervalSince(lastUpdate) < minimumFetchInterval {
             if #available(iOS 10, *) {
@@ -361,7 +380,6 @@ class DashboardTableViewController: UITableViewController {
         if #available(iOS 10, *) {
             os_log("Triggering fetch", type: .debug)
         }
-        refreshControl?.beginRefreshing()
         updateData(minimumFetchInterval: minimumFetchInterval, showAlertOnErrors: false)
     }
     
@@ -415,7 +433,7 @@ class DashboardTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        updateData(minimumFetchInterval: .oneMinute, showAlertOnErrors: false)
+        updateData(minimumFetchInterval: shouldForceDataReload ? 0 : minimumFetchInterval, showAlertOnErrors: false)
         updateUITimer = makeUpdateTimer()
     }
     
@@ -436,6 +454,7 @@ class DashboardTableViewController: UITableViewController {
         }
         
         switch segueIdentifier {
+        case .settings: break
         case .assignmentProgression:
             let vc = segue.destination as! AssignmentProgressionCollectionViewController
             let cell = sender as! LevelProgressTableViewCell
@@ -477,6 +496,11 @@ class DashboardTableViewController: UITableViewController {
     }
     
     private func updateData(minimumFetchInterval: TimeInterval, showAlertOnErrors: Bool) {
+        if refreshControl?.isRefreshing == false {
+            refreshControl?.beginRefreshing()
+        }
+        
+        shouldForceDataReload = false
         let progress = resourceRepository.updateAppData(minimumFetchInterval: minimumFetchInterval) { result in
             DispatchQueue.main.async {
                 self.refreshControl?.endRefreshing()
@@ -564,10 +588,22 @@ class DashboardTableViewController: UITableViewController {
                 let sectionsToReload: IndexSet = [TableViewSection.available.rawValue, TableViewSection.upcomingReviews.rawValue,
                                                   TableViewSection.levelProgression.rawValue, TableViewSection.srsDistribution.rawValue]
                 self.tableView.reloadSections(sectionsToReload, with: .automatic)
+            },
+            NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { [unowned self] _ in
+                self.updateData(minimumFetchInterval: 5 * .oneMinute, showAlertOnErrors: false)
             }
         ]
         
         return notificationObservers
     }
     
+}
+
+// MARK: - WebViewControllerDelegate
+extension DashboardTableViewController: WebViewControllerDelegate {
+    func webViewController(_ controller: WebViewController, didFinish url: URL?) {
+        if url == WaniKaniURL.lessonSession || url == WaniKaniURL.reviewSession {
+            shouldForceDataReload = true
+        }
+    }
 }

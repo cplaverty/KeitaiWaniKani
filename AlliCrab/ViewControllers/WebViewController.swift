@@ -11,6 +11,10 @@ import UIKit
 import WaniKaniKit
 import WebKit
 
+protocol WebViewControllerDelegate: class {
+    func webViewController(_ controller: WebViewController, didFinish url: URL?)
+}
+
 class WebViewController: UIViewController {
     
     class func wrapped(url: URL, configBlock: ((WebViewController) -> Void)? = nil) -> UINavigationController {
@@ -26,6 +30,7 @@ class WebViewController: UIViewController {
     
     // MARK: - Properties
     
+    weak var delegate: WebViewControllerDelegate?
     private(set) var webView: WKWebView!
     
     private var url: URL?
@@ -401,6 +406,8 @@ extension WebViewController: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        delegate?.webViewController(self, didFinish: webView.url)
+        
         guard let url = webView.url else { return }
         
         switch url {
