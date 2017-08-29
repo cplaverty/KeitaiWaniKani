@@ -23,7 +23,7 @@ class NotificationManager {
                 if let error = error {
                     os_log("Got error from notification authorisation: %@", type: .error, error as NSError)
                 }
-                os_log("Notification authorisation granted = %d", type: .info, String(granted))
+                os_log("Notification authorisation granted = %@", type: .info, String(granted))
                 
                 if granted {
                     self.listenForAssignmentChanges(resourceRepository: resourceRepository)
