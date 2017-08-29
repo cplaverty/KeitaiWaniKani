@@ -486,10 +486,15 @@
                     <navigationItem key="navigationItem" title="Dashboard" id="xk1-wl-s5j">
                         <barButtonItem key="rightBarButtonItem" image="Settings" id="CCJ-3i-Y8C">
                             <connections>
-                                <segue destination="6c9-me-PIu" kind="show" id="f5a-at-jln"/>
+                                <segue destination="6c9-me-PIu" kind="show" identifier="Settings" id="f5a-at-jln"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <keyCommands>
+                        <keyCommand input="l" modifierFlags="1048576" actionName="presentLessonsViewController" discoverabilityTitle="Lessons"/>
+                        <keyCommand input="r" modifierFlags="1048576" actionName="presentReviewsViewController" discoverabilityTitle="Reviews"/>
+                        <keyCommand input="," modifierFlags="1048576" actionName="presentSettingsViewController" discoverabilityTitle="Settings"/>
+                    </keyCommands>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="FUO-HA-n6h">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -611,17 +616,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrI-wk-2wM">
-                                <rect key="frame" x="0.0" y="68" width="375" height="599"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emJ-VE-3UC">
-                                        <rect key="frame" x="20.5" y="20" width="334.5" height="122"/>
+                                        <rect key="frame" x="20.5" y="20" width="334.5" height="130.5"/>
                                         <string key="text">Entering your API version 2 key will permit a basic level of functionality in the app.  However, please note that doing lessons or reviews within the app will open a web browser to the WaniKani site, where you will be prompted to log in.</string>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Jec-ZO-4eB">
-                                        <rect key="frame" x="20" y="162" width="335" height="30"/>
+                                        <rect key="frame" x="20" y="170.5" width="335" height="30"/>
                                         <accessibility key="accessibilityConfiguration" identifier="EnterAPIKey"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -711,7 +716,7 @@
                 <navigationController storyboardIdentifier="Login" automaticallyAdjustsScrollViewInsets="NO" id="Nd0-BU-x8J" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="h1V-zD-NeV">
-                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -729,7 +734,7 @@
                 <navigationController storyboardIdentifier="Main" automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="QIe-vK-SmD" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ywg-YD-EnF">
-                        <rect key="frame" x="0.0" y="20" width="375" height="48"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
