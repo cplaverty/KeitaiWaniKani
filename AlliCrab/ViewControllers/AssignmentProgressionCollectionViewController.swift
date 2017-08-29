@@ -152,6 +152,13 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
             os_log("%@ timer fire", type: .debug, String(describing: type(of: self)))
         }
         
+        let now = Date()
+        let isStartOfHour = now.timeIntervalSince(Calendar.current.startOfHour(for: now)) < .oneMinute
+        if isStartOfHour {
+            collectionView?.reloadData()
+            return
+        }
+        
         let indexPathsNeedingRefresh = sections.lazy.enumerated().flatMap { (sectionIndex, section) -> [IndexPath] in
             let cellsNeedingRefresh = section.items.lazy.enumerated().filter { (_, item) in
                 if let availableAt = item.availableAt, case let .date(date) = availableAt, date.timeIntervalSinceNow < .oneDay + .oneHour {
