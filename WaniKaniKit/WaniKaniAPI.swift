@@ -84,9 +84,7 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
         self.decoder = decoder
         
         let config = URLSessionConfiguration.default
-        if #available(iOS 11.0, *) {
-            config.waitsForConnectivity = true
-        }
+        config.timeoutIntervalForResource = .oneHour
         
         session = URLSession(configuration: config)
     }
