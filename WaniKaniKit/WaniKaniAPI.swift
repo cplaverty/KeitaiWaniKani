@@ -240,8 +240,6 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
             switch httpStatusCode {
             case 401:
                 throw WaniKaniAPIError.invalidAPIKey
-            case 404:
-                throw WaniKaniAPIError.resourceNotFound
             default:
                 throw WaniKaniAPIError.unknownError(httpStatusCode: httpStatusCode, message: errorMessage)
             }

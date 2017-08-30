@@ -278,7 +278,7 @@ public class ResourceRepository: ResourceRepositoryReader {
         return api.fetchResourceCollection(ofType: type) { (resources, requestError) -> Bool in
             if let error = requestError {
                 switch error {
-                case WaniKaniAPIError.resourceNotFound, WaniKaniAPIError.noContent:
+                case WaniKaniAPIError.noContent:
                     if #available(iOS 10.0, *) {
                         os_log("No data available: %@", type: .debug, error as NSError)
                     }
