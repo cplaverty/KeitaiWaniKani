@@ -62,14 +62,14 @@ class ProgressReportingBarButtonItemView: UIView {
         progressView.setProgress(Float(progress.fractionCompleted), animated: true)
         
         observers = [
-            progress.observe(\.fractionCompleted) { [unowned self] progress, _ in
+            progress.observe(\.fractionCompleted) { [weak self] progress, _ in
                 DispatchQueue.main.async {
-                    self.progressView.setProgress(Float(progress.fractionCompleted), animated: true)
+                    self?.progressView.setProgress(Float(progress.fractionCompleted), animated: true)
                 }
             },
-            progress.observe(\.isCancelled) { [unowned self] progress, _ in
+            progress.observe(\.isCancelled) { [weak self] _, _ in
                 DispatchQueue.main.async {
-                    self.markComplete()
+                    self?.markComplete()
                 }
             }]
     }
