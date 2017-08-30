@@ -38,14 +38,6 @@ class WebViewController: UIViewController {
     private var shouldIncludeDoneButton = false
     private var keyValueObservers: [NSKeyValueObservation]?
     
-    private lazy var statusBarView: UIView = {
-        let view = UIBottomBorderedView(frame: UIApplication.shared.statusBarFrame, color: .lightGray, width: 0.5)
-        view.autoresizingMask = .flexibleWidth
-        view.backgroundColor = .globalBarTintColor
-        
-        return view
-    }()
-    
     private lazy var backButton: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "ArrowLeft"), style: .plain, target: self, action: #selector(backButtonTouched(_:forEvent:)))
     private lazy var forwardButton: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "ArrowRight"), style: .plain, target: self, action: #selector(forwardButtonTouched(_:forEvent:)))
     private lazy var shareButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(share(_:)))
@@ -226,11 +218,11 @@ class WebViewController: UIViewController {
         keyValueObservers = registerObservers(webView)
         
         self.view.addSubview(webView)
-        self.view.addSubview(statusBarView)
         
-        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "V:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
-        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "H:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
-        NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "H:|[statusBarView]|", options: [], metrics: nil, views: ["statusBarView": statusBarView]))
+        webView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        webView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        webView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
         if let nc = self.navigationController {
             shouldIncludeDoneButton = nc.viewControllers[0] == self
@@ -246,6 +238,14 @@ class WebViewController: UIViewController {
             let request = URLRequest(url: url)
             self.webView.load(request)
         }
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return navigationController?.isNavigationBarHidden == true
+    }
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .slide
     }
     
     private func makeWebView() -> WKWebView {
@@ -292,7 +292,6 @@ class WebViewController: UIViewController {
     
     /// Sets the navigation bar and toolbar items based on the given UITraitCollection
     func configureToolbars(for traitCollection: UITraitCollection) {
-        statusBarView.isHidden = traitCollection.verticalSizeClass == .compact
         if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
             addToolbarItemsForCompactWidthRegularHeight()
         } else {
