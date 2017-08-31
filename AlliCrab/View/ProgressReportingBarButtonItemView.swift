@@ -36,6 +36,7 @@ class ProgressReportingBarButtonItemView: UIView {
         return observers != nil
     }
     
+    private var trackedProgress: Progress?
     private var observers: [NSKeyValueObservation]?
     
     override init(frame: CGRect) {
@@ -55,6 +56,7 @@ class ProgressReportingBarButtonItemView: UIView {
     }
     
     func track(progress: Progress, description: String) {
+        trackedProgress = progress
         textLabel.text = description
         
         progressView.setProgress(0, animated: false)
@@ -76,6 +78,7 @@ class ProgressReportingBarButtonItemView: UIView {
     
     func markComplete() {
         observers = nil
+        trackedProgress = nil
         progressView.setProgress(1, animated: true)
         UIView.animate(withDuration: 0.5, delay: 0.25, options: [.curveEaseIn], animations: {
             self.progressView.alpha = 0.0
