@@ -74,8 +74,8 @@ class WebAddressBarView: UIView {
         
         secureSiteIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         addressLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        addressLabel.topAnchor.constraint(equalTo: topAnchor, constant: 4).isActive = true
-        bottomAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 4).isActive = true
+        addressLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
+        bottomAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 8).isActive = true
         refreshButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
         addressLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
