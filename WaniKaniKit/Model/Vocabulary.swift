@@ -5,7 +5,7 @@
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-public struct Vocabulary: ResourceCollectionItemData, Subject {
+public struct Vocabulary: ResourceCollectionItemData {
     public let level: Int
     public let createdAt: Date
     public let slug: String
@@ -26,6 +26,12 @@ public struct Vocabulary: ResourceCollectionItemData, Subject {
         case partsOfSpeech = "parts_of_speech"
         case componentSubjectIDs = "component_subject_ids"
         case documentURL = "document_url"
+    }
+}
+
+extension Vocabulary: Subject {
+    public var subjectType: SubjectType {
+        return .vocabulary
     }
 }
 

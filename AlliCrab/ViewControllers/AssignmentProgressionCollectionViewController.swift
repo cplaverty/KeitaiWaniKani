@@ -83,28 +83,29 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = sections[indexPath.section].items[indexPath.row]
         
+        let cell: UICollectionViewCell & AssignmentProgressionCollectionViewCell
         switch item.subject {
         case let radical as Radical:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.radical.rawValue, for: indexPath) as! RadicalAssignmentProgressionCollectionViewCell
-            cell.availableAt = item.availableAt
-            cell.guruTime = item.guruTime
-            cell.percentComplete = item.percentComplete
-            cell.radical = radical
-            cell.updateUI()
+            let c = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.radical.rawValue, for: indexPath) as! RadicalAssignmentProgressionCollectionViewCell
+            c.radical = radical
             
-            return cell
+            cell = c
         case let kanji as Kanji:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.kanji.rawValue, for: indexPath) as! KanjiAssignmentProgressionCollectionViewCell
-            cell.availableAt = item.availableAt
-            cell.guruTime = item.guruTime
-            cell.percentComplete = item.percentComplete
-            cell.kanji = kanji
-            cell.updateUI()
+            let c = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.kanji.rawValue, for: indexPath) as! KanjiAssignmentProgressionCollectionViewCell
+            c.kanji = kanji
             
-            return cell
+            cell = c
         default:
             fatalError()
         }
+        
+        cell.isLocked = item.isLocked
+        cell.availableAt = item.availableAt
+        cell.guruTime = item.guruTime
+        cell.percentComplete = item.percentComplete
+        cell.updateUI()
+        
+        return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -161,7 +162,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
         
         let indexPathsNeedingRefresh = sections.lazy.enumerated().flatMap { (sectionIndex, section) -> [IndexPath] in
             let cellsNeedingRefresh = section.items.lazy.enumerated().filter { (_, item) in
-                if let availableAt = item.availableAt, case let .date(date) = availableAt, date.timeIntervalSinceNow < .oneDay + .oneHour {
+                if case let .date(date) = item.availableAt, date.timeIntervalSinceNow < .oneDay + .oneHour {
                     return true
                 }
                 if case let .date(date) = item.guruTime, date.timeIntervalSinceNow < .oneDay + .oneHour {

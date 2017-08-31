@@ -19,48 +19,51 @@ private let dateComponentsFormatter: DateComponentsFormatter = {
     return formatter
 }()
 
-protocol AssignmentProgressionCollectionViewCell {
-    
-    // MARK: - Properties
-    
-    var availableAt: NextReviewTime? { get }
-    var guruTime: NextReviewTime? { get }
-    var percentComplete: Float? { get }
+protocol AssignmentProgressionCollectionViewCell: class {
+    var isLocked: Bool { get set }
+    var availableAt: NextReviewTime? { get set }
+    var guruTime: NextReviewTime? { get set }
+    var percentComplete: Float? { get set }
     
     var infoURL: URL? { get }
-    
-    // MARK: - Outlets
     
     var progressView: UIProgressView! { get }
     var timeToNextReviewLabel: UILabel! { get }
     var timeToGuruLabel: UILabel! { get }
     
+    func updateUI()
 }
 
 private extension AssignmentProgressionCollectionViewCell {
     func updateProgress() {
-        switch availableAt {
-        case .none:
-            timeToNextReviewLabel.text = "Locked"
-        case .some(.none):
-            timeToNextReviewLabel.text = "Burned"
-        case .some(.now):
-            timeToNextReviewLabel.text = "Now"
-        case .some(.date(let date)) where date.timeIntervalSinceNow <= 0:
-            timeToNextReviewLabel.text = "Now"
-        case .some(.date(let date)):
-            let formattedInterval = dateComponentsFormatter.string(from: date.timeIntervalSinceNow, roundingUpwardToNearest: .oneMinute) ?? "???"
-            timeToNextReviewLabel.text = formattedInterval
+        if let availableAt = availableAt {
+            switch availableAt {
+            case .none:
+                timeToNextReviewLabel.text = isLocked ? "Locked" : "Burned"
+            case .now:
+                timeToNextReviewLabel.text = "Now"
+            case let .date(date) where date.timeIntervalSinceNow <= 0:
+                timeToNextReviewLabel.text = "Now"
+            case let .date(date):
+                let formattedInterval = dateComponentsFormatter.string(from: date.timeIntervalSinceNow, roundingUpwardToNearest: .oneMinute) ?? "???"
+                timeToNextReviewLabel.text = formattedInterval
+            }
+        } else {
+            timeToNextReviewLabel.text = "-"
         }
         
-        switch guruTime {
-        case .none, .some(.none), .some(.now):
+        if let guruTime = guruTime {
+            switch guruTime {
+            case .none, .now:
+                timeToGuruLabel.text = "-"
+            case let .date(date) where date.timeIntervalSinceNow <= 0:
+                timeToGuruLabel.text = "-"
+            case let .date(date):
+                let formattedInterval = dateComponentsFormatter.string(from: date.timeIntervalSinceNow, roundingUpwardToNearest: .oneMinute) ?? "???"
+                timeToGuruLabel.text = formattedInterval
+            }
+        } else {
             timeToGuruLabel.text = "-"
-        case .some(.date(let date)) where date.timeIntervalSinceNow <= 0:
-            timeToGuruLabel.text = "-"
-        case .some(.date(let date)):
-            let formattedInterval = dateComponentsFormatter.string(from: date.timeIntervalSinceNow, roundingUpwardToNearest: .oneMinute) ?? "???"
-            timeToGuruLabel.text = formattedInterval
         }
         
         progressView.setProgress(percentComplete ?? 0, animated: false)
@@ -72,6 +75,7 @@ class RadicalAssignmentProgressionCollectionViewCell: UICollectionViewCell, Assi
     
     // MARK: - Properties
     
+    var isLocked = true
     var availableAt: NextReviewTime?
     var guruTime: NextReviewTime?
     var percentComplete: Float?
@@ -139,7 +143,6 @@ class RadicalAssignmentProgressionCollectionViewCell: UICollectionViewCell, Assi
             }
         }
         
-        let isLocked = availableAt == nil
         backgroundColor = UIColor.waniKaniRadical.withAlphaComponent(isLocked ? 0.5 : 1.0)
     }
     
@@ -155,6 +158,7 @@ class KanjiAssignmentProgressionCollectionViewCell: UICollectionViewCell, Assign
     
     // MARK: - Properties
     
+    var isLocked = true
     var availableAt: NextReviewTime?
     var guruTime: NextReviewTime?
     var percentComplete: Float?
@@ -182,7 +186,6 @@ class KanjiAssignmentProgressionCollectionViewCell: UICollectionViewCell, Assign
         }
         
         characterLabel.text = kanji.character
-        let isLocked = availableAt == nil
         backgroundColor = UIColor.waniKaniKanji.withAlphaComponent(isLocked ? 0.5 : 1.0)
     }
     

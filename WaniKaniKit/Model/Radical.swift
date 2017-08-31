@@ -36,7 +36,13 @@ public struct Radical: ResourceCollectionItemData {
 }
 
 extension Radical: Subject {
-    public var componentSubjectIDs: [Int] { return [] }
+    public var subjectType: SubjectType {
+        return .radical
+    }
+    
+    public var componentSubjectIDs: [Int] {
+        return []
+    }
 }
 
 extension Radical: Equatable {

@@ -50,6 +50,16 @@ public enum SRSStage: String {
     }
 }
 
+extension SRSStage: Comparable {
+    public static func <(lhs: SRSStage, rhs: SRSStage) -> Bool {
+        return lhs.numericLevelRange.lowerBound < rhs.numericLevelRange.lowerBound
+    }
+    
+    public static func >(lhs: SRSStage, rhs: SRSStage) -> Bool {
+        return lhs.numericLevelRange.lowerBound > rhs.numericLevelRange.lowerBound
+    }
+}
+
 public extension SRSStage {
     var backgroundColor: UIColor {
         switch self {

@@ -26,6 +26,40 @@ public extension SubjectType {
 
 public protocol Subject {
     var level: Int { get }
+    var subjectType: SubjectType { get }
     var slug: String { get }
     var componentSubjectIDs: [Int] { get }
+}
+
+extension Subject {
+    public func earliestGuruDate(assignment: Assignment?, getAssignmentForSubjectID: (Int) -> Assignment?) -> Date? {
+        if assignment?.isPassed == true {
+            return nil
+        }
+        
+        let pendingSubjectAssignments = componentSubjectIDs.map({ componentSubjectID in getAssignmentForSubjectID(componentSubjectID) })
+            .filter( { assignment in assignment?.isPassed != true })
+        
+        let unlockDateForLockedItems: Date?
+        if pendingSubjectAssignments.isEmpty {
+            unlockDateForLockedItems = Date()
+        } else {
+            unlockDateForLockedItems = pendingSubjectAssignments.flatMap({ assignment in assignment?.guruDate(unlockDateForLockedItems: nil) }).min()
+        }
+        
+        let guruDate: Date?
+        if let assignment = assignment {
+            guruDate = assignment.guruDate(unlockDateForLockedItems: unlockDateForLockedItems)
+        } else if let unlockDateForLockedItems = unlockDateForLockedItems {
+            guruDate = Assignment.earliestDate(from: unlockDateForLockedItems,
+                                               forItemAtSRSStage: SRSStage.apprentice.numericLevelRange.lowerBound,
+                                               toSRSStage: SRSStage.guru.numericLevelRange.lowerBound,
+                                               subjectType: subjectType,
+                                               level: level)
+        } else {
+            guruDate = nil
+        }
+        
+        return guruDate
+    }
 }

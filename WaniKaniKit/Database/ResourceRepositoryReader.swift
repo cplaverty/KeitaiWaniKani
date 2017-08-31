@@ -363,7 +363,8 @@ public class ResourceRepositoryReader {
                     Assignment.earliestDate(from: startOfPreviousLevel,
                                             forItemAtSRSStage: SRSStage.apprentice.numericLevelRange.lowerBound,
                                             toSRSStage: SRSStage.guru.numericLevelRange.lowerBound,
-                                            withLevel: level)
+                                            subjectType: .kanji,
+                                            level: level)
                     } ?? Date.distantPast
                 
                 let unlockDates = unlockDatesByLevel[level] ?? []
