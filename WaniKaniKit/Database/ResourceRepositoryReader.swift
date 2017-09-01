@@ -348,8 +348,9 @@ public class ResourceRepositoryReader {
                 return LevelData(detail: [], projectedCurrentLevel: nil)
             }
             
-            var unlockDatesByLevel = try getUnlockDatesByLevel(from: database)
-            guard !unlockDatesByLevel.isEmpty else {
+            var radicalUnlockDatesByLevel = try getUnlockDatesByLevel(for: .radical, from: database)
+            var kanjiUnlockDatesByLevel = try getUnlockDatesByLevel(for: .kanji, from: database)
+            guard !radicalUnlockDatesByLevel.isEmpty && !kanjiUnlockDatesByLevel.isEmpty else {
                 return LevelData(detail: [], projectedCurrentLevel: nil)
             }
             
@@ -359,16 +360,24 @@ public class ResourceRepositoryReader {
             startDates.reserveCapacity(userInfo.level)
             
             for level in 1...userInfo.level {
-                let earliestPossibleGuruDate = startDates.last.flatMap { startOfPreviousLevel in
+                let earliestPossibleGuruDate = startDates.last.flatMap({ startOfPreviousLevel in
                     Assignment.earliestDate(from: startOfPreviousLevel,
                                             forItemAtSRSStage: SRSStage.apprentice.numericLevelRange.lowerBound,
                                             toSRSStage: SRSStage.guru.numericLevelRange.lowerBound,
                                             subjectType: .kanji,
                                             level: level)
-                    } ?? Date.distantPast
+                }) ?? Date.distantPast
                 
-                let unlockDates = unlockDatesByLevel[level] ?? []
-                let minStartDate = unlockDates.lazy.filter { $0 > earliestPossibleGuruDate }.min() ?? now
+                let unlockDates: [Date]
+                if let radicalUnlockDates = radicalUnlockDatesByLevel[level], !radicalUnlockDates.isEmpty {
+                    unlockDates = radicalUnlockDates
+                } else if let kanjiUnlockDates = kanjiUnlockDatesByLevel[level], !kanjiUnlockDates.isEmpty {
+                    unlockDates = kanjiUnlockDates
+                } else {
+                    unlockDates = []
+                }
+                
+                let minStartDate = unlockDates.lazy.filter({ $0 > earliestPossibleGuruDate }).min() ?? now
                 if #available(iOS 10.0, *) {
                     os_log("levelTimeline: level = %d, earliestPossibleGuruDate = %@, minStartDate = %@", type: .debug, level, earliestPossibleGuruDate as NSDate, minStartDate as NSDate)
                 }
@@ -443,20 +452,20 @@ public class ResourceRepositoryReader {
         return ProjectedLevelInfo(level: level, startDate: startDate, endDate: earliestLevellingDate, isEndDateBasedOnLockedItem: isEndDateBasedOnLockedItem)
     }
     
-    private func getUnlockDatesByLevel(from database: FMDatabase) throws -> [Int: [Date]] {
+    private func getUnlockDatesByLevel(for subjectType: SubjectType, from database: FMDatabase) throws -> [Int : [Date]] {
         let table = Tables.assignments
         let query = """
         SELECT \(table.level), \(table.unlockedAt)
         FROM \(table)
         WHERE \(table.unlockedAt) IS NOT NULL
-        AND \(table.subjectType) IN ('\(SubjectType.radical.rawValue)','\(SubjectType.kanji.rawValue)')
+        AND \(table.subjectType) = ?
         ORDER BY 1, 2
         """
         
-        let resultSet = try database.executeQuery(query, values: nil)
+        let resultSet = try database.executeQuery(query, values: [subjectType.rawValue])
         defer { resultSet.close() }
         
-        var unlockDatesByLevel = [Int: [Date]]()
+        var unlockDatesByLevel = [Int : [Date]]()
         while resultSet.next() {
             let level = resultSet.long(forColumn: table.level.name)
             let dateUnlocked = resultSet.date(forColumn: table.unlockedAt.name)!
