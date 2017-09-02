@@ -40,7 +40,7 @@ public class AppGroupDatabaseConnectionFactory: DatabaseConnectionFactory {
         let url = persistentStoreURL
         
         if #available(iOS 10.0, *) {
-            os_log("Creating database queue using SQLite %@ and FMDB %@ at %@", type: .info, FMDatabase.sqliteLibVersion(), FMDatabase.fmdbUserVersion(), url as NSURL)
+            os_log("Creating database queue using SQLite %@ and FMDB %@ at %@", type: .info, FMDatabase.sqliteLibVersion(), FMDatabase.fmdbUserVersion(), url.path)
         }
         
         let databaseQueue = FMDatabaseQueue(url: url)
