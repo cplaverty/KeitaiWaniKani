@@ -76,25 +76,20 @@ extension WebViewUserScriptSupport {
     
     func injectBundledFontReferences() {
         for (fontFamily, font) in fonts {
-            if let path = Bundle.main.path(forResource: font, ofType: nil) {
-                let isOpentype = font.hasSuffix("otf")
-                let mimeType = isOpentype ? "font/opentype" : "font/ttf"
-                let fontFormat = isOpentype ? "opentype" : "truetype"
-                let url = URL(fileURLWithPath: path)
-                if let data = try? Data(contentsOf: url) {
-                    if #available(iOS 10.0, *) {
-                        os_log("Adding %@", type: .debug, fontFamily)
-                    }
-                    let source = """
-                    @font-face {
-                    font-family: \"\(fontFamily)\";
-                    src: local(\"\(fontFamily)\") url(data:\(mimeType);base64,\(data.base64EncodedString())) format(\"\(fontFormat)\");
-                    }
-                    """
-                    
-                    injectStyleSheet(title: "font: \(fontFamily)", contents: source)
-                }
+            guard let path = Bundle.main.path(forResource: font, ofType: nil), let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
+                continue
             }
+            
+            let isOpenType = font.hasSuffix("otf")
+            let mimeType = isOpenType ? "font/otf" : "font/ttf"
+            let fontFormat = isOpenType ? "opentype" : "truetype"
+            
+            if #available(iOS 10.0, *) {
+                os_log("Adding %@", type: .debug, fontFamily)
+            }
+            let source = "@font-face { font-family: \"\(fontFamily)\"; src: url(data:\(mimeType);base64,\(data.base64EncodedString())) format(\"\(fontFormat)\"); }"
+            
+            injectStyleSheet(title: "font: \(fontFamily)", contents: source)
         }
     }
     
