@@ -13,6 +13,7 @@ class WebAddressBarView: UIView {
     
     // MARK: - Properties
     
+    private let contentView: UIView
     private let secureSiteIndicator: UIImageView
     private let addressLabel: UILabel
     private let refreshButton: UIButton
@@ -29,6 +30,10 @@ class WebAddressBarView: UIView {
     
     required init(frame: CGRect, forWebView webView: WKWebView) {
         self.webView = webView
+        
+        contentView = UIView(frame: frame)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        
         secureSiteIndicator = UIImageView(image: lockImage)
         secureSiteIndicator.translatesAutoresizingMaskIntoConstraints = false
         
@@ -51,20 +56,27 @@ class WebAddressBarView: UIView {
         
         super.init(frame: frame)
         
-        self.autoresizingMask = [.flexibleWidth, .flexibleTopMargin, .flexibleBottomMargin]
-        self.backgroundColor = UIColor(white: 0.8, alpha: 0.5)
-        self.clipsToBounds = true
-        self.layer.cornerRadius = 8
-        self.isOpaque = false
+        self.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        self.layoutMargins = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+        contentView.backgroundColor = UIColor(white: 0.8, alpha: 0.5)
+        contentView.clipsToBounds = true
+        contentView.layer.cornerRadius = 8
+        contentView.isOpaque = false
         
         refreshButton.addTarget(self, action: #selector(stopOrRefreshWebView(_:)), for: .touchUpInside)
         
         keyValueObservers = registerObservers(webView)
         
-        addSubview(secureSiteIndicator)
-        addSubview(addressLabel)
-        addSubview(refreshButton)
-        addSubview(progressView)
+        addSubview(contentView)
+        contentView.addSubview(secureSiteIndicator)
+        contentView.addSubview(addressLabel)
+        contentView.addSubview(refreshButton)
+        contentView.addSubview(progressView)
+        
+        contentView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor).isActive = true
+        contentView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor).isActive = true
         
         let views: [String : Any] = [
             "secureSiteIndicator": secureSiteIndicator,
@@ -72,18 +84,18 @@ class WebAddressBarView: UIView {
             "refreshButton": refreshButton
         ]
         
-        secureSiteIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        addressLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        addressLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        bottomAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 8).isActive = true
-        refreshButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        secureSiteIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        addressLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        addressLabel.topAnchor.constraint(greaterThanOrEqualTo: contentView.layoutMarginsGuide.topAnchor).isActive = true
+        contentView.layoutMarginsGuide.bottomAnchor.constraint(greaterThanOrEqualTo: addressLabel.bottomAnchor).isActive = true
+        refreshButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
-        addressLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        addressLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         NSLayoutConstraint.activate(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=8)-[secureSiteIndicator]-[addressLabel]-(>=8)-[refreshButton]-|", options: [], metrics: nil, views: views))
         
-        progressView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        progressView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        progressView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        progressView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        progressView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        progressView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -227,8 +227,7 @@ class WebViewController: UIViewController {
         if let nc = self.navigationController {
             shouldIncludeDoneButton = nc.viewControllers[0] == self
             
-            let addressBarView = WebAddressBarView(frame: CGRect(origin: .zero, size: CGSize(width: nc.navigationBar.bounds.width, height: 28)), forWebView: webView)
-            addressBarView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin, .flexibleBottomMargin]
+            let addressBarView = WebAddressBarView(frame: nc.navigationBar.bounds, forWebView: webView)
             self.navigationItem.titleView = addressBarView
         }
         
