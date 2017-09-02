@@ -21,15 +21,14 @@ header #main-info #character {
     vertical-align: middle;
 }
 
+@media (min-width: 320px) and (max-width: 767px) {
+    #reviews #question #character, #lessons header #main-info #character {
+        font-size: 10vh !important; line-height: 20vh !important; padding: 10px 0 0;
+    }
+}
+
 /* Portrait */
 @media only screen and (orientation: portrait) {
-    
-    /* 3.5" iPhone */
-    @media (min-width: 320px) and (max-width: 767px) {
-        #reviews #question #character, #lessons header #main-info #character {
-            font-size: 8vh !important; line-height: 18vh !important; padding: 10px 0 0;
-        }
-    }
     
     /* 4" iPhone */
     @media (min-width: 320px) and (max-width: 767px) and (min-height: 481px) {
@@ -66,7 +65,6 @@ header #main-info #character {
 
 /* Landscape */
 @media only screen and (orientation: landscape) {
-    
     /* iPad (minus status bar) */
     @media (min-height: 748px) and (max-height: 1003px) {
         .srs {
