@@ -21,6 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
+    private var rootNavigationController: UINavigationController! {
+        return window?.rootViewController as? UINavigationController
+    }
+    
     override init() {
         databaseConnectionFactory = AppGroupDatabaseConnectionFactory()
         databaseManager = DatabaseManager(factory: databaseConnectionFactory)
@@ -121,7 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let apiKey = ApplicationSettings.apiKey, !apiKey.isEmpty {
             resourceRepository = makeResourceRepository(forAPIKey: apiKey)
-            initialiseDashboard(fromRootViewController: window!.rootViewController!)
+            initialiseDashboardViewController(rootNavigationController.viewControllers[0] as! DashboardTableViewController)
             
             UIApplication.shared.shortcutItems = makeShortcutItems()
             
@@ -139,7 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             os_log("Handling url %@", type: .info, url as NSURL)
         }
         
-        guard let rootViewController = window?.rootViewController else {
+        guard let rootViewController = rootNavigationController else {
             return false
         }
         
@@ -206,7 +210,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             os_log("Handling shortcut item of type %@", type: .info, shortcutItem.type)
         }
         
-        guard let shortcutItemType = ShortcutItemType(rawValue: shortcutItem.type), let rootViewController = window?.rootViewController else {
+        guard let shortcutItemType = ShortcutItemType(rawValue: shortcutItem.type), let rootViewController = rootNavigationController else {
             completionHandler(false)
             return
         }
@@ -233,18 +237,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Login
     
     func presentLoginViewController(animated: Bool) {
-        let storyboard = window!.rootViewController!.storyboard!
-        let vc = storyboard.instantiateViewController(withIdentifier: "Login")
+        let storyboard = rootNavigationController.storyboard!
+        let vc = storyboard.instantiateViewController(withIdentifier: "Login") as! LoginRootViewController
         
-        window!.rootViewController = vc
+        rootNavigationController.setViewControllers([vc], animated: animated)
     }
     
     func presentDashboardViewController(animated: Bool) {
-        let storyboard = window!.rootViewController!.storyboard!
-        let vc = storyboard.instantiateViewController(withIdentifier: "Main")
-        initialiseDashboard(fromRootViewController: vc)
+        let storyboard = rootNavigationController.storyboard!
+        let vc = storyboard.instantiateViewController(withIdentifier: "Main") as! DashboardTableViewController
+        initialiseDashboardViewController(vc)
         
-        window!.rootViewController = vc
+        rootNavigationController.setViewControllers([vc], animated: animated)
     }
     
     func presentLessonViewController(on viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
@@ -257,10 +261,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         viewController.present(vc, animated: true, completion: completion)
     }
     
-    private func initialiseDashboard(fromRootViewController rootViewController: UIViewController) {
-        let vc = rootViewController as! UINavigationController
-        let dvc = vc.viewControllers[0] as! DashboardTableViewController
-        dvc.resourceRepository = resourceRepository
+    private func initialiseDashboardViewController(_ viewController: DashboardTableViewController) {
+        viewController.resourceRepository = resourceRepository
     }
     
     func makeResourceRepository(forAPIKey apiKey: String) -> ResourceRepository {

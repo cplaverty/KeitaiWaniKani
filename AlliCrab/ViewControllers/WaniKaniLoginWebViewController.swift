@@ -54,6 +54,7 @@ class WaniKaniLoginWebViewController: WebViewController {
             let resourceRepository = appDelegate.makeResourceRepository(forAPIKey: apiKey)
             appDelegate.resourceRepository = resourceRepository
             appDelegate.presentDashboardViewController(animated: true)
+            dismiss(animated: true, completion: nil)
         } else {
             if #available(iOS 10.0, *) {
                 os_log("Got blank API key", type: .info)
