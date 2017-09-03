@@ -11,11 +11,12 @@ class DurationDetailTableViewCell: UITableViewCell {
     
     private static let durationFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.day, .hour]
+        formatter.allowedUnits = [.day, .hour, .minute]
         formatter.allowsFractionalUnits = true
         formatter.collapsesLargestUnit = true
         formatter.maximumUnitCount = 2
         formatter.unitsStyle = .abbreviated
+        formatter.zeroFormattingBehavior = [.dropLeading, .dropTrailing]
         return formatter
     }()
     
@@ -23,7 +24,7 @@ class DurationDetailTableViewCell: UITableViewCell {
         textLabel!.text = text
         
         if let duration = duration {
-            let formattedTimeSinceLevelStart = type(of: self).durationFormatter.string(from: duration) ?? "???"
+            let formattedTimeSinceLevelStart = type(of: self).durationFormatter.string(from: duration, roundingUpwardToNearest: .oneMinute) ?? "???"
             detailTextLabel!.text = formattedTimeSinceLevelStart
             detailTextLabel!.textColor = .black
         } else {
