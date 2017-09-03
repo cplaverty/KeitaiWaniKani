@@ -36,10 +36,12 @@ protocol AssignmentProgressionCollectionViewCell: class {
 
 private extension AssignmentProgressionCollectionViewCell {
     func updateProgress() {
-        if let availableAt = availableAt {
+        if isLocked {
+            timeToNextReviewLabel.text = "Locked"
+        } else if let availableAt = availableAt {
             switch availableAt {
             case .none:
-                timeToNextReviewLabel.text = isLocked ? "Locked" : "Burned"
+                timeToNextReviewLabel.text = "Burned"
             case .now:
                 timeToNextReviewLabel.text = "Now"
             case let .date(date) where date.timeIntervalSinceNow <= 0:
