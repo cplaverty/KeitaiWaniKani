@@ -58,10 +58,9 @@ public extension Assignment {
     }
     
     public static func earliestDate(from date: Date, forItemAtSRSStage initialStage: Int, toSRSStage finalStage: Int, subjectType: SubjectType, level: Int) -> Date? {
-        let isAccelerated = subjectType == .radical && isAcceleratedLevel(level)
+        let isAccelerated = isAcceleratedLevel(level)
         
         let calendar = Calendar.current
-        
         var guruDate = calendar.startOfHour(for: date)
         for stage in initialStage..<finalStage {
             guard let timeToNextStage = timeToNextReview(forItemWithSRSStage: stage, isAccelerated: isAccelerated) else {
@@ -91,51 +90,27 @@ public extension Assignment {
         switch srsStageNumeric {
         case 0:
             return DateComponents()
-        case 1 where isAccelerated:
-            var dc = DateComponents()
-            dc.hour = 2
-            return dc
         case 1,
              2 where isAccelerated:
-            var dc = DateComponents()
-            dc.hour = 4
-            return dc
+            return DateComponents(hour: 4)
         case 2,
              3 where isAccelerated:
-            var dc = DateComponents()
-            dc.hour = 8
-            return dc
+            return DateComponents(hour: 8)
         case 3,
              4 where isAccelerated:
-            var dc = DateComponents()
-            dc.day = 1
-            dc.hour = -1
-            return dc
+            return DateComponents(day: 1, hour: -1)
         case 4:
-            var dc = DateComponents()
-            dc.day = 2
-            dc.hour = -1
-            return dc
+            return DateComponents(day: 2, hour: -1)
         case 5:
-            var dc = DateComponents()
-            dc.day = 7
-            dc.hour = -1
-            return dc
+            return DateComponents(day: 7, hour: -1)
         case 6:
-            var dc = DateComponents()
-            dc.day = 14
-            dc.hour = -1
-            return dc
+            return DateComponents(day: 14, hour: -1)
         case 7:
-            var dc = DateComponents()
-            dc.day = 30 // WK assumes 30 day months
-            dc.hour = -1
-            return dc
+            // WK assumes 30 day months
+            return DateComponents(day: 30, hour: -1)
         case 8:
-            var dc = DateComponents()
-            dc.day = 4 * 30  // WK assumes 30 day months
-            dc.hour = -1
-            return dc
+            // WK assumes 30 day months
+            return DateComponents(day: 4 * 30, hour: -1)
         default: return nil
         }
     }
