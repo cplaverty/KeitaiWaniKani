@@ -404,7 +404,6 @@ class DashboardTableViewController: UITableViewController {
         
         if !UIAccessibilityIsReduceTransparencyEnabled() {
             tableView.backgroundView = BlurredImageView(frame: tableView.frame, imageNamed: "Header", style: backgroundBlurEffectStyle)
-            tableView.separatorEffect = UIVibrancyEffect(blurEffect: UIBlurEffect(style: backgroundBlurEffectStyle))
         }
         
         do {
