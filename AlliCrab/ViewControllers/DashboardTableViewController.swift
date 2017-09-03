@@ -356,7 +356,7 @@ class DashboardTableViewController: UITableViewController {
                 self.studyQueue = try self.resourceRepository.studyQueue()
             }
             
-            self.tableView.reloadSections([TableViewSection.available.rawValue, TableViewSection.upcomingReviews.rawValue], with: .automatic)
+            self.tableView.reloadSections([TableViewSection.available.rawValue, TableViewSection.upcomingReviews.rawValue, TableViewSection.levelProgression.rawValue], with: .automatic)
         } catch {
             if #available(iOS 10.0, *) {
                 os_log("Failed to refresh study queue in timer callback: %@", type: .fault, error as NSError)
