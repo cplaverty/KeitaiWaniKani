@@ -86,8 +86,13 @@ class WebAddressBarView: UIView {
         
         secureSiteIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         addressLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        addressLabel.topAnchor.constraint(greaterThanOrEqualTo: contentView.layoutMarginsGuide.topAnchor).isActive = true
-        contentView.layoutMarginsGuide.bottomAnchor.constraint(greaterThanOrEqualTo: addressLabel.bottomAnchor).isActive = true
+        if #available(iOS 11, *) {
+            addressLabel.topAnchor.constraint(greaterThanOrEqualTo: contentView.layoutMarginsGuide.topAnchor).isActive = true
+            contentView.layoutMarginsGuide.bottomAnchor.constraint(greaterThanOrEqualTo: addressLabel.bottomAnchor).isActive = true
+        } else {
+            addressLabel.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor).isActive = true
+            contentView.bottomAnchor.constraint(greaterThanOrEqualTo: addressLabel.bottomAnchor).isActive = true
+        }
         refreshButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
         addressLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
