@@ -14,7 +14,7 @@ private let dateComponentsFormatter: DateComponentsFormatter = {
     formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute]
     formatter.maximumUnitCount = 2
     formatter.unitsStyle = .abbreviated
-    formatter.zeroFormattingBehavior = [.dropAll]
+    formatter.zeroFormattingBehavior = .dropAll
     
     return formatter
 }()

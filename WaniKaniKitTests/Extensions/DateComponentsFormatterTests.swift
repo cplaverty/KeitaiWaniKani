@@ -11,6 +11,7 @@ import XCTest
 class DateComponentsFormatterTests: XCTestCase {
     
     private var formatter: DateComponentsFormatter!
+    
     override func setUp() {
         super.setUp()
         
@@ -18,7 +19,7 @@ class DateComponentsFormatterTests: XCTestCase {
         formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute]
         formatter.maximumUnitCount = 2
         formatter.unitsStyle = .abbreviated
-        formatter.zeroFormattingBehavior = [.dropLeading, .dropTrailing]
+        formatter.zeroFormattingBehavior = .dropAll
     }
     
     override func tearDown() {

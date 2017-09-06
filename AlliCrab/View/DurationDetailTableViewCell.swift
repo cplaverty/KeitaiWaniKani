@@ -16,7 +16,7 @@ class DurationDetailTableViewCell: UITableViewCell {
         formatter.collapsesLargestUnit = true
         formatter.maximumUnitCount = 2
         formatter.unitsStyle = .abbreviated
-        formatter.zeroFormattingBehavior = [.dropLeading, .dropTrailing]
+        formatter.zeroFormattingBehavior = .dropAll
         return formatter
     }()
     

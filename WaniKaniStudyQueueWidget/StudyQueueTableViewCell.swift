@@ -17,7 +17,7 @@ class StudyQueueTableViewCell: UITableViewCell {
         formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute]
         formatter.maximumUnitCount = 1
         formatter.unitsStyle = .abbreviated
-        formatter.zeroFormattingBehavior = [.dropLeading, .dropTrailing]
+        formatter.zeroFormattingBehavior = .dropAll
         
         return formatter
     }()

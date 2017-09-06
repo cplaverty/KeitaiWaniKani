@@ -15,7 +15,7 @@ class ReviewTimeTableViewCell: UITableViewCell {
         formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute]
         formatter.maximumUnitCount = 2
         formatter.unitsStyle = .abbreviated
-        formatter.zeroFormattingBehavior = [.dropLeading, .dropTrailing]
+        formatter.zeroFormattingBehavior = .dropAll
         formatter.includesTimeRemainingPhrase = true
         
         return formatter
