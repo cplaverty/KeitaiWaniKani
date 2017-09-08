@@ -601,8 +601,14 @@ class DashboardTableViewController: UITableViewController {
 // MARK: - WebViewControllerDelegate
 extension DashboardTableViewController: WebViewControllerDelegate {
     func webViewController(_ controller: WebViewController, didFinish url: URL?) {
-        if url == WaniKaniURL.lessonSession || url == WaniKaniURL.reviewSession {
+        guard let url = url else {
+            return
+        }
+        
+        switch url {
+        case WaniKaniURL.lessonHome, WaniKaniURL.lessonSession, WaniKaniURL.reviewHome, WaniKaniURL.reviewSession:
             shouldForceDataReload = true
+        default: break
         }
     }
 }
