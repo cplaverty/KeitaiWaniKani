@@ -452,7 +452,7 @@ public class ResourceRepositoryReader {
         return ProjectedLevelInfo(level: level, startDate: startDate, endDate: earliestLevellingDate, isEndDateBasedOnLockedItem: isEndDateBasedOnLockedItem)
     }
     
-    private func getUnlockDatesByLevel(for subjectType: SubjectType, from database: FMDatabase) throws -> [Int : [Date]] {
+    private func getUnlockDatesByLevel(for subjectType: SubjectType, from database: FMDatabase) throws -> [Int: [Date]] {
         let table = Tables.assignments
         let query = """
         SELECT \(table.level), \(table.unlockedAt)
@@ -465,7 +465,7 @@ public class ResourceRepositoryReader {
         let resultSet = try database.executeQuery(query, values: [subjectType.rawValue])
         defer { resultSet.close() }
         
-        var unlockDatesByLevel = [Int : [Date]]()
+        var unlockDatesByLevel = [Int: [Date]]()
         while resultSet.next() {
             let level = resultSet.long(forColumn: table.level.name)
             let dateUnlocked = resultSet.date(forColumn: table.unlockedAt.name)!

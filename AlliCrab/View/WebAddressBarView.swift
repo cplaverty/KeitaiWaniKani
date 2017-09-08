@@ -78,7 +78,7 @@ class WebAddressBarView: UIView {
         contentView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor).isActive = true
         contentView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor).isActive = true
         
-        let views: [String : Any] = [
+        let views: [String: Any] = [
             "secureSiteIndicator": secureSiteIndicator,
             "addressLabel": addressLabel,
             "refreshButton": refreshButton
