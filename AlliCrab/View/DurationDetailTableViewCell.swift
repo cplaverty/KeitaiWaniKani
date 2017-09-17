@@ -24,8 +24,12 @@ class DurationDetailTableViewCell: UITableViewCell {
         textLabel!.text = text
         
         if let duration = duration {
-            let formattedTimeSinceLevelStart = type(of: self).durationFormatter.string(from: duration, roundingUpwardToNearest: .oneMinute) ?? "???"
-            detailTextLabel!.text = formattedTimeSinceLevelStart
+            if duration <= 0 {
+                detailTextLabel!.text = "Now"
+            } else {
+                let formattedTimeSinceLevelStart = type(of: self).durationFormatter.string(from: duration, roundingUpwardToNearest: .oneMinute) ?? "???"
+                detailTextLabel!.text = formattedTimeSinceLevelStart
+            }
             detailTextLabel!.textColor = .black
         } else {
             detailTextLabel!.text = "-"
