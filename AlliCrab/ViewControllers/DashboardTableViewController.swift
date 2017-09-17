@@ -355,7 +355,10 @@ class DashboardTableViewController: UITableViewController {
             if try self.resourceRepository.hasStudyQueue() {
                 self.studyQueue = try self.resourceRepository.studyQueue()
             }
-            
+            if try resourceRepository.hasLevelTimeline() {
+                self.levelTimeline = try resourceRepository.levelTimeline()
+            }
+
             self.tableView.reloadSections([TableViewSection.available.rawValue, TableViewSection.upcomingReviews.rawValue, TableViewSection.levelProgression.rawValue], with: .automatic)
         } catch {
             if #available(iOS 10.0, *) {
