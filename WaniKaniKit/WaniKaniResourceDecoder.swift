@@ -20,34 +20,28 @@ public class WaniKaniResourceDecoder: ResourceDecoder {
     
     private func makeJSONDecoder() -> JSONDecoder {
         let decoder = JSONDecoder()
-        if #available(iOS 10.0, *) {
-            decoder.dateDecodingStrategy = .iso8601
-        } else {
-            decoder.dateDecodingStrategy = .custom(decodeISO8601Date)
-        }
+        decoder.dateDecodingStrategy = .custom(decodeISO8601Date)
         return decoder
     }
     
     private func decodeISO8601Date(decoder: Decoder) throws -> Date {
         let stringValue = try decoder.singleValueContainer().decode(String.self)
         
-        let parseISODate: (String) -> (UnsafePointer<CChar>) -> Date? = { fmt in { p in
-            var tmc: tm = tm(tm_sec: 0, tm_min: 0, tm_hour: 0, tm_mday: 0, tm_mon: 0, tm_year: 0, tm_wday: 0, tm_yday: 0, tm_isdst: 0, tm_gmtoff: 0, tm_zone: nil)
-            guard strptime(p, fmt, &tmc) != nil else {
-                return nil
-            }
-            
-            return Date(timeIntervalSince1970: TimeInterval(mktime(&tmc)))
-            }}
-        
-        let parsed = stringValue.hasSuffix("Z")
-            ? stringValue.dropLast(1).withCString(parseISODate("%FT%T"))
-            : stringValue.withCString(parseISODate("%FT%T%z"))
-        
-        guard let date = parsed else {
+        guard let date = Formatter.iso8601.date(from: stringValue) else {
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Failed to parse date \(stringValue)"))
         }
         
         return date
     }
+}
+
+private extension Formatter {
+    static let iso8601: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSXXXXX"
+        return formatter
+    }()
 }
