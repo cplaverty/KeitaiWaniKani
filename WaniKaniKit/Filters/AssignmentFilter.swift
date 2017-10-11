@@ -43,12 +43,12 @@ public struct AssignmentFilter {
 extension AssignmentFilter: RequestFilter {
     func asQueryItems() -> [URLQueryItem]? {
         var elements = [URLQueryItem]()
-        elements.appendItemsIfSet(name: "subject_ids[]", values: subjectIDs)
+        elements.appendItemsIfSet(name: "subject_ids", values: subjectIDs)
         elements.appendItemIfSet(name: "subject_type", value: subjectType)
-        elements.appendItemsIfSet(name: "levels[]", values: levels)
+        elements.appendItemsIfSet(name: "levels", values: levels)
         elements.appendItemIfSet(name: "available_before", value: availableBefore)
         elements.appendItemIfSet(name: "available_after", value: availableAfter)
-        elements.appendItemsIfSet(name: "srs_stages[]", values: srsStages)
+        elements.appendItemsIfSet(name: "srs_stages", values: srsStages)
         elements.appendItemIfSet(name: "passed", value: passed)
         elements.appendItemIfSet(name: "burned", value: burned)
         elements.appendItemIfSet(name: "updated_after", value: updatedAfter)

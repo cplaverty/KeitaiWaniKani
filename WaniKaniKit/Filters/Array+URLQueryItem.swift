@@ -7,57 +7,44 @@
 
 extension Array where Element == URLQueryItem {
     mutating func appendItemIfSet(name: String, value: String?) {
-        if let value = value {
-            append(URLQueryItem(name: name, value: value))
-        }
+        guard let value = value else { return }
+        
+        append(URLQueryItem(name: name, value: value))
     }
     
     mutating func appendItemIfSet<T: LosslessStringConvertible>(name: String, value: T?) {
-        if let value = value {
-            append(URLQueryItem(name: name, value: String(value)))
-        }
+        guard let value = value else { return }
+        
+        append(URLQueryItem(name: name, value: String(value)))
     }
     
     mutating func appendItemIfSet<Subject>(name: String, value: Subject?) {
-        if let value = value {
-            append(URLQueryItem(name: name, value: String(describing: value)))
-        }
+        guard let value = value else { return }
+        
+        append(URLQueryItem(name: name, value: String(describing: value)))
     }
     
     mutating func appendItemIfSet(name: String, value: Date?) {
-        if let value = value {
-            if #available(iOS 10.0, *) {
-                let format = ISO8601DateFormatter()
-                format.formatOptions = .withInternetDateTime
-                format.timeZone = TimeZone(identifier: "UTC")!
-                
-                append(URLQueryItem(name: name, value: format.string(from: value)))
-            } else {
-                let format = DateFormatter()
-                format.locale = Locale(identifier: "en_US_POSIX")
-                format.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
-                format.timeZone = TimeZone(identifier: "UTC")!
-                
-                append(URLQueryItem(name: name, value: format.string(from: value)))
-            }
-        }
+        guard let value = value else { return }
+        
+        append(URLQueryItem(name: name, value: DateFormatter.iso8601.string(from: value)))
     }
     
     mutating func appendItemsIfSet(name: String, values: [String]?) {
-        if let values = values {
-            self += values.lazy.map { URLQueryItem(name: name, value: $0) }
-        }
+        guard let values = values else { return }
+        
+        append(URLQueryItem(name: name, value: values.joined(separator: ",")))
     }
     
     mutating func appendItemsIfSet<T: LosslessStringConvertible>(name: String, values: [T]?) {
-        if let values = values {
-            self += values.lazy.map { URLQueryItem(name: name, value: String($0)) }
-        }
+        guard let values = values else { return }
+        
+        append(URLQueryItem(name: name, value: values.lazy.map({ String($0) }).joined(separator: ",")))
     }
     
     mutating func appendItemsIfSet<Subject>(name: String, values: [Subject]?) {
-        if let values = values {
-            self += values.lazy.map { URLQueryItem(name: name, value: String(describing: $0)) }
-        }
+        guard let values = values else { return }
+        
+        append(URLQueryItem(name: name, value: values.lazy.map({ String(describing: $0) }).joined(separator: ",")))
     }
 }

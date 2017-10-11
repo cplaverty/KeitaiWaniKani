@@ -157,6 +157,7 @@
 		83D7CC021F50EC7900043D47 /* AssignmentProgressionCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D7CC011F50EC7900043D47 /* AssignmentProgressionCollectionReusableView.swift */; };
 		83DC0EFB1F4DCB81006B6DD6 /* UIBottomBorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC0EFA1F4DCB81006B6DD6 /* UIBottomBorderedView.swift */; };
 		83DEF7F51F53273200EDCACF /* ProgressReportingBarButtonItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DEF7F41F53273200EDCACF /* ProgressReportingBarButtonItemView.swift */; };
+		83F02ED61F8EA3C600A85014 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02ED51F8EA3C600A85014 /* Formatter.swift */; };
 		83F1CBD91F463CF100CE9583 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F1CBD81F463CF100CE9583 /* TimeInterval.swift */; };
 		83F1CBDB1F463D5800CE9583 /* SRSDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F1CBDA1F463D5800CE9583 /* SRSDistribution.swift */; };
 		83F1CBDD1F46519600CE9583 /* SRSReviewCounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F1CBDC1F46519600CE9583 /* SRSReviewCounts.swift */; };
@@ -408,6 +409,7 @@
 		83D7CC011F50EC7900043D47 /* AssignmentProgressionCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentProgressionCollectionReusableView.swift; sourceTree = "<group>"; };
 		83DC0EFA1F4DCB81006B6DD6 /* UIBottomBorderedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBottomBorderedView.swift; sourceTree = "<group>"; };
 		83DEF7F41F53273200EDCACF /* ProgressReportingBarButtonItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressReportingBarButtonItemView.swift; sourceTree = "<group>"; };
+		83F02ED51F8EA3C600A85014 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		83F1CBD81F463CF100CE9583 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		83F1CBDA1F463D5800CE9583 /* SRSDistribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRSDistribution.swift; sourceTree = "<group>"; };
 		83F1CBDC1F46519600CE9583 /* SRSReviewCounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRSReviewCounts.swift; sourceTree = "<group>"; };
@@ -803,6 +805,7 @@
 				83FEF27F1F3138E5003D7992 /* FMDatabaseAdditionsVariadic.swift */,
 				8334ABEA1F48900F00BBFDC8 /* FMDatabaseQueue.swift */,
 				83B75F6F1F351E6500BECEB0 /* FMResultSet.swift */,
+				83F02ED51F8EA3C600A85014 /* Formatter.swift */,
 				83F1CBD81F463CF100CE9583 /* TimeInterval.swift */,
 				83CE51D01F4DEC1D0050242A /* UIColor.swift */,
 			);
@@ -1360,6 +1363,7 @@
 				837BBEDE1F31318300C92141 /* DatabaseManager.swift in Sources */,
 				83F1CBDD1F46519600CE9583 /* SRSReviewCounts.swift in Sources */,
 				83C2618B1F37058A00278648 /* Reading+BulkDatabaseCodable.swift in Sources */,
+				83F02ED61F8EA3C600A85014 /* Formatter.swift in Sources */,
 				83FEF2801F3138E5003D7992 /* FMDatabaseAdditionsVariadic.swift in Sources */,
 				832AFE7C1F486DBB00252264 /* LevelData.swift in Sources */,
 				83B75F6A1F351B0300BECEB0 /* Assignment+DatabaseCodable.swift in Sources */,

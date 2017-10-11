@@ -25,7 +25,7 @@ public struct StudyMaterialFilter {
 extension StudyMaterialFilter: RequestFilter {
     func asQueryItems() -> [URLQueryItem]? {
         var elements = [URLQueryItem]()
-        elements.appendItemsIfSet(name: "subject_ids[]", values: subjectIDs)
+        elements.appendItemsIfSet(name: "subject_ids", values: subjectIDs)
         elements.appendItemIfSet(name: "subject_type", value: subjectType)
         elements.appendItemIfSet(name: "updated_after", value: updatedAfter)
         elements.appendItemIfSet(name: "page", value: pageNumber)

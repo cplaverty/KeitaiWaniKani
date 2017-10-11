@@ -27,21 +27,10 @@ public class WaniKaniResourceDecoder: ResourceDecoder {
     private func decodeISO8601Date(decoder: Decoder) throws -> Date {
         let stringValue = try decoder.singleValueContainer().decode(String.self)
         
-        guard let date = Formatter.iso8601.date(from: stringValue) else {
+        guard let date = DateFormatter.iso8601.date(from: stringValue) else {
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Failed to parse date \(stringValue)"))
         }
         
         return date
     }
-}
-
-private extension Formatter {
-    static let iso8601: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSXXXXX"
-        return formatter
-    }()
 }
