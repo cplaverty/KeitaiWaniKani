@@ -158,6 +158,7 @@
 		83DC0EFB1F4DCB81006B6DD6 /* UIBottomBorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC0EFA1F4DCB81006B6DD6 /* UIBottomBorderedView.swift */; };
 		83DEF7F51F53273200EDCACF /* ProgressReportingBarButtonItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DEF7F41F53273200EDCACF /* ProgressReportingBarButtonItemView.swift */; };
 		83F02ED61F8EA3C600A85014 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02ED51F8EA3C600A85014 /* Formatter.swift */; };
+		83F02ED81F8EC3BD00A85014 /* SubjectCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02ED71F8EC3BD00A85014 /* SubjectCharacterView.swift */; };
 		83F1CBD91F463CF100CE9583 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F1CBD81F463CF100CE9583 /* TimeInterval.swift */; };
 		83F1CBDB1F463D5800CE9583 /* SRSDistribution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F1CBDA1F463D5800CE9583 /* SRSDistribution.swift */; };
 		83F1CBDD1F46519600CE9583 /* SRSReviewCounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F1CBDC1F46519600CE9583 /* SRSReviewCounts.swift */; };
@@ -410,6 +411,7 @@
 		83DC0EFA1F4DCB81006B6DD6 /* UIBottomBorderedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBottomBorderedView.swift; sourceTree = "<group>"; };
 		83DEF7F41F53273200EDCACF /* ProgressReportingBarButtonItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressReportingBarButtonItemView.swift; sourceTree = "<group>"; };
 		83F02ED51F8EA3C600A85014 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		83F02ED71F8EC3BD00A85014 /* SubjectCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCharacterView.swift; sourceTree = "<group>"; };
 		83F1CBD81F463CF100CE9583 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		83F1CBDA1F463D5800CE9583 /* SRSDistribution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRSDistribution.swift; sourceTree = "<group>"; };
 		83F1CBDC1F46519600CE9583 /* SRSReviewCounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRSReviewCounts.swift; sourceTree = "<group>"; };
@@ -531,6 +533,7 @@
 				83FFD90A1F5387B80015988F /* ReviewTimelineHeaderFooterView.swift */,
 				83CE51D81F4F021E0050242A /* ReviewTimeTableViewCell.swift */,
 				83CE51D21F4E1C5A0050242A /* SRSProgressTableViewCell.swift */,
+				83F02ED71F8EC3BD00A85014 /* SubjectCharacterView.swift */,
 				83DC0EFA1F4DCB81006B6DD6 /* UIBottomBorderedView.swift */,
 				83CE51E01F4F541E0050242A /* UserScriptTableViewCell.swift */,
 				832708551F4C920100AB1525 /* WebAddressBarView.swift */,
@@ -1455,6 +1458,7 @@
 				83DEF7F51F53273200EDCACF /* ProgressReportingBarButtonItemView.swift in Sources */,
 				83CE51DF1F4F53C70050242A /* SettingsTableViewController.swift in Sources */,
 				83D7CC001F50B82A00043D47 /* AssignmentProgressionCollectionViewCell.swift in Sources */,
+				83F02ED81F8EC3BD00A85014 /* SubjectCharacterView.swift in Sources */,
 				83FFD90B1F5387B80015988F /* ReviewTimelineHeaderFooterView.swift in Sources */,
 				83FEF4401F4F969900A7029D /* ReviewTimelineEntryTableViewCell.swift in Sources */,
 				83FE5F1C1F534F5400A2CAA2 /* BlurredImageView.swift in Sources */,

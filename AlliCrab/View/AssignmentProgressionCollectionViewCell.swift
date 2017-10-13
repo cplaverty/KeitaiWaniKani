@@ -19,23 +19,34 @@ private let dateComponentsFormatter: DateComponentsFormatter = {
     return formatter
 }()
 
-protocol AssignmentProgressionCollectionViewCell: class {
-    var isLocked: Bool { get set }
-    var availableAt: NextReviewTime? { get set }
-    var guruTime: NextReviewTime? { get set }
-    var percentComplete: Float? { get set }
+class AssignmentProgressionCollectionViewCell: UICollectionViewCell {
     
-    var infoURL: URL? { get }
+    // MARK: - Properties
     
-    var progressView: UIProgressView! { get }
-    var timeToNextReviewLabel: UILabel! { get }
-    var timeToGuruLabel: UILabel! { get }
+    var isLocked = true
+    var availableAt: NextReviewTime?
+    var guruTime: NextReviewTime?
+    var percentComplete: Float = 0
+    var subject: Subject!
     
-    func updateUI()
-}
-
-private extension AssignmentProgressionCollectionViewCell {
-    func updateProgress() {
+    var documentURL: URL {
+        return subject.documentURL
+    }
+    
+    // MARK: - Outlets
+    
+    @IBOutlet weak var characterView: SubjectCharacterView!
+    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var timeToNextReviewLabel: UILabel!
+    @IBOutlet weak var timeToGuruLabel: UILabel!
+    
+    // MARK: - Update UI
+    
+    func updateUI() {
+        characterView.subject = subject
+        backgroundColor = subject.subjectType.backgroundColor.withAlphaComponent(isLocked ? 0.5 : 1.0)
+        progressView.progressTintColor = subject.subjectType.backgroundColor.withAlphaComponent(0.4)
+        
         if isLocked {
             timeToNextReviewLabel.text = "Locked"
         } else if let availableAt = availableAt {
@@ -68,128 +79,6 @@ private extension AssignmentProgressionCollectionViewCell {
             timeToGuruLabel.text = "-"
         }
         
-        progressView.setProgress(percentComplete ?? 0, animated: false)
+        progressView.setProgress(percentComplete, animated: false)
     }
 }
-
-// MARK: - RadicalAssignmentProgressionCollectionViewCell
-class RadicalAssignmentProgressionCollectionViewCell: UICollectionViewCell, AssignmentProgressionCollectionViewCell {
-    
-    // MARK: - Properties
-    
-    var isLocked = true
-    var availableAt: NextReviewTime?
-    var guruTime: NextReviewTime?
-    var percentComplete: Float?
-    var radical: Radical?
-    
-    var infoURL: URL? {
-        return radical.flatMap { WaniKaniURL.radicalRoot.appendingPathComponent($0.slug) }
-    }
-    
-    private var imageLoader: RadicalCharacterImageLoader? {
-        didSet {
-            if imageLoader != nil {
-                downloadProgressActivityIndicator.startAnimating()
-            } else {
-                downloadProgressActivityIndicator.stopAnimating()
-            }
-        }
-    }
-    
-    // MARK: - Outlets
-    
-    @IBOutlet weak var characterLabel: UILabel!
-    @IBOutlet weak var displayImageView: UIImageView!
-    @IBOutlet weak var downloadProgressActivityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var timeToNextReviewLabel: UILabel!
-    @IBOutlet weak var timeToGuruLabel: UILabel!
-    
-    // MARK: - Update UI
-    
-    func updateUI() {
-        updateProgress()
-        
-        guard let radical = self.radical else {
-            characterLabel.text = nil
-            displayImageView.image = nil
-            imageLoader = nil
-            return
-        }
-        
-        if let displayCharacter = radical.character {
-            characterLabel.text = displayCharacter
-            characterLabel.isHidden = false
-            displayImageView.image = nil
-            displayImageView.isHidden = true
-            imageLoader = nil
-        } else {
-            characterLabel.isHidden = true
-            displayImageView.isHidden = true
-            
-            let imageLoader = RadicalCharacterImageLoader(characterImages: radical.characterImages)
-            self.imageLoader = imageLoader
-            imageLoader.loadImage { [weak self] (image, error) in
-                guard let image = image else {
-                    if #available(iOS 10.0, *) {
-                        os_log("Failed to fetch radical image %@: %@", type: .error, radical.slug, error?.localizedDescription ?? "<no error>")
-                    }
-                    return
-                }
-                
-                self?.imageLoader = nil
-                self?.displayImageView.image = image
-                self?.displayImageView.tintColor = .white
-                self?.displayImageView.isHidden = false
-            }
-        }
-        
-        backgroundColor = UIColor.waniKaniRadical.withAlphaComponent(isLocked ? 0.5 : 1.0)
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        imageLoader = nil
-    }
-    
-}
-
-// MARK: - KanjiAssignmentProgressionCollectionViewCell
-class KanjiAssignmentProgressionCollectionViewCell: UICollectionViewCell, AssignmentProgressionCollectionViewCell {
-    
-    // MARK: - Properties
-    
-    var isLocked = true
-    var availableAt: NextReviewTime?
-    var guruTime: NextReviewTime?
-    var percentComplete: Float?
-    var kanji: Kanji?
-    
-    var infoURL: URL? {
-        return kanji.flatMap { WaniKaniURL.kanjiRoot.appendingPathComponent($0.character) }
-    }
-    
-    // MARK: - Outlets
-    
-    @IBOutlet weak var characterLabel: UILabel!
-    @IBOutlet weak var progressView: UIProgressView!
-    @IBOutlet weak var timeToNextReviewLabel: UILabel!
-    @IBOutlet weak var timeToGuruLabel: UILabel!
-    
-    // MARK: - Update UI
-    
-    func updateUI() {
-        updateProgress()
-        
-        guard let kanji = self.kanji else {
-            characterLabel.text = nil
-            return
-        }
-        
-        characterLabel.text = kanji.character
-        backgroundColor = UIColor.waniKaniKanji.withAlphaComponent(isLocked ? 0.5 : 1.0)
-    }
-    
-}
-

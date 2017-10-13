@@ -9,6 +9,11 @@ public struct Meaning: Codable {
     public let meaning: String
     public let isPrimary: Bool
     
+    public init(meaning: String, isPrimary: Bool) {
+        self.meaning = meaning
+        self.isPrimary = isPrimary
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case meaning
         case isPrimary = "primary"

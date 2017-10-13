@@ -18,8 +18,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
     
     private enum ReuseIdentifier: String {
         case header = "Header"
-        case radical = "Radical"
-        case kanji = "Kanji"
+        case subject = "Subject"
     }
     
     // MARK: - Properties
@@ -83,22 +82,9 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = sections[indexPath.section].items[indexPath.row]
         
-        let cell: UICollectionViewCell & AssignmentProgressionCollectionViewCell
-        switch item.subject {
-        case let radical as Radical:
-            let c = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.radical.rawValue, for: indexPath) as! RadicalAssignmentProgressionCollectionViewCell
-            c.radical = radical
-            
-            cell = c
-        case let kanji as Kanji:
-            let c = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.kanji.rawValue, for: indexPath) as! KanjiAssignmentProgressionCollectionViewCell
-            c.kanji = kanji
-            
-            cell = c
-        default:
-            fatalError()
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.subject.rawValue, for: indexPath) as! AssignmentProgressionCollectionViewCell
         
+        cell.subject = item.subject
         cell.isLocked = item.isLocked
         cell.availableAt = item.availableAt
         cell.guruTime = item.guruTime
@@ -125,11 +111,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! AssignmentProgressionCollectionViewCell
-        guard let url = cell.infoURL else {
-            return
-        }
-        
-        self.present(WebViewController.wrapped(url: url), animated: true, completion: nil)
+        self.present(WebViewController.wrapped(url: cell.documentURL), animated: true, completion: nil)
     }
     
     // MARK: - Timer

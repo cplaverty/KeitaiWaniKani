@@ -29,6 +29,7 @@ public protocol Subject {
     var subjectType: SubjectType { get }
     var slug: String { get }
     var componentSubjectIDs: [Int] { get }
+    var documentURL: URL { get }
 }
 
 extension Subject {
