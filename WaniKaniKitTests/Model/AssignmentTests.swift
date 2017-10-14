@@ -12,7 +12,7 @@ class AssignmentTests: XCTestCase {
     
     func testDecode() {
         let data = """
-            {"id":2363694,"object":"assignment","url":"https://www.wanikani.com/api/v2/assignments/2363694","data_updated_at":"2017-05-06T10:18:56Z","data":{"subject_id":3234,"subject_type":"vocabulary","level":10,"srs_stage":8,"srs_stage_name":"Enlightened","unlocked_at":"2016-02-07T00:11:03Z","started_at":null,"passed_at":null,"burned_at":null,"available_at":"2017-09-03T09:00:00Z","passed":true,"resurrected":false}}
+            {"id":2363694,"object":"assignment","url":"https://www.wanikani.com/api/v2/assignments/2363694","data_updated_at":"2017-05-06T10:18:56.0000000Z","data":{"subject_id":3234,"subject_type":"vocabulary","level":10,"srs_stage":8,"srs_stage_name":"Enlightened","unlocked_at":"2016-02-07T00:11:03.0000000Z","started_at":null,"passed_at":null,"burned_at":null,"available_at":"2017-09-03T09:00:00.0000000Z","passed":true,"resurrected":false}}
             """.data(using: .utf8)!
         
         let decoder = WaniKaniResourceDecoder()

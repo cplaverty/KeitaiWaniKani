@@ -12,7 +12,7 @@ class UserInformationTests: XCTestCase {
     
     func testDecode() {
         let data = """
-            {"object":"user","url":"https://www.wanikani.com/api/v2/user","data_updated_at":"2017-07-25T08:08:06Z","data":{"username":"cplaverty","level":13,"profile_url":"https://www.wanikani.com/users/cplaverty","started_at":"2014-06-12T07:40:29Z","subscribed":true,"current_vacation_started_at":null}}
+            {"object":"user","url":"https://www.wanikani.com/api/v2/user","data_updated_at":"2017-07-25T08:08:06.0000000Z","data":{"username":"cplaverty","level":13,"profile_url":"https://www.wanikani.com/users/cplaverty","started_at":"2014-06-12T07:40:29.0000000Z","subscribed":true,"current_vacation_started_at":null}}
             """.data(using: .utf8)!
         
         let decoder = WaniKaniResourceDecoder()

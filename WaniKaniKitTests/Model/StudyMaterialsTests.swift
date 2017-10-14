@@ -12,7 +12,7 @@ class StudyMaterialsTests: XCTestCase {
     
     func testDecode() {
         let data = """
-            {"id":204431,"object":"study_material","url":"https://www.wanikani.com/api/v2/study_materials/204431","data_updated_at":"2017-05-13T14:36:04Z","data":{"created_at":"2015-07-07T16:41:02Z","subject_id":25,"subject_type":"radical","meaning_note":"meaning note","reading_note":"reading note","meaning_synonyms":["industry"]}}
+            {"id":204431,"object":"study_material","url":"https://www.wanikani.com/api/v2/study_materials/204431","data_updated_at":"2017-05-13T14:36:04.0000000Z","data":{"created_at":"2015-07-07T16:41:02.0000000Z","subject_id":25,"subject_type":"radical","meaning_note":"meaning note","reading_note":"reading note","meaning_synonyms":["industry"]}}
             """.data(using: .utf8)!
         
         let decoder = WaniKaniResourceDecoder()
