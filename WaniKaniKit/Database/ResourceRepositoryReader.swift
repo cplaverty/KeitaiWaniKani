@@ -410,8 +410,18 @@ public class ResourceRepositoryReader {
             })
         }
         
-        return try ids.map { id in
+        return try ids.map({ id in
             (try loadResource(id: id).data as! Subject, assignments[id])
+        })
+    }
+    
+    public func findSubjects(matching query: String) throws -> [ResourceCollectionItem] {
+        guard let databaseQueue = self.databaseQueue else {
+            throw ResourceRepositoryError.noDatabase
+        }
+        
+        return try databaseQueue.inDatabase { database in
+            try SubjectSearch.read(from: database, searchQuery: query)
         }
     }
     
@@ -434,7 +444,7 @@ public class ResourceRepositoryReader {
         
         let now = Date()
         let dependents = try Assignment.read(from: database, subjectIDs: componentSubjectIDs)
-        let unlockDateForLockedItems = dependents.flatMap { assignment in assignment.guruDate(unlockDateForLockedItems: now) }.min()
+        let unlockDateForLockedItems = dependents.flatMap({ assignment in assignment.guruDate(unlockDateForLockedItems: now) }).max()
         
         return assignment.guruDate(unlockDateForLockedItems: unlockDateForLockedItems ?? now) ?? now
     }

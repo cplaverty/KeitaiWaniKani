@@ -64,6 +64,8 @@ extension Radical: DatabaseCodable {
             id, level, createdAt, slug, character as Any, documentURL.absoluteString
         ]
         try database.executeUpdate(query, values: values)
+        
+        try SubjectSearch.write(to: database, id: id, character: character, meanings: meanings, readings: [])
     }
 }
 

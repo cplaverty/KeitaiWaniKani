@@ -96,6 +96,8 @@ public class DatabaseManager {
             
             isGoodConnection = true
             
+            database.makeFunctionNamed("rank", arguments: -1, block: calculateRank)
+            
             var schemaVersion = schemaManager.version(of: database)
             if #available(iOS 10.0, *) {
                 os_log("Database version %u (expected version is %u)", type: .info, schemaVersion, schemaManager.expectedSchemaVersion)

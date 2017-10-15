@@ -436,6 +436,40 @@ class ResourceRepositoryReaderTests: XCTestCase {
         }
     }
     
+    func testSubjectSearch() {
+        let leafRadical = createTestRadical(level: 1, character: nil, meanings: [Meaning(meaning: "leaf", isPrimary: true)])
+        let finsRadical = createTestRadical(level: 1, character: "ハ", meanings: [Meaning(meaning: "fins", isPrimary: true)])
+        let mountainKanji = createTestKanji(level: 1, character: "山",
+                                            meanings: [Meaning(meaning: "Mountain", isPrimary: true)],
+                                            readings: [Reading(type: "onyomi", reading: "さん", isPrimary: true), Reading(type: "kunyomi", reading: "やま", isPrimary: false)])
+        let mouthKanji = createTestKanji(level: 1, character: "口",
+                                         meanings: [Meaning(meaning: "Mouth", isPrimary: true)],
+                                         readings: [Reading(type: "onyomi", reading: "こう", isPrimary: true), Reading(type: "onyomi", reading: "く", isPrimary: true), Reading(type: "kunyomi", reading: "くち", isPrimary: false)])
+        let industryKanji = createTestKanji(level: 1, character: "工",
+                                            meanings: [Meaning(meaning: "Construction", isPrimary: true), Meaning(meaning: "Industry", isPrimary: false)],
+                                            readings: [Reading(type: "onyomi", reading: "こう", isPrimary: true), Reading(type: "onyomi", reading: "く", isPrimary: true)])
+        let mountainVocab = createTestVocabulary(level: 1, characters: "山",
+                                                 meanings: [Meaning(meaning: "Mountain", isPrimary: true)],
+                                                 readings: [Reading(type: nil, reading: "やま", isPrimary: true)])
+        let mouthVocab = createTestVocabulary(level: 1, characters: "口",
+                                              meanings: [Meaning(meaning: "Mouth", isPrimary: true)],
+                                              readings: [Reading(type: nil, reading: "くち", isPrimary: true)])
+        let mountFujiVocab = createTestVocabulary(level: 1, characters: "ふじ山",
+                                                  meanings: [Meaning(meaning: "Mt Fuji", isPrimary: true), Meaning(meaning: "Mount Fuji", isPrimary: false), Meaning(meaning: "Mt. Fuji", isPrimary: false)],
+                                                  readings: [Reading(type: nil, reading: "ふじさん", isPrimary: true)])
+        
+        writeToDatabase([leafRadical, finsRadical, mountainKanji, mouthKanji, industryKanji, mountainVocab, mouthVocab, mountFujiVocab])
+        
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "leaf"), [leafRadical])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "fins"), [finsRadical])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "やま"), [mountainVocab, mountainKanji])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "く"), [mouthKanji, industryKanji])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "く*"), [mouthKanji, industryKanji, mouthVocab])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "mouth"), [mouthKanji, mouthVocab])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "口"), [mouthKanji, mouthVocab])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "mount*"), [mountainKanji, mountainVocab, mountFujiVocab])
+    }
+    
     private func createTestUser() {
         let user = UserInformation(username: "Test", level: testUserLevel, startedAt: Date(), isSubscribed: true, profileURL: nil, currentVacationStartedAt: nil)
         
@@ -472,35 +506,53 @@ class ResourceRepositoryReaderTests: XCTestCase {
         return item
     }
     
-    private func createTestRadical(level: Int) -> ResourceCollectionItem {
+    private func createTestRadical(level: Int, character: String? = nil, meanings: [Meaning] = []) -> ResourceCollectionItem {
         let item = ResourceCollectionItem(id: nextSubjectID,
                                           type: .radical,
                                           url: URL(string: "https://www.wanikani.com/api/v2/subjects/\(nextSubjectID)")!,
-                                          dataUpdatedAt: Date(),
+                                          dataUpdatedAt: Date(timeIntervalSinceReferenceDate: 0),
                                           data: Radical(level: level,
-                                                        createdAt: Date(),
+                                                        createdAt: Date(timeIntervalSinceReferenceDate: 0),
                                                         slug: "slug",
-                                                        character: nil,
+                                                        character: character,
                                                         characterImages: [],
-                                                        meanings: [],
+                                                        meanings: meanings,
                                                         documentURL: URL(string: "https://www.wanikani.com/radicals/slug")!))
         nextSubjectID += 1
         return item
     }
     
-    private func createTestKanji(level: Int) -> ResourceCollectionItem {
+    private func createTestKanji(level: Int, character: String = "", meanings: [Meaning] = [], readings: [Reading] = []) -> ResourceCollectionItem {
         let item = ResourceCollectionItem(id: nextSubjectID,
-                                          type: .radical,
+                                          type: .kanji,
                                           url: URL(string: "https://www.wanikani.com/api/v2/subjects/\(nextSubjectID)")!,
-                                          dataUpdatedAt: Date(),
+                                          dataUpdatedAt: Date(timeIntervalSinceReferenceDate: 0),
                                           data: Kanji(level: level,
-                                                      createdAt: Date(),
+                                                      createdAt: Date(timeIntervalSinceReferenceDate: 0),
                                                       slug: "slug",
-                                                      character: "",
-                                                      meanings: [],
-                                                      readings: [],
+                                                      character: character,
+                                                      meanings: meanings,
+                                                      readings: readings,
                                                       componentSubjectIDs: [],
-                                                      documentURL: URL(string: "https://www.wanikani.com/radicals/slug")!))
+                                                      documentURL: URL(string: "https://www.wanikani.com/kanji/\(character.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)")!))
+        nextSubjectID += 1
+        return item
+    }
+    
+    private func createTestVocabulary(level: Int, characters: String = "", meanings: [Meaning] = [], readings: [Reading] = []) -> ResourceCollectionItem {
+        let item = ResourceCollectionItem(id: nextSubjectID,
+                                          type: .vocabulary,
+                                          url: URL(string: "https://www.wanikani.com/api/v2/subjects/\(nextSubjectID)")!,
+                                          dataUpdatedAt: Date(timeIntervalSinceReferenceDate: 0),
+                                          data: Vocabulary(level: level,
+                                                           createdAt: Date(timeIntervalSinceReferenceDate: 0),
+                                                           slug: "slug",
+                                                           characters: characters,
+                                                           meanings: meanings,
+                                                           readings: readings,
+                                                           partsOfSpeech: [],
+                                                           componentSubjectIDs: [],
+                                                           documentURL: URL(string: "https://www.wanikani.com/vocabulary/\(characters.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)")!))
         nextSubjectID += 1
         return item
     }

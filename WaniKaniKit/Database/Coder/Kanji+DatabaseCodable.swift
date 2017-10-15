@@ -67,6 +67,7 @@ extension Kanji: DatabaseCodable {
             id, level, createdAt, slug, character, documentURL.absoluteString
         ]
         try database.executeUpdate(query, values: values)
+        
+        try SubjectSearch.write(to: database, id: id, character: character, meanings: meanings, readings: readings)
     }
 }
-

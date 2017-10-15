@@ -70,6 +70,8 @@ extension Vocabulary: DatabaseCodable {
             id, level, createdAt, slug, characters, documentURL.absoluteString
         ]
         try database.executeUpdate(query, values: values)
+        
+        try SubjectSearch.write(to: database, id: id, character: characters, meanings: meanings, readings: readings)
     }
 }
 

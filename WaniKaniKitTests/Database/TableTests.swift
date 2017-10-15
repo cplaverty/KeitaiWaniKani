@@ -64,6 +64,16 @@ private class TestTableMultipleIndexes: Table {
     }
 }
 
+private class TestVirtualTableNoPrimaryKey: Table {
+    let intColumn = Column(name: "int_column", type: .int, nullable: false)
+    let floatColumn = Column(name: "float_column", type: .float, nullable: false)
+    let numericColumn = Column(name: "numeric_column", type: .numeric, nullable: false)
+    
+    init() {
+        super.init(name: "test", isVirtual: true)
+    }
+}
+
 class TableTests: XCTestCase {
     
     func testCreateTableStatementNoPrimaryKey() {
@@ -104,6 +114,13 @@ class TableTests: XCTestCase {
             CREATE UNIQUE INDEX idx_test_i2 ON test (int_column, float_column_nullable);
             """
         let createStmt = TestTableMultipleIndexes().createTableStatement()
+        
+        XCTAssertEqual(createStmt, expectedCreateStmt)
+    }
+    
+    func testCreateVirtualTableStatementNoPrimaryKey() {
+        let expectedCreateStmt = "CREATE VIRTUAL TABLE test USING fts4(tokenize=porter, int_column INTEGER NOT NULL, float_column REAL NOT NULL, numeric_column NUMERIC NOT NULL);"
+        let createStmt = TestVirtualTableNoPrimaryKey().createTableStatement()
         
         XCTAssertEqual(createStmt, expectedCreateStmt)
     }

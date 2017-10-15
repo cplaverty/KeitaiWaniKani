@@ -40,14 +40,16 @@ extension Column: CustomStringConvertible {
 
 class Table {
     let name: String
-    
+    let isVirtual: Bool
+
     // We have to make these vars so that we can create the Mirror in the initialiser
     var columns: [Column]! = nil
     var primaryKeys: [Column]? = nil
     var indexes: [TableIndex]? = nil
     
-    init(name: String, indexes: [TableIndex]? = nil) {
+    init(name: String, isVirtual: Bool = false, indexes: [TableIndex]? = nil) {
         self.name = name
+        self.isVirtual = isVirtual
         let mirror = Mirror(reflecting: self)
         var columns = [Column]()
         columns.reserveCapacity(Int(mirror.children.count))
@@ -58,14 +60,14 @@ class Table {
             }
         }
         self.columns = columns
-        let primaryKeys = columns.filter { $0.isPrimaryKey }
+        let primaryKeys = columns.filter({ $0.isPrimaryKey })
         self.primaryKeys = primaryKeys.isEmpty ? nil : primaryKeys
         self.indexes = indexes
     }
     
     func createTableStatement() -> String {
-        var query = "CREATE TABLE \(name) ("
-        query += columns.lazy.map { column in
+        var query = isVirtual ? "CREATE VIRTUAL TABLE \(name) USING fts4(tokenize=porter, " : "CREATE TABLE \(name) ("
+        query += columns.lazy.map({ column in
             var decl = "\(column.name) \(column.type.rawValue)"
             if !column.isNullable {
                 decl += " NOT NULL"
@@ -78,20 +80,20 @@ class Table {
             }
             
             return decl
-            }.joined(separator: ", ")
+            }).joined(separator: ", ")
         if let primaryKeys = primaryKeys, primaryKeys.count > 1 {
             query += ", PRIMARY KEY ("
-            query += primaryKeys.lazy.map { $0.name }.joined(separator: ", ")
+            query += primaryKeys.lazy.map({ $0.name }).joined(separator: ", ")
             query += ")"
         }
         query += ");"
         
         if let indexes = indexes, !indexes.isEmpty {
             query += "\n"
-            query += indexes.lazy.map { index in
+            query += indexes.lazy.map({ index in
                 return (index.isUnique ? "CREATE UNIQUE INDEX" : "CREATE INDEX")
-                    + " \(index.name) ON \(self.name) (\(index.columns.lazy.map { $0.name }.joined(separator: ", ")));"
-                }.joined(separator: "\n")
+                    + " \(index.name) ON \(self.name) (\(index.columns.lazy.map({ $0.name }).joined(separator: ", ")));"
+                }).joined(separator: "\n")
         }
         return query
     }

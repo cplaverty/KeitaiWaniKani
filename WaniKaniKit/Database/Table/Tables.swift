@@ -18,6 +18,7 @@ struct Tables {
     static let studyMaterials = StudyMaterialsTable()
     static let studyMaterialsMeaningSynonyms = StudyMaterialsMeaningSynonymsTable()
     static let subjectComponents = SubjectComponentsTable()
+    static let subjectSearch = SubjectSearchVirtualTable()
     static let userInformation = UserInformationTable()
     static let vocabulary = VocabularyTable()
     static let vocabularyPartsOfSpeech = VocabularyPartsOfSpeechTable()
@@ -26,7 +27,7 @@ struct Tables {
         return [
             assignments, kanji, meanings, radicals, radicalCharacterImages, readings, resources,
             resourceLastUpdate, reviewStatistics, studyMaterials, studyMaterialsMeaningSynonyms,
-            subjectComponents, userInformation, vocabulary, vocabularyPartsOfSpeech
+            subjectComponents, subjectSearch, userInformation, vocabulary, vocabularyPartsOfSpeech
         ]
     }
 }
