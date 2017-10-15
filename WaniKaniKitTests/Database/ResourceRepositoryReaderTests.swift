@@ -14,7 +14,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
     private var databaseManager: DatabaseManager!
     private var resourceRepository: ResourceRepositoryReader!
     
-    private var nextAssignmentID = 1
+    private var nextAssignmentID = 100000
     private var nextSubjectID = 1
     private let testUserLevel = 10
     
@@ -28,7 +28,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         databaseManager = DatabaseManager(factory: factory)
         resourceRepository = ResourceRepositoryReader(databaseManager: databaseManager)
         
-        nextAssignmentID = 1
+        nextAssignmentID = 100000
         
         if !databaseManager.open() {
             self.continueAfterFailure = false
@@ -360,7 +360,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                                  from: calendar.date(byAdding: .weekOfYear, value: -testUserLevel * 2 + 1,
                                                                      to: calendar.startOfDay(for: Date()).addingTimeInterval(.oneDay))!)
         
-        var assignments = [ResourceCollectionItem]()
+        var resourceItems = [ResourceCollectionItem]()
         
         var startDate = components.date!
         
@@ -370,10 +370,14 @@ class ResourceRepositoryReaderTests: XCTestCase {
             let kanjiStart = startDate + .oneDay * 7
             
             for _ in 0..<radicalCount {
-                assignments.append(createTestAssignment(subjectType: .radical, level: level, srsStage: 5, availableAt: startDate, unlockedAt: startDate, isPassed: true))
+                let radical = createTestRadical(level: level)
+                resourceItems.append(radical)
+                resourceItems.append(createTestAssignment(subjectType: .radical, level: level, srsStage: 5, availableAt: startDate, unlockedAt: startDate, isPassed: true, subjectID: radical.id))
             }
             for _ in 0..<kanjiCount {
-                assignments.append(createTestAssignment(subjectType: .kanji, level: level, srsStage: 5, availableAt: kanjiStart, unlockedAt: kanjiStart, isPassed: true))
+                let kanji = createTestKanji(level: level)
+                resourceItems.append(kanji)
+                resourceItems.append(createTestAssignment(subjectType: .kanji, level: level, srsStage: 5, availableAt: kanjiStart, unlockedAt: kanjiStart, isPassed: true, subjectID: kanji.id))
             }
             
             let endDate = startDate + .oneDay * 14
@@ -389,18 +393,22 @@ class ResourceRepositoryReaderTests: XCTestCase {
         
         let firstRadicalAssignmentId = nextAssignmentID
         for _ in 0..<radicalCount {
-            assignments.append(createTestAssignment(subjectType: .radical, level: testUserLevel, srsStage: 5, availableAt: startDate, unlockedAt: startDate, isPassed: true))
+            let radical = createTestRadical(level: testUserLevel)
+            resourceItems.append(radical)
+            resourceItems.append(createTestAssignment(subjectType: .radical, level: testUserLevel, srsStage: 5, availableAt: startDate, unlockedAt: startDate, isPassed: true, subjectID: radical.id))
         }
         let firstKanjiAssignmentId = nextAssignmentID
         for _ in 0..<kanjiCount {
-            assignments.append(createTestAssignment(subjectType: .kanji, level: testUserLevel, srsStage: 0, availableAt: kanjiStart, unlockedAt: kanjiStart, isPassed: false))
+            let kanji = createTestKanji(level: testUserLevel)
+            resourceItems.append(kanji)
+            resourceItems.append(createTestAssignment(subjectType: .kanji, level: testUserLevel, srsStage: 0, availableAt: kanjiStart, unlockedAt: kanjiStart, isPassed: false, subjectID: kanji.id))
         }
         let lastKanjiAssignmentId = nextAssignmentID
         
         levelInfos.append(LevelInfo(level: testUserLevel, startDate: startDate, endDate: nil))
         
-        NSLog("Writing \(assignments.count) assignments")
-        writeToDatabase(assignments)
+        NSLog("Writing \(resourceItems.count) resources")
+        writeToDatabase(resourceItems)
         
         let minimumGuruTime = 4 * .oneHour + 8 * .oneHour + .oneDay - .oneHour + 2 * .oneDay - .oneHour
         let projectedLevelInfo = ProjectedLevelInfo(level: testUserLevel, startDate: startDate, endDate: kanjiStart + minimumGuruTime, isEndDateBasedOnLockedItem: false)

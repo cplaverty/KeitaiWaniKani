@@ -37,14 +37,15 @@ class SubjectTests: XCTestCase {
     
     func testRadical_PassedAssignment() {
         let subject = makeRadical()
-        let assignment = makeAssignment(srsStage: .guru, availableAt: Date().addingTimeInterval(-5 * .oneDay))
+        let passedAt = Date().addingTimeInterval(-1 * .oneDay)
+        let assignment = makeAssignment(srsStage: .guru, availableAt: Date().addingTimeInterval(-5 * .oneDay), passedAt: passedAt)
         
         let guruDate = subject.earliestGuruDate(assignment: assignment) { _ in
             XCTFail("Did not expect assignment fetch for radical")
             return nil
         }
         
-        XCTAssertNil(guruDate)
+        XCTAssertEqual(guruDate, passedAt)
     }
     
     func testKanji_NoAssignment_NoComponentAssignments() {
@@ -61,7 +62,7 @@ class SubjectTests: XCTestCase {
         let subject = makeKanji()
         
         let guruDate = subject.earliestGuruDate(assignment: nil) { subjectID in
-            return subjectID == 0 ? nil : makeAssignment(srsStage: .apprentice, availableAt: nil)
+            return subjectID == 0 || subjectID == 1 ? nil : makeAssignment(srsStage: .apprentice, availableAt: nil)
         }
         
         XCTAssertNil(guruDate)
@@ -69,12 +70,13 @@ class SubjectTests: XCTestCase {
     
     func testKanji_NoAssignment_AtLeastOneLockedComponentAssignments() {
         let subject = makeKanji()
-        
+        let expectedGuruDate = Calendar.current.startOfHour(for: Date()).addingTimeInterval((4 * .oneHour + 4 * .oneHour + 8 * .oneHour + 23 * .oneHour) * 2)
+
         let guruDate = subject.earliestGuruDate(assignment: nil) { subjectID in
-            return makeAssignment(srsStage: subjectID == 0 ? .guru : .initiate, availableAt: nil)
+            return makeAssignment(srsStage: subjectID == 1 ? .guru : .initiate, availableAt: nil)
         }
         
-        XCTAssertNil(guruDate)
+        XCTAssertEqual(guruDate, expectedGuruDate)
     }
     
     func testKanji_NoAssignment_ApprenticeComponentAssignments() {
@@ -113,13 +115,16 @@ class SubjectTests: XCTestCase {
     
     func testKanji_GuruAssignment_GuruComponentAssignments() {
         let subject = makeKanji()
-        let assignment = makeAssignment(srsStage: .guru, availableAt: Date())
+        let passedAt = Date().addingTimeInterval(-1 * .oneDay)
+        let assignment = makeAssignment(srsStage: .guru, availableAt: Date().addingTimeInterval(-5 * .oneDay), passedAt: passedAt)
         
         let guruDate = subject.earliestGuruDate(assignment: assignment) { _ in
-            return makeAssignment(srsStage: .guru, availableAt: Calendar.current.startOfHour(for: Date()))
+            return makeAssignment(srsStage: .guru,
+                                  availableAt: Calendar.current.startOfHour(for: Date()).addingTimeInterval(-10 * .oneDay),
+                                  passedAt: Calendar.current.startOfHour(for: Date()).addingTimeInterval(-5 * .oneDay))
         }
         
-        XCTAssertNil(guruDate)
+        XCTAssertEqual(guruDate, passedAt)
     }
     
     private func makeRadical() -> Radical {
@@ -143,7 +148,7 @@ class SubjectTests: XCTestCase {
                      documentURL: URL(string: "http://localhost")!)
     }
     
-    private func makeAssignment(srsStage: SRSStage, availableAt: Date?) -> Assignment {
+    private func makeAssignment(srsStage: SRSStage, availableAt: Date? = nil, passedAt: Date? = nil) -> Assignment {
         let srsStageNumeric = srsStage.numericLevelRange.lowerBound
         return Assignment(subjectID: 1,
                           subjectType: .radical,
@@ -152,7 +157,7 @@ class SubjectTests: XCTestCase {
                           srsStageName: "",
                           unlockedAt: nil,
                           startedAt: nil,
-                          passedAt: nil,
+                          passedAt: passedAt,
                           burnedAt: nil,
                           availableAt: availableAt,
                           isPassed: srsStage >= .guru,

@@ -72,14 +72,15 @@ public extension Assignment {
         return guruDate
     }
     
-    public func guruDate(unlockDateForLockedItems: Date?) -> Date? {
+    public func guruDate() -> Date? {
         let initialLevel = srsStage + 1
         let guruNumericLevel = SRSStage.guru.numericLevelRange.lowerBound
         
-        if isPassed || initialLevel > guruNumericLevel { return nil }
+        if isPassed || initialLevel > guruNumericLevel { return passedAt ?? Date.distantPast }
         
         // Assume best case scenario: the next review is performed as soon as it becomes available (or now, if available now) and is successful
-        guard let baseDate = availableAt.map({ max($0, Date()) }) ?? unlockDateForLockedItems else { return nil }
+        let startOfHour = Calendar.current.startOfHour(for: Date())
+        let baseDate = availableAt.map({ max($0, startOfHour) }) ?? startOfHour
         
         if initialLevel == guruNumericLevel { return baseDate }
         

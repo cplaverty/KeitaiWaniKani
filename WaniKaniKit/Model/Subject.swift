@@ -35,22 +35,23 @@ public protocol Subject {
 extension Subject {
     public func earliestGuruDate(assignment: Assignment?, getAssignmentForSubjectID: (Int) -> Assignment?) -> Date? {
         if assignment?.isPassed == true {
-            return nil
+            return assignment?.passedAt ?? Date.distantPast
         }
         
         let pendingSubjectAssignments = componentSubjectIDs.map({ componentSubjectID in getAssignmentForSubjectID(componentSubjectID) })
-            .filter( { assignment in assignment?.isPassed != true })
+            .filter({ assignment in assignment?.isPassed != true })
         
         let unlockDateForLockedItems: Date?
         if pendingSubjectAssignments.isEmpty {
-            unlockDateForLockedItems = Date()
+            unlockDateForLockedItems = Calendar.current.startOfHour(for: Date())
         } else {
-            unlockDateForLockedItems = pendingSubjectAssignments.flatMap({ assignment in assignment?.guruDate(unlockDateForLockedItems: nil) }).min()
+            let guruDates = pendingSubjectAssignments.map({ assignment in assignment?.guruDate() })
+            unlockDateForLockedItems = guruDates.lazy.filter({$0 == nil}).isEmpty ? guruDates.lazy.flatMap({ $0 }).max() : nil
         }
         
         let guruDate: Date?
         if let assignment = assignment {
-            guruDate = assignment.guruDate(unlockDateForLockedItems: unlockDateForLockedItems)
+            guruDate = assignment.guruDate()
         } else if let unlockDateForLockedItems = unlockDateForLockedItems {
             guruDate = Assignment.earliestDate(from: unlockDateForLockedItems,
                                                forItemAtSRSStage: SRSStage.apprentice.numericLevelRange.lowerBound,

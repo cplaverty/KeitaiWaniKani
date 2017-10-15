@@ -580,6 +580,9 @@ class DashboardTableViewController: UITableViewController {
                     if try self.resourceRepository.hasLevelProgression() {
                         self.levelProgression = try self.resourceRepository.levelProgression()
                     }
+                    if try self.resourceRepository.hasLevelTimeline() {
+                        self.levelTimeline = try self.resourceRepository.levelTimeline()
+                    }
                 } catch {
                     if #available(iOS 10.0, *) {
                         os_log("Failed to refresh data in notification observer: %@", type: .fault, error as NSError)

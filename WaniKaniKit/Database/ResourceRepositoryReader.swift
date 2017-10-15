@@ -183,15 +183,16 @@ public class ResourceRepositoryReader {
             let subjectsByID = allSubjects.reduce(into: [:]) { result, item in
                 result[item.id] = item
             }
-            let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: Array(subjectsByID.keys)).reduce(into: [:]) { result, assignment in
+            let requiredAssigmentSubjectIDs = subjectsByID.keys + allSubjects.lazy.flatMap({ ($0.data as! Subject).componentSubjectIDs })
+            let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: requiredAssigmentSubjectIDs).reduce(into: [:]) { result, assignment in
                 result[assignment.subjectID] = assignment
             }
             
-            return items.map { item in
+            return items.map({ item in
                 SubjectProgression(subject: item.data as! Subject,
                                    assignment: assignmentsBySubjectID[item.id],
                                    getAssignmentForSubjectID: { subjectID in assignmentsBySubjectID[subjectID] })
-            }
+            })
         }
     }
     
@@ -334,7 +335,9 @@ public class ResourceRepositoryReader {
         }
         
         return try databaseQueue.inDatabase { database in
-            return try ResourceType.user.getLastUpdateDate(in: database) != nil && ResourceType.assignments.getLastUpdateDate(in: database) != nil
+            return try ResourceType.user.getLastUpdateDate(in: database) != nil
+                && ResourceType.assignments.getLastUpdateDate(in: database) != nil
+                && ResourceType.subjects.getLastUpdateDate(in: database) != nil
         }
     }
     
@@ -425,39 +428,32 @@ public class ResourceRepositoryReader {
         }
     }
     
-    private func earliestGuruDate(for assignment: Assignment, from database: FMDatabase) throws -> Date {
-        let table = Tables.subjectComponents
+    private func projectedLevel(_ level: Int, startDate: Date, from database: FMDatabase) throws -> ProjectedLevelInfo? {
+        let kanji = try Kanji.read(from: database, level: level)
+        guard !kanji.isEmpty else { return nil }
         
-        let query = """
-        SELECT \(table.componentSubjectID)
-        FROM \(table)
-        WHERE \(table.subjectID) = ?
-        """
+        let subjectIDs = kanji.map({ $0.id })
+        let componentSubjectIDs = kanji.flatMap({ ($0.data as! Subject).componentSubjectIDs })
         
-        let resultSet = try database.executeQuery(query, values: [assignment.subjectID])
-        defer { resultSet.close() }
-        
-        var componentSubjectIDs = [Int]()
-        while (resultSet.next()) {
-            componentSubjectIDs.append(resultSet.long(forColumn: table.componentSubjectID.name))
+        let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: subjectIDs + componentSubjectIDs).reduce(into: [:]) { result, assignment in
+            result[assignment.subjectID] = assignment
         }
         
         let now = Date()
-        let dependents = try Assignment.read(from: database, subjectIDs: componentSubjectIDs)
-        let unlockDateForLockedItems = dependents.flatMap({ assignment in assignment.guruDate(unlockDateForLockedItems: now) }).max()
-        
-        return assignment.guruDate(unlockDateForLockedItems: unlockDateForLockedItems ?? now) ?? now
-    }
-    
-    private func projectedLevel(_ level: Int, startDate: Date, from database: FMDatabase) throws -> ProjectedLevelInfo? {
-        let kanji = try Assignment.read(from: database, level: level, subjectType: .kanji).sorted(by: Assignment.Sorting.byProgress)
-        guard !kanji.isEmpty else { return nil }
+        let itemProgression = kanji.map({ item -> (assignment: Assignment?, guruDate: Date) in
+            let subject = item.data as! Subject
+            let assignment = assignmentsBySubjectID[item.id]
+            let guruDate = subject.earliestGuruDate(assignment: assignment, getAssignmentForSubjectID: { subjectID in assignmentsBySubjectID[subjectID] }) ?? now
+            return (assignment, guruDate)
+        }).sorted { (lhs, rhs) in
+            lhs.guruDate > rhs.guruDate
+        }
         
         // You guru a level once at least 90% of all kanji is at Guru level or above, so skip past the first 10% of items
         let guruThresholdIndex = kanji.count / 10
-        let criticalKanji = kanji[guruThresholdIndex]
-        let earliestLevellingDate = try earliestGuruDate(for: criticalKanji, from: database)
-        let isEndDateBasedOnLockedItem = criticalKanji.unlockedAt == nil
+        let guruThresholdItem = itemProgression[guruThresholdIndex]
+        let earliestLevellingDate = guruThresholdItem.guruDate
+        let isEndDateBasedOnLockedItem = guruThresholdItem.assignment?.unlockedAt == nil
         
         return ProjectedLevelInfo(level: level, startDate: startDate, endDate: earliestLevellingDate, isEndDateBasedOnLockedItem: isEndDateBasedOnLockedItem)
     }
