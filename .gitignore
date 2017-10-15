@@ -16,6 +16,9 @@ DerivedData
 *.ipa
 *.xcuserstate
 
+# playground
+timeline.xctimeline
+
 # fastlane specific
 fastlane/report.xml
 
