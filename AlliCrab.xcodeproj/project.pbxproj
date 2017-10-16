@@ -113,6 +113,7 @@
 		836D7F1B1F2BF92900F32C90 /* WaniKaniAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8392681D1F2BF080006C744D /* WaniKaniAPI.swift */; };
 		836D7F1C1F2BF92900F32C90 /* WaniKaniAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8392681B1F2BF080006C744D /* WaniKaniAPIError.swift */; };
 		836D7F1D1F2BF92900F32C90 /* WaniKaniResourceDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8392681E1F2BF080006C744D /* WaniKaniResourceDecoder.swift */; };
+		8372F7C31F953FB4007881B6 /* WKButNoCigar.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 8372F7C21F953FB4007881B6 /* WKButNoCigar.user.js */; };
 		837BBEDC1F309BB800C92141 /* DatabaseCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837BBEDB1F309BB800C92141 /* DatabaseCodable.swift */; };
 		837BBEDE1F31318300C92141 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837BBEDD1F31318300C92141 /* DatabaseManager.swift */; };
 		837CEC8D1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837CEC8C1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift */; };
@@ -341,6 +342,7 @@
 		8364CB821F27F28D002DBE6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8364CB8E1F27FD41002DBE6B /* AlliCrab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AlliCrab.entitlements; sourceTree = "<group>"; };
 		836D7F171F2BF4CC00F32C90 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8372F7C21F953FB4007881B6 /* WKButNoCigar.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = WKButNoCigar.user.js; sourceTree = "<group>"; };
 		837BBEDB1F309BB800C92141 /* DatabaseCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseCodable.swift; sourceTree = "<group>"; };
 		837BBEDD1F31318300C92141 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		837CEC8C1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaniKaniLoginWebViewController.swift; sourceTree = "<group>"; };
@@ -559,6 +561,7 @@
 				832C18451F4501EC001FFACD /* markdown.user.js */,
 				832C18461F4501EC001FFACD /* noswipe.js */,
 				832C18481F4501EC001FFACD /* showdown.min.js */,
+				8372F7C21F953FB4007881B6 /* WKButNoCigar.user.js */,
 				832C184C1F4501EC001FFACD /* wkhidem.user.js */,
 				832C184D1F4501EC001FFACD /* wkimprove.js */,
 				832C184E1F4501EC001FFACD /* wkoverride.user.js */,
@@ -1124,6 +1127,7 @@
 				8364CB681F27F28D002DBE6B /* Assets.xcassets in Resources */,
 				832C18541F4501ED001FFACD /* jquery.qtip.min.js in Resources */,
 				832C18571F4501ED001FFACD /* resize.css in Resources */,
+				8372F7C31F953FB4007881B6 /* WKButNoCigar.user.js in Resources */,
 				832C18531F4501ED001FFACD /* jquery.qtip.min.css in Resources */,
 				832C18501F4501ED001FFACD /* common.js in Resources */,
 				832C186C1F4502A4001FFACD /* dartsfont.ttf in Resources */,

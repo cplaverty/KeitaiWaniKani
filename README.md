@@ -8,11 +8,12 @@ This unofficial app for [WaniKani](https://www.wanikani.com) improves the experi
 
 Features:
 * Do reviews and lessons with an in-app web browser, with support for community-produced user scripts.  (All user scripts are disabled by default and must be enabled in the app settings.)
-    * Jitai: https://community.wanikani.com/t/Jitai-字体-The-font-randomizer-that-fits/12617
-    * WaniKani Override (also known as the "ignore answer" script): https://community.wanikani.com/t/Userscript-Wanikani-Override-ignore-answer-button-active-support/17999
-    * WaniKani Improve: https://community.wanikani.com/t/WaniKani-Improve-222-—-faster-and-smarter-reviews/2858
-    * Markdown Notes: https://community.wanikani.com/t/Userscript-Markdown-Notes-updated/11462
-    * WaniKani Hide Mnemonics: https://community.wanikani.com/t/Userscript-WaniKani-hide-mnemonics/3923
+    * Close But No Cigar: https://community.wanikani.com/t/userscript-prevent-your-answer-was-a-bit-off-answers-from-being-accepted-a-k-a-close-but-no-cigar/7134
+    * Jitai: https://community.wanikani.com/t/jitai-the-font-randomizer-that-fits/12617
+    * Markdown Notes: https://community.wanikani.com/t/userscript-markdown-notes-updated/11462
+    * WaniKani Hide Mnemonics: https://community.wanikani.com/t/userscript-wanikani-hide-mnemonics/3923
+    * WaniKani Improve: https://community.wanikani.com/t/wanikani-improve-2-2-2-faster-and-smarter-reviews/2858
+    * WaniKani Override (also known as the "ignore answer" script): https://community.wanikani.com/t/userscript-wanikani-override-ignore-answer-button-active-support/17999
 * 1Password support for auto-filling your WaniKani login details
 * Receive notifications when reviews are due
 * Lists upcoming reviews in the review timeline
