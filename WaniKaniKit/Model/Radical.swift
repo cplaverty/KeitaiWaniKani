@@ -6,7 +6,7 @@
 //
 
 public struct Radical: ResourceCollectionItemData {
-    public struct CharacterImage: Codable {
+    public struct CharacterImage: SubjectImage, Codable {
         public let contentType: String
         public let url: URL
         
@@ -38,6 +38,18 @@ public struct Radical: ResourceCollectionItemData {
 extension Radical: Subject {
     public var subjectType: SubjectType {
         return .radical
+    }
+    
+    public var characterRepresentation: SubjectCharacterRepresentation {
+        if let character = character {
+            return .unicode(character)
+        }
+        
+        return .image(characterImages)
+    }
+    
+    public var readings: [Reading] {
+        return []
     }
     
     public var componentSubjectIDs: [Int] {

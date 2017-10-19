@@ -81,19 +81,11 @@ class SubjectCharacterView: UIView {
                 return
             }
             
-            switch subject {
-            case let radical as Radical:
-                if let displayCharacter = radical.character {
-                    setCharacters(displayCharacter)
-                } else {
-                    setImage(radical)
-                }
-            case let kanji as Kanji:
-                setCharacters(kanji.character)
-            case let vocabulary as Vocabulary:
-                setCharacters(vocabulary.characters)
-            default:
-                fatalError()
+            switch subject.characterRepresentation {
+            case let .unicode(character):
+                setCharacters(character)
+            case let .image(imageChoices):
+                setImage(imageChoices)
             }
         }
     }
@@ -154,16 +146,16 @@ class SubjectCharacterView: UIView {
         displayImageView.isHidden = true
     }
     
-    func setImage(_ radical: Radical) {
+    func setImage(_ imageChoices: [SubjectImage]) {
         characterLabel.isHidden = true
         displayImageView.isHidden = false
         
-        let imageLoader = RadicalCharacterImageLoader(characterImages: radical.characterImages)
+        let imageLoader = RadicalCharacterImageLoader(characterImages: imageChoices)
         self.imageLoader = imageLoader
         imageLoader.loadImage { [weak self] (image, error) in
             guard let image = image else {
                 if #available(iOS 10.0, *) {
-                    os_log("Failed to fetch radical image %@: %@", type: .error, radical.slug, error?.localizedDescription ?? "<no error>")
+                    os_log("Failed to fetch subject image %@: %@", type: .error, imageLoader.characterImage?.url.absoluteString ?? "<no renderable image>", error?.localizedDescription ?? "<no error>")
                 }
                 return
             }

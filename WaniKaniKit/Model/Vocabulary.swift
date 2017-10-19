@@ -33,6 +33,10 @@ extension Vocabulary: Subject {
     public var subjectType: SubjectType {
         return .vocabulary
     }
+    
+    public var characterRepresentation: SubjectCharacterRepresentation {
+        return .unicode(characters)
+    }
 }
 
 extension Vocabulary: Equatable {

@@ -25,11 +25,11 @@ class RadicalCharacterImageLoader {
         return parentDirectory
     }()
     
-    private let characterImages: [Radical.CharacterImage]
+    let characterImage: SubjectImage?
     private var task: URLSessionDownloadTask?
     
-    init(characterImages: [Radical.CharacterImage]) {
-        self.characterImages = characterImages
+    init(characterImages: [SubjectImage]) {
+        self.characterImage = characterImages.first(where: { image in image.contentType == "image/png" })
     }
     
     deinit {
@@ -37,7 +37,7 @@ class RadicalCharacterImageLoader {
     }
     
     func loadImage(completionHandler: @escaping (UIImage?, Error?) -> Void) {
-        guard let image = characterImages.first(where: { image in image.contentType == "image/png" }) else {
+        guard let image = characterImage else {
             completionHandler(nil, RadicalCharacterImageLoaderError.noRenderableImages)
             return
         }

@@ -24,10 +24,23 @@ public extension SubjectType {
     }
 }
 
+public protocol SubjectImage {
+    var contentType: String { get }
+    var url: URL { get }
+}
+
+public enum SubjectCharacterRepresentation {
+    case unicode(String)
+    case image([SubjectImage])
+}
+
 public protocol Subject {
     var level: Int { get }
     var subjectType: SubjectType { get }
     var slug: String { get }
+    var characterRepresentation: SubjectCharacterRepresentation { get }
+    var meanings: [Meaning] { get }
+    var readings: [Reading] { get }
     var componentSubjectIDs: [Int] { get }
     var documentURL: URL { get }
 }

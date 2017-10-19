@@ -31,6 +31,10 @@ extension Kanji: Subject {
     public var subjectType: SubjectType {
         return .kanji
     }
+    
+    public var characterRepresentation: SubjectCharacterRepresentation {
+        return .unicode(character)
+    }
 }
 
 extension Kanji: Equatable {
