@@ -116,6 +116,7 @@
 		836D7F1C1F2BF92900F32C90 /* WaniKaniAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8392681B1F2BF080006C744D /* WaniKaniAPIError.swift */; };
 		836D7F1D1F2BF92900F32C90 /* WaniKaniResourceDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8392681E1F2BF080006C744D /* WaniKaniResourceDecoder.swift */; };
 		8372F7C31F953FB4007881B6 /* WKButNoCigar.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 8372F7C21F953FB4007881B6 /* WKButNoCigar.user.js */; };
+		8373201D1F990601008647D5 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF4411F501D5E00A7029D /* Sequence.swift */; };
 		837BBEDC1F309BB800C92141 /* DatabaseCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837BBEDB1F309BB800C92141 /* DatabaseCodable.swift */; };
 		837BBEDE1F31318300C92141 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837BBEDD1F31318300C92141 /* DatabaseManager.swift */; };
 		837CEC8D1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837CEC8C1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift */; };
@@ -179,7 +180,6 @@
 		83FEF2801F3138E5003D7992 /* FMDatabaseAdditionsVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF27F1F3138E5003D7992 /* FMDatabaseAdditionsVariadic.swift */; };
 		83FEF43E1F4F952F00A7029D /* ReviewTimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF43D1F4F952F00A7029D /* ReviewTimelineTableViewController.swift */; };
 		83FEF4401F4F969900A7029D /* ReviewTimelineEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF43F1F4F969900A7029D /* ReviewTimelineEntryTableViewCell.swift */; };
-		83FEF4421F501D5E00A7029D /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF4411F501D5E00A7029D /* Sequence.swift */; };
 		83FEF4461F50518E00A7029D /* ReviewTimelineFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF4451F50518E00A7029D /* ReviewTimelineFilterTableViewController.swift */; };
 		83FFD90B1F5387B80015988F /* ReviewTimelineHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FFD90A1F5387B80015988F /* ReviewTimelineHeaderFooterView.swift */; };
 		9F41C9076D950FB1F5D5FAE4 /* Pods_WaniKaniKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A22927479B44A413664183A1 /* Pods_WaniKaniKitTests.framework */; };
@@ -826,6 +826,7 @@
 				8334ABEA1F48900F00BBFDC8 /* FMDatabaseQueue.swift */,
 				83B75F6F1F351E6500BECEB0 /* FMResultSet.swift */,
 				83F02ED51F8EA3C600A85014 /* Formatter.swift */,
+				83FEF4411F501D5E00A7029D /* Sequence.swift */,
 				83F1CBD81F463CF100CE9583 /* TimeInterval.swift */,
 				83CE51D01F4DEC1D0050242A /* UIColor.swift */,
 			);
@@ -873,7 +874,6 @@
 			isa = PBXGroup;
 			children = (
 				83B8A6F31F507A42006665DB /* ResourceRepository.swift */,
-				83FEF4411F501D5E00A7029D /* Sequence.swift */,
 				83F3927A1F4B2D7300E8DAE7 /* UIViewController.swift */,
 				832708571F4C9D9E00AB1525 /* WKWebView.swift */,
 			);
@@ -1373,6 +1373,7 @@
 				836D7F071F2BF44F00F32C90 /* AssignmentFilter.swift in Sources */,
 				8346C84F1F2FEC7300252DC9 /* VocabularyTable.swift in Sources */,
 				83AF99FA1F364ED800E35A00 /* ResourceLastUpdateTable.swift in Sources */,
+				8373201D1F990601008647D5 /* Sequence.swift in Sources */,
 				83C2619E1F37888100278648 /* UserInformation+DatabaseCodable.swift in Sources */,
 				833D7A0E1F2CB12200A22F33 /* UserInformationTable.swift in Sources */,
 				83C2618D1F37069D00278648 /* Kanji+DatabaseCodable.swift in Sources */,
@@ -1473,7 +1474,6 @@
 				83FEF43E1F4F952F00A7029D /* ReviewTimelineTableViewController.swift in Sources */,
 				83C071FD1F4A4E630046A3FD /* LoginRootViewController.swift in Sources */,
 				8325D7891F49E225008A6DF2 /* NotificationManager.swift in Sources */,
-				83FEF4421F501D5E00A7029D /* Sequence.swift in Sources */,
 				8326F7E41F95660600CC3213 /* SubjectCollectionViewCell.swift in Sources */,
 				832C18741F4503D9001FFACD /* BundleResourceLoader.swift in Sources */,
 				831E92D71F4DDFE200B979DD /* DashboardTableViewController.swift in Sources */,

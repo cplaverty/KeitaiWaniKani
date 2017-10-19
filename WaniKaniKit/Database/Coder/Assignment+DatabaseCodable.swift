@@ -10,12 +10,26 @@ import FMDB
 private let table = Tables.assignments
 
 extension Assignment: DatabaseCodable {
-    static func read(from database: FMDatabase, subjectIDs: [Int]? = nil, level: Int? = nil, srsStage: SRSStage? = nil) throws -> [Assignment] {
+    static func read(from database: FMDatabase, ids: [Int]? = nil, subjectIDs: [Int]? = nil, level: Int? = nil, srsStage: SRSStage? = nil) throws -> [Int: Assignment] {
         var filterCriteria = [String]()
         var queryArgs = [String: Any]()
         
+        if let ids = ids {
+            var parameterNames = [String]()
+            parameterNames.reserveCapacity(ids.count)
+            
+            for (index, id) in ids.enumerated() {
+                var parameterName = "id_\(index)"
+                parameterNames.append(":" + parameterName)
+                queryArgs[parameterName] = id
+            }
+            filterCriteria.append("\(table.id) IN (\(parameterNames.joined(separator: ",")))")
+        }
+        
         if let subjectIDs = subjectIDs {
             var parameterNames = [String]()
+            parameterNames.reserveCapacity(subjectIDs.count)
+            
             for (index, id) in subjectIDs.enumerated() {
                 var parameterName = "subject_id_\(index)"
                 parameterNames.append(":" + parameterName)
@@ -36,7 +50,7 @@ extension Assignment: DatabaseCodable {
         }
         
         let query = """
-        SELECT \(table.subjectID), \(table.subjectType), \(table.level), \(table.srsStage), \(table.srsStageName), \(table.unlockedAt), \(table.startedAt), \(table.passedAt), \(table.burnedAt), \(table.availableAt), \(table.isPassed), \(table.isResurrected)
+        SELECT \(table.id), \(table.subjectID), \(table.subjectType), \(table.level), \(table.srsStage), \(table.srsStageName), \(table.unlockedAt), \(table.startedAt), \(table.passedAt), \(table.burnedAt), \(table.availableAt), \(table.isPassed), \(table.isResurrected)
         FROM \(table)
         WHERE \(filterCriteria.joined(separator: "\nAND "))
         """
@@ -46,10 +60,11 @@ extension Assignment: DatabaseCodable {
         }
         defer { resultSet.close() }
         
-        var assignments = [Assignment]()
+        var assignments = [Int: Assignment]()
         
         while resultSet.next() {
-            assignments.append(Assignment(from: resultSet))
+            let id = resultSet.long(forColumn: table.id.name)
+            assignments[id] = Assignment(from: resultSet)
         }
         
         return assignments

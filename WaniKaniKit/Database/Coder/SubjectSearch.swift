@@ -26,7 +26,7 @@ struct SubjectSearch {
         }
         resultSet.close()
         
-        return try subjectIDs.map { id in try ResourceCollectionItem(from: database, id: id) }
+        return try ResourceCollectionItem.read(from: database, ids: subjectIDs)
     }
     
     static func write(to database: FMDatabase, id: Int, character: String?, meanings: [Meaning], readings: [Reading]) throws {

@@ -21,7 +21,54 @@ extension Kanji: DatabaseCodable {
         }
         resultSet.close()
         
-        return try subjectIDs.map { id in try ResourceCollectionItem(from: database, id: id) }
+        return try ResourceCollectionItem.read(from: database, ids: subjectIDs)
+    }
+    
+    static func read(from database: FMDatabase, ids: [Int]) throws -> [Int: Kanji] {
+        let meaningsBySubjectID = try Meaning.read(from: database, ids: ids)
+        let readingsBySubjectID = try Reading.read(from: database, ids: ids)
+        let subjectComponentsBySubjectID = try SubjectComponent.read(from: database, ids: ids)
+        
+        var parameterNames = [String]()
+        parameterNames.reserveCapacity(ids.count)
+        var queryArgs = [String: Any]()
+        queryArgs.reserveCapacity(ids.count)
+        
+        for (index, id) in ids.enumerated() {
+            var parameterName = "subject_id_\(index)"
+            parameterNames.append(":" + parameterName)
+            queryArgs[parameterName] = id
+        }
+        
+        let query = """
+        SELECT \(table.id), \(table.level), \(table.createdAt), \(table.slug), \(table.character), \(table.documentURL)
+        FROM \(table)
+        WHERE \(table.id) IN (\(parameterNames.joined(separator: ",")))
+        """
+        
+        guard let resultSet = database.executeQuery(query, withParameterDictionary: queryArgs) else {
+            throw database.lastError()
+        }
+        defer { resultSet.close() }
+        
+        var items = [Int: Kanji]()
+        items.reserveCapacity(ids.count)
+        
+        while resultSet.next() {
+            let id = resultSet.long(forColumn: table.id.name)
+            let level = resultSet.long(forColumn: table.level.name)
+            let createdAt = resultSet.date(forColumn: table.createdAt.name)!
+            let slug = resultSet.string(forColumn: table.slug.name)!
+            let character = resultSet.string(forColumn: table.character.name)!
+            let meanings = meaningsBySubjectID[id] ?? []
+            let readings = readingsBySubjectID[id] ?? []
+            let componentSubjectIDs = subjectComponentsBySubjectID[id] ?? []
+            let documentURL = resultSet.url(forColumn: table.documentURL.name)!
+            
+            items[id] = Kanji(level: level, createdAt: createdAt, slug: slug, character: character, meanings: meanings, readings: readings, componentSubjectIDs: componentSubjectIDs, documentURL: documentURL)
+        }
+        
+        return items
     }
     
     init(from database: FMDatabase, id: Int) throws {

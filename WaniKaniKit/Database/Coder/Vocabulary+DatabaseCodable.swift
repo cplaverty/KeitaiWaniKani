@@ -21,7 +21,56 @@ extension Vocabulary: DatabaseCodable {
         }
         resultSet.close()
         
-        return try subjectIDs.map { id in try ResourceCollectionItem(from: database, id: id) }
+        return try ResourceCollectionItem.read(from: database, ids: subjectIDs)
+    }
+    
+    static func read(from database: FMDatabase, ids: [Int]) throws -> [Int: Vocabulary] {
+        let meaningsBySubjectID = try Meaning.read(from: database, ids: ids)
+        let readingsBySubjectID = try Reading.read(from: database, ids: ids)
+        let partsOfSpeechBySubjectID = try PartOfSpeech.read(from: database, ids: ids)
+        let subjectComponentsBySubjectID = try SubjectComponent.read(from: database, ids: ids)
+        
+        var parameterNames = [String]()
+        parameterNames.reserveCapacity(ids.count)
+        var queryArgs = [String: Any]()
+        queryArgs.reserveCapacity(ids.count)
+        
+        for (index, id) in ids.enumerated() {
+            var parameterName = "subject_id_\(index)"
+            parameterNames.append(":" + parameterName)
+            queryArgs[parameterName] = id
+        }
+        
+        let query = """
+        SELECT \(table.id), \(table.level), \(table.createdAt), \(table.slug), \(table.characters), \(table.documentURL)
+        FROM \(table)
+        WHERE \(table.id) IN (\(parameterNames.joined(separator: ",")))
+        """
+        
+        guard let resultSet = database.executeQuery(query, withParameterDictionary: queryArgs) else {
+            throw database.lastError()
+        }
+        defer { resultSet.close() }
+        
+        var items = [Int: Vocabulary]()
+        items.reserveCapacity(ids.count)
+        
+        while resultSet.next() {
+            let id = resultSet.long(forColumn: table.id.name)
+            let level = resultSet.long(forColumn: table.level.name)
+            let createdAt = resultSet.date(forColumn: table.createdAt.name)!
+            let slug = resultSet.string(forColumn: table.slug.name)!
+            let characters = resultSet.string(forColumn: table.characters.name)!
+            let meanings = meaningsBySubjectID[id] ?? []
+            let readings = readingsBySubjectID[id] ?? []
+            let partsOfSpeech = partsOfSpeechBySubjectID[id] ?? []
+            let componentSubjectIDs = subjectComponentsBySubjectID[id] ?? []
+            let documentURL = resultSet.url(forColumn: table.documentURL.name)!
+            
+            items[id] = Vocabulary(level: level, createdAt: createdAt, slug: slug, characters: characters, meanings: meanings, readings: readings, partsOfSpeech: partsOfSpeech, componentSubjectIDs: componentSubjectIDs, documentURL: documentURL)
+        }
+        
+        return items
     }
     
     init(from database: FMDatabase, id: Int) throws {
@@ -92,6 +141,43 @@ struct PartOfSpeech: BulkDatabaseCodable {
         var items = [String]()
         while resultSet.next() {
             items.append(resultSet.string(forColumn: table.partOfSpeech.name)!)
+        }
+        
+        return items
+    }
+    
+    static func read(from database: FMDatabase, ids: [Int]) throws -> [Int: [String]] {
+        var parameterNames = [String]()
+        parameterNames.reserveCapacity(ids.count)
+        var queryArgs = [String: Any]()
+        queryArgs.reserveCapacity(ids.count)
+        
+        for (index, id) in ids.enumerated() {
+            var parameterName = "subject_id_\(index)"
+            parameterNames.append(":" + parameterName)
+            queryArgs[parameterName] = id
+        }
+        
+        let query = """
+        SELECT \(table.subjectID), \(table.partOfSpeech)
+        FROM \(table)
+        WHERE \(table.subjectID) IN (\(parameterNames.joined(separator: ",")))
+        ORDER BY \(table.subjectID), \(table.index)
+        """
+        
+        guard let resultSet = database.executeQuery(query, withParameterDictionary: queryArgs) else {
+            throw database.lastError()
+        }
+        defer { resultSet.close() }
+        
+        var items = [Int: [String]]()
+        items.reserveCapacity(ids.count)
+        
+        while resultSet.next() {
+            let subjectID = resultSet.long(forColumn: table.subjectID.name)
+            let partOfSpeech = resultSet.string(forColumn: table.partOfSpeech.name)!
+            
+            items[subjectID, default: []].append(partOfSpeech)
         }
         
         return items

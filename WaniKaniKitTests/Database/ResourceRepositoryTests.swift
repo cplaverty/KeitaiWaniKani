@@ -129,6 +129,9 @@ class ResourceRepositoryTests: XCTestCase {
             let load2 = try resourceRepository.loadResource(id: 2)
             XCTAssertEqual(load1, expected1)
             XCTAssertEqual(load2, expected2)
+            
+            let load = try resourceRepository.loadResources(ids: [1, 2])
+            XCTAssertEqual(load, [expected1, expected2])
         } catch {
             XCTFail(error.localizedDescription)
         }
@@ -357,6 +360,9 @@ class ResourceRepositoryTests: XCTestCase {
             XCTAssertEqual(load1, expected1)
             XCTAssertEqual(load2, expected2)
             XCTAssertEqual(load3, expected3)
+            
+            let load = try resourceRepository.loadResources(ids: [1, 440, 2467])
+            XCTAssertEqual(load, [expected1, expected2, expected3])
         } catch {
             XCTFail(error.localizedDescription)
         }

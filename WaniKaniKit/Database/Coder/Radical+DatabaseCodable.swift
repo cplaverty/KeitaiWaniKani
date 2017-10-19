@@ -21,7 +21,52 @@ extension Radical: DatabaseCodable {
         }
         resultSet.close()
         
-        return try subjectIDs.map { id in try ResourceCollectionItem(from: database, id: id) }
+        return try ResourceCollectionItem.read(from: database, ids: subjectIDs)
+    }
+    
+    static func read(from database: FMDatabase, ids: [Int]) throws -> [Int: Radical] {
+        let characterImagesBySubjectID = try CharacterImage.read(from: database, ids: ids)
+        let meaningsBySubjectID = try Meaning.read(from: database, ids: ids)
+        
+        var parameterNames = [String]()
+        parameterNames.reserveCapacity(ids.count)
+        var queryArgs = [String: Any]()
+        queryArgs.reserveCapacity(ids.count)
+        
+        for (index, id) in ids.enumerated() {
+            var parameterName = "subject_id_\(index)"
+            parameterNames.append(":" + parameterName)
+            queryArgs[parameterName] = id
+        }
+        
+        let query = """
+        SELECT \(table.id), \(table.level), \(table.createdAt), \(table.slug), \(table.character), \(table.documentURL)
+        FROM \(table)
+        WHERE \(table.id) IN (\(parameterNames.joined(separator: ",")))
+        """
+        
+        guard let resultSet = database.executeQuery(query, withParameterDictionary: queryArgs) else {
+            throw database.lastError()
+        }
+        defer { resultSet.close() }
+        
+        var items = [Int: Radical]()
+        items.reserveCapacity(ids.count)
+        
+        while resultSet.next() {
+            let id = resultSet.long(forColumn: table.id.name)
+            let level = resultSet.long(forColumn: table.level.name)
+            let createdAt = resultSet.date(forColumn: table.createdAt.name)!
+            let slug = resultSet.string(forColumn: table.slug.name)!
+            let character = resultSet.string(forColumn: table.character.name)
+            let characterImages = characterImagesBySubjectID[id] ?? []
+            let meanings = meaningsBySubjectID[id] ?? []
+            let documentURL = resultSet.url(forColumn: table.documentURL.name)!
+            
+            items[id] = Radical(level: level, createdAt: createdAt, slug: slug, character: character, characterImages: characterImages, meanings: meanings, documentURL: documentURL)
+        }
+        
+        return items
     }
     
     init(from database: FMDatabase, id: Int) throws {
@@ -74,7 +119,7 @@ extension Radical.CharacterImage: BulkDatabaseCodable {
     
     static func read(from database: FMDatabase, id: Int) throws -> [Radical.CharacterImage] {
         let query = """
-        SELECT \(table.subjectID), \(table.contentType), \(table.url)
+        SELECT \(table.contentType), \(table.url)
         FROM \(table)
         WHERE \(table.subjectID) = ?
         """
@@ -86,6 +131,44 @@ extension Radical.CharacterImage: BulkDatabaseCodable {
         while resultSet.next() {
             items.append(Radical.CharacterImage(contentType: resultSet.string(forColumn: table.contentType.name)!,
                                                 url: resultSet.url(forColumn: table.url.name)!))
+        }
+        
+        return items
+    }
+    
+    static func read(from database: FMDatabase, ids: [Int]) throws -> [Int: [Radical.CharacterImage]] {
+        var parameterNames = [String]()
+        parameterNames.reserveCapacity(ids.count)
+        var queryArgs = [String: Any]()
+        queryArgs.reserveCapacity(ids.count)
+        
+        for (index, id) in ids.enumerated() {
+            var parameterName = "subject_id_\(index)"
+            parameterNames.append(":" + parameterName)
+            queryArgs[parameterName] = id
+        }
+        
+        let query = """
+        SELECT \(table.subjectID), \(table.contentType), \(table.url)
+        FROM \(table)
+        WHERE \(table.subjectID) IN (\(parameterNames.joined(separator: ",")))
+        ORDER BY \(table.subjectID)
+        """
+        
+        guard let resultSet = database.executeQuery(query, withParameterDictionary: queryArgs) else {
+            throw database.lastError()
+        }
+        defer { resultSet.close() }
+        
+        var items = [Int: [Radical.CharacterImage]]()
+        items.reserveCapacity(ids.count)
+        
+        while resultSet.next() {
+            let subjectID = resultSet.long(forColumn: table.subjectID.name)
+            let image = Radical.CharacterImage(contentType: resultSet.string(forColumn: table.contentType.name)!,
+                                               url: resultSet.url(forColumn: table.url.name)!)
+            
+            items[subjectID, default: []].append(image)
         }
         
         return items

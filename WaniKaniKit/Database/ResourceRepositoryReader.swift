@@ -33,6 +33,16 @@ public class ResourceRepositoryReader {
         }
     }
     
+    public func loadResources(ids: [Int]) throws -> [ResourceCollectionItem] {
+        guard let databaseQueue = self.databaseQueue else {
+            throw ResourceRepositoryError.noDatabase
+        }
+        
+        return try databaseQueue.inDatabase { database in
+            try ResourceCollectionItem.read(from: database, ids: ids)
+        }
+    }
+    
     public func hasUserInformation() throws -> Bool {
         guard let databaseQueue = self.databaseQueue else {
             throw ResourceRepositoryError.noDatabase
@@ -184,7 +194,7 @@ public class ResourceRepositoryReader {
                 result[item.id] = item
             }
             let requiredAssigmentSubjectIDs = subjectsByID.keys + allSubjects.lazy.flatMap({ ($0.data as! Subject).componentSubjectIDs })
-            let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: requiredAssigmentSubjectIDs).reduce(into: [:]) { result, assignment in
+            let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: requiredAssigmentSubjectIDs).values.reduce(into: [:]) { result, assignment in
                 result[assignment.subjectID] = assignment
             }
             
@@ -407,24 +417,32 @@ public class ResourceRepositoryReader {
             throw ResourceRepositoryError.noDatabase
         }
         
-        let assignments = try databaseQueue.inDatabase { database in
-            try Assignment.read(from: database, subjectIDs: ids).reduce(into: [:], { (result, assignment) in
+        return try databaseQueue.inDatabase { database in
+            let subjectItems = try ResourceCollectionItem.read(from: database, ids: ids)
+            let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: ids).values.reduce(into: [:], { (result, assignment) in
                 result[assignment.subjectID] = assignment
             })
+            
+            return subjectItems.map({ item in
+                (item.data as! Subject, assignmentsBySubjectID[item.id])
+            })
         }
-        
-        return try ids.map({ id in
-            (try loadResource(id: id).data as! Subject, assignments[id])
-        })
     }
     
-    public func assignments(srsStage: SRSStage) throws -> [Assignment] {
+    public func subjects(srsStage: SRSStage) throws -> [(subject: Subject, assignment: Assignment)] {
         guard let databaseQueue = self.databaseQueue else {
             throw ResourceRepositoryError.noDatabase
         }
         
         return try databaseQueue.inDatabase { database in
-            try Assignment.read(from: database, srsStage: srsStage)
+            let assignmentsBySubjectID = try Assignment.read(from: database, srsStage: srsStage).values.reduce(into: [:], { (result, assignment) in
+                result[assignment.subjectID] = assignment
+            })
+            let subjectItems = try ResourceCollectionItem.read(from: database, ids: Array(assignmentsBySubjectID.keys))
+            
+            return subjectItems.map({ item in
+                (item.data as! Subject, assignmentsBySubjectID[item.id]!)
+            })
         }
     }
     
@@ -445,7 +463,7 @@ public class ResourceRepositoryReader {
         let subjectIDs = kanji.map({ $0.id })
         let componentSubjectIDs = kanji.flatMap({ ($0.data as! Subject).componentSubjectIDs })
         
-        let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: subjectIDs + componentSubjectIDs).reduce(into: [:]) { result, assignment in
+        let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: subjectIDs + componentSubjectIDs).values.reduce(into: [:]) { result, assignment in
             result[assignment.subjectID] = assignment
         }
         

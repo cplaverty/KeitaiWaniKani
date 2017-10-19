@@ -34,8 +34,7 @@ class SubjectCollectionViewController: UICollectionViewController {
         }
     }
     
-    private var assignments = [Assignment]()
-    private var subjectsBySubjectID = [Int: Subject]()
+    private var items = [(subject: Subject, assignment: Assignment)]()
     private var notificationObservers: [NSObjectProtocol]?
     
     // MARK: - Initialisers
@@ -58,7 +57,7 @@ class SubjectCollectionViewController: UICollectionViewController {
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return assignments.count
+        return items.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -69,16 +68,9 @@ class SubjectCollectionViewController: UICollectionViewController {
     }
     
     private func configure(_ cell: SubjectCollectionViewCell, at indexPath: IndexPath) {
-        let assignment = assignments[indexPath.row]
+        let item = items[indexPath.row]
         
-        let subject: Subject
-        if let s = subjectsBySubjectID[assignment.subjectID] {
-            subject = s
-        } else {
-            subject = try! repositoryReader!.loadResource(id: assignment.subjectID).data as! Subject
-            subjectsBySubjectID[assignment.subjectID] = subject
-        }
-        cell.subject = subject
+        cell.subject = item.subject
     }
     
     // MARK: - UICollectionViewDelegate
@@ -117,7 +109,6 @@ class SubjectCollectionViewController: UICollectionViewController {
                 self.updateUI()
             },
             NotificationCenter.default.addObserver(forName: .waniKaniSubjectsDidChange, object: nil, queue: .main) { [unowned self] _ in
-                self.subjectsBySubjectID = [Int: Subject]()
                 self.updateUI()
             }
         ]
@@ -134,8 +125,7 @@ class SubjectCollectionViewController: UICollectionViewController {
             os_log("Updating subject list for SRS stage %@", type: .info, String(describing: srsStage))
         }
         
-        assignments = try! repositoryReader.assignments(srsStage: srsStage).sorted(by: Assignment.Sorting.byProgress)
-        subjectsBySubjectID.reserveCapacity(assignments.count)
+        items = try! repositoryReader.subjects(srsStage: srsStage).sorted(by: { Assignment.Sorting.byProgress($0.assignment, $1.assignment) })
     }
     
 }
