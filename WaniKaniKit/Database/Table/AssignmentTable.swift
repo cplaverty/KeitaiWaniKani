@@ -23,6 +23,7 @@ final class AssignmentTable: Table {
     init() {
         super.init(name: "assignments",
                    indexes: [TableIndex(name: "idx_assignments_by_level", columns: [level]),
+                             TableIndex(name: "idx_assignments_by_srs_stage", columns: [srsStage]),
                              TableIndex(name: "idx_assignments_by_available_at", columns: [availableAt])])
     }
 }

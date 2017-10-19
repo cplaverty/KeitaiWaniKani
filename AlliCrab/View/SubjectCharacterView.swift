@@ -35,9 +35,9 @@ class SubjectCharacterView: UIView {
         return activityIndicatorView
     }()
     
-    @IBInspectable var fontSize: Float {
+    @IBInspectable var fontSize: Double {
         get {
-            return Float(characterLabel.font.pointSize)
+            return Double(characterLabel.font.pointSize)
         }
         set {
             characterLabel.font = characterLabel.font.withSize(CGFloat(newValue))
@@ -53,9 +53,9 @@ class SubjectCharacterView: UIView {
         }
     }
     
-    @IBInspectable var minimumScaleFactor: Float {
+    @IBInspectable var minimumScaleFactor: Double {
         get {
-            return Float(characterLabel.minimumScaleFactor)
+            return Double(characterLabel.minimumScaleFactor)
         }
         set {
             characterLabel.minimumScaleFactor = CGFloat(newValue)
@@ -126,20 +126,21 @@ class SubjectCharacterView: UIView {
         addSubview(displayImageView)
         addSubview(downloadProgressActivityIndicator)
         
-        characterLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor).isActive = true
-        layoutMarginsGuide.bottomAnchor.constraint(equalTo: characterLabel.bottomAnchor).isActive = true
-        characterLabel.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor).isActive = true
-        layoutMarginsGuide.trailingAnchor.constraint(equalTo: characterLabel.trailingAnchor).isActive = true
-        characterLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        characterLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            characterLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+            characterLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
+            characterLabel.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
+            characterLabel.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor)
+            ])
         
-        displayImageView.topAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.topAnchor).isActive = true
-        layoutMarginsGuide.bottomAnchor.constraint(greaterThanOrEqualTo: displayImageView.bottomAnchor).isActive = true
-        displayImageView.leadingAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.leadingAnchor).isActive = true
-        layoutMarginsGuide.trailingAnchor.constraint(greaterThanOrEqualTo: displayImageView.trailingAnchor).isActive = true
-        displayImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        displayImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        displayImageView.widthAnchor.constraint(equalTo: heightAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            displayImageView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
+            displayImageView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
+            displayImageView.leadingAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.leadingAnchor),
+            displayImageView.trailingAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.trailingAnchor),
+            displayImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            displayImageView.widthAnchor.constraint(equalTo: displayImageView.heightAnchor)
+            ])
         
         downloadProgressActivityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         downloadProgressActivityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true

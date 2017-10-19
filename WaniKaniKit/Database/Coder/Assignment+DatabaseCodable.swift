@@ -10,7 +10,7 @@ import FMDB
 private let table = Tables.assignments
 
 extension Assignment: DatabaseCodable {
-    static func read(from database: FMDatabase, subjectIDs: [Int]? = nil, level: Int? = nil, subjectType: SubjectType? = nil) throws -> [Assignment] {
+    static func read(from database: FMDatabase, subjectIDs: [Int]? = nil, level: Int? = nil, srsStage: SRSStage? = nil) throws -> [Assignment] {
         var filterCriteria = [String]()
         var queryArgs = [String: Any]()
         
@@ -29,9 +29,10 @@ extension Assignment: DatabaseCodable {
             queryArgs["level"] = level
         }
         
-        if let subjectType = subjectType {
-            filterCriteria.append("\(table.subjectType) = :subjectType")
-            queryArgs["subjectType"] = subjectType.rawValue
+        if let srsStage = srsStage {
+            filterCriteria.append("\(table.srsStage) BETWEEN :srsStageLower AND :srsStageUpper")
+            queryArgs["srsStageLower"] = srsStage.numericLevelRange.lowerBound
+            queryArgs["srsStageUpper"] = srsStage.numericLevelRange.upperBound
         }
         
         let query = """

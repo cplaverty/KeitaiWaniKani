@@ -5,7 +5,6 @@
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-import os
 import UIKit
 import WaniKaniKit
 

@@ -10,7 +10,11 @@ import WaniKaniKit
 
 class SRSProgressTableViewCell: UITableViewCell {
     
+    private(set) var srsStage: SRSStage?
+    
     func update(srsStage: SRSStage, srsDistribution: SRSDistribution?) {
+        self.srsStage = srsStage
+        
         imageView?.image = UIImage(named: srsStage.rawValue)?.withRenderingMode(.alwaysTemplate)
         imageView?.tintColor = srsStage.backgroundColor
         

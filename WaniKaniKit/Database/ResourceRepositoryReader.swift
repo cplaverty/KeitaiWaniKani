@@ -418,6 +418,16 @@ public class ResourceRepositoryReader {
         })
     }
     
+    public func assignments(srsStage: SRSStage) throws -> [Assignment] {
+        guard let databaseQueue = self.databaseQueue else {
+            throw ResourceRepositoryError.noDatabase
+        }
+        
+        return try databaseQueue.inDatabase { database in
+            try Assignment.read(from: database, srsStage: srsStage)
+        }
+    }
+    
     public func findSubjects(matching query: String) throws -> [ResourceCollectionItem] {
         guard let databaseQueue = self.databaseQueue else {
             throw ResourceRepositoryError.noDatabase

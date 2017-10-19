@@ -60,8 +60,14 @@ extension SRSStage: Comparable {
     }
 }
 
-public extension SRSStage {
-    var backgroundColor: UIColor {
+extension SRSStage: CustomStringConvertible {
+    public var description: String {
+        return rawValue
+    }
+}
+
+extension SRSStage {
+    public var backgroundColor: UIColor {
         switch self {
         case .initiate:
             return .clear

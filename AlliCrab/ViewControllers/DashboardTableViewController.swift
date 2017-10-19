@@ -27,6 +27,7 @@ class DashboardTableViewController: UITableViewController {
         case settings = "Settings"
         case reviewTimeline = "ReviewTimeline"
         case assignmentProgression = "AssignmentProgression"
+        case srsProgressDetail = "SRSProgressDetail"
     }
     
     private enum TableViewSection: Int {
@@ -465,6 +466,11 @@ class DashboardTableViewController: UITableViewController {
         case .reviewTimeline:
             let vc = segue.destination as! ReviewTimelineTableViewController
             vc.repositoryReader = resourceRepository
+        case .srsProgressDetail:
+            let vc = segue.destination as! SubjectCollectionViewController
+            let cell = sender as! SRSProgressTableViewCell
+            vc.repositoryReader = resourceRepository
+            vc.srsStage = cell.srsStage
         }
     }
     
