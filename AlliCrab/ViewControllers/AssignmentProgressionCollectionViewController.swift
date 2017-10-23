@@ -167,6 +167,12 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let flowLayout = collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
+        flowLayout.estimatedItemSize = flowLayout.itemSize
+        if #available(iOS 11.0, *) {
+            flowLayout.sectionInsetReference = .fromSafeArea
+        }
+        
         notificationObservers = addNotificationObservers()
         
         if !UIAccessibilityIsReduceTransparencyEnabled() {
@@ -216,7 +222,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
         if #available(iOS 10.0, *) {
             os_log("Updating assignment guru progression for subject type %@", type: .info, String(describing: subjectType))
         }
-
+        
         guard let userInformation = try! repositoryReader.userInformation() else {
             return
         }

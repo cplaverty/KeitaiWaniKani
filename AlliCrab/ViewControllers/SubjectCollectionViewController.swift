@@ -87,6 +87,9 @@ class SubjectCollectionViewController: UICollectionViewController {
         
         let flowLayout = collectionView!.collectionViewLayout as! UICollectionViewFlowLayout
         flowLayout.estimatedItemSize = flowLayout.itemSize
+        if #available(iOS 11.0, *) {
+            flowLayout.sectionInsetReference = .fromSafeArea
+        }
         
         notificationObservers = addNotificationObservers()
         

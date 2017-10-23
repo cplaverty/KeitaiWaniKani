@@ -148,6 +148,7 @@ class SubjectCharacterView: UIView {
     
     func setImage(_ imageChoices: [SubjectImage]) {
         characterLabel.isHidden = true
+        characterLabel.text = nil
         displayImageView.isHidden = false
         
         let imageLoader = RadicalCharacterImageLoader(characterImages: imageChoices)
