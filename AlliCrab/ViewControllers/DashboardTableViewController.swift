@@ -359,7 +359,7 @@ class DashboardTableViewController: UITableViewController {
             if try resourceRepository.hasLevelTimeline() {
                 self.levelTimeline = try resourceRepository.levelTimeline()
             }
-
+            
             self.tableView.reloadSections([TableViewSection.available.rawValue, TableViewSection.upcomingReviews.rawValue, TableViewSection.levelProgression.rawValue], with: .automatic)
         } catch {
             if #available(iOS 10.0, *) {
@@ -396,13 +396,26 @@ class DashboardTableViewController: UITableViewController {
         
         progressContainerView = ProgressReportingBarButtonItemView(frame: self.navigationController?.toolbar.frame ?? .zero)
         
+        if #available(iOS 11.0, *) {
+            let searchResultViewController = storyboard?.instantiateViewController(withIdentifier: "SubjectSearch") as! SubjectSearchTableViewController
+            searchResultViewController.repositoryReader = resourceRepository
+            
+            let searchController = UISearchController(searchResultsController: searchResultViewController)
+            searchController.searchResultsUpdater = searchResultViewController
+            searchController.hidesNavigationBarDuringPresentation = false
+            
+            navigationItem.searchController = searchController
+            
+            definesPresentationContext = true
+        }
+        
         let barButtonItems = [
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
             UIBarButtonItem(customView: progressContainerView),
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         ]
         
-        self.setToolbarItems(barButtonItems, animated: false)
+        setToolbarItems(barButtonItems, animated: false)
         
         updateStatusBarForLastUpdate(resourceRepository.lastAppDataUpdateDate)
         

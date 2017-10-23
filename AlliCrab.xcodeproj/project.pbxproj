@@ -115,6 +115,8 @@
 		836D7F1B1F2BF92900F32C90 /* WaniKaniAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8392681D1F2BF080006C744D /* WaniKaniAPI.swift */; };
 		836D7F1C1F2BF92900F32C90 /* WaniKaniAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8392681B1F2BF080006C744D /* WaniKaniAPIError.swift */; };
 		836D7F1D1F2BF92900F32C90 /* WaniKaniResourceDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8392681E1F2BF080006C744D /* WaniKaniResourceDecoder.swift */; };
+		836DE2B61F9B918D005E42EC /* SubjectSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DE2B51F9B918D005E42EC /* SubjectSearchTableViewController.swift */; };
+		836DE2B81F9B9D1C005E42EC /* SubjectSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DE2B71F9B9D1C005E42EC /* SubjectSearchTableViewCell.swift */; };
 		8372F7C31F953FB4007881B6 /* WKButNoCigar.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 8372F7C21F953FB4007881B6 /* WKButNoCigar.user.js */; };
 		8373201D1F990601008647D5 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF4411F501D5E00A7029D /* Sequence.swift */; };
 		837BBEDC1F309BB800C92141 /* DatabaseCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837BBEDB1F309BB800C92141 /* DatabaseCodable.swift */; };
@@ -346,6 +348,8 @@
 		8364CB821F27F28D002DBE6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8364CB8E1F27FD41002DBE6B /* AlliCrab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AlliCrab.entitlements; sourceTree = "<group>"; };
 		836D7F171F2BF4CC00F32C90 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		836DE2B51F9B918D005E42EC /* SubjectSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectSearchTableViewController.swift; sourceTree = "<group>"; };
+		836DE2B71F9B9D1C005E42EC /* SubjectSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectSearchTableViewCell.swift; sourceTree = "<group>"; };
 		8372F7C21F953FB4007881B6 /* WKButNoCigar.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = WKButNoCigar.user.js; sourceTree = "<group>"; };
 		837BBEDB1F309BB800C92141 /* DatabaseCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseCodable.swift; sourceTree = "<group>"; };
 		837BBEDD1F31318300C92141 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
@@ -547,6 +551,7 @@
 				83CE51D21F4E1C5A0050242A /* SRSProgressTableViewCell.swift */,
 				83F02ED71F8EC3BD00A85014 /* SubjectCharacterView.swift */,
 				8326F7E31F95660600CC3213 /* SubjectCollectionViewCell.swift */,
+				836DE2B71F9B9D1C005E42EC /* SubjectSearchTableViewCell.swift */,
 				83DC0EFA1F4DCB81006B6DD6 /* UIBottomBorderedView.swift */,
 				83CE51E01F4F541E0050242A /* UserScriptTableViewCell.swift */,
 				832708551F4C920100AB1525 /* WebAddressBarView.swift */,
@@ -844,6 +849,7 @@
 				83FEF43D1F4F952F00A7029D /* ReviewTimelineTableViewController.swift */,
 				83CE51DE1F4F53C70050242A /* SettingsTableViewController.swift */,
 				8326F7E11F95654000CC3213 /* SubjectCollectionViewController.swift */,
+				836DE2B51F9B918D005E42EC /* SubjectSearchTableViewController.swift */,
 				837CEC8C1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift */,
 				83B8A6F91F50961F006665DB /* WaniKaniReviewPageWebViewController.swift */,
 				832708521F4C66F100AB1525 /* WebViewBackForwardListTableViewController.swift */,
@@ -1487,10 +1493,12 @@
 				83FEF4401F4F969900A7029D /* ReviewTimelineEntryTableViewCell.swift in Sources */,
 				83FE5F1C1F534F5400A2CAA2 /* BlurredImageView.swift in Sources */,
 				83D7CC021F50EC7900043D47 /* AssignmentProgressionCollectionReusableView.swift in Sources */,
+				836DE2B61F9B918D005E42EC /* SubjectSearchTableViewController.swift in Sources */,
 				83CE51D31F4E1C5A0050242A /* SRSProgressTableViewCell.swift in Sources */,
 				83FEF4461F50518E00A7029D /* ReviewTimelineFilterTableViewController.swift in Sources */,
 				832C18591F4501ED001FFACD /* UserScripts.swift in Sources */,
 				83D7CBFE1F50B20600043D47 /* AssignmentProgressionCollectionViewController.swift in Sources */,
+				836DE2B81F9B9D1C005E42EC /* SubjectSearchTableViewCell.swift in Sources */,
 				83CE51D71F4EE4BB0050242A /* DurationDetailTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
