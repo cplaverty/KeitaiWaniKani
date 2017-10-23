@@ -1,7 +1,10 @@
 platform :ios, '9.0'
 use_frameworks!
+inhibit_all_warnings!
 
-pod 'FMDB', '~> 2.7'
+pod 'sqlite3'
+pod 'sqlite3/fts'
+pod 'FMDB/standalone'
 
 target 'WaniKaniKit'
 target 'WaniKaniStudyQueueWidget'
@@ -9,7 +12,7 @@ target 'WaniKaniStudyQueueWidget'
 target 'WaniKaniKitTests'
 
 target 'AlliCrab' do
-    pod '1PasswordExtension', '~> 1.8'
+    pod '1PasswordExtension'
 end
 
 post_install do |installer|
