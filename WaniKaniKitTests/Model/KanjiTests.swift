@@ -12,7 +12,7 @@ class KanjiTests: XCTestCase {
     
     func testDecode() {
         let data = """
-            {"id":440,"object":"kanji","url":"https://www.wanikani.com/api/v2/subjects/440","data_updated_at":"2017-07-14T01:06:47.0000000Z","data":{"level":1,"created_at":"2012-02-27T19:55:19.0000000Z","slug":"一","document_url":"https://www.wanikani.com/kanji/%E4%B8%80","character":"一","meanings":[{"meaning":"One","primary":true}],"readings":[{"type":"Onyomi","primary":true,"reading":"いち"},{"type":"Kunyomi","primary":false,"reading":"ひと"},{"type":"Nanori","primary":false,"reading":"かず"}],"component_subject_ids":[1]}}
+            {"id":440,"object":"kanji","url":"https://www.wanikani.com/api/v2/subjects/440","data_updated_at":"2017-07-14T01:06:47.000000Z","data":{"level":1,"created_at":"2012-02-27T19:55:19.000000Z","slug":"一","document_url":"https://www.wanikani.com/kanji/%E4%B8%80","character":"一","meanings":[{"meaning":"One","primary":true}],"readings":[{"type":"Onyomi","primary":true,"reading":"いち"},{"type":"Kunyomi","primary":false,"reading":"ひと"},{"type":"Nanori","primary":false,"reading":"かず"}],"component_subject_ids":[1]}}
             """.data(using: .utf8)!
         
         let decoder = WaniKaniResourceDecoder()

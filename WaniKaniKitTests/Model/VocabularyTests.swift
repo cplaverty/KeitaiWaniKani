@@ -12,7 +12,7 @@ class VocabularyTests: XCTestCase {
     
     func testDecode() {
         let data = """
-            {"id":2467,"object":"vocabulary","url":"https://www.wanikani.com/api/v2/subjects/2467","data_updated_at":"2017-07-14T01:11:03.0000000Z","data":{"level":1,"created_at":"2012-02-28T08:04:47.0000000Z","slug":"一","document_url":"https://www.wanikani.com/vocabulary/%E4%B8%80","characters":"一","meanings":[{"meaning":"One","primary":true}],"readings":[{"primary":true,"reading":"いち"}],"parts_of_speech":["numeral"],"component_subject_ids":[440]}}
+            {"id":2467,"object":"vocabulary","url":"https://www.wanikani.com/api/v2/subjects/2467","data_updated_at":"2017-07-14T01:11:03.000000Z","data":{"level":1,"created_at":"2012-02-28T08:04:47.000000Z","slug":"一","document_url":"https://www.wanikani.com/vocabulary/%E4%B8%80","characters":"一","meanings":[{"meaning":"One","primary":true}],"readings":[{"primary":true,"reading":"いち"}],"parts_of_speech":["numeral"],"component_subject_ids":[440]}}
             """.data(using: .utf8)!
         
         let decoder = WaniKaniResourceDecoder()

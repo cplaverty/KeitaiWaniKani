@@ -12,7 +12,7 @@ class RadicalTests: XCTestCase {
     
     func testDecode() {
         let data = """
-            {"id":1,"object":"radical","url":"https://www.wanikani.com/api/v2/subjects/1","data_updated_at":"2017-06-12T23:21:17.0000000Z","data":{"level":1,"created_at":"2012-02-27T18:08:16.0000000Z","slug":"ground","document_url":"https://www.wanikani.com/radicals/ground","character":"一","character_images":[],"meanings":[{"meaning":"Ground","primary":true}]}}
+            {"id":1,"object":"radical","url":"https://www.wanikani.com/api/v2/subjects/1","data_updated_at":"2017-06-12T23:21:17.000000Z","data":{"level":1,"created_at":"2012-02-27T18:08:16.000000Z","slug":"ground","document_url":"https://www.wanikani.com/radicals/ground","character":"一","character_images":[],"meanings":[{"meaning":"Ground","primary":true}]}}
             """.data(using: .utf8)!
         
         let decoder = WaniKaniResourceDecoder()
