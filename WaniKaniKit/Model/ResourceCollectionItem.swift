@@ -12,6 +12,7 @@ public enum ResourceCollectionItemObjectType: String, Codable {
     case assignment
     case studyMaterial = "study_material"
     case reviewStatistic = "review_statistic"
+    case levelProgression = "level_progression"
 }
 
 public protocol ResourceCollectionItemData: Codable {
@@ -65,6 +66,8 @@ extension ResourceCollectionItem: Equatable {
             guard ldata == rdata else { return false }
         case let (ldata, rdata) as (ReviewStatistics, ReviewStatistics):
             guard ldata == rdata else { return false }
+        case let (ldata, rdata) as (LevelProgression, LevelProgression):
+            guard ldata == rdata else { return false }
         default:
             return false
         }
@@ -85,6 +88,7 @@ private extension KeyedDecodingContainerProtocol {
         case .assignment: return try decode(Assignment.self, forKey: key)
         case .reviewStatistic: return try decode(ReviewStatistics.self, forKey: key)
         case .studyMaterial: return try decode(StudyMaterials.self, forKey: key)
+        case .levelProgression: return try decode(LevelProgression.self, forKey: key)
         }
     }
 }

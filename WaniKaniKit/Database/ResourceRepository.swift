@@ -9,51 +9,57 @@ import FMDB
 import os
 
 public extension NSNotification.Name {
-    public static let waniKaniUserInformationDidChange = NSNotification.Name("waniKaniUserInformationDidChange")
-    public static let waniKaniSubjectsDidChange = NSNotification.Name("waniKaniSubjectsDidChange")
     public static let waniKaniAssignmentsDidChange = NSNotification.Name("waniKaniAssignmentsDidChange")
+    public static let waniKaniLevelProgressionDidChange = NSNotification.Name("waniKaniLevelProgressionDidChange")
     public static let waniKaniReviewStatisticsDidChange = NSNotification.Name("waniKaniReviewStatisticsDidChange")
     public static let waniKaniStudyMaterialsDidChange = NSNotification.Name("waniKaniStudyMaterialsDidChange")
+    public static let waniKaniSubjectsDidChange = NSNotification.Name("waniKaniSubjectsDidChange")
+    public static let waniKaniUserInformationDidChange = NSNotification.Name("waniKaniUserInformationDidChange")
 }
 
 public extension CFNotificationName {
     private static let notificationBaseName = "uk.me.laverty.keitaiWaniKani.notifications"
     
-    public static let waniKaniUserInformationDidChange = CFNotificationName("\(notificationBaseName).waniKaniUserInformationDidChange" as CFString)
-    public static let waniKaniSubjectsDidChange = CFNotificationName("\(notificationBaseName).waniKaniSubjectsDidChange" as CFString)
     public static let waniKaniAssignmentsDidChange = CFNotificationName("\(notificationBaseName).waniKaniAssignmentsDidChange" as CFString)
+    public static let waniKaniLevelProgressionDidChange = CFNotificationName("\(notificationBaseName).waniKaniLevelProgressionDidChange" as CFString)
     public static let waniKaniReviewStatisticsDidChange = CFNotificationName("\(notificationBaseName).waniKaniReviewStatisticsDidChange" as CFString)
     public static let waniKaniStudyMaterialsDidChange = CFNotificationName("\(notificationBaseName).waniKaniStudyMaterialsDidChange" as CFString)
+    public static let waniKaniSubjectsDidChange = CFNotificationName("\(notificationBaseName).waniKaniSubjectsDidChange" as CFString)
+    public static let waniKaniUserInformationDidChange = CFNotificationName("\(notificationBaseName).waniKaniUserInformationDidChange" as CFString)
 }
 
 extension ResourceType {
     var associatedCFNotificationName: CFNotificationName {
         switch self {
-        case .user:
-            return .waniKaniUserInformationDidChange
-        case .subjects:
-            return .waniKaniSubjectsDidChange
         case .assignments:
             return .waniKaniAssignmentsDidChange
+        case .levelProgression:
+            return .waniKaniLevelProgressionDidChange
         case .reviewStatistics:
             return .waniKaniReviewStatisticsDidChange
         case .studyMaterials:
             return .waniKaniStudyMaterialsDidChange
+        case .subjects:
+            return .waniKaniSubjectsDidChange
+        case .user:
+            return .waniKaniUserInformationDidChange
         }
     }
     
     var associatedNotificationName: NSNotification.Name {
         switch self {
-        case .user:
-            return .waniKaniUserInformationDidChange
-        case .subjects:
-            return .waniKaniSubjectsDidChange
         case .assignments:
             return .waniKaniAssignmentsDidChange
+        case .levelProgression:
+            return .waniKaniLevelProgressionDidChange
         case .reviewStatistics:
             return .waniKaniReviewStatisticsDidChange
         case .studyMaterials:
             return .waniKaniStudyMaterialsDidChange
+        case .subjects:
+            return .waniKaniSubjectsDidChange
+        case .user:
+            return .waniKaniUserInformationDidChange
         }
     }
     

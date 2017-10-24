@@ -6,9 +6,10 @@
 //
 
 public enum ResourceType: String {
-    case user
-    case subjects
     case assignments
+    case levelProgression
     case reviewStatistics
     case studyMaterials
+    case subjects
+    case user
 }

@@ -8,6 +8,7 @@
 struct Tables {
     static let assignments = AssignmentTable()
     static let kanji = KanjiTable()
+    static let levelProgression = LevelProgressionTable()
     static let meanings = MeaningTable()
     static let radicals = RadicalTable()
     static let radicalCharacterImages = RadicalCharacterImagesTable()
@@ -25,7 +26,7 @@ struct Tables {
     
     static var all: [TableProtocol] {
         return [
-            assignments, kanji, meanings, radicals, radicalCharacterImages, readings, resources,
+            assignments, kanji, levelProgression, meanings, radicals, radicalCharacterImages, readings, resources,
             resourceLastUpdate, reviewStatistics, studyMaterials, studyMaterialsMeaningSynonyms,
             subjectComponents, subjectSearch, userInformation, vocabulary, vocabularyPartsOfSpeech
         ]

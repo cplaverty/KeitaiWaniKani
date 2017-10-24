@@ -112,7 +112,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
     }
     
     func testLevelProgression_Empty() {
-        let expected = LevelProgression(radicalsProgress: 0, radicalsTotal: 0, radicalSubjectIDs: [], kanjiProgress: 0, kanjiTotal: 0, kanjiSubjectIDs: [])
+        let expected = CurrentLevelProgression(radicalsProgress: 0, radicalsTotal: 0, radicalSubjectIDs: [], kanjiProgress: 0, kanjiTotal: 0, kanjiSubjectIDs: [])
         
         XCTAssertEqual(try resourceRepository.levelProgression(), expected)
     }
@@ -123,7 +123,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         
         populateDatabaseForLevelProgression(radicalsNotPassed: 10, radicalsPassed: 0, kanjiNotPassed: 15, kanjiPassed: 0)
         
-        let expected = LevelProgression(radicalsProgress: 0, radicalsTotal: 10, radicalSubjectIDs: radicalSubjectIDs, kanjiProgress: 0, kanjiTotal: 15, kanjiSubjectIDs: kanjiSubjectIDs)
+        let expected = CurrentLevelProgression(radicalsProgress: 0, radicalsTotal: 10, radicalSubjectIDs: radicalSubjectIDs, kanjiProgress: 0, kanjiTotal: 15, kanjiSubjectIDs: kanjiSubjectIDs)
         
         XCTAssertEqual(try resourceRepository.levelProgression(), expected)
     }
@@ -134,7 +134,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         
         populateDatabaseForLevelProgression(radicalsNotPassed: 4, radicalsPassed: 6, kanjiNotPassed: 12, kanjiPassed: 3)
         
-        let expected = LevelProgression(radicalsProgress: 6, radicalsTotal: 10, radicalSubjectIDs: radicalSubjectIDs, kanjiProgress: 3, kanjiTotal: 15, kanjiSubjectIDs: kanjiSubjectIDs)
+        let expected = CurrentLevelProgression(radicalsProgress: 6, radicalsTotal: 10, radicalSubjectIDs: radicalSubjectIDs, kanjiProgress: 3, kanjiTotal: 15, kanjiSubjectIDs: kanjiSubjectIDs)
         
         XCTAssertEqual(try resourceRepository.levelProgression(), expected)
     }
@@ -145,7 +145,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         
         populateDatabaseForLevelProgression(radicalsNotPassed: 0, radicalsPassed: 10, kanjiNotPassed: 0, kanjiPassed: 15)
         
-        let expected = LevelProgression(radicalsProgress: 10, radicalsTotal: 10, radicalSubjectIDs: radicalSubjectIDs, kanjiProgress: 15, kanjiTotal: 15, kanjiSubjectIDs: kanjiSubjectIDs)
+        let expected = CurrentLevelProgression(radicalsProgress: 10, radicalsTotal: 10, radicalSubjectIDs: radicalSubjectIDs, kanjiProgress: 15, kanjiTotal: 15, kanjiSubjectIDs: kanjiSubjectIDs)
         
         XCTAssertEqual(try resourceRepository.levelProgression(), expected)
     }
@@ -654,10 +654,12 @@ class ResourceRepositoryReaderTests: XCTestCase {
                         try ResourceType.subjects.setLastUpdateDate(Date(), in: database)
                     case .assignment:
                         try ResourceType.assignments.setLastUpdateDate(Date(), in: database)
-                    case .studyMaterial:
-                        try ResourceType.studyMaterials.setLastUpdateDate(Date(), in: database)
+                    case .levelProgression:
+                        try ResourceType.levelProgression.setLastUpdateDate(Date(), in: database)
                     case .reviewStatistic:
                         try ResourceType.reviewStatistics.setLastUpdateDate(Date(), in: database)
+                    case .studyMaterial:
+                        try ResourceType.studyMaterials.setLastUpdateDate(Date(), in: database)
                     }
                 }
             } catch {

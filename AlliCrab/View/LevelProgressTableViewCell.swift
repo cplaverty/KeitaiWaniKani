@@ -29,7 +29,7 @@ class LevelProgressTableViewCell: UITableViewCell {
     
     // MARK: - Update UI
     
-    func update(subjectType: SubjectType, levelProgression: LevelProgression?) {
+    func update(subjectType: SubjectType, levelProgression: CurrentLevelProgression?) {
         self.subjectType = subjectType
         
         let fractionComplete: Double?

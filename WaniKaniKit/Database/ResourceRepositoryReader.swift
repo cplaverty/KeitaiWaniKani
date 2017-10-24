@@ -108,7 +108,7 @@ public class ResourceRepositoryReader {
         }
     }
     
-    public func levelProgression() throws -> LevelProgression {
+    public func levelProgression() throws -> CurrentLevelProgression {
         guard let databaseQueue = self.databaseQueue else {
             throw ResourceRepositoryError.noDatabase
         }
@@ -120,7 +120,7 @@ public class ResourceRepositoryReader {
             let kanji = Tables.kanji
             
             guard let userInformation = try UserInformation(from: database) else {
-                return LevelProgression(radicalsProgress: 0, radicalsTotal: 0, radicalSubjectIDs: [], kanjiProgress: 0, kanjiTotal: 0, kanjiSubjectIDs: [])
+                return CurrentLevelProgression(radicalsProgress: 0, radicalsTotal: 0, radicalSubjectIDs: [], kanjiProgress: 0, kanjiTotal: 0, kanjiSubjectIDs: [])
             }
             
             let query = """
@@ -165,7 +165,7 @@ public class ResourceRepositoryReader {
                 }
             }
             
-            return LevelProgression(radicalsProgress: radicalsProgress, radicalsTotal: radicalsTotal, radicalSubjectIDs: radicalSubjectIDs, kanjiProgress: kanjiProgress, kanjiTotal: kanjiTotal, kanjiSubjectIDs: kanjiSubjectIDs)
+            return CurrentLevelProgression(radicalsProgress: radicalsProgress, radicalsTotal: radicalsTotal, radicalSubjectIDs: radicalSubjectIDs, kanjiProgress: kanjiProgress, kanjiTotal: kanjiTotal, kanjiSubjectIDs: kanjiSubjectIDs)
         }
     }
     

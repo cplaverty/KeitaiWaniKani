@@ -60,7 +60,7 @@ class DashboardTableViewController: UITableViewController {
     
     private var userInformation: UserInformation?
     private var studyQueue: StudyQueue?
-    private var levelProgression: LevelProgression?
+    private var levelProgression: CurrentLevelProgression?
     private var srsDistribution: SRSDistribution?
     private var levelTimeline: LevelData?
     

@@ -56,6 +56,8 @@ extension ResourceCollectionItem {
             data = try StudyMaterials(from: database, id: id)
         case .reviewStatistic:
             data = try ReviewStatistics(from: database, id: id)
+        case .levelProgression:
+            data = try LevelProgression(from: database, id: id)
         }
         
         self.data = data

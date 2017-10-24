@@ -1,11 +1,11 @@
 //
-//  LevelProgression.swift
+//  CurrentLevelProgression.swift
 //  WaniKaniKit
 //
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-public struct LevelProgression: Equatable {
+public struct CurrentLevelProgression: Equatable {
     public let radicalsProgress: Int
     public let radicalsTotal: Int
     public let radicalSubjectIDs: [Int]
@@ -31,8 +31,8 @@ public struct LevelProgression: Equatable {
     }
 }
 
-extension LevelProgression {
-    public static func ==(lhs: LevelProgression, rhs: LevelProgression) -> Bool {
+extension CurrentLevelProgression {
+    public static func ==(lhs: CurrentLevelProgression, rhs: CurrentLevelProgression) -> Bool {
         return lhs.radicalsProgress == rhs.radicalsProgress
             && lhs.radicalsTotal == rhs.radicalsTotal
             && lhs.radicalSubjectIDs == rhs.radicalSubjectIDs

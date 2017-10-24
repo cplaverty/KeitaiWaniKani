@@ -126,6 +126,10 @@
 		838BFB171F5417290047CDB9 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BFB161F5417290047CDB9 /* SnapshotHelper.swift */; };
 		8392510A1F58A80F004D8088 /* SubjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839251091F58A80F004D8088 /* SubjectTests.swift */; };
 		8396B04D1F2CD5550094C9EF /* AssignmentTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8396B04C1F2CD5550094C9EF /* AssignmentTable.swift */; };
+		83A783E81F9FEABC0000D28D /* LevelProgression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A783E71F9FEABC0000D28D /* LevelProgression.swift */; };
+		83A783EA1F9FEF590000D28D /* LevelProgressionTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A783E91F9FEF590000D28D /* LevelProgressionTable.swift */; };
+		83A783EC1F9FF1260000D28D /* LevelProgression+DatabaseCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A783EB1F9FF1260000D28D /* LevelProgression+DatabaseCodable.swift */; };
+		83A783EE1F9FF4430000D28D /* LevelProgressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A783ED1F9FF4430000D28D /* LevelProgressionTests.swift */; };
 		83AF99FA1F364ED800E35A00 /* ResourceLastUpdateTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AF99F91F364ED800E35A00 /* ResourceLastUpdateTable.swift */; };
 		83B75F6A1F351B0300BECEB0 /* Assignment+DatabaseCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B75F691F351B0300BECEB0 /* Assignment+DatabaseCodable.swift */; };
 		83B75F6D1F351B5300BECEB0 /* ResourceCollectionItem+DatabaseCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B75F6C1F351B5300BECEB0 /* ResourceCollectionItem+DatabaseCodable.swift */; };
@@ -150,6 +154,7 @@
 		83C4D3861F307CD80082EB31 /* MeaningTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C4D3851F307CD80082EB31 /* MeaningTable.swift */; };
 		83C4D3881F307D490082EB31 /* ReadingTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C4D3871F307D490082EB31 /* ReadingTable.swift */; };
 		83C4D38A1F307DF80082EB31 /* SubjectComponentsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C4D3891F307DF80082EB31 /* SubjectComponentsTable.swift */; };
+		83C5C7AE1F9FDF23009FD88D /* LevelProgressionFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C5C7AD1F9FDF23009FD88D /* LevelProgressionFilter.swift */; };
 		83C682001F51C2CD00CC431C /* RadicalCharacterImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C681FF1F51C2CD00CC431C /* RadicalCharacterImageLoader.swift */; };
 		83CE51CE1F4DE6A50050242A /* LevelProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CE51CC1F4DE6A50050242A /* LevelProgressTableViewCell.swift */; };
 		83CE51D11F4DEC1D0050242A /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CE51D01F4DEC1D0050242A /* UIColor.swift */; };
@@ -179,7 +184,7 @@
 		83FCAB351F9F52E600024398 /* TableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FCAB341F9F52E600024398 /* TableProtocol.swift */; };
 		83FCAB371F9F549300024398 /* VirtualTableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FCAB361F9F549300024398 /* VirtualTableTests.swift */; };
 		83FE5F1C1F534F5400A2CAA2 /* BlurredImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FE5F1B1F534F5400A2CAA2 /* BlurredImageView.swift */; };
-		83FE8FA81F3FA6E000E023B3 /* LevelProgression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FE8FA71F3FA6E000E023B3 /* LevelProgression.swift */; };
+		83FE8FA81F3FA6E000E023B3 /* CurrentLevelProgression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FE8FA71F3FA6E000E023B3 /* CurrentLevelProgression.swift */; };
 		83FE8FAA1F40E36B00E023B3 /* ApplicationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FE8FA91F40E36B00E023B3 /* ApplicationSettings.swift */; };
 		83FE8FAC1F4193CE00E023B3 /* ResourceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FE8FAB1F4193CE00E023B3 /* ResourceRepository.swift */; };
 		83FEF2801F3138E5003D7992 /* FMDatabaseAdditionsVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF27F1F3138E5003D7992 /* FMDatabaseAdditionsVariadic.swift */; };
@@ -389,6 +394,10 @@
 		839268421F2BF113006C744D /* UserInformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationTests.swift; sourceTree = "<group>"; };
 		839268431F2BF113006C744D /* VocabularyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyTests.swift; sourceTree = "<group>"; };
 		8396B04C1F2CD5550094C9EF /* AssignmentTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentTable.swift; sourceTree = "<group>"; };
+		83A783E71F9FEABC0000D28D /* LevelProgression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProgression.swift; sourceTree = "<group>"; };
+		83A783E91F9FEF590000D28D /* LevelProgressionTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProgressionTable.swift; sourceTree = "<group>"; };
+		83A783EB1F9FF1260000D28D /* LevelProgression+DatabaseCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LevelProgression+DatabaseCodable.swift"; sourceTree = "<group>"; };
+		83A783ED1F9FF4430000D28D /* LevelProgressionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProgressionTests.swift; sourceTree = "<group>"; };
 		83AF99F91F364ED800E35A00 /* ResourceLastUpdateTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceLastUpdateTable.swift; sourceTree = "<group>"; };
 		83B75F691F351B0300BECEB0 /* Assignment+DatabaseCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assignment+DatabaseCodable.swift"; sourceTree = "<group>"; };
 		83B75F6C1F351B5300BECEB0 /* ResourceCollectionItem+DatabaseCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResourceCollectionItem+DatabaseCodable.swift"; sourceTree = "<group>"; };
@@ -413,6 +422,7 @@
 		83C4D3851F307CD80082EB31 /* MeaningTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningTable.swift; sourceTree = "<group>"; };
 		83C4D3871F307D490082EB31 /* ReadingTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingTable.swift; sourceTree = "<group>"; };
 		83C4D3891F307DF80082EB31 /* SubjectComponentsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectComponentsTable.swift; sourceTree = "<group>"; };
+		83C5C7AD1F9FDF23009FD88D /* LevelProgressionFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProgressionFilter.swift; sourceTree = "<group>"; };
 		83C681FF1F51C2CD00CC431C /* RadicalCharacterImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadicalCharacterImageLoader.swift; sourceTree = "<group>"; };
 		83CE51CC1F4DE6A50050242A /* LevelProgressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProgressTableViewCell.swift; sourceTree = "<group>"; };
 		83CE51D01F4DEC1D0050242A /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -442,7 +452,7 @@
 		83FCAB341F9F52E600024398 /* TableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableProtocol.swift; sourceTree = "<group>"; };
 		83FCAB361F9F549300024398 /* VirtualTableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualTableTests.swift; sourceTree = "<group>"; };
 		83FE5F1B1F534F5400A2CAA2 /* BlurredImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurredImageView.swift; sourceTree = "<group>"; };
-		83FE8FA71F3FA6E000E023B3 /* LevelProgression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProgression.swift; sourceTree = "<group>"; };
+		83FE8FA71F3FA6E000E023B3 /* CurrentLevelProgression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLevelProgression.swift; sourceTree = "<group>"; };
 		83FE8FA91F40E36B00E023B3 /* ApplicationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSettings.swift; sourceTree = "<group>"; };
 		83FE8FAB1F4193CE00E023B3 /* ResourceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceRepository.swift; sourceTree = "<group>"; };
 		83FEF27F1F3138E5003D7992 /* FMDatabaseAdditionsVariadic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDatabaseAdditionsVariadic.swift; sourceTree = "<group>"; };
@@ -510,7 +520,7 @@
 			isa = PBXGroup;
 			children = (
 				832AFE7B1F486DBB00252264 /* LevelData.swift */,
-				83FE8FA71F3FA6E000E023B3 /* LevelProgression.swift */,
+				83FE8FA71F3FA6E000E023B3 /* CurrentLevelProgression.swift */,
 				83F1CBDA1F463D5800CE9583 /* SRSDistribution.swift */,
 				83F1CBDE1F4652DD00CE9583 /* SRSItemCounts.swift */,
 				83F1CBDC1F46519600CE9583 /* SRSReviewCounts.swift */,
@@ -670,6 +680,7 @@
 				83FCAB2D1F9F50AE00024398 /* Schema */,
 				8396B04C1F2CD5550094C9EF /* AssignmentTable.swift */,
 				8346C84A1F2FEA1800252DC9 /* KanjiTable.swift */,
+				83A783E91F9FEF590000D28D /* LevelProgressionTable.swift */,
 				83C4D3851F307CD80082EB31 /* MeaningTable.swift */,
 				8346C84C1F2FEBC900252DC9 /* RadicalTable.swift */,
 				83C4D3871F307D490082EB31 /* ReadingTable.swift */,
@@ -753,6 +764,7 @@
 			children = (
 				839268211F2BF080006C744D /* Array+URLQueryItem.swift */,
 				839268221F2BF080006C744D /* AssignmentFilter.swift */,
+				83C5C7AD1F9FDF23009FD88D /* LevelProgressionFilter.swift */,
 				839268231F2BF080006C744D /* RequestFilter.swift */,
 				839268241F2BF080006C744D /* ReviewStatisticFilter.swift */,
 				839268251F2BF080006C744D /* StudyMaterialFilter.swift */,
@@ -766,6 +778,7 @@
 			children = (
 				839268291F2BF080006C744D /* Assignment.swift */,
 				8392682A1F2BF080006C744D /* Kanji.swift */,
+				83A783E71F9FEABC0000D28D /* LevelProgression.swift */,
 				8392682B1F2BF080006C744D /* Meaning.swift */,
 				8392682C1F2BF080006C744D /* Radical.swift */,
 				8392682D1F2BF080006C744D /* Reading.swift */,
@@ -786,6 +799,7 @@
 			children = (
 				8392683C1F2BF113006C744D /* AssignmentTests.swift */,
 				8392683D1F2BF113006C744D /* KanjiTests.swift */,
+				83A783ED1F9FF4430000D28D /* LevelProgressionTests.swift */,
 				8392683E1F2BF113006C744D /* RadicalTests.swift */,
 				8392683F1F2BF113006C744D /* ReviewStatisticsTests.swift */,
 				839268401F2BF113006C744D /* StudyMaterialsTests.swift */,
@@ -813,6 +827,7 @@
 			children = (
 				83B75F691F351B0300BECEB0 /* Assignment+DatabaseCodable.swift */,
 				83C2618C1F37069D00278648 /* Kanji+DatabaseCodable.swift */,
+				83A783EB1F9FF1260000D28D /* LevelProgression+DatabaseCodable.swift */,
 				83C261881F37026700278648 /* Meaning+BulkDatabaseCodable.swift */,
 				83C261901F370FB000278648 /* Radical+DatabaseCodable.swift */,
 				83C2618A1F37058A00278648 /* Reading+BulkDatabaseCodable.swift */,
@@ -1398,6 +1413,7 @@
 				832C1E4E1F9345D10026F36D /* SubjectSearch.swift in Sources */,
 				836D7F071F2BF44F00F32C90 /* AssignmentFilter.swift in Sources */,
 				8346C84F1F2FEC7300252DC9 /* VocabularyTable.swift in Sources */,
+				83A783E81F9FEABC0000D28D /* LevelProgression.swift in Sources */,
 				83AF99FA1F364ED800E35A00 /* ResourceLastUpdateTable.swift in Sources */,
 				83FCAB351F9F52E600024398 /* TableProtocol.swift in Sources */,
 				8373201D1F990601008647D5 /* Sequence.swift in Sources */,
@@ -1408,7 +1424,7 @@
 				83B75F701F351E6500BECEB0 /* FMResultSet.swift in Sources */,
 				83FCAB331F9F51E600024398 /* VirtualTable.swift in Sources */,
 				8346C8491F2FE61900252DC9 /* ResourceTable.swift in Sources */,
-				83FE8FA81F3FA6E000E023B3 /* LevelProgression.swift in Sources */,
+				83FE8FA81F3FA6E000E023B3 /* CurrentLevelProgression.swift in Sources */,
 				8355BEE81F92C0BF00BC1025 /* SubjectSearchVirtualTable.swift in Sources */,
 				83150B221F3F0AF100B61F3A /* ResourceCollection+DatabaseWriteable.swift in Sources */,
 				8317E8891F54B31300B8D654 /* SubjectProgression.swift in Sources */,
@@ -1422,10 +1438,12 @@
 				83FEF2801F3138E5003D7992 /* FMDatabaseAdditionsVariadic.swift in Sources */,
 				832AFE7C1F486DBB00252264 /* LevelData.swift in Sources */,
 				83B75F6A1F351B0300BECEB0 /* Assignment+DatabaseCodable.swift in Sources */,
+				83A783EC1F9FF1260000D28D /* LevelProgression+DatabaseCodable.swift in Sources */,
 				834719E11F391C0300840C2C /* ResourceCollectionItem.swift in Sources */,
 				836D7F161F2BF45600F32C90 /* Vocabulary.swift in Sources */,
 				83F1CBDB1F463D5800CE9583 /* SRSDistribution.swift in Sources */,
 				83C4D38A1F307DF80082EB31 /* SubjectComponentsTable.swift in Sources */,
+				83A783EA1F9FEF590000D28D /* LevelProgressionTable.swift in Sources */,
 				83649F541F2E96670074BBB6 /* Subject.swift in Sources */,
 				83B75F6D1F351B5300BECEB0 /* ResourceCollectionItem+DatabaseCodable.swift in Sources */,
 				8346C84B1F2FEA1800252DC9 /* KanjiTable.swift in Sources */,
@@ -1440,6 +1458,7 @@
 				8334ABEB1F48900F00BBFDC8 /* FMDatabaseQueue.swift in Sources */,
 				836D7F1B1F2BF92900F32C90 /* WaniKaniAPI.swift in Sources */,
 				8334ABE91F488F6A00BBFDC8 /* Calendar.swift in Sources */,
+				83C5C7AE1F9FDF23009FD88D /* LevelProgressionFilter.swift in Sources */,
 				83C261981F37138800278648 /* Vocabulary+DatabaseCodable.swift in Sources */,
 				836D7F091F2BF44F00F32C90 /* ReviewStatisticFilter.swift in Sources */,
 				836D7F111F2BF45600F32C90 /* StandaloneResource.swift in Sources */,
@@ -1462,6 +1481,7 @@
 				8334ABF01F4899E000BBFDC8 /* DateComponentsFormatterTests.swift in Sources */,
 				83FCAB371F9F549300024398 /* VirtualTableTests.swift in Sources */,
 				836D7F001F2BF44600F32C90 /* RadicalTests.swift in Sources */,
+				83A783EE1F9FF4430000D28D /* LevelProgressionTests.swift in Sources */,
 				83629A8A1F2CDD6A000A26A2 /* TableTests.swift in Sources */,
 				836D7EFE1F2BF44600F32C90 /* AssignmentTests.swift in Sources */,
 				83C261941F3712F600278648 /* MockWaniKaniAPI.swift in Sources */,
