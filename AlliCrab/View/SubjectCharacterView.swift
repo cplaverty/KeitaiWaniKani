@@ -35,12 +35,15 @@ class SubjectCharacterView: UIView {
         return activityIndicatorView
     }()
     
+    private lazy var imageHeightConstraint = displayImageView.heightAnchor.constraint(lessThanOrEqualToConstant: characterLabel.font.lineHeight)
+    
     @IBInspectable var fontSize: Double {
         get {
             return Double(characterLabel.font.pointSize)
         }
         set {
             characterLabel.font = characterLabel.font.withSize(CGFloat(newValue))
+            imageHeightConstraint.constant = characterLabel.font.lineHeight
         }
     }
     
@@ -119,19 +122,20 @@ class SubjectCharacterView: UIView {
         addSubview(downloadProgressActivityIndicator)
         
         NSLayoutConstraint.activate([
-            characterLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
-            characterLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
-            characterLabel.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
-            characterLabel.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor)
+            characterLabel.topAnchor.constraint(equalTo: topAnchor),
+            characterLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            characterLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            characterLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
             ])
         
         NSLayoutConstraint.activate([
-            displayImageView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
-            displayImageView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
-            displayImageView.leadingAnchor.constraint(greaterThanOrEqualTo: layoutMarginsGuide.leadingAnchor),
-            displayImageView.trailingAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.trailingAnchor),
+            displayImageView.topAnchor.constraint(equalTo: topAnchor),
+            displayImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            displayImageView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor),
+            displayImageView.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             displayImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            displayImageView.widthAnchor.constraint(equalTo: displayImageView.heightAnchor)
+            displayImageView.widthAnchor.constraint(equalTo: displayImageView.heightAnchor),
+            imageHeightConstraint
             ])
         
         downloadProgressActivityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true

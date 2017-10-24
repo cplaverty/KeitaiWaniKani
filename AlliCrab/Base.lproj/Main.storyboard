@@ -12,6 +12,7 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -608,7 +609,7 @@
         <!--Subject Search Table View Controller-->
         <scene sceneID="kY8-zR-LA5">
             <objects>
-                <tableViewController storyboardIdentifier="SubjectSearch" id="UC9-it-LLX" customClass="SubjectSearchTableViewController" customModule="AlliCrab" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SubjectSearch" hidesBottomBarWhenPushed="YES" id="UC9-it-LLX" customClass="SubjectSearchTableViewController" customModule="AlliCrab" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Uev-oi-r2J">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -622,10 +623,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LtP-3u-WAi" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="16" width="48" height="48"/>
+                                            <rect key="frame" x="16" y="19" width="42" height="42"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                    <real key="value" value="32"/>
+                                                    <real key="value" value="42"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="adjustsFontSizeToFitWidth" value="YES"/>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="minimumScaleFactor">
@@ -690,17 +691,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrI-wk-2wM">
-                                <rect key="frame" x="0.0" y="68" width="375" height="599"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emJ-VE-3UC">
-                                        <rect key="frame" x="20.5" y="20" width="334.5" height="122"/>
+                                        <rect key="frame" x="20.5" y="20" width="334.5" height="130.5"/>
                                         <string key="text">Entering your API version 2 key will permit a basic level of functionality in the app.  However, please note that doing lessons or reviews within the app will open a web browser to the WaniKani site, where you will be prompted to log in.</string>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Jec-ZO-4eB">
-                                        <rect key="frame" x="20" y="162" width="335" height="30"/>
+                                        <rect key="frame" x="20" y="170.5" width="335" height="30"/>
                                         <accessibility key="accessibilityConfiguration" identifier="EnterAPIKey"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -791,8 +792,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="QIe-vK-SmD" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="ywg-YD-EnF">
-                        <rect key="frame" x="0.0" y="20" width="375" height="100"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ywg-YD-EnF">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1042,14 +1043,14 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1WJ-T3-PHk" userLabel="Content View">
                                             <rect key="frame" x="0.0" y="0.0" width="148" height="115"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JkL-7L-XqK">
-                                                    <rect key="frame" x="0.0" y="0.0" width="148" height="105"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JkL-7L-XqK">
+                                                    <rect key="frame" x="8" y="8" width="132" height="89"/>
                                                     <subviews>
                                                         <view opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="YgF-bH-50S" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="23.5" width="74.5" height="58.5"/>
+                                                            <rect key="frame" x="0.0" y="19.5" width="50.5" height="50"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                                    <real key="value" value="42"/>
+                                                                    <real key="value" value="50"/>
                                                                 </userDefinedRuntimeAttribute>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="adjustsFontSizeToFitWidth" value="YES"/>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="minimumScaleFactor">
@@ -1061,13 +1062,13 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="t61-6h-dGQ">
-                                                            <rect key="frame" x="74.5" y="0.5" width="73.5" height="104"/>
+                                                            <rect key="frame" x="58.5" y="0.0" width="73.5" height="89"/>
                                                             <subviews>
                                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpi-q4-WCZ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="73.5" height="52"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="73.5" height="44.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2d 15h" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4TP-ZM-P2x">
-                                                                            <rect key="frame" x="0.0" y="8" width="65.5" height="21.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="73.5" height="22"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <nil key="highlightedColor"/>
@@ -1075,7 +1076,7 @@
                                                                             <size key="shadowOffset" width="1" height="1"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Review" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MOA-9t-LGO">
-                                                                            <rect key="frame" x="0.0" y="29.5" width="65.5" height="14.5"/>
+                                                                            <rect key="frame" x="0.0" y="22" width="73.5" height="14.5"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <nil key="highlightedColor"/>
@@ -1084,20 +1085,20 @@
                                                                         </label>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstItem="4TP-ZM-P2x" firstAttribute="top" secondItem="Mpi-q4-WCZ" secondAttribute="topMargin" id="27O-pp-R7M"/>
+                                                                        <constraint firstItem="4TP-ZM-P2x" firstAttribute="top" secondItem="Mpi-q4-WCZ" secondAttribute="top" id="27O-pp-R7M"/>
                                                                         <constraint firstItem="MOA-9t-LGO" firstAttribute="firstBaseline" secondItem="4TP-ZM-P2x" secondAttribute="baseline" constant="16" symbolType="layoutAnchor" id="2nS-qB-bF6"/>
-                                                                        <constraint firstAttribute="trailingMargin" secondItem="MOA-9t-LGO" secondAttribute="trailing" id="4Vm-uX-D9u"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="MOA-9t-LGO" secondAttribute="trailing" id="4Vm-uX-D9u"/>
                                                                         <constraint firstItem="MOA-9t-LGO" firstAttribute="leading" secondItem="Mpi-q4-WCZ" secondAttribute="leading" id="A5u-VT-17p"/>
                                                                         <constraint firstAttribute="bottomMargin" secondItem="MOA-9t-LGO" secondAttribute="bottom" id="Clj-am-oBz"/>
-                                                                        <constraint firstAttribute="trailingMargin" secondItem="4TP-ZM-P2x" secondAttribute="trailing" id="UzX-EP-7wk"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="4TP-ZM-P2x" secondAttribute="trailing" id="UzX-EP-7wk"/>
                                                                         <constraint firstItem="4TP-ZM-P2x" firstAttribute="leading" secondItem="Mpi-q4-WCZ" secondAttribute="leading" id="zFg-xU-bij"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gEs-w3-5UR">
-                                                                    <rect key="frame" x="5" y="52" width="63.5" height="52"/>
+                                                                    <rect key="frame" x="5" y="44.5" width="63.5" height="44.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6d 13h" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6r8-Uz-uHU">
-                                                                            <rect key="frame" x="0.0" y="8" width="55.5" height="21.5"/>
+                                                                            <rect key="frame" x="0.0" y="8" width="63.5" height="22"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <nil key="highlightedColor"/>
@@ -1105,7 +1106,7 @@
                                                                             <size key="shadowOffset" width="1" height="1"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guru Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oLb-HB-rKv">
-                                                                            <rect key="frame" x="0.0" y="29.5" width="55.5" height="14.5"/>
+                                                                            <rect key="frame" x="0.0" y="30" width="63.5" height="14.5"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <nil key="highlightedColor"/>
@@ -1115,10 +1116,10 @@
                                                                     </subviews>
                                                                     <constraints>
                                                                         <constraint firstItem="6r8-Uz-uHU" firstAttribute="leading" secondItem="gEs-w3-5UR" secondAttribute="leading" id="2ho-uS-BWI"/>
-                                                                        <constraint firstAttribute="trailingMargin" secondItem="6r8-Uz-uHU" secondAttribute="trailing" id="p7V-uf-mci"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="6r8-Uz-uHU" secondAttribute="trailing" id="p7V-uf-mci"/>
                                                                         <constraint firstItem="6r8-Uz-uHU" firstAttribute="top" secondItem="gEs-w3-5UR" secondAttribute="topMargin" id="s4T-1i-R7f"/>
-                                                                        <constraint firstAttribute="trailingMargin" secondItem="oLb-HB-rKv" secondAttribute="trailing" id="tDw-u4-rnb"/>
-                                                                        <constraint firstAttribute="bottomMargin" secondItem="oLb-HB-rKv" secondAttribute="bottom" id="tfh-Rh-erS"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="oLb-HB-rKv" secondAttribute="trailing" id="tDw-u4-rnb"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="oLb-HB-rKv" secondAttribute="bottom" id="tfh-Rh-erS"/>
                                                                         <constraint firstItem="oLb-HB-rKv" firstAttribute="firstBaseline" secondItem="6r8-Uz-uHU" secondAttribute="baseline" constant="16" symbolType="layoutAnchor" id="xMK-kh-4DL"/>
                                                                         <constraint firstItem="oLb-HB-rKv" firstAttribute="leading" secondItem="gEs-w3-5UR" secondAttribute="leading" id="yNn-Zn-nnu"/>
                                                                     </constraints>
@@ -1133,13 +1134,13 @@
                                                 </progressView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="JkL-7L-XqK" firstAttribute="top" secondItem="1WJ-T3-PHk" secondAttribute="top" id="1JS-Vn-Ikb"/>
-                                                <constraint firstAttribute="trailing" secondItem="JkL-7L-XqK" secondAttribute="trailing" id="3l0-XI-8UI"/>
+                                                <constraint firstItem="JkL-7L-XqK" firstAttribute="top" secondItem="1WJ-T3-PHk" secondAttribute="topMargin" id="1JS-Vn-Ikb"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="JkL-7L-XqK" secondAttribute="trailing" id="3l0-XI-8UI"/>
                                                 <constraint firstItem="gnS-P1-6SX" firstAttribute="leading" secondItem="1WJ-T3-PHk" secondAttribute="leadingMargin" id="7sM-R2-yeG"/>
-                                                <constraint firstItem="gnS-P1-6SX" firstAttribute="top" secondItem="JkL-7L-XqK" secondAttribute="bottom" id="dLP-5Z-gy8"/>
+                                                <constraint firstItem="gnS-P1-6SX" firstAttribute="top" secondItem="JkL-7L-XqK" secondAttribute="bottom" constant="8" symbolic="YES" id="dLP-5Z-gy8"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="gnS-P1-6SX" secondAttribute="trailing" id="dRi-0g-xAH"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="gnS-P1-6SX" secondAttribute="bottom" id="dSw-GI-3g6"/>
-                                                <constraint firstItem="JkL-7L-XqK" firstAttribute="leading" secondItem="1WJ-T3-PHk" secondAttribute="leading" id="ife-LI-5SQ"/>
+                                                <constraint firstItem="JkL-7L-XqK" firstAttribute="leading" secondItem="1WJ-T3-PHk" secondAttribute="leadingMargin" id="ife-LI-5SQ"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -1200,7 +1201,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZgE-4G-mgy" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                    <rect key="frame" x="8" y="8" width="44" height="44"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                                             <real key="value" value="42"/>
@@ -1216,11 +1217,10 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="ZgE-4G-mgy" firstAttribute="top" secondItem="hLM-Dt-5J0" secondAttribute="top" id="1sP-vP-mvI"/>
-                                                <constraint firstAttribute="height" constant="60" id="CIg-PF-fPI"/>
-                                                <constraint firstAttribute="bottom" secondItem="ZgE-4G-mgy" secondAttribute="bottom" id="Pga-nZ-exe"/>
-                                                <constraint firstItem="ZgE-4G-mgy" firstAttribute="leading" secondItem="hLM-Dt-5J0" secondAttribute="leading" id="bIB-Rs-NtP"/>
-                                                <constraint firstAttribute="trailing" secondItem="ZgE-4G-mgy" secondAttribute="trailing" id="rlO-dv-BII"/>
+                                                <constraint firstItem="ZgE-4G-mgy" firstAttribute="top" secondItem="hLM-Dt-5J0" secondAttribute="topMargin" id="1sP-vP-mvI"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ZgE-4G-mgy" secondAttribute="bottom" id="Pga-nZ-exe"/>
+                                                <constraint firstItem="ZgE-4G-mgy" firstAttribute="leading" secondItem="hLM-Dt-5J0" secondAttribute="leadingMargin" id="bIB-Rs-NtP"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ZgE-4G-mgy" secondAttribute="trailing" id="rlO-dv-BII"/>
                                             </constraints>
                                         </view>
                                     </subviews>
