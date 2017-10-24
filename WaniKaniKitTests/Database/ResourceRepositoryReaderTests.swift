@@ -472,10 +472,10 @@ class ResourceRepositoryReaderTests: XCTestCase {
         XCTAssertEqual(try resourceRepository.findSubjects(matching: "fins"), [finsRadical])
         XCTAssertEqual(try resourceRepository.findSubjects(matching: "やま"), [mountainVocab, mountainKanji])
         XCTAssertEqual(try resourceRepository.findSubjects(matching: "く"), [mouthKanji, industryKanji])
-        XCTAssertEqual(try resourceRepository.findSubjects(matching: "く*"), [mouthKanji, industryKanji, mouthVocab])
-        XCTAssertEqual(try resourceRepository.findSubjects(matching: "mouth"), [mouthKanji, mouthVocab])
-        XCTAssertEqual(try resourceRepository.findSubjects(matching: "口"), [mouthKanji, mouthVocab])
-        XCTAssertEqual(try resourceRepository.findSubjects(matching: "mount*"), [mountainKanji, mountainVocab, mountFujiVocab])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "く*"), [mouthVocab, mouthKanji, industryKanji])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "mouth"), [mouthVocab, mouthKanji])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "口"), [mouthVocab, mouthKanji])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "mount*"), [mountainVocab, mountainKanji, mountFujiVocab])
     }
     
     private func createTestUser() {

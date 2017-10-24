@@ -30,37 +30,11 @@ struct SubjectComponent: BulkDatabaseCodable {
     }
     
     static func read(from database: FMDatabase, ids: [Int]) throws -> [Int: [Int]] {
-        var parameterNames = [String]()
-        parameterNames.reserveCapacity(ids.count)
-        var queryArgs = [String: Any]()
-        queryArgs.reserveCapacity(ids.count)
-        
-        for (index, id) in ids.enumerated() {
-            var parameterName = "subject_id_\(index)"
-            parameterNames.append(":" + parameterName)
-            queryArgs[parameterName] = id
-        }
-        
-        let query = """
-        SELECT \(table.subjectID), \(table.componentSubjectID)
-        FROM \(table)
-        WHERE \(table.subjectID) IN (\(parameterNames.joined(separator: ",")))
-        ORDER BY \(table.subjectID), \(table.index)
-        """
-        
-        guard let resultSet = database.executeQuery(query, withParameterDictionary: queryArgs) else {
-            throw database.lastError()
-        }
-        defer { resultSet.close() }
-        
         var items = [Int: [Int]]()
         items.reserveCapacity(ids.count)
         
-        while resultSet.next() {
-            let subjectID = resultSet.long(forColumn: table.subjectID.name)
-            let componentSubjectID = resultSet.long(forColumn: table.componentSubjectID.name)
-            
-            items[subjectID, default: []].append(componentSubjectID)
+        for id in ids {
+            items[id] = try read(from: database, id: id)
         }
         
         return items

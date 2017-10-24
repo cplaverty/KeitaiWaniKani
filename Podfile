@@ -3,7 +3,7 @@ use_frameworks!
 inhibit_all_warnings!
 
 pod 'sqlite3'
-pod 'sqlite3/fts'
+pod 'sqlite3/fts5'
 pod 'FMDB/standalone'
 
 target 'WaniKaniKit'

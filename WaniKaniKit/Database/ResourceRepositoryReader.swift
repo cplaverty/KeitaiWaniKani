@@ -194,9 +194,7 @@ public class ResourceRepositoryReader {
                 result[item.id] = item
             }
             let requiredAssigmentSubjectIDs = subjectsByID.keys + allSubjects.lazy.flatMap({ ($0.data as! Subject).componentSubjectIDs })
-            let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: requiredAssigmentSubjectIDs).values.reduce(into: [:]) { result, assignment in
-                result[assignment.subjectID] = assignment
-            }
+            let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: requiredAssigmentSubjectIDs)
             
             return items.map({ item in
                 SubjectProgression(subject: item.data as! Subject,
@@ -419,9 +417,7 @@ public class ResourceRepositoryReader {
         
         return try databaseQueue.inDatabase { database in
             let subjectItems = try ResourceCollectionItem.read(from: database, ids: ids)
-            let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: ids).values.reduce(into: [:], { (result, assignment) in
-                result[assignment.subjectID] = assignment
-            })
+            let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: ids)
             
             return subjectItems.map({ item in
                 (item.data as! Subject, assignmentsBySubjectID[item.id])
@@ -463,9 +459,7 @@ public class ResourceRepositoryReader {
         let subjectIDs = kanji.map({ $0.id })
         let componentSubjectIDs = kanji.flatMap({ ($0.data as! Subject).componentSubjectIDs })
         
-        let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: subjectIDs + componentSubjectIDs).values.reduce(into: [:]) { result, assignment in
-            result[assignment.subjectID] = assignment
-        }
+        let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: subjectIDs + componentSubjectIDs)
         
         let now = Date()
         let itemProgression = kanji.map({ item -> (assignment: Assignment?, guruDate: Date) in

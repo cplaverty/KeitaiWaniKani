@@ -33,7 +33,10 @@ public class DatabaseManager {
                     if #available(iOS 10.0, *) {
                         os_log("Memory warning.  Clearing cached statements.", type: .debug)
                     }
-                    databaseQueue.inDatabase { $0.clearCachedStatements() }
+                    databaseQueue.inDatabase { database in
+                        try? database.executeUpdate("PRAGMA shrink_memory", values: nil)
+                        database.clearCachedStatements()
+                    }
                 }
             }
         }
@@ -95,8 +98,6 @@ public class DatabaseManager {
             }
             
             isGoodConnection = true
-            
-            database.makeFunctionNamed("rank", arguments: -1, block: calculateRank)
             
             var schemaVersion = schemaManager.version(of: database)
             if #available(iOS 10.0, *) {

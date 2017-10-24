@@ -15,7 +15,7 @@ struct SubjectSearch {
         SELECT \(table.subjectID)
         FROM \(table)
         WHERE \(table.name) MATCH ?
-        ORDER BY rank(matchinfo(\(table.name)), 10, 1, 1, 0.1, 0.1) DESC
+        ORDER BY rank, \(table.subjectID)
         """
         
         let resultSet = try database.executeQuery(query, values: [searchQuery])

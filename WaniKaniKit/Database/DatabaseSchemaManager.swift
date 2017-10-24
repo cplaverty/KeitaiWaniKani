@@ -33,6 +33,9 @@ public class DatabaseSchemaManager {
             throw DatabaseSchemaManagerError.invalidSchemaVersion(schemaVersion)
         }
         
+        // Set version to an invalid version so that, if something fails while we're creating the schema, it will delete and retry on next launch
+        setVersion(of: database, to: .max)
+        
         try database.executeUpdate("PRAGMA auto_vacuum = FULL", values: nil)
         
         for table in Tables.all {
@@ -46,13 +49,12 @@ public class DatabaseSchemaManager {
     }
 }
 
-private extension Table {
+private extension TableProtocol {
     func create(in database: FMDatabase) throws {
         if #available(iOS 10.0, *) {
             os_log("Creating table %@", type: .debug, name)
         }
-        let query = createTableStatement()
-        if !database.executeStatements(query) {
+        if !database.executeStatements(sqlStatement) {
             throw database.lastError()
         }
     }

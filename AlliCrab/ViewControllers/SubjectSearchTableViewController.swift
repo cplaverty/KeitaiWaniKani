@@ -57,7 +57,7 @@ class SubjectSearchTableViewController: UITableViewController {
 // MARK: - UISearchResultsUpdating
 extension SubjectSearchTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text?.trimmingCharacters(in: CharacterSet.whitespaces) else {
+        guard let searchText = searchController.searchBar.text?.trimmingCharacters(in: .whitespaces), !searchText.isEmpty else {
             subjects = []
             return
         }

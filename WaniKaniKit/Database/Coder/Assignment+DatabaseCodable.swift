@@ -10,33 +10,35 @@ import FMDB
 private let table = Tables.assignments
 
 extension Assignment: DatabaseCodable {
-    static func read(from database: FMDatabase, ids: [Int]? = nil, subjectIDs: [Int]? = nil, level: Int? = nil, srsStage: SRSStage? = nil) throws -> [Int: Assignment] {
+    static func read(from database: FMDatabase, ids: [Int]) throws -> [Int: Assignment] {
+        var items = [Int: Assignment]()
+        items.reserveCapacity(ids.count)
+        
+        for id in ids {
+            items[id] = try Assignment(from: database, id: id)
+        }
+        
+        return items
+    }
+    
+    static func read(from database: FMDatabase, subjectIDs: [Int]) throws -> [Int: Assignment] {
+        var items = [Int: Assignment]()
+        items.reserveCapacity(subjectIDs.count)
+        
+        for subjectID in subjectIDs {
+            guard let assignment = try Assignment(from: database, subjectID: subjectID) else {
+                continue
+            }
+            
+            items[subjectID] = assignment
+        }
+        
+        return items
+    }
+    
+    static func read(from database: FMDatabase, level: Int? = nil, srsStage: SRSStage? = nil) throws -> [Int: Assignment] {
         var filterCriteria = [String]()
         var queryArgs = [String: Any]()
-        
-        if let ids = ids {
-            var parameterNames = [String]()
-            parameterNames.reserveCapacity(ids.count)
-            
-            for (index, id) in ids.enumerated() {
-                var parameterName = "id_\(index)"
-                parameterNames.append(":" + parameterName)
-                queryArgs[parameterName] = id
-            }
-            filterCriteria.append("\(table.id) IN (\(parameterNames.joined(separator: ",")))")
-        }
-        
-        if let subjectIDs = subjectIDs {
-            var parameterNames = [String]()
-            parameterNames.reserveCapacity(subjectIDs.count)
-            
-            for (index, id) in subjectIDs.enumerated() {
-                var parameterName = "subject_id_\(index)"
-                parameterNames.append(":" + parameterName)
-                queryArgs[parameterName] = id
-            }
-            filterCriteria.append("\(table.subjectID) IN (\(parameterNames.joined(separator: ",")))")
-        }
         
         if let level = level {
             filterCriteria.append("\(table.level) = :level")
@@ -82,6 +84,23 @@ extension Assignment: DatabaseCodable {
         
         guard resultSet.next() else {
             throw DatabaseError.itemNotFound(id: id)
+        }
+        
+        self.init(from: resultSet)
+    }
+    
+    init?(from database: FMDatabase, subjectID: Int) throws {
+        let query = """
+        SELECT \(table.subjectID), \(table.subjectType), \(table.level), \(table.srsStage), \(table.srsStageName), \(table.unlockedAt), \(table.startedAt), \(table.passedAt), \(table.burnedAt), \(table.availableAt), \(table.isPassed), \(table.isResurrected)
+        FROM \(table)
+        WHERE \(table.subjectID) = ?
+        """
+        
+        let resultSet = try database.executeQuery(query, values: [subjectID])
+        defer { resultSet.close() }
+        
+        guard resultSet.next() else {
+            return nil
         }
         
         self.init(from: resultSet)

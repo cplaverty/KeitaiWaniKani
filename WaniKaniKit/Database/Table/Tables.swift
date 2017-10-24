@@ -23,7 +23,7 @@ struct Tables {
     static let vocabulary = VocabularyTable()
     static let vocabularyPartsOfSpeech = VocabularyPartsOfSpeechTable()
     
-    static var all: [Table] {
+    static var all: [TableProtocol] {
         return [
             assignments, kanji, meanings, radicals, radicalCharacterImages, readings, resources,
             resourceLastUpdate, reviewStatistics, studyMaterials, studyMaterialsMeaningSynonyms,

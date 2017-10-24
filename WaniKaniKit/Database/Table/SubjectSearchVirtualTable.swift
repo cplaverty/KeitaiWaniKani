@@ -7,15 +7,15 @@
 
 import Foundation
 
-final class SubjectSearchVirtualTable: Table {
-    let subjectID = "docid"
-    let character = Column(name: "characters", type: .text, nullable: true)
-    let primaryMeanings = Column(name: "primary_meanings", type: .text, nullable: false)
-    let primaryReadings = Column(name: "primary_readings", type: .text, nullable: false)
-    let nonprimaryMeanings = Column(name: "nonprimary_meanings", type: .text, nullable: false)
-    let nonprimaryReadings = Column(name: "nonprimary_readings", type: .text, nullable: false)
+final class SubjectSearchVirtualTable: VirtualTable {
+    let subjectID = "rowid"
+    let character = Column(name: "characters", rank: 25)
+    let primaryMeanings = Column(name: "primary_meanings", rank: 10)
+    let primaryReadings = Column(name: "primary_readings", rank: 10)
+    let nonprimaryMeanings = Column(name: "nonprimary_meanings")
+    let nonprimaryReadings = Column(name: "nonprimary_readings")
     
     init() {
-        super.init(name: "subject_search", isVirtual: true)
+        super.init(name: "subject_search")
     }
 }

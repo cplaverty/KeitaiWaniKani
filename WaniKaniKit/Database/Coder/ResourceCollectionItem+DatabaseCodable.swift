@@ -11,85 +11,11 @@ private let table = Tables.resources
 
 extension ResourceCollectionItem {
     static func read(from database: FMDatabase, ids: [Int]) throws -> [ResourceCollectionItem] {
-        var parameterNames = [String]()
-        parameterNames.reserveCapacity(ids.count)
-        var queryArgs = [String: Any]()
-        queryArgs.reserveCapacity(ids.count)
-        
-        for (index, id) in ids.enumerated() {
-            var parameterName = "id_\(index)"
-            parameterNames.append(":" + parameterName)
-            queryArgs[parameterName] = id
-        }
-        
-        let query = """
-        SELECT \(table.id), \(table.resourceType), \(table.url), \(table.dataUpdatedAt)
-        FROM \(table)
-        WHERE \(table.id) IN (\(parameterNames.joined(separator: ",")))
-        """
-        
-        guard let resultSet = database.executeQuery(query, withParameterDictionary: queryArgs) else {
-            throw database.lastError()
-        }
-        defer { resultSet.close() }
-        
-        var foundIDs = [Int]()
-        foundIDs.reserveCapacity(ids.count)
-        var resourceTypes = [ResourceCollectionItemObjectType]()
-        resourceTypes.reserveCapacity(ids.count)
-        var urls = [URL]()
-        urls.reserveCapacity(ids.count)
-        var dataUpdatedAts = [Date]()
-        dataUpdatedAts.reserveCapacity(ids.count)
-        
-        while resultSet.next() {
-            foundIDs.append(resultSet.long(forColumn: table.id.name))
-            resourceTypes.append(resultSet.rawValue(ResourceCollectionItemObjectType.self, forColumn: table.resourceType.name)!)
-            urls.append(resultSet.url(forColumn: table.url.name)!)
-            dataUpdatedAts.append(resultSet.date(forColumn: table.dataUpdatedAt.name)!)
-        }
-        resultSet.close()
-        
-        let typesByID = zip(foundIDs, resourceTypes).reduce(into: [ResourceCollectionItemObjectType: [Int]]()) { (result, element) in
-            let (id, type) = element
-            result[type, default: []].append(id)
-        }
-        
-        var dataByID = [Int: ResourceCollectionItemData]()
-        dataByID.reserveCapacity(ids.count)
-        for (type, ids) in typesByID {
-            switch type {
-            case .assignment:
-                dataByID.merge(try Assignment.read(from: database, ids: ids),
-                               uniquingKeysWith: { (lhs, _) in lhs })
-            case .radical:
-                dataByID.merge(try Radical.read(from: database, ids: ids),
-                               uniquingKeysWith: { (lhs, _) in lhs })
-            case .kanji:
-                dataByID.merge(try Kanji.read(from: database, ids: ids),
-                               uniquingKeysWith: { (lhs, _) in lhs })
-            case .vocabulary:
-                dataByID.merge(try Vocabulary.read(from: database, ids: ids),
-                               uniquingKeysWith: { (lhs, _) in lhs })
-            case .studyMaterial:
-                dataByID.merge(try StudyMaterials.read(from: database, ids: ids),
-                               uniquingKeysWith: { (lhs, _) in lhs })
-            case .reviewStatistic:
-                dataByID.merge(try ReviewStatistics.read(from: database, ids: ids),
-                               uniquingKeysWith: { (lhs, _) in lhs })
-            }
-        }
-        
         var items = [ResourceCollectionItem]()
         items.reserveCapacity(ids.count)
         
-        for i in 0..<foundIDs.count {
-            let id = foundIDs[i]
-            guard let data = dataByID[id] else {
-                continue
-            }
-            
-            items.append(ResourceCollectionItem(id: id, type: resourceTypes[i], url: urls[i], dataUpdatedAt: dataUpdatedAts[i], data: data))
+        for id in ids {
+            items.append(try ResourceCollectionItem(from: database, id: id))
         }
         
         return items
