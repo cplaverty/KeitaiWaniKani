@@ -2,10 +2,10 @@ PODS:
   - 1PasswordExtension (1.8.4)
   - FMDB/standalone (2.7.2):
     - sqlite3
-  - sqlite3 (3.20.1):
-    - sqlite3/common (= 3.20.1)
-  - sqlite3/common (3.20.1)
-  - sqlite3/fts5 (3.20.1):
+  - sqlite3 (3.21.0):
+    - sqlite3/common (= 3.21.0)
+  - sqlite3/common (3.21.0)
+  - sqlite3/fts5 (3.21.0):
     - sqlite3/common
 
 DEPENDENCIES:
@@ -17,7 +17,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   1PasswordExtension: e775a29310c65851e5a6cec1afc349ab4e334e47
   FMDB: 6198a90e7b6900cfc046e6bc0ef6ebb7be9236aa
-  sqlite3: 871cb15b7c4978ab99bdefeaaba0134c9fada709
+  sqlite3: c1728c2cd4ce1c2e629d674e4a732cf0339eb906
 
 PODFILE CHECKSUM: a90ddf660a47fc208692670efb06390cdab7fc7d
 
