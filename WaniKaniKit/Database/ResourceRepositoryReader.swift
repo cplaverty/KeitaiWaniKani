@@ -448,7 +448,11 @@ public class ResourceRepositoryReader {
         }
         
         return try databaseQueue.inDatabase { database in
-            try SubjectSearch.read(from: database, searchQuery: query)
+            guard let userInfo = try UserInformation(from: database) else {
+                return []
+            }
+            
+            return try SubjectSearch.read(from: database, searchQuery: query, isSubscribed: userInfo.isSubscribed)
         }
     }
     

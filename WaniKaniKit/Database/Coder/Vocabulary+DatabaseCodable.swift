@@ -82,7 +82,7 @@ extension Vocabulary: DatabaseCodable {
         ]
         try database.executeUpdate(query, values: values)
         
-        try SubjectSearch.write(to: database, id: id, character: characters, meanings: meanings, readings: readings)
+        try SubjectSearch.write(to: database, id: id, character: characters, level: level, meanings: meanings, readings: readings)
     }
 }
 
