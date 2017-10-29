@@ -517,14 +517,12 @@ class DashboardTableViewController: UITableViewController {
     }
     
     private func updateData(minimumFetchInterval: TimeInterval, showAlertOnErrors: Bool) {
-        if refreshControl?.isRefreshing == false {
-            refreshControl?.beginRefreshing()
-        }
-        
         shouldForceDataReload = false
         let progress = resourceRepository.updateAppData(minimumFetchInterval: minimumFetchInterval) { result in
             DispatchQueue.main.async {
-                self.refreshControl?.endRefreshing()
+                if let refreshControl = self.refreshControl, refreshControl.isRefreshing {
+                    refreshControl.endRefreshing()
+                }
                 self.progressContainerView.markComplete()
                 self.updateStatusBarForLastUpdate(self.resourceRepository.lastAppDataUpdateDate)
                 
