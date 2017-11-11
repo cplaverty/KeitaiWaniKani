@@ -137,38 +137,42 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
     
     private func fetchResourceCollection(with url: URL, request: Request, allPagesFetched: Bool, completionHandler: @escaping (ResourceCollection?, Error?) -> Bool) -> URLSessionDataTask {
         let task = dataTask(with: url) { (data, response, error) in
-            defer { request.progress.completedUnitCount += 1 }
+            let resources: ResourceCollection?
             do {
-                let resources = try self.parseResource(ResourceCollection.self, data: data, response: response, error: error)
-                
-                if let pages = resources?.pages {
-                    request.progress.totalUnitCount = Int64(pages.lastNumber)
-                    
-                    guard !request.isCancelled else { return }
-                    
-                    if !allPagesFetched {
-                        if let allPages = self.getAllLocations(for: pages) {
-                            allPages.forEach { nextPage in
-                                request.tasks.append(self.fetchResourceCollection(with: nextPage, request: request, allPagesFetched: true, completionHandler: completionHandler))
-                            }
-                        } else if let nextPage = pages.nextURL {
-                            request.tasks.append(self.fetchResourceCollection(with: nextPage, request: request, allPagesFetched: false, completionHandler: completionHandler))
-                        }
-                    }
-                } else {
-                    request.progress.totalUnitCount = 1
-                }
+                resources = try self.parseResource(ResourceCollection.self, data: data, response: response, error: error)
+            } catch let error as URLError where error.code == .cancelled {
+                // Do not notify errors due to cancellation
+                return
+            } catch {
+                _ = completionHandler(nil, error)
+                return
+            }
+            
+            if let pages = resources?.pages {
+                defer { request.progress.completedUnitCount += 1 }
+                request.progress.totalUnitCount = Int64(pages.lastNumber)
                 
                 guard !request.isCancelled else { return }
                 
-                let shouldGetNextPage = completionHandler(resources, error)
-                if !shouldGetNextPage {
-                    request.cancel()
+                if !allPagesFetched {
+                    if let allPages = self.getAllLocations(for: pages) {
+                        allPages.forEach { nextPage in
+                            request.tasks.append(self.fetchResourceCollection(with: nextPage, request: request, allPagesFetched: true, completionHandler: completionHandler))
+                        }
+                    } else if let nextPage = pages.nextURL {
+                        request.tasks.append(self.fetchResourceCollection(with: nextPage, request: request, allPagesFetched: false, completionHandler: completionHandler))
+                    }
                 }
-            } catch let error as URLError where error.code == .cancelled {
-                // Do not notify errors due to cancellation
-            } catch {
-                _ = completionHandler(nil, error)
+            } else {
+                defer { request.progress.completedUnitCount = 1 }
+                request.progress.totalUnitCount = 1
+            }
+            
+            guard !request.isCancelled else { return }
+            
+            let shouldGetNextPage = completionHandler(resources, error)
+            if !shouldGetNextPage {
+                request.cancel()
             }
         }
         
