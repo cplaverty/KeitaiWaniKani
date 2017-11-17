@@ -7,16 +7,14 @@
 
 public struct ResourceCollection: Decodable {
     public struct Pages: Decodable {
+        public let itemsPerPage: Int
         public let previousURL: URL?
         public let nextURL: URL?
-        public let currentNumber: Int
-        public let lastNumber: Int
         
         private enum CodingKeys: String, CodingKey {
+            case itemsPerPage = "per_page"
             case previousURL = "previous_url"
             case nextURL = "next_url"
-            case currentNumber = "current"
-            case lastNumber = "last"
         }
     }
     
@@ -26,6 +24,11 @@ public struct ResourceCollection: Decodable {
     public let totalCount: Int
     public let dataUpdatedAt: Date?
     public let data: [ResourceCollectionItem]
+    
+    public var estimatedPageCount: Int {
+        let (quotient, remainder) = totalCount.quotientAndRemainder(dividingBy: pages.itemsPerPage)
+        return remainder > 0 ? quotient + 1 : quotient
+    }
     
     private enum CodingKeys: String, CodingKey {
         case object

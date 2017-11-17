@@ -306,12 +306,12 @@ public class ResourceRepository: ResourceRepositoryReader {
             }
             
             totalPagesReceived += 1
-            let isLastPage = totalPagesReceived == resources.pages.lastNumber
+            let isLastPage = totalPagesReceived == resources.estimatedPageCount
             
             var databaseError: Error? = nil
             databaseQueue.inTransaction { (database, rollback) in
                 if #available(iOS 10.0, *) {
-                    os_log("Writing %d entries to database (page %d of %d)", type: .debug, resources.data.count, resources.pages.currentNumber, resources.pages.lastNumber)
+                    os_log("Writing %d entries to database (page %d of %d)", type: .debug, resources.data.count, totalPagesReceived, resources.estimatedPageCount)
                 }
                 do {
                     try resources.write(to: database)

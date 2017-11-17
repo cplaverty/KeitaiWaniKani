@@ -129,13 +129,13 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
     public func fetchResourceCollection(ofType type: ResourceCollectionRequestType, completionHandler: @escaping (ResourceCollection?, Error?) -> Bool) -> Progress {
         let request = Request()
         
-        let task = fetchResourceCollection(with: type.url(from: endpoints), request: request, allPagesFetched: false, completionHandler: completionHandler)
+        let task = fetchResourceCollection(with: type.url(from: endpoints), request: request, completionHandler: completionHandler)
         request.tasks.append(task)
         
         return request.progress
     }
     
-    private func fetchResourceCollection(with url: URL, request: Request, allPagesFetched: Bool, completionHandler: @escaping (ResourceCollection?, Error?) -> Bool) -> URLSessionDataTask {
+    private func fetchResourceCollection(with url: URL, request: Request, completionHandler: @escaping (ResourceCollection?, Error?) -> Bool) -> URLSessionDataTask {
         let task = dataTask(with: url) { (data, response, error) in
             let resources: ResourceCollection?
             do {
@@ -148,20 +148,14 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
                 return
             }
             
-            if let pages = resources?.pages {
+            if let resources = resources {
                 defer { request.progress.completedUnitCount += 1 }
-                request.progress.totalUnitCount = Int64(pages.lastNumber)
+                request.progress.totalUnitCount = Int64(resources.estimatedPageCount)
                 
                 guard !request.isCancelled else { return }
                 
-                if !allPagesFetched {
-                    if let allPages = self.getAllLocations(for: pages) {
-                        allPages.forEach { nextPage in
-                            request.tasks.append(self.fetchResourceCollection(with: nextPage, request: request, allPagesFetched: true, completionHandler: completionHandler))
-                        }
-                    } else if let nextPage = pages.nextURL {
-                        request.tasks.append(self.fetchResourceCollection(with: nextPage, request: request, allPagesFetched: false, completionHandler: completionHandler))
-                    }
+                if let nextPage = resources.pages.nextURL {
+                    request.tasks.append(self.fetchResourceCollection(with: nextPage, request: request, completionHandler: completionHandler))
                 }
             } else {
                 defer { request.progress.completedUnitCount = 1 }
@@ -181,29 +175,6 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
         }
         
         return task
-    }
-    
-    private func getAllLocations(for pages: ResourceCollection.Pages) -> [URL]? {
-        let pageQueryItemName = "page"
-        guard let nextPage = pages.nextURL else {
-            return []
-        }
-        
-        guard let urlComponents = URLComponents(url: nextPage, resolvingAgainstBaseURL: true),
-            let queryItem = urlComponents.queryItems,
-            let pageQueryItemIndex = queryItem.index(where: { queryItem in queryItem.name == pageQueryItemName }) else {
-                return nil
-        }
-        
-        let startingPage = queryItem[pageQueryItemIndex].value.flatMap { Int($0) } ?? pages.currentNumber + 1
-        
-        let pages: [URL] = (startingPage...pages.lastNumber).map { pageNumber in
-            var newComponents = urlComponents
-            newComponents.queryItems![pageQueryItemIndex] = URLQueryItem(name: "page", value: String(pageNumber))
-            return newComponents.url!
-        }
-        
-        return pages
     }
     
     private func parseResource<T: Decodable>(_ type: T.Type, data: Data?, response: URLResponse?, error: Error?) throws -> T? {

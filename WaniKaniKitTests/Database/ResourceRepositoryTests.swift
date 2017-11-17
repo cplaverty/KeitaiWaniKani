@@ -70,13 +70,13 @@ class ResourceRepositoryTests: XCTestCase {
         
         let collection = ResourceCollection(object: "collection",
                                             url: URL(string: "https://www.wanikani.com/api/v2/assignments")!,
-                                            pages: ResourceCollection.Pages(previousURL: nil, nextURL: nil, currentNumber: 1, lastNumber: 1),
+                                            pages: ResourceCollection.Pages(itemsPerPage: 250, previousURL: nil, nextURL: nil),
                                             totalCount: 2,
                                             dataUpdatedAt: dataUpdatedAt,
                                             data: [expected1, expected2])
         let emptyCollection = ResourceCollection(object: "collection",
                                                  url: URL(string: "https://www.wanikani.com/api/v2/assignments")!,
-                                                 pages: ResourceCollection.Pages(previousURL: nil, nextURL: nil, currentNumber: 1, lastNumber: 1),
+                                                 pages: ResourceCollection.Pages(itemsPerPage: 250, previousURL: nil, nextURL: nil),
                                                  totalCount: 0,
                                                  dataUpdatedAt: nil,
                                                  data: [])
@@ -173,13 +173,13 @@ class ResourceRepositoryTests: XCTestCase {
         
         let collection = ResourceCollection(object: "collection",
                                             url: URL(string: "https://www.wanikani.com/api/v2/study_materials")!,
-                                            pages: ResourceCollection.Pages(previousURL: nil, nextURL: nil, currentNumber: 1, lastNumber: 1),
+                                            pages: ResourceCollection.Pages(itemsPerPage: 250, previousURL: nil, nextURL: nil),
                                             totalCount: 1,
                                             dataUpdatedAt: dataUpdatedAt,
                                             data: [expected])
         let emptyCollection = ResourceCollection(object: "collection",
                                                  url: URL(string: "https://www.wanikani.com/api/v2/study_materials")!,
-                                                 pages: ResourceCollection.Pages(previousURL: nil, nextURL: nil, currentNumber: 1, lastNumber: 1),
+                                                 pages: ResourceCollection.Pages(itemsPerPage: 250, previousURL: nil, nextURL: nil),
                                                  totalCount: 0,
                                                  dataUpdatedAt: nil,
                                                  data: [])
@@ -299,13 +299,13 @@ class ResourceRepositoryTests: XCTestCase {
         
         let collection = ResourceCollection(object: "collection",
                                             url: URL(string: "https://www.wanikani.com/api/v2/subjects")!,
-                                            pages: ResourceCollection.Pages(previousURL: nil, nextURL: nil, currentNumber: 1, lastNumber: 1),
+                                            pages: ResourceCollection.Pages(itemsPerPage: 250, previousURL: nil, nextURL: nil),
                                             totalCount: 3,
                                             dataUpdatedAt: dataUpdatedAt,
                                             data: [expected1, expected2, expected3])
         let emptyCollection = ResourceCollection(object: "collection",
                                                  url: URL(string: "https://www.wanikani.com/api/v2/subjects")!,
-                                                 pages: ResourceCollection.Pages(previousURL: nil, nextURL: nil, currentNumber: 1, lastNumber: 1),
+                                                 pages: ResourceCollection.Pages(itemsPerPage: 250, previousURL: nil, nextURL: nil),
                                                  totalCount: 0,
                                                  dataUpdatedAt: nil,
                                                  data: [])
@@ -410,13 +410,13 @@ class ResourceRepositoryTests: XCTestCase {
         
         let collection = ResourceCollection(object: "collection",
                                             url: URL(string: "https://www.wanikani.com/api/v2/review_statistics")!,
-                                            pages: ResourceCollection.Pages(previousURL: nil, nextURL: nil, currentNumber: 1, lastNumber: 1),
+                                            pages: ResourceCollection.Pages(itemsPerPage: 250, previousURL: nil, nextURL: nil),
                                             totalCount: 1,
                                             dataUpdatedAt: dataUpdatedAt,
                                             data: [expected])
         let emptyCollection = ResourceCollection(object: "collection",
                                                  url: URL(string: "https://www.wanikani.com/api/v2/review_statistics")!,
-                                                 pages: ResourceCollection.Pages(previousURL: nil, nextURL: nil, currentNumber: 1, lastNumber: 1),
+                                                 pages: ResourceCollection.Pages(itemsPerPage: 250, previousURL: nil, nextURL: nil),
                                                  totalCount: 0,
                                                  dataUpdatedAt: nil,
                                                  data: [])
