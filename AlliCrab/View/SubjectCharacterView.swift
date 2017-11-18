@@ -35,7 +35,10 @@ class SubjectCharacterView: UIView {
         return activityIndicatorView
     }()
     
-    private lazy var imageHeightConstraint = displayImageView.heightAnchor.constraint(lessThanOrEqualToConstant: characterLabel.font.lineHeight)
+    private lazy var heightConstraints = [
+        displayImageView.heightAnchor.constraint(lessThanOrEqualToConstant: characterLabel.font.lineHeight),
+        downloadProgressActivityIndicator.heightAnchor.constraint(lessThanOrEqualToConstant: characterLabel.font.lineHeight)
+    ]
     
     @IBInspectable var fontSize: Double {
         get {
@@ -43,7 +46,7 @@ class SubjectCharacterView: UIView {
         }
         set {
             characterLabel.font = characterLabel.font.withSize(CGFloat(newValue))
-            imageHeightConstraint.constant = characterLabel.font.lineHeight
+            heightConstraints.forEach { $0.constant = characterLabel.font.lineHeight }
         }
     }
     
@@ -125,21 +128,25 @@ class SubjectCharacterView: UIView {
             characterLabel.topAnchor.constraint(equalTo: topAnchor),
             characterLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             characterLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            characterLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
-            ])
-        
-        NSLayoutConstraint.activate([
+            characterLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
             displayImageView.topAnchor.constraint(equalTo: topAnchor),
             displayImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             displayImageView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor),
             displayImageView.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
             displayImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             displayImageView.widthAnchor.constraint(equalTo: displayImageView.heightAnchor),
-            imageHeightConstraint
+            
+            downloadProgressActivityIndicator.topAnchor.constraint(equalTo: topAnchor),
+            downloadProgressActivityIndicator.bottomAnchor.constraint(equalTo: bottomAnchor),
+            downloadProgressActivityIndicator.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor),
+            downloadProgressActivityIndicator.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
+            downloadProgressActivityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            downloadProgressActivityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
+            downloadProgressActivityIndicator.widthAnchor.constraint(equalTo: downloadProgressActivityIndicator.heightAnchor)
             ])
         
-        downloadProgressActivityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        downloadProgressActivityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        NSLayoutConstraint.activate(heightConstraints)
     }
     
     func setCharacters(_ characters: String) {
