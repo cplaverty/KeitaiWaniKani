@@ -98,6 +98,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             shouldSendNotifications = false
         }
         
+        if ApplicationSettings.purgeCaches {
+            ApplicationSettings.purgeCaches = false
+            let fileManager = FileManager.default
+            let cachesDir = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            do {
+                try fileManager.contentsOfDirectory(at: cachesDir, includingPropertiesForKeys: nil, options: [])
+                    .forEach(fileManager.removeItem(at:))
+            } catch {
+                if #available(iOS 10.0, *) {
+                    os_log("Failed to purge caches directory: %@", error as NSError)
+                }
+            }
+        }
+        
         if ApplicationSettings.purgeDatabase {
             try! databaseConnectionFactory.destroyDatabase()
             ApplicationSettings.purgeDatabase = false

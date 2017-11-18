@@ -10,6 +10,7 @@ import WaniKaniKit
 enum ApplicationSettingKey: String {
     case apiKey = "apiKeyV2"
     case purgeDatabase = "purgeDatabase"
+    case purgeCaches = "purgeCaches"
     case disableLessonSwipe = "disableLessonSwipe"
     case userScriptCloseButNoCigarEnabled = "userScript-CloseButNoCigar"
     case userScriptJitaiEnabled = "userScript-Jitai"
@@ -46,6 +47,11 @@ struct ApplicationSettings {
         set { userDefaults.set(newValue, forKey: .purgeDatabase) }
     }
     
+    static var purgeCaches: Bool {
+        get { return userDefaults.bool(forKey: .purgeCaches) }
+        set { userDefaults.set(newValue, forKey: .purgeCaches) }
+    }
+    
     static var disableLessonSwipe: Bool {
         get { return userDefaults.bool(forKey: .disableLessonSwipe) }
         set { userDefaults.set(newValue, forKey: .disableLessonSwipe) }
@@ -55,7 +61,7 @@ struct ApplicationSettings {
         get { return userDefaults.bool(forKey: .userScriptCloseButNoCigarEnabled) }
         set { userDefaults.set(newValue, forKey: .userScriptCloseButNoCigarEnabled) }
     }
-
+    
     static var userScriptJitaiEnabled: Bool {
         get { return userDefaults.bool(forKey: .userScriptJitaiEnabled) }
         set { userDefaults.set(newValue, forKey: .userScriptJitaiEnabled) }
@@ -94,6 +100,7 @@ struct ApplicationSettings {
     static func resetToDefaults() {
         apiKey = nil
         purgeDatabase = false
+        purgeCaches = false
         disableLessonSwipe = false
         userScriptCloseButNoCigarEnabled = false
         userScriptJitaiEnabled = false
