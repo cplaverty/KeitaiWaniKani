@@ -69,7 +69,8 @@ public class ResourceRepositoryReader {
         }
         
         return try databaseQueue.inDatabase { database in
-            return try ResourceType.assignments.getLastUpdateDate(in: database) != nil
+            return try ResourceType.user.getLastUpdateDate(in: database) != nil
+                && ResourceType.assignments.getLastUpdateDate(in: database) != nil
         }
     }
     
@@ -78,13 +79,17 @@ public class ResourceRepositoryReader {
             throw ResourceRepositoryError.noDatabase
         }
         
-        let asOf = Date()
-        
         return try databaseQueue.inDatabase { database in
+            guard let userInfo = try UserInformation(from: database), userInfo.currentVacationStartedAt == nil else {
+                return StudyQueue(lessonsAvailable: 0, reviewsAvailable: 0, nextReviewDate: nil, reviewsAvailableNextHour: 0, reviewsAvailableNextDay: 0)
+            }
+            
+            let asOf = Date()
+            
             let table = Tables.assignments
             
-            let lessonsAvailable = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.srsStage) = 0")!
-            let reviewsAvailable = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.srsStage) != 0 AND \(table.availableAt) <= ?", values: [asOf])!
+            let lessonsAvailable = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.srsStage) = \(SRSStage.initiate.numericLevelRange.upperBound)")!
+            let reviewsAvailable = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.srsStage) BETWEEN \(SRSStage.apprentice.numericLevelRange.lowerBound) and \(SRSStage.enlightened.numericLevelRange.upperBound) AND \(table.availableAt) <= ?", values: [asOf])!
             let nextReviewDate = try database.dateForQuery("SELECT MIN(\(table.availableAt)) FROM \(table) WHERE \(table.availableAt) > ?", values: [asOf])
             
             let reviewsAvailableNextHour = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.availableAt) BETWEEN ? AND ?",
@@ -275,6 +280,10 @@ public class ResourceRepositoryReader {
         }
         
         return try databaseQueue.inDatabase { database in
+            guard let userInformation = try UserInformation(from: database), userInformation.currentVacationStartedAt == nil else {
+                return []
+            }
+            
             let table = Tables.assignments
             
             let radicalColumn = "radicals"
