@@ -28,7 +28,7 @@ public struct Radical: ResourceCollectionItemData {
         case level
         case createdAt = "created_at"
         case slug
-        case character
+        case character = "characters"
         case characterImages = "character_images"
         case meanings
         case documentURL = "document_url"
