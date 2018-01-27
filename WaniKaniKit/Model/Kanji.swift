@@ -19,7 +19,7 @@ public struct Kanji: ResourceCollectionItemData {
         case level
         case createdAt = "created_at"
         case slug
-        case character
+        case character = "characters"
         case meanings
         case readings
         case componentSubjectIDs = "component_subject_ids"
