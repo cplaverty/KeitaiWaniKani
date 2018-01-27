@@ -225,7 +225,7 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
     
     private func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         var urlRequest = URLRequest(url: url)
-        urlRequest.setValue("Token token=\(apiKey)", forHTTPHeaderField: "Authorization")
+        urlRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         
         if #available(iOS 10.0, *) {
             os_log("Initiating request for %@", type: .debug, url.absoluteString)

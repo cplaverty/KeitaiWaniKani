@@ -445,15 +445,15 @@ class ResourceRepositoryReaderTests: XCTestCase {
     }
     
     func testSubjectSearch() {
-        let leafRadical = createTestRadical(level: 1, character: nil, meanings: [Meaning(meaning: "leaf", isPrimary: true)])
-        let finsRadical = createTestRadical(level: 1, character: "ハ", meanings: [Meaning(meaning: "fins", isPrimary: true)])
-        let mountainKanji = createTestKanji(level: 1, character: "山",
+        let leafRadical = createTestRadical(level: 1, characters: nil, meanings: [Meaning(meaning: "leaf", isPrimary: true)])
+        let finsRadical = createTestRadical(level: 1, characters: "ハ", meanings: [Meaning(meaning: "fins", isPrimary: true)])
+        let mountainKanji = createTestKanji(level: 1, characters: "山",
                                             meanings: [Meaning(meaning: "Mountain", isPrimary: true)],
                                             readings: [Reading(type: "onyomi", reading: "さん", isPrimary: true), Reading(type: "kunyomi", reading: "やま", isPrimary: false)])
-        let mouthKanji = createTestKanji(level: 1, character: "口",
+        let mouthKanji = createTestKanji(level: 1, characters: "口",
                                          meanings: [Meaning(meaning: "Mouth", isPrimary: true)],
                                          readings: [Reading(type: "onyomi", reading: "こう", isPrimary: true), Reading(type: "onyomi", reading: "く", isPrimary: true), Reading(type: "kunyomi", reading: "くち", isPrimary: false)])
-        let industryKanji = createTestKanji(level: 1, character: "工",
+        let industryKanji = createTestKanji(level: 1, characters: "工",
                                             meanings: [Meaning(meaning: "Construction", isPrimary: true), Meaning(meaning: "Industry", isPrimary: false)],
                                             readings: [Reading(type: "onyomi", reading: "こう", isPrimary: true), Reading(type: "onyomi", reading: "く", isPrimary: true)])
         let mountainVocab = createTestVocabulary(level: 1, characters: "山",
@@ -514,7 +514,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         return item
     }
     
-    private func createTestRadical(level: Int, character: String? = nil, meanings: [Meaning] = []) -> ResourceCollectionItem {
+    private func createTestRadical(level: Int, characters: String? = nil, meanings: [Meaning] = []) -> ResourceCollectionItem {
         let item = ResourceCollectionItem(id: nextSubjectID,
                                           type: .radical,
                                           url: URL(string: "https://www.wanikani.com/api/v2/subjects/\(nextSubjectID)")!,
@@ -522,7 +522,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                           data: Radical(level: level,
                                                         createdAt: Date(timeIntervalSinceReferenceDate: 0),
                                                         slug: "slug",
-                                                        character: character,
+                                                        characters: characters,
                                                         characterImages: [],
                                                         meanings: meanings,
                                                         documentURL: URL(string: "https://www.wanikani.com/radicals/slug")!))
@@ -530,7 +530,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         return item
     }
     
-    private func createTestKanji(level: Int, character: String = "", meanings: [Meaning] = [], readings: [Reading] = []) -> ResourceCollectionItem {
+    private func createTestKanji(level: Int, characters: String = "", meanings: [Meaning] = [], readings: [Reading] = []) -> ResourceCollectionItem {
         let item = ResourceCollectionItem(id: nextSubjectID,
                                           type: .kanji,
                                           url: URL(string: "https://www.wanikani.com/api/v2/subjects/\(nextSubjectID)")!,
@@ -538,11 +538,11 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                           data: Kanji(level: level,
                                                       createdAt: Date(timeIntervalSinceReferenceDate: 0),
                                                       slug: "slug",
-                                                      character: character,
+                                                      characters: characters,
                                                       meanings: meanings,
                                                       readings: readings,
                                                       componentSubjectIDs: [],
-                                                      documentURL: URL(string: "https://www.wanikani.com/kanji/\(character.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)")!))
+                                                      documentURL: URL(string: "https://www.wanikani.com/kanji/\(characters.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)")!))
         nextSubjectID += 1
         return item
     }

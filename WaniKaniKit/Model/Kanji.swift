@@ -9,7 +9,7 @@ public struct Kanji: ResourceCollectionItemData {
     public let level: Int
     public let createdAt: Date
     public let slug: String
-    public let character: String
+    public let characters: String
     public let meanings: [Meaning]
     public let readings: [Reading]
     public let componentSubjectIDs: [Int]
@@ -19,7 +19,7 @@ public struct Kanji: ResourceCollectionItemData {
         case level
         case createdAt = "created_at"
         case slug
-        case character = "characters"
+        case characters
         case meanings
         case readings
         case componentSubjectIDs = "component_subject_ids"
@@ -33,7 +33,7 @@ extension Kanji: Subject {
     }
     
     public var characterRepresentation: SubjectCharacterRepresentation {
-        return .unicode(character)
+        return .unicode(characters)
     }
 }
 
@@ -42,7 +42,7 @@ extension Kanji: Equatable {
         return lhs.level == rhs.level
             && lhs.createdAt == rhs.createdAt
             && lhs.slug == rhs.slug
-            && lhs.character == rhs.character
+            && lhs.characters == rhs.characters
             && lhs.meanings == rhs.meanings
             && lhs.readings == rhs.readings
             && lhs.componentSubjectIDs == rhs.componentSubjectIDs

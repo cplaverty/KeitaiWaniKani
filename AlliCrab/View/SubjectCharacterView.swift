@@ -88,8 +88,8 @@ class SubjectCharacterView: UIView {
             }
             
             switch subject.characterRepresentation {
-            case let .unicode(character):
-                setCharacters(character)
+            case let .unicode(characters):
+                setCharacters(characters)
             case let .image(imageChoices):
                 setImage(imageChoices)
             }

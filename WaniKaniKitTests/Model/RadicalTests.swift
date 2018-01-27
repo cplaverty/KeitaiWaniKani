@@ -27,7 +27,7 @@ class RadicalTests: XCTestCase {
                                                   data: Radical(level: 1,
                                                                 createdAt: makeUTCDate(year: 2012, month: 2, day: 27, hour: 18, minute: 8, second: 16),
                                                                 slug: "ground",
-                                                                character: "一",
+                                                                characters: "一",
                                                                 characterImages: [],
                                                                 meanings: [Meaning(meaning: "Ground", isPrimary: true)],
                                                                 documentURL: URL(string: "https://www.wanikani.com/radicals/ground")!))

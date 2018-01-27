@@ -56,7 +56,7 @@ extension Kanji: DatabaseCodable {
         self.level = resultSet.long(forColumn: table.level.name)
         self.createdAt = resultSet.date(forColumn: table.createdAt.name)!
         self.slug = resultSet.string(forColumn: table.slug.name)!
-        self.character = resultSet.string(forColumn: table.character.name)!
+        self.characters = resultSet.string(forColumn: table.character.name)!
         self.meanings = meanings
         self.readings = readings
         self.componentSubjectIDs = subjectComponents
@@ -75,10 +75,10 @@ extension Kanji: DatabaseCodable {
         """
         
         let values: [Any] = [
-            id, level, createdAt, slug, character, documentURL.absoluteString
+            id, level, createdAt, slug, characters, documentURL.absoluteString
         ]
         try database.executeUpdate(query, values: values)
         
-        try SubjectSearch.write(to: database, id: id, character: character, level: level, meanings: meanings, readings: readings)
+        try SubjectSearch.write(to: database, id: id, character: characters, level: level, meanings: meanings, readings: readings)
     }
 }

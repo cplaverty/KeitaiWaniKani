@@ -265,7 +265,7 @@ class ResourceRepositoryTests: XCTestCase {
                                                data: Radical(level: 1,
                                                              createdAt: makeUTCDate(year: 2012, month: 2, day: 27, hour: 18, minute: 8, second: 16),
                                                              slug: "ground",
-                                                             character: "一",
+                                                             characters: "一",
                                                              characterImages: [],
                                                              meanings: [Meaning(meaning: "Ground", isPrimary: true)],
                                                              documentURL: URL(string: "https://www.wanikani.com/radicals/ground")!))
@@ -276,7 +276,7 @@ class ResourceRepositoryTests: XCTestCase {
                                                data: Kanji(level: 1,
                                                            createdAt: makeUTCDate(year: 2012, month: 2, day: 27, hour: 19, minute: 55, second: 19),
                                                            slug: "一",
-                                                           character: "一",
+                                                           characters: "一",
                                                            meanings: [Meaning(meaning: "One", isPrimary: true)],
                                                            readings: [Reading(type: "Onyomi", reading: "いち", isPrimary: true),
                                                                       Reading(type: "Kunyomi", reading: "ひと", isPrimary: false),

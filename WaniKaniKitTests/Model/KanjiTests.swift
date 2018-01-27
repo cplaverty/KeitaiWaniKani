@@ -27,7 +27,7 @@ class KanjiTests: XCTestCase {
                                                   data: Kanji(level: 1,
                                                               createdAt: makeUTCDate(year: 2012, month: 2, day: 27, hour: 19, minute: 55, second: 19),
                                                               slug: "一",
-                                                              character: "一",
+                                                              characters: "一",
                                                               meanings: [Meaning(meaning: "One", isPrimary: true)],
                                                               readings: [Reading(type: "onyomi", reading: "いち", isPrimary: true),
                                                                          Reading(type: "kunyomi", reading: "ひと", isPrimary: false),

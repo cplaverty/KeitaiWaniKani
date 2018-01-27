@@ -131,7 +131,7 @@ class SubjectTests: XCTestCase {
         return Radical(level: 1,
                        createdAt: Date(),
                        slug: "slug",
-                       character: nil,
+                       characters: nil,
                        characterImages: [],
                        meanings: [],
                        documentURL: URL(string: "http://localhost")!)
@@ -141,7 +141,7 @@ class SubjectTests: XCTestCase {
         return Kanji(level: 1,
                      createdAt: Date(),
                      slug: "slug",
-                     character: "char",
+                     characters: "char",
                      meanings: [],
                      readings: [],
                      componentSubjectIDs: [1, 2],

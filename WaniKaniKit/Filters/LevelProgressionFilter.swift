@@ -6,21 +6,21 @@
 //
 
 public struct LevelProgressionFilter {
+    public let ids: [Int]?
     public let updatedAfter: Date?
-    public let pageNumber: Int?
     
-    public init(updatedAfter: Date? = nil,
-                pageNumber: Int? = nil) {
+    public init(ids: [Int]? = nil,
+                updatedAfter: Date? = nil) {
+        self.ids = ids
         self.updatedAfter = updatedAfter
-        self.pageNumber = pageNumber
     }
 }
 
 extension LevelProgressionFilter: RequestFilter {
     func asQueryItems() -> [URLQueryItem]? {
         var elements = [URLQueryItem]()
+        elements.appendItemsIfSet(name: "ids", values: ids)
         elements.appendItemIfSet(name: "updated_after", value: updatedAfter)
-        elements.appendItemIfSet(name: "page", value: pageNumber)
         
         return elements.count == 0 ? nil : elements
     }

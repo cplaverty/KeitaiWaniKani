@@ -6,29 +6,29 @@
 //
 
 public struct StudyMaterialFilter {
+    public let ids: [Int]?
     public let subjectIDs: [Int]?
-    public let subjectType: SubjectType?
+    public let subjectTypes: [SubjectType]?
     public let updatedAfter: Date?
-    public let pageNumber: Int?
     
-    public init(subjectIDs: [Int]? = nil,
-                subjectType: SubjectType? = nil,
-                updatedAfter: Date? = nil,
-                pageNumber: Int? = nil) {
+    public init(ids: [Int]? = nil,
+                subjectIDs: [Int]? = nil,
+                subjectTypes: [SubjectType]? = nil,
+                updatedAfter: Date? = nil) {
+        self.ids = ids
         self.subjectIDs = subjectIDs
-        self.subjectType = subjectType
+        self.subjectTypes = subjectTypes
         self.updatedAfter = updatedAfter
-        self.pageNumber = pageNumber
     }
 }
 
 extension StudyMaterialFilter: RequestFilter {
     func asQueryItems() -> [URLQueryItem]? {
         var elements = [URLQueryItem]()
+        elements.appendItemsIfSet(name: "ids", values: ids)
         elements.appendItemsIfSet(name: "subject_ids", values: subjectIDs)
-        elements.appendItemIfSet(name: "subject_type", value: subjectType)
+        elements.appendItemsIfSet(name: "subject_types", values: subjectTypes)
         elements.appendItemIfSet(name: "updated_after", value: updatedAfter)
-        elements.appendItemIfSet(name: "page", value: pageNumber)
         
         return elements.count == 0 ? nil : elements
     }

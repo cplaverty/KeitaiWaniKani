@@ -55,7 +55,7 @@ extension Radical: DatabaseCodable {
         self.level = resultSet.long(forColumn: table.level.name)
         self.createdAt = resultSet.date(forColumn: table.createdAt.name)!
         self.slug = resultSet.string(forColumn: table.slug.name)!
-        self.character = resultSet.string(forColumn: table.character.name)
+        self.characters = resultSet.string(forColumn: table.character.name)
         self.characterImages = characterImages
         self.meanings = meanings
         self.documentURL = resultSet.url(forColumn: table.documentURL.name)!
@@ -72,11 +72,11 @@ extension Radical: DatabaseCodable {
         """
         
         let values: [Any] = [
-            id, level, createdAt, slug, character as Any, documentURL.absoluteString
+            id, level, createdAt, slug, characters as Any, documentURL.absoluteString
         ]
         try database.executeUpdate(query, values: values)
         
-        try SubjectSearch.write(to: database, id: id, character: character, level: level, meanings: meanings, readings: [])
+        try SubjectSearch.write(to: database, id: id, character: characters, level: level, meanings: meanings, readings: [])
     }
 }
 
