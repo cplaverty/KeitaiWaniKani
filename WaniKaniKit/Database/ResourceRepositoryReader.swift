@@ -89,7 +89,7 @@ public class ResourceRepositoryReader {
             let table = Tables.assignments
             
             let lessonsAvailable = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.srsStage) = \(SRSStage.initiate.numericLevelRange.upperBound)")!
-            let reviewsAvailable = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.srsStage) BETWEEN \(SRSStage.apprentice.numericLevelRange.lowerBound) and \(SRSStage.enlightened.numericLevelRange.upperBound) AND \(table.availableAt) <= ?", values: [asOf])!
+            let reviewsAvailable = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.srsStage) BETWEEN \(SRSStage.apprentice.numericLevelRange.lowerBound) and \(SRSStage.enlightened.numericLevelRange.upperBound) AND \(table.availableAt) <= ? AND \(table.burnedAt) IS NULL", values: [asOf])!
             let nextReviewDate = try database.dateForQuery("SELECT MIN(\(table.availableAt)) FROM \(table) WHERE \(table.availableAt) > ?", values: [asOf])
             
             let reviewsAvailableNextHour = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.availableAt) BETWEEN ? AND ?",
