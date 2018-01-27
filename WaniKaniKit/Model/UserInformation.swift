@@ -8,6 +8,7 @@
 public struct UserInformation: StandaloneResourceData {
     public let username: String
     public let level: Int
+    public let maxLevelGrantedBySubscription: Int
     public let startedAt: Date
     public let isSubscribed: Bool
     public let profileURL: URL?
@@ -16,6 +17,7 @@ public struct UserInformation: StandaloneResourceData {
     private enum CodingKeys: String, CodingKey {
         case username
         case level
+        case maxLevelGrantedBySubscription = "max_level_granted_by_subscription"
         case startedAt = "started_at"
         case isSubscribed = "subscribed"
         case profileURL = "profile_url"
@@ -27,6 +29,7 @@ extension UserInformation: Equatable {
     public static func ==(lhs: UserInformation, rhs: UserInformation) -> Bool {
         return lhs.username == rhs.username
             && lhs.level == rhs.level
+            && lhs.maxLevelGrantedBySubscription == rhs.maxLevelGrantedBySubscription
             && lhs.startedAt == rhs.startedAt
             && lhs.isSubscribed == rhs.isSubscribed
             && lhs.profileURL == rhs.profileURL

@@ -471,15 +471,14 @@ class ResourceRepositoryReaderTests: XCTestCase {
         XCTAssertEqual(try resourceRepository.findSubjects(matching: "leaf"), [leafRadical])
         XCTAssertEqual(try resourceRepository.findSubjects(matching: "fins"), [finsRadical])
         XCTAssertEqual(try resourceRepository.findSubjects(matching: "やま"), [mountainVocab, mountainKanji])
-        XCTAssertEqual(try resourceRepository.findSubjects(matching: "く"), [mouthKanji, industryKanji])
-        XCTAssertEqual(try resourceRepository.findSubjects(matching: "く*"), [mouthVocab, mouthKanji, industryKanji])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "く"), [mouthVocab, mouthKanji, industryKanji])
         XCTAssertEqual(try resourceRepository.findSubjects(matching: "mouth"), [mouthVocab, mouthKanji])
         XCTAssertEqual(try resourceRepository.findSubjects(matching: "口"), [mouthVocab, mouthKanji])
-        XCTAssertEqual(try resourceRepository.findSubjects(matching: "mount*"), [mountainVocab, mountainKanji, mountFujiVocab])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "mount"), [mountainVocab, mountainKanji, mountFujiVocab])
     }
     
     private func createTestUser() {
-        let user = UserInformation(username: "Test", level: testUserLevel, startedAt: Date(), isSubscribed: true, profileURL: nil, currentVacationStartedAt: nil)
+        let user = UserInformation(username: "Test", level: testUserLevel, maxLevelGrantedBySubscription: 60, startedAt: Date(), isSubscribed: true, profileURL: nil, currentVacationStartedAt: nil)
         
         databaseManager.databaseQueue!.inTransaction { (database, rollback) in
             do {

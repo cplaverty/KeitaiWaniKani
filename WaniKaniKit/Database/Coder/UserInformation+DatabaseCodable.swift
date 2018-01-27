@@ -29,6 +29,9 @@ extension UserInformation {
         self.isSubscribed = resultSet.bool(forColumn: table.isSubscribed.name)
         self.profileURL = resultSet.url(forColumn: table.profileURL.name)
         self.currentVacationStartedAt = resultSet.date(forColumn: table.currentVacationStartedAt.name)
+        
+        // TODO: This should be stored
+        self.maxLevelGrantedBySubscription = self.isSubscribed ? 60 : 3
     }
     
     func write(to database: FMDatabase) throws {

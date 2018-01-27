@@ -499,6 +499,7 @@ class ResourceRepositoryTests: XCTestCase {
                                           dataUpdatedAt: makeUTCDate(year: 2017, month: 7, day: 25, hour: 8, minute: 8, second: 6),
                                           data: UserInformation(username: "cplaverty",
                                                                 level: 13,
+                                                                maxLevelGrantedBySubscription: 60,
                                                                 startedAt: makeUTCDate(year: 2014, month: 6, day: 12, hour: 7, minute: 40, second: 29),
                                                                 isSubscribed: true,
                                                                 profileURL: URL(string: "https://www.wanikani.com/users/cplaverty")!,

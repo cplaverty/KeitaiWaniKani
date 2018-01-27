@@ -461,7 +461,7 @@ public class ResourceRepositoryReader {
                 return []
             }
             
-            return try SubjectSearch.read(from: database, searchQuery: query, isSubscribed: userInfo.isSubscribed)
+            return try SubjectSearch.read(from: database, searchQuery: query, maxLevel: userInfo.maxLevelGrantedBySubscription)
         }
     }
     
