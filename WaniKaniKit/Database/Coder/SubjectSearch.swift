@@ -20,7 +20,7 @@ struct SubjectSearch {
         ORDER BY rank, \(table.subjectID)
         """
         
-        let resultSet = try database.executeQuery(query, values: [searchQuery])
+        let resultSet = try database.executeQuery(query, values: ["\(searchQuery) *"])
         
         var subjectIDs = [Int]()
         while resultSet.next() {
