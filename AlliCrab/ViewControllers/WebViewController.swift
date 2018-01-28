@@ -44,6 +44,14 @@ class WebViewController: UIViewController {
     private lazy var openInSafariButton: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "OpenInSafari"), style: .plain, target: self, action: #selector(openInSafari(_:)))
     private lazy var doneButton: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(done(_:)))
     
+    private lazy var statusBarView: UIView = {
+        let view = UIBottomBorderedView(frame: UIApplication.shared.statusBarFrame, color: .lightGray, width: 0.5)
+        view.autoresizingMask = .flexibleWidth
+        view.backgroundColor = .globalBarTintColor
+        
+        return view
+    }()
+    
     private lazy var defaultWebViewConfiguration: WKWebViewConfiguration = {
         let config = WKWebViewConfiguration()
         registerMessageHandlers(config.userContentController)
@@ -218,11 +226,16 @@ class WebViewController: UIViewController {
         keyValueObservers = registerObservers(webView)
         
         self.view.addSubview(webView)
+        self.view.addSubview(statusBarView)
         
         webView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         webView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         webView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        
+        statusBarView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        statusBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        statusBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
         if let nc = self.navigationController {
             shouldIncludeDoneButton = nc.viewControllers[0] == self
@@ -237,14 +250,6 @@ class WebViewController: UIViewController {
             let request = URLRequest(url: url)
             self.webView.load(request)
         }
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return navigationController?.isNavigationBarHidden == true
-    }
-    
-    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return .slide
     }
     
     private func makeWebView() -> WKWebView {
@@ -291,6 +296,7 @@ class WebViewController: UIViewController {
     
     /// Sets the navigation bar and toolbar items based on the given UITraitCollection
     func configureToolbars(for traitCollection: UITraitCollection) {
+        statusBarView.isHidden = traitCollection.verticalSizeClass == .compact
         if traitCollection.horizontalSizeClass == .compact && traitCollection.verticalSizeClass == .regular {
             addToolbarItemsForCompactWidthRegularHeight()
         } else {
