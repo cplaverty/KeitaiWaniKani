@@ -5,9 +5,9 @@
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-import MessageUI
 import os
 import UIKit
+import WaniKaniKit
 
 class SettingsTableViewController: UITableViewController {
     
@@ -78,7 +78,7 @@ class SettingsTableViewController: UITableViewController {
         
         switch tableViewSection {
         case let .userScript(userScript): return userScript.forumLink == nil ? 1 : 2
-        case .feedback: return 2
+        case .feedback: return 1
         case .logOut: return 1
         case .count: fatalError("This is a placeholder and not a real section")
         }
@@ -105,14 +105,8 @@ class SettingsTableViewController: UITableViewController {
             default: fatalError()
             }
         case .feedback:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.basic.rawValue, for: indexPath)
-            switch indexPath.row {
-            case 0:
-                cell.textLabel?.text = "Send Feedback"
-            case 1:
-                cell.textLabel?.text = "Leave a Review"
-            default: fatalError()
-            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.forumTopicLink.rawValue, for: indexPath)
+            cell.detailTextLabel?.text = WaniKaniURL.appForumTopic.absoluteString.removingPercentEncoding
             
             return cell
         case .logOut:
@@ -149,7 +143,7 @@ class SettingsTableViewController: UITableViewController {
             }
             return "Script by \(author)"
         case .feedback:
-            return "App Store reviews are reset after every release.  Good reviews are always appreciated, but if you're experiencing any issues please email me through the Send Feedback link."
+            return "Please check the app forum topic for the latest news and support"
         case .logOut:
             let (product, version, build) = self.productAndVersion
             return "\(product) version \(version) (build \(build))"
@@ -169,47 +163,13 @@ class SettingsTableViewController: UITableViewController {
                 present(vc, animated: true, completion: nil)
             }
         case .feedback:
-            switch indexPath.row {
-            case 0: sendMail()
-            case 1: leaveReview()
-            default: fatalError("No cell defined for index path \(indexPath)")
-            }
+            let vc = WebViewController.wrapped(url: WaniKaniURL.appForumTopic)
+            present(vc, animated: true, completion: nil)
         case .logOut: confirmLogOut()
         case .count: fatalError("This is a placeholder and not a real section")
         }
         
         return nil
-    }
-    
-    // MARK: - Feedback
-    
-    private func sendMail() {
-        if !MFMailComposeViewController.canSendMail() {
-            self.showAlert(title: "Unable to send mail", message: "Your device is not configured to send e-mail.  Please set up an email account and try again.")
-        } else {
-            let vc = MFMailComposeViewController()
-            vc.mailComposeDelegate = self
-            vc.setToRecipients(["allicrab@icloud.com"])
-            let (product, version, build) = self.productAndVersion
-            vc.setSubject("\(product) feedback (v\(version) b\(build))")
-            self.present(vc, animated: true, completion: nil)
-        }
-    }
-    
-    private func leaveReview() {
-        if #available(iOS 10.0, *) {
-            let reviewURL = URL(string: "itms-apps://itunes.apple.com/app/id1031055291?action=write-review")!
-            UIApplication.shared.open(reviewURL) { success in
-                if !success {
-                    DispatchQueue.main.async {
-                        self.showAlert(message: "Thank you for your interest in leaving a review. However, the review page failed to open.  You will need to visit the App Store directly.")
-                    }
-                }
-            }
-        } else {
-            let reviewURL = URL(string: "itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1031055291&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software")!
-            UIApplication.shared.openURL(reviewURL)
-        }
     }
     
     // MARK: - Log Out
@@ -235,14 +195,4 @@ class SettingsTableViewController: UITableViewController {
         return (productName, appVersion, buildNumber)
     }
     
-}
-
-// MARK: - MFMailComposeViewControllerDelegate
-extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        if #available(iOS 10.0, *) {
-            os_log("MFMailComposeViewController finished with result %d: %@", type: .debug, result.rawValue, error?.localizedDescription ?? "<no error>")
-        }
-        controller.dismiss(animated: true, completion: nil)
-    }
 }

@@ -24,4 +24,14 @@ public struct WaniKaniURL {
     public static let radicalRoot = home.appendingPathComponent("radicals")
     public static let kanjiRoot = home.appendingPathComponent("kanji")
     public static let vocabularyRoot = home.appendingPathComponent("vocabulary")
+    
+    public static let appForumTopic = forumTopic(withRelativePath: "ios-mobile-allicrab-for-wanikani/10065")
+    
+    public static func forumTopic(withRelativePath path: String) -> URL {
+        guard let path = path.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlPathAllowed) else {
+            fatalError("Unable to encode path '{path}'!")
+        }
+        
+        return communityCentre.appendingPathComponent("t").appendingPathComponent(path).absoluteURL
+    }
 }
