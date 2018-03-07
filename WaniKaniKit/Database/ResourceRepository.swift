@@ -118,7 +118,7 @@ public class ResourceRepository: ResourceRepositoryReader {
         }
         
         return try databaseQueue.inDatabase { database in
-            return try resourceTypes.lazy.flatMap { try $0.getLastUpdateDate(in: database) }.min()
+            return try resourceTypes.lazy.compactMap({ try $0.getLastUpdateDate(in: database) }).min()
         }
     }
     
