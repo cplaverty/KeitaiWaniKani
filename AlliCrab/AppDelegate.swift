@@ -67,6 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIToolbar.appearance().tintColor = .globalTintColor
         UIToolbar.appearance().barTintColor = .globalBarTintColor
         
+        #if targetEnvironment(simulator)
         // Check if we've been launched by Snapshot
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             guard #available(iOS 10, *) else {
@@ -97,6 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             shouldSendNotifications = false
         }
+        #endif
         
         if ApplicationSettings.purgeCaches {
             ApplicationSettings.purgeCaches = false
