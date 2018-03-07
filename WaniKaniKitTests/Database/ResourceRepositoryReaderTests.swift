@@ -73,7 +73,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
     func testStudyQueue_PendingLessonsReviews_NoFutureReviews() {
         populateDatabaseForStudyQueue(lessonCount: 10, pendingReviewCount: 23, futureReviewCount: 0)
         
-        let expected = StudyQueue(lessonsAvailable: 10, reviewsAvailable: 23, nextReviewDate: Date(), reviewsAvailableNextHour: 0, reviewsAvailableNextDay: 0)
+        let expected = StudyQueue(lessonsAvailable: 10, reviewsAvailable: 23, nextReviewDate: nil, reviewsAvailableNextHour: 0, reviewsAvailableNextDay: 0)
         
         XCTAssertEqual(try resourceRepository.studyQueue(), expected)
     }
