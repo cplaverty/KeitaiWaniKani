@@ -12,9 +12,3 @@ public struct SRSDistribution: Equatable {
         self.countsBySRSStage = countsBySRSStage
     }
 }
-
-public extension SRSDistribution {
-    public static func ==(lhs: SRSDistribution, rhs: SRSDistribution) -> Bool {
-        return lhs.countsBySRSStage == rhs.countsBySRSStage
-    }
-}

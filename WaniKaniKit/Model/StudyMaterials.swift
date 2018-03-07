@@ -5,7 +5,7 @@
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-public struct StudyMaterials: ResourceCollectionItemData {
+public struct StudyMaterials: ResourceCollectionItemData, Equatable {
     public let createdAt: Date
     public let subjectID: Int
     public let subjectType: SubjectType
@@ -20,16 +20,5 @@ public struct StudyMaterials: ResourceCollectionItemData {
         case meaningNote = "meaning_note"
         case readingNote = "reading_note"
         case meaningSynonyms = "meaning_synonyms"
-    }
-}
-
-extension StudyMaterials: Equatable {
-    public static func ==(lhs: StudyMaterials, rhs: StudyMaterials) -> Bool {
-        return lhs.createdAt == rhs.createdAt
-            && lhs.subjectID == rhs.subjectID
-            && lhs.subjectType == rhs.subjectType
-            && lhs.meaningNote == rhs.meaningNote
-            && lhs.readingNote == rhs.readingNote
-            && lhs.meaningSynonyms == rhs.meaningSynonyms
     }
 }

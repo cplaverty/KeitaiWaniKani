@@ -5,7 +5,7 @@
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-public struct Reading: Codable {
+public struct Reading: Codable, Equatable {
     /// Kanji only: one of Onyomi, Kunyomi or Nanori
     public let type: String?
     public let reading: String
@@ -23,13 +23,5 @@ public struct Reading: Codable {
         case type
         case reading
         case isPrimary = "primary"
-    }
-}
-
-extension Reading: Equatable {
-    public static func ==(lhs: Reading, rhs: Reading) -> Bool {
-        return lhs.type == rhs.type
-            && lhs.reading == rhs.reading
-            && lhs.isPrimary == rhs.isPrimary
     }
 }

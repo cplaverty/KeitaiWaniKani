@@ -5,8 +5,8 @@
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-public struct Radical: ResourceCollectionItemData {
-    public struct CharacterImage: SubjectImage, Codable {
+public struct Radical: ResourceCollectionItemData, Equatable {
+    public struct CharacterImage: SubjectImage, Codable, Equatable {
         public let contentType: String
         public let url: URL
         
@@ -54,24 +54,5 @@ extension Radical: Subject {
     
     public var componentSubjectIDs: [Int] {
         return []
-    }
-}
-
-extension Radical: Equatable {
-    public static func ==(lhs: Radical, rhs: Radical) -> Bool {
-        return lhs.level == rhs.level
-            && lhs.createdAt == rhs.createdAt
-            && lhs.slug == rhs.slug
-            && lhs.characters == rhs.characters
-            && lhs.characterImages == rhs.characterImages
-            && lhs.meanings == rhs.meanings
-            && lhs.documentURL == rhs.documentURL
-    }
-}
-
-extension Radical.CharacterImage: Equatable {
-    public static func ==(lhs: Radical.CharacterImage, rhs: Radical.CharacterImage) -> Bool {
-        return lhs.contentType == rhs.contentType
-            && lhs.url == rhs.url
     }
 }

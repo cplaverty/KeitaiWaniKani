@@ -5,8 +5,8 @@
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-public struct ResourceCollection: Decodable {
-    public struct Pages: Decodable {
+public struct ResourceCollection: Decodable, Equatable {
+    public struct Pages: Decodable, Equatable {
         public let itemsPerPage: Int
         public let previousURL: URL?
         public let nextURL: URL?

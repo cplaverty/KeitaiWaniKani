@@ -24,19 +24,6 @@ public enum NextReviewTime: Equatable {
     }
 }
 
-extension NextReviewTime {
-    public static func ==(lhs: NextReviewTime, rhs: NextReviewTime) -> Bool {
-        switch (lhs, rhs) {
-        case (.none, .none), (.now, .now):
-            return true
-        case let (.date(ldate), .date(rdate)):
-            return ldate == rdate
-        default:
-            return false
-        }
-    }
-}
-
 public struct StudyQueue: Equatable {
     public let lessonsAvailable: Int
     public let reviewsAvailable: Int
@@ -58,15 +45,5 @@ public struct StudyQueue: Equatable {
         self.nextReviewDate = nextReviewDate
         self.reviewsAvailableNextHour = reviewsAvailableNextHour
         self.reviewsAvailableNextDay = reviewsAvailableNextDay
-    }
-}
-
-extension StudyQueue {
-    public static func ==(lhs: StudyQueue, rhs: StudyQueue) -> Bool {
-        return lhs.lessonsAvailable == rhs.lessonsAvailable
-            && lhs.reviewsAvailable == rhs.reviewsAvailable
-            && lhs.nextReviewTime == rhs.nextReviewTime
-            && lhs.reviewsAvailableNextHour == rhs.reviewsAvailableNextHour
-            && lhs.reviewsAvailableNextDay == rhs.reviewsAvailableNextDay
     }
 }

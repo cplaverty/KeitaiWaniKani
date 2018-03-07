@@ -30,14 +30,6 @@ public struct LevelData: Equatable {
     }
 }
 
-extension LevelData {
-    public static func ==(lhs: LevelData, rhs: LevelData) -> Bool {
-        return lhs.detail == rhs.detail
-            && lhs.projectedCurrentLevel == rhs.projectedCurrentLevel
-            && lhs.stats == rhs.stats
-    }
-}
-
 public struct LevelStats: Equatable {
     public let mean: TimeInterval
     public let lowerQuartile: TimeInterval
@@ -47,14 +39,6 @@ public struct LevelStats: Equatable {
         self.mean = mean
         self.lowerQuartile = lowerQuartile
         self.upperQuartile = upperQuartile
-    }
-}
-
-extension LevelStats {
-    public static func ==(lhs: LevelStats, rhs: LevelStats) -> Bool {
-        return lhs.mean == rhs.mean
-            && lhs.lowerQuartile == rhs.lowerQuartile
-            && lhs.upperQuartile == rhs.upperQuartile
     }
 }
 
@@ -74,14 +58,6 @@ public struct LevelInfo: Equatable {
     }
 }
 
-extension LevelInfo {
-    public static func ==(lhs: LevelInfo, rhs: LevelInfo) -> Bool {
-        return lhs.level == rhs.level
-            && lhs.startDate == rhs.startDate
-            && lhs.endDate == rhs.endDate
-    }
-}
-
 public struct ProjectedLevelInfo: Equatable {
     public let level: Int
     public let startDate: Date
@@ -96,14 +72,6 @@ public struct ProjectedLevelInfo: Equatable {
     }
 }
 
-extension ProjectedLevelInfo {
-    public static func ==(lhs: ProjectedLevelInfo, rhs: ProjectedLevelInfo) -> Bool {
-        return lhs.level == rhs.level
-            && lhs.startDate == rhs.startDate
-            && lhs.endDate == rhs.endDate
-            && lhs.isEndDateBasedOnLockedItem == rhs.isEndDateBasedOnLockedItem
-    }
-}
 
 private extension Collection {
     /// Grab the middle 50% of values, preferring lower values

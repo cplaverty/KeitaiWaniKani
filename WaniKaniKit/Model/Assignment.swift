@@ -5,7 +5,7 @@
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-public struct Assignment: ResourceCollectionItemData {
+public struct Assignment: ResourceCollectionItemData, Equatable {
     public let subjectID: Int
     public let subjectType: SubjectType
     public let level: Int
@@ -32,23 +32,6 @@ public struct Assignment: ResourceCollectionItemData {
         case availableAt = "available_at"
         case isPassed = "passed"
         case isResurrected = "resurrected"
-    }
-}
-
-extension Assignment: Equatable {
-    public static func ==(lhs: Assignment, rhs: Assignment) -> Bool {
-        return lhs.subjectID == rhs.subjectID
-            && lhs.subjectType == rhs.subjectType
-            && lhs.level == rhs.level
-            && lhs.srsStage == rhs.srsStage
-            && lhs.srsStageName == rhs.srsStageName
-            && lhs.unlockedAt == rhs.unlockedAt
-            && lhs.startedAt == rhs.startedAt
-            && lhs.passedAt == rhs.passedAt
-            && lhs.burnedAt == rhs.burnedAt
-            && lhs.availableAt == rhs.availableAt
-            && lhs.isPassed == rhs.isPassed
-            && lhs.isResurrected == rhs.isResurrected
     }
 }
 

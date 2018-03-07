@@ -14,10 +14,3 @@ public struct SRSReviewCounts: Equatable {
         self.itemCounts = itemCounts
     }
 }
-
-extension SRSReviewCounts {
-    public static func ==(lhs: SRSReviewCounts, rhs: SRSReviewCounts) -> Bool {
-        return lhs.dateAvailable == rhs.dateAvailable
-            && lhs.itemCounts == rhs.itemCounts
-    }
-}

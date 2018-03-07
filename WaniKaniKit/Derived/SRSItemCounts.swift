@@ -21,13 +21,6 @@ public struct SRSItemCounts: Equatable {
 }
 
 public extension SRSItemCounts {
-    public static func ==(lhs: SRSItemCounts, rhs: SRSItemCounts) -> Bool {
-        return lhs.radicals == rhs.radicals
-            && lhs.kanji == rhs.kanji
-            && lhs.vocabulary == rhs.vocabulary
-            && lhs.total == rhs.total
-    }
-    
     public static func +(lhs: SRSItemCounts, rhs: SRSItemCounts) -> SRSItemCounts {
         return SRSItemCounts(radicals: lhs.radicals + rhs.radicals,
                              kanji: lhs.kanji + rhs.kanji,

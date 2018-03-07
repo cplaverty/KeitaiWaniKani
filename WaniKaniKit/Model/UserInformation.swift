@@ -5,7 +5,7 @@
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-public struct UserInformation: StandaloneResourceData {
+public struct UserInformation: StandaloneResourceData, Equatable {
     public let username: String
     public let level: Int
     public let maxLevelGrantedBySubscription: Int
@@ -22,17 +22,5 @@ public struct UserInformation: StandaloneResourceData {
         case isSubscribed = "subscribed"
         case profileURL = "profile_url"
         case currentVacationStartedAt = "current_vacation_started_at"
-    }
-}
-
-extension UserInformation: Equatable {
-    public static func ==(lhs: UserInformation, rhs: UserInformation) -> Bool {
-        return lhs.username == rhs.username
-            && lhs.level == rhs.level
-            && lhs.maxLevelGrantedBySubscription == rhs.maxLevelGrantedBySubscription
-            && lhs.startedAt == rhs.startedAt
-            && lhs.isSubscribed == rhs.isSubscribed
-            && lhs.profileURL == rhs.profileURL
-            && lhs.currentVacationStartedAt == rhs.currentVacationStartedAt
     }
 }

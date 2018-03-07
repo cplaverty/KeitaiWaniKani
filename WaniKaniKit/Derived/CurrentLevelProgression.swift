@@ -30,14 +30,3 @@ public struct CurrentLevelProgression: Equatable {
         self.kanjiSubjectIDs = kanjiSubjectIDs
     }
 }
-
-extension CurrentLevelProgression {
-    public static func ==(lhs: CurrentLevelProgression, rhs: CurrentLevelProgression) -> Bool {
-        return lhs.radicalsProgress == rhs.radicalsProgress
-            && lhs.radicalsTotal == rhs.radicalsTotal
-            && lhs.radicalSubjectIDs == rhs.radicalSubjectIDs
-            && lhs.kanjiProgress == rhs.kanjiProgress
-            && lhs.kanjiTotal == rhs.kanjiTotal
-            && lhs.kanjiSubjectIDs == rhs.kanjiSubjectIDs
-    }
-}

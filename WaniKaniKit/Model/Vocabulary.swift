@@ -5,7 +5,7 @@
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-public struct Vocabulary: ResourceCollectionItemData {
+public struct Vocabulary: ResourceCollectionItemData, Equatable {
     public let level: Int
     public let createdAt: Date
     public let slug: String
@@ -36,19 +36,5 @@ extension Vocabulary: Subject {
     
     public var characterRepresentation: SubjectCharacterRepresentation {
         return .unicode(characters)
-    }
-}
-
-extension Vocabulary: Equatable {
-    public static func ==(lhs: Vocabulary, rhs: Vocabulary) -> Bool {
-        return lhs.level == rhs.level
-            && lhs.createdAt == rhs.createdAt
-            && lhs.slug == rhs.slug
-            && lhs.characters == rhs.characters
-            && lhs.meanings == rhs.meanings
-            && lhs.readings == rhs.readings
-            && lhs.partsOfSpeech == rhs.partsOfSpeech
-            && lhs.componentSubjectIDs == rhs.componentSubjectIDs
-            && lhs.documentURL == rhs.documentURL
     }
 }

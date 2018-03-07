@@ -5,7 +5,7 @@
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-public struct ReviewStatistics: ResourceCollectionItemData {
+public struct ReviewStatistics: ResourceCollectionItemData, Equatable {
     public let createdAt: Date
     public let subjectID: Int
     public let subjectType: SubjectType
@@ -32,22 +32,5 @@ public struct ReviewStatistics: ResourceCollectionItemData {
         case readingMaxStreak = "reading_max_streak"
         case readingCurrentStreak = "reading_current_streak"
         case percentageCorrect = "percentage_correct"
-    }
-}
-
-extension ReviewStatistics: Equatable {
-    public static func ==(lhs: ReviewStatistics, rhs: ReviewStatistics) -> Bool {
-        return lhs.createdAt == rhs.createdAt
-            && lhs.subjectID == rhs.subjectID
-            && lhs.subjectType == rhs.subjectType
-            && lhs.meaningCorrect == rhs.meaningCorrect
-            && lhs.meaningIncorrect == rhs.meaningIncorrect
-            && lhs.meaningMaxStreak == rhs.meaningMaxStreak
-            && lhs.meaningCurrentStreak == rhs.meaningCurrentStreak
-            && lhs.readingCorrect == rhs.readingCorrect
-            && lhs.readingIncorrect == rhs.readingIncorrect
-            && lhs.readingMaxStreak == rhs.readingMaxStreak
-            && lhs.readingCurrentStreak == rhs.readingCurrentStreak
-            && lhs.percentageCorrect == rhs.percentageCorrect
     }
 }

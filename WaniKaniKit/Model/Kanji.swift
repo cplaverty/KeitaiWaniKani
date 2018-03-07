@@ -5,7 +5,7 @@
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-public struct Kanji: ResourceCollectionItemData {
+public struct Kanji: ResourceCollectionItemData, Equatable {
     public let level: Int
     public let createdAt: Date
     public let slug: String
@@ -34,18 +34,5 @@ extension Kanji: Subject {
     
     public var characterRepresentation: SubjectCharacterRepresentation {
         return .unicode(characters)
-    }
-}
-
-extension Kanji: Equatable {
-    public static func ==(lhs: Kanji, rhs: Kanji) -> Bool {
-        return lhs.level == rhs.level
-            && lhs.createdAt == rhs.createdAt
-            && lhs.slug == rhs.slug
-            && lhs.characters == rhs.characters
-            && lhs.meanings == rhs.meanings
-            && lhs.readings == rhs.readings
-            && lhs.componentSubjectIDs == rhs.componentSubjectIDs
-            && lhs.documentURL == rhs.documentURL
     }
 }
