@@ -49,19 +49,36 @@ extension WKWebView {
     
     // Adapted from https://github.com/Telerik-Verified-Plugins/WKWebView/commit/04e8296adeb61f289f9c698045c19b62d080c7e3
     func keyboardDisplayDoesNotRequireUserAction() {
-        typealias SelectorImpType = @convention(c) (Any, Selector, OpaquePointer, Bool, Bool, Any) -> Void
-        
-        let sel = sel_getUid("_startAssistingNode:userIsInteracting:blurPreviousNode:userObject:")
-        guard let method = class_getInstanceMethod(NSClassFromString("WKContentView"), sel) else {
-            return
+        let cls: AnyClass? = NSClassFromString("WKContentView")
+        if #available(iOS 11.3, *) {
+            typealias SelectorImpType = @convention(c) (AnyObject, Selector, OpaquePointer, Bool, Bool, Bool, AnyObject) -> Void
+            let sel = sel_getUid("_startAssistingNode:userIsInteracting:blurPreviousNode:changingActivityState:userObject:")
+            guard let method = class_getInstanceMethod(cls, sel) else {
+                return
+            }
+            
+            let originalImp = method_getImplementation(method)
+            let block: @convention(block) (AnyObject, OpaquePointer, Bool, Bool, Bool, AnyObject) -> Void = {
+                let chained = unsafeBitCast(originalImp, to: SelectorImpType.self)
+                chained($0, sel, $1, true, $3, $4, $5)
+            }
+            let imp = imp_implementationWithBlock(block)
+            method_setImplementation(method, imp)
+        } else {
+            typealias SelectorImpType = @convention(c) (AnyObject, Selector, OpaquePointer, Bool, Bool, AnyObject) -> Void
+            
+            let sel = sel_getUid("_startAssistingNode:userIsInteracting:blurPreviousNode:userObject:")
+            guard let method = class_getInstanceMethod(cls, sel) else {
+                return
+            }
+            
+            let originalImp = method_getImplementation(method)
+            let block: @convention(block) (AnyObject, OpaquePointer, Bool, Bool, AnyObject) -> Void = {
+                let chained = unsafeBitCast(originalImp, to: SelectorImpType.self)
+                chained($0, sel, $1, true, $3, $4)
+            }
+            let imp = imp_implementationWithBlock(block)
+            method_setImplementation(method, imp)
         }
-        
-        let originalImp = method_getImplementation(method)
-        let block: @convention(block) (Any, OpaquePointer, Bool, Bool, Any) -> Void = {
-            let chained = unsafeBitCast(originalImp, to: SelectorImpType.self)
-            chained($0, sel, $1, true, $3, $4)
-        }
-        let imp = imp_implementationWithBlock(block)
-        method_setImplementation(method, imp)
     }
 }
