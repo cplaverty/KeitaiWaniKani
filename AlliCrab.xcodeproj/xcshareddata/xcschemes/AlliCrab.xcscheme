@@ -38,6 +38,11 @@
                BlueprintName = "AlliCrabUITests"
                ReferencedContainer = "container:AlliCrab.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "SnapshotUITests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO">
