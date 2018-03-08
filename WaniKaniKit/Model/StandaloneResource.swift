@@ -10,6 +10,14 @@ public enum StandaloneResourceObjectType: String, Codable {
 }
 
 public protocol StandaloneResourceData: Codable {
+    func isEqualTo(_ other: StandaloneResourceData) -> Bool
+}
+
+extension StandaloneResourceData where Self: Equatable {
+    public func isEqualTo(_ other: StandaloneResourceData) -> Bool {
+        guard let otherData = other as? Self else { return false }
+        return self == otherData
+    }
 }
 
 public struct StandaloneResource: Decodable {
@@ -43,16 +51,10 @@ public struct StandaloneResource: Decodable {
 
 extension StandaloneResource: Equatable {
     public static func ==(lhs: StandaloneResource, rhs: StandaloneResource) -> Bool {
-        switch (lhs.data, rhs.data) {
-        case let (ldata, rdata) as (UserInformation, UserInformation):
-            guard ldata == rdata else { return false }
-        default:
-            return false
-        }
-        
         return lhs.type == rhs.type
             && lhs.url == rhs.url
             && lhs.dataUpdatedAt == rhs.dataUpdatedAt
+            && lhs.data.isEqualTo(rhs.data)
     }
 }
 

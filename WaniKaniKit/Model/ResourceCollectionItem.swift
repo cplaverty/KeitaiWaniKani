@@ -16,6 +16,14 @@ public enum ResourceCollectionItemObjectType: String, Codable {
 }
 
 public protocol ResourceCollectionItemData: Codable {
+    func isEqualTo(_ other: ResourceCollectionItemData) -> Bool
+}
+
+extension ResourceCollectionItemData where Self: Equatable {
+    public func isEqualTo(_ other: ResourceCollectionItemData) -> Bool {
+        guard let otherData = other as? Self else { return false }
+        return self == otherData
+    }
 }
 
 public struct ResourceCollectionItem: Decodable {
@@ -53,29 +61,11 @@ public struct ResourceCollectionItem: Decodable {
 
 extension ResourceCollectionItem: Equatable {
     public static func ==(lhs: ResourceCollectionItem, rhs: ResourceCollectionItem) -> Bool {
-        switch (lhs.data, rhs.data) {
-        case let (ldata, rdata) as (Assignment, Assignment):
-            guard ldata == rdata else { return false }
-        case let (ldata, rdata) as (Radical, Radical):
-            guard ldata == rdata else { return false }
-        case let (ldata, rdata) as (Kanji, Kanji):
-            guard ldata == rdata else { return false }
-        case let (ldata, rdata) as (Vocabulary, Vocabulary):
-            guard ldata == rdata else { return false }
-        case let (ldata, rdata) as (StudyMaterials, StudyMaterials):
-            guard ldata == rdata else { return false }
-        case let (ldata, rdata) as (ReviewStatistics, ReviewStatistics):
-            guard ldata == rdata else { return false }
-        case let (ldata, rdata) as (LevelProgression, LevelProgression):
-            guard ldata == rdata else { return false }
-        default:
-            return false
-        }
-        
         return lhs.id == rhs.id
             && lhs.type == rhs.type
             && lhs.url == rhs.url
             && lhs.dataUpdatedAt == rhs.dataUpdatedAt
+            && lhs.data.isEqualTo(rhs.data)
     }
 }
 
