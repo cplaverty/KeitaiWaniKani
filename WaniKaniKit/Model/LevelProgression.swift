@@ -14,6 +14,11 @@ public struct LevelProgression: ResourceCollectionItemData, Equatable {
     public let completedAt: Date?
     public let abandonedAt: Date?
     
+    public var duration: TimeInterval? {
+        guard let unlockedAt = unlockedAt, let passedAt = passedAt else { return nil }
+        return passedAt.timeIntervalSince(unlockedAt)
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case level
         case createdAt = "created_at"

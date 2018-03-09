@@ -6,19 +6,19 @@
 //
 
 public struct LevelData: Equatable {
-    public let detail: [LevelInfo]
+    public let detail: [LevelProgression]
     public let projectedCurrentLevel: ProjectedLevelInfo?
     public let stats: LevelStats?
     
-    public init(detail: [LevelInfo], projectedCurrentLevel: ProjectedLevelInfo?) {
+    public init(detail: [LevelProgression], projectedCurrentLevel: ProjectedLevelInfo?) {
         self.detail = detail
         self.projectedCurrentLevel = projectedCurrentLevel
         self.stats = type(of: self).calculateAverageLevelDuration(detail)
     }
     
     /// Calculate the bounded mean, ignoring durations in the upper and lower quartiles
-    private static func calculateAverageLevelDuration(_ detail: [LevelInfo]) -> LevelStats? {
-        let durations = detail.lazy.flatMap { $0.duration }.sorted()
+    private static func calculateAverageLevelDuration(_ detail: [LevelProgression]) -> LevelStats? {
+        let durations = detail.lazy.compactMap({ $0.duration }).sorted()
         let boundedDurations = durations.interquartileSubSequence()
         guard !boundedDurations.isEmpty else { return nil }
         
@@ -42,22 +42,6 @@ public struct LevelStats: Equatable {
     }
 }
 
-public struct LevelInfo: Equatable {
-    public let level: Int
-    public let startDate: Date
-    public let endDate: Date?
-    
-    public var duration: TimeInterval? {
-        return endDate?.timeIntervalSince(startDate)
-    }
-    
-    public init(level: Int, startDate: Date, endDate: Date?) {
-        self.level = level
-        self.startDate = startDate
-        self.endDate = endDate
-    }
-}
-
 public struct ProjectedLevelInfo: Equatable {
     public let level: Int
     public let startDate: Date
@@ -71,7 +55,6 @@ public struct ProjectedLevelInfo: Equatable {
         self.isEndDateBasedOnLockedItem = isEndDateBasedOnLockedItem
     }
 }
-
 
 private extension Collection {
     /// Grab the middle 50% of values, preferring lower values

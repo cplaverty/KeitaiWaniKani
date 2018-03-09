@@ -404,18 +404,19 @@ public class ResourceRepositoryReader {
                 startDates.append(minStartDate)
             }
             
-            var levelInfos = [LevelInfo]()
-            levelInfos.reserveCapacity(userInfo.level)
+            var levelProgressions = [LevelProgression]()
+            levelProgressions.reserveCapacity(userInfo.level)
             
             for level in 1...userInfo.level {
                 let startDate = startDates[level - 1]
                 let endDate = startDates.count > level ? startDates[level] : nil
-                levelInfos.append(LevelInfo(level: level, startDate: startDate, endDate: endDate))
+                let levelProgress = LevelProgression(level: level, createdAt: startDate, unlockedAt: startDate, startedAt: startDate, passedAt: endDate, completedAt: nil, abandonedAt: nil)
+                levelProgressions.append(levelProgress)
             }
             
             let projectedCurrentLevel = try projectedLevel(userInfo.level, startDate: startDates.last!, from: database)
             
-            return LevelData(detail: levelInfos, projectedCurrentLevel: projectedCurrentLevel)
+            return LevelData(detail: levelProgressions, projectedCurrentLevel: projectedCurrentLevel)
         }
     }
     

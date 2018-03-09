@@ -59,7 +59,7 @@ extension Subject {
             unlockDateForLockedItems = Calendar.current.startOfHour(for: Date())
         } else {
             let guruDates = pendingSubjectAssignments.map({ assignment in assignment?.guruDate() })
-            unlockDateForLockedItems = guruDates.lazy.filter({$0 == nil}).isEmpty ? guruDates.lazy.flatMap({ $0 }).max() : nil
+            unlockDateForLockedItems = guruDates.lazy.filter({ $0 == nil }).isEmpty ? guruDates.lazy.compactMap({ $0 }).max() : nil
         }
         
         let guruDate: Date?

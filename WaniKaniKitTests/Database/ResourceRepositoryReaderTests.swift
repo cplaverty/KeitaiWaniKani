@@ -353,7 +353,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
     }
     
     func testLevelTimeline_Load() {
-        var levelInfos = [LevelInfo]()
+        var levelProgressions = [LevelProgression]()
         
         let calendar = Calendar.current
         let components = calendar.dateComponents(in: utcTimeZone,
@@ -381,7 +381,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
             }
             
             let endDate = startDate + .oneDay * 14
-            levelInfos.append(LevelInfo(level: level, startDate: startDate, endDate: endDate))
+            levelProgressions.append(LevelProgression(level: level, createdAt: startDate, unlockedAt: startDate, startedAt: startDate, passedAt: endDate, completedAt: nil, abandonedAt: nil))
             startDate = endDate
         }
         
@@ -405,7 +405,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         }
         let lastKanjiAssignmentId = nextAssignmentID
         
-        levelInfos.append(LevelInfo(level: testUserLevel, startDate: startDate, endDate: nil))
+        levelProgressions.append(LevelProgression(level: testUserLevel, createdAt: startDate, unlockedAt: startDate, startedAt: startDate, passedAt: nil, completedAt: nil, abandonedAt: nil))
         
         NSLog("Writing \(resourceItems.count) resources")
         writeToDatabase(resourceItems)
@@ -413,7 +413,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         let minimumGuruTime = 4 * .oneHour + 8 * .oneHour + .oneDay - .oneHour + 2 * .oneDay - .oneHour
         let projectedLevelInfo = ProjectedLevelInfo(level: testUserLevel, startDate: startDate, endDate: kanjiStart + minimumGuruTime, isEndDateBasedOnLockedItem: false)
         
-        let expected = LevelData(detail: levelInfos, projectedCurrentLevel: projectedLevelInfo)
+        let expected = LevelData(detail: levelProgressions, projectedCurrentLevel: projectedLevelInfo)
         
         do {
             let levelTimeline = try resourceRepository.levelTimeline()
