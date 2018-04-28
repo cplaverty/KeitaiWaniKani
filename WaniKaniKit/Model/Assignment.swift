@@ -75,7 +75,7 @@ public extension Assignment {
         case 0:
             return DateComponents()
         case 1 where isAccelerated:
-            return DateComponents(hour: 1)
+            return DateComponents(hour: 2)
         case 1,
              2 where isAccelerated:
             return DateComponents(hour: 4)
