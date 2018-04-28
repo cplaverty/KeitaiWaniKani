@@ -27,9 +27,9 @@ private class Request {
         progress.isCancellable = true
         progress.isPausable = true
         
-        progress.cancellationHandler = cancel
-        progress.pausingHandler = suspend
-        progress.resumingHandler = resume
+        progress.cancellationHandler = cancelTasks
+        progress.pausingHandler = suspendTasks
+        progress.resumingHandler = resumeTasks
     }
     
     deinit {
@@ -49,18 +49,22 @@ private class Request {
     }
     
     func cancel() {
+        progress.cancel()
+    }
+    
+    private func cancelTasks() {
         tasks.forEach { task in
             task.cancel()
         }
     }
     
-    func suspend() {
+    private func suspendTasks() {
         tasks.forEach { task in
             task.suspend()
         }
     }
     
-    func resume() {
+    private func resumeTasks() {
         tasks.forEach { task in
             task.resume()
         }
