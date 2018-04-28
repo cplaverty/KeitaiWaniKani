@@ -6,7 +6,7 @@
 //
 
 public class Endpoints {
-    public static let `default` = Endpoints(baseURL: URL(string: "https://www.wanikani.com/api/v2")!)
+    public static let `default` = Endpoints(baseURL: URL(string: "https://api.wanikani.com/v2")!)
     
     public private(set) lazy var assignments: URL = baseURL.appendingPathComponent("assignments")
     public private(set) lazy var levelProgressions: URL = baseURL.appendingPathComponent("level_progressions")
