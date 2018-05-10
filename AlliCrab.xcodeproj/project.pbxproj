@@ -1796,7 +1796,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5EA23079F4EAC898978078C3 /* Pods-AlliCrab.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AlliCrab/AlliCrab.entitlements;
 				DEVELOPMENT_TEAM = 5QAN68L9NX;
@@ -1813,7 +1812,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 906ABAC46CC97C2A8D68969D /* Pods-AlliCrab.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = AlliCrab/AlliCrab.entitlements;
 				DEVELOPMENT_TEAM = 5QAN68L9NX;
