@@ -61,9 +61,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
     
     deinit {
         if let notificationObservers = notificationObservers {
-            if #available(iOS 10.0, *) {
-                os_log("Removing NotificationCenter observers from %@", type: .debug, String(describing: type(of: self)))
-            }
+            os_log("Removing NotificationCenter observers from %@", type: .debug, String(describing: type(of: self)))
             notificationObservers.forEach(NotificationCenter.default.removeObserver(_:))
         }
         notificationObservers = nil
@@ -120,9 +118,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
         let nextFireTime = Calendar.current.nextDate(after: Date(),
                                                      matching: DateComponents(second: 0, nanosecond: 0),
                                                      matchingPolicy: .nextTime)!
-        if #available(iOS 10, *) {
-            os_log("%@ update timer will fire at %@", type: .debug, String(describing: type(of: self)), nextFireTime as NSDate)
-        }
+        os_log("%@ update timer will fire at %@", type: .debug, String(describing: type(of: self)), nextFireTime as NSDate)
         let timer = Timer(fireAt: nextFireTime, interval: .oneMinute, target: self, selector: #selector(updateUITimerDidFire(_:)), userInfo: nil, repeats: true)
         timer.tolerance = 5
         RunLoop.main.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
@@ -131,9 +127,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
     }
     
     @objc func updateUITimerDidFire(_ timer: Timer) {
-        if #available(iOS 10, *) {
-            os_log("%@ timer fire", type: .debug, String(describing: type(of: self)))
-        }
+        os_log("%@ timer fire", type: .debug, String(describing: type(of: self)))
         
         let now = Date()
         let isStartOfHour = now.timeIntervalSince(Calendar.current.startOfHour(for: now)) < .oneMinute
@@ -155,9 +149,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
             return cellsNeedingRefresh.map { itemIndex in IndexPath(item: itemIndex, section: sectionIndex) }
         }
         
-        if #available(iOS 10, *) {
-            os_log("Refreshing %d cells", type: .debug, indexPathsNeedingRefresh.count)
-        }
+        os_log("Refreshing %d cells", type: .debug, indexPathsNeedingRefresh.count)
         
         collectionView?.reloadItems(at: indexPathsNeedingRefresh)
     }
@@ -196,9 +188,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
     // MARK: - Update UI
     
     private func addNotificationObservers() -> [NSObjectProtocol] {
-        if #available(iOS 10.0, *) {
-            os_log("Adding NotificationCenter observers to %@", type: .debug, String(describing: type(of: self)))
-        }
+        os_log("Adding NotificationCenter observers to %@", type: .debug, String(describing: type(of: self)))
         let notificationObservers = [
             NotificationCenter.default.addObserver(forName: .waniKaniUserInformationDidChange, object: nil, queue: .main) { [unowned self] _ in
                 self.updateUI()
@@ -219,9 +209,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
             return
         }
         
-        if #available(iOS 10.0, *) {
-            os_log("Updating assignment guru progression for subject type %@", type: .info, String(describing: subjectType))
-        }
+        os_log("Updating assignment guru progression for subject type %@", type: .info, String(describing: subjectType))
         
         guard let userInformation = try! repositoryReader.userInformation() else {
             return
@@ -236,9 +224,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
         let unpassed = progression[..<switchIndex]
         let passed = progression[switchIndex...]
         
-        if #available(iOS 10.0, *) {
-            os_log("Item count: remainingToLevel = %d, passed = %d", type: .debug, unpassed.count, passed.count)
-        }
+        os_log("Item count: remainingToLevel = %d, passed = %d", type: .debug, unpassed.count, passed.count)
         if !unpassed.isEmpty {
             sections.append(Section(title: "Remaining to Level",
                                     items: unpassed.sorted(by: { Assignment.Sorting.byProgress($0.assignment, $1.assignment) })))

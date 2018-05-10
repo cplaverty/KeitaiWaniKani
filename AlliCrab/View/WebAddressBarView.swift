@@ -38,12 +38,10 @@ class WebAddressBarView: UIView {
         secureSiteIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         addressLabel = UILabel()
+        addressLabel.adjustsFontForContentSizeCategory = true
+        addressLabel.font = UIFont.preferredFont(forTextStyle: .callout)
         addressLabel.translatesAutoresizingMaskIntoConstraints = false
         addressLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        addressLabel.font = UIFont.preferredFont(forTextStyle: .callout)
-        if #available(iOS 10.0, *) {
-            addressLabel.adjustsFontForContentSizeCategory = true
-        }
         
         refreshButton = UIButton(type: .custom)
         refreshButton.translatesAutoresizingMaskIntoConstraints = false

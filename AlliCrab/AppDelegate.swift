@@ -70,10 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #if targetEnvironment(simulator)
         // Check if we've been launched by Snapshot
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-            guard #available(iOS 10, *) else {
-                fatalError("Only snapshots for iOS 10 and above are supported")
-            }
-            
             os_log("Detected snapshot run: setting login cookie and disabling notification prompts", type: .info)
             if let loginCookieValue = UserDefaults.standard.string(forKey: "LOGIN_COOKIE") {
                 let loginCookie = HTTPCookie(properties: [
@@ -108,9 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try fileManager.contentsOfDirectory(at: cachesDir, includingPropertiesForKeys: nil, options: [])
                     .forEach(fileManager.removeItem(at:))
             } catch {
-                if #available(iOS 10.0, *) {
-                    os_log("Failed to purge caches directory: %@", error as NSError)
-                }
+                os_log("Failed to purge caches directory: %@", error as NSError)
             }
         }
         
@@ -120,9 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if !databaseManager.open() {
-            if #available(iOS 10.0, *) {
-                os_log("Failed to open database!", type: .fault)
-            }
+            os_log("Failed to open database!", type: .fault)
             fatalError("Failed to open database!")
         }
         
@@ -130,13 +122,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let session = AVAudioSession.sharedInstance()
             try session.setCategory(AVAudioSessionCategoryAmbient, with: [.interruptSpokenAudioAndMixWithOthers])
             try session.setActive(true)
-            if #available(iOS 10.0, *) {
-                os_log("Audio session activated", type: .debug)
-            }
+            os_log("Audio session activated", type: .debug)
         } catch {
-            if #available(iOS 10.0, *) {
-                os_log("Failed to activate audio session", type: .error, error as NSError)
-            }
+            os_log("Failed to activate audio session", type: .error, error as NSError)
         }
         
         if let apiKey = ApplicationSettings.apiKey, !apiKey.isEmpty {
@@ -155,9 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
-        if #available(iOS 10, *) {
-            os_log("Handling url %@", type: .info, url as NSURL)
-        }
+        os_log("Handling url %@", type: .info, url as NSURL)
         
         guard let rootViewController = rootNavigationController else {
             return false
@@ -177,38 +163,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Background Fetch
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        if #available(iOS 10.0, *) {
-            os_log("In background fetch handler", type: .debug)
-        }
+        os_log("In background fetch handler", type: .debug)
         
         guard let resourceRepository = self.resourceRepository else {
-            if #available(iOS 10.0, *) {
-                os_log("Background fetch result = .noData (No resource repository)", type: .debug)
-            }
+            os_log("Background fetch result = .noData (No resource repository)", type: .debug)
             completionHandler(.noData)
             return
         }
         
-        if #available(iOS 10.0, *) {
-            os_log("Updating app data from background fetch handler", type: .info)
-        }
+        os_log("Updating app data from background fetch handler", type: .info)
         
         resourceRepository.updateAppData(minimumFetchInterval: 15 * .oneMinute) { result in
             switch result {
             case .success:
-                if #available(iOS 10.0, *) {
-                    os_log("Background fetch result = .newData", type: .debug)
-                }
+                os_log("Background fetch result = .newData", type: .debug)
                 completionHandler(.newData)
             case .noData:
-                if #available(iOS 10.0, *) {
-                    os_log("Background fetch result = .noData", type: .debug)
-                }
+                os_log("Background fetch result = .noData", type: .debug)
                 completionHandler(.noData)
             case let .error(error):
-                if #available(iOS 10.0, *) {
-                    os_log("Background fetch result = .failed (%@)", type: .error, error as NSError)
-                }
+                os_log("Background fetch result = .failed (%@)", type: .error, error as NSError)
                 completionHandler(.failed)
             }
         }
@@ -222,9 +196,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
-        if #available(iOS 10, *) {
-            os_log("Handling shortcut item of type %@", type: .info, shortcutItem.type)
-        }
+        os_log("Handling shortcut item of type %@", type: .info, shortcutItem.type)
         
         guard let shortcutItemType = ShortcutItemType(rawValue: shortcutItem.type), let rootViewController = rootNavigationController else {
             completionHandler(false)
@@ -306,9 +278,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         try! databaseConnectionFactory.destroyDatabase()
         
         if !databaseManager.open() {
-            if #available(iOS 10.0, *) {
-                os_log("Failed to open database!", type: .fault)
-            }
+            os_log("Failed to open database!", type: .fault)
             fatalError("Failed to open database!")
         }
         
@@ -316,4 +286,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 }
-

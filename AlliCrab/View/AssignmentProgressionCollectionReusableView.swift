@@ -13,15 +13,13 @@ class AssignmentProgressionCollectionReusableView: UICollectionReusableView {
     
     let headerLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
+        label.adjustsFontForContentSizeCategory = true
         label.font = UIFont.preferredFont(forTextStyle: .title1)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
         if !UIAccessibilityIsReduceTransparencyEnabled() {
             label.shadowColor = .black
             label.shadowOffset = CGSize(width: 1, height: 1)
-        }
-        if #available(iOS 10.0, *) {
-            label.adjustsFontForContentSizeCategory = true
         }
         
         return label

@@ -19,24 +19,20 @@ class ReviewTimelineHeaderFooterView: UITableViewHeaderFooterView {
     
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .darkGray
+        label.adjustsFontForContentSizeCategory = true
         label.font = UIFont.preferredFont(forTextStyle: .callout)
-        if #available(iOS 10.0, *) {
-            label.adjustsFontForContentSizeCategory = true
-        }
+        label.textColor = .darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
     
     let countLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .darkGray
+        label.adjustsFontForContentSizeCategory = true
         label.font = UIFont.preferredFont(forTextStyle: .callout)
-        if #available(iOS 10.0, *) {
-            label.adjustsFontForContentSizeCategory = true
-        }
+        label.textColor = .darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
     }()
@@ -51,7 +47,7 @@ class ReviewTimelineHeaderFooterView: UITableViewHeaderFooterView {
         preservesSuperviewLayoutMargins = true
         layoutMargins.top = 4
         layoutMargins.bottom = 4
-
+        
         addSubview(titleLabel)
         addSubview(countLabel)
         

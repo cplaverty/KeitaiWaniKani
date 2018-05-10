@@ -8,19 +8,19 @@
 import UIKit
 import WaniKaniKit
 
+private let timeToNextReviewFormatter: DateComponentsFormatter = {
+    let formatter = DateComponentsFormatter()
+    formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute]
+    formatter.maximumUnitCount = 1
+    formatter.unitsStyle = .abbreviated
+    formatter.zeroFormattingBehavior = .dropAll
+    
+    return formatter
+}()
+
 class StudyQueueTableViewCell: UITableViewCell {
     
     // MARK: - Properties
-    
-    private static let timeToNextReviewFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.year, .month, .weekOfMonth, .day, .hour, .minute]
-        formatter.maximumUnitCount = 1
-        formatter.unitsStyle = .abbreviated
-        formatter.zeroFormattingBehavior = .dropAll
-        
-        return formatter
-    }()
     
     var studyQueue: StudyQueue? {
         didSet {
@@ -47,26 +47,21 @@ class StudyQueueTableViewCell: UITableViewCell {
         case .now:
             timeToNextReviewLabel?.text = "Now"
         case let .date(date):
-            timeToNextReviewLabel?.text = type(of: self).timeToNextReviewFormatter.string(from: date.timeIntervalSinceNow, roundingUpwardToNearest: .oneMinute) ?? "???"
+            timeToNextReviewLabel?.text = timeToNextReviewFormatter.string(from: date.timeIntervalSinceNow, roundingUpwardToNearest: .oneMinute) ?? "???"
         }
         
         if studyQueue.reviewsAvailable > 0 {
             associatedNameLabel?.text = "Reviews"
-            associatedValueLabel?.text = NumberFormatter.localizedString(from: NSNumber(value: studyQueue.reviewsAvailable), number: .decimal)
-            return
+            associatedValueLabel?.text = NumberFormatter.localizedString(from: studyQueue.reviewsAvailable as NSNumber, number: .decimal)
+        } else {
+            associatedNameLabel?.text = "Next Day"
+            associatedValueLabel?.text = NumberFormatter.localizedString(from: studyQueue.reviewsAvailableNextDay as NSNumber, number: .decimal)
         }
-        
-        associatedNameLabel?.text = "Next Day"
-        associatedValueLabel?.text = NumberFormatter.localizedString(from: NSNumber(value: studyQueue.reviewsAvailableNextDay), number: .decimal)
-        return
     }
     
     override func prepareForReuse() {
         timeToNextReviewLabel?.text = "–"
         associatedNameLabel?.text = nil
         associatedValueLabel?.text = nil
-        
-        timeToNextReviewLabel.font = UIFont.preferredFont(forTextStyle: .title1)
-        associatedValueLabel.font = UIFont.preferredFont(forTextStyle: .title1)
     }
 }

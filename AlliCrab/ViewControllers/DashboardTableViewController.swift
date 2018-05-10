@@ -74,9 +74,7 @@ class DashboardTableViewController: UITableViewController {
     deinit {
         updateUITimer?.invalidate()
         if let notificationObservers = notificationObservers {
-            if #available(iOS 10.0, *) {
-                os_log("Removing NotificationCenter observers from %@", type: .debug, String(describing: type(of: self)))
-            }
+            os_log("Removing NotificationCenter observers from %@", type: .debug, String(describing: type(of: self)))
             notificationObservers.forEach(NotificationCenter.default.removeObserver(_:))
         }
         notificationObservers = nil
@@ -337,9 +335,7 @@ class DashboardTableViewController: UITableViewController {
         let nextFireTime = Calendar.current.nextDate(after: Date(),
                                                      matching: DateComponents(second: 0, nanosecond: 0),
                                                      matchingPolicy: .nextTime)!
-        if #available(iOS 10, *) {
-            os_log("%@ update timer will fire at %@", type: .debug, String(describing: type(of: self)), nextFireTime as NSDate)
-        }
+        os_log("%@ update timer will fire at %@", type: .debug, String(describing: type(of: self)), nextFireTime as NSDate)
         let timer = Timer(fireAt: nextFireTime, interval: .oneMinute, target: self, selector: #selector(updateUITimerDidFire(_:)), userInfo: nil, repeats: true)
         timer.tolerance = 5
         RunLoop.main.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
@@ -348,9 +344,7 @@ class DashboardTableViewController: UITableViewController {
     }
     
     @objc func updateUITimerDidFire(_ timer: Timer) {
-        if #available(iOS 10, *) {
-            os_log("%@ timer fire", type: .debug, String(describing: type(of: self)))
-        }
+        os_log("%@ timer fire", type: .debug, String(describing: type(of: self)))
         
         do {
             if try self.resourceRepository.hasStudyQueue() {
@@ -362,9 +356,7 @@ class DashboardTableViewController: UITableViewController {
             
             self.tableView.reloadSections([TableViewSection.available.rawValue, TableViewSection.upcomingReviews.rawValue, TableViewSection.levelProgression.rawValue], with: .automatic)
         } catch {
-            if #available(iOS 10.0, *) {
-                os_log("Failed to refresh study queue in timer callback: %@", type: .fault, error as NSError)
-            }
+            os_log("Failed to refresh study queue in timer callback: %@", type: .fault, error as NSError)
             fatalError(error.localizedDescription)
         }
         
@@ -374,16 +366,12 @@ class DashboardTableViewController: UITableViewController {
         
         let lastUpdate = resourceRepository.lastAppDataUpdateDate
         if let lastUpdate = lastUpdate, Date().timeIntervalSince(lastUpdate) < minimumFetchInterval {
-            if #available(iOS 10, *) {
-                os_log("No fetch required for update date %@ (%.3f < %.3f)", type: .debug, lastUpdate as NSDate, Date().timeIntervalSince(lastUpdate), minimumFetchInterval)
-            }
+            os_log("No fetch required for update date %@ (%.3f < %.3f)", type: .debug, lastUpdate as NSDate, Date().timeIntervalSince(lastUpdate), minimumFetchInterval)
             updateStatusBarForLastUpdate(lastUpdate)
             return
         }
         
-        if #available(iOS 10, *) {
-            os_log("Triggering fetch", type: .debug)
-        }
+        os_log("Triggering fetch", type: .debug)
         updateData(minimumFetchInterval: minimumFetchInterval, showAlertOnErrors: false)
     }
     
@@ -465,9 +453,7 @@ class DashboardTableViewController: UITableViewController {
             return
         }
         
-        if #available(iOS 10.0, *) {
-            os_log("Preparing segue %@", type: .debug, identifier)
-        }
+        os_log("Preparing segue %@", type: .debug, identifier)
         
         switch segueIdentifier {
         case .settings: break
@@ -543,9 +529,7 @@ class DashboardTableViewController: UITableViewController {
     }
     
     private func addNotificationObservers() -> [NSObjectProtocol] {
-        if #available(iOS 10.0, *) {
-            os_log("Adding NotificationCenter observers to %@", type: .debug, String(describing: type(of: self)))
-        }
+        os_log("Adding NotificationCenter observers to %@", type: .debug, String(describing: type(of: self)))
         let notificationObservers = [
             NotificationCenter.default.addObserver(forName: .waniKaniUserInformationDidChange, object: nil, queue: .main) { [unowned self] _ in
                 do {
@@ -559,9 +543,7 @@ class DashboardTableViewController: UITableViewController {
                         self.levelTimeline = try self.resourceRepository.levelTimeline()
                     }
                 } catch {
-                    if #available(iOS 10.0, *) {
-                        os_log("Failed to refresh data in notification observer: %@", type: .fault, error as NSError)
-                    }
+                    os_log("Failed to refresh data in notification observer: %@", type: .fault, error as NSError)
                     fatalError(error.localizedDescription)
                 }
                 
@@ -582,9 +564,7 @@ class DashboardTableViewController: UITableViewController {
                         self.levelTimeline = try self.resourceRepository.levelTimeline()
                     }
                 } catch {
-                    if #available(iOS 10.0, *) {
-                        os_log("Failed to refresh data in notification observer: %@", type: .fault, error as NSError)
-                    }
+                    os_log("Failed to refresh data in notification observer: %@", type: .fault, error as NSError)
                     fatalError(error.localizedDescription)
                 }
                 
@@ -601,9 +581,7 @@ class DashboardTableViewController: UITableViewController {
                         self.levelTimeline = try self.resourceRepository.levelTimeline()
                     }
                 } catch {
-                    if #available(iOS 10.0, *) {
-                        os_log("Failed to refresh data in notification observer: %@", type: .fault, error as NSError)
-                    }
+                    os_log("Failed to refresh data in notification observer: %@", type: .fault, error as NSError)
                     fatalError(error.localizedDescription)
                 }
                 

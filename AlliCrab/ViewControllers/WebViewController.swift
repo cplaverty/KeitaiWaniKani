@@ -58,17 +58,9 @@ class WebViewController: UIViewController {
         config.applicationNameForUserAgent = "Mobile AlliCrab"
         
         let delegate = UIApplication.shared.delegate as! AppDelegate
+        config.ignoresViewportScaleLimits = true
+        config.mediaTypesRequiringUserActionForPlayback = [.video]
         config.processPool = delegate.webKitProcessPool
-        
-        if #available(iOS 10.0, *) {
-            config.ignoresViewportScaleLimits = true
-        }
-        
-        if #available(iOS 10.0, *) {
-            config.mediaTypesRequiringUserActionForPlayback = [.video]
-        } else {
-            config.requiresUserActionForMediaPlayback = false
-        }
         
         return config
     }()
@@ -133,18 +125,14 @@ class WebViewController: UIViewController {
         if onePasswordExtension.isAppExtensionAvailable() {
             onePasswordExtension.createExtensionItem(forWebView: webView) { extensionItem, error -> Void in
                 if let error = error {
-                    if #available(iOS 10.0, *) {
-                        os_log("Failed to create 1Password extension item: %@", type: .error, error as NSError)
-                    }
+                    os_log("Failed to create 1Password extension item: %@", type: .error, error as NSError)
                 } else if let extensionItem = extensionItem {
                     activityItems.append(extensionItem)
                 }
                 self.presentActivityViewController(activityItems, title: self.webView.title, sender: sender) {
                     activityType, completed, returnedItems, activityError in
                     if let error = activityError {
-                        if #available(iOS 10.0, *) {
-                            os_log("Activity failed: %@", type: .error, error as NSError)
-                        }
+                        os_log("Activity failed: %@", type: .error, error as NSError)
                         DispatchQueue.main.async {
                             self.showAlert(title: "Activity failed", message: error.localizedDescription)
                         }
@@ -159,9 +147,7 @@ class WebViewController: UIViewController {
                         onePasswordExtension.fillReturnedItems(returnedItems, intoWebView: self.webView) { success, error in
                             if !success {
                                 let errorDescription = error?.localizedDescription ?? "(No error details)"
-                                if #available(iOS 10.0, *) {
-                                    os_log("Failed to fill password from password manager: %@", type: .error, errorDescription)
-                                }
+                                os_log("Failed to fill password from password manager: %@", type: .error, errorDescription)
                                 DispatchQueue.main.async {
                                     self.showAlert(title: "Password fill failed", message: errorDescription)
                                 }
@@ -180,11 +166,7 @@ class WebViewController: UIViewController {
             return
         }
         
-        if #available(iOS 10.0, *) {
-            UIApplication.shared.open(URL)
-        } else {
-            UIApplication.shared.openURL(URL)
-        }
+        UIApplication.shared.open(URL)
     }
     
     @objc func done(_ sender: UIBarButtonItem) {
@@ -327,10 +309,8 @@ class WebViewController: UIViewController {
         var buttons: [UIBarButtonItem] = []
         buttons.reserveCapacity(1)
         
-        if #available(iOS 10.0, *) {
-            if shouldIncludeDoneButton {
-                buttons.append(doneButton)
-            }
+        if shouldIncludeDoneButton {
+            buttons.append(doneButton)
         }
         
         return buttons
@@ -339,13 +319,6 @@ class WebViewController: UIViewController {
     var customRightBarButtonItems: [UIBarButtonItem] {
         var buttons: [UIBarButtonItem] = []
         buttons.reserveCapacity(1)
-        
-        if #available(iOS 10.0, *) {
-        } else {
-            if shouldIncludeDoneButton {
-                buttons.append(doneButton)
-            }
-        }
         
         return buttons
     }
@@ -396,16 +369,12 @@ extension WebViewController: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        if #available(iOS 10.0, *) {
-            os_log("Navigation failed: %@", type: .error, error as NSError)
-        }
+        os_log("Navigation failed: %@", type: .error, error as NSError)
         showErrorDialog(error)
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        if #available(iOS 10.0, *) {
-            os_log("Navigation failed: %@", type: .error, error as NSError)
-        }
+        os_log("Navigation failed: %@", type: .error, error as NSError)
         showErrorDialog(error)
     }
     
@@ -460,9 +429,7 @@ extension WebViewController: WKUIDelegate {
         DispatchQueue.main.async {
             let host = frame.request.url?.host ?? "web page"
             let title = "From \(host):"
-            if #available(iOS 10.0, *) {
-                os_log("Displaying alert with title %@ and message %@", type: .debug, title, message)
-            }
+            os_log("Displaying alert with title %@ and message %@", type: .debug, title, message)
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in completionHandler() })
             
@@ -474,9 +441,7 @@ extension WebViewController: WKUIDelegate {
         DispatchQueue.main.async {
             let host = frame.request.url?.host ?? "web page"
             let title = "From \(host):"
-            if #available(iOS 10.0, *) {
-                os_log("Displaying alert with title %@ and message %@", type: .debug, title, message)
-            }
+            os_log("Displaying alert with title %@ and message %@", type: .debug, title, message)
             let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in completionHandler(true) })
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in completionHandler(false) })
@@ -489,9 +454,7 @@ extension WebViewController: WKUIDelegate {
         DispatchQueue.main.async {
             let host = frame.request.url?.host ?? "web page"
             let title = "From \(host):"
-            if #available(iOS 10.0, *) {
-                os_log("Displaying input panel with title %@ and message %@", type: .debug, title, prompt)
-            }
+            os_log("Displaying input panel with title %@ and message %@", type: .debug, title, prompt)
             let alert = UIAlertController(title: title, message: prompt, preferredStyle: .alert)
             alert.addTextField { $0.text = defaultText }
             alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in completionHandler(alert.textFields?.first?.text) })

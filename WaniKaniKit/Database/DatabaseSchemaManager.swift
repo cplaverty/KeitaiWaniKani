@@ -42,18 +42,14 @@ public class DatabaseSchemaManager {
             try table.create(in: database)
         }
         
-        if #available(iOS 10.0, *) {
-            os_log("Setting database version %u", type: .debug, expectedSchemaVersion)
-        }
+        os_log("Setting database version %u", type: .debug, expectedSchemaVersion)
         setVersion(of: database, to: expectedSchemaVersion)
     }
 }
 
 private extension TableProtocol {
     func create(in database: FMDatabase) throws {
-        if #available(iOS 10.0, *) {
-            os_log("Creating table %@", type: .debug, name)
-        }
+        os_log("Creating table %@", type: .debug, name)
         if !database.executeStatements(sqlStatement) {
             throw database.lastError()
         }

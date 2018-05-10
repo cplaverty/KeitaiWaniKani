@@ -19,9 +19,7 @@ protocol UserScriptSupport {
 
 extension UserScriptSupport {
     func injectUserScripts(for url: URL) -> Bool {
-        if #available(iOS 10.0, *) {
-            os_log("Loading user scripts for %@", type: .info, url as NSURL)
-        }
+        os_log("Loading user scripts for %@", type: .info, url as NSURL)
         var scriptsInjected = false
         var bundledFontReferencesInjected = false
         
@@ -57,17 +55,13 @@ protocol WebViewUserScriptSupport: UserScriptSupport, BundleResourceLoader {
 
 extension WebViewUserScriptSupport {
     func injectStyleSheet(name: String) {
-        if #available(iOS 10.0, *) {
-            os_log("Loading stylesheet %@", type: .debug, name + ".css")
-        }
+        os_log("Loading stylesheet %@", type: .debug, name + ".css")
         let contents = loadBundleResource(name: name, withExtension: "css", javascriptEncode: true)
         injectStyleSheet(title: "\(name).css", contents: contents)
     }
     
     func injectScript(name: String) {
-        if #available(iOS 10.0, *) {
-            os_log("Loading script %@", type: .debug, name + ".js")
-        }
+        os_log("Loading script %@", type: .debug, name + ".js")
         let source = loadBundleResource(name: name, withExtension: "js", javascriptEncode: false)
         let script = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         
@@ -84,9 +78,7 @@ extension WebViewUserScriptSupport {
             let mimeType = isOpenType ? "font/otf" : "font/ttf"
             let fontFormat = isOpenType ? "opentype" : "truetype"
             
-            if #available(iOS 10.0, *) {
-                os_log("Adding %@", type: .debug, fontFamily)
-            }
+            os_log("Adding %@", type: .debug, fontFamily)
             let source = "@font-face { font-family: \"\(fontFamily)\"; src: url(data:\(mimeType);base64,\(data.base64EncodedString())) format(\"\(fontFormat)\"); }"
             
             injectStyleSheet(title: "font: \(fontFamily)", contents: source)

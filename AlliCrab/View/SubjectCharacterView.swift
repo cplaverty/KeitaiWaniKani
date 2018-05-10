@@ -166,9 +166,7 @@ class SubjectCharacterView: UIView {
         self.imageLoader = imageLoader
         imageLoader.loadImage { [weak self] (image, error) in
             guard let image = image else {
-                if #available(iOS 10.0, *) {
-                    os_log("Failed to fetch subject image %@: %@", type: .error, imageLoader.characterImage?.url.absoluteString ?? "<no renderable image>", error?.localizedDescription ?? "<no error>")
-                }
+                os_log("Failed to fetch subject image %@: %@", type: .error, imageLoader.characterImage?.url.absoluteString ?? "<no renderable image>", error?.localizedDescription ?? "<no error>")
                 return
             }
             

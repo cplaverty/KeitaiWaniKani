@@ -19,16 +19,16 @@ private struct MessageKey {
 }
 
 private let getAPIKeyScript = """
-    "use strict";
-    $.get('/settings/account').done(function(data, textStatus, jqXHR) {
-        var apiKey = $(data).find('#user_api_key_v2').attr('value');
-        if (typeof apiKey === 'string') {
-            window.webkit.messageHandlers.\(MessageHandlerName.apiKey.rawValue).postMessage({ '\(MessageKey.success)': apiKey });
-        }
-    }).fail(function(jqXHR, textStatus) {
-        window.webkit.messageHandlers.\(MessageHandlerName.apiKey.rawValue).postMessage({ '\(MessageKey.error)': textStatus });
-    });
-    """
+"use strict";
+$.get('/settings/account').done(function(data, textStatus, jqXHR) {
+    var apiKey = $(data).find('#user_api_key_v2').attr('value');
+    if (typeof apiKey === 'string') {
+        window.webkit.messageHandlers.\(MessageHandlerName.apiKey.rawValue).postMessage({ '\(MessageKey.success)': apiKey });
+    }
+}).fail(function(jqXHR, textStatus) {
+    window.webkit.messageHandlers.\(MessageHandlerName.apiKey.rawValue).postMessage({ '\(MessageKey.error)': textStatus });
+});
+"""
 
 class WaniKaniLoginWebViewController: WebViewController {
     
@@ -46,9 +46,7 @@ class WaniKaniLoginWebViewController: WebViewController {
     
     func validate(apiKey: String) {
         if !apiKey.isEmpty {
-            if #available(iOS 10.0, *) {
-                os_log("Received API Key %@", type: .debug, apiKey)
-            }
+            os_log("Received API Key %@", type: .debug, apiKey)
             ApplicationSettings.apiKey = apiKey
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let resourceRepository = appDelegate.makeResourceRepository(forAPIKey: apiKey)
@@ -56,16 +54,12 @@ class WaniKaniLoginWebViewController: WebViewController {
             appDelegate.presentDashboardViewController(animated: true)
             dismiss(animated: true, completion: nil)
         } else {
-            if #available(iOS 10.0, *) {
-                os_log("Got blank API key", type: .info)
-            }
+            os_log("Got blank API key", type: .info)
             let alert = UIAlertController(title: "No API version 2 key found.  Would you like to generate one?", message: "A WaniKani API version 2 key could not be found for your account.  If you've never used a third-party app or user script, one may not have been generated and you should generate one now.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Generate API Version 2 Key", style: .default) { _ in
                 self.webView.evaluateJavaScript("$('#edit_user_api_key_v2').submit();", completionHandler: { (_, error) in
                     if let error = error {
-                        if #available(iOS 10.0, *) {
-                            os_log("Failed to click API version 2 key generation button: %@", type: .error, error as NSError)
-                        }
+                        os_log("Failed to click API version 2 key generation button: %@", type: .error, error as NSError)
                         self.showAlert(title: "Failed to generate API version 2 key", message: "API version 2 key could not be generated: \(error.localizedDescription).  Please try again later.") { self.finish() }
                     }
                 })
@@ -90,9 +84,7 @@ extension WaniKaniLoginWebViewController {
         
         switch url {
         case WaniKaniURL.dashboard:
-            if #available(iOS 10.0, *) {
-                os_log("Logged in: redirecting to settings", type: .debug)
-            }
+            os_log("Logged in: redirecting to settings", type: .debug)
             decisionHandler(.cancel)
             DispatchQueue.main.async {
                 webView.load(URLRequest(url: WaniKaniURL.accountSettings))
@@ -108,9 +100,7 @@ extension WaniKaniLoginWebViewController {
             return
         }
         
-        if #available(iOS 10.0, *) {
-            os_log("On settings page: fetching API Key", type: .debug)
-        }
+        os_log("On settings page: fetching API Key", type: .debug)
         webView.evaluateJavaScript("$('#user_api_key_v2').attr('value');") { apiKey, error in
             if let apiKey = apiKey as? String {
                 DispatchQueue.main.async {
@@ -118,9 +108,7 @@ extension WaniKaniLoginWebViewController {
                 }
             }
             else if let error = error {
-                if #available(iOS 10.0, *) {
-                    os_log("Failed to execute API key fetch script: %@", type: .error, error as NSError)
-                }
+                os_log("Failed to execute API key fetch script: %@", type: .error, error as NSError)
                 webView.configuration.userContentController.addUserScript(WKUserScript(source: getAPIKeyScript, injectionTime: .atDocumentStart, forMainFrameOnly: true))
             }
         }
@@ -137,18 +125,14 @@ extension WaniKaniLoginWebViewController {
         
         switch messageName {
         case .apiKey:
-            if #available(iOS 10.0, *) {
-                os_log("Received apiKey script message body %@", type: .debug, String(describing: message.body))
-            }
+            os_log("Received apiKey script message body %@", type: .debug, String(describing: message.body))
             let payload = message.body as! [String: Any]
             if let apiKey = payload[MessageKey.success] as? String {
                 DispatchQueue.main.async {
                     self.validate(apiKey: apiKey)
                 }
             } else if let error = payload[MessageKey.error] {
-                if #available(iOS 10.0, *) {
-                    os_log("Received script message error: %@", type: .debug, String(describing: error))
-                }
+                os_log("Received script message error: %@", type: .debug, String(describing: error))
             }
         }
     }

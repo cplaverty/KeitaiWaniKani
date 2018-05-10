@@ -257,9 +257,7 @@ public class ResourceRepositoryReader {
                 let srsStageNumeric = resultSet.long(forColumn: table.srsStage.name)
                 
                 guard let srsStage = SRSStage(numericLevel: srsStageNumeric) else {
-                    if #available(iOS 10.0, *) {
-                        os_log("Returned unexpected numeric srs stage %d", type: .info, srsStageNumeric)
-                    }
+                    os_log("Returned unexpected numeric srs stage %d", type: .info, srsStageNumeric)
                     continue
                 }
                 
@@ -398,9 +396,7 @@ public class ResourceRepositoryReader {
                 }
                 
                 let minStartDate = unlockDates.lazy.filter({ $0 > earliestPossibleGuruDate }).min() ?? now
-                if #available(iOS 10.0, *) {
-                    os_log("levelTimeline: level = %d, earliestPossibleGuruDate = %@, minStartDate = %@", type: .debug, level, earliestPossibleGuruDate as NSDate, minStartDate as NSDate)
-                }
+                os_log("levelTimeline: level = %d, earliestPossibleGuruDate = %@, minStartDate = %@", type: .debug, level, earliestPossibleGuruDate as NSDate, minStartDate as NSDate)
                 startDates.append(minStartDate)
             }
             

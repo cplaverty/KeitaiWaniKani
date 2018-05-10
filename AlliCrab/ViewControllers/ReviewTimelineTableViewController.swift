@@ -157,9 +157,7 @@ class ReviewTimelineTableViewController: UITableViewController {
             return
         }
         
-        if #available(iOS 10.0, *) {
-            os_log("Updating review timeline with filter %@", type: .info, String(describing: filter))
-        }
+        os_log("Updating review timeline with filter %@", type: .info, String(describing: filter))
         
         var level: Int? = nil
         var srsStage: SRSStage? = nil

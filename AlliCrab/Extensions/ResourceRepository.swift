@@ -27,9 +27,7 @@ extension ResourceRepository {
             case .success, .noData:
                 results.append(result)
                 if results.count == expectedResultCount {
-                    if #available(iOS 10, *) {
-                        os_log("All resources received.  Notifying completion.", type: .debug)
-                    }
+                    os_log("All resources received.  Notifying completion.", type: .debug)
                     if results.contains(.success) {
                         completionHandler(.success)
                     } else {

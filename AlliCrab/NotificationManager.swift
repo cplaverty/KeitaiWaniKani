@@ -14,11 +14,7 @@ class NotificationManager {
     private var assignmentsChangeObserver: NSObjectProtocol?
     
     init() {
-        if #available(iOS 10.0, *) {
-            notificationScheduler = UserNotificationScheduler()
-        } else {
-            notificationScheduler = LocalNotificationScheduler()
-        }
+        notificationScheduler = UserNotificationScheduler()
     }
     
     deinit {
@@ -28,13 +24,9 @@ class NotificationManager {
     public func registerForNotifications(resourceRepository: ResourceRepositoryReader) {
         notificationScheduler.requestAuthorisation { (granted, error) in
             if let error = error {
-                if #available(iOS 10.0, *) {
-                    os_log("Got error from notification authorisation: %@", type: .error, error as NSError)
-                }
+                os_log("Got error from notification authorisation: %@", type: .error, error as NSError)
             }
-            if #available(iOS 10.0, *) {
-                os_log("Notification authorisation granted = %@", type: .info, String(granted))
-            }
+            os_log("Notification authorisation granted = %@", type: .info, String(granted))
             
             if granted {
                 self.listenForAssignmentChanges(resourceRepository: resourceRepository)
@@ -64,9 +56,7 @@ class NotificationManager {
             let reviewTimeline = try resourceRepository.reviewTimeline()
             
             let currentReviewCount = reviewTimeline.lazy.filter({ review in review.dateAvailable <= now }).reduce(0, { count, review in count + review.itemCounts.total })
-            if #available(iOS 10.0, *) {
-                os_log("Badging app icon: %d", type: .debug, currentReviewCount)
-            }
+            os_log("Badging app icon: %d", type: .debug, currentReviewCount)
             
             UIApplication.shared.applicationIconBadgeNumber = currentReviewCount
             
@@ -85,9 +75,7 @@ class NotificationManager {
         } catch ResourceRepositoryError.noDatabase {
             clearBadgeNumberAndRemoveAllNotifications()
         } catch {
-            if #available(iOS 10.0, *) {
-                os_log("Failed to update badge count and send notifications: %@", type: .error, error as NSError)
-            }
+            os_log("Failed to update badge count and send notifications: %@", type: .error, error as NSError)
         }
     }
     
@@ -97,9 +85,7 @@ class NotificationManager {
     }
     
     private func clearBadgeNumber() {
-        if #available(iOS 10.0, *) {
-            os_log("Clearing badge number", type: .debug)
-        }
+        os_log("Clearing badge number", type: .debug)
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
 }
@@ -111,48 +97,6 @@ private protocol NotificationScheduler {
     func removeAllNotifications()
 }
 
-private class LocalNotificationScheduler: NotificationScheduler {
-    func requestAuthorisation(completionHandler: @escaping (Bool, Error?) -> Void) {
-        UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
-        // We assume success
-        completionHandler(true, nil)
-    }
-    
-    func removeAllNotifications() {
-        if #available(iOS 10.0, *) {
-            os_log("Removing all notifications", type: .debug)
-        }
-        
-        UIApplication.shared.cancelAllLocalNotifications()
-    }
-    
-    func scheduleNotification(at date: Date, badgeNumber: Int) {
-        if #available(iOS 10.0, *) {
-            os_log("Scheduling local notification with badge number %d at %@", type: .debug, badgeNumber, date as NSDate)
-        }
-        
-        let localNotification = UILocalNotification()
-        localNotification.fireDate = date
-        localNotification.applicationIconBadgeNumber = badgeNumber
-        
-        UIApplication.shared.scheduleLocalNotification(localNotification)
-    }
-    
-    func scheduleNotification(at date: Date, body: String) {
-        if #available(iOS 10.0, *) {
-            os_log("Scheduling local notification at %@", type: .debug, date as NSDate)
-        }
-        
-        let localNotification = UILocalNotification()
-        localNotification.fireDate = date
-        localNotification.alertBody = body
-        localNotification.soundName = UILocalNotificationDefaultSoundName
-        
-        UIApplication.shared.scheduleLocalNotification(localNotification)
-    }
-}
-
-@available(iOS 10.0, *)
 private class UserNotificationScheduler: NotificationScheduler {
     func requestAuthorisation(completionHandler: @escaping (Bool, Error?) -> Void) {
         let center = UNUserNotificationCenter.current()

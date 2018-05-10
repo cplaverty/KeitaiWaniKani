@@ -33,9 +33,7 @@ private class Request {
     }
     
     deinit {
-        if #available(iOS 10, *) {
-            os_log("Marking progress complete for request (was %jd of %jd)", type: .debug, progress.completedUnitCount, progress.totalUnitCount)
-        }
+        os_log("Marking progress complete for request (was %jd of %jd)", type: .debug, progress.completedUnitCount, progress.totalUnitCount)
         progress.totalUnitCount = min(progress.totalUnitCount, 1)
         progress.completedUnitCount = min(progress.totalUnitCount, 1)
     }
@@ -190,12 +188,10 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
         let httpStatusCode: Int = httpResponse?.statusCode ?? 200
         let httpStatusCodeDescription = HTTPURLResponse.localizedString(forStatusCode: httpStatusCode)
         
-        if #available(iOS 10.0, *) {
-            if let data = data {
-                os_log("Response: %@ (%d), %{iec-bytes}d received", type: .debug, httpStatusCodeDescription, httpStatusCode, data.count)
-            } else {
-                os_log("Response: %@ (%d) <no data>", type: .debug, httpStatusCodeDescription, httpStatusCode)
-            }
+        if let data = data {
+            os_log("Response: %@ (%d), %{iec-bytes}d received", type: .debug, httpStatusCodeDescription, httpStatusCode, data.count)
+        } else {
+            os_log("Response: %@ (%d) <no data>", type: .debug, httpStatusCodeDescription, httpStatusCode)
         }
         
         switch httpStatusCode {
@@ -212,9 +208,7 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
                 errorMessage = httpStatusCodeDescription
             }
             
-            if #available(iOS 10.0, *) {
-                os_log("Error message received: %@", type: .debug, errorMessage)
-            }
+            os_log("Error message received: %@", type: .debug, errorMessage)
             
             switch httpStatusCode {
             case 401:
@@ -231,9 +225,7 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
         var urlRequest = URLRequest(url: url)
         urlRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         
-        if #available(iOS 10.0, *) {
-            os_log("Initiating request for %@", type: .debug, url.absoluteString)
-        }
+        os_log("Initiating request for %@", type: .debug, url.absoluteString)
         
         let task = session.dataTask(with: urlRequest, completionHandler: completionHandler)
         addTaskStateListener(task)
@@ -253,38 +245,26 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
                 switch task.state {
                 case .running:
                     guard !running else {
-                        if #available(iOS 10.0, *) {
-                            os_log("Ignoring duplicate state change for task with identifier %d triggering network activity start", type: .debug, task.taskIdentifier)
-                        }
+                        os_log("Ignoring duplicate state change for task with identifier %d triggering network activity start", type: .debug, task.taskIdentifier)
                         return
                     }
-                    if #available(iOS 10.0, *) {
-                        os_log("Task with identifier %d triggering network activity start", type: .debug, task.taskIdentifier)
-                    }
+                    os_log("Task with identifier %d triggering network activity start", type: .debug, task.taskIdentifier)
                     networkActivityDelegate.networkActivityDidStart()
                     running = true
                 case .suspended:
                     guard running else {
-                        if #available(iOS 10.0, *) {
-                            os_log("Ignoring duplicate state change for task with identifier %d triggering network activity finish", type: .debug, task.taskIdentifier)
-                        }
+                        os_log("Ignoring duplicate state change for task with identifier %d triggering network activity finish", type: .debug, task.taskIdentifier)
                         return
                     }
-                    if #available(iOS 10.0, *) {
-                        os_log("Task with identifier %d triggering network activity finish", type: .debug, task.taskIdentifier)
-                    }
+                    os_log("Task with identifier %d triggering network activity finish", type: .debug, task.taskIdentifier)
                     networkActivityDelegate.networkActivityDidFinish()
                     running = false
                 case .canceling, .completed:
                     guard running else {
-                        if #available(iOS 10.0, *) {
-                            os_log("Ignoring duplicate state change for task with identifier %d triggering network activity finish (terminal state)", type: .debug, task.taskIdentifier)
-                        }
+                        os_log("Ignoring duplicate state change for task with identifier %d triggering network activity finish (terminal state)", type: .debug, task.taskIdentifier)
                         return
                     }
-                    if #available(iOS 10.0, *) {
-                        os_log("Task with identifier %d triggering network activity finish (terminal state)", type: .debug, task.taskIdentifier)
-                    }
+                    os_log("Task with identifier %d triggering network activity finish (terminal state)", type: .debug, task.taskIdentifier)
                     guard running else { return }
                     networkActivityDelegate.networkActivityDidFinish()
                     running = false

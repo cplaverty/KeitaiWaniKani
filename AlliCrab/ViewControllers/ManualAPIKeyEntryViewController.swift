@@ -62,18 +62,14 @@ class ManualAPIKeyEntryViewController: UIViewController {
                 
                 switch result {
                 case .success, .noData:
-                    if #available(iOS 10.0, *) {
-                        os_log("API Key verified", type: .info)
-                    }
+                    os_log("API Key verified", type: .info)
                     ApplicationSettings.apiKey = apiKey
                     appDelegate.resourceRepository = resourceRepository
                     appDelegate.presentDashboardViewController(animated: true)
                 case .error(WaniKaniAPIError.invalidAPIKey):
                     self.showAlert(title: "Invalid API Key", message: "The API key you entered is invalid.  Please check and try again.")
                 case let .error(error):
-                    if #available(iOS 10.0, *) {
-                        os_log("Error when verifying API Key: %@", type: .error, error as NSError)
-                    }
+                    os_log("Error when verifying API Key: %@", type: .error, error as NSError)
                     self.showAlert(title: "Unable to verify API Key", message: "An error occurred when attempting to validate the API Key.\nDetails: \(error.localizedDescription)")
                 }
             }

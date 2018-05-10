@@ -11,13 +11,11 @@ import UIKit
 class ProgressReportingBarButtonItemView: UIView {
     let textLabel: UILabel = {
         let label = UILabel()
+        label.adjustsFontForContentSizeCategory = true
         label.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         label.font = UIFont.preferredFont(forTextStyle: .caption1)
         label.textAlignment = .center
         label.textColor = .black
-        if #available(iOS 10.0, *) {
-            label.adjustsFontForContentSizeCategory = true
-        }
         
         return label
     }()

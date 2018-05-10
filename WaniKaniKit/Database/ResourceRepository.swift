@@ -71,9 +71,7 @@ extension ResourceType {
     }
     
     func setLastUpdateDate(_ lastUpdate: Date, in database: FMDatabase) throws {
-        if #available(iOS 10.0, *) {
-            os_log("Setting last update date for resource %@ to %@", type: .debug, rawValue, lastUpdate as NSDate)
-        }
+        os_log("Setting last update date for resource %@ to %@", type: .debug, rawValue, lastUpdate as NSDate)
         let table = Tables.resourceLastUpdate
         let query = """
         INSERT OR REPLACE INTO \(table.name)
@@ -140,9 +138,7 @@ public class ResourceRepository: ResourceRepositoryReader {
             }).flatMap { $0 }
         
         if let lastUpdate = lastUpdate, requestStartTime.timeIntervalSince(lastUpdate) < minimumFetchInterval {
-            if #available(iOS 10.0, *) {
-                os_log("Skipping resource fetch: %.3f < %.3f", type: .info, requestStartTime.timeIntervalSince(lastUpdate), minimumFetchInterval)
-            }
+            os_log("Skipping resource fetch: %.3f < %.3f", type: .info, requestStartTime.timeIntervalSince(lastUpdate), minimumFetchInterval)
             
             let progress = Progress(totalUnitCount: 1)
             progress.completedUnitCount = 1
@@ -154,39 +150,29 @@ public class ResourceRepository: ResourceRepositoryReader {
         
         return api.fetchResource(ofType: .user) { (resource, requestError) in
             if let error = requestError {
-                if #available(iOS 10.0, *) {
-                    os_log("Got error when fetching: %@", type: .error, error as NSError)
-                }
+                os_log("Got error when fetching: %@", type: .error, error as NSError)
                 completionHandler(.error(error))
                 return
             }
             guard let resource = resource, let data = resource.data as? UserInformation else {
-                if #available(iOS 10.0, *) {
-                    os_log("No data available", type: .debug)
-                }
+                os_log("No data available", type: .debug)
                 self.notifyNoData(databaseQueue: databaseQueue, resourceType: resourceType, requestStartTime: requestStartTime, completionHandler: completionHandler)
                 return
             }
             
             if let lastUpdate = lastUpdate, resource.dataUpdatedAt < lastUpdate {
-                if #available(iOS 10.0, *) {
-                    os_log("No change from last update", type: .debug)
-                }
+                os_log("No change from last update", type: .debug)
                 self.notifyNoData(databaseQueue: databaseQueue, resourceType: resourceType, requestStartTime: requestStartTime, completionHandler: completionHandler)
                 return
             }
             
             var databaseError: Error? = nil
             databaseQueue.inTransaction { (database, rollback) in
-                if #available(iOS 10.0, *) {
-                    os_log("Writing to database", type: .debug)
-                }
+                os_log("Writing to database", type: .debug)
                 do {
                     try data.write(to: database)
                     
-                    if #available(iOS 10.0, *) {
-                        os_log("Setting last update date for resource %@ to %@", type: .info, resourceType.rawValue, requestStartTime as NSDate)
-                    }
+                    os_log("Setting last update date for resource %@ to %@", type: .info, resourceType.rawValue, requestStartTime as NSDate)
                     try resourceType.setLastUpdateDate(requestStartTime, in: database)
                 } catch {
                     databaseError = error
@@ -195,16 +181,12 @@ public class ResourceRepository: ResourceRepositoryReader {
             }
             
             if let error = databaseError {
-                if #available(iOS 10.0, *) {
-                    os_log("Error writing to database", type: .error, error as NSError)
-                }
+                os_log("Error writing to database", type: .error, error as NSError)
                 completionHandler(.error(error))
                 return
             }
             
-            if #available(iOS 10.0, *) {
-                os_log("Fetch of resource %@ finished successfully", type: .info, resourceType.rawValue)
-            }
+            os_log("Fetch of resource %@ finished successfully", type: .info, resourceType.rawValue)
             DispatchQueue.main.async {
                 self.postNotifications(for: resourceType)
             }
@@ -257,9 +239,7 @@ public class ResourceRepository: ResourceRepositoryReader {
             }).flatMap { $0 }
         
         if let lastUpdate = lastUpdate, requestStartTime.timeIntervalSince(lastUpdate) < minimumFetchInterval {
-            if #available(iOS 10.0, *) {
-                os_log("Skipping resource fetch: %.3f < %.3f", type: .debug, requestStartTime.timeIntervalSince(lastUpdate), minimumFetchInterval)
-            }
+            os_log("Skipping resource fetch: %.3f < %.3f", type: .debug, requestStartTime.timeIntervalSince(lastUpdate), minimumFetchInterval)
             
             let progress = Progress(totalUnitCount: 1)
             progress.completedUnitCount = 1
@@ -269,12 +249,10 @@ public class ResourceRepository: ResourceRepositoryReader {
             return progress
         }
         
-        if #available(iOS 10.0, *) {
-            if let lastUpdate = lastUpdate {
-                os_log("Fetching resource %@ (updated since %@)", type: .info, resourceType.rawValue, lastUpdate as NSDate)
-            } else {
-                os_log("Fetching resource %@", type: .info, resourceType.rawValue)
-            }
+        if let lastUpdate = lastUpdate {
+            os_log("Fetching resource %@ (updated since %@)", type: .info, resourceType.rawValue, lastUpdate as NSDate)
+        } else {
+            os_log("Fetching resource %@", type: .info, resourceType.rawValue)
         }
         
         let type = requestForLastUpdateDate(lastUpdate)
@@ -285,22 +263,16 @@ public class ResourceRepository: ResourceRepositoryReader {
             if let error = requestError {
                 switch error {
                 case WaniKaniAPIError.noContent:
-                    if #available(iOS 10.0, *) {
-                        os_log("No data available: %@", type: .debug, error as NSError)
-                    }
+                    os_log("No data available: %@", type: .debug, error as NSError)
                     self.notifyNoData(databaseQueue: databaseQueue, resourceType: resourceType, requestStartTime: requestStartTime, completionHandler: completionHandler)
                 default:
-                    if #available(iOS 10.0, *) {
-                        os_log("Got error when fetching: %@", type: .error, error as NSError)
-                    }
+                    os_log("Got error when fetching: %@", type: .error, error as NSError)
                     completionHandler(.error(error))
                 }
                 return false
             }
             guard let resources = resources, resources.totalCount > 0 else {
-                if #available(iOS 10.0, *) {
-                    os_log("No data available (response nil or total count zero)", type: .debug)
-                }
+                os_log("No data available (response nil or total count zero)", type: .debug)
                 self.notifyNoData(databaseQueue: databaseQueue, resourceType: resourceType, requestStartTime: requestStartTime, completionHandler: completionHandler)
                 return false
             }
@@ -310,9 +282,7 @@ public class ResourceRepository: ResourceRepositoryReader {
             
             var databaseError: Error? = nil
             databaseQueue.inTransaction { (database, rollback) in
-                if #available(iOS 10.0, *) {
-                    os_log("Writing %d entries to database (page %d of %d)", type: .debug, resources.data.count, totalPagesReceived, resources.estimatedPageCount)
-                }
+                os_log("Writing %d entries to database (page %d of %d)", type: .debug, resources.data.count, totalPagesReceived, resources.estimatedPageCount)
                 do {
                     try resources.write(to: database)
                     
@@ -326,17 +296,13 @@ public class ResourceRepository: ResourceRepositoryReader {
             }
             
             if let error = databaseError {
-                if #available(iOS 10.0, *) {
-                    os_log("Error writing to database", type: .error, error as NSError)
-                }
+                os_log("Error writing to database", type: .error, error as NSError)
                 completionHandler(.error(error))
                 return false
             }
             
             if isLastPage {
-                if #available(iOS 10.0, *) {
-                    os_log("Fetch of resource %@ finished successfully", type: .info, resourceType.rawValue)
-                }
+                os_log("Fetch of resource %@ finished successfully", type: .info, resourceType.rawValue)
                 DispatchQueue.main.async {
                     self.postNotifications(for: resourceType)
                 }
@@ -360,9 +326,7 @@ public class ResourceRepository: ResourceRepositoryReader {
     }
     
     private func postNotifications(for resourceType: ResourceType) {
-        if #available(iOS 10.0, *) {
-            os_log("Sending notifications for resource %@", type: .debug, resourceType.rawValue)
-        }
+        os_log("Sending notifications for resource %@", type: .debug, resourceType.rawValue)
         NotificationCenter.default.post(name: resourceType.associatedNotificationName, object: self)
         CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), resourceType.associatedCFNotificationName, nil, nil, true)
     }

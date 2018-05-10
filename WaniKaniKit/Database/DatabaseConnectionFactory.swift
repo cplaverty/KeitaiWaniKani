@@ -19,9 +19,7 @@ public class AppGroupDatabaseConnectionFactory: DatabaseConnectionFactory {
     public init() {
         let groupIdentifier = "group.uk.me.laverty.KeitaiWaniKani"
         guard let appGroupContainerURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: groupIdentifier) else {
-            if #available(iOS 10.0, *) {
-                os_log("Can't find group shared directory for group identifier %@", type: .fault, groupIdentifier)
-            }
+            os_log("Can't find group shared directory for group identifier %@", type: .fault, groupIdentifier)
             fatalError("Can't find group shared directory for group identifier \(groupIdentifier)")
         }
         
@@ -29,9 +27,7 @@ public class AppGroupDatabaseConnectionFactory: DatabaseConnectionFactory {
         
         let legacyPersistentStoreURL = appGroupContainerURL.appendingPathComponent("WaniKaniData.sqlite")
         if FileManager.default.fileExists(atPath: legacyPersistentStoreURL.path) {
-            if #available(iOS 10.0, *) {
-                os_log("Trying to remove legacy store at %@", type: .debug, legacyPersistentStoreURL as NSURL)
-            }
+            os_log("Trying to remove legacy store at %@", type: .debug, legacyPersistentStoreURL as NSURL)
             try? FileManager.default.removeItem(at: legacyPersistentStoreURL)
         }
     }
@@ -39,9 +35,7 @@ public class AppGroupDatabaseConnectionFactory: DatabaseConnectionFactory {
     public func makeDatabaseQueue() -> FMDatabaseQueue? {
         let url = persistentStoreURL
         
-        if #available(iOS 10.0, *) {
-            os_log("Creating database queue using SQLite %@ and FMDB %@ at %@", type: .info, FMDatabase.sqliteLibVersion(), FMDatabase.fmdbUserVersion(), url.path)
-        }
+        os_log("Creating database queue using SQLite %@ and FMDB %@ at %@", type: .info, FMDatabase.sqliteLibVersion(), FMDatabase.fmdbUserVersion(), url.path)
         
         let databaseQueue = FMDatabaseQueue(url: url)
         excludeStoreFromBackup()
@@ -58,16 +52,12 @@ public class AppGroupDatabaseConnectionFactory: DatabaseConnectionFactory {
         do {
             var resourceValues = try url.resourceValues(forKeys: [.isExcludedFromBackupKey])
             if resourceValues.isExcludedFromBackup != true {
-                if #available(iOS 10.0, *) {
-                    os_log("Excluding store at %@ from backup", type: .debug, url as NSURL)
-                }
+                os_log("Excluding store at %@ from backup", type: .debug, url as NSURL)
                 resourceValues.isExcludedFromBackup = true
                 try url.setResourceValues(resourceValues)
             }
         } catch {
-            if #available(iOS 10.0, *) {
-                os_log("Ignoring error when trying to exclude store at %@ from backup: %@", type: .error, url as NSURL, error as NSError)
-            }
+            os_log("Ignoring error when trying to exclude store at %@ from backup: %@", type: .error, url as NSURL, error as NSError)
         }
     }
 }

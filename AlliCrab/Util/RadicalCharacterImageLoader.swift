@@ -51,18 +51,14 @@ class RadicalCharacterImageLoader {
             return
         }
         
-        if #available(iOS 10, *) {
-            os_log("Downloading radical image at %@", type: .debug, url as NSURL)
-        }
+        os_log("Downloading radical image at %@", type: .debug, url as NSURL)
         let task = URLSession.shared.downloadTask(with: url) { (location, response, error) in
             DispatchQueue.main.sync {
                 NetworkIndicatorController.shared.networkActivityDidFinish()
                 self.task = nil
                 
                 guard let location = location else {
-                    if #available(iOS 10, *) {
-                        os_log("Download failed: %@", type: .error, error?.localizedDescription ?? "<no error>")
-                    }
+                    os_log("Download failed: %@", type: .error, error?.localizedDescription ?? "<no error>")
                     completionHandler(nil, error)
                     return
                 }
@@ -71,9 +67,7 @@ class RadicalCharacterImageLoader {
                 try? fileManager.removeItem(at: destination)
                 
                 do {
-                    if #available(iOS 10, *) {
-                        os_log("Caching radical image to %@", type: .debug, destination.path)
-                    }
+                    os_log("Caching radical image to %@", type: .debug, destination.path)
                     try fileManager.moveItem(at: location, to: destination)
                     let image = self.makeUIImage(contentsOfFile: destination.path)
                     completionHandler(image, nil)

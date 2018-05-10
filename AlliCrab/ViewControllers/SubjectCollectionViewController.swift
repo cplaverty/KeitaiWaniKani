@@ -41,9 +41,7 @@ class SubjectCollectionViewController: UICollectionViewController {
     
     deinit {
         if let notificationObservers = notificationObservers {
-            if #available(iOS 10.0, *) {
-                os_log("Removing NotificationCenter observers from %@", type: .debug, String(describing: type(of: self)))
-            }
+            os_log("Removing NotificationCenter observers from %@", type: .debug, String(describing: type(of: self)))
             notificationObservers.forEach(NotificationCenter.default.removeObserver(_:))
         }
         notificationObservers = nil
@@ -101,9 +99,7 @@ class SubjectCollectionViewController: UICollectionViewController {
     // MARK: - Update UI
     
     private func addNotificationObservers() -> [NSObjectProtocol] {
-        if #available(iOS 10.0, *) {
-            os_log("Adding NotificationCenter observers to %@", type: .debug, String(describing: type(of: self)))
-        }
+        os_log("Adding NotificationCenter observers to %@", type: .debug, String(describing: type(of: self)))
         let notificationObservers = [
             NotificationCenter.default.addObserver(forName: .waniKaniUserInformationDidChange, object: nil, queue: .main) { [unowned self] _ in
                 self.updateUI()
@@ -124,9 +120,7 @@ class SubjectCollectionViewController: UICollectionViewController {
             return
         }
         
-        if #available(iOS 10.0, *) {
-            os_log("Updating subject list for SRS stage %@", type: .info, String(describing: srsStage))
-        }
+        os_log("Updating subject list for SRS stage %@", type: .info, String(describing: srsStage))
         
         items = try! repositoryReader.subjects(srsStage: srsStage).sorted(by: { Assignment.Sorting.byProgress($0.assignment, $1.assignment) })
     }
