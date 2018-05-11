@@ -23,7 +23,7 @@ extension ReviewStatistics: DatabaseCodable {
     
     init(from database: FMDatabase, id: Int) throws {
         let query = """
-        SELECT \(table.createdAt), \(table.subjectID), \(table.subjectType), \(table.meaningCorrect), \(table.meaningIncorrect), \(table.meaningMaxStreak), \(table.meaningCurrentStreak), \(table.readingCorrect), \(table.readingIncorrect), \(table.readingMaxStreak), \(table.readingCurrentStreak), \(table.percentageCorrect)
+        SELECT \(table.createdAt), \(table.subjectID), \(table.subjectType), \(table.meaningCorrect), \(table.meaningIncorrect), \(table.meaningMaxStreak), \(table.meaningCurrentStreak), \(table.readingCorrect), \(table.readingIncorrect), \(table.readingMaxStreak), \(table.readingCurrentStreak), \(table.percentageCorrect), \(table.isHidden)
         FROM \(table)
         WHERE \(table.id) = ?
         """
@@ -47,20 +47,21 @@ extension ReviewStatistics: DatabaseCodable {
         self.readingMaxStreak = resultSet.long(forColumn: table.readingMaxStreak.name)
         self.readingCurrentStreak = resultSet.long(forColumn: table.readingCurrentStreak.name)
         self.percentageCorrect = resultSet.long(forColumn: table.percentageCorrect.name)
+        self.isHidden = resultSet.bool(forColumn: table.isHidden.name)
     }
     
     func write(to database: FMDatabase, id: Int) throws {
         let query = """
         INSERT OR REPLACE INTO \(table)
-        (\(table.id.name), \(table.createdAt.name), \(table.subjectID.name), \(table.subjectType.name), \(table.meaningCorrect.name), \(table.meaningIncorrect.name), \(table.meaningMaxStreak.name), \(table.meaningCurrentStreak.name), \(table.readingCorrect.name), \(table.readingIncorrect.name), \(table.readingMaxStreak.name), \(table.readingCurrentStreak.name), \(table.percentageCorrect.name))
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (\(table.id.name), \(table.createdAt.name), \(table.subjectID.name), \(table.subjectType.name), \(table.meaningCorrect.name), \(table.meaningIncorrect.name), \(table.meaningMaxStreak.name), \(table.meaningCurrentStreak.name), \(table.readingCorrect.name), \(table.readingIncorrect.name), \(table.readingMaxStreak.name), \(table.readingCurrentStreak.name), \(table.percentageCorrect.name), \(table.isHidden.name))
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """
         
         let values: [Any] = [
             id, createdAt, subjectID, subjectType.rawValue,
             meaningCorrect, meaningIncorrect, meaningMaxStreak, meaningCurrentStreak,
             readingCorrect, readingIncorrect, readingMaxStreak, readingCurrentStreak,
-            percentageCorrect
+            percentageCorrect, isHidden
         ]
         try database.executeUpdate(query, values: values)
     }

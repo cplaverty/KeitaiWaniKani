@@ -12,7 +12,7 @@ class StudyMaterialsTests: XCTestCase {
     
     func testDecode() {
         let data = """
-            {"id":204431,"object":"study_material","url":"https://www.wanikani.com/api/v2/study_materials/204431","data_updated_at":"2017-05-13T14:36:04.000000Z","data":{"created_at":"2015-07-07T16:41:02.000000Z","subject_id":25,"subject_type":"radical","meaning_note":"meaning note","reading_note":"reading note","meaning_synonyms":["industry"]}}
+            {"id":204431,"object":"study_material","url":"https://www.wanikani.com/api/v2/study_materials/204431","data_updated_at":"2017-05-13T14:36:04.000000Z","data":{"created_at":"2015-07-07T16:41:02.000000Z","subject_id":25,"subject_type":"radical","meaning_note":"meaning note","reading_note":"reading note","meaning_synonyms":["industry"],"hidden":false}}
             """.data(using: .utf8)!
         
         let decoder = WaniKaniResourceDecoder()
@@ -29,7 +29,8 @@ class StudyMaterialsTests: XCTestCase {
                                                                        subjectType: .radical,
                                                                        meaningNote: "meaning note",
                                                                        readingNote: "reading note",
-                                                                       meaningSynonyms: ["industry"]))
+                                                                       meaningSynonyms: ["industry"],
+                                                                       isHidden: false))
             
             XCTAssertEqual(resource, expected)
         } catch {

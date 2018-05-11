@@ -12,6 +12,7 @@ final class VocabularyTable: Table {
     let slug = Column(name: "slug", type: .text, nullable: false)
     let characters = Column(name: "characters", type: .text, nullable: false)
     let documentURL = Column(name: "document_url", type: .text, nullable: false)
+    let hiddenAt = Column(name: "hidden_at", type: .float)
     
     init() {
         super.init(name: "vocabulary",

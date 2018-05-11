@@ -19,6 +19,7 @@ final class ReviewStatisticsTable: Table {
     let readingMaxStreak = Column(name: "reading_max_streak", type: .int, nullable: false)
     let readingCurrentStreak = Column(name: "reading_current_streak", type: .int, nullable: false)
     let percentageCorrect = Column(name: "percentage_correct", type: .int, nullable: false)
+    let isHidden = Column(name: "is_hidden", type: .int, nullable: false)
     
     init() {
         super.init(name: "review_statistics")

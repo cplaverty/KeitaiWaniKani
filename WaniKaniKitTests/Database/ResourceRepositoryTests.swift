@@ -39,7 +39,8 @@ class ResourceRepositoryTests: XCTestCase {
                                                type: .assignment,
                                                url: URL(string: "https://www.wanikani.com/api/v2/assignments/1")!,
                                                dataUpdatedAt: dataUpdatedAt,
-                                               data: Assignment(subjectID: 1,
+                                               data: Assignment(createdAt: baseDate.addingTimeInterval(-.oneDay),
+                                                                subjectID: 1,
                                                                 subjectType: .radical,
                                                                 level: 1,
                                                                 srsStage: 9,
@@ -49,13 +50,16 @@ class ResourceRepositoryTests: XCTestCase {
                                                                 passedAt: baseDate.addingTimeInterval(4 * .oneDay),
                                                                 burnedAt: baseDate.addingTimeInterval(160 * .oneDay),
                                                                 availableAt: baseDate,
+                                                                resurrectedAt: nil,
                                                                 isPassed: true,
-                                                                isResurrected: false))
+                                                                isResurrected: false,
+                                                                isHidden: false))
         let expected2 = ResourceCollectionItem(id: 2,
                                                type: .assignment,
                                                url: URL(string: "https://www.wanikani.com/api/v2/assignments/2")!,
                                                dataUpdatedAt: dataUpdatedAt,
-                                               data: Assignment(subjectID: 10,
+                                               data: Assignment(createdAt: baseDate.addingTimeInterval(-.oneDay),
+                                                                subjectID: 10,
                                                                 subjectType: .radical,
                                                                 level: 10,
                                                                 srsStage: 2,
@@ -65,8 +69,10 @@ class ResourceRepositoryTests: XCTestCase {
                                                                 passedAt: nil,
                                                                 burnedAt: nil,
                                                                 availableAt: baseDate,
+                                                                resurrectedAt: nil,
                                                                 isPassed: false,
-                                                                isResurrected: false))
+                                                                isResurrected: false,
+                                                                isHidden: false))
         
         let collection = ResourceCollection(object: "collection",
                                             url: URL(string: "https://www.wanikani.com/api/v2/assignments")!,
@@ -169,7 +175,8 @@ class ResourceRepositoryTests: XCTestCase {
                                                                    subjectType: .radical,
                                                                    meaningNote: "meaning note",
                                                                    readingNote: "reading note",
-                                                                   meaningSynonyms: ["industry"]))
+                                                                   meaningSynonyms: ["industry"],
+                                                                   isHidden: false))
         
         let collection = ResourceCollection(object: "collection",
                                             url: URL(string: "https://www.wanikani.com/api/v2/study_materials")!,
@@ -268,7 +275,8 @@ class ResourceRepositoryTests: XCTestCase {
                                                              characters: "一",
                                                              characterImages: [],
                                                              meanings: [Meaning(meaning: "Ground", isPrimary: true)],
-                                                             documentURL: URL(string: "https://www.wanikani.com/radicals/ground")!))
+                                                             documentURL: URL(string: "https://www.wanikani.com/radicals/ground")!,
+                                                             hiddenAt: nil))
         let expected2 = ResourceCollectionItem(id: 440,
                                                type: .kanji,
                                                url: URL(string: "https://www.wanikani.com/api/v2/subjects/440")!,
@@ -282,7 +290,8 @@ class ResourceRepositoryTests: XCTestCase {
                                                                       Reading(type: "Kunyomi", reading: "ひと", isPrimary: false),
                                                                       Reading(type: "Nanori", reading: "かず", isPrimary: false)],
                                                            componentSubjectIDs: [1],
-                                                           documentURL: URL(string: "https://www.wanikani.com/kanji/%E4%B8%80")!))
+                                                           documentURL: URL(string: "https://www.wanikani.com/kanji/%E4%B8%80")!,
+                                                           hiddenAt: nil))
         let expected3 = ResourceCollectionItem(id: 2467,
                                                type: .vocabulary,
                                                url: URL(string: "https://www.wanikani.com/api/v2/subjects/2467")!,
@@ -295,7 +304,8 @@ class ResourceRepositoryTests: XCTestCase {
                                                                 readings: [Reading(reading: "いち", isPrimary: true)],
                                                                 partsOfSpeech: ["numeral"],
                                                                 componentSubjectIDs: [440],
-                                                                documentURL: URL(string: "https://www.wanikani.com/vocabulary/%E4%B8%80")!))
+                                                                documentURL: URL(string: "https://www.wanikani.com/vocabulary/%E4%B8%80")!,
+                                                                hiddenAt: nil))
         
         let collection = ResourceCollection(object: "collection",
                                             url: URL(string: "https://www.wanikani.com/api/v2/subjects")!,
@@ -406,7 +416,8 @@ class ResourceRepositoryTests: XCTestCase {
                                                                      readingIncorrect: 3,
                                                                      readingMaxStreak: 5,
                                                                      readingCurrentStreak: 2,
-                                                                     percentageCorrect: 80))
+                                                                     percentageCorrect: 80,
+                                                                     isHidden: false))
         
         let collection = ResourceCollection(object: "collection",
                                             url: URL(string: "https://www.wanikani.com/api/v2/review_statistics")!,

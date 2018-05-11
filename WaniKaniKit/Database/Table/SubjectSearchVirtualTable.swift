@@ -9,7 +9,7 @@ import Foundation
 
 final class SubjectSearchVirtualTable: VirtualTable {
     let subjectID = "rowid"
-    let character = Column(name: "characters", rank: 25)
+    let characters = Column(name: "characters", rank: 25)
     let level = Column(name: "level")
     let primaryMeanings = Column(name: "primary_meaning", rank: 10)
     let primaryReadings = Column(name: "primary_reading", rank: 10)

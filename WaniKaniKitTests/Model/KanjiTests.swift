@@ -12,7 +12,7 @@ class KanjiTests: XCTestCase {
     
     func testDecode() {
         let data = """
-            {"id":440,"object":"kanji","url":"https://www.wanikani.com/api/v2/subjects/440","data_updated_at":"2017-10-04T18:56:21.000000Z","data":{"level":1,"created_at":"2012-02-27T19:55:19.000000Z","slug":"一","document_url":"https://www.wanikani.com/kanji/%E4%B8%80","characters":"一","meanings":[{"meaning":"One","primary":true}],"readings":[{"type":"onyomi","primary":true,"reading":"いち"},{"type":"kunyomi","primary":false,"reading":"ひと"},{"type":"nanori","primary":false,"reading":"かず"}],"component_subject_ids":[1]}}
+            {"id":440,"object":"kanji","url":"https://www.wanikani.com/api/v2/subjects/440","data_updated_at":"2017-10-04T18:56:21.000000Z","data":{"level":1,"created_at":"2012-02-27T19:55:19.000000Z","slug":"一","document_url":"https://www.wanikani.com/kanji/%E4%B8%80","characters":"一","meanings":[{"meaning":"One","primary":true}],"readings":[{"type":"onyomi","primary":true,"reading":"いち"},{"type":"kunyomi","primary":false,"reading":"ひと"},{"type":"nanori","primary":false,"reading":"かず"}],"component_subject_ids":[1],"hidden_at":null}}
             """.data(using: .utf8)!
         
         let decoder = WaniKaniResourceDecoder()
@@ -33,7 +33,8 @@ class KanjiTests: XCTestCase {
                                                                          Reading(type: "kunyomi", reading: "ひと", isPrimary: false),
                                                                          Reading(type: "nanori", reading: "かず", isPrimary: false)],
                                                               componentSubjectIDs: [1],
-                                                              documentURL: URL(string: "https://www.wanikani.com/kanji/%E4%B8%80")!))
+                                                              documentURL: URL(string: "https://www.wanikani.com/kanji/%E4%B8%80")!,
+                                                              hiddenAt: nil))
             
             XCTAssertEqual(resource, expected)
         } catch {

@@ -15,6 +15,7 @@ public struct Vocabulary: ResourceCollectionItemData, Equatable {
     public let partsOfSpeech: [String]
     public let componentSubjectIDs: [Int]
     public let documentURL: URL
+    public let hiddenAt: Date?
     
     private enum CodingKeys: String, CodingKey {
         case level
@@ -26,6 +27,7 @@ public struct Vocabulary: ResourceCollectionItemData, Equatable {
         case partsOfSpeech = "parts_of_speech"
         case componentSubjectIDs = "component_subject_ids"
         case documentURL = "document_url"
+        case hiddenAt = "hidden_at"
     }
 }
 

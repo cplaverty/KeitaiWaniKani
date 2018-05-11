@@ -14,6 +14,7 @@ public struct Kanji: ResourceCollectionItemData, Equatable {
     public let readings: [Reading]
     public let componentSubjectIDs: [Int]
     public let documentURL: URL
+    public let hiddenAt: Date?
     
     private enum CodingKeys: String, CodingKey {
         case level
@@ -24,6 +25,7 @@ public struct Kanji: ResourceCollectionItemData, Equatable {
         case readings
         case componentSubjectIDs = "component_subject_ids"
         case documentURL = "document_url"
+        case hiddenAt = "hidden_at"
     }
 }
 

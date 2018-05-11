@@ -10,9 +10,10 @@ final class RadicalTable: Table {
     let level = Column(name: "level", type: .int, nullable: false)
     let createdAt = Column(name: "created_at", type: .float, nullable: false)
     let slug = Column(name: "slug", type: .text, nullable: false)
-    let character = Column(name: "character", type: .text, nullable: true)
+    let characters = Column(name: "characters", type: .text)
     let documentURL = Column(name: "document_url", type: .text, nullable: false)
-    
+    let hiddenAt = Column(name: "hidden_at", type: .float)
+
     init() {
         super.init(name: "radicals",
                    indexes: [TableIndex(name: "idx_radicals_by_level", columns: [level])])

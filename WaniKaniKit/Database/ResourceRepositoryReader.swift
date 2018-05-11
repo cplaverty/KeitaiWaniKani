@@ -88,9 +88,9 @@ public class ResourceRepositoryReader {
             
             let table = Tables.assignments
             
-            let lessonsAvailable = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.srsStage) = \(SRSStage.initiate.numericLevelRange.upperBound)")!
-            let reviewsAvailable = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.srsStage) BETWEEN \(SRSStage.apprentice.numericLevelRange.lowerBound) and \(SRSStage.enlightened.numericLevelRange.upperBound) AND \(table.availableAt) <= ? AND \(table.burnedAt) IS NULL", values: [asOf])!
-            let nextReviewDate = try database.dateForQuery("SELECT MIN(\(table.availableAt)) FROM \(table) WHERE \(table.availableAt) > ?", values: [asOf])
+            let lessonsAvailable = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.srsStage) = \(SRSStage.initiate.numericLevelRange.upperBound) AND \(table.unlockedAt) IS NOT NULL AND \(table.isHidden) = 0")!
+            let reviewsAvailable = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.srsStage) BETWEEN \(SRSStage.apprentice.numericLevelRange.lowerBound) AND \(SRSStage.enlightened.numericLevelRange.upperBound) AND \(table.availableAt) <= ? AND \(table.burnedAt) IS NULL AND \(table.isHidden) = 0", values: [asOf])!
+            let nextReviewDate = try database.dateForQuery("SELECT MIN(\(table.availableAt)) FROM \(table) WHERE \(table.availableAt) > ? AND \(table.isHidden) = 0", values: [asOf])
             
             let reviewsAvailableNextHour = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.availableAt) BETWEEN ? AND ?",
                 values: [asOf, asOf.addingTimeInterval(.oneHour)])!
@@ -132,10 +132,14 @@ public class ResourceRepositoryReader {
             SELECT \(radicals.id), '\(SubjectType.radical.rawValue)' AS \(assignments.subjectType.name), coalesce(\(assignments.isPassed), 0) AS \(assignments.isPassed.name)
             FROM \(radicals) LEFT JOIN \(assignments) ON \(radicals.id) = \(assignments.subjectID)
             WHERE \(radicals.level) = :level
+            AND \(radicals.hiddenAt) IS NULL
+            AND \(assignments.isHidden) = 0
             UNION ALL
             SELECT \(kanji.id), '\(SubjectType.kanji.rawValue)' AS \(assignments.subjectType.name), coalesce(\(assignments.isPassed), 0) AS \(assignments.isPassed.name)
             FROM \(kanji) LEFT JOIN \(assignments) ON \(kanji.id) = \(assignments.subjectID)
             WHERE \(kanji.level) = :level
+            AND \(kanji.hiddenAt) IS NULL
+            AND \(assignments.isHidden) = 0
             """
             
             guard let resultSet = database.executeQuery(query, withParameterDictionary: ["level": userInformation.level]) else {
@@ -314,6 +318,7 @@ public class ResourceRepositoryReader {
             FROM \(table)
             WHERE \(table.availableAt) IS NOT NULL
             AND \(table.srsStage) BETWEEN :srsStageLower AND :srsStageUpper
+            AND \(table.isHidden) = 0
             \(additionalCriteria)
             )
             SELECT \(table.availableAt.name),

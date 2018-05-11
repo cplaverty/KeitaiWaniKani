@@ -12,7 +12,7 @@ class RadicalTests: XCTestCase {
     
     func testDecode() {
         let data = """
-            {"id":1,"object":"radical","url":"https://www.wanikani.com/api/v2/subjects/1","data_updated_at":"2018-01-24T23:08:17.000000Z","data":{"level":1,"created_at":"2012-02-27T18:08:16.000000Z","slug":"ground","document_url":"https://www.wanikani.com/radicals/ground","characters":"一","character_images":[],"meanings":[{"meaning":"Ground","primary":true}]}}
+            {"id":1,"object":"radical","url":"https://www.wanikani.com/api/v2/subjects/1","data_updated_at":"2018-01-24T23:08:17.000000Z","data":{"level":1,"created_at":"2012-02-27T18:08:16.000000Z","slug":"ground","document_url":"https://www.wanikani.com/radicals/ground","characters":"一","character_images":[],"meanings":[{"meaning":"Ground","primary":true}],"hidden_at":null}}
             """.data(using: .utf8)!
         
         let decoder = WaniKaniResourceDecoder()
@@ -30,7 +30,8 @@ class RadicalTests: XCTestCase {
                                                                 characters: "一",
                                                                 characterImages: [],
                                                                 meanings: [Meaning(meaning: "Ground", isPrimary: true)],
-                                                                documentURL: URL(string: "https://www.wanikani.com/radicals/ground")!))
+                                                                documentURL: URL(string: "https://www.wanikani.com/radicals/ground")!,
+                                                                hiddenAt: nil))
             
             XCTAssertEqual(resource, expected)
         } catch {

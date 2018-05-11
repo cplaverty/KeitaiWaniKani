@@ -11,7 +11,7 @@ private let table = Tables.vocabulary
 
 extension Vocabulary: DatabaseCodable {
     static func read(from database: FMDatabase, level: Int) throws -> [ResourceCollectionItem] {
-        let query = "SELECT \(table.id) FROM \(table) WHERE \(table.level) = ?"
+        let query = "SELECT \(table.id) FROM \(table) WHERE \(table.level) = ? AND \(table.hiddenAt) IS NULL"
         
         let resultSet = try database.executeQuery(query, values: [level])
         
@@ -42,7 +42,7 @@ extension Vocabulary: DatabaseCodable {
         let subjectComponents = try SubjectComponent.read(from: database, id: id)
         
         let query = """
-        SELECT \(table.level), \(table.createdAt), \(table.slug), \(table.characters), \(table.documentURL)
+        SELECT \(table.level), \(table.createdAt), \(table.slug), \(table.characters), \(table.documentURL), \(table.hiddenAt)
         FROM \(table)
         WHERE \(table.id) = ?
         """
@@ -63,6 +63,7 @@ extension Vocabulary: DatabaseCodable {
         self.partsOfSpeech = partsOfSpeech
         self.componentSubjectIDs = subjectComponents
         self.documentURL = resultSet.url(forColumn: table.documentURL.name)!
+        self.hiddenAt = resultSet.date(forColumn: table.hiddenAt.name)
     }
     
     func write(to database: FMDatabase, id: Int) throws {
@@ -73,16 +74,16 @@ extension Vocabulary: DatabaseCodable {
         
         let query = """
         INSERT OR REPLACE INTO \(table)
-        (\(table.id.name), \(table.level.name), \(table.createdAt.name), \(table.slug.name), \(table.characters.name), \(table.documentURL.name))
-        VALUES (?, ?, ?, ?, ?, ?)
+        (\(table.id.name), \(table.level.name), \(table.createdAt.name), \(table.slug.name), \(table.characters.name), \(table.documentURL.name), \(table.hiddenAt.name))
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         """
         
         let values: [Any] = [
-            id, level, createdAt, slug, characters, documentURL.absoluteString
+            id, level, createdAt, slug, characters, documentURL.absoluteString, hiddenAt as Any
         ]
         try database.executeUpdate(query, values: values)
         
-        try SubjectSearch.write(to: database, id: id, character: characters, level: level, meanings: meanings, readings: readings)
+        try SubjectSearch.write(to: database, id: id, character: characters, level: level, meanings: meanings, readings: readings, hidden: hiddenAt != nil)
     }
 }
 

@@ -25,7 +25,7 @@ extension StudyMaterials: DatabaseCodable {
         let meaningSynonyms = try MeaningSynonym.read(from: database, id: id)
         
         let query = """
-        SELECT \(table.createdAt), \(table.subjectID), \(table.subjectType), \(table.meaningNote), \(table.readingNote)
+        SELECT \(table.createdAt), \(table.subjectID), \(table.subjectType), \(table.meaningNote), \(table.readingNote), \(table.isHidden)
         FROM \(table)
         WHERE \(table.id) = ?
         """
@@ -43,6 +43,7 @@ extension StudyMaterials: DatabaseCodable {
         self.meaningNote = resultSet.string(forColumn: table.meaningNote.name)
         self.readingNote = resultSet.string(forColumn: table.readingNote.name)
         self.meaningSynonyms = meaningSynonyms
+        self.isHidden = resultSet.bool(forColumn: table.isHidden.name)
     }
     
     func write(to database: FMDatabase, id: Int) throws {
@@ -50,13 +51,13 @@ extension StudyMaterials: DatabaseCodable {
         
         let query = """
         INSERT OR REPLACE INTO \(table)
-        (\(table.id.name), \(table.createdAt.name), \(table.subjectID.name), \(table.subjectType.name), \(table.meaningNote.name), \(table.readingNote.name))
-        VALUES (?, ?, ?, ?, ?, ?)
+        (\(table.id.name), \(table.createdAt.name), \(table.subjectID.name), \(table.subjectType.name), \(table.meaningNote.name), \(table.readingNote.name), \(table.isHidden.name))
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         """
         
         let values: [Any] = [
             id, createdAt, subjectID, subjectType.rawValue,
-            meaningNote as Any, readingNote as Any
+            meaningNote as Any, readingNote as Any, isHidden
         ]
         try database.executeUpdate(query, values: values)
     }

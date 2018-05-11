@@ -23,6 +23,7 @@ public struct Radical: ResourceCollectionItemData, Equatable {
     public let characterImages: [CharacterImage]
     public let meanings: [Meaning]
     public let documentURL: URL
+    public let hiddenAt: Date?
     
     private enum CodingKeys: String, CodingKey {
         case level
@@ -32,6 +33,7 @@ public struct Radical: ResourceCollectionItemData, Equatable {
         case characterImages = "character_images"
         case meanings
         case documentURL = "document_url"
+        case hiddenAt = "hidden_at"
     }
 }
 

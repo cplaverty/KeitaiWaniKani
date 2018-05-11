@@ -18,6 +18,7 @@ public struct ReviewStatistics: ResourceCollectionItemData, Equatable {
     public let readingMaxStreak: Int
     public let readingCurrentStreak: Int
     public let percentageCorrect: Int
+    public let isHidden: Bool
     
     private enum CodingKeys: String, CodingKey {
         case createdAt = "created_at"
@@ -32,5 +33,6 @@ public struct ReviewStatistics: ResourceCollectionItemData, Equatable {
         case readingMaxStreak = "reading_max_streak"
         case readingCurrentStreak = "reading_current_streak"
         case percentageCorrect = "percentage_correct"
+        case isHidden = "hidden"
     }
 }

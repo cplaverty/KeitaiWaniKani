@@ -11,7 +11,7 @@ private let table = Tables.radicals
 
 extension Radical: DatabaseCodable {
     static func read(from database: FMDatabase, level: Int) throws -> [ResourceCollectionItem] {
-        let query = "SELECT \(table.id) FROM \(table) WHERE \(table.level) = ?"
+        let query = "SELECT \(table.id) FROM \(table) WHERE \(table.level) = ? AND \(table.hiddenAt) IS NULL"
         
         let resultSet = try database.executeQuery(query, values: [level])
         
@@ -40,7 +40,7 @@ extension Radical: DatabaseCodable {
         let meanings = try Meaning.read(from: database, id: id)
         
         let query = """
-        SELECT \(table.level), \(table.createdAt), \(table.slug), \(table.character), \(table.documentURL)
+        SELECT \(table.level), \(table.createdAt), \(table.slug), \(table.characters), \(table.documentURL), \(table.hiddenAt)
         FROM \(table)
         WHERE \(table.id) = ?
         """
@@ -55,10 +55,11 @@ extension Radical: DatabaseCodable {
         self.level = resultSet.long(forColumn: table.level.name)
         self.createdAt = resultSet.date(forColumn: table.createdAt.name)!
         self.slug = resultSet.string(forColumn: table.slug.name)!
-        self.characters = resultSet.string(forColumn: table.character.name)
+        self.characters = resultSet.string(forColumn: table.characters.name)
         self.characterImages = characterImages
         self.meanings = meanings
         self.documentURL = resultSet.url(forColumn: table.documentURL.name)!
+        self.hiddenAt = resultSet.date(forColumn: table.hiddenAt.name)
     }
     
     func write(to database: FMDatabase, id: Int) throws {
@@ -67,16 +68,16 @@ extension Radical: DatabaseCodable {
         
         let query = """
         INSERT OR REPLACE INTO \(table)
-        (\(table.id.name), \(table.level.name), \(table.createdAt.name), \(table.slug.name), \(table.character.name), \(table.documentURL.name))
-        VALUES (?, ?, ?, ?, ?, ?)
+        (\(table.id.name), \(table.level.name), \(table.createdAt.name), \(table.slug.name), \(table.characters.name), \(table.documentURL.name), \(table.hiddenAt.name))
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         """
         
         let values: [Any] = [
-            id, level, createdAt, slug, characters as Any, documentURL.absoluteString
+            id, level, createdAt, slug, characters as Any, documentURL.absoluteString, hiddenAt as Any
         ]
         try database.executeUpdate(query, values: values)
         
-        try SubjectSearch.write(to: database, id: id, character: characters, level: level, meanings: meanings, readings: [])
+        try SubjectSearch.write(to: database, id: id, character: characters, level: level, meanings: meanings, readings: [], hidden: hiddenAt != nil)
     }
 }
 

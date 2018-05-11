@@ -6,6 +6,7 @@
 //
 
 public struct Assignment: ResourceCollectionItemData, Equatable {
+    public let createdAt: Date
     public let subjectID: Int
     public let subjectType: SubjectType
     public let level: Int
@@ -16,10 +17,13 @@ public struct Assignment: ResourceCollectionItemData, Equatable {
     public let passedAt: Date?
     public let burnedAt: Date?
     public let availableAt: Date?
+    public let resurrectedAt: Date?
     public let isPassed: Bool
     public let isResurrected: Bool
+    public let isHidden: Bool
     
     private enum CodingKeys: String, CodingKey {
+        case createdAt = "created_at"
         case subjectID = "subject_id"
         case subjectType = "subject_type"
         case level
@@ -30,8 +34,10 @@ public struct Assignment: ResourceCollectionItemData, Equatable {
         case passedAt = "passed_at"
         case burnedAt = "burned_at"
         case availableAt = "available_at"
+        case resurrectedAt = "resurrected_at"
         case isPassed = "passed"
         case isResurrected = "resurrected"
+        case isHidden = "hidden"
     }
 }
 

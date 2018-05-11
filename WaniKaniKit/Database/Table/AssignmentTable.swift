@@ -7,6 +7,7 @@
 
 final class AssignmentTable: Table {
     let id = Column(name: "id", type: .int, nullable: false, primaryKey: true)
+    let createdAt = Column(name: "created_at", type: .float, nullable: false)
     let subjectID = Column(name: "subject_id", type: .int, nullable: false, unique: true)
     let subjectType = Column(name: "subject_type", type: .text, nullable: false)
     let level = Column(name: "level", type: .int, nullable: false)
@@ -17,9 +18,11 @@ final class AssignmentTable: Table {
     let passedAt = Column(name: "passed_at", type: .float)
     let burnedAt = Column(name: "burned_at", type: .float)
     let availableAt = Column(name: "available_at", type: .float)
+    let resurrectedAt = Column(name: "resurrected_at", type: .float)
     let isPassed = Column(name: "is_passed", type: .int, nullable: false)
     let isResurrected = Column(name: "is_resurrected", type: .int, nullable: false)
-    
+    let isHidden = Column(name: "is_hidden", type: .int, nullable: false)
+
     init() {
         super.init(name: "assignments",
                    indexes: [TableIndex(name: "idx_assignments_by_level", columns: [level]),

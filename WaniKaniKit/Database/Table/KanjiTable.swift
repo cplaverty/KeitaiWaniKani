@@ -10,8 +10,9 @@ final class KanjiTable: Table {
     let level = Column(name: "level", type: .int, nullable: false)
     let createdAt = Column(name: "created_at", type: .float, nullable: false)
     let slug = Column(name: "slug", type: .text, nullable: false)
-    let character = Column(name: "character", type: .text, nullable: false)
+    let characters = Column(name: "characters", type: .text, nullable: false)
     let documentURL = Column(name: "document_url", type: .text, nullable: false)
+    let hiddenAt = Column(name: "hidden_at", type: .float)
     
     init() {
         super.init(name: "kanji",

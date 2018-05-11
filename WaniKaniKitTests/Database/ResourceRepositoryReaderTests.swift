@@ -496,7 +496,8 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                           type: .assignment,
                                           url: URL(string: "https://www.wanikani.com/api/v2/assignments/\(nextAssignmentID)")!,
                                           dataUpdatedAt: Date(),
-                                          data: Assignment(subjectID: subjectID ?? nextSubjectID,
+                                          data: Assignment(createdAt: Date(),
+                                                           subjectID: subjectID ?? nextSubjectID,
                                                            subjectType: subjectType,
                                                            level: level,
                                                            srsStage: srsStage,
@@ -506,8 +507,10 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                                            passedAt: nil,
                                                            burnedAt: nil,
                                                            availableAt: availableAt,
+                                                           resurrectedAt: nil,
                                                            isPassed: isPassed ?? (srsStage >= SRSStage.guru.numericLevelRange.lowerBound),
-                                                           isResurrected: false))
+                                                           isResurrected: false,
+                                                           isHidden: false))
         nextAssignmentID += 1
         if subjectID == nil { nextSubjectID += 1 }
         return item
@@ -524,7 +527,8 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                                         characters: characters,
                                                         characterImages: [],
                                                         meanings: meanings,
-                                                        documentURL: URL(string: "https://www.wanikani.com/radicals/slug")!))
+                                                        documentURL: URL(string: "https://www.wanikani.com/radicals/slug")!,
+                                                        hiddenAt: nil))
         nextSubjectID += 1
         return item
     }
@@ -541,7 +545,8 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                                       meanings: meanings,
                                                       readings: readings,
                                                       componentSubjectIDs: [],
-                                                      documentURL: URL(string: "https://www.wanikani.com/kanji/\(characters.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)")!))
+                                                      documentURL: URL(string: "https://www.wanikani.com/kanji/\(characters.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)")!,
+                                                      hiddenAt: nil))
         nextSubjectID += 1
         return item
     }
@@ -559,7 +564,8 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                                            readings: readings,
                                                            partsOfSpeech: [],
                                                            componentSubjectIDs: [],
-                                                           documentURL: URL(string: "https://www.wanikani.com/vocabulary/\(characters.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)")!))
+                                                           documentURL: URL(string: "https://www.wanikani.com/vocabulary/\(characters.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)")!,
+                                                           hiddenAt: nil))
         nextSubjectID += 1
         return item
     }
@@ -571,7 +577,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         let dateInPast = makeUTCDate(year: 2012, month: 02, day: 24, hour: 19, minute: 09, second: 18)
         
         for _ in 0..<lessonCount {
-            assignments.append(createTestAssignment(subjectType: .radical, level: 1, srsStage: 0))
+            assignments.append(createTestAssignment(subjectType: .radical, level: 1, srsStage: 0, unlockedAt: dateInPast))
         }
         
         for _ in 0..<pendingReviewCount {

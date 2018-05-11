@@ -12,6 +12,7 @@ public struct StudyMaterials: ResourceCollectionItemData, Equatable {
     public let meaningNote: String?
     public let readingNote: String?
     public let meaningSynonyms: [String]
+    public let isHidden: Bool
     
     private enum CodingKeys: String, CodingKey {
         case createdAt = "created_at"
@@ -20,5 +21,6 @@ public struct StudyMaterials: ResourceCollectionItemData, Equatable {
         case meaningNote = "meaning_note"
         case readingNote = "reading_note"
         case meaningSynonyms = "meaning_synonyms"
+        case isHidden = "hidden"
     }
 }

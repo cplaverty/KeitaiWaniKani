@@ -10,8 +10,9 @@ final class StudyMaterialsTable: Table {
     let createdAt = Column(name: "created_at", type: .float, nullable: false)
     let subjectID = Column(name: "subject_id", type: .int, nullable: false, unique: true)
     let subjectType = Column(name: "subject_type", type: .text, nullable: false)
-    let meaningNote = Column(name: "meaning_note", type: .text, nullable: false)
-    let readingNote = Column(name: "reading_note", type: .text, nullable: false)
+    let meaningNote = Column(name: "meaning_note", type: .text)
+    let readingNote = Column(name: "reading_note", type: .text)
+    let isHidden = Column(name: "is_hidden", type: .int, nullable: false)
     
     init() {
         super.init(name: "study_materials")

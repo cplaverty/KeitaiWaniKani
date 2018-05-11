@@ -30,10 +30,15 @@ struct SubjectSearch {
         return try ResourceCollectionItem.read(from: database, ids: subjectIDs)
     }
     
-    static func write(to database: FMDatabase, id: Int, character: String?, level: Int, meanings: [Meaning], readings: [Reading]) throws {
+    static func write(to database: FMDatabase, id: Int, character: String?, level: Int, meanings: [Meaning], readings: [Reading], hidden: Bool) throws {
+        guard !hidden else {
+            try database.executeUpdate("DELETE FROM \(table) WHERE \(table.subjectID) = ?", values: [id])
+            return
+        }
+        
         let query = """
         INSERT OR REPLACE INTO \(table)
-        (\(table.subjectID), \(table.character.name), \(table.level.name), \(table.primaryMeanings.name), \(table.primaryReadings.name), \(table.nonprimaryMeanings.name), \(table.nonprimaryReadings.name))
+        (\(table.subjectID), \(table.characters.name), \(table.level.name), \(table.primaryMeanings.name), \(table.primaryReadings.name), \(table.nonprimaryMeanings.name), \(table.nonprimaryReadings.name))
         VALUES (?, ?, ?, ?, ?, ?, ?)
         """
         
