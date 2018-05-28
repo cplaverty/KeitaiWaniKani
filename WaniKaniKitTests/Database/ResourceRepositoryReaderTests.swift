@@ -87,6 +87,21 @@ class ResourceRepositoryReaderTests: XCTestCase {
         XCTAssertEqual(try resourceRepository.studyQueue(), expected)
     }
     
+    func testStudyQueue_VacationMode() {
+        populateDatabaseForStudyQueue(lessonCount: 10, pendingReviewCount: 23, futureReviewCount: 6, futureReviewTime: nextHourReviewTime)
+        populateDatabaseForStudyQueue(lessonCount: 0, pendingReviewCount: 0, futureReviewCount: 4, futureReviewTime: nextDayReviewTime)
+        
+        let expectedPreVacation = StudyQueue(lessonsAvailable: 10, reviewsAvailable: 23, nextReviewDate: nextHourReviewTime, reviewsAvailableNextHour: 6, reviewsAvailableNextDay: 10)
+
+        XCTAssertEqual(try resourceRepository.studyQueue(), expectedPreVacation)
+        
+        createTestUser(currentVacationStartedAt: Date())
+        
+        let expectedPostVacation = StudyQueue(lessonsAvailable: 0, reviewsAvailable: 0, nextReviewDate: nil, reviewsAvailableNextHour: 0, reviewsAvailableNextDay: 0)
+
+        XCTAssertEqual(try resourceRepository.studyQueue(), expectedPostVacation)
+    }
+
     func testStudyQueue_Load() {
         populateDatabaseForStudyQueue(lessonCount: 327, pendingReviewCount: 1352, futureReviewCount: 50, futureReviewTime: nextHourReviewTime)
         populateDatabaseForStudyQueue(lessonCount: 0, pendingReviewCount: 0, futureReviewCount: 2342, futureReviewTime: nextDayReviewTime)
@@ -477,8 +492,8 @@ class ResourceRepositoryReaderTests: XCTestCase {
         XCTAssertEqual(try resourceRepository.findSubjects(matching: "mount"), [mountainVocab, mountainKanji, mountFujiVocab])
     }
     
-    private func createTestUser() {
-        let user = UserInformation(username: "Test", level: testUserLevel, maxLevelGrantedBySubscription: 60, startedAt: Date(), isSubscribed: true, profileURL: nil, currentVacationStartedAt: nil)
+    private func createTestUser(currentVacationStartedAt: Date? = nil) {
+        let user = UserInformation(username: "Test", level: testUserLevel, maxLevelGrantedBySubscription: 60, startedAt: Date(), isSubscribed: true, profileURL: nil, currentVacationStartedAt: currentVacationStartedAt)
         
         databaseManager.databaseQueue!.inTransaction { (database, rollback) in
             do {
