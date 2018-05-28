@@ -133,13 +133,13 @@ public class ResourceRepositoryReader {
             FROM \(radicals) LEFT JOIN \(assignments) ON \(radicals.id) = \(assignments.subjectID)
             WHERE \(radicals.level) = :level
             AND \(radicals.hiddenAt) IS NULL
-            AND \(assignments.isHidden) = 0
+            AND (\(assignments.isHidden) IS NULL OR \(assignments.isHidden) = 0)
             UNION ALL
             SELECT \(kanji.id), '\(SubjectType.kanji.rawValue)' AS \(assignments.subjectType.name), coalesce(\(assignments.isPassed), 0) AS \(assignments.isPassed.name)
             FROM \(kanji) LEFT JOIN \(assignments) ON \(kanji.id) = \(assignments.subjectID)
             WHERE \(kanji.level) = :level
             AND \(kanji.hiddenAt) IS NULL
-            AND \(assignments.isHidden) = 0
+            AND (\(assignments.isHidden) IS NULL OR \(assignments.isHidden) = 0)
             """
             
             guard let resultSet = database.executeQuery(query, withParameterDictionary: ["level": userInformation.level]) else {
