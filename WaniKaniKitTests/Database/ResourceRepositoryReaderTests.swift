@@ -460,26 +460,26 @@ class ResourceRepositoryReaderTests: XCTestCase {
     }
     
     func testSubjectSearch() {
-        let leafRadical = createTestRadical(level: 1, characters: nil, meanings: [Meaning(meaning: "leaf", isPrimary: true)])
-        let finsRadical = createTestRadical(level: 1, characters: "ハ", meanings: [Meaning(meaning: "fins", isPrimary: true)])
+        let leafRadical = createTestRadical(level: 1, characters: nil, meanings: [Meaning(meaning: "leaf", isPrimary: true, isAcceptedAnswer: true)])
+        let finsRadical = createTestRadical(level: 1, characters: "ハ", meanings: [Meaning(meaning: "fins", isPrimary: true, isAcceptedAnswer: true)])
         let mountainKanji = createTestKanji(level: 1, characters: "山",
-                                            meanings: [Meaning(meaning: "Mountain", isPrimary: true)],
-                                            readings: [Reading(type: "onyomi", reading: "さん", isPrimary: true), Reading(type: "kunyomi", reading: "やま", isPrimary: false)])
+                                            meanings: [Meaning(meaning: "Mountain", isPrimary: true, isAcceptedAnswer: true)],
+                                            readings: [Reading(type: "onyomi", reading: "さん", isPrimary: true, isAcceptedAnswer: true), Reading(type: "kunyomi", reading: "やま", isPrimary: false, isAcceptedAnswer: false)])
         let mouthKanji = createTestKanji(level: 1, characters: "口",
-                                         meanings: [Meaning(meaning: "Mouth", isPrimary: true)],
-                                         readings: [Reading(type: "onyomi", reading: "こう", isPrimary: true), Reading(type: "onyomi", reading: "く", isPrimary: true), Reading(type: "kunyomi", reading: "くち", isPrimary: false)])
+                                         meanings: [Meaning(meaning: "Mouth", isPrimary: true, isAcceptedAnswer: true)],
+                                         readings: [Reading(type: "onyomi", reading: "こう", isPrimary: true, isAcceptedAnswer: true), Reading(type: "onyomi", reading: "く", isPrimary: true, isAcceptedAnswer: true), Reading(type: "kunyomi", reading: "くち", isPrimary: false, isAcceptedAnswer: false)])
         let industryKanji = createTestKanji(level: 1, characters: "工",
-                                            meanings: [Meaning(meaning: "Construction", isPrimary: true), Meaning(meaning: "Industry", isPrimary: false)],
-                                            readings: [Reading(type: "onyomi", reading: "こう", isPrimary: true), Reading(type: "onyomi", reading: "く", isPrimary: true)])
+                                            meanings: [Meaning(meaning: "Construction", isPrimary: true, isAcceptedAnswer: true), Meaning(meaning: "Industry", isPrimary: false, isAcceptedAnswer: true)],
+                                            readings: [Reading(type: "onyomi", reading: "こう", isPrimary: true, isAcceptedAnswer: true), Reading(type: "onyomi", reading: "く", isPrimary: true, isAcceptedAnswer: true)])
         let mountainVocab = createTestVocabulary(level: 1, characters: "山",
-                                                 meanings: [Meaning(meaning: "Mountain", isPrimary: true)],
-                                                 readings: [Reading(type: nil, reading: "やま", isPrimary: true)])
+                                                 meanings: [Meaning(meaning: "Mountain", isPrimary: true, isAcceptedAnswer: true)],
+                                                 readings: [Reading(type: nil, reading: "やま", isPrimary: true, isAcceptedAnswer: true)])
         let mouthVocab = createTestVocabulary(level: 1, characters: "口",
-                                              meanings: [Meaning(meaning: "Mouth", isPrimary: true)],
-                                              readings: [Reading(type: nil, reading: "くち", isPrimary: true)])
+                                              meanings: [Meaning(meaning: "Mouth", isPrimary: true, isAcceptedAnswer: true)],
+                                              readings: [Reading(type: nil, reading: "くち", isPrimary: true, isAcceptedAnswer: true)])
         let mountFujiVocab = createTestVocabulary(level: 1, characters: "ふじ山",
-                                                  meanings: [Meaning(meaning: "Mt Fuji", isPrimary: true), Meaning(meaning: "Mount Fuji", isPrimary: false), Meaning(meaning: "Mt. Fuji", isPrimary: false)],
-                                                  readings: [Reading(type: nil, reading: "ふじさん", isPrimary: true)])
+                                                  meanings: [Meaning(meaning: "Mt Fuji", isPrimary: true, isAcceptedAnswer: true), Meaning(meaning: "Mount Fuji", isPrimary: false, isAcceptedAnswer: true), Meaning(meaning: "Mt. Fuji", isPrimary: false, isAcceptedAnswer: true)],
+                                                  readings: [Reading(type: nil, reading: "ふじさん", isPrimary: true, isAcceptedAnswer: true)])
         
         writeToDatabase([leafRadical, finsRadical, mountainKanji, mouthKanji, industryKanji, mountainVocab, mouthVocab, mountFujiVocab])
         
@@ -542,6 +542,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                                         characters: characters,
                                                         characterImages: [],
                                                         meanings: meanings,
+                                                        amalgamationSubjectIDs: [],
                                                         documentURL: URL(string: "https://www.wanikani.com/radicals/slug")!,
                                                         hiddenAt: nil))
         nextSubjectID += 1
@@ -560,6 +561,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                                       meanings: meanings,
                                                       readings: readings,
                                                       componentSubjectIDs: [],
+                                                      amalgamationSubjectIDs: [],
                                                       documentURL: URL(string: "https://www.wanikani.com/kanji/\(characters.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)")!,
                                                       hiddenAt: nil))
         nextSubjectID += 1

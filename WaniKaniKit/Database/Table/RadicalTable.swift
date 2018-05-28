@@ -13,7 +13,7 @@ final class RadicalTable: Table {
     let characters = Column(name: "characters", type: .text)
     let documentURL = Column(name: "document_url", type: .text, nullable: false)
     let hiddenAt = Column(name: "hidden_at", type: .float)
-
+    
     init() {
         super.init(name: "radicals",
                    indexes: [TableIndex(name: "idx_radicals_by_level", columns: [level])])
@@ -21,12 +21,23 @@ final class RadicalTable: Table {
 }
 
 final class RadicalCharacterImagesTable: Table {
-    let subjectID = Column(name: "subject_id", type: .int, nullable: false)
+    let subjectID = Column(name: "subject_id", type: .int, nullable: false, primaryKey: true)
+    let index = Column(name: "idx", type: .int, nullable: false, primaryKey: true)
     let contentType = Column(name: "content_type", type: .int, nullable: false)
     let url = Column(name: "url", type: .text, nullable: false)
     
     init() {
-        super.init(name: "radical_character_images",
-                   indexes: [TableIndex(name: "idx_radical_character_images_by_subject_id", columns: [subjectID])])
+        super.init(name: "radical_character_images")
+    }
+}
+
+final class RadicalCharacterImagesMetadataTable: Table {
+    let subjectID = Column(name: "subject_id", type: .int, nullable: false, primaryKey: true)
+    let index = Column(name: "idx", type: .int, nullable: false, primaryKey: true)
+    let key = Column(name: "key", type: .int, nullable: false)
+    let value = Column(name: "value", type: .text, nullable: false)
+    
+    init() {
+        super.init(name: "radical_character_image_metadata")
     }
 }

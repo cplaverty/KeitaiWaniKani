@@ -38,6 +38,7 @@ extension Radical: DatabaseCodable {
     init(from database: FMDatabase, id: Int) throws {
         let characterImages = try CharacterImage.read(from: database, id: id)
         let meanings = try Meaning.read(from: database, id: id)
+        let subjectAmalgamation = try SubjectAmalgamation.read(from: database, id: id)
         
         let query = """
         SELECT \(table.level), \(table.createdAt), \(table.slug), \(table.characters), \(table.documentURL), \(table.hiddenAt)
@@ -58,6 +59,7 @@ extension Radical: DatabaseCodable {
         self.characters = resultSet.string(forColumn: table.characters.name)
         self.characterImages = characterImages
         self.meanings = meanings
+        self.amalgamationSubjectIDs = subjectAmalgamation
         self.documentURL = resultSet.url(forColumn: table.documentURL.name)!
         self.hiddenAt = resultSet.date(forColumn: table.hiddenAt.name)
     }
@@ -65,6 +67,7 @@ extension Radical: DatabaseCodable {
     func write(to database: FMDatabase, id: Int) throws {
         try CharacterImage.write(items: characterImages, to: database, id: id)
         try Meaning.write(items: meanings, to: database, id: id)
+        try SubjectAmalgamation.write(items: amalgamationSubjectIDs, to: database, id: id)
         
         let query = """
         INSERT OR REPLACE INTO \(table)
@@ -82,22 +85,31 @@ extension Radical: DatabaseCodable {
 }
 
 extension Radical.CharacterImage: BulkDatabaseCodable {
-    private static let table = Tables.radicalCharacterImages
+    private static let imagesTable = Tables.radicalCharacterImages
+    private static let metadataTable = Tables.radicalCharacterImagesMetadata
     
     static func read(from database: FMDatabase, id: Int) throws -> [Radical.CharacterImage] {
+        let allMetadata = try readMetadata(from: database, id: id)
+        
+        let table = imagesTable
+        
         let query = """
         SELECT \(table.contentType), \(table.url)
         FROM \(table)
         WHERE \(table.subjectID) = ?
+        ORDER BY \(table.index)
         """
         
         let resultSet = try database.executeQuery(query, values: [id])
         defer { resultSet.close() }
         
+        var index = 0
         var items = [Radical.CharacterImage]()
         while resultSet.next() {
             items.append(Radical.CharacterImage(contentType: resultSet.string(forColumn: table.contentType.name)!,
+                                                metadata: allMetadata[index] ?? Metadata(color: nil, dimensions: nil, styleName: nil, inlineStyles: nil),
                                                 url: resultSet.url(forColumn: table.url.name)!))
+            index += 1
         }
         
         return items
@@ -114,20 +126,79 @@ extension Radical.CharacterImage: BulkDatabaseCodable {
         return items
     }
     
+    private static func readMetadata(from database: FMDatabase, id: Int) throws -> [Int: Metadata] {
+        let table = metadataTable
+        
+        let query = """
+        SELECT \(table.index), \(table.key), \(table.value)
+        FROM \(table)
+        WHERE \(table.subjectID) = ? AND \(table.index) = ?
+        ORDER BY \(table.index)
+        """
+        
+        let resultSet = try database.executeQuery(query, values: [id, index])
+        defer { resultSet.close() }
+        
+        var items = [Int: [String: String]]()
+        while resultSet.next() {
+            let index = Int(resultSet.int(forColumn: table.index.name))
+            let key = resultSet.string(forColumn: table.key.name)!
+            let value = resultSet.string(forColumn: table.key.name)!
+            var metadataForItem = items[index, default: [String: String]()]
+            metadataForItem[key] = value
+        }
+        
+        return items.mapValues({ dictionary in
+            return Metadata(color: dictionary[Metadata.CodingKeys.color.rawValue],
+                            dimensions: dictionary[Metadata.CodingKeys.dimensions.rawValue],
+                            styleName: dictionary[Metadata.CodingKeys.styleName.rawValue],
+                            inlineStyles: dictionary[Metadata.CodingKeys.inlineStyles.rawValue].flatMap({ Bool($0) })
+            )
+        })
+    }
+    
     static func write(items: [Radical.CharacterImage], to database: FMDatabase, id: Int) throws {
-        try database.executeUpdate("DELETE FROM \(table) WHERE \(table.subjectID) = ?", values: [id])
+        try database.executeUpdate("DELETE FROM \(imagesTable) WHERE \(imagesTable.subjectID) = ?", values: [id])
+        try database.executeUpdate("DELETE FROM \(metadataTable) WHERE \(metadataTable.subjectID) = ?", values: [id])
+        
+        let table = imagesTable
         
         let query = """
         INSERT OR REPLACE INTO \(table)
-        (\(table.subjectID.name), \(table.contentType.name), \(table.url.name))
-        VALUES (?, ?, ?)
+        (\(table.subjectID.name), \(table.index.name), \(table.contentType.name), \(table.url.name))
+        VALUES (?, ?, ?, ?)
         """
         
-        for item in items {
+        for (index, item) in items.enumerated() {
             let values: [Any] = [
-                id, item.contentType, item.url.absoluteString
+                id, index, item.contentType, item.url.absoluteString
             ]
             try database.executeUpdate(query, values: values)
+            
+            try write(metadata: item.metadata, to: database, id: id, index: index)
         }
+    }
+    
+    private static func write(metadata: Metadata, to database: FMDatabase, id: Int, index: Int) throws {
+        try writeMetadataAttributeIfPresent(key: .color, value: metadata.color, to: database, id: id, index: index)
+        try writeMetadataAttributeIfPresent(key: .dimensions, value: metadata.dimensions, to: database, id: id, index: index)
+        try writeMetadataAttributeIfPresent(key: .styleName, value: metadata.styleName, to: database, id: id, index: index)
+        try writeMetadataAttributeIfPresent(key: .inlineStyles, value: metadata.inlineStyles, to: database, id: id, index: index)
+    }
+    
+    private static func writeMetadataAttributeIfPresent<T>(key: Metadata.CodingKeys, value: T?, to database: FMDatabase, id: Int, index: Int) throws {
+        guard let value = value else {
+            return
+        }
+        
+        let table = metadataTable
+        
+        let query = """
+        INSERT OR REPLACE INTO \(table)
+        (\(table.subjectID.name), \(table.index.name), \(table.key.name), \(table.value.name))
+        VALUES (?, ?, ?, ?)
+        """
+        
+        try database.executeUpdate(query, values: [id, index, key.rawValue, value])
     }
 }

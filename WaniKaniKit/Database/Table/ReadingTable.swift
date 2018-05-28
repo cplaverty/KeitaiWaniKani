@@ -11,9 +11,9 @@ final class ReadingTable: Table {
     let readingType = Column(name: "type", type: .text)
     let reading = Column(name: "reading", type: .text, nullable: false)
     let isPrimary = Column(name: "is_primary", type: .int, nullable: false)
+    let isAcceptedAnswer = Column(name: "is_accepted_answer", type: .int, nullable: false)
     
     init() {
-        super.init(name: "readings",
-                   indexes: [TableIndex(name: "idx_readings_by_subject_id", columns: [subjectID])])
+        super.init(name: "readings")
     }
 }

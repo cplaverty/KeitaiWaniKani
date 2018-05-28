@@ -12,7 +12,7 @@ private let table = Tables.readings
 extension Reading: BulkDatabaseCodable {
     static func read(from database: FMDatabase, id: Int) throws -> [Reading] {
         let query = """
-        SELECT \(table.readingType), \(table.reading), \(table.isPrimary)
+        SELECT \(table.readingType), \(table.reading), \(table.isPrimary), \(table.isAcceptedAnswer)
         FROM \(table)
         WHERE \(table.subjectID) = ?
         ORDER BY \(table.index)
@@ -25,7 +25,8 @@ extension Reading: BulkDatabaseCodable {
         while resultSet.next() {
             items.append(Reading(type: resultSet.string(forColumn: table.readingType.name),
                                  reading: resultSet.string(forColumn: table.reading.name)!,
-                                 isPrimary: resultSet.bool(forColumn: table.isPrimary.name)))
+                                 isPrimary: resultSet.bool(forColumn: table.isPrimary.name),
+                                 isAcceptedAnswer: resultSet.bool(forColumn: table.isAcceptedAnswer.name)))
         }
         
         return items
@@ -47,13 +48,13 @@ extension Reading: BulkDatabaseCodable {
         
         let query = """
         INSERT OR REPLACE INTO \(table)
-        (\(table.subjectID.name), \(table.index.name), \(table.readingType.name), \(table.reading.name), \(table.isPrimary.name))
-        VALUES (?, ?, ?, ?, ?)
+        (\(table.subjectID.name), \(table.index.name), \(table.readingType.name), \(table.reading.name), \(table.isPrimary.name), \(table.isAcceptedAnswer.name))
+        VALUES (?, ?, ?, ?, ?, ?)
         """
         
         for (index, item) in items.enumerated() {
             let values: [Any] = [
-                id, index, item.type as Any, item.reading, item.isPrimary
+                id, index, item.type as Any, item.reading, item.isPrimary, item.isAcceptedAnswer
             ]
             try database.executeUpdate(query, values: values)
         }

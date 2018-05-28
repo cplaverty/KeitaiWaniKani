@@ -11,7 +11,6 @@ final class SubjectComponentsTable: Table {
     let componentSubjectID = Column(name: "component_subject_id", type: .int, nullable: false)
     
     init() {
-        super.init(name: "subject_components",
-                   indexes: [TableIndex(name: "idx_subject_components_by_subject_id", columns: [subjectID])])
+        super.init(name: "subject_components")
     }
 }

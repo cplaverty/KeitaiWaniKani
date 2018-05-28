@@ -12,7 +12,7 @@ private let table = Tables.meanings
 extension Meaning: BulkDatabaseCodable {
     static func read(from database: FMDatabase, id: Int) throws -> [Meaning] {
         let query = """
-        SELECT \(table.meaning), \(table.isPrimary)
+        SELECT \(table.meaning), \(table.isPrimary), \(table.isAcceptedAnswer)
         FROM \(table)
         WHERE \(table.subjectID) = ?
         ORDER BY \(table.index)
@@ -24,7 +24,8 @@ extension Meaning: BulkDatabaseCodable {
         var items = [Meaning]()
         while resultSet.next() {
             items.append(Meaning(meaning: resultSet.string(forColumn: table.meaning.name)!,
-                                 isPrimary: resultSet.bool(forColumn: table.isPrimary.name)))
+                                 isPrimary: resultSet.bool(forColumn: table.isPrimary.name),
+                                 isAcceptedAnswer: resultSet.bool(forColumn: table.isAcceptedAnswer.name)))
         }
         
         return items
@@ -46,13 +47,13 @@ extension Meaning: BulkDatabaseCodable {
         
         let query = """
         INSERT OR REPLACE INTO \(table)
-        (\(table.subjectID.name), \(table.index.name), \(table.meaning.name), \(table.isPrimary.name))
-        VALUES (?, ?, ?, ?)
+        (\(table.subjectID.name), \(table.index.name), \(table.meaning.name), \(table.isPrimary.name), \(table.isAcceptedAnswer.name))
+        VALUES (?, ?, ?, ?, ?)
         """
         
         for (index, item) in items.enumerated() {
             let values: [Any] = [
-                id, index, item.meaning, item.isPrimary
+                id, index, item.meaning, item.isPrimary, item.isAcceptedAnswer
             ]
             try database.executeUpdate(query, values: values)
         }

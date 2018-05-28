@@ -2,7 +2,6 @@
 //  LevelProgression+DatabaseCodable.swift
 //  WaniKaniKit
 //
-//  Created by Chris Laverty on 24/10/2017.
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 

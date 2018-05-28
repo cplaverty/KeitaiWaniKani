@@ -12,12 +12,14 @@ struct Tables {
     static let meanings = MeaningTable()
     static let radicals = RadicalTable()
     static let radicalCharacterImages = RadicalCharacterImagesTable()
+    static let radicalCharacterImagesMetadata = RadicalCharacterImagesMetadataTable()
     static let readings = ReadingTable()
     static let resources = ResourceTable()
     static let resourceLastUpdate = ResourceLastUpdateTable()
     static let reviewStatistics = ReviewStatisticsTable()
     static let studyMaterials = StudyMaterialsTable()
     static let studyMaterialsMeaningSynonyms = StudyMaterialsMeaningSynonymsTable()
+    static let subjectAmalgamations = SubjectAmalgamationsTable()
     static let subjectComponents = SubjectComponentsTable()
     static let subjectSearch = SubjectSearchVirtualTable()
     static let userInformation = UserInformationTable()
@@ -26,9 +28,9 @@ struct Tables {
     
     static var all: [TableProtocol] {
         return [
-            assignments, kanji, levelProgression, meanings, radicals, radicalCharacterImages, readings, resources,
-            resourceLastUpdate, reviewStatistics, studyMaterials, studyMaterialsMeaningSynonyms,
-            subjectComponents, subjectSearch, userInformation, vocabulary, vocabularyPartsOfSpeech
+            assignments, kanji, levelProgression, meanings, radicals, radicalCharacterImages, radicalCharacterImagesMetadata,
+            readings, resources, resourceLastUpdate, reviewStatistics, studyMaterials, studyMaterialsMeaningSynonyms,
+            subjectAmalgamations, subjectComponents, subjectSearch, userInformation, vocabulary, vocabularyPartsOfSpeech
         ]
     }
 }

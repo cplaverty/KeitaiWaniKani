@@ -25,7 +25,6 @@ final class StudyMaterialsMeaningSynonymsTable: Table {
     let synonym = Column(name: "synonym", type: .text, nullable: false)
     
     init() {
-        super.init(name: "study_materials_meaning_synonyms",
-                   indexes: [TableIndex(name: "idx_readings_by_study_materials_id", columns: [studyMaterialsID])])
+        super.init(name: "study_materials_meaning_synonyms")
     }
 }

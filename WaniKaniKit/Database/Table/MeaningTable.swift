@@ -10,9 +10,9 @@ final class MeaningTable: Table {
     let index = Column(name: "idx", type: .int, nullable: false, primaryKey: true)
     let meaning = Column(name: "meaning", type: .text, nullable: false)
     let isPrimary = Column(name: "is_primary", type: .int, nullable: false)
+    let isAcceptedAnswer = Column(name: "is_accepted_answer", type: .int, nullable: false)
     
     init() {
-        super.init(name: "meanings",
-                   indexes: [TableIndex(name: "idx_meanings_by_subject_id", columns: [subjectID])])
+        super.init(name: "meanings")
     }
 }

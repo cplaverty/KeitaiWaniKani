@@ -13,6 +13,7 @@ public struct Kanji: ResourceCollectionItemData, Equatable {
     public let meanings: [Meaning]
     public let readings: [Reading]
     public let componentSubjectIDs: [Int]
+    public let amalgamationSubjectIDs: [Int]
     public let documentURL: URL
     public let hiddenAt: Date?
     
@@ -24,6 +25,7 @@ public struct Kanji: ResourceCollectionItemData, Equatable {
         case meanings
         case readings
         case componentSubjectIDs = "component_subject_ids"
+        case amalgamationSubjectIDs = "amalgamation_subject_ids"
         case documentURL = "document_url"
         case hiddenAt = "hidden_at"
     }

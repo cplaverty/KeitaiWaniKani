@@ -168,6 +168,8 @@
 		83D7CBFE1F50B20600043D47 /* AssignmentProgressionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D7CBFD1F50B20600043D47 /* AssignmentProgressionCollectionViewController.swift */; };
 		83D7CC001F50B82A00043D47 /* AssignmentProgressionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D7CBFF1F50B82A00043D47 /* AssignmentProgressionCollectionViewCell.swift */; };
 		83D7CC021F50EC7900043D47 /* AssignmentProgressionCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D7CC011F50EC7900043D47 /* AssignmentProgressionCollectionReusableView.swift */; };
+		83D8C45920BC1AFD00AF4825 /* SubjectAmalgamationsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D8C45820BC1AFD00AF4825 /* SubjectAmalgamationsTable.swift */; };
+		83D8C45B20BC1BD900AF4825 /* SubjectAmalgamationsTable+BulkDatabaseCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D8C45A20BC1BD900AF4825 /* SubjectAmalgamationsTable+BulkDatabaseCodable.swift */; };
 		83DC0EFB1F4DCB81006B6DD6 /* UIBottomBorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC0EFA1F4DCB81006B6DD6 /* UIBottomBorderedView.swift */; };
 		83DEF7F51F53273200EDCACF /* ProgressReportingBarButtonItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DEF7F41F53273200EDCACF /* ProgressReportingBarButtonItemView.swift */; };
 		83F02ED61F8EA3C600A85014 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02ED51F8EA3C600A85014 /* Formatter.swift */; };
@@ -436,6 +438,8 @@
 		83D7CBFD1F50B20600043D47 /* AssignmentProgressionCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentProgressionCollectionViewController.swift; sourceTree = "<group>"; };
 		83D7CBFF1F50B82A00043D47 /* AssignmentProgressionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentProgressionCollectionViewCell.swift; sourceTree = "<group>"; };
 		83D7CC011F50EC7900043D47 /* AssignmentProgressionCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentProgressionCollectionReusableView.swift; sourceTree = "<group>"; };
+		83D8C45820BC1AFD00AF4825 /* SubjectAmalgamationsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectAmalgamationsTable.swift; sourceTree = "<group>"; };
+		83D8C45A20BC1BD900AF4825 /* SubjectAmalgamationsTable+BulkDatabaseCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubjectAmalgamationsTable+BulkDatabaseCodable.swift"; sourceTree = "<group>"; };
 		83DC0EFA1F4DCB81006B6DD6 /* UIBottomBorderedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBottomBorderedView.swift; sourceTree = "<group>"; };
 		83DEF7F41F53273200EDCACF /* ProgressReportingBarButtonItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressReportingBarButtonItemView.swift; sourceTree = "<group>"; };
 		83F02ED51F8EA3C600A85014 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
@@ -688,6 +692,7 @@
 				8346C8481F2FE61900252DC9 /* ResourceTable.swift */,
 				8346C8501F3074F400252DC9 /* ReviewStatisticsTable.swift */,
 				8346C8521F30772100252DC9 /* StudyMaterialsTable.swift */,
+				83D8C45820BC1AFD00AF4825 /* SubjectAmalgamationsTable.swift */,
 				83C4D3891F307DF80082EB31 /* SubjectComponentsTable.swift */,
 				8355BEE71F92C0BF00BC1025 /* SubjectSearchVirtualTable.swift */,
 				835D08EC1F33B2F300186D0B /* Tables.swift */,
@@ -835,6 +840,7 @@
 				83B75F6C1F351B5300BECEB0 /* ResourceCollectionItem+DatabaseCodable.swift */,
 				83C261991F371CE300278648 /* ReviewStatistics+DatabaseCodable.swift */,
 				83C2619B1F3749A400278648 /* StudyMaterials+DatabaseCodable.swift */,
+				83D8C45A20BC1BD900AF4825 /* SubjectAmalgamationsTable+BulkDatabaseCodable.swift */,
 				83C2618E1F37079900278648 /* SubjectComponentsTable+BulkDatabaseCodable.swift */,
 				832C1E4D1F9345D10026F36D /* SubjectSearch.swift */,
 				83C2619D1F37888100278648 /* UserInformation+DatabaseCodable.swift */,
@@ -1357,11 +1363,13 @@
 				833D7A0E1F2CB12200A22F33 /* UserInformationTable.swift in Sources */,
 				83C2618D1F37069D00278648 /* Kanji+DatabaseCodable.swift in Sources */,
 				836D7F0D1F2BF45600F32C90 /* Kanji.swift in Sources */,
+				83D8C45920BC1AFD00AF4825 /* SubjectAmalgamationsTable.swift in Sources */,
 				83B75F701F351E6500BECEB0 /* FMResultSet.swift in Sources */,
 				83FCAB331F9F51E600024398 /* VirtualTable.swift in Sources */,
 				8346C8491F2FE61900252DC9 /* ResourceTable.swift in Sources */,
 				83FE8FA81F3FA6E000E023B3 /* CurrentLevelProgression.swift in Sources */,
 				8355BEE81F92C0BF00BC1025 /* SubjectSearchVirtualTable.swift in Sources */,
+				83D8C45B20BC1BD900AF4825 /* SubjectAmalgamationsTable+BulkDatabaseCodable.swift in Sources */,
 				83150B221F3F0AF100B61F3A /* ResourceCollection+DatabaseWriteable.swift in Sources */,
 				8317E8891F54B31300B8D654 /* SubjectProgression.swift in Sources */,
 				83C4D3861F307CD80082EB31 /* MeaningTable.swift in Sources */,
@@ -1832,7 +1840,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5QAN68L9NX;
 				INFOPLIST_FILE = AlliCrabUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.AlliCrabUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1851,7 +1858,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5QAN68L9NX;
 				INFOPLIST_FILE = AlliCrabUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = uk.me.laverty.AlliCrabUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

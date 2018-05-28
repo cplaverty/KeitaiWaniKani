@@ -26,7 +26,6 @@ final class VocabularyPartsOfSpeechTable: Table {
     let partOfSpeech = Column(name: "part_of_speech", type: .text, nullable: false)
     
     init() {
-        super.init(name: "vocabulary_parts_of_speech",
-                   indexes: [TableIndex(name: "idx_vocabulary_parts_of_speech_by_subject_id", columns: [subjectID])])
+        super.init(name: "vocabulary_parts_of_speech")
     }
 }

@@ -39,6 +39,7 @@ extension Kanji: DatabaseCodable {
         let meanings = try Meaning.read(from: database, id: id)
         let readings = try Reading.read(from: database, id: id)
         let subjectComponents = try SubjectComponent.read(from: database, id: id)
+        let subjectAmalgamation = try SubjectAmalgamation.read(from: database, id: id)
         
         let query = """
         SELECT \(table.level), \(table.createdAt), \(table.slug), \(table.characters), \(table.documentURL), \(table.hiddenAt)
@@ -60,6 +61,7 @@ extension Kanji: DatabaseCodable {
         self.meanings = meanings
         self.readings = readings
         self.componentSubjectIDs = subjectComponents
+        self.amalgamationSubjectIDs = subjectAmalgamation
         self.documentURL = resultSet.url(forColumn: table.documentURL.name)!
         self.hiddenAt = resultSet.date(forColumn: table.hiddenAt.name)
     }
@@ -68,6 +70,7 @@ extension Kanji: DatabaseCodable {
         try Meaning.write(items: meanings, to: database, id: id)
         try Reading.write(items: readings, to: database, id: id)
         try SubjectComponent.write(items: componentSubjectIDs, to: database, id: id)
+        try SubjectAmalgamation.write(items: amalgamationSubjectIDs, to: database, id: id)
         
         let query = """
         INSERT OR REPLACE INTO \(table)

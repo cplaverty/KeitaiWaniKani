@@ -134,6 +134,7 @@ class SubjectTests: XCTestCase {
                        characters: nil,
                        characterImages: [],
                        meanings: [],
+                       amalgamationSubjectIDs: [1],
                        documentURL: URL(string: "http://localhost")!,
                        hiddenAt: nil)
     }
@@ -146,6 +147,7 @@ class SubjectTests: XCTestCase {
                      meanings: [],
                      readings: [],
                      componentSubjectIDs: [1, 2],
+                     amalgamationSubjectIDs: [],
                      documentURL: URL(string: "http://localhost")!,
                      hiddenAt: nil)
     }
