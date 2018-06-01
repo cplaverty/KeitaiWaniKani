@@ -291,7 +291,8 @@ class DashboardTableViewController: UITableViewController {
         
         let title = self.tableView(tableView, titleForHeaderInSection: section)
         view.titleLabel.text = title
-        
+        view.titleLabel.sizeToFit()
+
         return view
     }
     
