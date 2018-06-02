@@ -118,13 +118,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Failed to open database!")
         }
         
+        let session = AVAudioSession.sharedInstance()
         do {
-            let session = AVAudioSession.sharedInstance()
             try session.setCategory(AVAudioSessionCategoryAmbient, with: [.interruptSpokenAudioAndMixWithOthers])
-            try session.setActive(true)
-            os_log("Audio session activated", type: .debug)
+            os_log("Audio session category assigned", type: .debug)
         } catch {
-            os_log("Failed to activate audio session", type: .error, error as NSError)
+            os_log("Failed to set audio session category", type: .error, error as NSError)
         }
         
         if let apiKey = ApplicationSettings.apiKey, !apiKey.isEmpty {
