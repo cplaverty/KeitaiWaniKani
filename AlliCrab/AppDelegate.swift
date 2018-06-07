@@ -97,6 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         
         if ApplicationSettings.purgeCaches {
+            os_log("Clearing caches directory", type: .info)
             ApplicationSettings.purgeCaches = false
             let fileManager = FileManager.default
             let cachesDir = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -104,11 +105,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try fileManager.contentsOfDirectory(at: cachesDir, includingPropertiesForKeys: nil, options: [])
                     .forEach(fileManager.removeItem(at:))
             } catch {
-                os_log("Failed to purge caches directory: %@", error as NSError)
+                os_log("Failed to purge caches directory: %@", type: .error, error as NSError)
             }
         }
         
         if ApplicationSettings.purgeDatabase {
+            os_log("Purging database", type: .info)
             try! databaseConnectionFactory.destroyDatabase()
             ApplicationSettings.purgeDatabase = false
         }
