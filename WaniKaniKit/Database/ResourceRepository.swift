@@ -201,10 +201,10 @@ public class ResourceRepository: ResourceRepositoryReader {
                                         completionHandler: completionHandler)
     }
     
-    @discardableResult public func updateSubjects(minimumFetchInterval: TimeInterval, completionHandler: @escaping (ResourceRefreshResult) -> Void) -> Progress {
-        return updateResourceCollection(ofType: .subjects,
+    @discardableResult public func updateLevelProgression(minimumFetchInterval: TimeInterval, completionHandler: @escaping (ResourceRefreshResult) -> Void) -> Progress {
+        return updateResourceCollection(ofType: .levelProgression,
                                         minimumFetchInterval: minimumFetchInterval,
-                                        requestForLastUpdateDate: { .subjects(filter: $0.map { SubjectFilter(updatedAfter: $0) }) },
+                                        requestForLastUpdateDate: { .levelProgressions(filter: $0.map { LevelProgressionFilter(updatedAfter: $0) }) },
                                         completionHandler: completionHandler)
     }
     
@@ -219,6 +219,13 @@ public class ResourceRepository: ResourceRepositoryReader {
         return updateResourceCollection(ofType: .studyMaterials,
                                         minimumFetchInterval: minimumFetchInterval,
                                         requestForLastUpdateDate: { .studyMaterials(filter: $0.map { StudyMaterialFilter(updatedAfter: $0) }) },
+                                        completionHandler: completionHandler)
+    }
+
+    @discardableResult public func updateSubjects(minimumFetchInterval: TimeInterval, completionHandler: @escaping (ResourceRefreshResult) -> Void) -> Progress {
+        return updateResourceCollection(ofType: .subjects,
+                                        minimumFetchInterval: minimumFetchInterval,
+                                        requestForLastUpdateDate: { .subjects(filter: $0.map { SubjectFilter(updatedAfter: $0) }) },
                                         completionHandler: completionHandler)
     }
     
