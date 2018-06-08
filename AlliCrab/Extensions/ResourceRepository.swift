@@ -12,6 +12,8 @@ import WaniKaniKit
 private var currentFetchRequest: Progress?
 private let fetchRequestLock = NSLock()
 
+private typealias UpdateFunction = (TimeInterval, @escaping (ResourceRefreshResult) -> Void) -> Progress
+
 extension ResourceRepository {
     var lastAppDataUpdateDate: Date? {
         return try! getEarliestLastUpdateDate(for: [ .assignments, .levelProgression, .reviewStatistics, .studyMaterials, .subjects, .user ])
@@ -26,17 +28,17 @@ extension ResourceRepository {
             return currentFetchRequest
         }
         
-        let weightedUpdateOperations = [
-            (Int64(4), updateAssignments),
-            (Int64(1), updateLevelProgression),
-            (Int64(2), updateReviewStatistics),
-            (Int64(2), updateStudyMaterials),
-            (Int64(4), updateSubjects),
-            (Int64(1), updateUser),
-            ]
+        let weightedUpdateOperations: [(weight: Int64, UpdateFunction)] = [
+            (4, updateAssignments),
+            (1, updateLevelProgression),
+            (2, updateReviewStatistics),
+            (2, updateStudyMaterials),
+            (4, updateSubjects),
+            (1, updateUser)
+        ]
         
         let expectedResultCount = weightedUpdateOperations.count
-        let expectedTotalUnitCount = weightedUpdateOperations.reduce(1, { $0 + $1.0 })
+        let expectedTotalUnitCount = weightedUpdateOperations.reduce(1, { $0 + $1.weight })
         
         os_log("Scheduling resource fetch request", type: .debug)
         
@@ -51,8 +53,8 @@ extension ResourceRepository {
             case .success, .noData:
                 results.append(result)
                 if results.count == expectedResultCount {
+                    defer { currentFetchRequest = nil }
                     os_log("All resources received.  Notifying completion.", type: .debug)
-                    currentFetchRequest = nil
                     if results.contains(.success) {
                         completionHandler(.success)
                     } else {
@@ -62,8 +64,8 @@ extension ResourceRepository {
                     fatalError("Received more results than expected!")
                 }
             case .error(_):
+                defer { currentFetchRequest = nil }
                 os_log("Received error on resource fetch.  Cancelling request and notifying completion.", type: .debug)
-                currentFetchRequest = nil
                 guard !progress.isCancelled else {
                     break
                 }
