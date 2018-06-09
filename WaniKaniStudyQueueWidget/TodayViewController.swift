@@ -17,8 +17,8 @@ struct ApplicationURL {
 class TodayViewController: UITableViewController {
     
     private enum ReuseIdentifier: String {
-        case studyQueue = "StudyQueueLight"
-        case notLoggedIn = "NotLoggedInLight"
+        case studyQueue = "StudyQueue"
+        case notLoggedIn = "NotLoggedIn"
     }
     
     // MARK: - Properties
@@ -69,21 +69,28 @@ class TodayViewController: UITableViewController {
     
     // MARK: - Implementation
     
-    private func updateStudyQueue() throws -> Bool {
+    private func latestStudyQueue() throws -> StudyQueue? {
         let databaseManager = DatabaseManager(factory: AppGroupDatabaseConnectionFactory())
         guard databaseManager.open(readOnly: true) else {
-            return false
+            return nil
         }
         
         let resourceRepository = ResourceRepositoryReader(databaseManager: databaseManager)
-        
-        let studyQueue = try resourceRepository.studyQueue()
-        if studyQueue != self.studyQueue {
-            self.studyQueue = studyQueue
-            return true
+        guard try resourceRepository.hasStudyQueue() else {
+            return nil
         }
         
-        return false
+        return try resourceRepository.studyQueue()
+    }
+    
+    private func updateStudyQueue() throws -> Bool {
+        let studyQueue = try latestStudyQueue()
+        guard studyQueue != self.studyQueue else {
+            return false
+        }
+        
+        self.studyQueue = studyQueue
+        return true
     }
     
     // MARK: - UITableViewDataSource
@@ -108,7 +115,9 @@ class TodayViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        self.extensionContext?.open(ApplicationURL.launchReviews, completionHandler: nil)
+        if self.studyQueue != nil {
+            self.extensionContext?.open(ApplicationURL.launchReviews, completionHandler: nil)
+        }
         return nil
     }
     
@@ -128,9 +137,11 @@ extension TodayViewController: NCWidgetProviding {
             }
         } catch ResourceRepositoryError.noDatabase {
             os_log("Database does not exist", type: .info)
+            self.studyQueue = nil
             completionHandler(.noData)
         } catch {
             os_log("Error when refreshing study queue from today widget in completion handler: %@", type: .error, error as NSError)
+            self.studyQueue = nil
             completionHandler(.failed)
         }
     }
