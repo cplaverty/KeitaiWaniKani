@@ -12,7 +12,7 @@ private let table = Tables.userInformation
 extension UserInformation {
     init?(from database: FMDatabase) throws {
         let query = """
-        SELECT \(table.username), \(table.level), \(table.startedAt), \(table.isSubscribed), \(table.profileURL), \(table.currentVacationStartedAt)
+        SELECT \(table.username), \(table.level), \(table.maxLevelGrantedBySubscription), \(table.startedAt), \(table.isSubscribed), \(table.profileURL), \(table.currentVacationStartedAt)
         FROM \(table)
         """
         
@@ -25,24 +25,22 @@ extension UserInformation {
         
         self.username = resultSet.string(forColumn: table.username.name)!
         self.level = resultSet.long(forColumn: table.level.name)
+        self.maxLevelGrantedBySubscription = resultSet.long(forColumn: table.maxLevelGrantedBySubscription.name)
         self.startedAt = resultSet.date(forColumn: table.startedAt.name)!
         self.isSubscribed = resultSet.bool(forColumn: table.isSubscribed.name)
         self.profileURL = resultSet.url(forColumn: table.profileURL.name)
         self.currentVacationStartedAt = resultSet.date(forColumn: table.currentVacationStartedAt.name)
-        
-        // TODO: This should be stored
-        self.maxLevelGrantedBySubscription = self.isSubscribed ? 60 : 3
     }
     
     func write(to database: FMDatabase) throws {
         let query = """
         INSERT OR REPLACE INTO \(table)
-        (\(table.username.name), \(table.level.name), \(table.startedAt.name), \(table.isSubscribed.name), \(table.profileURL.name), \(table.currentVacationStartedAt.name))
-        VALUES (?, ?, ?, ?, ?, ?)
+        (\(table.username.name), \(table.level.name), \(table.maxLevelGrantedBySubscription.name), \(table.startedAt.name), \(table.isSubscribed.name), \(table.profileURL.name), \(table.currentVacationStartedAt.name))
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         """
         
         let values: [Any] = [
-            username, level, startedAt, isSubscribed,
+            username, level, maxLevelGrantedBySubscription ,startedAt, isSubscribed,
             profileURL?.absoluteString as Any, currentVacationStartedAt as Any
         ]
         try database.executeUpdate(query, values: values)

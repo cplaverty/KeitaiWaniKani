@@ -8,6 +8,7 @@
 final class UserInformationTable: Table {
     let username = Column(name: "username", type: .text, nullable: false, primaryKey: true)
     let level = Column(name: "level", type: .int, nullable: false)
+    let maxLevelGrantedBySubscription = Column(name: "max_level_granted_by_subscription", type: .int, nullable: false)
     let startedAt = Column(name: "started_at", type: .float, nullable: false)
     let isSubscribed = Column(name: "is_subscribed", type: .int, nullable: false)
     let profileURL = Column(name: "profile_url", type: .text)
