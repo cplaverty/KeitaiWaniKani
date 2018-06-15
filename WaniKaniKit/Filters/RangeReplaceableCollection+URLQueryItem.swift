@@ -1,11 +1,11 @@
 //
-//  Array+URLQueryItem.swift
+//  RangeReplaceableCollection+URLQueryItem.swift
 //  WaniKaniKit
 //
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-extension Array where Element == URLQueryItem {
+extension RangeReplaceableCollection where Element == URLQueryItem {
     mutating func appendItemIfSet(name: String, value: String?) {
         guard let value = value else { return }
         

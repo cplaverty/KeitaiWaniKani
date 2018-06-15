@@ -92,7 +92,7 @@
 		836D7F021F2BF44600F32C90 /* StudyMaterialsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839268401F2BF113006C744D /* StudyMaterialsTests.swift */; };
 		836D7F041F2BF44600F32C90 /* UserInformationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839268421F2BF113006C744D /* UserInformationTests.swift */; };
 		836D7F051F2BF44600F32C90 /* VocabularyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839268431F2BF113006C744D /* VocabularyTests.swift */; };
-		836D7F061F2BF44F00F32C90 /* Array+URLQueryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839268211F2BF080006C744D /* Array+URLQueryItem.swift */; };
+		836D7F061F2BF44F00F32C90 /* RangeReplaceableCollection+URLQueryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839268211F2BF080006C744D /* RangeReplaceableCollection+URLQueryItem.swift */; };
 		836D7F071F2BF44F00F32C90 /* AssignmentFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839268221F2BF080006C744D /* AssignmentFilter.swift */; };
 		836D7F081F2BF44F00F32C90 /* RequestFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839268231F2BF080006C744D /* RequestFilter.swift */; };
 		836D7F091F2BF44F00F32C90 /* ReviewStatisticFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839268241F2BF080006C744D /* ReviewStatisticFilter.swift */; };
@@ -372,7 +372,7 @@
 		8392681D1F2BF080006C744D /* WaniKaniAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaniKaniAPI.swift; sourceTree = "<group>"; };
 		8392681E1F2BF080006C744D /* WaniKaniResourceDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaniKaniResourceDecoder.swift; sourceTree = "<group>"; };
 		8392681F1F2BF080006C744D /* RequestTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTypes.swift; sourceTree = "<group>"; };
-		839268211F2BF080006C744D /* Array+URLQueryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+URLQueryItem.swift"; sourceTree = "<group>"; };
+		839268211F2BF080006C744D /* RangeReplaceableCollection+URLQueryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RangeReplaceableCollection+URLQueryItem.swift"; sourceTree = "<group>"; };
 		839268221F2BF080006C744D /* AssignmentFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentFilter.swift; sourceTree = "<group>"; };
 		839268231F2BF080006C744D /* RequestFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFilter.swift; sourceTree = "<group>"; };
 		839268241F2BF080006C744D /* ReviewStatisticFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewStatisticFilter.swift; sourceTree = "<group>"; };
@@ -767,7 +767,7 @@
 		839268201F2BF080006C744D /* Filters */ = {
 			isa = PBXGroup;
 			children = (
-				839268211F2BF080006C744D /* Array+URLQueryItem.swift */,
+				839268211F2BF080006C744D /* RangeReplaceableCollection+URLQueryItem.swift */,
 				839268221F2BF080006C744D /* AssignmentFilter.swift */,
 				83C5C7AD1F9FDF23009FD88D /* LevelProgressionFilter.swift */,
 				839268231F2BF080006C744D /* RequestFilter.swift */,
@@ -1394,7 +1394,7 @@
 				834230BE1F3E1529000E83FE /* ResourceRepositoryReader.swift in Sources */,
 				83FE8FAC1F4193CE00E023B3 /* ResourceRepository.swift in Sources */,
 				836D7F1C1F2BF92900F32C90 /* WaniKaniAPIError.swift in Sources */,
-				836D7F061F2BF44F00F32C90 /* Array+URLQueryItem.swift in Sources */,
+				836D7F061F2BF44F00F32C90 /* RangeReplaceableCollection+URLQueryItem.swift in Sources */,
 				83C2618F1F37079900278648 /* SubjectComponentsTable+BulkDatabaseCodable.swift in Sources */,
 				836D7F0A1F2BF44F00F32C90 /* StudyMaterialFilter.swift in Sources */,
 				8346C8531F30772100252DC9 /* StudyMaterialsTable.swift in Sources */,
