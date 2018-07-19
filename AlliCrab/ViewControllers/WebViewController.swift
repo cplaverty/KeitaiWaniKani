@@ -37,6 +37,9 @@ class WebViewController: UIViewController {
     private var webViewConfiguration: WKWebViewConfiguration?
     private var shouldIncludeDoneButton = false
     private var keyValueObservers: [NSKeyValueObservation]?
+    private var restoreScrollDelegate: UIScrollViewDelegate?
+    private var keyboardContentOffset: CGPoint?
+    private var restrictKeyboardScroll = false
     
     private lazy var backButton: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "ArrowLeft"), style: .plain, target: self, action: #selector(backButtonTouched(_:forEvent:)))
     private lazy var forwardButton: UIBarButtonItem = UIBarButtonItem(image: UIImage(named: "ArrowRight"), style: .plain, target: self, action: #selector(forwardButtonTouched(_:forEvent:)))
@@ -234,6 +237,16 @@ class WebViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        startObservingKeyboardEvents()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopObservingKeyboardEvents()
+    }
+    
     private func makeWebView() -> WKWebView {
         let webView = WKWebView(frame: .zero, configuration: webViewConfiguration ?? defaultWebViewConfiguration)
         webView.translatesAutoresizingMaskIntoConstraints = false
@@ -323,6 +336,32 @@ class WebViewController: UIViewController {
         return buttons
     }
     
+    // MARK: - Keyboard
+    
+    private func startObservingKeyboardEvents() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+    }
+    
+    private func stopObservingKeyboardEvents() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if( self.restrictKeyboardScroll ) {
+            self.keyboardContentOffset = self.webView.scrollView.contentOffset;
+            self.restoreScrollDelegate = self.webView.scrollView.delegate;
+            self.webView.scrollView.delegate = self;
+        }
+    }
+    
+    @objc func keyboardDidShow(notification: NSNotification) {
+        if( self.restrictKeyboardScroll ) {
+            self.webView.scrollView.delegate = self.restoreScrollDelegate;
+        }
+    }
+    
     // MARK: - Implementation
     
     func showBrowserInterface(_ shouldShowBrowserInterface: Bool, animated: Bool) {
@@ -351,6 +390,15 @@ extension WebViewController: WebViewBackForwardListTableViewControllerDelegate {
     func webViewBackForwardListTableViewController(_ controller: WebViewBackForwardListTableViewController, didSelectBackForwardListItem item: WKBackForwardListItem) {
         controller.dismiss(animated: true, completion: nil)
         self.webView.go(to: item)
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension WebViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if( self.restrictKeyboardScroll ) {
+            scrollView.contentOffset = self.keyboardContentOffset!;
+        }
     }
 }
 
@@ -386,6 +434,7 @@ extension WebViewController: WKNavigationDelegate {
         switch url {
         case WaniKaniURL.lessonSession, WaniKaniURL.reviewSession:
             showBrowserInterface(false, animated: true)
+            self.restrictKeyboardScroll = true
         default: break
         }
     }
