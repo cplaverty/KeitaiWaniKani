@@ -35,7 +35,7 @@ class WebViewBackForwardListTableViewController: UITableViewController {
         navigationItem.title = "History"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done(_:)))
         
-        if UIAccessibilityIsReduceTransparencyEnabled() {
+        if UIAccessibility.isReduceTransparencyEnabled {
             tableView.backgroundColor = .white
         } else {
             tableView.backgroundColor = .clear
@@ -84,7 +84,7 @@ extension WebViewBackForwardListTableViewController: UIPopoverPresentationContro
     func presentationController(_ presentationController: UIPresentationController, willPresentWithAdaptiveStyle style: UIModalPresentationStyle, transitionCoordinator: UIViewControllerTransitionCoordinator?) {
         if style == .popover || style == .none {
             let vc = presentationController.presentedViewController as! WebViewBackForwardListTableViewController
-            if UIAccessibilityIsReduceTransparencyEnabled() {
+            if UIAccessibility.isReduceTransparencyEnabled {
                 vc.tableView.backgroundColor = .white
             } else {
                 vc.tableView.backgroundColor = .clear

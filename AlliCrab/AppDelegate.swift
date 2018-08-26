@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public var resourceRepository: ResourceRepository? {
         didSet {
             guard let resourceRepository = resourceRepository else {
-                UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalNever)
+                UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalNever)
                 notificationManager.unregisterForNotifications()
                 return
             }
@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - UIApplicationDelegate
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UINavigationBar.appearance().tintColor = .globalTintColor
         UINavigationBar.appearance().barTintColor = .globalBarTintColor
         UIToolbar.appearance().tintColor = .globalTintColor
@@ -122,7 +122,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let session = AVAudioSession.sharedInstance()
         do {
-            try session.setCategory(AVAudioSessionCategoryAmbient, with: [.interruptSpokenAudioAndMixWithOthers])
+            try session.setCategory(.ambient, mode: .default, options: [.interruptSpokenAudioAndMixWithOthers])
             os_log("Audio session category assigned", type: .debug)
         } catch {
             os_log("Failed to set audio session category", type: .error, error as NSError)
@@ -143,7 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         os_log("Handling url %@", type: .info, url as NSURL)
         
         guard let rootViewController = rootNavigationController else {

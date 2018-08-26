@@ -9,7 +9,7 @@ import UIKit
 
 class DashboardTableViewHeaderFooterView: UITableViewHeaderFooterView {
     
-    private let backgroundBlurEffectStyle = UIBlurEffectStyle.extraLight
+    private let backgroundBlurEffectStyle = UIBlurEffect.Style.extraLight
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -17,7 +17,7 @@ class DashboardTableViewHeaderFooterView: UITableViewHeaderFooterView {
         label.font = UIFont.preferredFont(forTextStyle: .title2)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
+        if !UIAccessibility.isReduceTransparencyEnabled {
             label.shadowColor = .black
             label.shadowOffset = CGSize(width: 1, height: 1)
         }
@@ -32,7 +32,7 @@ class DashboardTableViewHeaderFooterView: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
+        if !UIAccessibility.isReduceTransparencyEnabled {
             let visualEffectView = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: UIBlurEffect(style: backgroundBlurEffectStyle)))
             visualEffectView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             visualEffectView.preservesSuperviewLayoutMargins = true

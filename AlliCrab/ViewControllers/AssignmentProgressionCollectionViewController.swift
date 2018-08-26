@@ -95,7 +95,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ReuseIdentifier.header.rawValue, for: indexPath) as! AssignmentProgressionCollectionReusableView
         
-        if kind == UICollectionElementKindSectionHeader {
+        if kind == UICollectionView.elementKindSectionHeader {
             let section = sections[indexPath.section]
             view.headerLabel.text = section.title
         } else {
@@ -121,7 +121,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
         os_log("%@ update timer will fire at %@", type: .debug, String(describing: type(of: self)), nextFireTime as NSDate)
         let timer = Timer(fireAt: nextFireTime, interval: .oneMinute, target: self, selector: #selector(updateUITimerDidFire(_:)), userInfo: nil, repeats: true)
         timer.tolerance = 5
-        RunLoop.main.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
+        RunLoop.main.add(timer, forMode: .default)
         
         return timer
     }
@@ -167,7 +167,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
         
         notificationObservers = addNotificationObservers()
         
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
+        if !UIAccessibility.isReduceTransparencyEnabled {
             collectionView!.backgroundView = BlurredImageView(frame: collectionView!.frame, imageNamed: "Art03", style: .extraLight)
         }
     }

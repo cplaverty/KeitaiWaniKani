@@ -29,7 +29,7 @@ class SubjectCharacterView: UIView {
     }()
     
     private let downloadProgressActivityIndicator: UIActivityIndicatorView = {
-        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         
         return activityIndicatorView

@@ -25,7 +25,7 @@ public class DatabaseManager {
             
             if let databaseQueue = databaseQueue {
                 os_log("Adding memory warning listener", type: .debug)
-                memoryWarningObserver = NotificationCenter.default.addObserver(forName: .UIApplicationDidReceiveMemoryWarning, object: nil, queue: nil) { _ in
+                memoryWarningObserver = NotificationCenter.default.addObserver(forName: UIApplication.didReceiveMemoryWarningNotification, object: nil, queue: nil) { _ in
                     os_log("Memory warning.  Clearing cached statements.", type: .debug)
                     databaseQueue.inDatabase { database in
                         try? database.executeUpdate("PRAGMA shrink_memory", values: nil)

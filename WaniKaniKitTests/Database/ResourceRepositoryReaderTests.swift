@@ -226,9 +226,9 @@ class ResourceRepositoryReaderTests: XCTestCase {
         var reviewTime = calendar.startOfHour(for: Date()).addingTimeInterval(.oneDay)
         
         repeat {
-            let radicalCount = Int(arc4random_uniform(30))
-            let kanjiCount = Int(arc4random_uniform(30))
-            let vocabularyCount = Int(arc4random_uniform(30))
+            let radicalCount = Int.random(in: 0...30)
+            let kanjiCount = Int.random(in: 0...30)
+            let vocabularyCount = Int.random(in: 0...30)
             for _ in 0..<radicalCount {
                 assignments.append(createTestAssignment(subjectType: .radical, level: 1, srsStage: 1, availableAt: reviewTime))
                 for _ in 0..<2 {
@@ -275,9 +275,9 @@ class ResourceRepositoryReaderTests: XCTestCase {
         var reviewTime = calendar.startOfHour(for: Date()).addingTimeInterval(.oneDay)
         
         repeat {
-            let radicalCount = Int(arc4random_uniform(30))
-            let kanjiCount = Int(arc4random_uniform(30))
-            let vocabularyCount = Int(arc4random_uniform(30))
+            let radicalCount = Int.random(in: 0...30)
+            let kanjiCount = Int.random(in: 0...30)
+            let vocabularyCount = Int.random(in: 0...30)
             for _ in 0..<radicalCount {
                 assignments.append(createTestAssignment(subjectType: .radical, level: 1, srsStage: 1, availableAt: reviewTime))
                 for _ in 0..<2 {
@@ -324,9 +324,9 @@ class ResourceRepositoryReaderTests: XCTestCase {
         var reviewTime = calendar.startOfHour(for: Date()).addingTimeInterval(.oneDay)
         
         repeat {
-            let radicalCount = Int(arc4random_uniform(30))
-            let kanjiCount = Int(arc4random_uniform(30))
-            let vocabularyCount = Int(arc4random_uniform(30))
+            let radicalCount = Int.random(in: 0...30)
+            let kanjiCount = Int.random(in: 0...30)
+            let vocabularyCount = Int.random(in: 0...30)
             for _ in 0..<radicalCount {
                 assignments.append(createTestAssignment(subjectType: .radical, level: 1, srsStage: 3, availableAt: reviewTime))
             }
@@ -380,8 +380,8 @@ class ResourceRepositoryReaderTests: XCTestCase {
         var startDate = components.date!
         
         for level in 1..<testUserLevel {
-            let radicalCount = Int(arc4random_uniform(29)) + 1
-            let kanjiCount = Int(arc4random_uniform(29)) + 1
+            let radicalCount = Int.random(in: 1...30)
+            let kanjiCount = Int.random(in: 1...30)
             let kanjiStart = startDate + .oneDay * 7
             
             for _ in 0..<radicalCount {
@@ -400,8 +400,8 @@ class ResourceRepositoryReaderTests: XCTestCase {
             startDate = endDate
         }
         
-        let radicalCount = Int(arc4random_uniform(29)) + 1
-        let kanjiCount = Int(arc4random_uniform(29)) + 1
+        let radicalCount = Int.random(in: 1...30)
+        let kanjiCount = Int.random(in: 1...30)
         let kanjiStart = startDate + .oneDay * 7
         
         XCTAssertGreaterThan(kanjiStart, Date())
@@ -617,7 +617,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         for _ in 0..<radicalsNotPassed {
             let radical = createTestRadical(level: testUserLevel)
             items.append(radical)
-            if arc4random_uniform(2) == 0 {
+            if Bool.random() {
                 items.append(createTestAssignment(subjectType: .radical, level: testUserLevel, srsStage: 0, availableAt: now, isPassed: false, subjectID: radical.id))
             }
         }
@@ -631,7 +631,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         for _ in 0..<kanjiNotPassed {
             let kanji = createTestKanji(level: testUserLevel)
             items.append(kanji)
-            if arc4random_uniform(2) == 0 {
+            if Bool.random() {
                 items.append(createTestAssignment(subjectType: .kanji, level: testUserLevel, srsStage: 0, availableAt: now, isPassed: false, subjectID: kanji.id))
             }
         }

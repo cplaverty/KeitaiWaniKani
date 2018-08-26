@@ -30,8 +30,8 @@ class DashboardTableViewController: UITableViewController {
         case srsProgressDetail = "SRSProgressDetail"
     }
     
-    private enum TableViewSection: Int {
-        case available = 0, upcomingReviews, levelProgression, srsDistribution, links, count
+    private enum TableViewSection: Int, CaseIterable {
+        case available = 0, upcomingReviews, levelProgression, srsDistribution, links
     }
     
     // MARK: - Properties
@@ -56,7 +56,7 @@ class DashboardTableViewController: UITableViewController {
     
     var resourceRepository: ResourceRepository!
     
-    private let backgroundBlurEffectStyle = UIBlurEffectStyle.extraLight
+    private let backgroundBlurEffectStyle = UIBlurEffect.Style.extraLight
     
     private var userInformation: UserInformation?
     private var studyQueue: StudyQueue?
@@ -107,7 +107,7 @@ class DashboardTableViewController: UITableViewController {
     // MARK: - UITableViewDataSource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return TableViewSection.count.rawValue
+        return TableViewSection.allCases.count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -130,7 +130,6 @@ class DashboardTableViewController: UITableViewController {
             return "SRS Item Distribution"
         case .links:
             return "Links"
-        case .count: fatalError("This is a placeholder and not a real section")
         }
     }
     
@@ -150,7 +149,6 @@ class DashboardTableViewController: UITableViewController {
             return 5
         case .links:
             return 2
-        case .count: fatalError("This is a placeholder and not a real section")
         }
     }
     
@@ -270,8 +268,6 @@ class DashboardTableViewController: UITableViewController {
             }
             
             return cell
-        case .count:
-            fatalError("This is a placeholder and not a real section")
         }
     }
     
@@ -292,7 +288,7 @@ class DashboardTableViewController: UITableViewController {
         let title = self.tableView(tableView, titleForHeaderInSection: section)
         view.titleLabel.text = title
         view.titleLabel.sizeToFit()
-
+        
         return view
     }
     
@@ -339,7 +335,7 @@ class DashboardTableViewController: UITableViewController {
         os_log("%@ update timer will fire at %@", type: .debug, String(describing: type(of: self)), nextFireTime as NSDate)
         let timer = Timer(fireAt: nextFireTime, interval: .oneMinute, target: self, selector: #selector(updateUITimerDidFire(_:)), userInfo: nil, repeats: true)
         timer.tolerance = 5
-        RunLoop.main.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
+        RunLoop.main.add(timer, forMode: .default)
         
         return timer
     }
@@ -408,7 +404,7 @@ class DashboardTableViewController: UITableViewController {
         
         updateStatusBarForLastUpdate(resourceRepository.lastAppDataUpdateDate)
         
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
+        if !UIAccessibility.isReduceTransparencyEnabled {
             tableView.backgroundView = BlurredImageView(frame: tableView.frame, imageNamed: "Header", style: backgroundBlurEffectStyle)
         }
         
@@ -590,7 +586,7 @@ class DashboardTableViewController: UITableViewController {
                                                   TableViewSection.levelProgression.rawValue, TableViewSection.srsDistribution.rawValue]
                 self.tableView.reloadSections(sectionsToReload, with: .automatic)
             },
-            NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { [unowned self] _ in
+            NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [unowned self] _ in
                 self.updateData(minimumFetchInterval: 5 * .oneMinute, showAlertOnErrors: false)
             }
         ]

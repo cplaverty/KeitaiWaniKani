@@ -188,7 +188,7 @@ class WebViewController: UIViewController {
         present(vc, animated: true, completion: nil)
     }
     
-    func presentActivityViewController(_ activityItems: [AnyObject], title: String?, sender: UIBarButtonItem, completionHandler: UIActivityViewControllerCompletionWithItemsHandler? = nil) {
+    func presentActivityViewController(_ activityItems: [AnyObject], title: String?, sender: UIBarButtonItem, completionHandler: UIActivityViewController.CompletionWithItemsHandler? = nil) {
         let avc = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         avc.popoverPresentationController?.barButtonItem = sender;
         avc.completionWithItemsHandler = completionHandler

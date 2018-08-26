@@ -91,7 +91,7 @@ class SubjectCollectionViewController: UICollectionViewController {
         
         notificationObservers = addNotificationObservers()
         
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
+        if !UIAccessibility.isReduceTransparencyEnabled {
             collectionView!.backgroundView = BlurredImageView(frame: collectionView!.frame, imageNamed: "Art03", style: .extraLight)
         }
     }

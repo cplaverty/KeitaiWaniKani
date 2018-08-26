@@ -9,7 +9,7 @@ import UIKit
 
 class BlurredImageView: UIView {
     
-    init(frame: CGRect, imageNamed name: String, style: UIBlurEffectStyle) {
+    init(frame: CGRect, imageNamed name: String, style: UIBlurEffect.Style) {
         super.init(frame: frame)
         
         autoresizingMask = [.flexibleHeight, .flexibleWidth]

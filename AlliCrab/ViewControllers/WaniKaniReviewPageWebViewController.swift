@@ -26,7 +26,7 @@ class WaniKaniReviewPageWebViewController: WebViewController {
         
         showBrowserInterface(webView.url != WaniKaniURL.lessonSession && webView.url != WaniKaniURL.reviewSession, animated: true)
         
-        keyboardWillShowObserver = NotificationCenter.default.addObserver(forName: .UIKeyboardWillShow, object: nil, queue: .main) { [unowned self] _ in
+        keyboardWillShowObserver = NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { [unowned self] _ in
             guard let url = self.webView.url, url == WaniKaniURL.lessonSession || url == WaniKaniURL.reviewSession else {
                 return
             }

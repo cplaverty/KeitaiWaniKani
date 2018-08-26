@@ -9,7 +9,7 @@ import UIKit
 
 class AssignmentProgressionCollectionReusableView: UICollectionReusableView {
     
-    private let backgroundBlurEffectStyle = UIBlurEffectStyle.extraLight
+    private let backgroundBlurEffectStyle = UIBlurEffect.Style.extraLight
     
     let headerLabel: UILabel = {
         let label = UILabel()
@@ -17,7 +17,7 @@ class AssignmentProgressionCollectionReusableView: UICollectionReusableView {
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
+        if !UIAccessibility.isReduceTransparencyEnabled {
             label.shadowColor = .black
             label.shadowOffset = CGSize(width: 1, height: 1)
         }
@@ -28,7 +28,7 @@ class AssignmentProgressionCollectionReusableView: UICollectionReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
+        if !UIAccessibility.isReduceTransparencyEnabled {
             let visualEffectView = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: UIBlurEffect(style: backgroundBlurEffectStyle)))
             visualEffectView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             visualEffectView.frame = self.frame
