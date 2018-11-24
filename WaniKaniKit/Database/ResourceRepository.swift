@@ -167,7 +167,7 @@ public class ResourceRepository: ResourceRepositoryReader {
             }
             
             var databaseError: Error? = nil
-            databaseQueue.inTransaction { (database, rollback) in
+            databaseQueue.inImmediateTransaction { (database, rollback) in
                 os_log("Writing to database", type: .debug)
                 do {
                     try data.write(to: database)
@@ -288,7 +288,7 @@ public class ResourceRepository: ResourceRepositoryReader {
             let isLastPage = totalPagesReceived == resources.estimatedPageCount
             
             var databaseError: Error? = nil
-            databaseQueue.inTransaction { (database, rollback) in
+            databaseQueue.inImmediateTransaction { (database, rollback) in
                 os_log("Writing %d entries to database (page %d of %d)", type: .debug, resources.data.count, totalPagesReceived, resources.estimatedPageCount)
                 do {
                     try resources.write(to: database)

@@ -437,7 +437,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
             XCTFail(error.localizedDescription)
         }
         
-        databaseManager.databaseQueue!.inTransaction { (database, rollback) in
+        databaseManager.databaseQueue!.inExclusiveTransaction { (database, rollback) in
             for assignmentId in firstKanjiAssignmentId..<lastKanjiAssignmentId {
                 do {
                     let dependencies = firstKanjiAssignmentId - firstRadicalAssignmentId > 1 ? [firstRadicalAssignmentId, firstRadicalAssignmentId + 1] : [firstRadicalAssignmentId]
@@ -495,7 +495,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
     private func createTestUser(currentVacationStartedAt: Date? = nil) {
         let user = UserInformation(username: "Test", level: testUserLevel, maxLevelGrantedBySubscription: 60, startedAt: Date(), isSubscribed: true, profileURL: nil, currentVacationStartedAt: currentVacationStartedAt)
         
-        databaseManager.databaseQueue!.inTransaction { (database, rollback) in
+        databaseManager.databaseQueue!.inExclusiveTransaction { (database, rollback) in
             do {
                 try user.write(to: database)
                 try ResourceType.user.setLastUpdateDate(Date(), in: database)
@@ -665,7 +665,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
     }
     
     private func writeToDatabase(_ items: [ResourceCollectionItem]) {
-        databaseManager.databaseQueue!.inTransaction { (database, rollback) in
+        databaseManager.databaseQueue!.inExclusiveTransaction { (database, rollback) in
             do {
                 for item in items {
                     try item.write(to: database)
