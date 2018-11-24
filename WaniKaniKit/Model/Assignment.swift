@@ -9,7 +9,6 @@ public struct Assignment: ResourceCollectionItemData, Equatable {
     public let createdAt: Date
     public let subjectID: Int
     public let subjectType: SubjectType
-    public let level: Int
     public let srsStage: Int
     public let srsStageName: String
     public let unlockedAt: Date?
@@ -26,7 +25,6 @@ public struct Assignment: ResourceCollectionItemData, Equatable {
         case createdAt = "created_at"
         case subjectID = "subject_id"
         case subjectType = "subject_type"
-        case level
         case srsStage = "srs_stage"
         case srsStageName = "srs_stage_name"
         case unlockedAt = "unlocked_at"
@@ -42,6 +40,12 @@ public struct Assignment: ResourceCollectionItemData, Equatable {
 }
 
 public extension Assignment {
+    var level: Int {
+        print("subjectType \(subjectType)")
+        print("subjectID \(subjectID)")
+        return 1
+    }
+
     public static func isAcceleratedLevel(_ level: Int) -> Bool {
         return level <= 2
     }

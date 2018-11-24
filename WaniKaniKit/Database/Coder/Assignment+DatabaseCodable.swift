@@ -110,7 +110,7 @@ extension Assignment: DatabaseCodable {
         self.createdAt = resultSet.date(forColumn: table.createdAt.name)!
         self.subjectID = resultSet.long(forColumn: table.subjectID.name)
         self.subjectType = resultSet.rawValue(SubjectType.self, forColumn: table.subjectType.name)!
-        self.level = resultSet.long(forColumn: table.level.name)
+//        self.level = resultSet.long(forColumn: table.level.name)
         self.srsStage = resultSet.long(forColumn: table.srsStage.name)
         self.srsStageName = resultSet.string(forColumn: table.srsStageName.name)!
         self.unlockedAt = resultSet.date(forColumn: table.unlockedAt.name)
