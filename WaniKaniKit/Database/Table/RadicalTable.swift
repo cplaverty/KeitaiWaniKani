@@ -5,7 +5,7 @@
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-final class RadicalTable: Table {
+final class RadicalTable: Table, SubjectTable {
     let id = Column(name: "id", type: .int, nullable: false, primaryKey: true)
     let level = Column(name: "level", type: .int, nullable: false)
     let createdAt = Column(name: "created_at", type: .float, nullable: false)

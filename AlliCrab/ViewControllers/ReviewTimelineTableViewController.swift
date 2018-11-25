@@ -53,7 +53,17 @@ class ReviewTimelineTableViewController: UITableViewController {
         }
     }
     
-    private var assignmentsChangeObserver: NSObjectProtocol?
+    private var notificationObservers: [NSObjectProtocol]?
+    
+    // MARK: - Initialisers
+    
+    deinit {
+        if let notificationObservers = notificationObservers {
+            os_log("Removing NotificationCenter observers from %@", type: .debug, String(describing: type(of: self)))
+            notificationObservers.forEach(NotificationCenter.default.removeObserver(_:))
+        }
+        notificationObservers = nil
+    }
     
     // MARK: - UITableViewDataSource
     
@@ -114,23 +124,8 @@ class ReviewTimelineTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.register(ReviewTimelineHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: ReuseIdentifier.dateHeader.rawValue)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
-        assignmentsChangeObserver = NotificationCenter.default.addObserver(forName: .waniKaniAssignmentsDidChange, object: nil, queue: .main) { _ in
-            try! self.updateReviewTimeline()
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if let assignmentsChangeObserver = assignmentsChangeObserver {
-            NotificationCenter.default.removeObserver(assignmentsChangeObserver)
-        }
-        assignmentsChangeObserver = nil
+        notificationObservers = addNotificationObservers()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -151,6 +146,23 @@ class ReviewTimelineTableViewController: UITableViewController {
     }
     
     // MARK: - Update UI
+    
+    private func addNotificationObservers() -> [NSObjectProtocol] {
+        os_log("Adding NotificationCenter observers to %@", type: .debug, String(describing: type(of: self)))
+        let notificationObservers = [
+            NotificationCenter.default.addObserver(forName: .waniKaniUserInformationDidChange, object: nil, queue: .main) { [unowned self] _ in
+                try! self.updateReviewTimeline()
+            },
+            NotificationCenter.default.addObserver(forName: .waniKaniAssignmentsDidChange, object: nil, queue: .main) { [unowned self] _ in
+                try! self.updateReviewTimeline()
+            },
+            NotificationCenter.default.addObserver(forName: .waniKaniSubjectsDidChange, object: nil, queue: .main) { [unowned self] _ in
+                try! self.updateReviewTimeline()
+            }
+        ]
+        
+        return notificationObservers
+    }
     
     private func updateReviewTimeline() throws {
         guard let repositoryReader = repositoryReader else {

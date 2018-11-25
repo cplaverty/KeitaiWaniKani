@@ -92,16 +92,16 @@ class ResourceRepositoryReaderTests: XCTestCase {
         populateDatabaseForStudyQueue(lessonCount: 0, pendingReviewCount: 0, futureReviewCount: 4, futureReviewTime: nextDayReviewTime)
         
         let expectedPreVacation = StudyQueue(lessonsAvailable: 10, reviewsAvailable: 23, nextReviewDate: nextHourReviewTime, reviewsAvailableNextHour: 6, reviewsAvailableNextDay: 10)
-
+        
         XCTAssertEqual(try resourceRepository.studyQueue(), expectedPreVacation)
         
         createTestUser(currentVacationStartedAt: Date())
         
         let expectedPostVacation = StudyQueue(lessonsAvailable: 0, reviewsAvailable: 0, nextReviewDate: nil, reviewsAvailableNextHour: 0, reviewsAvailableNextDay: 0)
-
+        
         XCTAssertEqual(try resourceRepository.studyQueue(), expectedPostVacation)
     }
-
+    
     func testStudyQueue_Load() {
         populateDatabaseForStudyQueue(lessonCount: 327, pendingReviewCount: 1352, futureReviewCount: 50, futureReviewTime: nextHourReviewTime)
         populateDatabaseForStudyQueue(lessonCount: 0, pendingReviewCount: 0, futureReviewCount: 2342, futureReviewTime: nextDayReviewTime)
@@ -220,7 +220,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         var expectedLvl2 = [SRSReviewCounts]()
         let expectedLvl3 = [SRSReviewCounts]()
         
-        var assignments = [ResourceCollectionItem]()
+        var resourceItems = [ResourceCollectionItem]()
         
         let calendar = Calendar.current
         var reviewTime = calendar.startOfHour(for: Date()).addingTimeInterval(.oneDay)
@@ -230,21 +230,21 @@ class ResourceRepositoryReaderTests: XCTestCase {
             let kanjiCount = Int.random(in: 0...30)
             let vocabularyCount = Int.random(in: 0...30)
             for _ in 0..<radicalCount {
-                assignments.append(createTestAssignment(subjectType: .radical, level: 1, srsStage: 1, availableAt: reviewTime))
+                resourceItems += createTestRadicalWithAssignment(level: 1, srsStage: 1, availableAt: reviewTime)
                 for _ in 0..<2 {
-                    assignments.append(createTestAssignment(subjectType: .radical, level: 2, srsStage: 2, availableAt: reviewTime))
+                    resourceItems += createTestRadicalWithAssignment(level: 2, srsStage: 2, availableAt: reviewTime)
                 }
             }
             for _ in 0..<kanjiCount {
-                assignments.append(createTestAssignment(subjectType: .kanji, level: 1, srsStage: 2, availableAt: reviewTime))
+                resourceItems += createTestKanjiWithAssignment(level: 1, srsStage: 2, availableAt: reviewTime)
                 for _ in 0..<2 {
-                    assignments.append(createTestAssignment(subjectType: .kanji, level: 2, srsStage: 3, availableAt: reviewTime))
+                    resourceItems += createTestKanjiWithAssignment(level: 2, srsStage: 3, availableAt: reviewTime)
                 }
             }
             for _ in 0..<vocabularyCount {
-                assignments.append(createTestAssignment(subjectType: .vocabulary, level: 1, srsStage: 1, availableAt: reviewTime))
+                resourceItems += createTestVocabularyWithAssignment(level: 1, srsStage: 1, availableAt: reviewTime)
                 for _ in 0..<2 {
-                    assignments.append(createTestAssignment(subjectType: .vocabulary, level: 2, srsStage: 5, availableAt: reviewTime))
+                    resourceItems += createTestVocabularyWithAssignment(level: 2, srsStage: 5, availableAt: reviewTime)
                 }
             }
             expectedLvl1.append(SRSReviewCounts(dateAvailable: reviewTime, itemCounts: SRSItemCounts(radicals: radicalCount, kanji: kanjiCount, vocabulary: vocabularyCount)))
@@ -255,8 +255,8 @@ class ResourceRepositoryReaderTests: XCTestCase {
         expectedLvl1 = expectedLvl1.filter { c in c.itemCounts.total > 0 }
         expectedLvl2 = expectedLvl2.filter { c in c.itemCounts.total > 0 }
         
-        NSLog("Writing \(assignments.count) assignments")
-        writeToDatabase(assignments)
+        NSLog("Writing \(resourceItems.count) assignments")
+        writeToDatabase(resourceItems)
         
         XCTAssertEqual(try resourceRepository.reviewTimeline(forLevel: 1), expectedLvl1)
         XCTAssertEqual(try resourceRepository.reviewTimeline(forLevel: 2), expectedLvl2)
@@ -269,7 +269,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         var expectedMaster = [SRSReviewCounts]()
         let expectedEnlightened = [SRSReviewCounts]()
         
-        var assignments = [ResourceCollectionItem]()
+        var resourceItems = [ResourceCollectionItem]()
         
         let calendar = Calendar.current
         var reviewTime = calendar.startOfHour(for: Date()).addingTimeInterval(.oneDay)
@@ -279,21 +279,21 @@ class ResourceRepositoryReaderTests: XCTestCase {
             let kanjiCount = Int.random(in: 0...30)
             let vocabularyCount = Int.random(in: 0...30)
             for _ in 0..<radicalCount {
-                assignments.append(createTestAssignment(subjectType: .radical, level: 1, srsStage: 1, availableAt: reviewTime))
+                resourceItems += createTestRadicalWithAssignment(level: 1, srsStage: 1, availableAt: reviewTime)
                 for _ in 0..<2 {
-                    assignments.append(createTestAssignment(subjectType: .radical, level: 2, srsStage: 2, availableAt: reviewTime))
+                    resourceItems += createTestRadicalWithAssignment(level: 2, srsStage: 2, availableAt: reviewTime)
                 }
             }
             for _ in 0..<kanjiCount {
-                assignments.append(createTestAssignment(subjectType: .kanji, level: 1, srsStage: 6, availableAt: reviewTime))
+                resourceItems += createTestKanjiWithAssignment(level: 1, srsStage: 6, availableAt: reviewTime)
                 for _ in 0..<2 {
-                    assignments.append(createTestAssignment(subjectType: .kanji, level: 2, srsStage: 7, availableAt: reviewTime))
+                    resourceItems += createTestKanjiWithAssignment(level: 2, srsStage: 7, availableAt: reviewTime)
                 }
             }
             for _ in 0..<vocabularyCount {
-                assignments.append(createTestAssignment(subjectType: .vocabulary, level: 1, srsStage: 1, availableAt: reviewTime))
+                resourceItems += createTestVocabularyWithAssignment(level: 1, srsStage: 1, availableAt: reviewTime)
                 for _ in 0..<2 {
-                    assignments.append(createTestAssignment(subjectType: .vocabulary, level: 2, srsStage: 5, availableAt: reviewTime))
+                    resourceItems += createTestVocabularyWithAssignment(level: 2, srsStage: 5, availableAt: reviewTime)
                 }
             }
             expectedApprentice.append(SRSReviewCounts(dateAvailable: reviewTime, itemCounts: SRSItemCounts(radicals: radicalCount * 3, kanji: 0, vocabulary: vocabularyCount)))
@@ -306,8 +306,8 @@ class ResourceRepositoryReaderTests: XCTestCase {
         expectedGuru = expectedGuru.filter { c in c.itemCounts.total > 0 }
         expectedMaster = expectedMaster.filter { c in c.itemCounts.total > 0 }
         
-        NSLog("Writing \(assignments.count) assignments")
-        writeToDatabase(assignments)
+        NSLog("Writing \(resourceItems.count) assignments")
+        writeToDatabase(resourceItems)
         
         XCTAssertEqual(try resourceRepository.reviewTimeline(forSRSStage: .apprentice), expectedApprentice)
         XCTAssertEqual(try resourceRepository.reviewTimeline(forSRSStage: .guru), expectedGuru)
@@ -318,7 +318,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
     func testReviewTimeline_Load() {
         var expected = [SRSReviewCounts]()
         
-        var assignments = [ResourceCollectionItem]()
+        var resourceItems = [ResourceCollectionItem]()
         
         let calendar = Calendar.current
         var reviewTime = calendar.startOfHour(for: Date()).addingTimeInterval(.oneDay)
@@ -328,20 +328,20 @@ class ResourceRepositoryReaderTests: XCTestCase {
             let kanjiCount = Int.random(in: 0...30)
             let vocabularyCount = Int.random(in: 0...30)
             for _ in 0..<radicalCount {
-                assignments.append(createTestAssignment(subjectType: .radical, level: 1, srsStage: 3, availableAt: reviewTime))
+                resourceItems += createTestRadicalWithAssignment(level: 1, srsStage: 3, availableAt: reviewTime)
             }
             for _ in 0..<kanjiCount {
-                assignments.append(createTestAssignment(subjectType: .kanji, level: 1, srsStage: 3, availableAt: reviewTime))
+                resourceItems += createTestKanjiWithAssignment(level: 1, srsStage: 3, availableAt: reviewTime)
             }
             for _ in 0..<vocabularyCount {
-                assignments.append(createTestAssignment(subjectType: .vocabulary, level: 1, srsStage: 3, availableAt: reviewTime))
+                resourceItems += createTestVocabularyWithAssignment(level: 1, srsStage: 3, availableAt: reviewTime)
             }
             expected.append(SRSReviewCounts(dateAvailable: reviewTime, itemCounts: SRSItemCounts(radicals: radicalCount, kanji: kanjiCount, vocabulary: vocabularyCount)))
             reviewTime += .oneHour
         } while expected.count < 100
         
-        NSLog("Writing \(assignments.count) assignments")
-        writeToDatabase(assignments)
+        NSLog("Writing \(resourceItems.count) assignments")
+        writeToDatabase(resourceItems)
         
         self.measure {
             do {
@@ -385,14 +385,10 @@ class ResourceRepositoryReaderTests: XCTestCase {
             let kanjiStart = startDate + .oneDay * 7
             
             for _ in 0..<radicalCount {
-                let radical = createTestRadical(level: level)
-                resourceItems.append(radical)
-                resourceItems.append(createTestAssignment(subjectType: .radical, level: level, srsStage: 5, availableAt: startDate, unlockedAt: startDate, isPassed: true, subjectID: radical.id))
+                resourceItems += createTestRadicalWithAssignment(level: level, srsStage: 5, availableAt: startDate, unlockedAt: startDate, isPassed: true)
             }
             for _ in 0..<kanjiCount {
-                let kanji = createTestKanji(level: level)
-                resourceItems.append(kanji)
-                resourceItems.append(createTestAssignment(subjectType: .kanji, level: level, srsStage: 5, availableAt: kanjiStart, unlockedAt: kanjiStart, isPassed: true, subjectID: kanji.id))
+                resourceItems += createTestKanjiWithAssignment(level: level, srsStage: 5, availableAt: kanjiStart, unlockedAt: kanjiStart, isPassed: true)
             }
             
             let endDate = startDate + .oneDay * 14
@@ -408,15 +404,11 @@ class ResourceRepositoryReaderTests: XCTestCase {
         
         let firstRadicalAssignmentId = nextAssignmentID
         for _ in 0..<radicalCount {
-            let radical = createTestRadical(level: testUserLevel)
-            resourceItems.append(radical)
-            resourceItems.append(createTestAssignment(subjectType: .radical, level: testUserLevel, srsStage: 5, availableAt: startDate, unlockedAt: startDate, isPassed: true, subjectID: radical.id))
+            resourceItems += createTestRadicalWithAssignment(level: testUserLevel, srsStage: 5, availableAt: startDate, unlockedAt: startDate, isPassed: true)
         }
         let firstKanjiAssignmentId = nextAssignmentID
         for _ in 0..<kanjiCount {
-            let kanji = createTestKanji(level: testUserLevel)
-            resourceItems.append(kanji)
-            resourceItems.append(createTestAssignment(subjectType: .kanji, level: testUserLevel, srsStage: 0, availableAt: kanjiStart, unlockedAt: kanjiStart, isPassed: false, subjectID: kanji.id))
+            resourceItems += createTestKanjiWithAssignment(level: testUserLevel, srsStage: 0, availableAt: kanjiStart, unlockedAt: kanjiStart, isPassed: false)
         }
         let lastKanjiAssignmentId = nextAssignmentID
         
@@ -506,7 +498,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         }
     }
     
-    private func createTestAssignment(subjectType: SubjectType, level: Int, srsStage: Int, availableAt: Date? = nil, unlockedAt: Date? = nil, isPassed: Bool? = nil, subjectID: Int? = nil) -> ResourceCollectionItem {
+    private func createTestAssignment(subjectType: SubjectType, srsStage: Int, availableAt: Date? = nil, unlockedAt: Date? = nil, isPassed: Bool? = nil, subjectID: Int? = nil) -> ResourceCollectionItem {
         let item = ResourceCollectionItem(id: nextAssignmentID,
                                           type: .assignment,
                                           url: URL(string: "https://www.wanikani.com/api/v2/assignments/\(nextAssignmentID)")!,
@@ -514,7 +506,6 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                           data: Assignment(createdAt: Date(),
                                                            subjectID: subjectID ?? nextSubjectID,
                                                            subjectType: subjectType,
-                                                           level: level,
                                                            srsStage: srsStage,
                                                            srsStageName: "",
                                                            unlockedAt: unlockedAt,
@@ -549,6 +540,14 @@ class ResourceRepositoryReaderTests: XCTestCase {
         return item
     }
     
+    private func createTestRadicalWithAssignment(level: Int, characters: String? = nil, meanings: [Meaning] = [],
+                                                 srsStage: Int, availableAt: Date? = nil, unlockedAt: Date? = nil, isPassed: Bool? = nil) -> [ResourceCollectionItem] {
+        let subject = createTestRadical(level: level, characters: characters, meanings: meanings)
+        let assignment = createTestAssignment(subjectType: .radical, srsStage: srsStage, availableAt: availableAt, unlockedAt: unlockedAt, isPassed: isPassed, subjectID: subject.id)
+        
+        return [subject, assignment]
+    }
+    
     private func createTestKanji(level: Int, characters: String = "", meanings: [Meaning] = [], readings: [Reading] = []) -> ResourceCollectionItem {
         let item = ResourceCollectionItem(id: nextSubjectID,
                                           type: .kanji,
@@ -566,6 +565,14 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                                       hiddenAt: nil))
         nextSubjectID += 1
         return item
+    }
+    
+    private func createTestKanjiWithAssignment(level: Int, characters: String = "", meanings: [Meaning] = [], readings: [Reading] = [],
+                                               srsStage: Int, availableAt: Date? = nil, unlockedAt: Date? = nil, isPassed: Bool? = nil) -> [ResourceCollectionItem] {
+        let subject = createTestKanji(level: level, characters: characters, meanings: meanings, readings: readings)
+        let assignment = createTestAssignment(subjectType: .kanji, srsStage: srsStage, availableAt: availableAt, unlockedAt: unlockedAt, isPassed: isPassed, subjectID: subject.id)
+        
+        return [subject, assignment]
     }
     
     private func createTestVocabulary(level: Int, characters: String = "", meanings: [Meaning] = [], readings: [Reading] = []) -> ResourceCollectionItem {
@@ -587,6 +594,14 @@ class ResourceRepositoryReaderTests: XCTestCase {
         return item
     }
     
+    private func createTestVocabularyWithAssignment(level: Int, characters: String = "", meanings: [Meaning] = [], readings: [Reading] = [],
+                                                    srsStage: Int, availableAt: Date? = nil, unlockedAt: Date? = nil, isPassed: Bool? = nil) -> [ResourceCollectionItem] {
+        let subject = createTestVocabulary(level: level, characters: characters, meanings: meanings, readings: readings)
+        let assignment = createTestAssignment(subjectType: .vocabulary, srsStage: srsStage, availableAt: availableAt, unlockedAt: unlockedAt, isPassed: isPassed, subjectID: subject.id)
+        
+        return [subject, assignment]
+    }
+    
     private func populateDatabaseForStudyQueue(lessonCount: Int, pendingReviewCount: Int, futureReviewCount: Int, futureReviewTime: Date? = nil) {
         var assignments = [ResourceCollectionItem]()
         assignments.reserveCapacity(lessonCount + pendingReviewCount + futureReviewCount)
@@ -594,15 +609,15 @@ class ResourceRepositoryReaderTests: XCTestCase {
         let dateInPast = makeUTCDate(year: 2012, month: 02, day: 24, hour: 19, minute: 09, second: 18)
         
         for _ in 0..<lessonCount {
-            assignments.append(createTestAssignment(subjectType: .radical, level: 1, srsStage: 0, unlockedAt: dateInPast))
+            assignments.append(createTestAssignment(subjectType: .radical, srsStage: 0, unlockedAt: dateInPast))
         }
         
         for _ in 0..<pendingReviewCount {
-            assignments.append(createTestAssignment(subjectType: .radical, level: 1, srsStage: 3, availableAt: dateInPast))
+            assignments.append(createTestAssignment(subjectType: .radical, srsStage: 3, availableAt: dateInPast))
         }
         
         for _ in 0..<futureReviewCount {
-            assignments.append(createTestAssignment(subjectType: .radical, level: 1, srsStage: 3, availableAt: futureReviewTime!))
+            assignments.append(createTestAssignment(subjectType: .radical, srsStage: 3, availableAt: futureReviewTime!))
         }
         
         writeToDatabase(assignments)
@@ -618,28 +633,24 @@ class ResourceRepositoryReaderTests: XCTestCase {
             let radical = createTestRadical(level: testUserLevel)
             items.append(radical)
             if Bool.random() {
-                items.append(createTestAssignment(subjectType: .radical, level: testUserLevel, srsStage: 0, availableAt: now, isPassed: false, subjectID: radical.id))
+                items.append(createTestAssignment(subjectType: .radical, srsStage: 0, availableAt: now, isPassed: false, subjectID: radical.id))
             }
         }
         
         for _ in 0..<radicalsPassed {
-            let radical = createTestRadical(level: testUserLevel)
-            items.append(radical)
-            items.append(createTestAssignment(subjectType: .radical, level: testUserLevel, srsStage: 4, availableAt: now, isPassed: true, subjectID: radical.id))
+            items += createTestRadicalWithAssignment(level: testUserLevel, srsStage: 4, availableAt: now, isPassed: true)
         }
         
         for _ in 0..<kanjiNotPassed {
             let kanji = createTestKanji(level: testUserLevel)
             items.append(kanji)
             if Bool.random() {
-                items.append(createTestAssignment(subjectType: .kanji, level: testUserLevel, srsStage: 0, availableAt: now, isPassed: false, subjectID: kanji.id))
+                items.append(createTestAssignment(subjectType: .kanji, srsStage: 0, availableAt: now, isPassed: false, subjectID: kanji.id))
             }
         }
         
         for _ in 0..<kanjiPassed {
-            let kanji = createTestKanji(level: testUserLevel)
-            items.append(kanji)
-            items.append(createTestAssignment(subjectType: .kanji, level: testUserLevel, srsStage: 4, availableAt: now, isPassed: true, subjectID: kanji.id))
+            items += createTestKanjiWithAssignment(level: testUserLevel, srsStage: 4, availableAt: now, isPassed: true)
         }
         
         writeToDatabase(items)
@@ -652,13 +663,13 @@ class ResourceRepositoryReaderTests: XCTestCase {
         let now = Date()
         
         for _ in 0..<radicals {
-            assignments.append(createTestAssignment(subjectType: .radical, level: 1, srsStage: srsStage, availableAt: now))
+            assignments.append(createTestAssignment(subjectType: .radical, srsStage: srsStage, availableAt: now))
         }
         for _ in 0..<kanji {
-            assignments.append(createTestAssignment(subjectType: .kanji, level: 1, srsStage: srsStage, availableAt: now))
+            assignments.append(createTestAssignment(subjectType: .kanji, srsStage: srsStage, availableAt: now))
         }
         for _ in 0..<vocabulary {
-            assignments.append(createTestAssignment(subjectType: .vocabulary, level: 1, srsStage: srsStage, availableAt: now))
+            assignments.append(createTestAssignment(subjectType: .vocabulary, srsStage: srsStage, availableAt: now))
         }
         
         writeToDatabase(assignments)

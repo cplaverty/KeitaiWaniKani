@@ -286,67 +286,75 @@ public class ResourceRepositoryReader {
                 return []
             }
             
-            let table = Tables.assignments
+            let radicalCounts = try itemCounts(for: .radical, level: level, srsStage: srsStage, from: database)
+            let kanjiCounts = try itemCounts(for: .kanji, level: level, srsStage: srsStage, from: database)
+            let vocabularyCounts = try itemCounts(for: .vocabulary, level: level, srsStage: srsStage, from: database)
             
-            let radicalColumn = "radicals"
-            let kanjiColumn = "kanji"
-            let vocabularyColumn = "vocabulary"
+            let totalCounts = radicalCounts
+                .merging(kanjiCounts, uniquingKeysWith: +)
+                .merging(vocabularyCounts, uniquingKeysWith: +)
+                .map({ SRSReviewCounts(dateAvailable: $0.key, itemCounts: $0.value) })
+                .sorted(by: { $0.dateAvailable < $1.dateAvailable })
             
-            var queryArgs = [String: Any]()
-            
-            if let srsStage = srsStage {
-                queryArgs["srsStageLower"] = srsStage.numericLevelRange.lowerBound
-                queryArgs["srsStageUpper"] = srsStage.numericLevelRange.upperBound
-            } else {
-                queryArgs["srsStageLower"] = SRSStage.apprentice.numericLevelRange.lowerBound
-                queryArgs["srsStageUpper"] = SRSStage.enlightened.numericLevelRange.upperBound
-            }
-            
-            var additionalCriteria = ""
-            if let level = level {
-                additionalCriteria += "AND \(table.level) = :level\n"
-                queryArgs["level"] = level
-            }
-            
-            let query = """
-            WITH counts(\(table.availableAt.name), \(radicalColumn), \(kanjiColumn), \(vocabularyColumn))
-            AS (
-            SELECT \(table.availableAt),
-            CASE \(table.subjectType) WHEN '\(SubjectType.radical.rawValue)' THEN 1 ELSE 0 END,
-            CASE \(table.subjectType) WHEN '\(SubjectType.kanji.rawValue)' THEN 1 ELSE 0 END,
-            CASE \(table.subjectType) WHEN '\(SubjectType.vocabulary.rawValue)' THEN 1 ELSE 0 END
-            FROM \(table)
-            WHERE \(table.availableAt) IS NOT NULL
-            AND \(table.srsStage) BETWEEN :srsStageLower AND :srsStageUpper
-            AND \(table.isHidden) = 0
-            \(additionalCriteria)
-            )
-            SELECT \(table.availableAt.name),
-            SUM(\(radicalColumn)) AS \(radicalColumn),
-            SUM(\(kanjiColumn)) AS \(kanjiColumn),
-            SUM(\(vocabularyColumn)) AS \(vocabularyColumn)
-            FROM counts
-            GROUP BY 1
-            ORDER BY 1 ASC
-            """
-            
-            guard let resultSet = database.executeQuery(query, withParameterDictionary: queryArgs) else {
-                throw database.lastError()
-            }
-            defer { resultSet.close() }
-            
-            var results = [SRSReviewCounts]()
-            while resultSet.next() {
-                results.append(
-                    SRSReviewCounts(dateAvailable: resultSet.date(forColumn: table.availableAt.name)!,
-                                    itemCounts: SRSItemCounts(
-                                        radicals: resultSet.long(forColumn: radicalColumn),
-                                        kanji: resultSet.long(forColumn: kanjiColumn),
-                                        vocabulary: resultSet.long(forColumn: vocabularyColumn))))
-            }
-            
-            return results
+            return totalCounts
         }
+    }
+    
+    private func itemCounts(for subjectType: SubjectType, level: Int?, srsStage: SRSStage?, from database: FMDatabase) throws -> [Date: SRSItemCounts] {
+        let assignments = Tables.assignments
+        let subjects = Tables.subjectTable(for: subjectType)
+        
+        var queryArgs = [String: Any]()
+        queryArgs["subjectType"] = subjectType.rawValue
+        
+        var additionalCriteria = ""
+        
+        if let srsStage = srsStage {
+            additionalCriteria += "\nAND \(assignments.srsStage) BETWEEN :srsStageLower AND :srsStageUpper"
+            queryArgs["srsStageLower"] = srsStage.numericLevelRange.lowerBound
+            queryArgs["srsStageUpper"] = srsStage.numericLevelRange.upperBound
+        }
+        
+        if let level = level {
+            additionalCriteria += "\nAND \(subjects.level) = :level"
+            queryArgs["level"] = level
+        }
+        
+        let query = """
+        SELECT \(assignments.availableAt), COUNT(*) AS count
+        FROM \(assignments) LEFT JOIN \(subjects) ON \(subjects.id) = \(assignments.subjectID)
+        WHERE \(assignments.availableAt) IS NOT NULL
+        AND \(assignments.isHidden) = 0
+        AND \(assignments.subjectType) = :subjectType
+        \(additionalCriteria)
+        GROUP BY 1
+        ORDER BY 1 ASC
+        """
+        
+        guard let resultSet = database.executeQuery(query, withParameterDictionary: queryArgs) else {
+            throw database.lastError()
+        }
+        defer { resultSet.close() }
+        
+        var results = [Date: SRSItemCounts]()
+        while resultSet.next() {
+            let dateAvailable = resultSet.date(forColumn: assignments.availableAt.name)!
+            let count = resultSet.long(forColumn: "count")
+            
+            let itemCounts: SRSItemCounts;
+            switch subjectType {
+            case .radical:
+                itemCounts = SRSItemCounts(radicals: count, kanji: 0, vocabulary: 0)
+            case .kanji:
+                itemCounts = SRSItemCounts(radicals: 0, kanji: count, vocabulary: 0)
+            case .vocabulary:
+                itemCounts = SRSItemCounts(radicals: 0, kanji: 0, vocabulary: count)
+            }
+            
+            results[dateAvailable] = itemCounts
+        }
+        
+        return results
     }
     
     public func hasLevelTimeline() throws -> Bool {
@@ -482,9 +490,9 @@ public class ResourceRepositoryReader {
             let assignment = assignmentsBySubjectID[item.id]
             let guruDate = subject.earliestGuruDate(assignment: assignment, getAssignmentForSubjectID: { subjectID in assignmentsBySubjectID[subjectID] }) ?? now
             return (assignment, guruDate)
-        }).sorted { (lhs, rhs) in
+        }).sorted(by: { (lhs, rhs) in
             lhs.guruDate > rhs.guruDate
-        }
+        })
         
         // You guru a level once at least 90% of all kanji is at Guru level or above, so skip past the first 10% of items
         let guruThresholdIndex = kanji.count / 10
@@ -496,22 +504,23 @@ public class ResourceRepositoryReader {
     }
     
     private func getUnlockDatesByLevel(for subjectType: SubjectType, from database: FMDatabase) throws -> [Int: [Date]] {
-        let table = Tables.assignments
+        let assignments = Tables.assignments
+        let subjects = Tables.subjectTable(for: subjectType)
+        
         let query = """
-        SELECT \(table.level), \(table.unlockedAt)
-        FROM \(table)
-        WHERE \(table.unlockedAt) IS NOT NULL
-        AND \(table.subjectType) = ?
+        SELECT \(subjects.level), \(assignments.unlockedAt)
+        FROM \(subjects) INNER JOIN \(assignments) ON \(subjects.id) = \(assignments.subjectID)
+        WHERE \(assignments.unlockedAt) IS NOT NULL
         ORDER BY 1, 2
         """
         
-        let resultSet = try database.executeQuery(query, values: [subjectType.rawValue])
+        let resultSet = try database.executeQuery(query, values: nil)
         defer { resultSet.close() }
         
         var unlockDatesByLevel = [Int: [Date]]()
         while resultSet.next() {
-            let level = resultSet.long(forColumn: table.level.name)
-            let dateUnlocked = resultSet.date(forColumn: table.unlockedAt.name)!
+            let level = resultSet.long(forColumn: subjects.level.name)
+            let dateUnlocked = resultSet.date(forColumn: assignments.unlockedAt.name)!
             if unlockDatesByLevel[level]?.append(dateUnlocked) == nil {
                 unlockDatesByLevel[level] = [dateUnlocked]
             }

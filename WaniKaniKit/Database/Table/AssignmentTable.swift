@@ -10,7 +10,6 @@ final class AssignmentTable: Table {
     let createdAt = Column(name: "created_at", type: .float, nullable: false)
     let subjectID = Column(name: "subject_id", type: .int, nullable: false, unique: true)
     let subjectType = Column(name: "subject_type", type: .text, nullable: false)
-    let level = Column(name: "level", type: .int, nullable: false)
     let srsStage = Column(name: "srs_stage", type: .int, nullable: false)
     let srsStageName = Column(name: "srs_stage_name", type: .text, nullable: false)
     let unlockedAt = Column(name: "unlocked_at", type: .float)
@@ -25,8 +24,7 @@ final class AssignmentTable: Table {
 
     init() {
         super.init(name: "assignments",
-                   indexes: [TableIndex(name: "idx_assignments_by_level", columns: [level]),
-                             TableIndex(name: "idx_assignments_by_srs_stage", columns: [srsStage]),
+                   indexes: [TableIndex(name: "idx_assignments_by_srs_stage", columns: [srsStage]),
                              TableIndex(name: "idx_assignments_by_available_at", columns: [availableAt])])
     }
 }

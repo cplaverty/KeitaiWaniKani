@@ -33,4 +33,12 @@ struct Tables {
             subjectAmalgamations, subjectComponents, subjectSearch, userInformation, vocabulary, vocabularyPartsOfSpeech
         ]
     }
+    
+    static func subjectTable(for subjectType: SubjectType) -> SubjectTable {
+        switch subjectType {
+        case .radical: return Tables.radicals
+        case .kanji: return Tables.kanji
+        case .vocabulary: return Tables.vocabulary
+        }
+    }
 }

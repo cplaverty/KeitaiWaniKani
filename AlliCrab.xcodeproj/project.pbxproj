@@ -155,6 +155,7 @@
 		83C4D3881F307D490082EB31 /* ReadingTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C4D3871F307D490082EB31 /* ReadingTable.swift */; };
 		83C4D38A1F307DF80082EB31 /* SubjectComponentsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C4D3891F307DF80082EB31 /* SubjectComponentsTable.swift */; };
 		83C5C7AE1F9FDF23009FD88D /* LevelProgressionFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C5C7AD1F9FDF23009FD88D /* LevelProgressionFilter.swift */; };
+		83C6360A21A9CFC700669758 /* SubjectTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C6360921A9CFC700669758 /* SubjectTable.swift */; };
 		83C682001F51C2CD00CC431C /* RadicalCharacterImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C681FF1F51C2CD00CC431C /* RadicalCharacterImageLoader.swift */; };
 		83CE51CE1F4DE6A50050242A /* LevelProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CE51CC1F4DE6A50050242A /* LevelProgressTableViewCell.swift */; };
 		83CE51D11F4DEC1D0050242A /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CE51D01F4DEC1D0050242A /* UIColor.swift */; };
@@ -425,6 +426,7 @@
 		83C4D3871F307D490082EB31 /* ReadingTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingTable.swift; sourceTree = "<group>"; };
 		83C4D3891F307DF80082EB31 /* SubjectComponentsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectComponentsTable.swift; sourceTree = "<group>"; };
 		83C5C7AD1F9FDF23009FD88D /* LevelProgressionFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProgressionFilter.swift; sourceTree = "<group>"; };
+		83C6360921A9CFC700669758 /* SubjectTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectTable.swift; sourceTree = "<group>"; };
 		83C681FF1F51C2CD00CC431C /* RadicalCharacterImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadicalCharacterImageLoader.swift; sourceTree = "<group>"; };
 		83CE51CC1F4DE6A50050242A /* LevelProgressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProgressTableViewCell.swift; sourceTree = "<group>"; };
 		83CE51D01F4DEC1D0050242A /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -695,6 +697,7 @@
 				83D8C45820BC1AFD00AF4825 /* SubjectAmalgamationsTable.swift */,
 				83C4D3891F307DF80082EB31 /* SubjectComponentsTable.swift */,
 				8355BEE71F92C0BF00BC1025 /* SubjectSearchVirtualTable.swift */,
+				83C6360921A9CFC700669758 /* SubjectTable.swift */,
 				835D08EC1F33B2F300186D0B /* Tables.swift */,
 				833D7A0D1F2CB12200A22F33 /* UserInformationTable.swift */,
 				8346C84E1F2FEC7300252DC9 /* VocabularyTable.swift */,
@@ -1416,6 +1419,7 @@
 				83C261891F37026700278648 /* Meaning+BulkDatabaseCodable.swift in Sources */,
 				836D7F191F2BF92900F32C90 /* Endpoints.swift in Sources */,
 				836D7F0E1F2BF45600F32C90 /* Meaning.swift in Sources */,
+				83C6360A21A9CFC700669758 /* SubjectTable.swift in Sources */,
 				836D7F1A1F2BF92900F32C90 /* RequestTypes.swift in Sources */,
 				837BBEDC1F309BB800C92141 /* DatabaseCodable.swift in Sources */,
 			);

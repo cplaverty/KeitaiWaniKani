@@ -157,7 +157,6 @@ class SubjectTests: XCTestCase {
         return Assignment(createdAt: Date(),
                           subjectID: 1,
                           subjectType: .radical,
-                          level: 1,
                           srsStage: srsStageNumeric,
                           srsStageName: "",
                           unlockedAt: nil,

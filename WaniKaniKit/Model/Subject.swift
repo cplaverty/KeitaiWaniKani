@@ -58,13 +58,13 @@ extension Subject {
         if pendingSubjectAssignments.isEmpty {
             unlockDateForLockedItems = Calendar.current.startOfHour(for: Date())
         } else {
-            let guruDates = pendingSubjectAssignments.map({ assignment in assignment?.guruDate() })
+            let guruDates = pendingSubjectAssignments.map({ assignment in assignment?.guruDate(level: level) })
             unlockDateForLockedItems = guruDates.lazy.filter({ $0 == nil }).isEmpty ? guruDates.lazy.compactMap({ $0 }).max() : nil
         }
         
         let guruDate: Date?
         if let assignment = assignment {
-            guruDate = assignment.guruDate()
+            guruDate = assignment.guruDate(level: level)
         } else if let unlockDateForLockedItems = unlockDateForLockedItems {
             guruDate = Assignment.earliestDate(from: unlockDateForLockedItems,
                                                forItemAtSRSStage: SRSStage.apprentice.numericLevelRange.lowerBound,

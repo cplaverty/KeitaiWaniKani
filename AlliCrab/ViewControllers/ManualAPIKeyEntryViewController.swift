@@ -100,7 +100,7 @@ class ManualAPIKeyEntryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        textFieldTextChangedObserver = NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: apiKeyTextField, queue: .main) { _ in
+        textFieldTextChangedObserver = NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: apiKeyTextField, queue: .main) { [unowned self] _ in
             guard let apiKey = self.apiKeyTextField.text, !apiKey.isEmpty else { return }
             
             let isAPIKeyValidFormat = self.isAPIKeyValidFormat(apiKey)

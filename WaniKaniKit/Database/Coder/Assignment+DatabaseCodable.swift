@@ -36,15 +36,10 @@ extension Assignment: DatabaseCodable {
         return items
     }
     
-    static func read(from database: FMDatabase, level: Int? = nil, srsStage: SRSStage? = nil) throws -> [Int: Assignment] {
+    static func read(from database: FMDatabase, srsStage: SRSStage? = nil) throws -> [Int: Assignment] {
         var queryArgs = [String: Any]()
         
         var filterCriteria = ""
-        if let level = level {
-            filterCriteria += "\nAND \(table.level) = :level"
-            queryArgs["level"] = level
-        }
-        
         if let srsStage = srsStage {
             filterCriteria += "\nAND \(table.srsStage) BETWEEN :srsStageLower AND :srsStageUpper"
             queryArgs["srsStageLower"] = srsStage.numericLevelRange.lowerBound
@@ -52,7 +47,7 @@ extension Assignment: DatabaseCodable {
         }
         
         let query = """
-        SELECT \(table.id), \(table.createdAt), \(table.subjectID), \(table.subjectType), \(table.level), \(table.srsStage), \(table.srsStageName), \(table.unlockedAt), \(table.startedAt), \(table.passedAt), \(table.burnedAt), \(table.availableAt), \(table.resurrectedAt), \(table.isPassed), \(table.isResurrected), \(table.isHidden)
+        SELECT \(table.id), \(table.createdAt), \(table.subjectID), \(table.subjectType), \(table.srsStage), \(table.srsStageName), \(table.unlockedAt), \(table.startedAt), \(table.passedAt), \(table.burnedAt), \(table.availableAt), \(table.resurrectedAt), \(table.isPassed), \(table.isResurrected), \(table.isHidden)
         FROM \(table)
         WHERE \(table.isHidden) = 0\(filterCriteria)
         """
@@ -74,7 +69,7 @@ extension Assignment: DatabaseCodable {
     
     init(from database: FMDatabase, id: Int) throws {
         let query = """
-        SELECT \(table.createdAt), \(table.subjectID), \(table.subjectType), \(table.level), \(table.srsStage), \(table.srsStageName), \(table.unlockedAt), \(table.startedAt), \(table.passedAt), \(table.burnedAt), \(table.availableAt), \(table.resurrectedAt), \(table.isPassed), \(table.isResurrected), \(table.isHidden)
+        SELECT \(table.createdAt), \(table.subjectID), \(table.subjectType), \(table.srsStage), \(table.srsStageName), \(table.unlockedAt), \(table.startedAt), \(table.passedAt), \(table.burnedAt), \(table.availableAt), \(table.resurrectedAt), \(table.isPassed), \(table.isResurrected), \(table.isHidden)
         FROM \(table)
         WHERE \(table.id) = ?
         """
@@ -91,7 +86,7 @@ extension Assignment: DatabaseCodable {
     
     init?(from database: FMDatabase, subjectID: Int) throws {
         let query = """
-        SELECT \(table.createdAt), \(table.subjectID), \(table.subjectType), \(table.level), \(table.srsStage), \(table.srsStageName), \(table.unlockedAt), \(table.startedAt), \(table.passedAt), \(table.burnedAt), \(table.availableAt), \(table.resurrectedAt), \(table.isPassed), \(table.isResurrected), \(table.isHidden)
+        SELECT \(table.createdAt), \(table.subjectID), \(table.subjectType), \(table.srsStage), \(table.srsStageName), \(table.unlockedAt), \(table.startedAt), \(table.passedAt), \(table.burnedAt), \(table.availableAt), \(table.resurrectedAt), \(table.isPassed), \(table.isResurrected), \(table.isHidden)
         FROM \(table)
         WHERE \(table.subjectID) = ?
         """
@@ -110,7 +105,6 @@ extension Assignment: DatabaseCodable {
         self.createdAt = resultSet.date(forColumn: table.createdAt.name)!
         self.subjectID = resultSet.long(forColumn: table.subjectID.name)
         self.subjectType = resultSet.rawValue(SubjectType.self, forColumn: table.subjectType.name)!
-        self.level = resultSet.long(forColumn: table.level.name)
         self.srsStage = resultSet.long(forColumn: table.srsStage.name)
         self.srsStageName = resultSet.string(forColumn: table.srsStageName.name)!
         self.unlockedAt = resultSet.date(forColumn: table.unlockedAt.name)
@@ -127,12 +121,12 @@ extension Assignment: DatabaseCodable {
     func write(to database: FMDatabase, id: Int) throws {
         let query = """
         INSERT OR REPLACE INTO \(table)
-        (\(table.id.name), \(table.createdAt.name), \(table.subjectID.name), \(table.subjectType.name), \(table.level.name), \(table.srsStage.name), \(table.srsStageName.name), \(table.unlockedAt.name), \(table.startedAt.name), \(table.passedAt.name), \(table.burnedAt.name), \(table.availableAt.name), \(table.resurrectedAt.name), \(table.isPassed.name), \(table.isResurrected.name), \(table.isHidden.name))
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (\(table.id.name), \(table.createdAt.name), \(table.subjectID.name), \(table.subjectType.name), \(table.srsStage.name), \(table.srsStageName.name), \(table.unlockedAt.name), \(table.startedAt.name), \(table.passedAt.name), \(table.burnedAt.name), \(table.availableAt.name), \(table.resurrectedAt.name), \(table.isPassed.name), \(table.isResurrected.name), \(table.isHidden.name))
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """
         
         let values: [Any] = [
-            id, createdAt, subjectID, subjectType.rawValue, level, srsStage, srsStageName, unlockedAt as Any, startedAt as Any, passedAt as Any, burnedAt as Any, availableAt as Any, resurrectedAt as Any, isPassed, isResurrected, isHidden
+            id, createdAt, subjectID, subjectType.rawValue, srsStage, srsStageName, unlockedAt as Any, startedAt as Any, passedAt as Any, burnedAt as Any, availableAt as Any, resurrectedAt as Any, isPassed, isResurrected, isHidden
         ]
         try database.executeUpdate(query, values: values)
     }
