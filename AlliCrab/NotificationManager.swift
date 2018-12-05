@@ -66,7 +66,7 @@ class NotificationManager {
             if let nextReviewDate = nextReviewDate, currentReviewCount == 0 {
                 let nextReviewCount = futureReviews.first!.itemCounts.total
                 if (nextReviewCount == 1) {
-                    notificationScheduler.scheduleNotification(at: nextReviewDate, body: "You have one new WaniKani review available")
+                    notificationScheduler.scheduleNotification(at: nextReviewDate, body: "You have 1 new WaniKani review available")
                 } else {
                     notificationScheduler.scheduleNotification(at: nextReviewDate, body: "You have \(nextReviewCount) new WaniKani reviews available")
                 }
