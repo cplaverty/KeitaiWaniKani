@@ -62,9 +62,14 @@ class NotificationManager {
             
             let futureReviews = reviewTimeline.lazy.filter({ review in review.dateAvailable > now }).prefix(48)
             let nextReviewDate = futureReviews.first?.dateAvailable
-            
+
             if let nextReviewDate = nextReviewDate, currentReviewCount == 0 {
-                notificationScheduler.scheduleNotification(at: nextReviewDate, body: "You have new WaniKani reviews available")
+                let nextReviewCount = futureReviews.first!.itemCounts.total
+                if (nextReviewCount == 1) {
+                    notificationScheduler.scheduleNotification(at: nextReviewDate, body: "You have one new WaniKani review available")
+                } else {
+                    notificationScheduler.scheduleNotification(at: nextReviewDate, body: "You have \(nextReviewCount) new WaniKani reviews available")
+                }
             }
             
             var cumulativeReviewTotal = currentReviewCount
