@@ -61,15 +61,16 @@ class NotificationManager {
             UIApplication.shared.applicationIconBadgeNumber = currentReviewCount
             
             let futureReviews = reviewTimeline.lazy.filter({ review in review.dateAvailable > now }).prefix(48)
-            let nextReviewDate = futureReviews.first?.dateAvailable
-
-            if let nextReviewDate = nextReviewDate, currentReviewCount == 0 {
-                let nextReviewCount = futureReviews.first!.itemCounts.total
-                if (nextReviewCount == 1) {
-                    notificationScheduler.scheduleNotification(at: nextReviewDate, body: "You have 1 new WaniKani review available")
-                } else {
-                    notificationScheduler.scheduleNotification(at: nextReviewDate, body: "You have \(nextReviewCount) new WaniKani reviews available")
-                }
+            
+            if let nextReview = futureReviews.first, currentReviewCount == 0 {
+                let nextReviewDate = nextReview.dateAvailable
+                let nextReviewCount = nextReview.itemCounts.total
+                let formattedCount = NumberFormatter.localizedString(from: nextReviewCount as NSNumber, number: .decimal)
+                
+                notificationScheduler.scheduleNotification(at: nextReviewDate,
+                                                           body: nextReviewCount == 1
+                                                            ? "You have 1 new WaniKani review available"
+                                                            : "You have \(formattedCount) new WaniKani reviews available")
             }
             
             var cumulativeReviewTotal = currentReviewCount
