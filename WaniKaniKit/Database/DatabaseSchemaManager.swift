@@ -13,7 +13,7 @@ enum DatabaseSchemaManagerError: Error {
 }
 
 public class DatabaseSchemaManager {
-    public let expectedSchemaVersion: UInt32 = 6
+    public let expectedSchemaVersion: UInt32 = 7
     
     public func version(of database: FMDatabase) -> UInt32 {
         return database.userVersion

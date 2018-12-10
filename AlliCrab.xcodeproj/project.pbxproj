@@ -71,6 +71,8 @@
 		834B61B21F2BF01600825630 /* WaniKaniKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 834B61A21F2BF01600825630 /* WaniKaniKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		834B61B51F2BF01600825630 /* WaniKaniKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834B61A01F2BF01600825630 /* WaniKaniKit.framework */; };
 		834B61B71F2BF01600825630 /* WaniKaniKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 834B61A01F2BF01600825630 /* WaniKaniKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		834E997C21BF179D00BC6601 /* SubjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834E997B21BF179D00BC6601 /* SubjectsView.swift */; };
+		834E997E21BF1D6100BC6601 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834E997D21BF1D6100BC6601 /* View.swift */; };
 		834F59C21F41A2C40025024C /* ResourceRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834F59C11F41A2C40025024C /* ResourceRepositoryTests.swift */; };
 		8355BEE81F92C0BF00BC1025 /* SubjectSearchVirtualTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8355BEE71F92C0BF00BC1025 /* SubjectSearchVirtualTable.swift */; };
 		835D08EB1F3310B300186D0B /* DatabaseSchemaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D08EA1F3310B300186D0B /* DatabaseSchemaManager.swift */; };
@@ -338,6 +340,8 @@
 		834B61A31F2BF01600825630 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		834B61A81F2BF01600825630 /* WaniKaniKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WaniKaniKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		834B61B11F2BF01600825630 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		834E997B21BF179D00BC6601 /* SubjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsView.swift; sourceTree = "<group>"; };
+		834E997D21BF1D6100BC6601 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		834F59C11F41A2C40025024C /* ResourceRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceRepositoryTests.swift; sourceTree = "<group>"; };
 		8355BEE71F92C0BF00BC1025 /* SubjectSearchVirtualTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectSearchVirtualTable.swift; sourceTree = "<group>"; };
 		835D08EA1F3310B300186D0B /* DatabaseSchemaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseSchemaManager.swift; sourceTree = "<group>"; };
@@ -698,6 +702,7 @@
 				83C4D3891F307DF80082EB31 /* SubjectComponentsTable.swift */,
 				8355BEE71F92C0BF00BC1025 /* SubjectSearchVirtualTable.swift */,
 				83C6360921A9CFC700669758 /* SubjectTable.swift */,
+				834E997B21BF179D00BC6601 /* SubjectsView.swift */,
 				835D08EC1F33B2F300186D0B /* Tables.swift */,
 				833D7A0D1F2CB12200A22F33 /* UserInformationTable.swift */,
 				8346C84E1F2FEC7300252DC9 /* VocabularyTable.swift */,
@@ -922,6 +927,7 @@
 				83FCAB2E1F9F50CC00024398 /* SQLConvertible.swift */,
 				833D7A0B1F2C9F8800A22F33 /* Table.swift */,
 				83FCAB341F9F52E600024398 /* TableProtocol.swift */,
+				834E997D21BF1D6100BC6601 /* View.swift */,
 				83FCAB321F9F51E600024398 /* VirtualTable.swift */,
 			);
 			path = Schema;
@@ -1366,6 +1372,7 @@
 				83AF99FA1F364ED800E35A00 /* ResourceLastUpdateTable.swift in Sources */,
 				83FCAB351F9F52E600024398 /* TableProtocol.swift in Sources */,
 				8373201D1F990601008647D5 /* Sequence.swift in Sources */,
+				834E997E21BF1D6100BC6601 /* View.swift in Sources */,
 				83C2619E1F37888100278648 /* UserInformation+DatabaseCodable.swift in Sources */,
 				833D7A0E1F2CB12200A22F33 /* UserInformationTable.swift in Sources */,
 				83C2618D1F37069D00278648 /* Kanji+DatabaseCodable.swift in Sources */,
@@ -1413,6 +1420,7 @@
 				83C261981F37138800278648 /* Vocabulary+DatabaseCodable.swift in Sources */,
 				836D7F091F2BF44F00F32C90 /* ReviewStatisticFilter.swift in Sources */,
 				836D7F111F2BF45600F32C90 /* StandaloneResource.swift in Sources */,
+				834E997C21BF179D00BC6601 /* SubjectsView.swift in Sources */,
 				837CEC8F1F4CEF95008EBE08 /* WaniKaniURL.swift in Sources */,
 				836D7F081F2BF44F00F32C90 /* RequestFilter.swift in Sources */,
 				836D7F131F2BF45600F32C90 /* StudyMaterials.swift in Sources */,

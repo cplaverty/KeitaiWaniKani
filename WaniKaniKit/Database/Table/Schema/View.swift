@@ -1,24 +1,26 @@
 //
-//  VirtualTable.swift
+//  View.swift
 //  WaniKaniKit
 //
-//  Copyright © 2017 Chris Laverty. All rights reserved.
+//  Copyright © 2018 Chris Laverty. All rights reserved.
 //
 
-class VirtualTable {
+class View {
     let name: String
     
     // We have to make these vars so that we can create the Mirror in the initialiser
     var columns: [Column]! = nil
+    private let selectStatement: String
     
-    init(name: String) {
+    init(name: String, selectStatement: String) {
         self.name = name
+        self.selectStatement = selectStatement
         let mirror = Mirror(reflecting: self)
         var columns = [Column]()
         columns.reserveCapacity(Int(mirror.children.count))
         for child in mirror.children {
             if let column = child.value as? Column {
-                column.table = self
+                column.view = self
                 columns.append(column)
             }
         }
@@ -27,45 +29,42 @@ class VirtualTable {
     
     class Column {
         let name: String
-        let rank: Double
         
-        weak var table: VirtualTable?
+        weak var view: View?
         
-        init(name: String, rank: Double = 1.0) {
+        init(name: String) {
             self.name = name
-            self.rank = rank
         }
     }
 }
 
 // MARK: - CustomStringConvertible
-extension VirtualTable: CustomStringConvertible {
+extension View: CustomStringConvertible {
     var description: String {
         return name
     }
 }
 
-extension VirtualTable.Column: CustomStringConvertible {
+extension View.Column: CustomStringConvertible {
     var description: String {
-        guard let table = table else { return name }
-        return "\(table.name).\(name)"
+        guard let view = view else { return name }
+        return "\(view.name).\(name)"
     }
 }
 
 // MARK: - TableProtocol
-extension VirtualTable: TableProtocol {
+extension View: TableProtocol {
     var sqlStatement: String {
-        var query = "CREATE VIRTUAL TABLE \(name) USING fts5("
+        var query = "CREATE VIEW \(name) ("
         query += columns.lazy.map({ $0.sqlStatement }).joined(separator: ", ")
-        query += ", tokenize = porter);\n"
-        query += "INSERT INTO \(name)(\(name), rank) VALUES('rank', 'bm25(\(columns.lazy.map({ String($0.rank) }).joined(separator: ", ")))');"
+        query += ") AS \(selectStatement)"
         
         return query
     }
 }
 
 // MARK: - ColumnProtocol
-extension VirtualTable.Column: ColumnProtocol {
+extension View.Column: ColumnProtocol {
     var sqlStatement: String {
         return name
     }

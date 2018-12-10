@@ -106,8 +106,8 @@ extension Table: TableProtocol {
     }
 }
 
-// MARK: - SQLConvertible
-extension Table.Column: SQLConvertible {
+// MARK: - ColumnProtocol
+extension Table.Column: ColumnProtocol {
     var sqlStatement: String {
         var decl = "\(name) \(type.rawValue)"
         if !isNullable {
@@ -121,6 +121,7 @@ extension Table.Column: SQLConvertible {
     }
 }
 
+// MARK: - SQLConvertible
 extension Table.TableIndex: SQLConvertible {
     var sqlStatement: String {
         guard let table = table else {

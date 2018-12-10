@@ -26,11 +26,14 @@ struct Tables {
     static let vocabulary = VocabularyTable()
     static let vocabularyPartsOfSpeech = VocabularyPartsOfSpeechTable()
     
+    static let subjectsView = SubjectsView(radicals: radicals, kanji: kanji, vocabulary: vocabulary)
+    
     static var all: [TableProtocol] {
         return [
             assignments, kanji, levelProgression, meanings, radicals, radicalCharacterImages, radicalCharacterImagesMetadata,
             readings, resources, resourceLastUpdate, reviewStatistics, studyMaterials, studyMaterialsMeaningSynonyms,
-            subjectAmalgamations, subjectComponents, subjectSearch, userInformation, vocabulary, vocabularyPartsOfSpeech
+            subjectAmalgamations, subjectComponents, subjectSearch, userInformation, vocabulary, vocabularyPartsOfSpeech,
+            subjectsView
         ]
     }
     

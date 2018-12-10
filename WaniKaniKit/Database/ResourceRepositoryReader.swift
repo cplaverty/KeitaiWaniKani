@@ -71,6 +71,7 @@ public class ResourceRepositoryReader {
         return try databaseQueue.inDatabase { database in
             return try ResourceType.user.getLastUpdateDate(in: database) != nil
                 && ResourceType.assignments.getLastUpdateDate(in: database) != nil
+                && ResourceType.subjects.getLastUpdateDate(in: database) != nil
         }
     }
     
@@ -86,16 +87,55 @@ public class ResourceRepositoryReader {
             
             let asOf = Date()
             
-            let table = Tables.assignments
+            let assignments = Tables.assignments
+            let subjects = Tables.subjectsView
             
-            let lessonsAvailable = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.srsStage) = \(SRSStage.initiate.numericLevelRange.upperBound) AND \(table.unlockedAt) IS NOT NULL AND \(table.isHidden) = 0")!
-            let reviewsAvailable = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.srsStage) BETWEEN \(SRSStage.apprentice.numericLevelRange.lowerBound) AND \(SRSStage.enlightened.numericLevelRange.upperBound) AND \(table.availableAt) <= ? AND \(table.burnedAt) IS NULL AND \(table.isHidden) = 0", values: [asOf])!
-            let nextReviewDate = try database.dateForQuery("SELECT MIN(\(table.availableAt)) FROM \(table) WHERE \(table.availableAt) > ? AND \(table.isHidden) = 0", values: [asOf])
+            let lessonsAvailable = try database.longForQuery("""
+                SELECT COUNT(*)
+                FROM \(assignments) INNER JOIN \(subjects) ON \(assignments.subjectID) = \(subjects.id) AND \(assignments.subjectType) = \(subjects.subjectType)
+                WHERE \(subjects.level) <= ?
+                AND \(subjects.hiddenAt) IS NULL
+                AND \(assignments.srsStage) = \(SRSStage.initiate.numericLevelRange.upperBound)
+                AND \(assignments.unlockedAt) IS NOT NULL
+                AND \(assignments.isHidden) = 0
+                """,
+                values: [userInfo.level])!
+            let reviewsAvailable = try database.longForQuery("""
+                SELECT COUNT(*)
+                FROM \(assignments) INNER JOIN \(subjects) ON \(assignments.subjectID) = \(subjects.id) AND \(assignments.subjectType) = \(subjects.subjectType)
+                WHERE \(subjects.level) <= ?
+                AND \(subjects.hiddenAt) IS NULL
+                AND \(assignments.srsStage) BETWEEN \(SRSStage.apprentice.numericLevelRange.lowerBound)
+                AND \(SRSStage.enlightened.numericLevelRange.upperBound)
+                AND \(assignments.availableAt) <= ?
+                AND \(assignments.burnedAt) IS NULL
+                AND \(assignments.isHidden) = 0
+                """,
+                values: [userInfo.level, asOf])!
+            let nextReviewDate = try database.dateForQuery("""
+                SELECT MIN(\(assignments.availableAt))
+                FROM \(assignments) INNER JOIN \(subjects) ON \(assignments.subjectID) = \(subjects.id) AND \(assignments.subjectType) = \(subjects.subjectType)
+                WHERE \(subjects.level) <= ?
+                AND \(subjects.hiddenAt) IS NULL
+                AND \(assignments.availableAt) > ? AND \(assignments.isHidden) = 0
+                """,
+                values: [userInfo.level, asOf])
             
-            let reviewsAvailableNextHour = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.availableAt) BETWEEN ? AND ?",
-                values: [asOf, asOf.addingTimeInterval(.oneHour)])!
-            let reviewsAvailableNextDay = try database.longForQuery("SELECT COUNT(*) FROM \(table) WHERE \(table.availableAt) BETWEEN ? AND ?",
-                values: [asOf, asOf.addingTimeInterval(.oneDay)])!
+            let reviewsAvailableNextHour = try database.longForQuery("""
+                SELECT COUNT(*)
+                FROM \(assignments) INNER JOIN \(subjects) ON \(assignments.subjectID) = \(subjects.id) AND \(assignments.subjectType) = \(subjects.subjectType)
+                WHERE \(subjects.level) <= ?
+                AND \(subjects.hiddenAt) IS NULL
+                AND \(assignments.availableAt) BETWEEN ? AND ?
+                """,
+                values: [userInfo.level, asOf, asOf.addingTimeInterval(.oneHour)])!
+            let reviewsAvailableNextDay = try database.longForQuery("""
+                SELECT COUNT(*)
+                FROM \(assignments) INNER JOIN \(subjects) ON \(assignments.subjectID) = \(subjects.id) AND \(assignments.subjectType) = \(subjects.subjectType)
+                WHERE \(subjects.level) <= ?
+                AND \(assignments.availableAt) BETWEEN ? AND ?
+                """,
+                values: [userInfo.level, asOf, asOf.addingTimeInterval(.oneDay)])!
             
             return StudyQueue(lessonsAvailable: lessonsAvailable, reviewsAvailable: reviewsAvailable, nextReviewDate: nextReviewDate, reviewsAvailableNextHour: reviewsAvailableNextHour, reviewsAvailableNextDay: reviewsAvailableNextDay)
         }
@@ -219,7 +259,8 @@ public class ResourceRepositoryReader {
         }
         
         return try databaseQueue.inDatabase { database in
-            return try ResourceType.assignments.getLastUpdateDate(in: database) != nil
+            return try ResourceType.user.getLastUpdateDate(in: database) != nil
+                && ResourceType.assignments.getLastUpdateDate(in: database) != nil
         }
     }
     
@@ -229,23 +270,30 @@ public class ResourceRepositoryReader {
         }
         
         return try databaseQueue.inDatabase { database in
-            let table = Tables.assignments
+            guard let userInformation = try UserInformation(from: database) else {
+                return SRSDistribution(countsBySRSStage: [:])
+            }
             
+            let assignments = Tables.assignments
+            let subjects = Tables.subjectsView
+
             let radicalColumn = "radicals"
             let kanjiColumn = "kanji"
             let vocabularyColumn = "vocabulary"
             
             let query = """
-            WITH counts(\(table.srsStage.name), \(radicalColumn), \(kanjiColumn), \(vocabularyColumn))
+            WITH counts(\(assignments.srsStage.name), \(radicalColumn), \(kanjiColumn), \(vocabularyColumn))
             AS (
-            SELECT \(table.srsStage),
-            CASE \(table.subjectType) WHEN '\(SubjectType.radical.rawValue)' THEN 1 ELSE 0 END,
-            CASE \(table.subjectType) WHEN '\(SubjectType.kanji.rawValue)' THEN 1 ELSE 0 END,
-            CASE \(table.subjectType) WHEN '\(SubjectType.vocabulary.rawValue)' THEN 1 ELSE 0 END
-            FROM \(table)
-            WHERE \(table.srsStage) > 0
+            SELECT \(assignments.srsStage),
+            CASE \(assignments.subjectType) WHEN '\(SubjectType.radical.rawValue)' THEN 1 ELSE 0 END,
+            CASE \(assignments.subjectType) WHEN '\(SubjectType.kanji.rawValue)' THEN 1 ELSE 0 END,
+            CASE \(assignments.subjectType) WHEN '\(SubjectType.vocabulary.rawValue)' THEN 1 ELSE 0 END
+            FROM \(assignments) INNER JOIN \(subjects) ON \(assignments.subjectID) = \(subjects.id) AND \(assignments.subjectType) = \(subjects.subjectType)
+            WHERE \(subjects.level) <= ?
+            AND \(subjects.hiddenAt) IS NULL
+            AND \(assignments.srsStage) > 0
             )
-            SELECT \(table.srsStage.name),
+            SELECT \(assignments.srsStage.name),
             SUM(\(radicalColumn)) AS \(radicalColumn),
             SUM(\(kanjiColumn)) AS \(kanjiColumn),
             SUM(\(vocabularyColumn)) AS \(vocabularyColumn)
@@ -253,12 +301,12 @@ public class ResourceRepositoryReader {
             GROUP BY 1
             """
             
-            let resultSet = try database.executeQuery(query, values: nil)
+            let resultSet = try database.executeQuery(query, values: [userInformation.level])
             defer { resultSet.close() }
             
             var countsBySRSStage = [SRSStage: SRSItemCounts]()
             while resultSet.next() {
-                let srsStageNumeric = resultSet.long(forColumn: table.srsStage.name)
+                let srsStageNumeric = resultSet.long(forColumn: assignments.srsStage.name)
                 
                 guard let srsStage = SRSStage(numericLevel: srsStageNumeric) else {
                     os_log("Returned unexpected numeric srs stage %d", type: .info, srsStageNumeric)
@@ -286,9 +334,9 @@ public class ResourceRepositoryReader {
                 return []
             }
             
-            let radicalCounts = try itemCounts(for: .radical, level: level, srsStage: srsStage, from: database)
-            let kanjiCounts = try itemCounts(for: .kanji, level: level, srsStage: srsStage, from: database)
-            let vocabularyCounts = try itemCounts(for: .vocabulary, level: level, srsStage: srsStage, from: database)
+            let radicalCounts = try itemCounts(for: .radical, userInformation: userInformation, level: level, srsStage: srsStage, from: database)
+            let kanjiCounts = try itemCounts(for: .kanji, userInformation: userInformation, level: level, srsStage: srsStage, from: database)
+            let vocabularyCounts = try itemCounts(for: .vocabulary, userInformation: userInformation, level: level, srsStage: srsStage, from: database)
             
             let totalCounts = radicalCounts
                 .merging(kanjiCounts, uniquingKeysWith: +)
@@ -300,7 +348,7 @@ public class ResourceRepositoryReader {
         }
     }
     
-    private func itemCounts(for subjectType: SubjectType, level: Int?, srsStage: SRSStage?, from database: FMDatabase) throws -> [Date: SRSItemCounts] {
+    private func itemCounts(for subjectType: SubjectType, userInformation: UserInformation, level: Int?, srsStage: SRSStage?, from database: FMDatabase) throws -> [Date: SRSItemCounts] {
         let assignments = Tables.assignments
         let subjects = Tables.subjectTable(for: subjectType)
         
@@ -318,12 +366,16 @@ public class ResourceRepositoryReader {
         if let level = level {
             additionalCriteria += "\nAND \(subjects.level) = :level"
             queryArgs["level"] = level
+        } else {
+            additionalCriteria += "\nAND \(subjects.level) <= :level"
+            queryArgs["level"] = userInformation.level
         }
         
         let query = """
         SELECT \(assignments.availableAt), COUNT(*) AS count
-        FROM \(assignments) LEFT JOIN \(subjects) ON \(subjects.id) = \(assignments.subjectID)
-        WHERE \(assignments.availableAt) IS NOT NULL
+        FROM \(assignments) INNER JOIN \(subjects) ON \(subjects.id) = \(assignments.subjectID)
+        WHERE \(subjects.hiddenAt) IS NULL
+        AND \(assignments.availableAt) IS NOT NULL
         AND \(assignments.isHidden) = 0
         AND \(assignments.subjectType) = :subjectType
         \(additionalCriteria)
