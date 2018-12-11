@@ -7,6 +7,7 @@
 
 class VirtualTable {
     let name: String
+    let type = "table"
     
     // We have to make these vars so that we can create the Mirror in the initialiser
     var columns: [Column]! = nil

@@ -40,7 +40,7 @@ class DatabaseManagerTests: XCTestCase {
         databaseQueue.inDatabase { database in
             for table in Tables.all {
                 do {
-                    let name = try database.stringForQuery("SELECT name FROM sqlite_master WHERE type = 'table' AND name = ?;", values: [table.name])
+                    let name = try database.stringForQuery("SELECT name FROM sqlite_master WHERE name = ? AND type = ?;", values: [table.name, table.type])
                     XCTAssertEqual(name, table.name)
                 } catch {
                     XCTFail("Failed to query for table '\(table)': \(error)")

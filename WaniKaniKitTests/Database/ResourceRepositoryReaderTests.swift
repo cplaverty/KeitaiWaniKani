@@ -603,24 +603,24 @@ class ResourceRepositoryReaderTests: XCTestCase {
     }
     
     private func populateDatabaseForStudyQueue(lessonCount: Int, pendingReviewCount: Int, futureReviewCount: Int, futureReviewTime: Date? = nil) {
-        var assignments = [ResourceCollectionItem]()
-        assignments.reserveCapacity(lessonCount + pendingReviewCount + futureReviewCount)
+        var items = [ResourceCollectionItem]()
+        items.reserveCapacity((lessonCount + pendingReviewCount + futureReviewCount) * 2)
         
         let dateInPast = makeUTCDate(year: 2012, month: 02, day: 24, hour: 19, minute: 09, second: 18)
         
         for _ in 0..<lessonCount {
-            assignments.append(createTestAssignment(subjectType: .radical, srsStage: 0, unlockedAt: dateInPast))
+            items += createTestRadicalWithAssignment(level: testUserLevel, srsStage: 0, unlockedAt: dateInPast)
         }
         
         for _ in 0..<pendingReviewCount {
-            assignments.append(createTestAssignment(subjectType: .radical, srsStage: 3, availableAt: dateInPast))
+            items += createTestRadicalWithAssignment(level: testUserLevel, srsStage: 3, availableAt: dateInPast)
         }
         
         for _ in 0..<futureReviewCount {
-            assignments.append(createTestAssignment(subjectType: .radical, srsStage: 3, availableAt: futureReviewTime!))
+            items += createTestRadicalWithAssignment(level: testUserLevel, srsStage: 3, availableAt: futureReviewTime!)
         }
         
-        writeToDatabase(assignments)
+        writeToDatabase(items)
     }
     
     private func populateDatabaseForLevelProgression(radicalsNotPassed: Int, radicalsPassed: Int, kanjiNotPassed: Int, kanjiPassed: Int) {
@@ -657,22 +657,22 @@ class ResourceRepositoryReaderTests: XCTestCase {
     }
     
     private func populateDatabaseForSRSDistribution(srsStage: Int, radicals: Int, kanji: Int, vocabulary: Int) {
-        var assignments = [ResourceCollectionItem]()
-        assignments.reserveCapacity(radicals + kanji + vocabulary)
+        var items = [ResourceCollectionItem]()
+        items.reserveCapacity((radicals + kanji + vocabulary) * 2)
         
         let now = Date()
         
         for _ in 0..<radicals {
-            assignments.append(createTestAssignment(subjectType: .radical, srsStage: srsStage, availableAt: now))
+            items += createTestRadicalWithAssignment(level: testUserLevel, srsStage: srsStage, availableAt: now)
         }
         for _ in 0..<kanji {
-            assignments.append(createTestAssignment(subjectType: .kanji, srsStage: srsStage, availableAt: now))
+            items += createTestKanjiWithAssignment(level: testUserLevel, srsStage: srsStage, availableAt: now)
         }
         for _ in 0..<vocabulary {
-            assignments.append(createTestAssignment(subjectType: .vocabulary, srsStage: srsStage, availableAt: now))
+            items += createTestVocabularyWithAssignment(level: testUserLevel, srsStage: srsStage, availableAt: now)
         }
         
-        writeToDatabase(assignments)
+        writeToDatabase(items)
     }
     
     private func writeToDatabase(_ items: [ResourceCollectionItem]) {
