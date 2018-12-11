@@ -11,7 +11,7 @@ import WaniKaniKit
 
 class NotificationManager {
     private let notificationScheduler: NotificationScheduler
-    private var assignmentsChangeObserver: NSObjectProtocol?
+    private var notificationObservers: [NSObjectProtocol]?
     
     init() {
         notificationScheduler = UserNotificationScheduler()
@@ -29,28 +29,44 @@ class NotificationManager {
             os_log("Notification authorisation granted = %@", type: .info, String(granted))
             
             if granted {
-                self.listenForAssignmentChanges(resourceRepository: resourceRepository)
+                self.unregisterForNotifications()
+                self.notificationObservers = self.addNotificationObservers(resourceRepository: resourceRepository)
             }
         }
     }
     
     public func unregisterForNotifications() {
-        if let assignmentsChangeObserver = assignmentsChangeObserver {
-            NotificationCenter.default.removeObserver(assignmentsChangeObserver)
+        if let notificationObservers = notificationObservers {
+            os_log("Removing NotificationCenter observers from %@", type: .debug, String(describing: type(of: self)))
+            notificationObservers.forEach(NotificationCenter.default.removeObserver(_:))
         }
-        assignmentsChangeObserver = nil
+        notificationObservers = nil
     }
     
-    private func listenForAssignmentChanges(resourceRepository: ResourceRepositoryReader) {
-        unregisterForNotifications()
-        assignmentsChangeObserver = NotificationCenter.default.addObserver(forName: .waniKaniAssignmentsDidChange, object: nil, queue: .main) { [weak self] _ in
-            self?.scheduleNotifications(resourceRepository: resourceRepository)
-        }
+    private func addNotificationObservers(resourceRepository: ResourceRepositoryReader) -> [NSObjectProtocol] {
+        os_log("Adding NotificationCenter observers to %@", type: .debug, String(describing: type(of: self)))
+        let notificationObservers = [
+            NotificationCenter.default.addObserver(forName: .waniKaniUserInformationDidChange, object: nil, queue: .main) { [weak self] _ in
+                self?.scheduleNotifications(resourceRepository: resourceRepository)
+            },
+            NotificationCenter.default.addObserver(forName: .waniKaniAssignmentsDidChange, object: nil, queue: .main) { [weak self] _ in
+                self?.scheduleNotifications(resourceRepository: resourceRepository)
+            },
+            NotificationCenter.default.addObserver(forName: .waniKaniSubjectsDidChange, object: nil, queue: .main) { [weak self] _ in
+                self?.scheduleNotifications(resourceRepository: resourceRepository)
+            }
+        ]
+        
+        return notificationObservers
     }
     
     public func scheduleNotifications(resourceRepository: ResourceRepositoryReader) {
         do {
             notificationScheduler.removeAllNotifications()
+            
+            guard try resourceRepository.hasReviewTimeline() else {
+                return
+            }
             
             let now = Date()
             let reviewTimeline = try resourceRepository.reviewTimeline()

@@ -529,62 +529,13 @@ class DashboardTableViewController: UITableViewController {
         os_log("Adding NotificationCenter observers to %@", type: .debug, String(describing: type(of: self)))
         let notificationObservers = [
             NotificationCenter.default.addObserver(forName: .waniKaniUserInformationDidChange, object: nil, queue: .main) { [unowned self] _ in
-                do {
-                    if try self.resourceRepository.hasUserInformation() {
-                        self.userInformation = try self.resourceRepository.userInformation()
-                    }
-                    if try self.resourceRepository.hasLevelProgression() {
-                        self.levelProgression = try self.resourceRepository.levelProgression()
-                    }
-                    if try self.resourceRepository.hasLevelTimeline() {
-                        self.levelTimeline = try self.resourceRepository.levelTimeline()
-                    }
-                } catch {
-                    os_log("Failed to refresh data in notification observer: %@", type: .fault, error as NSError)
-                    fatalError(error.localizedDescription)
-                }
-                
-                self.tableView.reloadSections([TableViewSection.levelProgression.rawValue], with: .automatic)
+                self.updateUI()
             },
             NotificationCenter.default.addObserver(forName: .waniKaniAssignmentsDidChange, object: nil, queue: .main) { [unowned self] _ in
-                do {
-                    if try self.resourceRepository.hasStudyQueue() {
-                        self.studyQueue = try self.resourceRepository.studyQueue()
-                    }
-                    if try self.resourceRepository.hasLevelProgression() {
-                        self.levelProgression = try self.resourceRepository.levelProgression()
-                    }
-                    if try self.resourceRepository.hasSRSDistribution() {
-                        self.srsDistribution = try self.resourceRepository.srsDistribution()
-                    }
-                    if try self.resourceRepository.hasLevelTimeline() {
-                        self.levelTimeline = try self.resourceRepository.levelTimeline()
-                    }
-                } catch {
-                    os_log("Failed to refresh data in notification observer: %@", type: .fault, error as NSError)
-                    fatalError(error.localizedDescription)
-                }
-                
-                let sectionsToReload: IndexSet = [TableViewSection.available.rawValue, TableViewSection.upcomingReviews.rawValue,
-                                                  TableViewSection.levelProgression.rawValue, TableViewSection.srsDistribution.rawValue]
-                self.tableView.reloadSections(sectionsToReload, with: .automatic)
+                self.updateUI()
             },
             NotificationCenter.default.addObserver(forName: .waniKaniSubjectsDidChange, object: nil, queue: .main) { [unowned self] _ in
-                do {
-                    if try self.resourceRepository.hasLevelProgression() {
-                        self.levelProgression = try self.resourceRepository.levelProgression()
-                    }
-                    if try self.resourceRepository.hasLevelTimeline() {
-                        self.levelTimeline = try self.resourceRepository.levelTimeline()
-                    }
-                } catch {
-                    os_log("Failed to refresh data in notification observer: %@", type: .fault, error as NSError)
-                    fatalError(error.localizedDescription)
-                }
-                
-                let sectionsToReload: IndexSet = [TableViewSection.available.rawValue, TableViewSection.upcomingReviews.rawValue,
-                                                  TableViewSection.levelProgression.rawValue, TableViewSection.srsDistribution.rawValue]
-                self.tableView.reloadSections(sectionsToReload, with: .automatic)
+                self.updateUI()
             },
             NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [unowned self] _ in
                 self.updateData(minimumFetchInterval: 5 * .oneMinute, showAlertOnErrors: false)
@@ -592,6 +543,33 @@ class DashboardTableViewController: UITableViewController {
         ]
         
         return notificationObservers
+    }
+    
+    private func updateUI() {
+        do {
+            if try self.resourceRepository.hasUserInformation() {
+                self.userInformation = try self.resourceRepository.userInformation()
+            }
+            if try self.resourceRepository.hasStudyQueue() {
+                self.studyQueue = try self.resourceRepository.studyQueue()
+            }
+            if try self.resourceRepository.hasLevelProgression() {
+                self.levelProgression = try self.resourceRepository.levelProgression()
+            }
+            if try self.resourceRepository.hasSRSDistribution() {
+                self.srsDistribution = try self.resourceRepository.srsDistribution()
+            }
+            if try self.resourceRepository.hasLevelTimeline() {
+                self.levelTimeline = try self.resourceRepository.levelTimeline()
+            }
+        } catch {
+            os_log("Failed to refresh data in notification observer: %@", type: .fault, error as NSError)
+            fatalError(error.localizedDescription)
+        }
+        
+        let sectionsToReload: IndexSet = [TableViewSection.available.rawValue, TableViewSection.upcomingReviews.rawValue,
+                                          TableViewSection.levelProgression.rawValue, TableViewSection.srsDistribution.rawValue]
+        self.tableView.reloadSections(sectionsToReload, with: .automatic)
     }
     
 }

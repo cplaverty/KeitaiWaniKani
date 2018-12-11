@@ -276,7 +276,7 @@ public class ResourceRepositoryReader {
             
             let assignments = Tables.assignments
             let subjects = Tables.subjectsView
-
+            
             let radicalColumn = "radicals"
             let kanjiColumn = "kanji"
             let vocabularyColumn = "vocabulary"
@@ -321,6 +321,18 @@ public class ResourceRepositoryReader {
             }
             
             return SRSDistribution(countsBySRSStage: countsBySRSStage)
+        }
+    }
+    
+    public func hasReviewTimeline() throws -> Bool {
+        guard let databaseQueue = self.databaseQueue else {
+            throw ResourceRepositoryError.noDatabase
+        }
+        
+        return try databaseQueue.inDatabase { database in
+            return try ResourceType.user.getLastUpdateDate(in: database) != nil
+                && ResourceType.assignments.getLastUpdateDate(in: database) != nil
+                && ResourceType.subjects.getLastUpdateDate(in: database) != nil
         }
     }
     

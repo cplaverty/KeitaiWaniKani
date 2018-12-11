@@ -165,7 +165,7 @@ class ReviewTimelineTableViewController: UITableViewController {
     }
     
     private func updateReviewTimeline() throws {
-        guard let repositoryReader = repositoryReader else {
+        guard let repositoryReader = repositoryReader, try repositoryReader.hasReviewTimeline() else {
             return
         }
         
