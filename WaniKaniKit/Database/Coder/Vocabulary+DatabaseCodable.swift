@@ -21,7 +21,7 @@ extension Vocabulary: DatabaseCodable {
         }
         resultSet.close()
         
-        return try ResourceCollectionItem.read(from: database, ids: subjectIDs)
+        return try ResourceCollectionItem.read(from: database, ids: subjectIDs, type: .vocabulary)
     }
     
     static func read(from database: FMDatabase, ids: [Int]) throws -> [Int: Vocabulary] {

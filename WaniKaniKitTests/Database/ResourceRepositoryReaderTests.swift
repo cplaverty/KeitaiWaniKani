@@ -653,6 +653,10 @@ class ResourceRepositoryReaderTests: XCTestCase {
             items += createTestKanjiWithAssignment(level: testUserLevel, srsStage: 4, availableAt: now, isPassed: true)
         }
         
+        for _ in 0..<Int.random(in: 50...150) {
+            items += createTestVocabularyWithAssignment(level: testUserLevel, srsStage: 1, availableAt: now, isPassed: false)
+        }
+        
         writeToDatabase(items)
     }
     

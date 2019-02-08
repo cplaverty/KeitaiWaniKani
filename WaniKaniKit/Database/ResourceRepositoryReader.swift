@@ -23,23 +23,33 @@ public class ResourceRepositoryReader {
         self.databaseManager = databaseManager
     }
     
-    public func loadResource(id: Int) throws -> ResourceCollectionItem {
+    public func loadResource(id: Int, type: ResourceCollectionItemObjectType) throws -> ResourceCollectionItem {
         guard let databaseQueue = self.databaseQueue else {
             throw ResourceRepositoryError.noDatabase
         }
         
         return try databaseQueue.inDatabase { database in
-            try ResourceCollectionItem(from: database, id: id)
+            try ResourceCollectionItem(from: database, id: id, type: type)
         }
     }
     
-    public func loadResources(ids: [Int]) throws -> [ResourceCollectionItem] {
+    public func loadResources(ids: [Int], type: ResourceCollectionItemObjectType) throws -> [ResourceCollectionItem] {
         guard let databaseQueue = self.databaseQueue else {
             throw ResourceRepositoryError.noDatabase
         }
         
         return try databaseQueue.inDatabase { database in
-            try ResourceCollectionItem.read(from: database, ids: ids)
+            try ResourceCollectionItem.read(from: database, ids: ids, type: type)
+        }
+    }
+    
+    public func loadSubjects(ids: [Int]) throws -> [ResourceCollectionItem] {
+        guard let databaseQueue = self.databaseQueue else {
+            throw ResourceRepositoryError.noDatabase
+        }
+        
+        return try databaseQueue.inDatabase { database in
+            try ResourceCollectionItem.readSubjects(from: database, ids: ids)
         }
     }
     
@@ -161,24 +171,18 @@ public class ResourceRepositoryReader {
         return try databaseQueue.inDatabase { database in
             let user = Tables.userInformation
             let assignments = Tables.assignments
-            let radicals = Tables.radicals
-            let kanji = Tables.kanji
+            let subjects = Tables.subjectsView
             
             guard let userInformation = try UserInformation(from: database) else {
                 return CurrentLevelProgression(radicalsProgress: 0, radicalsTotal: 0, radicalSubjectIDs: [], kanjiProgress: 0, kanjiTotal: 0, kanjiSubjectIDs: [])
             }
             
             let query = """
-            SELECT \(radicals.id), '\(SubjectType.radical.rawValue)' AS \(assignments.subjectType.name), coalesce(\(assignments.isPassed), 0) AS \(assignments.isPassed.name)
-            FROM \(radicals) LEFT JOIN \(assignments) ON \(radicals.id) = \(assignments.subjectID)
-            WHERE \(radicals.level) = :level
-            AND \(radicals.hiddenAt) IS NULL
-            AND (\(assignments.isHidden) IS NULL OR \(assignments.isHidden) = 0)
-            UNION ALL
-            SELECT \(kanji.id), '\(SubjectType.kanji.rawValue)' AS \(assignments.subjectType.name), coalesce(\(assignments.isPassed), 0) AS \(assignments.isPassed.name)
-            FROM \(kanji) LEFT JOIN \(assignments) ON \(kanji.id) = \(assignments.subjectID)
-            WHERE \(kanji.level) = :level
-            AND \(kanji.hiddenAt) IS NULL
+            SELECT \(subjects.id), \(subjects.subjectType), coalesce(\(assignments.isPassed), 0) AS \(assignments.isPassed.name)
+            FROM \(subjects) LEFT JOIN \(assignments) ON \(subjects.id) = \(assignments.subjectID)
+            WHERE \(subjects.level) = :level
+            AND \(subjects.subjectType) IN ('\(SubjectType.radical.rawValue)', '\(SubjectType.kanji.rawValue)')
+            AND \(subjects.hiddenAt) IS NULL
             AND (\(assignments.isHidden) IS NULL OR \(assignments.isHidden) = 0)
             """
             
@@ -195,22 +199,23 @@ public class ResourceRepositoryReader {
             var kanjiSubjectIDs = [Int]()
             
             while resultSet.next() {
+                let subjectId = resultSet.long(forColumn: subjects.id.name)
                 let passed = resultSet.bool(forColumn: assignments.isPassed.name)
-                switch resultSet.rawValue(SubjectType.self, forColumn: assignments.subjectType.name)! {
+                switch resultSet.rawValue(SubjectType.self, forColumn: subjects.subjectType.name)! {
                 case .radical:
-                    radicalSubjectIDs.append(resultSet.long(forColumn: radicals.id.name))
+                    radicalSubjectIDs.append(subjectId)
                     if passed {
                         radicalsProgress += 1
                     }
                     radicalsTotal += 1
                 case .kanji:
-                    kanjiSubjectIDs.append(resultSet.long(forColumn: kanji.id.name))
+                    kanjiSubjectIDs.append(subjectId)
                     if passed {
                         kanjiProgress += 1
                     }
                     kanjiTotal += 1
                 case .vocabulary:
-                    fatalError()
+                    fatalError("Only radicals and kanji contribute to levelling.  Getting this error suggests the query used is incorrect.")
                 }
             }
             
@@ -493,21 +498,6 @@ public class ResourceRepositoryReader {
         }
     }
     
-    public func subjects(ids: [Int]) throws -> [(subject: Subject, assignment: Assignment?)] {
-        guard let databaseQueue = self.databaseQueue else {
-            throw ResourceRepositoryError.noDatabase
-        }
-        
-        return try databaseQueue.inDatabase { database in
-            let subjectItems = try ResourceCollectionItem.read(from: database, ids: ids)
-            let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: ids)
-            
-            return subjectItems.map({ item in
-                (item.data as! Subject, assignmentsBySubjectID[item.id])
-            })
-        }
-    }
-    
     public func subjects(srsStage: SRSStage) throws -> [(subject: Subject, assignment: Assignment)] {
         guard let databaseQueue = self.databaseQueue else {
             throw ResourceRepositoryError.noDatabase
@@ -517,7 +507,7 @@ public class ResourceRepositoryReader {
             let assignmentsBySubjectID = try Assignment.read(from: database, srsStage: srsStage).values.reduce(into: [:], { (result, assignment) in
                 result[assignment.subjectID] = assignment
             })
-            let subjectItems = try ResourceCollectionItem.read(from: database, ids: Array(assignmentsBySubjectID.keys))
+            let subjectItems = try ResourceCollectionItem.readSubjects(from: database, ids: Array(assignmentsBySubjectID.keys))
             
             return subjectItems.map({ item in
                 (item.data as! Subject, assignmentsBySubjectID[item.id]!)

@@ -129,12 +129,12 @@ class ResourceRepositoryTests: XCTestCase {
             updateTime = try resourceRepository.getLastUpdateDate(for: .assignments)
             XCTAssertNotNil(updateTime)
             
-            let load1 = try resourceRepository.loadResource(id: 1)
-            let load2 = try resourceRepository.loadResource(id: 2)
+            let load1 = try resourceRepository.loadResource(id: 1, type: .assignment)
+            let load2 = try resourceRepository.loadResource(id: 2, type: .assignment)
             XCTAssertEqual(load1, expected1)
             XCTAssertEqual(load2, expected2)
             
-            let load = try resourceRepository.loadResources(ids: [1, 2])
+            let load = try resourceRepository.loadResources(ids: [1, 2], type: .assignment)
             XCTAssertEqual(load, [expected1, expected2])
         } catch {
             XCTFail(error.localizedDescription)
@@ -233,7 +233,7 @@ class ResourceRepositoryTests: XCTestCase {
             updateTime = try resourceRepository.getLastUpdateDate(for: .studyMaterials)
             XCTAssertNotNil(updateTime)
             
-            let load = try resourceRepository.loadResource(id: 204431)
+            let load = try resourceRepository.loadResource(id: 204431, type: .studyMaterial)
             XCTAssertEqual(load, expected)
         } catch {
             XCTFail(error.localizedDescription)
@@ -364,14 +364,14 @@ class ResourceRepositoryTests: XCTestCase {
             updateTime = try resourceRepository.getLastUpdateDate(for: .subjects)
             XCTAssertNotNil(updateTime)
             
-            let load1 = try resourceRepository.loadResource(id: 1)
-            let load2 = try resourceRepository.loadResource(id: 440)
-            let load3 = try resourceRepository.loadResource(id: 2467)
+            let load1 = try resourceRepository.loadResource(id: 1, type: .radical)
+            let load2 = try resourceRepository.loadResource(id: 440, type: .kanji)
+            let load3 = try resourceRepository.loadResource(id: 2467, type: .vocabulary)
             XCTAssertEqual(load1, expected1)
             XCTAssertEqual(load2, expected2)
             XCTAssertEqual(load3, expected3)
             
-            let load = try resourceRepository.loadResources(ids: [1, 440, 2467])
+            let load = try resourceRepository.loadSubjects(ids: [1, 440, 2467])
             XCTAssertEqual(load, [expected1, expected2, expected3])
         } catch {
             XCTFail(error.localizedDescription)
@@ -476,7 +476,7 @@ class ResourceRepositoryTests: XCTestCase {
             updateTime = try resourceRepository.getLastUpdateDate(for: .reviewStatistics)
             XCTAssertNotNil(updateTime)
             
-            let load = try resourceRepository.loadResource(id: 2364240)
+            let load = try resourceRepository.loadResource(id: 2364240, type: .reviewStatistic)
             XCTAssertEqual(load, expected)
         } catch {
             XCTFail(error.localizedDescription)

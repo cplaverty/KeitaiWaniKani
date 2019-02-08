@@ -27,7 +27,7 @@ struct SubjectSearch {
         }
         resultSet.close()
         
-        return try ResourceCollectionItem.read(from: database, ids: subjectIDs)
+        return try ResourceCollectionItem.readSubjects(from: database, ids: subjectIDs)
     }
     
     static func write(to database: FMDatabase, id: Int, character: String?, level: Int, meanings: [Meaning], readings: [Reading], hidden: Bool) throws {

@@ -10,25 +10,63 @@ import FMDB
 private let table = Tables.resources
 
 extension ResourceCollectionItem {
-    static func read(from database: FMDatabase, ids: [Int]) throws -> [ResourceCollectionItem] {
+    static func read(from database: FMDatabase, ids: [Int], type: ResourceCollectionItemObjectType) throws -> [ResourceCollectionItem] {
         var items = [ResourceCollectionItem]()
         items.reserveCapacity(ids.count)
         
         for id in ids {
-            items.append(try ResourceCollectionItem(from: database, id: id))
+            items.append(try ResourceCollectionItem(from: database, id: id, type: type))
         }
         
         return items
     }
     
-    init(from database: FMDatabase, id: Int) throws {
+    static func readSubjects(from database: FMDatabase, ids: [Int]) throws -> [ResourceCollectionItem] {
+        var items = [ResourceCollectionItem]()
+        items.reserveCapacity(ids.count)
+        
+        for id in ids {
+            let type = try getSubjectTypeForSubjectId(from: database, id: id)
+            items.append(try ResourceCollectionItem(from: database, id: id, type: type))
+        }
+        
+        return items
+    }
+    
+    private static func getSubjectTypeForSubjectId(from database: FMDatabase, id: Int) throws -> ResourceCollectionItemObjectType {
+        let subjects = Tables.subjectsView
+        
+        let query = """
+        SELECT \(subjects.subjectType)
+        FROM \(subjects)
+        WHERE \(subjects.id) = ?
+        """
+        
+        let resultSet = try database.executeQuery(query, values: [id])
+        
+        guard resultSet.next() else {
+            resultSet.close()
+            throw DatabaseError.itemNotFound(id: id)
+        }
+        
+        let subjectType = resultSet.rawValue(SubjectType.self, forColumn: subjects.subjectType.name)!
+        
+        switch subjectType {
+        case .radical: return .radical
+        case .kanji: return .kanji
+        case .vocabulary: return .vocabulary
+        }
+    }
+    
+    init(from database: FMDatabase, id: Int, type: ResourceCollectionItemObjectType) throws {
         let query = """
         SELECT \(table.resourceType), \(table.url), \(table.dataUpdatedAt)
         FROM \(table)
         WHERE \(table.id) = ?
+        AND \(table.resourceType) = ?
         """
         
-        let resultSet = try database.executeQuery(query, values: [id])
+        let resultSet = try database.executeQuery(query, values: [id, type.rawValue])
         
         guard resultSet.next() else {
             resultSet.close()
