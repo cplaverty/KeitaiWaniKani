@@ -102,7 +102,7 @@ public class ResourceRepositoryReader {
             
             let lessonsAvailable = try database.longForQuery("""
                 SELECT COUNT(*)
-                FROM \(assignments) INNER JOIN \(subjects) ON \(assignments.subjectID) = \(subjects.id) AND \(assignments.subjectType) = \(subjects.subjectType)
+                FROM \(subjects) INNER JOIN \(assignments) ON \(assignments.subjectID) = \(subjects.id) AND \(assignments.subjectType) = \(subjects.subjectType)
                 WHERE \(subjects.level) <= ?
                 AND \(subjects.hiddenAt) IS NULL
                 AND \(assignments.srsStage) = \(SRSStage.initiate.numericLevelRange.upperBound)
@@ -118,7 +118,7 @@ public class ResourceRepositoryReader {
                 AND \(assignments.srsStage) BETWEEN \(SRSStage.apprentice.numericLevelRange.lowerBound)
                 AND \(SRSStage.enlightened.numericLevelRange.upperBound)
                 AND \(assignments.availableAt) <= ?
-                AND \(assignments.burnedAt) IS NULL
+                AND (\(assignments.burnedAt) IS NULL OR \(assignments.isResurrected) = 1)
                 AND \(assignments.isHidden) = 0
                 """,
                 values: [userInfo.level, asOf])!

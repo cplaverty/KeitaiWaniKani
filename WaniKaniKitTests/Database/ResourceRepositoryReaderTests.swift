@@ -59,7 +59,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
     func testHasStudyQueue() {
         XCTAssertFalse(try resourceRepository.hasStudyQueue())
         
-        populateDatabaseForStudyQueue(lessonCount: 10, pendingReviewCount: 23, futureReviewCount: 0)
+        populateDatabaseForStudyQueue(lessonCount: 10, pendingReviewCount: 23)
         
         XCTAssertTrue(try resourceRepository.hasStudyQueue())
     }
@@ -71,7 +71,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
     }
     
     func testStudyQueue_PendingLessonsReviews_NoFutureReviews() {
-        populateDatabaseForStudyQueue(lessonCount: 10, pendingReviewCount: 23, futureReviewCount: 0)
+        populateDatabaseForStudyQueue(lessonCount: 10, pendingReviewCount: 23)
         
         let expected = StudyQueue(lessonsAvailable: 10, reviewsAvailable: 23, nextReviewDate: nil, reviewsAvailableNextHour: 0, reviewsAvailableNextDay: 0)
         
@@ -79,14 +79,22 @@ class ResourceRepositoryReaderTests: XCTestCase {
     }
     
     func testStudyQueue_FutureReviewsOnly() {
-        populateDatabaseForStudyQueue(lessonCount: 0, pendingReviewCount: 0, futureReviewCount: 6, futureReviewTime: nextHourReviewTime)
-        populateDatabaseForStudyQueue(lessonCount: 0, pendingReviewCount: 0, futureReviewCount: 4, futureReviewTime: nextDayReviewTime)
+        populateDatabaseForStudyQueue(futureReviewCount: 6, futureReviewTime: nextHourReviewTime)
+        populateDatabaseForStudyQueue(futureReviewCount: 4, futureReviewTime: nextDayReviewTime)
         
         let expected = StudyQueue(lessonsAvailable: 0, reviewsAvailable: 0, nextReviewDate: nextHourReviewTime, reviewsAvailableNextHour: 6, reviewsAvailableNextDay: 10)
         
         XCTAssertEqual(try resourceRepository.studyQueue(), expected)
     }
     
+    func testStudyQueue_ResurrectedItems() {
+        populateDatabaseForStudyQueue(lessonCount: 10, pendingReviewCount: 18, resurrectedReviewCount: 5)
+        
+        let expected = StudyQueue(lessonsAvailable: 10, reviewsAvailable: 23, nextReviewDate: nil, reviewsAvailableNextHour: 0, reviewsAvailableNextDay: 0)
+        
+        XCTAssertEqual(try resourceRepository.studyQueue(), expected)
+    }
+
     func testStudyQueue_VacationMode() {
         populateDatabaseForStudyQueue(lessonCount: 10, pendingReviewCount: 23, futureReviewCount: 6, futureReviewTime: nextHourReviewTime)
         populateDatabaseForStudyQueue(lessonCount: 0, pendingReviewCount: 0, futureReviewCount: 4, futureReviewTime: nextDayReviewTime)
@@ -385,10 +393,10 @@ class ResourceRepositoryReaderTests: XCTestCase {
             let kanjiStart = startDate + .oneDay * 7
             
             for _ in 0..<radicalCount {
-                resourceItems += createTestRadicalWithAssignment(level: level, srsStage: 5, availableAt: startDate, unlockedAt: startDate, isPassed: true)
+                resourceItems += createTestRadicalWithAssignment(level: level, srsStage: 5, unlockedAt: startDate, availableAt: startDate, isPassed: true)
             }
             for _ in 0..<kanjiCount {
-                resourceItems += createTestKanjiWithAssignment(level: level, srsStage: 5, availableAt: kanjiStart, unlockedAt: kanjiStart, isPassed: true)
+                resourceItems += createTestKanjiWithAssignment(level: level, srsStage: 5, unlockedAt: kanjiStart, availableAt: kanjiStart, isPassed: true)
             }
             
             let endDate = startDate + .oneDay * 14
@@ -404,11 +412,11 @@ class ResourceRepositoryReaderTests: XCTestCase {
         
         let firstRadicalAssignmentId = nextAssignmentID
         for _ in 0..<radicalCount {
-            resourceItems += createTestRadicalWithAssignment(level: testUserLevel, srsStage: 5, availableAt: startDate, unlockedAt: startDate, isPassed: true)
+            resourceItems += createTestRadicalWithAssignment(level: testUserLevel, srsStage: 5, unlockedAt: startDate, availableAt: startDate, isPassed: true)
         }
         let firstKanjiAssignmentId = nextAssignmentID
         for _ in 0..<kanjiCount {
-            resourceItems += createTestKanjiWithAssignment(level: testUserLevel, srsStage: 0, availableAt: kanjiStart, unlockedAt: kanjiStart, isPassed: false)
+            resourceItems += createTestKanjiWithAssignment(level: testUserLevel, srsStage: 0, unlockedAt: kanjiStart, availableAt: kanjiStart, isPassed: false)
         }
         let lastKanjiAssignmentId = nextAssignmentID
         
@@ -507,7 +515,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         }
     }
     
-    private func createTestAssignment(subjectType: SubjectType, srsStage: Int, availableAt: Date? = nil, unlockedAt: Date? = nil, isPassed: Bool? = nil, subjectID: Int? = nil) -> ResourceCollectionItem {
+    private func createTestAssignment(subjectType: SubjectType, srsStage: Int, unlockedAt: Date? = nil, availableAt: Date? = nil, resurrectedAt: Date? = nil, isPassed: Bool? = nil, subjectID: Int? = nil) -> ResourceCollectionItem {
         let item = ResourceCollectionItem(id: nextAssignmentID,
                                           type: .assignment,
                                           url: URL(string: "https://www.wanikani.com/api/v2/assignments/\(nextAssignmentID)")!,
@@ -522,9 +530,9 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                                            passedAt: nil,
                                                            burnedAt: nil,
                                                            availableAt: availableAt,
-                                                           resurrectedAt: nil,
+                                                           resurrectedAt: resurrectedAt,
                                                            isPassed: isPassed ?? (srsStage >= SRSStage.guru.numericLevelRange.lowerBound),
-                                                           isResurrected: false,
+                                                           isResurrected: resurrectedAt != nil,
                                                            isHidden: false))
         nextAssignmentID += 1
         if subjectID == nil { nextSubjectID += 1 }
@@ -553,9 +561,9 @@ class ResourceRepositoryReaderTests: XCTestCase {
     }
     
     private func createTestRadicalWithAssignment(level: Int, characters: String? = nil, meanings: [Meaning] = [],
-                                                 srsStage: Int, availableAt: Date? = nil, unlockedAt: Date? = nil, isPassed: Bool? = nil) -> [ResourceCollectionItem] {
+                                                 srsStage: Int, unlockedAt: Date? = nil, availableAt: Date? = nil, resurrectedAt: Date? = nil, isPassed: Bool? = nil) -> [ResourceCollectionItem] {
         let subject = createTestRadical(level: level, characters: characters, meanings: meanings)
-        let assignment = createTestAssignment(subjectType: .radical, srsStage: srsStage, availableAt: availableAt, unlockedAt: unlockedAt, isPassed: isPassed, subjectID: subject.id)
+        let assignment = createTestAssignment(subjectType: .radical, srsStage: srsStage, unlockedAt: unlockedAt, availableAt: availableAt, resurrectedAt: resurrectedAt, isPassed: isPassed, subjectID: subject.id)
         
         return [subject, assignment]
     }
@@ -587,9 +595,9 @@ class ResourceRepositoryReaderTests: XCTestCase {
     }
     
     private func createTestKanjiWithAssignment(level: Int, characters: String = "", meanings: [Meaning] = [], readings: [Reading] = [],
-                                               srsStage: Int, availableAt: Date? = nil, unlockedAt: Date? = nil, isPassed: Bool? = nil) -> [ResourceCollectionItem] {
+                                               srsStage: Int, unlockedAt: Date? = nil, availableAt: Date? = nil, resurrectedAt: Date? = nil, isPassed: Bool? = nil) -> [ResourceCollectionItem] {
         let subject = createTestKanji(level: level, characters: characters, meanings: meanings, readings: readings)
-        let assignment = createTestAssignment(subjectType: .kanji, srsStage: srsStage, availableAt: availableAt, unlockedAt: unlockedAt, isPassed: isPassed, subjectID: subject.id)
+        let assignment = createTestAssignment(subjectType: .kanji, srsStage: srsStage, unlockedAt: unlockedAt, availableAt: availableAt, resurrectedAt: resurrectedAt, isPassed: isPassed, subjectID: subject.id)
         
         return [subject, assignment]
     }
@@ -620,18 +628,18 @@ class ResourceRepositoryReaderTests: XCTestCase {
     }
     
     private func createTestVocabularyWithAssignment(level: Int, characters: String = "", meanings: [Meaning] = [], readings: [Reading] = [],
-                                                    srsStage: Int, availableAt: Date? = nil, unlockedAt: Date? = nil, isPassed: Bool? = nil) -> [ResourceCollectionItem] {
+                                                    srsStage: Int, unlockedAt: Date? = nil, availableAt: Date? = nil, resurrectedAt: Date? = nil, isPassed: Bool? = nil) -> [ResourceCollectionItem] {
         let subject = createTestVocabulary(level: level, characters: characters, meanings: meanings, readings: readings)
-        let assignment = createTestAssignment(subjectType: .vocabulary, srsStage: srsStage, availableAt: availableAt, unlockedAt: unlockedAt, isPassed: isPassed, subjectID: subject.id)
+        let assignment = createTestAssignment(subjectType: .vocabulary, srsStage: srsStage, unlockedAt: unlockedAt, availableAt: availableAt, resurrectedAt: resurrectedAt, isPassed: isPassed, subjectID: subject.id)
         
         return [subject, assignment]
     }
     
-    private func populateDatabaseForStudyQueue(lessonCount: Int, pendingReviewCount: Int, futureReviewCount: Int, futureReviewTime: Date? = nil) {
+    private func populateDatabaseForStudyQueue(lessonCount: Int = 0, pendingReviewCount: Int = 0, resurrectedReviewCount: Int = 0, futureReviewCount: Int = 0, futureReviewTime: Date? = nil) {
         var items = [ResourceCollectionItem]()
         items.reserveCapacity((lessonCount + pendingReviewCount + futureReviewCount) * 2)
         
-        let dateInPast = makeUTCDate(year: 2012, month: 02, day: 24, hour: 19, minute: 09, second: 18)
+        let dateInPast = makeUTCDate(year: 2012, month: 2, day: 24, hour: 19, minute: 9, second: 18)
         
         for _ in 0..<lessonCount {
             items += createTestRadicalWithAssignment(level: testUserLevel, srsStage: 0, unlockedAt: dateInPast)
@@ -641,6 +649,10 @@ class ResourceRepositoryReaderTests: XCTestCase {
             items += createTestRadicalWithAssignment(level: testUserLevel, srsStage: 3, availableAt: dateInPast)
         }
         
+        for _ in 0..<resurrectedReviewCount {
+            items += createTestRadicalWithAssignment(level: testUserLevel, srsStage: 3, availableAt: dateInPast, resurrectedAt: dateInPast)
+        }
+
         for _ in 0..<futureReviewCount {
             items += createTestRadicalWithAssignment(level: testUserLevel, srsStage: 3, availableAt: futureReviewTime!)
         }
