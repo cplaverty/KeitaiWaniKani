@@ -1,5 +1,5 @@
 //
-//  ResourceCollection+DatabaseWriteable.swift
+//  ResourceCollection+DatabaseWritable.swift
 //  WaniKaniKit
 //
 //  Copyright © 2017 Chris Laverty. All rights reserved.

@@ -7,7 +7,7 @@
 
 class View {
     let name: String
-    let type = "view"
+    let schemaType = "view"
     
     // We have to make these vars so that we can create the Mirror in the initialiser
     var columns: [Column]! = nil

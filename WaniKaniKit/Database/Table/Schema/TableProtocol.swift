@@ -7,7 +7,7 @@
 
 protocol TableProtocol: SQLConvertible, CustomStringConvertible {
     var name: String { get }
-    var type: String { get }
+    var schemaType: String { get }
 }
 
 protocol ColumnProtocol: SQLConvertible, CustomStringConvertible {

@@ -7,7 +7,7 @@
 
 import FMDB
 
-protocol DatabaseWriteable {
+protocol DatabaseWritable {
     func write(to database: FMDatabase, id: Int) throws
 }
 
@@ -15,9 +15,9 @@ protocol DatabaseReadable {
     init(from database: FMDatabase, id: Int) throws
 }
 
-typealias DatabaseCodable = DatabaseWriteable & DatabaseReadable
+typealias DatabaseCodable = DatabaseWritable & DatabaseReadable
 
-protocol BulkDatabaseWriteable {
+protocol BulkDatabaseWritable {
     associatedtype Element
     static func write(items: [Element], to database: FMDatabase, id: Int) throws
 }
@@ -27,7 +27,7 @@ protocol BulkDatabaseReadable {
     static func read(from database: FMDatabase, id: Int) throws -> [Element]
 }
 
-typealias BulkDatabaseCodable = BulkDatabaseWriteable & BulkDatabaseReadable
+typealias BulkDatabaseCodable = BulkDatabaseWritable & BulkDatabaseReadable
 
 enum DatabaseError: Error {
     case itemNotFound(id: Int)

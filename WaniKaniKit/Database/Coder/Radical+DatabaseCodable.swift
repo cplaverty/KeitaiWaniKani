@@ -38,10 +38,11 @@ extension Radical: DatabaseCodable {
     init(from database: FMDatabase, id: Int) throws {
         let characterImages = try CharacterImage.read(from: database, id: id)
         let meanings = try Meaning.read(from: database, id: id)
-        let subjectAmalgamation = try SubjectAmalgamation.read(from: database, id: id)
+        let auxiliaryMeaning = try AuxiliaryMeaning.read(from: database, id: id)
+        let subjectAmalgamation = try SubjectRelation.read(from: database, type: .amalgamation, id: id)
         
         let query = """
-        SELECT \(table.level), \(table.createdAt), \(table.slug), \(table.characters), \(table.documentURL), \(table.hiddenAt)
+        SELECT \(table.createdAt), \(table.level), \(table.slug), \(table.hiddenAt), \(table.documentURL), \(table.characters), \(table.meaningMnemonic), \(table.lessonPosition)
         FROM \(table)
         WHERE \(table.id) = ?
         """
@@ -53,34 +54,38 @@ extension Radical: DatabaseCodable {
             throw DatabaseError.itemNotFound(id: id)
         }
         
-        self.level = resultSet.long(forColumn: table.level.name)
         self.createdAt = resultSet.date(forColumn: table.createdAt.name)!
+        self.level = resultSet.long(forColumn: table.level.name)
         self.slug = resultSet.string(forColumn: table.slug.name)!
+        self.hiddenAt = resultSet.date(forColumn: table.hiddenAt.name)
+        self.documentURL = resultSet.url(forColumn: table.documentURL.name)!
         self.characters = resultSet.string(forColumn: table.characters.name)
         self.characterImages = characterImages
         self.meanings = meanings
+        self.auxiliaryMeanings = auxiliaryMeaning
         self.amalgamationSubjectIDs = subjectAmalgamation
-        self.documentURL = resultSet.url(forColumn: table.documentURL.name)!
-        self.hiddenAt = resultSet.date(forColumn: table.hiddenAt.name)
+        self.meaningMnemonic = resultSet.string(forColumn: table.meaningMnemonic.name)!
+        self.lessonPosition = resultSet.long(forColumn: table.lessonPosition.name)
     }
     
     func write(to database: FMDatabase, id: Int) throws {
         try CharacterImage.write(items: characterImages, to: database, id: id)
         try Meaning.write(items: meanings, to: database, id: id)
-        try SubjectAmalgamation.write(items: amalgamationSubjectIDs, to: database, id: id)
+        try AuxiliaryMeaning.write(items: auxiliaryMeanings, to: database, id: id)
+        try SubjectRelation.write(items: amalgamationSubjectIDs, to: database, type: .amalgamation, id: id)
         
         let query = """
         INSERT OR REPLACE INTO \(table)
-        (\(table.id.name), \(table.level.name), \(table.createdAt.name), \(table.slug.name), \(table.characters.name), \(table.documentURL.name), \(table.hiddenAt.name))
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        (\(table.id.name), \(table.createdAt.name), \(table.level.name), \(table.slug.name), \(table.hiddenAt.name), \(table.documentURL.name), \(table.characters.name), \(table.meaningMnemonic.name), \(table.lessonPosition.name))
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """
         
         let values: [Any] = [
-            id, level, createdAt, slug, characters as Any, documentURL.absoluteString, hiddenAt as Any
+            id, createdAt, level, slug, hiddenAt as Any, documentURL.absoluteString, characters as Any, meaningMnemonic, lessonPosition
         ]
         try database.executeUpdate(query, values: values)
         
-        try SubjectSearch.write(to: database, id: id, character: characters, level: level, meanings: meanings, readings: [], hidden: hiddenAt != nil)
+        try SubjectSearch.write(to: database, id: id, characters: characters, level: level, meanings: meanings, readings: [], hidden: hiddenAt != nil)
     }
 }
 
@@ -94,7 +99,7 @@ extension Radical.CharacterImage: BulkDatabaseCodable {
         let table = imagesTable
         
         let query = """
-        SELECT \(table.contentType), \(table.url)
+        SELECT \(table.url), \(table.contentType)
         FROM \(table)
         WHERE \(table.subjectID) = ?
         ORDER BY \(table.index)
@@ -106,9 +111,9 @@ extension Radical.CharacterImage: BulkDatabaseCodable {
         var index = 0
         var items = [Radical.CharacterImage]()
         while resultSet.next() {
-            items.append(Radical.CharacterImage(contentType: resultSet.string(forColumn: table.contentType.name)!,
-                                                metadata: allMetadata[index] ?? Metadata(color: nil, dimensions: nil, styleName: nil, inlineStyles: nil),
-                                                url: resultSet.url(forColumn: table.url.name)!))
+            items.append(Radical.CharacterImage(url: resultSet.url(forColumn: table.url.name)!,
+                                                metadata: allMetadata[index]!,
+                                                contentType: resultSet.string(forColumn: table.contentType.name)!))
             index += 1
         }
         
@@ -132,20 +137,21 @@ extension Radical.CharacterImage: BulkDatabaseCodable {
         let query = """
         SELECT \(table.index), \(table.key), \(table.value)
         FROM \(table)
-        WHERE \(table.subjectID) = ? AND \(table.index) = ?
+        WHERE \(table.subjectID) = ?
         ORDER BY \(table.index)
         """
         
-        let resultSet = try database.executeQuery(query, values: [id, index])
+        let resultSet = try database.executeQuery(query, values: [id])
         defer { resultSet.close() }
         
         var items = [Int: [String: String]]()
         while resultSet.next() {
-            let index = Int(resultSet.int(forColumn: table.index.name))
+            let index = resultSet.long(forColumn: table.index.name)
             let key = resultSet.string(forColumn: table.key.name)!
-            let value = resultSet.string(forColumn: table.key.name)!
+            let value = resultSet.string(forColumn: table.value.name)!
             var metadataForItem = items[index, default: [String: String]()]
             metadataForItem[key] = value
+            items[index] = metadataForItem
         }
         
         return items.mapValues({ dictionary in
@@ -165,13 +171,13 @@ extension Radical.CharacterImage: BulkDatabaseCodable {
         
         let query = """
         INSERT OR REPLACE INTO \(table)
-        (\(table.subjectID.name), \(table.index.name), \(table.contentType.name), \(table.url.name))
+        (\(table.subjectID.name), \(table.index.name), \(table.url.name), \(table.contentType.name))
         VALUES (?, ?, ?, ?)
         """
         
         for (index, item) in items.enumerated() {
             let values: [Any] = [
-                id, index, item.contentType, item.url.absoluteString
+                id, index, item.url.absoluteString, item.contentType
             ]
             try database.executeUpdate(query, values: values)
             

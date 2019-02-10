@@ -128,28 +128,38 @@ class SubjectTests: XCTestCase {
     }
     
     private func makeRadical() -> Radical {
-        return Radical(level: 1,
-                       createdAt: Date(),
+        return Radical(createdAt: Date(),
+                       level: 1,
                        slug: "slug",
+                       hiddenAt: nil,
+                       documentURL: URL(string: "http://localhost")!,
                        characters: nil,
                        characterImages: [],
                        meanings: [],
+                       auxiliaryMeanings: [],
                        amalgamationSubjectIDs: [1],
-                       documentURL: URL(string: "http://localhost")!,
-                       hiddenAt: nil)
+                       meaningMnemonic: "",
+                       lessonPosition: 0)
     }
     
     private func makeKanji() -> Kanji {
-        return Kanji(level: 1,
-                     createdAt: Date(),
+        return Kanji(createdAt: Date(),
+                     level: 1,
                      slug: "slug",
+                     hiddenAt: nil,
+                     documentURL: URL(string: "http://localhost")!,
                      characters: "char",
                      meanings: [],
+                     auxiliaryMeanings: [],
                      readings: [],
                      componentSubjectIDs: [1, 2],
                      amalgamationSubjectIDs: [],
-                     documentURL: URL(string: "http://localhost")!,
-                     hiddenAt: nil)
+                     visuallySimilarSubjectIDs: [],
+                     meaningMnemonic: "",
+                     meaningHint: "",
+                     readingMnemonic: "",
+                     readingHint: "",
+                     lessonPosition: 0)
     }
     
     private func makeAssignment(srsStage: SRSStage, availableAt: Date? = nil, passedAt: Date? = nil) -> Assignment {

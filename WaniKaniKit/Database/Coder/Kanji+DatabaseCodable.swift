@@ -37,12 +37,14 @@ extension Kanji: DatabaseCodable {
     
     init(from database: FMDatabase, id: Int) throws {
         let meanings = try Meaning.read(from: database, id: id)
+        let auxiliaryMeanings = try AuxiliaryMeaning.read(from: database, id: id)
         let readings = try Reading.read(from: database, id: id)
-        let subjectComponents = try SubjectComponent.read(from: database, id: id)
-        let subjectAmalgamation = try SubjectAmalgamation.read(from: database, id: id)
+        let subjectComponents = try SubjectRelation.read(from: database, type: .component, id: id)
+        let subjectAmalgamation = try SubjectRelation.read(from: database, type: .amalgamation, id: id)
+        let visuallySimilarSubjectIDs = try SubjectRelation.read(from: database, type: .visuallySimilar, id: id)
         
         let query = """
-        SELECT \(table.level), \(table.createdAt), \(table.slug), \(table.characters), \(table.documentURL), \(table.hiddenAt)
+        SELECT \(table.createdAt), \(table.level), \(table.slug), \(table.hiddenAt), \(table.documentURL), \(table.characters), \(table.meaningMnemonic), \(table.meaningHint), \(table.readingMnemonic), \(table.readingHint), \(table.lessonPosition)
         FROM \(table)
         WHERE \(table.id) = ?
         """
@@ -54,35 +56,44 @@ extension Kanji: DatabaseCodable {
             throw DatabaseError.itemNotFound(id: id)
         }
         
-        self.level = resultSet.long(forColumn: table.level.name)
         self.createdAt = resultSet.date(forColumn: table.createdAt.name)!
+        self.level = resultSet.long(forColumn: table.level.name)
         self.slug = resultSet.string(forColumn: table.slug.name)!
+        self.hiddenAt = resultSet.date(forColumn: table.hiddenAt.name)
+        self.documentURL = resultSet.url(forColumn: table.documentURL.name)!
         self.characters = resultSet.string(forColumn: table.characters.name)!
         self.meanings = meanings
+        self.auxiliaryMeanings = auxiliaryMeanings
         self.readings = readings
         self.componentSubjectIDs = subjectComponents
         self.amalgamationSubjectIDs = subjectAmalgamation
-        self.documentURL = resultSet.url(forColumn: table.documentURL.name)!
-        self.hiddenAt = resultSet.date(forColumn: table.hiddenAt.name)
+        self.visuallySimilarSubjectIDs = visuallySimilarSubjectIDs
+        self.meaningMnemonic = resultSet.string(forColumn: table.meaningMnemonic.name)!
+        self.meaningHint = resultSet.string(forColumn: table.meaningHint.name)
+        self.readingMnemonic = resultSet.string(forColumn: table.readingMnemonic.name)!
+        self.readingHint = resultSet.string(forColumn: table.readingHint.name)
+        self.lessonPosition = resultSet.long(forColumn: table.lessonPosition.name)
     }
     
     func write(to database: FMDatabase, id: Int) throws {
         try Meaning.write(items: meanings, to: database, id: id)
+        try AuxiliaryMeaning.write(items: auxiliaryMeanings, to: database, id: id)
         try Reading.write(items: readings, to: database, id: id)
-        try SubjectComponent.write(items: componentSubjectIDs, to: database, id: id)
-        try SubjectAmalgamation.write(items: amalgamationSubjectIDs, to: database, id: id)
+        try SubjectRelation.write(items: componentSubjectIDs, to: database, type: .component, id: id)
+        try SubjectRelation.write(items: amalgamationSubjectIDs, to: database, type: .amalgamation, id: id)
+        try SubjectRelation.write(items: visuallySimilarSubjectIDs, to: database, type: .visuallySimilar, id: id)
         
         let query = """
         INSERT OR REPLACE INTO \(table)
-        (\(table.id.name), \(table.level.name), \(table.createdAt.name), \(table.slug.name), \(table.characters.name), \(table.documentURL.name), \(table.hiddenAt.name))
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        (\(table.id.name), \(table.createdAt.name), \(table.level.name), \(table.slug.name), \(table.hiddenAt.name), \(table.documentURL.name), \(table.characters.name), \(table.meaningMnemonic.name), \(table.meaningHint.name), \(table.readingMnemonic.name), \(table.readingHint.name), \(table.lessonPosition.name))
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """
         
         let values: [Any] = [
-            id, level, createdAt, slug, characters, documentURL.absoluteString, hiddenAt as Any
+            id, createdAt, level, slug, hiddenAt as Any, documentURL.absoluteString, characters, meaningMnemonic, meaningHint as Any, readingMnemonic, readingHint as Any, lessonPosition
         ]
         try database.executeUpdate(query, values: values)
         
-        try SubjectSearch.write(to: database, id: id, character: characters, level: level, meanings: meanings, readings: readings, hidden: hiddenAt != nil)
+        try SubjectSearch.write(to: database, id: id, characters: characters, level: level, meanings: meanings, readings: readings, hidden: hiddenAt != nil)
     }
 }

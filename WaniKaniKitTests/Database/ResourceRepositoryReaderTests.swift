@@ -433,7 +433,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
             for assignmentId in firstKanjiAssignmentId..<lastKanjiAssignmentId {
                 do {
                     let dependencies = firstKanjiAssignmentId - firstRadicalAssignmentId > 1 ? [firstRadicalAssignmentId, firstRadicalAssignmentId + 1] : [firstRadicalAssignmentId]
-                    try SubjectComponent.write(items: dependencies, to: database, id: assignmentId)
+                    try SubjectRelation.write(items: dependencies, to: database, type: .component, id: assignmentId)
                 } catch {
                     rollback.pointee = true
                     XCTFail("Failed to create test items: \(error)")
@@ -485,7 +485,16 @@ class ResourceRepositoryReaderTests: XCTestCase {
     }
     
     private func createTestUser(currentVacationStartedAt: Date? = nil) {
-        let user = UserInformation(username: "Test", level: testUserLevel, maxLevelGrantedBySubscription: 60, startedAt: Date(), isSubscribed: true, profileURL: nil, currentVacationStartedAt: currentVacationStartedAt)
+        let user = UserInformation(id: "00000000-0000-0000-0000-000000000000",
+                                   username: "Test",
+                                   level: testUserLevel,
+                                   profileURL: URL(string: "https://localhost/Test")!,
+                                   startedAt: Date(),
+                                   subscription: UserInformation.Subscription(isActive: true,
+                                                                              type: "lifetime",
+                                                                              maxLevelGranted: 60,
+                                                                              periodEndsAt: nil),
+                                   currentVacationStartedAt: currentVacationStartedAt)
         
         databaseManager.databaseQueue!.inExclusiveTransaction { (database, rollback) in
             do {
@@ -527,15 +536,18 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                           type: .radical,
                                           url: URL(string: "https://www.wanikani.com/api/v2/subjects/\(nextSubjectID)")!,
                                           dataUpdatedAt: Date(timeIntervalSinceReferenceDate: 0),
-                                          data: Radical(level: level,
-                                                        createdAt: Date(timeIntervalSinceReferenceDate: 0),
+                                          data: Radical(createdAt: Date(timeIntervalSinceReferenceDate: 0),
+                                                        level: level,
                                                         slug: "slug",
+                                                        hiddenAt: nil,
+                                                        documentURL: URL(string: "https://www.wanikani.com/radicals/slug")!,
                                                         characters: characters,
                                                         characterImages: [],
                                                         meanings: meanings,
+                                                        auxiliaryMeanings: [],
                                                         amalgamationSubjectIDs: [],
-                                                        documentURL: URL(string: "https://www.wanikani.com/radicals/slug")!,
-                                                        hiddenAt: nil))
+                                                        meaningMnemonic: "",
+                                                        lessonPosition: 0))
         nextSubjectID += 1
         return item
     }
@@ -553,16 +565,23 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                           type: .kanji,
                                           url: URL(string: "https://www.wanikani.com/api/v2/subjects/\(nextSubjectID)")!,
                                           dataUpdatedAt: Date(timeIntervalSinceReferenceDate: 0),
-                                          data: Kanji(level: level,
-                                                      createdAt: Date(timeIntervalSinceReferenceDate: 0),
+                                          data: Kanji(createdAt: Date(timeIntervalSinceReferenceDate: 0),
+                                                      level: level,
                                                       slug: "slug",
+                                                      hiddenAt: nil,
+                                                      documentURL: URL(string: "https://www.wanikani.com/kanji/\(characters.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)")!,
                                                       characters: characters,
                                                       meanings: meanings,
+                                                      auxiliaryMeanings: [],
                                                       readings: readings,
                                                       componentSubjectIDs: [],
                                                       amalgamationSubjectIDs: [],
-                                                      documentURL: URL(string: "https://www.wanikani.com/kanji/\(characters.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)")!,
-                                                      hiddenAt: nil))
+                                                      visuallySimilarSubjectIDs: [],
+                                                      meaningMnemonic: "",
+                                                      meaningHint: "",
+                                                      readingMnemonic: "",
+                                                      readingHint: "",
+                                                      lessonPosition: 0))
         nextSubjectID += 1
         return item
     }
@@ -580,16 +599,22 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                           type: .vocabulary,
                                           url: URL(string: "https://www.wanikani.com/api/v2/subjects/\(nextSubjectID)")!,
                                           dataUpdatedAt: Date(timeIntervalSinceReferenceDate: 0),
-                                          data: Vocabulary(level: level,
-                                                           createdAt: Date(timeIntervalSinceReferenceDate: 0),
+                                          data: Vocabulary(createdAt: Date(timeIntervalSinceReferenceDate: 0),
+                                                           level: level,
                                                            slug: "slug",
+                                                           hiddenAt: nil,
+                                                           documentURL: URL(string: "https://www.wanikani.com/vocabulary/\(characters.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)")!,
                                                            characters: characters,
                                                            meanings: meanings,
+                                                           auxiliaryMeanings: [],
                                                            readings: readings,
                                                            partsOfSpeech: [],
                                                            componentSubjectIDs: [],
-                                                           documentURL: URL(string: "https://www.wanikani.com/vocabulary/\(characters.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)")!,
-                                                           hiddenAt: nil))
+                                                           meaningMnemonic: "",
+                                                           readingMnemonic: "",
+                                                           contextSentences: [],
+                                                           pronunciationAudios: [],
+                                                           lessonPosition: 0))
         nextSubjectID += 1
         return item
     }

@@ -30,7 +30,7 @@ struct SubjectSearch {
         return try ResourceCollectionItem.readSubjects(from: database, ids: subjectIDs)
     }
     
-    static func write(to database: FMDatabase, id: Int, character: String?, level: Int, meanings: [Meaning], readings: [Reading], hidden: Bool) throws {
+    static func write(to database: FMDatabase, id: Int, characters: String?, level: Int, meanings: [Meaning], readings: [Reading], hidden: Bool) throws {
         guard !hidden else {
             try database.executeUpdate("DELETE FROM \(table) WHERE \(table.subjectID) = ?", values: [id])
             return
@@ -47,7 +47,7 @@ struct SubjectSearch {
         let primaryReadings = readings.lazy.filter({ $0.isPrimary }).map({ $0.reading }).joined(separator: ",")
         let nonprimaryReadings = readings.lazy.filter({ !$0.isPrimary }).map({ $0.reading }).joined(separator: ",")
         let values: [Any] = [
-            id, character as Any, level, primaryMeanings, primaryReadings, nonprimaryMeanings, nonprimaryReadings
+            id, characters as Any, level, primaryMeanings, primaryReadings, nonprimaryMeanings, nonprimaryReadings
         ]
         try database.executeUpdate(query, values: values)
     }

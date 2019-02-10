@@ -6,26 +6,32 @@
 //
 
 public struct Radical: ResourceCollectionItemData, Equatable {
-    public let level: Int
     public let createdAt: Date
+    public let level: Int
     public let slug: String
+    public let hiddenAt: Date?
+    public let documentURL: URL
     public let characters: String?
     public let characterImages: [CharacterImage]
     public let meanings: [Meaning]
+    public let auxiliaryMeanings: [AuxiliaryMeaning]
     public let amalgamationSubjectIDs: [Int]
-    public let documentURL: URL
-    public let hiddenAt: Date?
+    public let meaningMnemonic: String
+    public let lessonPosition: Int
     
     private enum CodingKeys: String, CodingKey {
-        case level
         case createdAt = "created_at"
+        case level
         case slug
+        case hiddenAt = "hidden_at"
+        case documentURL = "document_url"
         case characters
         case characterImages = "character_images"
         case meanings
+        case auxiliaryMeanings = "auxiliary_meanings"
         case amalgamationSubjectIDs = "amalgamation_subject_ids"
-        case documentURL = "document_url"
-        case hiddenAt = "hidden_at"
+        case meaningMnemonic = "meaning_mnemonic"
+        case lessonPosition = "lesson_position"
     }
 }
 
@@ -53,14 +59,14 @@ extension Radical: Subject {
 
 extension Radical {
     public struct CharacterImage: SubjectImage, Codable, Equatable {
-        public let contentType: String
-        public let metadata: Metadata
         public let url: URL
-        
+        public let metadata: Metadata
+        public let contentType: String
+
         private enum CodingKeys: String, CodingKey {
-            case contentType = "content_type"
-            case metadata
             case url
+            case metadata
+            case contentType = "content_type"
         }
     }
 }

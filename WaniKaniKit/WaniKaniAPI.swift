@@ -70,6 +70,7 @@ private class Request {
 }
 
 public class WaniKaniAPI: WaniKaniAPIProtocol {
+    public let apiRevision = "20170710"
     public let apiKey: String
     
     public weak var networkActivityDelegate: NetworkActivityDelegate?
@@ -213,6 +214,8 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
             switch httpStatusCode {
             case 401:
                 throw WaniKaniAPIError.invalidAPIKey
+            case 429:
+                throw WaniKaniAPIError.tooManyRequests
             default:
                 throw WaniKaniAPIError.unknownError(httpStatusCode: httpStatusCode, message: errorMessage)
             }
@@ -224,6 +227,7 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
     private func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         var urlRequest = URLRequest(url: url)
         urlRequest.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        urlRequest.setValue(apiRevision, forHTTPHeaderField: "Wanikani-Revision")
         
         os_log("Initiating request for %@", type: .debug, url.absoluteString)
         

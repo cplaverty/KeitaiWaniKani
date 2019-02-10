@@ -25,8 +25,8 @@ public extension SubjectType {
 }
 
 public protocol SubjectImage {
-    var contentType: String { get }
     var url: URL { get }
+    var contentType: String { get }
 }
 
 public enum SubjectCharacterRepresentation {
@@ -35,14 +35,15 @@ public enum SubjectCharacterRepresentation {
 }
 
 public protocol Subject {
-    var level: Int { get }
     var subjectType: SubjectType { get }
+    var level: Int { get }
     var slug: String { get }
+    var documentURL: URL { get }
     var characterRepresentation: SubjectCharacterRepresentation { get }
     var meanings: [Meaning] { get }
     var readings: [Reading] { get }
     var componentSubjectIDs: [Int] { get }
-    var documentURL: URL { get }
+    var lessonPosition: Int { get }
 }
 
 extension Subject {

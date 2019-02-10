@@ -43,9 +43,9 @@ extension ResourceCollectionItem {
         """
         
         let resultSet = try database.executeQuery(query, values: [id])
+        defer { resultSet.close() }
         
         guard resultSet.next() else {
-            resultSet.close()
             throw DatabaseError.itemNotFound(id: id)
         }
         
@@ -60,7 +60,7 @@ extension ResourceCollectionItem {
     
     init(from database: FMDatabase, id: Int, type: ResourceCollectionItemObjectType) throws {
         let query = """
-        SELECT \(table.resourceType), \(table.url), \(table.dataUpdatedAt)
+        SELECT \(table.url), \(table.dataUpdatedAt)
         FROM \(table)
         WHERE \(table.id) = ?
         AND \(table.resourceType) = ?
@@ -73,7 +73,6 @@ extension ResourceCollectionItem {
             throw DatabaseError.itemNotFound(id: id)
         }
         
-        let type = resultSet.rawValue(ResourceCollectionItemObjectType.self, forColumn: table.resourceType.name)!
         self.id = id
         self.type = type
         self.url = resultSet.url(forColumn: table.url.name)!
@@ -102,12 +101,11 @@ extension ResourceCollectionItem {
     }
     
     func write(to database: FMDatabase) throws {
-        switch data {
-        case let writable as DatabaseWriteable:
-            try writable.write(to: database, id: id)
-        default:
-            fatalError("Unable to persist data (does not implement DatabaseWriteable)")
+        guard let writable = data as? DatabaseWritable else {
+            fatalError("Unable to persist data (does not implement DatabaseWritable)")
         }
+        
+        try writable.write(to: database, id: id)
         
         let query = """
         INSERT OR REPLACE INTO \(table)

@@ -8,6 +8,7 @@
 public enum WaniKaniAPIError: Error {
     case noContent
     case invalidAPIKey
+    case tooManyRequests
     case unknownError(httpStatusCode: Int, message: String)
     case unhandledStatusCode(httpStatusCode: Int, data: Data?)
 }

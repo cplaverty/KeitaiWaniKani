@@ -12,7 +12,7 @@ private let table = Tables.userInformation
 extension UserInformation {
     init?(from database: FMDatabase) throws {
         let query = """
-        SELECT \(table.username), \(table.level), \(table.maxLevelGrantedBySubscription), \(table.startedAt), \(table.isSubscribed), \(table.profileURL), \(table.currentVacationStartedAt)
+        SELECT \(table.id), \(table.username), \(table.level), \(table.profileURL), \(table.startedAt), \(table.isSubscriptionActive), \(table.subscriptionType), \(table.subscriptionMaxLevelGranted), \(table.subscriptionPeriodEndsAt), \(table.currentVacationStartedAt)
         FROM \(table)
         """
         
@@ -23,25 +23,27 @@ extension UserInformation {
             return nil
         }
         
+        self.id = resultSet.string(forColumn: table.id.name)!
         self.username = resultSet.string(forColumn: table.username.name)!
         self.level = resultSet.long(forColumn: table.level.name)
-        self.maxLevelGrantedBySubscription = resultSet.long(forColumn: table.maxLevelGrantedBySubscription.name)
+        self.profileURL = resultSet.url(forColumn: table.profileURL.name)!
         self.startedAt = resultSet.date(forColumn: table.startedAt.name)!
-        self.isSubscribed = resultSet.bool(forColumn: table.isSubscribed.name)
-        self.profileURL = resultSet.url(forColumn: table.profileURL.name)
+        self.subscription = UserInformation.Subscription(isActive: resultSet.bool(forColumn: table.isSubscriptionActive.name),
+                                                         type: resultSet.string(forColumn: table.subscriptionType.name)!,
+                                                         maxLevelGranted: resultSet.long(forColumn: table.subscriptionMaxLevelGranted.name),
+                                                         periodEndsAt: resultSet.date(forColumn: table.subscriptionPeriodEndsAt.name))
         self.currentVacationStartedAt = resultSet.date(forColumn: table.currentVacationStartedAt.name)
     }
     
     func write(to database: FMDatabase) throws {
         let query = """
         INSERT OR REPLACE INTO \(table)
-        (\(table.username.name), \(table.level.name), \(table.maxLevelGrantedBySubscription.name), \(table.startedAt.name), \(table.isSubscribed.name), \(table.profileURL.name), \(table.currentVacationStartedAt.name))
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        (\(table.id.name), \(table.username.name), \(table.level.name), \(table.profileURL.name), \(table.startedAt.name), \(table.isSubscriptionActive.name), \(table.subscriptionType.name), \(table.subscriptionMaxLevelGranted.name), \(table.subscriptionPeriodEndsAt.name), \(table.currentVacationStartedAt.name))
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """
         
         let values: [Any] = [
-            username, level, maxLevelGrantedBySubscription ,startedAt, isSubscribed,
-            profileURL?.absoluteString as Any, currentVacationStartedAt as Any
+            id, username, level, profileURL.absoluteString, startedAt, subscription.isActive, subscription.type, subscription.maxLevelGranted, subscription.periodEndsAt as Any, currentVacationStartedAt as Any
         ]
         try database.executeUpdate(query, values: values)
     }
