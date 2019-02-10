@@ -1237,7 +1237,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-AlliCrab/Pods-AlliCrab-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/sqlite3/sqlite3.framework",
 				"${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework",
@@ -1250,7 +1250,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AlliCrab/Pods-AlliCrab-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7273F5020A3095777066CC69 /* [CP] Embed Pods Frameworks */ = {
@@ -1259,7 +1259,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
 				"${BUILT_PRODUCTS_DIR}/sqlite3/sqlite3.framework",
 			);
@@ -1270,7 +1270,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		769AE31C0C3AA029C9AAF2A2 /* [CP] Check Pods Manifest.lock */ = {
