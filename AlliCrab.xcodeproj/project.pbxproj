@@ -119,7 +119,6 @@
 		836DE2B61F9B918D005E42EC /* SubjectSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DE2B51F9B918D005E42EC /* SubjectSearchTableViewController.swift */; };
 		836DE2B81F9B9D1C005E42EC /* SubjectSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836DE2B71F9B9D1C005E42EC /* SubjectSearchTableViewCell.swift */; };
 		8372F7C31F953FB4007881B6 /* WKButNoCigar.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 8372F7C21F953FB4007881B6 /* WKButNoCigar.user.js */; };
-		8373201D1F990601008647D5 /* Sequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF4411F501D5E00A7029D /* Sequence.swift */; };
 		837BBEDC1F309BB800C92141 /* DatabaseCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837BBEDB1F309BB800C92141 /* DatabaseCodable.swift */; };
 		837BBEDE1F31318300C92141 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837BBEDD1F31318300C92141 /* DatabaseManager.swift */; };
 		837CEC8D1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837CEC8C1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift */; };
@@ -470,7 +469,6 @@
 		83FEF27F1F3138E5003D7992 /* FMDatabaseAdditionsVariadic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDatabaseAdditionsVariadic.swift; sourceTree = "<group>"; };
 		83FEF43D1F4F952F00A7029D /* ReviewTimelineTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTimelineTableViewController.swift; sourceTree = "<group>"; };
 		83FEF43F1F4F969900A7029D /* ReviewTimelineEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTimelineEntryTableViewCell.swift; sourceTree = "<group>"; };
-		83FEF4411F501D5E00A7029D /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		83FEF4451F50518E00A7029D /* ReviewTimelineFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTimelineFilterTableViewController.swift; sourceTree = "<group>"; };
 		83FFD90A1F5387B80015988F /* ReviewTimelineHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTimelineHeaderFooterView.swift; sourceTree = "<group>"; };
 		906ABAC46CC97C2A8D68969D /* Pods-AlliCrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab.release.xcconfig"; sourceTree = "<group>"; };
@@ -869,7 +867,6 @@
 				8334ABEA1F48900F00BBFDC8 /* FMDatabaseQueue.swift */,
 				83B75F6F1F351E6500BECEB0 /* FMResultSet.swift */,
 				83F02ED51F8EA3C600A85014 /* Formatter.swift */,
-				83FEF4411F501D5E00A7029D /* Sequence.swift */,
 				83F1CBD81F463CF100CE9583 /* TimeInterval.swift */,
 				83CE51D01F4DEC1D0050242A /* UIColor.swift */,
 			);
@@ -1374,7 +1371,6 @@
 				83A783E81F9FEABC0000D28D /* LevelProgression.swift in Sources */,
 				83AF99FA1F364ED800E35A00 /* ResourceLastUpdateTable.swift in Sources */,
 				83FCAB351F9F52E600024398 /* TableProtocol.swift in Sources */,
-				8373201D1F990601008647D5 /* Sequence.swift in Sources */,
 				834E997E21BF1D6100BC6601 /* View.swift in Sources */,
 				83C2619E1F37888100278648 /* UserInformation+DatabaseCodable.swift in Sources */,
 				833D7A0E1F2CB12200A22F33 /* UserInformationTable.swift in Sources */,

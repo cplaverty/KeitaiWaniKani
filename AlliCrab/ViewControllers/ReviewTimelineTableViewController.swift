@@ -185,18 +185,18 @@ class ReviewTimelineTableViewController: UITableViewController {
         let reviewTimeline = try repositoryReader.reviewTimeline(forLevel: level, forSRSStage: srsStage)
         
         let calendar = Calendar.current
-        let pastDateMarker = Date(timeIntervalSince1970: 0)
-        var reviewTimelineByDate = reviewTimeline.group { counts -> Date in
+        let pastDateMarker = Date.distantPast
+        var reviewTimelineByDate = Dictionary(grouping: reviewTimeline) { counts -> Date in
             let date = counts.dateAvailable
             return date.timeIntervalSinceNow <= 0 ? pastDateMarker : calendar.startOfDay(for: date)
         }
         
         if let pastReviewCounts = reviewTimelineByDate[pastDateMarker] {
-            let aggregatedItemCounts = pastReviewCounts.lazy.map { $0.itemCounts }.reduce(.zero, +)
+            let aggregatedItemCounts = pastReviewCounts.lazy.map({ $0.itemCounts }).reduce(.zero, +)
             reviewTimelineByDate[pastDateMarker] = [SRSReviewCounts(dateAvailable: pastDateMarker, itemCounts: aggregatedItemCounts)]
         }
         
-        self.reviewTimelineByDate = reviewTimelineByDate.sorted { $0.key < $1.key }
+        self.reviewTimelineByDate = reviewTimelineByDate.sorted(by: { $0.key < $1.key })
     }
     
 }

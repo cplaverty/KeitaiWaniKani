@@ -49,7 +49,7 @@ class ReviewTimelineEntryTableViewCell: UITableViewCell {
     }
     
     private func formatTime(_ date: Date) -> String {
-        if date.timeIntervalSince1970 == 0 {
+        if date.timeIntervalSinceReferenceDate <= 0 {
             return "Now"
         } else {
             return DateFormatter.localizedString(from: date, dateStyle: .none, timeStyle: .short)

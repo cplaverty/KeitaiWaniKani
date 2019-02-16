@@ -65,7 +65,7 @@ class ReviewTimelineHeaderFooterView: UITableViewHeaderFooterView {
     }
     
     func updateHeader(date: Date, totalForDay: Int) {
-        if date.timeIntervalSince1970 == 0 {
+        if date.timeIntervalSinceReferenceDate <= 0 {
             titleLabel.text = type(of: self).reviewDateFormatter.string(from: Date())
         } else {
             titleLabel.text = type(of: self).reviewDateFormatter.string(from: date)
