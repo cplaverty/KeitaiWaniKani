@@ -226,14 +226,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Login
     
     func presentLoginViewController(animated: Bool) {
-        let storyboard = rootNavigationController.storyboard!
+        let storyboard = Storyboard.login.instance
         let vc = storyboard.instantiateViewController(withIdentifier: "Login") as! LoginRootViewController
         
         rootNavigationController.setViewControllers([vc], animated: animated)
     }
     
     func presentDashboardViewController(animated: Bool) {
-        let storyboard = rootNavigationController.storyboard!
+        let storyboard = Storyboard.main.instance
         let vc = storyboard.instantiateViewController(withIdentifier: "Main") as! DashboardTableViewController
         initialiseDashboardViewController(vc)
         

@@ -53,6 +53,8 @@
 		8334ABF01F4899E000BBFDC8 /* DateComponentsFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83150B371F3F543500B61F3A /* DateComponentsFormatterTests.swift */; };
 		833D7A0C1F2C9F8800A22F33 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833D7A0B1F2C9F8800A22F33 /* Table.swift */; };
 		833D7A0E1F2CB12200A22F33 /* UserInformationTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833D7A0D1F2CB12200A22F33 /* UserInformationTable.swift */; };
+		833E0518221B4A2800E99A53 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833E0517221B4A2800E99A53 /* Storyboard.swift */; };
+		833E0519221B4E4000E99A53 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833E051B221B4E4000E99A53 /* Login.storyboard */; };
 		834230AA1F3E0A51000E83FE /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834230A91F3E0A51000E83FE /* NotificationCenter.framework */; };
 		834230AD1F3E0A51000E83FE /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834230AC1F3E0A51000E83FE /* TodayViewController.swift */; };
 		834230B01F3E0A51000E83FE /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 834230AE1F3E0A51000E83FE /* MainInterface.storyboard */; };
@@ -322,6 +324,8 @@
 		8334ABEA1F48900F00BBFDC8 /* FMDatabaseQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDatabaseQueue.swift; sourceTree = "<group>"; };
 		833D7A0B1F2C9F8800A22F33 /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
 		833D7A0D1F2CB12200A22F33 /* UserInformationTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationTable.swift; sourceTree = "<group>"; };
+		833E0517221B4A2800E99A53 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
+		833E051A221B4E4000E99A53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		834230A81F3E0A51000E83FE /* WaniKaniStudyQueueWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WaniKaniStudyQueueWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		834230A91F3E0A51000E83FE /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		834230AC1F3E0A51000E83FE /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -759,8 +763,10 @@
 				83FE8FA91F40E36B00E023B3 /* ApplicationSettings.swift */,
 				83632C8F1F4B8A520059E29C /* NetworkIndicatorController.swift */,
 				8325D7881F49E225008A6DF2 /* NotificationManager.swift */,
+				833E0517221B4A2800E99A53 /* Storyboard.swift */,
 				8364CB671F27F28D002DBE6B /* Assets.xcassets */,
 				8364CB691F27F28D002DBE6B /* LaunchScreen.storyboard */,
+				833E051B221B4E4000E99A53 /* Login.storyboard */,
 				8364CB641F27F28D002DBE6B /* Main.storyboard */,
 				8303F82E1F54678300E016E9 /* ReorderSettings.storyboard */,
 			);
@@ -1189,6 +1195,7 @@
 				8303F8301F54678400E016E9 /* ReorderSettings.storyboard in Resources */,
 				832C18581F4501ED001FFACD /* showdown.min.js in Resources */,
 				832C18701F4502A4001FFACD /* n_chifont+.ttf in Resources */,
+				833E0519221B4E4000E99A53 /* Login.storyboard in Resources */,
 				8364CB681F27F28D002DBE6B /* Assets.xcassets in Resources */,
 				838973C4221E078900EED665 /* SubjectCharacterView.xib in Resources */,
 				832C18541F4501ED001FFACD /* jquery.qtip.min.js in Resources */,
@@ -1487,6 +1494,7 @@
 				83F3927B1F4B2D7300E8DAE7 /* UIViewController.swift in Sources */,
 				832708511F4C595C00AB1525 /* WebViewController.swift in Sources */,
 				83CE51D51F4EE2F70050242A /* NumericDetailTableViewCell.swift in Sources */,
+				833E0518221B4A2800E99A53 /* Storyboard.swift in Sources */,
 				832C185A1F4501ED001FFACD /* UserScriptSupport.swift in Sources */,
 				83FEF43E1F4F952F00A7029D /* ReviewTimelineTableViewController.swift in Sources */,
 				83C071FD1F4A4E630046A3FD /* LoginRootViewController.swift in Sources */,
@@ -1561,6 +1569,14 @@
 				8303F82F1F54678300E016E9 /* Base */,
 			);
 			name = ReorderSettings.storyboard;
+			sourceTree = "<group>";
+		};
+		833E051B221B4E4000E99A53 /* Login.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				833E051A221B4E4000E99A53 /* Base */,
+			);
+			name = Login.storyboard;
 			sourceTree = "<group>";
 		};
 		834230AE1F3E0A51000E83FE /* MainInterface.storyboard */ = {

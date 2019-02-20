@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login Root View Controller-->
+        <scene sceneID="54x-PN-rxj">
+            <objects>
+                <viewController storyboardIdentifier="Login" hidesBottomBarWhenPushed="YES" id="XBa-nN-Rj0" customClass="LoginRootViewController" customModule="AlliCrab" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SsJ-0b-oRJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Art04" translatesAutoresizingMaskIntoConstraints="NO" id="Nnm-Hx-YzL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bDt-gq-kuZ">
+                                <rect key="frame" x="246.5" y="84.5" width="72" height="189.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="携" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFJ-SD-y8S">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="48"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="帯" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4e-2d-JdR">
+                                        <rect key="frame" x="0.0" y="48" width="48" height="48"/>
+                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="48"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="鰐" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAT-PB-Y89">
+                                        <rect key="frame" x="0.0" y="96" width="48" height="48"/>
+                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="48"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="蟹" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHB-Kb-QAt">
+                                        <rect key="frame" x="0.0" y="144" width="48" height="48"/>
+                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="48"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="け" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="DmT-nT-X7q">
+                                        <rect key="frame" x="48" y="0.0" width="24" height="24"/>
+                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="24"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="い" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="3dt-rW-T6z">
+                                        <rect key="frame" x="48" y="24" width="24" height="24"/>
+                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="24"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="た" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KPy-ee-HUu">
+                                        <rect key="frame" x="48" y="48" width="24" height="24"/>
+                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="24"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="い" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oBG-IQ-m4u">
+                                        <rect key="frame" x="48.5" y="72" width="24" height="24"/>
+                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="24"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="わ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XQs-wp-K5H">
+                                        <rect key="frame" x="48" y="96" width="24" height="24"/>
+                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="24"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="に" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jVi-JH-PNE">
+                                        <rect key="frame" x="48" y="120" width="24" height="24"/>
+                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="24"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="か" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="GvA-Pz-G0K">
+                                        <rect key="frame" x="48" y="144" width="24" height="24"/>
+                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="24"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="に" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9pM-cD-IBe">
+                                        <rect key="frame" x="48.5" y="168" width="24" height="24"/>
+                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="24"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="jAT-PB-Y89" firstAttribute="firstBaseline" secondItem="v4e-2d-JdR" secondAttribute="baseline" constant="48" symbolType="layoutAnchor" id="0j0-oE-JJm"/>
+                                    <constraint firstItem="v4e-2d-JdR" firstAttribute="firstBaseline" secondItem="DFJ-SD-y8S" secondAttribute="baseline" constant="48" symbolType="layoutAnchor" id="1qW-VT-o3T"/>
+                                    <constraint firstItem="DmT-nT-X7q" firstAttribute="leading" secondItem="DFJ-SD-y8S" secondAttribute="trailing" id="65z-Ks-t8g"/>
+                                    <constraint firstItem="9pM-cD-IBe" firstAttribute="firstBaseline" relation="greaterThanOrEqual" secondItem="GvA-Pz-G0K" secondAttribute="baseline" constant="24" symbolType="layoutAnchor" id="6Uf-ps-cUy"/>
+                                    <constraint firstItem="3dt-rW-T6z" firstAttribute="firstBaseline" relation="greaterThanOrEqual" secondItem="DmT-nT-X7q" secondAttribute="baseline" constant="24" symbolType="layoutAnchor" id="6zJ-VD-NMD"/>
+                                    <constraint firstAttribute="trailing" secondItem="3dt-rW-T6z" secondAttribute="trailing" id="79U-6Q-ePO"/>
+                                    <constraint firstItem="KPy-ee-HUu" firstAttribute="leading" secondItem="v4e-2d-JdR" secondAttribute="trailing" id="EJI-jZ-Cch"/>
+                                    <constraint firstItem="3dt-rW-T6z" firstAttribute="leading" secondItem="DFJ-SD-y8S" secondAttribute="trailing" id="Ftv-8M-KGU"/>
+                                    <constraint firstItem="9pM-cD-IBe" firstAttribute="leading" secondItem="dHB-Kb-QAt" secondAttribute="trailing" constant="0.5" id="GnI-Nh-UNy"/>
+                                    <constraint firstItem="dHB-Kb-QAt" firstAttribute="firstBaseline" secondItem="jAT-PB-Y89" secondAttribute="baseline" constant="48" symbolType="layoutAnchor" id="H5s-sp-7Jm"/>
+                                    <constraint firstAttribute="trailing" secondItem="XQs-wp-K5H" secondAttribute="trailing" id="HZk-P4-giO"/>
+                                    <constraint firstAttribute="trailing" secondItem="DmT-nT-X7q" secondAttribute="trailing" id="K7z-u8-oPw"/>
+                                    <constraint firstItem="dHB-Kb-QAt" firstAttribute="leading" secondItem="bDt-gq-kuZ" secondAttribute="leading" id="MWO-qa-UEz"/>
+                                    <constraint firstItem="jVi-JH-PNE" firstAttribute="leading" secondItem="jAT-PB-Y89" secondAttribute="trailing" id="NGQ-YR-Ch2"/>
+                                    <constraint firstAttribute="trailing" secondItem="KPy-ee-HUu" secondAttribute="trailing" id="Nmy-T6-8OO"/>
+                                    <constraint firstAttribute="trailing" secondItem="jVi-JH-PNE" secondAttribute="trailing" id="PQy-yb-oX0"/>
+                                    <constraint firstItem="XQs-wp-K5H" firstAttribute="leading" secondItem="jAT-PB-Y89" secondAttribute="trailing" id="SDf-Fl-Xfm"/>
+                                    <constraint firstAttribute="bottom" secondItem="dHB-Kb-QAt" secondAttribute="bottom" constant="-2.5" id="Usn-Fk-RzS"/>
+                                    <constraint firstItem="oBG-IQ-m4u" firstAttribute="firstBaseline" relation="greaterThanOrEqual" secondItem="KPy-ee-HUu" secondAttribute="baseline" constant="24" symbolType="layoutAnchor" id="W13-RF-VaL"/>
+                                    <constraint firstAttribute="trailing" secondItem="oBG-IQ-m4u" secondAttribute="trailing" constant="-0.5" id="Wvn-mr-gsW"/>
+                                    <constraint firstItem="XQs-wp-K5H" firstAttribute="top" secondItem="jAT-PB-Y89" secondAttribute="top" id="Xsj-Pi-N66"/>
+                                    <constraint firstItem="3dt-rW-T6z" firstAttribute="bottom" secondItem="DFJ-SD-y8S" secondAttribute="bottom" id="YoL-X5-DAs"/>
+                                    <constraint firstItem="9pM-cD-IBe" firstAttribute="bottom" secondItem="dHB-Kb-QAt" secondAttribute="bottom" id="fKf-5Q-TFD"/>
+                                    <constraint firstItem="KPy-ee-HUu" firstAttribute="top" secondItem="v4e-2d-JdR" secondAttribute="top" id="fRP-3N-KA1"/>
+                                    <constraint firstItem="oBG-IQ-m4u" firstAttribute="leading" secondItem="v4e-2d-JdR" secondAttribute="trailing" constant="0.5" id="ffu-Ck-uKy"/>
+                                    <constraint firstItem="jVi-JH-PNE" firstAttribute="firstBaseline" relation="greaterThanOrEqual" secondItem="XQs-wp-K5H" secondAttribute="baseline" constant="24" symbolType="layoutAnchor" id="hDK-ZY-UAw"/>
+                                    <constraint firstItem="DFJ-SD-y8S" firstAttribute="leading" secondItem="bDt-gq-kuZ" secondAttribute="leading" id="ho4-Kn-Ic6"/>
+                                    <constraint firstItem="jVi-JH-PNE" firstAttribute="bottom" secondItem="jAT-PB-Y89" secondAttribute="bottom" id="jAE-1R-jUY"/>
+                                    <constraint firstItem="oBG-IQ-m4u" firstAttribute="bottom" secondItem="v4e-2d-JdR" secondAttribute="bottom" id="klq-M8-ZgS"/>
+                                    <constraint firstItem="GvA-Pz-G0K" firstAttribute="leading" secondItem="dHB-Kb-QAt" secondAttribute="trailing" id="nlN-Ua-x8v"/>
+                                    <constraint firstItem="jAT-PB-Y89" firstAttribute="leading" secondItem="bDt-gq-kuZ" secondAttribute="leading" id="o6Y-cS-ECA"/>
+                                    <constraint firstAttribute="trailing" secondItem="GvA-Pz-G0K" secondAttribute="trailing" id="qCN-oI-gwT"/>
+                                    <constraint firstItem="GvA-Pz-G0K" firstAttribute="top" secondItem="dHB-Kb-QAt" secondAttribute="top" id="rb8-dw-sXU"/>
+                                    <constraint firstItem="DFJ-SD-y8S" firstAttribute="top" secondItem="bDt-gq-kuZ" secondAttribute="top" id="wdX-8t-q1Y"/>
+                                    <constraint firstItem="DmT-nT-X7q" firstAttribute="top" secondItem="DFJ-SD-y8S" secondAttribute="top" id="xBM-6Y-xdm"/>
+                                    <constraint firstItem="v4e-2d-JdR" firstAttribute="leading" secondItem="bDt-gq-kuZ" secondAttribute="leading" id="xGB-30-xqS"/>
+                                    <constraint firstAttribute="trailing" secondItem="9pM-cD-IBe" secondAttribute="trailing" constant="-0.5" id="xKi-3m-NHn"/>
+                                </constraints>
+                            </view>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3j-VA-qVk">
+                                <rect key="frame" x="0.0" y="398.5" width="375" height="268.5"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bS1-4z-kDz">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="268.5"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sf-2j-0EM">
+                                            <rect key="frame" x="20" y="20" width="335" height="152.5"/>
+                                            <string key="text">Welcome to this companion app for the WaniKani web site.  Your WaniKani API version 2 key is required in order for this app to function.  This can either be retrieved for you by logging in to the WaniKani web site, or you can manually enter it.</string>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="B6D-TO-lni">
+                                            <rect key="frame" x="8" y="180.5" width="359" height="80"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="L7K-PC-5IT">
+                                                    <rect key="frame" x="109" y="0.0" width="141" height="33"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="WaniKaniLoginLink"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <state key="normal" title="Log in to WaniKani"/>
+                                                    <connections>
+                                                        <action selector="loginButtonTapped" destination="XBa-nN-Rj0" eventType="touchUpInside" id="NMA-j1-rKr"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="2U9-D2-Fff">
+                                                    <rect key="frame" x="73.5" y="47" width="212" height="33"/>
+                                                    <accessibility key="accessibilityConfiguration" identifier="ManualAPIKeyEntry"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <state key="normal" title="I know my API version 2 key"/>
+                                                    <connections>
+                                                        <segue destination="bpG-Gj-LvF" kind="show" identifier="" id="STq-fY-U6h"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <variation key="widthClass=compact" axis="vertical"/>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="B6D-TO-lni" secondAttribute="trailing" id="Pdf-7Z-Dqu"/>
+                                        <constraint firstItem="4sf-2j-0EM" firstAttribute="leading" secondItem="bS1-4z-kDz" secondAttribute="leading" constant="20" symbolic="YES" id="ZUg-Jn-cVE"/>
+                                        <constraint firstItem="B6D-TO-lni" firstAttribute="top" secondItem="4sf-2j-0EM" secondAttribute="bottom" constant="8" symbolic="YES" id="cvQ-Up-ojW"/>
+                                        <constraint firstItem="B6D-TO-lni" firstAttribute="bottom" secondItem="bS1-4z-kDz" secondAttribute="bottomMargin" id="exG-HG-766"/>
+                                        <constraint firstAttribute="trailing" secondItem="4sf-2j-0EM" secondAttribute="trailing" constant="20" symbolic="YES" id="fnK-vO-IJ1"/>
+                                        <constraint firstItem="B6D-TO-lni" firstAttribute="leading" secondItem="bS1-4z-kDz" secondAttribute="leadingMargin" id="oaG-i1-3ag"/>
+                                        <constraint firstItem="4sf-2j-0EM" firstAttribute="top" secondItem="bS1-4z-kDz" secondAttribute="top" constant="20" symbolic="YES" id="qq9-oa-nlC"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="J3j-VA-qVk" firstAttribute="leading" secondItem="SsJ-0b-oRJ" secondAttribute="leading" id="7jA-hw-fw7"/>
+                            <constraint firstItem="J3j-VA-qVk" firstAttribute="trailing" secondItem="SsJ-0b-oRJ" secondAttribute="trailing" id="AgU-97-wGM"/>
+                            <constraint firstItem="bDt-gq-kuZ" firstAttribute="centerX" secondItem="7oS-6g-tHm" secondAttribute="centerX" multiplier="3/2" constant="1" id="E4N-BG-hit"/>
+                            <constraint firstItem="J3j-VA-qVk" firstAttribute="bottom" secondItem="SsJ-0b-oRJ" secondAttribute="bottom" id="GoZ-oK-6Y7"/>
+                            <constraint firstItem="bDt-gq-kuZ" firstAttribute="firstBaseline" secondItem="SsJ-0b-oRJ" secondAttribute="centerY" multiplier="1/4" constant="1" id="lVx-i4-6KO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7oS-6g-tHm"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="W74-Qd-Tmi"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="136-Fv-eDD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="788" y="-60"/>
+        </scene>
+        <!--Enter API Key-->
+        <scene sceneID="nd4-Ld-VmJ">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="bpG-Gj-LvF" customClass="ManualAPIKeyEntryViewController" customModule="AlliCrab" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Yf9-aS-lc0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZUe-hC-VDd">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNz-tB-2PQ">
+                                        <rect key="frame" x="20" y="20" width="335" height="130.5"/>
+                                        <string key="text">Entering your API version 2 key will permit a basic level of functionality in the app.  However, please note that doing lessons or reviews within the app will open a web browser to the WaniKani site, where you will be prompted to log in.</string>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="AVn-xv-9lq">
+                                        <rect key="frame" x="20" y="170.5" width="335" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="EnterAPIKey"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="gNz-tB-2PQ" secondAttribute="trailing" constant="20" id="1po-5B-3Z4"/>
+                                    <constraint firstItem="gNz-tB-2PQ" firstAttribute="leading" secondItem="ZUe-hC-VDd" secondAttribute="leading" constant="20" id="47D-Aq-bv2"/>
+                                    <constraint firstAttribute="bottom" secondItem="AVn-xv-9lq" secondAttribute="bottom" constant="20" symbolic="YES" id="6af-X7-8gm"/>
+                                    <constraint firstItem="gNz-tB-2PQ" firstAttribute="top" secondItem="ZUe-hC-VDd" secondAttribute="top" constant="20" symbolic="YES" id="GUb-F2-uGH"/>
+                                    <constraint firstItem="AVn-xv-9lq" firstAttribute="leading" secondItem="ZUe-hC-VDd" secondAttribute="leading" constant="20" id="Qfc-PT-4f1"/>
+                                    <constraint firstAttribute="trailing" secondItem="AVn-xv-9lq" secondAttribute="trailing" constant="20" id="fAs-y2-H6e"/>
+                                    <constraint firstItem="AVn-xv-9lq" firstAttribute="top" secondItem="gNz-tB-2PQ" secondAttribute="bottom" constant="20" id="xRH-ig-0wg"/>
+                                </constraints>
+                            </scrollView>
+                            <visualEffectView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T8O-jJ-a6u">
+                                <rect key="frame" x="102" y="280.5" width="171" height="106"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="vyJ-Pf-GkD">
+                                    <rect key="frame" x="0.0" y="0.0" width="171" height="106"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking API Key..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Wj-BT-uDh">
+                                            <rect key="frame" x="8" y="20" width="155" height="21"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="CuQ-5G-P8S">
+                                            <rect key="frame" x="67" y="49" width="37" height="37"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="CuQ-5G-P8S" secondAttribute="bottom" constant="20" symbolic="YES" id="0sr-4q-XQN"/>
+                                        <constraint firstItem="8Wj-BT-uDh" firstAttribute="top" secondItem="vyJ-Pf-GkD" secondAttribute="top" constant="20" symbolic="YES" id="FCY-Wc-7mQ"/>
+                                        <constraint firstItem="CuQ-5G-P8S" firstAttribute="centerX" secondItem="vyJ-Pf-GkD" secondAttribute="centerX" id="JLj-af-ZHH"/>
+                                        <constraint firstItem="CuQ-5G-P8S" firstAttribute="top" secondItem="8Wj-BT-uDh" secondAttribute="bottom" constant="8" symbolic="YES" id="pUq-rU-0ja"/>
+                                        <constraint firstItem="8Wj-BT-uDh" firstAttribute="centerX" secondItem="vyJ-Pf-GkD" secondAttribute="centerX" id="qfU-ac-iSj"/>
+                                        <constraint firstItem="8Wj-BT-uDh" firstAttribute="leading" secondItem="vyJ-Pf-GkD" secondAttribute="leadingMargin" id="tx1-Kj-3dH"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="dark"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZUe-hC-VDd" firstAttribute="top" secondItem="byM-Ce-NTV" secondAttribute="top" id="3aC-6Q-YiY"/>
+                            <constraint firstItem="byM-Ce-NTV" firstAttribute="bottom" secondItem="ZUe-hC-VDd" secondAttribute="bottom" id="4Ad-GM-BSs"/>
+                            <constraint firstItem="byM-Ce-NTV" firstAttribute="trailing" secondItem="gNz-tB-2PQ" secondAttribute="trailing" constant="20" id="IOk-A1-hXw"/>
+                            <constraint firstItem="ZUe-hC-VDd" firstAttribute="trailing" secondItem="byM-Ce-NTV" secondAttribute="trailing" id="IoR-fS-CmA"/>
+                            <constraint firstItem="T8O-jJ-a6u" firstAttribute="centerX" secondItem="Yf9-aS-lc0" secondAttribute="centerX" id="XJR-pZ-WQ6"/>
+                            <constraint firstItem="AVn-xv-9lq" firstAttribute="leading" secondItem="byM-Ce-NTV" secondAttribute="leading" constant="20" id="aZC-KP-fGA"/>
+                            <constraint firstItem="byM-Ce-NTV" firstAttribute="trailing" secondItem="AVn-xv-9lq" secondAttribute="trailing" constant="20" id="d11-5c-0uA"/>
+                            <constraint firstItem="T8O-jJ-a6u" firstAttribute="centerY" secondItem="Yf9-aS-lc0" secondAttribute="centerY" id="kWt-NE-4LG"/>
+                            <constraint firstItem="gNz-tB-2PQ" firstAttribute="leading" secondItem="byM-Ce-NTV" secondAttribute="leading" constant="20" id="lvA-bq-naT"/>
+                            <constraint firstItem="ZUe-hC-VDd" firstAttribute="leading" secondItem="byM-Ce-NTV" secondAttribute="leading" id="yO2-sw-JLX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="byM-Ce-NTV"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Enter API Key" largeTitleDisplayMode="always" id="iOp-JE-BDU">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" style="done" systemItem="done" id="PI0-M0-1pf">
+                            <connections>
+                                <action selector="done:" destination="bpG-Gj-LvF" id="1QE-3j-vfP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="CuQ-5G-P8S" id="Ml8-EZ-0CL"/>
+                        <outlet property="activityStatusView" destination="T8O-jJ-a6u" id="jid-25-Bid"/>
+                        <outlet property="apiKeyTextField" destination="AVn-xv-9lq" id="ajk-uI-xtF"/>
+                        <outlet property="doneBarButton" destination="PI0-M0-1pf" id="0Nc-Rk-ey7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DaI-SU-bLh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1574" y="-61"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Art04" width="860.760009765625" height="537.84002685546875"/>
+    </resources>
+    <color key="tintColor" name="GlobalTint"/>
+</document>
