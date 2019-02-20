@@ -40,14 +40,6 @@ extension Radical: Subject {
         return .radical
     }
     
-    public var characterRepresentation: SubjectCharacterRepresentation {
-        if let characters = characters {
-            return .unicode(characters)
-        }
-        
-        return .image(characterImages)
-    }
-    
     public var readings: [Reading] {
         return []
     }
@@ -62,7 +54,7 @@ extension Radical {
         public let url: URL
         public let metadata: Metadata
         public let contentType: String
-
+        
         private enum CodingKeys: String, CodingKey {
             case url
             case metadata

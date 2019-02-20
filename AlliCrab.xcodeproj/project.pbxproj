@@ -123,6 +123,8 @@
 		837BBEDE1F31318300C92141 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837BBEDD1F31318300C92141 /* DatabaseManager.swift */; };
 		837CEC8D1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837CEC8C1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift */; };
 		837CEC8F1F4CEF95008EBE08 /* WaniKaniURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837CEC8E1F4CEF95008EBE08 /* WaniKaniURL.swift */; };
+		838973C4221E078900EED665 /* SubjectCharacterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838973C3221E078900EED665 /* SubjectCharacterView.xib */; };
+		838973C6221E07A300EED665 /* XibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838973C5221E07A300EED665 /* XibLoadable.swift */; };
 		838BFB151F54139A0047CDB9 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BFB141F54139A0047CDB9 /* SnapshotUITests.swift */; };
 		838BFB171F5417290047CDB9 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BFB161F5417290047CDB9 /* SnapshotHelper.swift */; };
 		839033D2220DCFB1009D4E54 /* AuxiliaryMeanings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839033D1220DCFB1009D4E54 /* AuxiliaryMeanings.swift */; };
@@ -369,6 +371,8 @@
 		837BBEDD1F31318300C92141 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		837CEC8C1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaniKaniLoginWebViewController.swift; sourceTree = "<group>"; };
 		837CEC8E1F4CEF95008EBE08 /* WaniKaniURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaniKaniURL.swift; sourceTree = "<group>"; };
+		838973C3221E078900EED665 /* SubjectCharacterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubjectCharacterView.xib; sourceTree = "<group>"; };
+		838973C5221E07A300EED665 /* XibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XibLoadable.swift; sourceTree = "<group>"; };
 		838BFB141F54139A0047CDB9 /* SnapshotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotUITests.swift; sourceTree = "<group>"; };
 		838BFB161F5417290047CDB9 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		839033D1220DCFB1009D4E54 /* AuxiliaryMeanings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuxiliaryMeanings.swift; sourceTree = "<group>"; };
@@ -576,6 +580,7 @@
 				83CE51D81F4F021E0050242A /* ReviewTimeTableViewCell.swift */,
 				83CE51D21F4E1C5A0050242A /* SRSProgressTableViewCell.swift */,
 				83F02ED71F8EC3BD00A85014 /* SubjectCharacterView.swift */,
+				838973C3221E078900EED665 /* SubjectCharacterView.xib */,
 				8326F7E31F95660600CC3213 /* SubjectCollectionViewCell.swift */,
 				836DE2B71F9B9D1C005E42EC /* SubjectSearchTableViewCell.swift */,
 				83DC0EFA1F4DCB81006B6DD6 /* UIBottomBorderedView.swift */,
@@ -907,6 +912,7 @@
 			children = (
 				832C18731F4503D9001FFACD /* BundleResourceLoader.swift */,
 				83C681FF1F51C2CD00CC431C /* RadicalCharacterImageLoader.swift */,
+				838973C5221E07A300EED665 /* XibLoadable.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1184,6 +1190,7 @@
 				832C18581F4501ED001FFACD /* showdown.min.js in Resources */,
 				832C18701F4502A4001FFACD /* n_chifont+.ttf in Resources */,
 				8364CB681F27F28D002DBE6B /* Assets.xcassets in Resources */,
+				838973C4221E078900EED665 /* SubjectCharacterView.xib in Resources */,
 				832C18541F4501ED001FFACD /* jquery.qtip.min.js in Resources */,
 				832C18571F4501ED001FFACD /* resize.css in Resources */,
 				8372F7C31F953FB4007881B6 /* WKButNoCigar.user.js in Resources */,
@@ -1503,6 +1510,7 @@
 				832C18591F4501ED001FFACD /* UserScripts.swift in Sources */,
 				83D7CBFE1F50B20600043D47 /* AssignmentProgressionCollectionViewController.swift in Sources */,
 				836DE2B81F9B9D1C005E42EC /* SubjectSearchTableViewCell.swift in Sources */,
+				838973C6221E07A300EED665 /* XibLoadable.swift in Sources */,
 				83CE51D71F4EE4BB0050242A /* DurationDetailTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -29,17 +29,11 @@ public protocol SubjectImage {
     var contentType: String { get }
 }
 
-public enum SubjectCharacterRepresentation {
-    case unicode(String)
-    case image([SubjectImage])
-}
-
 public protocol Subject {
     var subjectType: SubjectType { get }
     var level: Int { get }
     var slug: String { get }
     var documentURL: URL { get }
-    var characterRepresentation: SubjectCharacterRepresentation { get }
     var meanings: [Meaning] { get }
     var readings: [Reading] { get }
     var componentSubjectIDs: [Int] { get }

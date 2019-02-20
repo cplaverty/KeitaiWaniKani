@@ -23,7 +23,7 @@ public struct Kanji: ResourceCollectionItemData, Equatable {
     public let readingMnemonic: String
     public let readingHint: String?
     public let lessonPosition: Int
-
+    
     private enum CodingKeys: String, CodingKey {
         case createdAt = "created_at"
         case level
@@ -48,9 +48,5 @@ public struct Kanji: ResourceCollectionItemData, Equatable {
 extension Kanji: Subject {
     public var subjectType: SubjectType {
         return .kanji
-    }
-    
-    public var characterRepresentation: SubjectCharacterRepresentation {
-        return .unicode(characters)
     }
 }

@@ -10,35 +10,14 @@ import UIKit
 import WaniKaniKit
 
 @IBDesignable
-class SubjectCharacterView: UIView {
+class SubjectCharacterView: UIView, XibLoadable {
     
-    let characterLabel: UILabel! = {
-        var label = UILabel()
-        label.font = UIFont(name: "HiraginoSans-W6", size: 50)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }()
+    var contentView : UIView!
     
-    let displayImageView: UIImageView! = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return imageView
-    }()
-    
-    private let downloadProgressActivityIndicator: UIActivityIndicatorView = {
-        let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
-        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return activityIndicatorView
-    }()
-    
-    private lazy var heightConstraints = [
-        displayImageView.heightAnchor.constraint(lessThanOrEqualToConstant: characterLabel.font.lineHeight),
-        downloadProgressActivityIndicator.heightAnchor.constraint(lessThanOrEqualToConstant: characterLabel.font.lineHeight)
-    ]
+    @IBOutlet weak var characterLabel: UILabel!
+    @IBOutlet weak var displayImageView: UIImageView!
+    @IBOutlet weak var downloadProgressActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet var displayImageViewHeightConstraint: NSLayoutConstraint!
     
     @IBInspectable var fontSize: Double {
         get {
@@ -46,35 +25,7 @@ class SubjectCharacterView: UIView {
         }
         set {
             characterLabel.font = characterLabel.font.withSize(CGFloat(newValue))
-            heightConstraints.forEach { $0.constant = characterLabel.font.lineHeight }
-        }
-    }
-    
-    @IBInspectable var adjustsFontSizeToFitWidth: Bool {
-        get {
-            return characterLabel.adjustsFontSizeToFitWidth
-        }
-        set {
-            characterLabel.adjustsFontSizeToFitWidth = newValue
-        }
-    }
-    
-    @IBInspectable var minimumScaleFactor: Double {
-        get {
-            return Double(characterLabel.minimumScaleFactor)
-        }
-        set {
-            characterLabel.minimumScaleFactor = CGFloat(newValue)
-        }
-    }
-    
-    @IBInspectable var textColor: UIColor! {
-        get {
-            return characterLabel.textColor
-        }
-        set {
-            characterLabel.textColor = newValue
-            displayImageView.tintColor = newValue
+            displayImageViewHeightConstraint.constant = characterLabel.font.lineHeight
         }
     }
     
@@ -87,11 +38,19 @@ class SubjectCharacterView: UIView {
                 return
             }
             
-            switch subject.characterRepresentation {
-            case let .unicode(characters):
-                setCharacters(characters)
-            case let .image(imageChoices):
-                setImage(imageChoices)
+            switch subject {
+            case let r as Radical:
+                if let characters = r.characters {
+                    setCharacters(characters)
+                } else {
+                    setImage(r.characterImages)
+                }
+            case let k as Kanji:
+                setCharacters(k.characters)
+            case let v as Vocabulary:
+                setCharacters(v.characters)
+            default:
+                fatalError("Unknown subject type")
             }
         }
     }
@@ -106,47 +65,28 @@ class SubjectCharacterView: UIView {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        commonInit()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        xibSetup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        xibSetup()
     }
     
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        
-        commonInit()
-        setCharacters("入")
+        xibSetup()
+        contentView.prepareForInterfaceBuilder()
     }
     
-    private func commonInit() {
-        addSubview(characterLabel)
-        addSubview(displayImageView)
-        addSubview(downloadProgressActivityIndicator)
+    func xibSetup() {
+        contentView = loadViewFromXib()
+        contentView.frame = bounds
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        NSLayoutConstraint.activate([
-            characterLabel.topAnchor.constraint(equalTo: topAnchor),
-            characterLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            characterLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            characterLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
-            displayImageView.topAnchor.constraint(equalTo: topAnchor),
-            displayImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            displayImageView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor),
-            displayImageView.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
-            displayImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            displayImageView.widthAnchor.constraint(equalTo: displayImageView.heightAnchor),
-            
-            downloadProgressActivityIndicator.topAnchor.constraint(equalTo: topAnchor),
-            downloadProgressActivityIndicator.bottomAnchor.constraint(equalTo: bottomAnchor),
-            downloadProgressActivityIndicator.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor),
-            downloadProgressActivityIndicator.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor),
-            downloadProgressActivityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-            downloadProgressActivityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
-            downloadProgressActivityIndicator.widthAnchor.constraint(equalTo: downloadProgressActivityIndicator.heightAnchor)
-            ])
-        
-        NSLayoutConstraint.activate(heightConstraints)
+        addSubview(contentView)
     }
     
     func setCharacters(_ characters: String) {
@@ -155,12 +95,14 @@ class SubjectCharacterView: UIView {
         characterLabel.isHidden = false
         displayImageView.image = nil
         displayImageView.isHidden = true
+        displayImageViewHeightConstraint.isActive = false
     }
     
     func setImage(_ imageChoices: [SubjectImage]) {
         characterLabel.isHidden = true
         characterLabel.text = nil
         displayImageView.isHidden = false
+        displayImageViewHeightConstraint.isActive = true
         
         let imageLoader = RadicalCharacterImageLoader(characterImages: imageChoices)
         self.imageLoader = imageLoader
@@ -172,7 +114,6 @@ class SubjectCharacterView: UIView {
             
             self?.imageLoader = nil
             self?.displayImageView.image = image
-            self?.displayImageView.tintColor = self?.textColor
             self?.displayImageView.isHidden = false
         }
     }
