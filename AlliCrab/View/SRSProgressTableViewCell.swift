@@ -15,11 +15,11 @@ class SRSProgressTableViewCell: UITableViewCell {
     func update(srsStage: SRSStage, srsDistribution: SRSDistribution?) {
         self.srsStage = srsStage
         
-        imageView?.image = UIImage(named: srsStage.rawValue)?.withRenderingMode(.alwaysTemplate)
-        imageView?.tintColor = srsStage.backgroundColor
+        imageView!.image = UIImage(named: srsStage.rawValue)!.withRenderingMode(.alwaysTemplate)
+        imageView!.tintColor = srsStage.backgroundColor
         
-        textLabel?.text = srsStage.rawValue
-        textLabel?.textColor = srsStage.backgroundColor
+        textLabel!.text = srsStage.rawValue
+        textLabel!.textColor = srsStage.backgroundColor
         
         if let srsDistribution = srsDistribution {
             let itemCounts = srsDistribution.countsBySRSStage[srsStage] ?? SRSItemCounts.zero

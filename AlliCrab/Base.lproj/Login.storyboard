@@ -139,9 +139,9 @@
                                 </constraints>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3j-VA-qVk">
-                                <rect key="frame" x="0.0" y="398.5" width="375" height="268.5"/>
+                                <rect key="frame" x="0.0" y="399" width="375" height="268"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bS1-4z-kDz">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="268.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="268"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sf-2j-0EM">
@@ -313,5 +313,5 @@
     <resources>
         <image name="Art04" width="860.760009765625" height="537.84002685546875"/>
     </resources>
-    <color key="tintColor" name="GlobalTint"/>
+    <color key="tintColor" name="Colours/GlobalTint"/>
 </document>
