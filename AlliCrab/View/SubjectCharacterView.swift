@@ -17,15 +17,17 @@ class SubjectCharacterView: UIView, XibLoadable {
     @IBOutlet weak var characterLabel: UILabel!
     @IBOutlet weak var displayImageView: UIImageView!
     @IBOutlet weak var downloadProgressActivityIndicator: UIActivityIndicatorView!
-    @IBOutlet var displayImageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var displayImageViewHeightConstraints: [NSLayoutConstraint]!
     
-    @IBInspectable var fontSize: Double {
+    @IBInspectable var fontSize: CGFloat {
         get {
-            return Double(characterLabel.font.pointSize)
+            return characterLabel.font.pointSize
         }
         set {
-            characterLabel.font = characterLabel.font.withSize(CGFloat(newValue))
-            displayImageViewHeightConstraint.constant = characterLabel.font.lineHeight
+            characterLabel.font = characterLabel.font.withSize(newValue)
+            displayImageViewHeightConstraints.forEach { constraint in
+                constraint.constant = characterLabel.font.lineHeight
+            }
         }
     }
     
@@ -95,14 +97,18 @@ class SubjectCharacterView: UIView, XibLoadable {
         characterLabel.isHidden = false
         displayImageView.image = nil
         displayImageView.isHidden = true
-        displayImageViewHeightConstraint.isActive = false
+        displayImageViewHeightConstraints.forEach { constraint in
+            constraint.isActive = false
+        }
     }
     
     func setImage(_ imageChoices: [SubjectImage]) {
         characterLabel.isHidden = true
         characterLabel.text = nil
         displayImageView.isHidden = false
-        displayImageViewHeightConstraint.isActive = true
+        displayImageViewHeightConstraints.forEach { constraint in
+            constraint.isActive = true
+        }
         
         let imageLoader = RadicalCharacterImageLoader(characterImages: imageChoices)
         self.imageLoader = imageLoader
