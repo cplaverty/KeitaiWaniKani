@@ -10,16 +10,21 @@ import FMDB
 private let table = Tables.levelProgression
 
 extension LevelProgression: DatabaseCodable {
-    static func read(from database: FMDatabase, levels: [Int]) throws -> [Int: LevelProgression] {
-        var items = [Int: LevelProgression]()
-        items.reserveCapacity(levels.count)
+    static func read(from database: FMDatabase) throws -> [LevelProgression] {
+        let query = """
+        SELECT \(table.level), \(table.createdAt), \(table.unlockedAt), \(table.startedAt), \(table.passedAt), \(table.completedAt), \(table.abandonedAt)
+        FROM \(table)
+        ORDER BY \(table.level)
+        """
         
-        for level in levels {
-            guard let levelProgression = try LevelProgression(from: database, level: level) else {
-                continue
-            }
-            
-            items[level] = levelProgression
+        let resultSet = try database.executeQuery(query, values: nil)
+        defer { resultSet.close() }
+        
+        var items = [LevelProgression]()
+        
+        while resultSet.next() {
+            let levelProgression = LevelProgression(from: resultSet)
+            items.append(levelProgression)
         }
         
         return items
@@ -37,23 +42,6 @@ extension LevelProgression: DatabaseCodable {
         
         guard resultSet.next() else {
             throw DatabaseError.itemNotFound(id: id)
-        }
-        
-        self.init(from: resultSet)
-    }
-    
-    init?(from database: FMDatabase, level: Int) throws {
-        let query = """
-        SELECT \(table.level), \(table.createdAt), \(table.unlockedAt), \(table.startedAt), \(table.passedAt), \(table.completedAt), \(table.abandonedAt)
-        FROM \(table)
-        WHERE \(table.level) = ?
-        """
-        
-        let resultSet = try database.executeQuery(query, values: [level])
-        defer { resultSet.close() }
-        
-        guard resultSet.next() else {
-            return nil
         }
         
         self.init(from: resultSet)

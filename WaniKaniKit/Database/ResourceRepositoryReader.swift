@@ -448,54 +448,80 @@ public class ResourceRepositoryReader {
                 return LevelData(detail: [], projectedCurrentLevel: nil)
             }
             
-            var radicalUnlockDatesByLevel = try getUnlockDatesByLevel(for: .radical, from: database)
-            var kanjiUnlockDatesByLevel = try getUnlockDatesByLevel(for: .kanji, from: database)
-            guard !radicalUnlockDatesByLevel.isEmpty && !kanjiUnlockDatesByLevel.isEmpty else {
-                return LevelData(detail: [], projectedCurrentLevel: nil)
-            }
+            var levelProgressions = try LevelProgression.read(from: database).filter({ progress -> Bool in
+                progress.abandonedAt == nil
+            })
             
-            let now = Date()
-            
-            var startDates = [Date]()
-            startDates.reserveCapacity(userInfo.level)
-            
-            for level in 1...userInfo.level {
-                let earliestPossibleGuruDate = startDates.last.flatMap({ startOfPreviousLevel in
-                    Assignment.earliestDate(from: startOfPreviousLevel,
-                                            forItemAtSRSStage: SRSStage.apprentice.numericLevelRange.lowerBound,
-                                            toSRSStage: SRSStage.guru.numericLevelRange.lowerBound,
-                                            subjectType: .kanji,
-                                            level: level)
-                }) ?? Date.distantPast
+            let maxLevelToInfer = levelProgressions.first.map({ $0.level - 1 }) ?? userInfo.level
+            if maxLevelToInfer > 0 {
+                let maxInferredLevelEndDate = levelProgressions.first.flatMap({ $0.unlockedAt })
+                let inferredLevelProgressions = try inferLevelProgressionFromSubjects(toLevel: maxLevelToInfer, toLevelStartDate: maxInferredLevelEndDate, from: database)
                 
-                let unlockDates: [Date]
-                if let radicalUnlockDates = radicalUnlockDatesByLevel[level], !radicalUnlockDates.isEmpty {
-                    unlockDates = radicalUnlockDates
-                } else if let kanjiUnlockDates = kanjiUnlockDatesByLevel[level], !kanjiUnlockDates.isEmpty {
-                    unlockDates = kanjiUnlockDates
-                } else {
-                    unlockDates = []
+                // Let's not return partial results
+                guard !inferredLevelProgressions.isEmpty else {
+                    return LevelData(detail: [], projectedCurrentLevel: nil)
                 }
                 
-                let minStartDate = unlockDates.lazy.filter({ $0 > earliestPossibleGuruDate }).min() ?? now
-                os_log("levelTimeline: level = %d, earliestPossibleGuruDate = %@, minStartDate = %@", type: .debug, level, earliestPossibleGuruDate as NSDate, minStartDate as NSDate)
-                startDates.append(minStartDate)
+                levelProgressions = inferredLevelProgressions + levelProgressions
             }
             
-            var levelProgressions = [LevelProgression]()
-            levelProgressions.reserveCapacity(userInfo.level)
-            
-            for level in 1...userInfo.level {
-                let startDate = startDates[level - 1]
-                let endDate = startDates.count > level ? startDates[level] : nil
-                let levelProgress = LevelProgression(level: level, createdAt: startDate, unlockedAt: startDate, startedAt: startDate, passedAt: endDate, completedAt: nil, abandonedAt: nil)
-                levelProgressions.append(levelProgress)
-            }
-            
-            let projectedCurrentLevel = try projectedLevel(userInfo.level, startDate: startDates.last!, from: database)
+            let currentLevelStartDate = levelProgressions.last?.startedAt ?? Date()
+            let projectedCurrentLevel = try projectedLevel(userInfo.level, startDate: currentLevelStartDate, from: database)
             
             return LevelData(detail: levelProgressions, projectedCurrentLevel: projectedCurrentLevel)
         }
+    }
+    
+    private func inferLevelProgressionFromSubjects(toLevel maxLevel: Int, toLevelStartDate: Date?, from database: FMDatabase) throws -> [LevelProgression] {
+        let radicalUnlockDatesByLevel = try getUnlockDatesByLevel(for: .radical, from: database)
+        let kanjiUnlockDatesByLevel = try getUnlockDatesByLevel(for: .kanji, from: database)
+        guard !radicalUnlockDatesByLevel.isEmpty && !kanjiUnlockDatesByLevel.isEmpty else {
+            return []
+        }
+        
+        let now = Date()
+        
+        var startDates = [Date]()
+        startDates.reserveCapacity(maxLevel)
+        
+        for level in 1...maxLevel {
+            let earliestPossibleGuruDate = startDates.last.flatMap({ startOfPreviousLevel in
+                Assignment.earliestDate(from: startOfPreviousLevel,
+                                        forItemAtSRSStage: SRSStage.apprentice.numericLevelRange.lowerBound,
+                                        toSRSStage: SRSStage.guru.numericLevelRange.lowerBound,
+                                        subjectType: .kanji,
+                                        level: level)
+            }) ?? Date.distantPast
+            
+            let unlockDates: [Date]
+            if let radicalUnlockDates = radicalUnlockDatesByLevel[level], !radicalUnlockDates.isEmpty {
+                unlockDates = radicalUnlockDates
+            } else if let kanjiUnlockDates = kanjiUnlockDatesByLevel[level], !kanjiUnlockDates.isEmpty {
+                unlockDates = kanjiUnlockDates
+            } else {
+                unlockDates = []
+            }
+            
+            let minStartDate = unlockDates.lazy.filter({ $0 > earliestPossibleGuruDate }).min() ?? now
+            os_log("Inferred level timeline: level = %d, earliestPossibleGuruDate = %@, minStartDate = %@", type: .debug, level, earliestPossibleGuruDate as NSDate, minStartDate as NSDate)
+            startDates.append(minStartDate)
+        }
+        
+        if let toLevelStartDate = toLevelStartDate {
+            startDates.append(toLevelStartDate)
+        }
+        
+        var levelProgressions = [LevelProgression]()
+        levelProgressions.reserveCapacity(maxLevel)
+        
+        for level in 1...maxLevel {
+            let startDate = startDates[level - 1]
+            let endDate = startDates.count > level ? startDates[level] : nil
+            let levelProgress = LevelProgression(level: level, createdAt: startDate, unlockedAt: startDate, startedAt: startDate, passedAt: endDate, completedAt: nil, abandonedAt: nil)
+            levelProgressions.append(levelProgress)
+        }
+        
+        return levelProgressions
     }
     
     public func subjects(srsStage: SRSStage) throws -> [(subject: Subject, assignment: Assignment)] {
