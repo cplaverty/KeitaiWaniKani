@@ -46,6 +46,34 @@ extension StudyMaterials: DatabaseCodable {
         self.isHidden = resultSet.bool(forColumn: table.isHidden.name)
     }
     
+    init?(from database: FMDatabase, subjectID: Int) throws {
+        let query = """
+        SELECT \(table.id), \(table.createdAt), \(table.subjectID), \(table.subjectType), \(table.meaningNote), \(table.readingNote), \(table.isHidden)
+        FROM \(table)
+        WHERE \(table.subjectID) = ?
+        """
+        
+        let resultSet = try database.executeQuery(query, values: [subjectID])
+        
+        guard resultSet.next() else {
+            resultSet.close()
+            return nil
+        }
+        
+        self.createdAt = resultSet.date(forColumn: table.createdAt.name)!
+        self.subjectID = resultSet.long(forColumn: table.subjectID.name)
+        self.subjectType = resultSet.rawValue(SubjectType.self, forColumn: table.subjectType.name)!
+        self.meaningNote = resultSet.string(forColumn: table.meaningNote.name)
+        self.readingNote = resultSet.string(forColumn: table.readingNote.name)
+        self.isHidden = resultSet.bool(forColumn: table.isHidden.name)
+        
+        let id = resultSet.long(forColumn: table.id.name)
+        resultSet.close()
+        
+        let meaningSynonyms = try MeaningSynonym.read(from: database, id: id)
+        self.meaningSynonyms = meaningSynonyms
+    }
+    
     func write(to database: FMDatabase, id: Int) throws {
         try MeaningSynonym.write(items: meaningSynonyms, to: database, id: id)
         

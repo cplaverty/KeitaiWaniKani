@@ -26,11 +26,16 @@ extension ResourceCollectionItem {
         items.reserveCapacity(ids.count)
         
         for id in ids {
-            let type = try getSubjectTypeForSubjectId(from: database, id: id)
-            items.append(try ResourceCollectionItem(from: database, id: id, type: type))
+            let item = try readSubject(from: database, id: id)
+            items.append(item)
         }
         
         return items
+    }
+    
+    static func readSubject(from database: FMDatabase, id: Int) throws -> ResourceCollectionItem {
+        let type = try getSubjectTypeForSubjectId(from: database, id: id)
+        return try ResourceCollectionItem(from: database, id: id, type: type)
     }
     
     private static func getSubjectTypeForSubjectId(from database: FMDatabase, id: Int) throws -> ResourceCollectionItemObjectType {

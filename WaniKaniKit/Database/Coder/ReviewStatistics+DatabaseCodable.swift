@@ -35,6 +35,27 @@ extension ReviewStatistics: DatabaseCodable {
             throw DatabaseError.itemNotFound(id: id)
         }
         
+        self.init(from: resultSet)
+    }
+    
+    init?(from database: FMDatabase, subjectID: Int) throws {
+        let query = """
+        SELECT \(table.createdAt), \(table.subjectID), \(table.subjectType), \(table.meaningCorrect), \(table.meaningIncorrect), \(table.meaningMaxStreak), \(table.meaningCurrentStreak), \(table.readingCorrect), \(table.readingIncorrect), \(table.readingMaxStreak), \(table.readingCurrentStreak), \(table.percentageCorrect), \(table.isHidden)
+        FROM \(table)
+        WHERE \(table.subjectID) = ?
+        """
+        
+        let resultSet = try database.executeQuery(query, values: [subjectID])
+        defer { resultSet.close() }
+        
+        guard resultSet.next() else {
+            return nil
+        }
+        
+        self.init(from: resultSet)
+    }
+    
+    init(from resultSet: FMResultSet) {
         self.createdAt = resultSet.date(forColumn: table.createdAt.name)!
         self.subjectID = resultSet.long(forColumn: table.subjectID.name)
         self.subjectType = resultSet.rawValue(SubjectType.self, forColumn: table.subjectType.name)!
