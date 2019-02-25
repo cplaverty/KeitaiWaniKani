@@ -19,10 +19,24 @@ class SubjectSearchTableViewController: UITableViewController {
     
     var repositoryReader: ResourceRepositoryReader!
     
-    private var subjects = [Subject]() {
+    private var subjectIDs = [Int]() {
         didSet {
+            subjectsCache = Array(repeating: nil, count: subjectIDs.count)
             tableView.reloadData()
         }
+    }
+    
+    private var subjectsCache = [Subject?]()
+    
+    private func subject(at index: Int) -> Subject {
+        if let cached = subjectsCache[index] {
+            return cached
+        }
+        
+        let subject = try! repositoryReader.loadSubject(id: subjectIDs[index]).data as! Subject
+        subjectsCache[index] = subject
+        
+        return subject
     }
     
     // MARK: - UITableViewDataSource
@@ -32,14 +46,14 @@ class SubjectSearchTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return subjects.count
+        return subjectIDs.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.subject.rawValue, for: indexPath) as! SubjectSearchTableViewCell
         
-        let subject = subjects[indexPath.row]
-        cell.subject = subject
+        let s = subject(at: indexPath.row)
+        cell.subject = s
         
         return cell
     }
@@ -47,8 +61,8 @@ class SubjectSearchTableViewController: UITableViewController {
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        let subject = subjects[indexPath.row]
-        self.present(WebViewController.wrapped(url: subject.documentURL), animated: true, completion: nil)
+        let s = subject(at: indexPath.row)
+        self.present(WebViewController.wrapped(url: s.documentURL), animated: true, completion: nil)
         return nil
     }
     
@@ -58,10 +72,10 @@ class SubjectSearchTableViewController: UITableViewController {
 extension SubjectSearchTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text?.trimmingCharacters(in: .whitespaces), !searchText.isEmpty else {
-            subjects = []
+            subjectIDs = []
             return
         }
         
-        subjects = try! repositoryReader.findSubjects(matching: searchText).map({ $0.data as! Subject })
+        subjectIDs = try! repositoryReader.findSubjects(matching: searchText)
     }
 }

@@ -43,6 +43,16 @@ public class ResourceRepositoryReader {
         }
     }
     
+    public func loadSubject(id: Int) throws -> ResourceCollectionItem {
+        guard let databaseQueue = self.databaseQueue else {
+            throw ResourceRepositoryError.noDatabase
+        }
+        
+        return try databaseQueue.inDatabase { database in
+            try ResourceCollectionItem.readSubject(from: database, id: id)
+        }
+    }
+    
     public func loadSubjects(ids: [Int]) throws -> [ResourceCollectionItem] {
         guard let databaseQueue = self.databaseQueue else {
             throw ResourceRepositoryError.noDatabase
@@ -541,7 +551,7 @@ public class ResourceRepositoryReader {
         }
     }
     
-    public func findSubjects(matching query: String) throws -> [ResourceCollectionItem] {
+    public func findSubjects(matching query: String) throws -> [Int] {
         guard let databaseQueue = self.databaseQueue else {
             throw ResourceRepositoryError.noDatabase
         }

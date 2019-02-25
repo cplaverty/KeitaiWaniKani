@@ -483,13 +483,13 @@ class ResourceRepositoryReaderTests: XCTestCase {
         
         writeToDatabase([leafRadical, finsRadical, mountainKanji, mouthKanji, industryKanji, mountainVocab, mouthVocab, mountFujiVocab])
         
-        XCTAssertEqual(try resourceRepository.findSubjects(matching: "leaf"), [leafRadical])
-        XCTAssertEqual(try resourceRepository.findSubjects(matching: "fins"), [finsRadical])
-        XCTAssertEqual(try resourceRepository.findSubjects(matching: "やま"), [mountainVocab, mountainKanji])
-        XCTAssertEqual(try resourceRepository.findSubjects(matching: "く"), [mouthVocab, mouthKanji, industryKanji])
-        XCTAssertEqual(try resourceRepository.findSubjects(matching: "mouth"), [mouthVocab, mouthKanji])
-        XCTAssertEqual(try resourceRepository.findSubjects(matching: "口"), [mouthVocab, mouthKanji])
-        XCTAssertEqual(try resourceRepository.findSubjects(matching: "mount"), [mountainVocab, mountainKanji, mountFujiVocab])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "leaf"), [leafRadical.id])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "fins"), [finsRadical.id])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "やま"), [mountainVocab.id, mountainKanji.id])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "く"), [mouthVocab.id, mouthKanji.id, industryKanji.id])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "mouth"), [mouthVocab.id, mouthKanji.id])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "口"), [mouthVocab.id, mouthKanji.id])
+        XCTAssertEqual(try resourceRepository.findSubjects(matching: "mount"), [mountainVocab.id, mountainKanji.id, mountFujiVocab.id])
     }
     
     private func createTestUser(currentVacationStartedAt: Date? = nil) {

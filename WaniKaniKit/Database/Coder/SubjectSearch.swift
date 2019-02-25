@@ -10,7 +10,7 @@ import FMDB
 private let table = Tables.subjectSearch
 
 struct SubjectSearch {
-    static func read(from database: FMDatabase, searchQuery: String, maxLevel: Int) throws -> [ResourceCollectionItem] {
+    static func read(from database: FMDatabase, searchQuery: String, maxLevel: Int) throws -> [Int] {
         let query = """
         SELECT \(table.subjectID)
         FROM \(table)
@@ -27,7 +27,7 @@ struct SubjectSearch {
         }
         resultSet.close()
         
-        return try ResourceCollectionItem.readSubjects(from: database, ids: subjectIDs)
+        return subjectIDs
     }
     
     static func write(to database: FMDatabase, id: Int, characters: String?, level: Int, meanings: [Meaning], readings: [Reading], hidden: Bool) throws {
