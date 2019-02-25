@@ -23,7 +23,7 @@ extension Reading: BulkDatabaseCodable {
         
         var items = [Reading]()
         while resultSet.next() {
-            items.append(Reading(type: resultSet.string(forColumn: table.readingType.name),
+            items.append(Reading(type: resultSet.rawValue(ReadingType.self, forColumn: table.readingType.name),
                                  reading: resultSet.string(forColumn: table.reading.name)!,
                                  isPrimary: resultSet.bool(forColumn: table.isPrimary.name),
                                  isAcceptedAnswer: resultSet.bool(forColumn: table.isAcceptedAnswer.name)))
@@ -54,7 +54,7 @@ extension Reading: BulkDatabaseCodable {
         
         for (index, item) in items.enumerated() {
             let values: [Any] = [
-                id, index, item.type as Any, item.reading, item.isPrimary, item.isAcceptedAnswer
+                id, index, item.type?.rawValue as Any, item.reading, item.isPrimary, item.isAcceptedAnswer
             ]
             try database.executeUpdate(query, values: values)
         }

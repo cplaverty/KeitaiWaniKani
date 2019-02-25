@@ -50,3 +50,21 @@ extension Kanji: Subject {
         return .kanji
     }
 }
+
+extension Kanji {
+    public func readings(type: ReadingType) -> String? {
+        let joined = readings.lazy
+            .filter({ $0.type == type })
+            .map({ $0.reading })
+            .joined(separator: ", ")
+        
+        return joined.isEmpty ? nil : joined
+    }
+    
+    public func isPrimary(type: ReadingType) -> Bool {
+        return readings.lazy
+            .filter({ $0.type == type })
+            .map({ $0.isPrimary })
+            .contains(true)
+    }
+}

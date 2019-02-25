@@ -464,13 +464,13 @@ class ResourceRepositoryReaderTests: XCTestCase {
         let finsRadical = createTestRadical(level: 1, characters: "ハ", meanings: [Meaning(meaning: "fins", isPrimary: true, isAcceptedAnswer: true)])
         let mountainKanji = createTestKanji(level: 1, characters: "山",
                                             meanings: [Meaning(meaning: "Mountain", isPrimary: true, isAcceptedAnswer: true)],
-                                            readings: [Reading(type: "onyomi", reading: "さん", isPrimary: true, isAcceptedAnswer: true), Reading(type: "kunyomi", reading: "やま", isPrimary: false, isAcceptedAnswer: false)])
+                                            readings: [Reading(type: .onyomi, reading: "さん", isPrimary: true, isAcceptedAnswer: true), Reading(type: .kunyomi, reading: "やま", isPrimary: false, isAcceptedAnswer: false)])
         let mouthKanji = createTestKanji(level: 1, characters: "口",
                                          meanings: [Meaning(meaning: "Mouth", isPrimary: true, isAcceptedAnswer: true)],
-                                         readings: [Reading(type: "onyomi", reading: "こう", isPrimary: true, isAcceptedAnswer: true), Reading(type: "onyomi", reading: "く", isPrimary: true, isAcceptedAnswer: true), Reading(type: "kunyomi", reading: "くち", isPrimary: false, isAcceptedAnswer: false)])
+                                         readings: [Reading(type: .onyomi, reading: "こう", isPrimary: true, isAcceptedAnswer: true), Reading(type: .onyomi, reading: "く", isPrimary: true, isAcceptedAnswer: true), Reading(type: .kunyomi, reading: "くち", isPrimary: false, isAcceptedAnswer: false)])
         let industryKanji = createTestKanji(level: 1, characters: "工",
                                             meanings: [Meaning(meaning: "Construction", isPrimary: true, isAcceptedAnswer: true), Meaning(meaning: "Industry", isPrimary: false, isAcceptedAnswer: true)],
-                                            readings: [Reading(type: "onyomi", reading: "こう", isPrimary: true, isAcceptedAnswer: true), Reading(type: "onyomi", reading: "く", isPrimary: true, isAcceptedAnswer: true)])
+                                            readings: [Reading(type: .onyomi, reading: "こう", isPrimary: true, isAcceptedAnswer: true), Reading(type: .onyomi, reading: "く", isPrimary: true, isAcceptedAnswer: true)])
         let mountainVocab = createTestVocabulary(level: 1, characters: "山",
                                                  meanings: [Meaning(meaning: "Mountain", isPrimary: true, isAcceptedAnswer: true)],
                                                  readings: [Reading(type: nil, reading: "やま", isPrimary: true, isAcceptedAnswer: true)])

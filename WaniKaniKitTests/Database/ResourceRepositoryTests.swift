@@ -299,9 +299,9 @@ class ResourceRepositoryTests: XCTestCase {
                                                            meanings: [Meaning(meaning: "One", isPrimary: true, isAcceptedAnswer: true)],
                                                            auxiliaryMeanings: [AuxiliaryMeaning(type: "whitelist", meaning: "1")],
                                                            readings: [
-                                                            Reading(type: "onyomi", reading: "いち", isPrimary: true, isAcceptedAnswer: true),
-                                                            Reading(type: "kunyomi", reading: "ひと", isPrimary: false, isAcceptedAnswer: false),
-                                                            Reading(type: "nanori", reading: "かず", isPrimary: false, isAcceptedAnswer: false),
+                                                            Reading(type: .onyomi, reading: "いち", isPrimary: true, isAcceptedAnswer: true),
+                                                            Reading(type: .kunyomi, reading: "ひと", isPrimary: false, isAcceptedAnswer: false),
+                                                            Reading(type: .nanori, reading: "かず", isPrimary: false, isAcceptedAnswer: false),
                                                             ],
                                                            componentSubjectIDs: [1],
                                                            amalgamationSubjectIDs: [2467, 2468],
