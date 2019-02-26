@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProgressBarView" customModule="AlliCrab" customModuleProvider="target">
+            <connections>
+                <outlet property="percentCompleteLabel" destination="IGd-Q7-GgZ" id="vnp-bc-Tw4"/>
+                <outlet property="progressView" destination="rZY-zO-8AI" id="ata-nP-2H8"/>
+                <outlet property="titleLabel" destination="aWV-Tg-qCB" id="Pl8-PH-F8j"/>
+                <outlet property="totalItemCountLabel" destination="DJ1-oL-XSU" id="Tek-O8-aEb"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aWV-Tg-qCB">
+                    <rect key="frame" x="0.0" y="0.0" width="33.5" height="20.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IGd-Q7-GgZ">
+                    <rect key="frame" x="353" y="0.0" width="22" height="20.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJn-Bi-6w8">
+                    <rect key="frame" x="0.0" y="20.5" width="8" height="14.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rZY-zO-8AI">
+                    <rect key="frame" x="16" y="27" width="345" height="2"/>
+                </progressView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJ1-oL-XSU">
+                    <rect key="frame" x="369" y="20.5" width="6" height="14.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DJ1-oL-XSU" secondAttribute="bottom" id="31D-Vd-ucd"/>
+                <constraint firstItem="aWV-Tg-qCB" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="4VB-4p-EJF"/>
+                <constraint firstItem="aWV-Tg-qCB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="6Dh-ug-iHg"/>
+                <constraint firstItem="ZJn-Bi-6w8" firstAttribute="firstBaseline" secondItem="aWV-Tg-qCB" secondAttribute="baseline" constant="16" symbolType="layoutAnchor" id="9v5-cD-wA9"/>
+                <constraint firstItem="DJ1-oL-XSU" firstAttribute="firstBaseline" secondItem="IGd-Q7-GgZ" secondAttribute="baseline" constant="16" symbolType="layoutAnchor" id="BER-DR-Nc3"/>
+                <constraint firstItem="IGd-Q7-GgZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aWV-Tg-qCB" secondAttribute="trailing" constant="8" symbolic="YES" id="DZ8-nk-iob"/>
+                <constraint firstItem="ZJn-Bi-6w8" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Jw7-oM-pzE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="IGd-Q7-GgZ" secondAttribute="trailing" id="SMv-f0-RQN"/>
+                <constraint firstItem="DJ1-oL-XSU" firstAttribute="leading" secondItem="rZY-zO-8AI" secondAttribute="trailing" constant="8" symbolic="YES" id="Tfs-K7-EOc"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="DJ1-oL-XSU" secondAttribute="trailing" id="UIq-OY-J4W"/>
+                <constraint firstItem="IGd-Q7-GgZ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="aQM-1c-8QL"/>
+                <constraint firstItem="rZY-zO-8AI" firstAttribute="leading" secondItem="ZJn-Bi-6w8" secondAttribute="trailing" constant="8" symbolic="YES" id="g1E-ck-SDL"/>
+                <constraint firstItem="rZY-zO-8AI" firstAttribute="centerY" secondItem="DJ1-oL-XSU" secondAttribute="centerY" id="tE0-OF-nJG"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ZJn-Bi-6w8" secondAttribute="bottom" id="vLP-UT-dOL"/>
+                <constraint firstItem="rZY-zO-8AI" firstAttribute="centerY" secondItem="ZJn-Bi-6w8" secondAttribute="centerY" id="xfT-1H-2En"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+</document>

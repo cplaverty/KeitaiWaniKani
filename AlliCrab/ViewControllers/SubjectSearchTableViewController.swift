@@ -15,6 +15,10 @@ class SubjectSearchTableViewController: UITableViewController {
         case subject = "Subject"
     }
     
+    private enum SegueIdentifier: String {
+        case subjectDetail = "SubjectDetail"
+    }
+    
     // MARK: - Properties
     
     var repositoryReader: ResourceRepositoryReader!
@@ -53,6 +57,7 @@ class SubjectSearchTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.subject.rawValue, for: indexPath) as! SubjectSearchTableViewCell
         
         let s = subject(at: indexPath.row)
+        cell.subjectID = subjectIDs[indexPath.row]
         cell.subject = s
         
         return cell
@@ -60,12 +65,31 @@ class SubjectSearchTableViewController: UITableViewController {
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        let s = subject(at: indexPath.row)
-        self.present(WebViewController.wrapped(url: s.documentURL), animated: true, completion: nil)
-        return nil
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    // MARK: - View Controller Lifecycle
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier, let segueIdentifier = SegueIdentifier(rawValue: identifier) else {
+            return
+        }
+        
+        os_log("Preparing segue %@", type: .debug, identifier)
+        
+        switch segueIdentifier {
+        case .subjectDetail:
+            let vc = (segue.destination as! UINavigationController).viewControllers[0] as! SubjectDetailViewController
+            let cell = sender as! SubjectSearchTableViewCell
+            vc.repositoryReader = repositoryReader
+            vc.subjectID = cell.subjectID
+        }
+    }
+    
+    @IBAction func unwindToSubjectDetailPresenter(_ unwindSegue: UIStoryboardSegue) {
+    }
+
 }
 
 // MARK: - UISearchResultsUpdating

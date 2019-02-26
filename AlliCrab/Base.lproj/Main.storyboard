@@ -144,57 +144,23 @@
                                     <rect key="frame" x="0.0" y="0.0" width="341" height="64.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="soy-hi-ZTj">
-                                            <rect key="frame" x="16.000000000000007" y="11" width="100.66666666666669" height="21"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EMW-DU-GQX">
-                                            <rect key="frame" x="312" y="11" width="21" height="21"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utt-xm-YJO">
-                                            <rect key="frame" x="16" y="32.666666666666664" width="8" height="14.666666666666664"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gZ9-sB-y5U">
-                                            <rect key="frame" x="32" y="39" width="287" height="2"/>
-                                        </progressView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="08d-yv-wm7">
-                                            <rect key="frame" x="327" y="32.666666666666664" width="6" height="14.666666666666664"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LvI-ns-lSG" customClass="ProgressBarView" customModule="AlliCrab" customModuleProvider="target">
+                                            <rect key="frame" x="16" y="11" width="317" height="43"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="Subject"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="08d-yv-wm7" firstAttribute="leading" secondItem="gZ9-sB-y5U" secondAttribute="trailing" constant="8" symbolic="YES" id="0cV-gU-QVP"/>
-                                        <constraint firstItem="utt-xm-YJO" firstAttribute="leading" secondItem="Fev-Hz-e2g" secondAttribute="leadingMargin" id="0gN-1U-0UW"/>
-                                        <constraint firstItem="EMW-DU-GQX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="soy-hi-ZTj" secondAttribute="trailing" constant="8" symbolic="YES" id="37l-Ls-vFJ"/>
-                                        <constraint firstItem="utt-xm-YJO" firstAttribute="firstBaseline" secondItem="soy-hi-ZTj" secondAttribute="baseline" constant="16" symbolType="layoutAnchor" id="6Va-zD-StR"/>
-                                        <constraint firstItem="soy-hi-ZTj" firstAttribute="top" secondItem="Fev-Hz-e2g" secondAttribute="topMargin" id="89I-jv-gun"/>
-                                        <constraint firstItem="gZ9-sB-y5U" firstAttribute="leading" secondItem="utt-xm-YJO" secondAttribute="trailing" constant="8" symbolic="YES" id="FGf-qi-0g4"/>
-                                        <constraint firstItem="gZ9-sB-y5U" firstAttribute="centerY" secondItem="utt-xm-YJO" secondAttribute="centerY" id="Kwx-Y0-brj"/>
-                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="08d-yv-wm7" secondAttribute="bottom" id="NBu-6p-JhX"/>
-                                        <constraint firstItem="soy-hi-ZTj" firstAttribute="leading" secondItem="Fev-Hz-e2g" secondAttribute="leadingMargin" id="RsJ-WA-UCd"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="EMW-DU-GQX" secondAttribute="trailing" id="SXS-Xf-wEX"/>
-                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="utt-xm-YJO" secondAttribute="bottom" id="SgZ-Um-52P"/>
-                                        <constraint firstItem="gZ9-sB-y5U" firstAttribute="centerY" secondItem="08d-yv-wm7" secondAttribute="centerY" id="SlM-ts-wA0"/>
-                                        <constraint firstItem="EMW-DU-GQX" firstAttribute="top" secondItem="Fev-Hz-e2g" secondAttribute="topMargin" id="WqE-Z7-Q4S"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="08d-yv-wm7" secondAttribute="trailing" id="YKV-Om-Xkp"/>
-                                        <constraint firstItem="08d-yv-wm7" firstAttribute="firstBaseline" secondItem="EMW-DU-GQX" secondAttribute="baseline" constant="16" symbolType="layoutAnchor" id="kB9-N8-Q9n"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="LvI-ns-lSG" secondAttribute="trailing" id="Gfo-LT-EKq"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="LvI-ns-lSG" secondAttribute="bottom" id="TcI-ZE-teQ"/>
+                                        <constraint firstItem="LvI-ns-lSG" firstAttribute="top" secondItem="Fev-Hz-e2g" secondAttribute="topMargin" id="suq-aD-hPG"/>
+                                        <constraint firstItem="LvI-ns-lSG" firstAttribute="leading" secondItem="Fev-Hz-e2g" secondAttribute="leadingMargin" id="tkF-pc-b1S"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="percentCompleteLabel" destination="EMW-DU-GQX" id="6b7-LX-N4j"/>
-                                    <outlet property="progressView" destination="gZ9-sB-y5U" id="2Oh-h0-lpo"/>
-                                    <outlet property="subjectTypeLabel" destination="soy-hi-ZTj" id="RhX-r4-9PC"/>
-                                    <outlet property="totalItemCountLabel" destination="08d-yv-wm7" id="kjv-nN-7JF"/>
+                                    <outlet property="progressBarView" destination="LvI-ns-lSG" id="rrw-Rc-QiP"/>
                                     <segue destination="VCB-Qy-NHv" kind="show" identifier="AssignmentProgression" id="6he-Jn-LC6"/>
                                 </connections>
                             </tableViewCell>
@@ -413,21 +379,24 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="79.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LtP-3u-WAi" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="LtP-3u-WAi" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
                                             <rect key="frame" x="16" y="11" width="50" height="58"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" placeholder="YES" id="Hbq-Ah-VDd"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                                     <real key="value" value="42"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1F8-0h-Fel">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1F8-0h-Fel">
                                             <rect key="frame" x="317" y="35.666666666666664" width="42" height="21"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YOb-Sk-8n1">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YOb-Sk-8n1">
                                             <rect key="frame" x="317" y="11" width="42" height="21"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -452,6 +421,10 @@
                                     <outlet property="characterView" destination="LtP-3u-WAi" id="5Qz-k1-KtT"/>
                                     <outlet property="meaningLabel" destination="YOb-Sk-8n1" id="wGb-dv-2Pq"/>
                                     <outlet property="readingLabel" destination="1F8-0h-Fel" id="zqC-xC-zH4"/>
+                                    <segue destination="8M7-Yf-8Qr" kind="show" identifier="SubjectDetail" id="nTC-ah-dsD">
+                                        <segue key="commit" inheritsFrom="parent" id="DNS-R0-Cdc"/>
+                                        <segue key="preview" inheritsFrom="commit" id="aPG-MQ-RRM"/>
+                                    </segue>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -732,14 +705,14 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="t61-6h-dGQ">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="t61-6h-dGQ">
                                                             <rect key="frame" x="58" y="0.0" width="74" height="91"/>
                                                             <subviews>
                                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpi-q4-WCZ">
-                                                                    <rect key="frame" x="0.3333333333333286" y="0.0" width="73.333333333333329" height="45.666666666666664"/>
+                                                                    <rect key="frame" x="0.3333333333333286" y="0.0" width="73.333333333333329" height="41.666666666666664"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2d 15h" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4TP-ZM-P2x">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="73.333333333333329" height="30.666666666666668"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="73.333333333333329" height="21.333333333333332"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -747,7 +720,7 @@
                                                                             <size key="shadowOffset" width="1" height="1"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Review" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MOA-9t-LGO">
-                                                                            <rect key="frame" x="0.0" y="31.333333333333332" width="73.333333333333329" height="14.333333333333332"/>
+                                                                            <rect key="frame" x="0.0" y="22" width="73.333333333333329" height="19.666666666666671"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -766,10 +739,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gEs-w3-5UR">
-                                                                    <rect key="frame" x="5.3333333333333321" y="45.666666666666657" width="63.333333333333343" height="45.333333333333343"/>
+                                                                    <rect key="frame" x="5.3333333333333321" y="49.666666666666657" width="63.333333333333343" height="41.333333333333343"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6d 13h" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6r8-Uz-uHU">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="63.333333333333336" height="30.333333333333332"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="63.333333333333336" height="21.333333333333332"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -777,7 +750,7 @@
                                                                             <size key="shadowOffset" width="1" height="1"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guru Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oLb-HB-rKv">
-                                                                            <rect key="frame" x="0.0" y="31.000000000000004" width="63.333333333333336" height="14.333333333333332"/>
+                                                                            <rect key="frame" x="0.0" y="22.000000000000007" width="63.333333333333336" height="19.333333333333336"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -828,6 +801,10 @@
                                     <outlet property="progressView" destination="gnS-P1-6SX" id="xxV-l1-sQ2"/>
                                     <outlet property="timeToGuruLabel" destination="6r8-Uz-uHU" id="eBf-zC-ecX"/>
                                     <outlet property="timeToNextReviewLabel" destination="4TP-ZM-P2x" id="QgR-kJ-lkl"/>
+                                    <segue destination="7Qb-BJ-QOO" kind="show" identifier="SubjectDetail" id="PXS-8D-U2k">
+                                        <segue key="commit" inheritsFrom="parent" id="vcg-4F-vUy"/>
+                                        <segue key="preview" inheritsFrom="commit" id="9Ba-yI-DvR"/>
+                                    </segue>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -912,11 +889,29 @@
             </objects>
             <point key="canvasLocation" x="1574" y="1452"/>
         </scene>
+        <!--SubjectDetail-->
+        <scene sceneID="NYz-WS-3sX">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SubjectDetail" id="8M7-Yf-8Qr" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0ay-Qj-Bqr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2384" y="1162"/>
+        </scene>
+        <!--SubjectDetail-->
+        <scene sceneID="Wg0-Ik-Vkd">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="SubjectDetail" storyboardName="SubjectDetail" referencedIdentifier="SubjectDetail" id="7Qb-BJ-QOO" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fCc-Gi-uyp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="787" y="1904"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Settings" width="23" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="PXS-8D-U2k"/>
+        <segue reference="nTC-ah-dsD"/>
         <segue reference="ixj-74-CwY"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Colours/GlobalTint"/>

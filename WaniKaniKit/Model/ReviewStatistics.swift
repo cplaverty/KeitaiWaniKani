@@ -36,3 +36,43 @@ public struct ReviewStatistics: ResourceCollectionItemData, Equatable {
         case isHidden = "hidden"
     }
 }
+
+public extension ReviewStatistics {
+    public var total: Int {
+        get {
+            return meaningCorrect + readingCorrect + meaningIncorrect + readingIncorrect
+        }
+    }
+    
+    public var meaningTotal: Int {
+        get {
+            return meaningCorrect + meaningIncorrect
+        }
+    }
+    
+    public var meaningPercentageCorrect: Int {
+        get {
+            guard meaningTotal != 0 else {
+                return 100
+            }
+            
+            return meaningCorrect * 100 / meaningTotal
+        }
+    }
+    
+    public var readingTotal: Int {
+        get {
+            return readingCorrect + readingIncorrect
+        }
+    }
+    
+    public var readingPercentageCorrect: Int {
+        get {
+            guard readingTotal != 0 else {
+                return 100
+            }
+            
+            return readingCorrect * 100 / readingTotal
+        }
+    }
+}

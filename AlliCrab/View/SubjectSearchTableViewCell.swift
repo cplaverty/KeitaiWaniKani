@@ -12,6 +12,8 @@ class SubjectSearchTableViewCell: UITableViewCell {
     
     // MARK: - Properties
     
+    var subjectID: Int!
+    
     var subject: Subject! {
         didSet {
             characterView.subject = subject

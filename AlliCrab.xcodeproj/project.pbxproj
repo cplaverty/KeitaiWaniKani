@@ -53,6 +53,8 @@
 		8334ABF01F4899E000BBFDC8 /* DateComponentsFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83150B371F3F543500B61F3A /* DateComponentsFormatterTests.swift */; };
 		833D7A0C1F2C9F8800A22F33 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833D7A0B1F2C9F8800A22F33 /* Table.swift */; };
 		833D7A0E1F2CB12200A22F33 /* UserInformationTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833D7A0D1F2CB12200A22F33 /* UserInformationTable.swift */; };
+		833E0512221B33D700E99A53 /* SubjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833E0511221B33D700E99A53 /* SubjectDetailViewController.swift */; };
+		833E0514221B3CF700E99A53 /* SubjectDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833E0513221B3CF700E99A53 /* SubjectDetail.storyboard */; };
 		833E0518221B4A2800E99A53 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833E0517221B4A2800E99A53 /* Storyboard.swift */; };
 		833E0519221B4E4000E99A53 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833E051B221B4E4000E99A53 /* Login.storyboard */; };
 		834230AA1F3E0A51000E83FE /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834230A91F3E0A51000E83FE /* NotificationCenter.framework */; };
@@ -125,6 +127,8 @@
 		837BBEDE1F31318300C92141 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837BBEDD1F31318300C92141 /* DatabaseManager.swift */; };
 		837CEC8D1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837CEC8C1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift */; };
 		837CEC8F1F4CEF95008EBE08 /* WaniKaniURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837CEC8E1F4CEF95008EBE08 /* WaniKaniURL.swift */; };
+		838323F3222174A3009DADB2 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838323F2222174A3009DADB2 /* ProgressBarView.swift */; };
+		838323F5222174B0009DADB2 /* ProgressBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838323F4222174B0009DADB2 /* ProgressBarView.xib */; };
 		838973C4221E078900EED665 /* SubjectCharacterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838973C3221E078900EED665 /* SubjectCharacterView.xib */; };
 		838973C6221E07A300EED665 /* XibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838973C5221E07A300EED665 /* XibLoadable.swift */; };
 		838BFB151F54139A0047CDB9 /* SnapshotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838BFB141F54139A0047CDB9 /* SnapshotUITests.swift */; };
@@ -172,6 +176,7 @@
 		83CE51DD1F4F40350050242A /* DashboardTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CE51DC1F4F40350050242A /* DashboardTableViewHeaderFooterView.swift */; };
 		83CE51DF1F4F53C70050242A /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CE51DE1F4F53C70050242A /* SettingsTableViewController.swift */; };
 		83CE51E11F4F541E0050242A /* UserScriptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CE51E01F4F541E0050242A /* UserScriptTableViewCell.swift */; };
+		83D028BA2225D76700C61D3F /* NSAttributedStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D028B92225D76700C61D3F /* NSAttributedStringTests.swift */; };
 		83D7CBFE1F50B20600043D47 /* AssignmentProgressionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D7CBFD1F50B20600043D47 /* AssignmentProgressionCollectionViewController.swift */; };
 		83D7CC001F50B82A00043D47 /* AssignmentProgressionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D7CBFF1F50B82A00043D47 /* AssignmentProgressionCollectionViewCell.swift */; };
 		83D7CC021F50EC7900043D47 /* AssignmentProgressionCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D7CC011F50EC7900043D47 /* AssignmentProgressionCollectionReusableView.swift */; };
@@ -179,6 +184,7 @@
 		83D8C45B20BC1BD900AF4825 /* SubjectRelation+BulkDatabaseCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D8C45A20BC1BD900AF4825 /* SubjectRelation+BulkDatabaseCodable.swift */; };
 		83DC0EFB1F4DCB81006B6DD6 /* UIBottomBorderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DC0EFA1F4DCB81006B6DD6 /* UIBottomBorderedView.swift */; };
 		83DEF7F51F53273200EDCACF /* ProgressReportingBarButtonItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83DEF7F41F53273200EDCACF /* ProgressReportingBarButtonItemView.swift */; };
+		83E90B0722234D590039D31E /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E90B0622234D590039D31E /* NSAttributedString.swift */; };
 		83F02ED61F8EA3C600A85014 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02ED51F8EA3C600A85014 /* Formatter.swift */; };
 		83F02ED81F8EC3BD00A85014 /* SubjectCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F02ED71F8EC3BD00A85014 /* SubjectCharacterView.swift */; };
 		83F1CBD91F463CF100CE9583 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F1CBD81F463CF100CE9583 /* TimeInterval.swift */; };
@@ -324,6 +330,8 @@
 		8334ABEA1F48900F00BBFDC8 /* FMDatabaseQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDatabaseQueue.swift; sourceTree = "<group>"; };
 		833D7A0B1F2C9F8800A22F33 /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
 		833D7A0D1F2CB12200A22F33 /* UserInformationTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationTable.swift; sourceTree = "<group>"; };
+		833E0511221B33D700E99A53 /* SubjectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectDetailViewController.swift; sourceTree = "<group>"; };
+		833E0513221B3CF700E99A53 /* SubjectDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SubjectDetail.storyboard; sourceTree = "<group>"; };
 		833E0517221B4A2800E99A53 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		833E051A221B4E4000E99A53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		834230A81F3E0A51000E83FE /* WaniKaniStudyQueueWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WaniKaniStudyQueueWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -375,6 +383,8 @@
 		837BBEDD1F31318300C92141 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		837CEC8C1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaniKaniLoginWebViewController.swift; sourceTree = "<group>"; };
 		837CEC8E1F4CEF95008EBE08 /* WaniKaniURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaniKaniURL.swift; sourceTree = "<group>"; };
+		838323F2222174A3009DADB2 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		838323F4222174B0009DADB2 /* ProgressBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressBarView.xib; sourceTree = "<group>"; };
 		838973C3221E078900EED665 /* SubjectCharacterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubjectCharacterView.xib; sourceTree = "<group>"; };
 		838973C5221E07A300EED665 /* XibLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XibLoadable.swift; sourceTree = "<group>"; };
 		838BFB141F54139A0047CDB9 /* SnapshotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotUITests.swift; sourceTree = "<group>"; };
@@ -450,6 +460,7 @@
 		83CE51DC1F4F40350050242A /* DashboardTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		83CE51DE1F4F53C70050242A /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		83CE51E01F4F541E0050242A /* UserScriptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScriptTableViewCell.swift; sourceTree = "<group>"; };
+		83D028B92225D76700C61D3F /* NSAttributedStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedStringTests.swift; sourceTree = "<group>"; };
 		83D7CBFD1F50B20600043D47 /* AssignmentProgressionCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentProgressionCollectionViewController.swift; sourceTree = "<group>"; };
 		83D7CBFF1F50B82A00043D47 /* AssignmentProgressionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentProgressionCollectionViewCell.swift; sourceTree = "<group>"; };
 		83D7CC011F50EC7900043D47 /* AssignmentProgressionCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentProgressionCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -457,6 +468,7 @@
 		83D8C45A20BC1BD900AF4825 /* SubjectRelation+BulkDatabaseCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubjectRelation+BulkDatabaseCodable.swift"; sourceTree = "<group>"; };
 		83DC0EFA1F4DCB81006B6DD6 /* UIBottomBorderedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBottomBorderedView.swift; sourceTree = "<group>"; };
 		83DEF7F41F53273200EDCACF /* ProgressReportingBarButtonItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressReportingBarButtonItemView.swift; sourceTree = "<group>"; };
+		83E90B0622234D590039D31E /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
 		83F02ED51F8EA3C600A85014 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		83F02ED71F8EC3BD00A85014 /* SubjectCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCharacterView.swift; sourceTree = "<group>"; };
 		83F1CBD81F463CF100CE9583 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
@@ -564,6 +576,7 @@
 			isa = PBXGroup;
 			children = (
 				83150B371F3F543500B61F3A /* DateComponentsFormatterTests.swift */,
+				83D028B92225D76700C61D3F /* NSAttributedStringTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -578,6 +591,8 @@
 				83CE51D61F4EE4BB0050242A /* DurationDetailTableViewCell.swift */,
 				83CE51CC1F4DE6A50050242A /* LevelProgressTableViewCell.swift */,
 				83CE51D41F4EE2F70050242A /* NumericDetailTableViewCell.swift */,
+				838323F2222174A3009DADB2 /* ProgressBarView.swift */,
+				838323F4222174B0009DADB2 /* ProgressBarView.xib */,
 				83DEF7F41F53273200EDCACF /* ProgressReportingBarButtonItemView.swift */,
 				83FEF43F1F4F969900A7029D /* ReviewTimelineEntryTableViewCell.swift */,
 				83FFD90A1F5387B80015988F /* ReviewTimelineHeaderFooterView.swift */,
@@ -769,6 +784,7 @@
 				833E051B221B4E4000E99A53 /* Login.storyboard */,
 				8364CB641F27F28D002DBE6B /* Main.storyboard */,
 				8303F82E1F54678300E016E9 /* ReorderSettings.storyboard */,
+				833E0513221B3CF700E99A53 /* SubjectDetail.storyboard */,
 			);
 			path = AlliCrab;
 			sourceTree = "<group>";
@@ -878,6 +894,7 @@
 				8334ABEA1F48900F00BBFDC8 /* FMDatabaseQueue.swift */,
 				83B75F6F1F351E6500BECEB0 /* FMResultSet.swift */,
 				83F02ED51F8EA3C600A85014 /* Formatter.swift */,
+				83E90B0622234D590039D31E /* NSAttributedString.swift */,
 				83F1CBD81F463CF100CE9583 /* TimeInterval.swift */,
 				83CE51D01F4DEC1D0050242A /* UIColor.swift */,
 			);
@@ -895,6 +912,7 @@
 				83FEF43D1F4F952F00A7029D /* ReviewTimelineTableViewController.swift */,
 				83CE51DE1F4F53C70050242A /* SettingsTableViewController.swift */,
 				8326F7E11F95654000CC3213 /* SubjectCollectionViewController.swift */,
+				833E0511221B33D700E99A53 /* SubjectDetailViewController.swift */,
 				836DE2B51F9B918D005E42EC /* SubjectSearchTableViewController.swift */,
 				837CEC8C1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift */,
 				83B8A6F91F50961F006665DB /* WaniKaniReviewPageWebViewController.swift */,
@@ -1206,9 +1224,11 @@
 				832C186C1F4502A4001FFACD /* dartsfont.ttf in Resources */,
 				8364CB661F27F28D002DBE6B /* Main.storyboard in Resources */,
 				832C185D1F4501ED001FFACD /* wkimprove.js in Resources */,
+				838323F5222174B0009DADB2 /* ProgressBarView.xib in Resources */,
 				832C186F1F4502A4001FFACD /* Hosohuwafont.ttf in Resources */,
 				832C184F1F4501ED001FFACD /* common.css in Resources */,
 				832C18521F4501ED001FFACD /* jitai.user.js in Resources */,
+				833E0514221B3CF700E99A53 /* SubjectDetail.storyboard in Resources */,
 				832C18561F4501ED001FFACD /* noswipe.js in Resources */,
 				832C186E1F4502A4001FFACD /* hkgokukaikk.ttf in Resources */,
 			);
@@ -1417,6 +1437,7 @@
 				83F1CBDB1F463D5800CE9583 /* SRSDistribution.swift in Sources */,
 				83A783EA1F9FEF590000D28D /* LevelProgressionTable.swift in Sources */,
 				83649F541F2E96670074BBB6 /* Subject.swift in Sources */,
+				83E90B0722234D590039D31E /* NSAttributedString.swift in Sources */,
 				83B75F6D1F351B5300BECEB0 /* ResourceCollectionItem+DatabaseCodable.swift in Sources */,
 				8346C84B1F2FEA1800252DC9 /* KanjiTable.swift in Sources */,
 				834230BE1F3E1529000E83FE /* ResourceRepositoryReader.swift in Sources */,
@@ -1456,6 +1477,7 @@
 				83FCAB371F9F549300024398 /* VirtualTableTests.swift in Sources */,
 				836D7F001F2BF44600F32C90 /* RadicalTests.swift in Sources */,
 				83A783EE1F9FF4430000D28D /* LevelProgressionTests.swift in Sources */,
+				83D028BA2225D76700C61D3F /* NSAttributedStringTests.swift in Sources */,
 				83629A8A1F2CDD6A000A26A2 /* TableTests.swift in Sources */,
 				836D7EFE1F2BF44600F32C90 /* AssignmentTests.swift in Sources */,
 				83C261941F3712F600278648 /* MockWaniKaniAPI.swift in Sources */,
@@ -1485,6 +1507,7 @@
 				83C682001F51C2CD00CC431C /* RadicalCharacterImageLoader.swift in Sources */,
 				8364CB611F27F28D002DBE6B /* AppDelegate.swift in Sources */,
 				83F392781F4B276C00E8DAE7 /* ManualAPIKeyEntryViewController.swift in Sources */,
+				838323F3222174A3009DADB2 /* ProgressBarView.swift in Sources */,
 				83DC0EFB1F4DCB81006B6DD6 /* UIBottomBorderedView.swift in Sources */,
 				83632C901F4B8A520059E29C /* NetworkIndicatorController.swift in Sources */,
 				837CEC8D1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift in Sources */,
@@ -1509,6 +1532,7 @@
 				83D7CC001F50B82A00043D47 /* AssignmentProgressionCollectionViewCell.swift in Sources */,
 				83F02ED81F8EC3BD00A85014 /* SubjectCharacterView.swift in Sources */,
 				83FFD90B1F5387B80015988F /* ReviewTimelineHeaderFooterView.swift in Sources */,
+				833E0512221B33D700E99A53 /* SubjectDetailViewController.swift in Sources */,
 				83FEF4401F4F969900A7029D /* ReviewTimelineEntryTableViewCell.swift in Sources */,
 				83FE5F1C1F534F5400A2CAA2 /* BlurredImageView.swift in Sources */,
 				83D7CC021F50EC7900043D47 /* AssignmentProgressionCollectionReusableView.swift in Sources */,

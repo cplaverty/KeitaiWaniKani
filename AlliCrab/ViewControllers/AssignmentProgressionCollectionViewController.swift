@@ -21,6 +21,10 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
         case subject = "Subject"
     }
     
+    private enum SegueIdentifier: String {
+        case subjectDetail = "SubjectDetail"
+    }
+    
     // MARK: - Properties
     
     var repositoryReader: ResourceRepositoryReader? {
@@ -82,11 +86,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.subject.rawValue, for: indexPath) as! AssignmentProgressionCollectionViewCell
         
-        cell.subject = item.subject
-        cell.isLocked = item.isLocked
-        cell.availableAt = item.availableAt
-        cell.guruTime = item.guruTime
-        cell.percentComplete = item.percentComplete
+        cell.subjectProgression = item
         cell.updateUI()
         
         return cell
@@ -103,13 +103,6 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
         }
         
         return view
-    }
-    
-    // MARK: - UICollectionViewDelegate
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! AssignmentProgressionCollectionViewCell
-        self.present(WebViewController.wrapped(url: cell.documentURL), animated: true, completion: nil)
     }
     
     // MARK: - Timer
@@ -183,6 +176,25 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
         
         updateUITimer?.invalidate()
         updateUITimer = nil
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier, let segueIdentifier = SegueIdentifier(rawValue: identifier) else {
+            return
+        }
+        
+        os_log("Preparing segue %@", type: .debug, identifier)
+        
+        switch segueIdentifier {
+        case .subjectDetail:
+            let vc = segue.destination as! SubjectDetailViewController
+            let cell = sender as! AssignmentProgressionCollectionViewCell
+            vc.repositoryReader = repositoryReader
+            vc.subjectID = cell.subjectProgression!.subjectID
+        }
+    }
+    
+    @IBAction func unwindToSubjectDetailPresenter(_ unwindSegue: UIStoryboardSegue) {
     }
     
     // MARK: - Update UI

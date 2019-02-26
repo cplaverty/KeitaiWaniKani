@@ -6,6 +6,7 @@
 //
 
 public struct SubjectProgression {
+    public let subjectID: Int
     public let subject: Subject
     public let assignment: Assignment?
     public let isLocked: Bool
@@ -14,7 +15,8 @@ public struct SubjectProgression {
     public let guruTime: NextReviewTime
     public let percentComplete: Float
     
-    public init(subject: Subject, assignment: Assignment?, getAssignmentForSubjectID: (Int) -> Assignment?) {
+    public init(subjectID: Int, subject: Subject, assignment: Assignment?, getAssignmentForSubjectID: (Int) -> Assignment?) {
+        self.subjectID = subjectID
         self.subject = subject
         self.assignment = assignment
         self.isLocked = assignment == nil || assignment!.srsStage == 0

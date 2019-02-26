@@ -62,6 +62,14 @@ extension Vocabulary {
 }
 
 extension Vocabulary {
+    public var allReadings: String {
+        return readings.lazy
+            .map({ $0.reading })
+            .joined(separator: ", ")
+    }
+}
+
+extension Vocabulary {
     public struct PronunciationAudio: Codable, Equatable {
         public let url: URL
         public let metadata: Metadata

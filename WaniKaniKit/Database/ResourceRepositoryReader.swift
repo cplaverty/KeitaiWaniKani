@@ -261,7 +261,8 @@ public class ResourceRepositoryReader {
             let assignmentsBySubjectID = try Assignment.read(from: database, subjectIDs: requiredAssigmentSubjectIDs)
             
             return items.map({ item in
-                SubjectProgression(subject: item.data as! Subject,
+                SubjectProgression(subjectID: item.id,
+                                   subject: item.data as! Subject,
                                    assignment: assignmentsBySubjectID[item.id],
                                    getAssignmentForSubjectID: { subjectID in assignmentsBySubjectID[subjectID] })
             })
@@ -532,6 +533,21 @@ public class ResourceRepositoryReader {
         }
         
         return levelProgressions
+    }
+    
+    public func subjectDetail(id: Int) throws -> (subject: Subject, studyMaterials: StudyMaterials?, assignment: Assignment?, reviewStatistics: ReviewStatistics?) {
+        guard let databaseQueue = self.databaseQueue else {
+            throw ResourceRepositoryError.noDatabase
+        }
+        
+        return try databaseQueue.inDatabase { database in
+            let subjectItem = try ResourceCollectionItem.readSubject(from: database, id: id)
+            let studyMaterials = try StudyMaterials(from: database, subjectID: id)
+            let assignment = try Assignment(from: database, subjectID: id)
+            let reviewStatistics = try ReviewStatistics(from: database, subjectID: id)
+
+            return (subjectItem.data as! Subject, studyMaterials, assignment, reviewStatistics)
+        }
     }
     
     public func subjects(srsStage: SRSStage) throws -> [(subject: Subject, assignment: Assignment)] {

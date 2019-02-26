@@ -22,15 +22,7 @@ class AssignmentProgressionCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    var isLocked = true
-    var availableAt: NextReviewTime?
-    var guruTime: NextReviewTime?
-    var percentComplete: Float = 0
-    var subject: Subject!
-    
-    var documentURL: URL {
-        return subject.documentURL
-    }
+    var subjectProgression: SubjectProgression?
     
     // MARK: - Outlets
     
@@ -42,13 +34,23 @@ class AssignmentProgressionCollectionViewCell: UICollectionViewCell {
     // MARK: - Update UI
     
     func updateUI() {
+        guard let subjectProgression = self.subjectProgression else {
+            fatalError()
+        }
+        
+        let isLocked = subjectProgression.isLocked
+        let availableAt = subjectProgression.availableAt
+        let guruTime = subjectProgression.guruTime
+        let percentComplete = subjectProgression.percentComplete
+        let subject = subjectProgression.subject
+        
         characterView.subject = subject
         backgroundColor = subject.subjectType.backgroundColor.withAlphaComponent(isLocked ? 0.5 : 1.0)
         progressView.progressTintColor = subject.subjectType.backgroundColor.withAlphaComponent(0.4)
         
         if isLocked {
             timeToNextReviewLabel.text = "Locked"
-        } else if let availableAt = availableAt {
+        } else {
             switch availableAt {
             case .none:
                 timeToNextReviewLabel.text = "Burned"
@@ -60,22 +62,16 @@ class AssignmentProgressionCollectionViewCell: UICollectionViewCell {
                 let formattedInterval = dateComponentsFormatter.string(from: date.timeIntervalSinceNow, roundingUpwardToNearest: .oneMinute) ?? "???"
                 timeToNextReviewLabel.text = formattedInterval
             }
-        } else {
-            timeToNextReviewLabel.text = "-"
         }
         
-        if let guruTime = guruTime {
-            switch guruTime {
-            case .none, .now:
-                timeToGuruLabel.text = "-"
-            case let .date(date) where date.timeIntervalSinceNow <= 0:
-                timeToGuruLabel.text = "-"
-            case let .date(date):
-                let formattedInterval = dateComponentsFormatter.string(from: date.timeIntervalSinceNow, roundingUpwardToNearest: .oneMinute) ?? "???"
-                timeToGuruLabel.text = formattedInterval
-            }
-        } else {
+        switch guruTime {
+        case .none, .now:
             timeToGuruLabel.text = "-"
+        case let .date(date) where date.timeIntervalSinceNow <= 0:
+            timeToGuruLabel.text = "-"
+        case let .date(date):
+            let formattedInterval = dateComponentsFormatter.string(from: date.timeIntervalSinceNow, roundingUpwardToNearest: .oneMinute) ?? "???"
+            timeToGuruLabel.text = formattedInterval
         }
         
         progressView.setProgress(percentComplete, animated: false)
