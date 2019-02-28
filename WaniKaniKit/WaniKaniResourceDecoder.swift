@@ -27,10 +27,14 @@ public class WaniKaniResourceDecoder: ResourceDecoder {
     private func decodeISO8601Date(decoder: Decoder) throws -> Date {
         let stringValue = try decoder.singleValueContainer().decode(String.self)
         
-        guard let date = DateFormatter.iso8601.date(from: stringValue) else {
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Failed to parse date \(stringValue)"))
+        if let date = DateFormatter.iso8601.date(from: stringValue) {
+            return date
         }
         
-        return date
+        if let date = DateFormatter.iso8601WithoutFractionalSeconds.date(from: stringValue) {
+            return date
+        }
+        
+        throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Failed to parse date \(stringValue)"))
     }
 }
