@@ -463,7 +463,7 @@ class DashboardTableViewController: UITableViewController {
             let vc = segue.destination as! ReviewTimelineTableViewController
             vc.repositoryReader = resourceRepository
         case .srsProgressDetail:
-            let vc = segue.destination as! SubjectCollectionViewController
+            let vc = segue.destination as! SRSProgressDetailCollectionViewController
             let cell = sender as! SRSProgressTableViewCell
             vc.repositoryReader = resourceRepository
             vc.srsStage = cell.srsStage

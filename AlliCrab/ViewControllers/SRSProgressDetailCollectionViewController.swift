@@ -1,5 +1,5 @@
 //
-//  SubjectCollectionViewController.swift
+//  SRSProgressDetailCollectionViewController.swift
 //  AlliCrab
 //
 //  Copyright © 2017 Chris Laverty. All rights reserved.
@@ -9,7 +9,7 @@ import os
 import UIKit
 import WaniKaniKit
 
-class SubjectCollectionViewController: UICollectionViewController {
+class SRSProgressDetailCollectionViewController: UICollectionViewController {
     
     private enum ReuseIdentifier: String {
         case subject = "Subject"
