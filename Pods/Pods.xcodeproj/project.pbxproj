@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		000C8C8AAAA84B209C95A14F3B9BE803 /* sqlite3.h in Headers */ = {isa = PBXBuildFile; fileRef = 7977821DC116BC599B808F2526BC8FED /* sqlite3.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		07E2FBBEAC6C78A52F1F0CD8D3EAB45F /* Pods-WaniKaniKitTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 372058943B2D6E297059CE853F57689A /* Pods-WaniKaniKitTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17584A4EF58F748634FDE31BC41CB15D /* 1Password.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B3DC5C5B7F4D188524E71D2FE9D4D0B /* 1Password.xcassets */; };
 		1CB332AE5B404330DB659F27DFD03C71 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35EC641595FCD03F72F43545B8C6E40 /* UIKit.framework */; };
-		22E40765D982498CF78C21498E617004 /* sqlite3ext.h in Headers */ = {isa = PBXBuildFile; fileRef = E817A4626A764AB8E4D1A7937F9E6890 /* sqlite3ext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2ECF09DE7482A519AA04C826B6F211EC /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7311D2B23D4EAAF3B65D85AF75356B0A /* MobileCoreServices.framework */; };
 		2F016D9D6CDF724FBE166E5BD8818F13 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E2EFBC7B4EC7F39DFD529859746AE8 /* Foundation.framework */; };
-		3C541B703C391928EE5A53192CE66B0E /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = F31FCDF0223BC5DE3A01255CC327AE05 /* sqlite3.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		48200CC7159CEC1072B7C344C4808BBF /* FMDB-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 03864110CEEC761056297A86853B3789 /* FMDB-dummy.m */; };
 		4BB306109B05844E6E76335C931520D6 /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3545EB43789C2C14C579E506DFE85E7A /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B3D75A6DBBFB958385E447FCDD55B4B /* 1PasswordExtension-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9285F6270717AA2B79A0F111F841534F /* 1PasswordExtension-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -32,6 +31,7 @@
 		8F2F295B9B45BA69360E6EA65DA656A8 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = A25FEF2D826BDF6B89F1FF017B7054A5 /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8F4A9E1BD4AD2650F2BB39E66BD361F2 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = B032D4112E58C0E362E5F6E6BBBDFF80 /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9132D01241057B936C46CA17C87E87E0 /* Pods-AlliCrab-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C25C4505DD347914B4A045596A34B200 /* Pods-AlliCrab-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		99341EC767C39F54FE457B8A43C4FC2E /* sqlite3ext.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E07B4E3A13DD96D679DC3D9608DDA45 /* sqlite3ext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A12B4F428A222649FD3565D7B3FF7DB1 /* OnePasswordExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A8851B6CCDB15F8828358913CB794E9 /* OnePasswordExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7BEBEDD6F32A2A45B62C4256A71424E /* FMDB-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 208CDDA9B3B41CEAC60B47320B56DCC6 /* FMDB-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A80DF112B8CA7BFBFC42E23199B1DF65 /* sqlite3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF051A3C9503AAA2442182BA2E2FE7A7 /* sqlite3.framework */; };
@@ -45,9 +45,9 @@
 		D5F7AAA471F10E120AE25EE041BA0AEB /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894912F8BC8324A9054E380CD1D2E46 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		DCC10F94F5F1F0622BC2F0A14F59A969 /* OnePasswordExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 325D92696AB85BDB3DEE7A126C4FD793 /* OnePasswordExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		DF84302DDAA080D8EA17CC6F36EC595B /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 244499A5BC340B607CC27DF2728D4D68 /* FMDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E2E209FE13BE1FDF5432D9053B69D422 /* sqlite3.h in Headers */ = {isa = PBXBuildFile; fileRef = ABCE633D9D141DD4144FDFED668FD57F /* sqlite3.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E6698319D6E2ACE8337CCB6D2F4EDC2C /* Pods-WaniKaniKitTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AFE2171579C48F338A5D32731145F /* Pods-WaniKaniKitTests-dummy.m */; };
 		ED511D2F505B779355F056B6321E622F /* OnePasswordExtensionResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DF9D3AD2A46BA13E7D56FEDE14571E6A /* OnePasswordExtensionResources.bundle */; };
+		F5A7914B3DAC8D994BBEB64DA78FD556 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = DD7F52B1DE95BC377F621BB1C3D40ECD /* sqlite3.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		FB23EF2A7885485BB512522546602762 /* 1PasswordExtension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2070B4C760337564C0BA86AC2648E9DD /* 1PasswordExtension-dummy.m */; };
 /* End PBXBuildFile section */
 
@@ -170,8 +170,10 @@
 		706D80632BCC19A100E8709BAAF938E7 /* Pods-AlliCrab.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-AlliCrab.modulemap"; sourceTree = "<group>"; };
 		7311D2B23D4EAAF3B65D85AF75356B0A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		75EED18A243A9B6219FA348DDF15879E /* Pods_WaniKaniStudyQueueWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_WaniKaniStudyQueueWidget.framework; path = "Pods-WaniKaniStudyQueueWidget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7977821DC116BC599B808F2526BC8FED /* sqlite3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = "sqlite-amalgamation-3270200/sqlite3.h"; sourceTree = "<group>"; };
 		7CB511E20219EC040D6BC853ACBE2131 /* Pods-WaniKaniStudyQueueWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniStudyQueueWidget.debug.xcconfig"; sourceTree = "<group>"; };
 		7D6D9758B8CBF7B91736532E10D845F9 /* Pods-WaniKaniKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-WaniKaniKit.modulemap"; sourceTree = "<group>"; };
+		7E07B4E3A13DD96D679DC3D9608DDA45 /* sqlite3ext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sqlite3ext.h; path = "sqlite-amalgamation-3270200/sqlite3ext.h"; sourceTree = "<group>"; };
 		7FA5662BA46E627838CDA578BDA3EDBB /* FMDB.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FMDB.xcconfig; sourceTree = "<group>"; };
 		814AFB9BFD166A6FBD34ED0D5535797D /* Pods-WaniKaniKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		8243FEF6EC2B31F3E1747B1914145BAD /* Pods_AlliCrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AlliCrab.framework; path = "Pods-AlliCrab.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,7 +188,6 @@
 		968BA0C896C792C7937E1037148A1DE7 /* Pods-WaniKaniKitTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-WaniKaniKitTests.modulemap"; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A25FEF2D826BDF6B89F1FF017B7054A5 /* FMResultSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = src/fmdb/FMResultSet.h; sourceTree = "<group>"; };
-		ABCE633D9D141DD4144FDFED668FD57F /* sqlite3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = "sqlite-amalgamation-3270100/sqlite3.h"; sourceTree = "<group>"; };
 		AF5D739D03933CAC51FAC8C0B4A3DD81 /* 1PasswordExtension-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "1PasswordExtension-prefix.pch"; sourceTree = "<group>"; };
 		B032D4112E58C0E362E5F6E6BBBDFF80 /* FMDatabase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = src/fmdb/FMDatabase.h; sourceTree = "<group>"; };
 		B17AEAF10D4321018876529AB4C6BC9D /* Pods-AlliCrab-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AlliCrab-frameworks.sh"; sourceTree = "<group>"; };
@@ -202,15 +203,14 @@
 		D732759F06F3BB4CF964C82CD5BCDE72 /* Pods-WaniKaniKitTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniKitTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		D90E7E29FE1DB57264359595562DD0CC /* FMDatabase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = src/fmdb/FMDatabase.m; sourceTree = "<group>"; };
 		D920BA0FDABF4D9BDC104287D7BDEF01 /* Pods-WaniKaniStudyQueueWidget-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniStudyQueueWidget-Info.plist"; sourceTree = "<group>"; };
+		DD7F52B1DE95BC377F621BB1C3D40ECD /* sqlite3.c */ = {isa = PBXFileReference; includeInIndex = 1; name = sqlite3.c; path = "sqlite-amalgamation-3270200/sqlite3.c"; sourceTree = "<group>"; };
 		DF051A3C9503AAA2442182BA2E2FE7A7 /* sqlite3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = sqlite3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF9D3AD2A46BA13E7D56FEDE14571E6A /* OnePasswordExtensionResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = OnePasswordExtensionResources.bundle; path = "1PasswordExtension-OnePasswordExtensionResources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5A6AE39824680CA5D98745A4C438B26 /* Pods-WaniKaniKitTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniKitTests-Info.plist"; sourceTree = "<group>"; };
 		E7AF059C429FC57FA09EB440E789EE1B /* Pods-WaniKaniKitTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WaniKaniKitTests-frameworks.sh"; sourceTree = "<group>"; };
-		E817A4626A764AB8E4D1A7937F9E6890 /* sqlite3ext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sqlite3ext.h; path = "sqlite-amalgamation-3270100/sqlite3ext.h"; sourceTree = "<group>"; };
 		EE3197A68A7BC9831A733B3D5E769CE0 /* FMDB-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-prefix.pch"; sourceTree = "<group>"; };
 		F2460464A31492953826CD87EA7DD94A /* Pods-WaniKaniStudyQueueWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniStudyQueueWidget.release.xcconfig"; sourceTree = "<group>"; };
 		F2760957698EB062E8209A190F8CB8E6 /* sqlite3.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = sqlite3.xcconfig; sourceTree = "<group>"; };
-		F31FCDF0223BC5DE3A01255CC327AE05 /* sqlite3.c */ = {isa = PBXFileReference; includeInIndex = 1; name = sqlite3.c; path = "sqlite-amalgamation-3270100/sqlite3.c"; sourceTree = "<group>"; };
 		F6A86539E428174CDF6EA32245AEBDC0 /* Pods-WaniKaniKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniKit.release.xcconfig"; sourceTree = "<group>"; };
 		F6E87814B96F46E033D02F3015711E96 /* 1PasswordExtension-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "1PasswordExtension-Info.plist"; sourceTree = "<group>"; };
 		FC055A6AD0F35A29A30A8950947F1472 /* FMDB.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FMDB.modulemap; sourceTree = "<group>"; };
@@ -405,7 +405,7 @@
 		80473BE76C1ABD0DC4360663D171BEA8 /* sqlite3 */ = {
 			isa = PBXGroup;
 			children = (
-				FC3CD1DA4CD53BA552A9378DE815EBE5 /* common */,
+				DC93BCD3808744B87FED4D5751C2D3EA /* common */,
 				5BD93E9E5611C087BF70004209764D9C /* Support Files */,
 			);
 			name = sqlite3;
@@ -510,6 +510,16 @@
 			);
 			sourceTree = "<group>";
 		};
+		DC93BCD3808744B87FED4D5751C2D3EA /* common */ = {
+			isa = PBXGroup;
+			children = (
+				DD7F52B1DE95BC377F621BB1C3D40ECD /* sqlite3.c */,
+				7977821DC116BC599B808F2526BC8FED /* sqlite3.h */,
+				7E07B4E3A13DD96D679DC3D9608DDA45 /* sqlite3ext.h */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
 		FBC62BBA57EB82087645A3B1019B8955 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,16 +530,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		FC3CD1DA4CD53BA552A9378DE815EBE5 /* common */ = {
-			isa = PBXGroup;
-			children = (
-				F31FCDF0223BC5DE3A01255CC327AE05 /* sqlite3.c */,
-				ABCE633D9D141DD4144FDFED668FD57F /* sqlite3.h */,
-				E817A4626A764AB8E4D1A7937F9E6890 /* sqlite3ext.h */,
-			);
-			name = common;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -538,8 +538,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DC1708C142EFE6BCE87C0AD4C0EF2A1 /* sqlite3-umbrella.h in Headers */,
-				E2E209FE13BE1FDF5432D9053B69D422 /* sqlite3.h in Headers */,
-				22E40765D982498CF78C21498E617004 /* sqlite3ext.h in Headers */,
+				000C8C8AAAA84B209C95A14F3B9BE803 /* sqlite3.h in Headers */,
+				99341EC767C39F54FE457B8A43C4FC2E /* sqlite3ext.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -864,7 +864,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAD93A203C9670BA7F79F050D63432E4 /* sqlite3-dummy.m in Sources */,
-				3C541B703C391928EE5A53192CE66B0E /* sqlite3.c in Sources */,
+				F5A7914B3DAC8D994BBEB64DA78FD556 /* sqlite3.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
