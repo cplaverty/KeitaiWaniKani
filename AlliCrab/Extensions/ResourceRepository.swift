@@ -48,6 +48,13 @@ extension ResourceRepository {
         let progress = Progress(totalUnitCount: expectedTotalUnitCount)
         progress.completedUnitCount = 1
         
+        let backgroundTaskID = UIApplication.shared.beginBackgroundTask(withName: "ResourceRepository.updateAppData") {
+            os_log("Cancelling background task from expiration handler", type: .debug)
+            progress.cancel()
+        }
+        
+        os_log("Begun background task %d", type: .debug, backgroundTaskID.rawValue)
+        
         let sharedCompletionHandler: (ResourceRefreshResult) -> Void = { result in
             switch result {
             case .success, .noData:
@@ -60,6 +67,8 @@ extension ResourceRepository {
                     } else {
                         completionHandler(.noData)
                     }
+                    os_log("End background task %d", type: .debug, backgroundTaskID.rawValue)
+                    UIApplication.shared.endBackgroundTask(backgroundTaskID)
                 } else if results.count > expectedResultCount {
                     fatalError("Received more results than expected!")
                 }
@@ -71,6 +80,8 @@ extension ResourceRepository {
                 }
                 progress.cancel()
                 completionHandler(result)
+                os_log("End background task %d", type: .debug, backgroundTaskID.rawValue)
+                UIApplication.shared.endBackgroundTask(backgroundTaskID)
             }
         }
         
