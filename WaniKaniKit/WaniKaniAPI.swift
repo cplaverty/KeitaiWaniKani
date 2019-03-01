@@ -109,8 +109,8 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
         progress.isCancellable = true
         progress.isPausable = true
         
-        let task = dataTask(with: url) { (data, response, error) in
-            defer { progress.completedUnitCount = 1 }
+        let task = dataTask(with: url) { [weak progress] (data, response, error) in
+            defer { progress?.completedUnitCount = 1 }
             do {
                 let resource = try self.parseResource(T.self, data: data, response: response, error: error)
                 completionHandler(resource, error)
