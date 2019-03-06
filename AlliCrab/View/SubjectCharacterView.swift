@@ -105,12 +105,17 @@ class SubjectCharacterView: UIView, XibLoadable {
         let imageLoader = RadicalCharacterImageLoader(characterImages: imageChoices)
         self.imageLoader = imageLoader
         imageLoader.loadImage { [weak self] (image, error) in
+            guard let currentImageLoader = self?.imageLoader, imageLoader === currentImageLoader else {
+                os_log("Ignoring outdated image load request", type: .info)
+                return
+            }
+            self?.imageLoader = nil
+            
             guard let image = image else {
                 os_log("Failed to fetch subject image %@: %@", type: .error, imageLoader.characterImage?.url.absoluteString ?? "<no renderable image>", error?.localizedDescription ?? "<no error>")
                 return
             }
             
-            self?.imageLoader = nil
             self?.displayImageView.image = image
             self?.displayImageView.isHidden = false
         }

@@ -23,6 +23,12 @@ public struct Vocabulary: ResourceCollectionItemData, Equatable {
     public let pronunciationAudios: [PronunciationAudio]
     public let lessonPosition: Int
     
+    public var normalisedPartsOfSpeech: [String] {
+        get {
+            return partsOfSpeech.map({ normalisePartOfSpeech($0).capitalized })
+        }
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case createdAt = "created_at"
         case level
@@ -40,6 +46,31 @@ public struct Vocabulary: ResourceCollectionItemData, Equatable {
         case contextSentences = "context_sentences"
         case pronunciationAudios = "pronunciation_audios"
         case lessonPosition = "lesson_position"
+    }
+    
+    private func normalisePartOfSpeech(_ str: String) -> String {
+        switch str {
+        case "godan_verb":
+            return "godan verb"
+        case "i_adjective":
+            return "い adjective"
+        case "ichidan_verb":
+            return "ichidan verb"
+        case "intransitive_verb":
+            return "intransitive verb"
+        case "na_adjective":
+            return "な adjective"
+        case "no_adjective":
+            return "の adjective"
+        case "proper_noun":
+            return "proper noun"
+        case "suru_verb":
+            return "する verb"
+        case "transitive_verb":
+            return "transitive verb"
+        default:
+            return str
+        }
     }
 }
 

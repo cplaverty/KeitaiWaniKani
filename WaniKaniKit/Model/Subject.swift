@@ -58,7 +58,7 @@ extension Subject {
         }
         
         let guruDate: Date?
-        if let assignment = assignment, assignment.srsStage > 0 {
+        if let assignment = assignment, pendingSubjectAssignments.isEmpty {
             guruDate = assignment.guruDate(level: level)
         } else if let unlockDateForLockedItems = unlockDateForLockedItems {
             guruDate = Assignment.earliestDate(from: unlockDateForLockedItems,

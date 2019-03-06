@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContextSentenceView" customModule="AlliCrab" customModuleProvider="target">
+            <connections>
+                <outlet property="englishTranslationLabel" destination="Wj1-Eq-krs" id="ysX-UX-waJ"/>
+                <outlet property="japaneseSentenceLabel" destination="UBi-21-bQz" id="cTx-EY-Wzh"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBi-21-bQz">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="17.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wj1-Eq-krs">
+                    <rect key="frame" x="0.0" y="24.5" width="375" height="20.5"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="UBi-21-bQz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Fjj-UE-rP7"/>
+                <constraint firstItem="Wj1-Eq-krs" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="QMK-vb-iFk"/>
+                <constraint firstItem="Wj1-Eq-krs" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="VsG-0J-xfd"/>
+                <constraint firstItem="UBi-21-bQz" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="j7O-xS-a56"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="UBi-21-bQz" secondAttribute="trailing" id="oSp-1Q-c6i"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Wj1-Eq-krs" secondAttribute="trailing" id="rVT-ij-KA3"/>
+                <constraint firstItem="Wj1-Eq-krs" firstAttribute="firstBaseline" secondItem="UBi-21-bQz" secondAttribute="baseline" multiplier="1.25" constant="24" symbolType="layoutAnchor" id="tnr-dz-oJ3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+</document>

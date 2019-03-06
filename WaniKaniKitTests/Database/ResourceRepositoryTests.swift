@@ -262,6 +262,8 @@ class ResourceRepositoryTests: XCTestCase {
     }
     
     func testUpdateSubjects() {
+        createTestUser()
+        
         let dataUpdatedAt = makeUTCDate(year: 2017, month: 7, day: 14, hour: 1, minute: 6, second: 51)
         let expected1 = ResourceCollectionItem(id: 1,
                                                type: .radical,
@@ -283,7 +285,7 @@ class ResourceRepositoryTests: XCTestCase {
                                                                 ],
                                                              meanings: [Meaning(meaning: "Ground", isPrimary: true, isAcceptedAnswer: true)],
                                                              auxiliaryMeanings: [],
-                                                             amalgamationSubjectIDs: [440, 449],
+                                                             amalgamationSubjectIDs: [440],
                                                              meaningMnemonic: "ground",
                                                              lessonPosition: 0))
         let expected2 = ResourceCollectionItem(id: 440,
@@ -304,7 +306,7 @@ class ResourceRepositoryTests: XCTestCase {
                                                             Reading(type: .nanori, reading: "かず", isPrimary: false, isAcceptedAnswer: false),
                                                             ],
                                                            componentSubjectIDs: [1],
-                                                           amalgamationSubjectIDs: [2467, 2468],
+                                                           amalgamationSubjectIDs: [2467],
                                                            visuallySimilarSubjectIDs: [],
                                                            meaningMnemonic: "ground",
                                                            meaningHint: "one",
@@ -615,6 +617,29 @@ class ResourceRepositoryTests: XCTestCase {
             XCTAssertNotEqual(updateTime2, updateTime)
         } catch {
             XCTFail(error.localizedDescription)
+        }
+    }
+    
+    private func createTestUser() {
+        let user = UserInformation(id: "00000000-0000-0000-0000-000000000000",
+                                   username: "Test",
+                                   level: 1,
+                                   profileURL: URL(string: "https://localhost/Test")!,
+                                   startedAt: Date(),
+                                   subscription: UserInformation.Subscription(isActive: true,
+                                                                              type: "lifetime",
+                                                                              maxLevelGranted: 60,
+                                                                              periodEndsAt: nil),
+                                   currentVacationStartedAt: nil)
+        
+        databaseManager.databaseQueue!.inExclusiveTransaction { (database, rollback) in
+            do {
+                try user.write(to: database)
+                try ResourceType.user.setLastUpdateDate(Date(), in: database)
+            } catch {
+                rollback.pointee = true
+                XCTFail("Failed to create test user: \(error)")
+            }
         }
     }
     

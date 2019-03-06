@@ -17,11 +17,15 @@ public enum SubjectRelationType: String {
 
 struct SubjectRelation {
     static func read(from database: FMDatabase, type: SubjectRelationType, id: Int) throws -> [Int] {
+        let subjects = Tables.subjectsView
+        let userInformation = Tables.userInformation
+        
         let query = """
         SELECT \(table.relatedSubjectID)
-        FROM \(table)
+        FROM \(table) INNER JOIN \(subjects) on \(table.relatedSubjectID) = \(subjects.id)
         WHERE \(table.relationType) = ?
         AND \(table.subjectID) = ?
+        AND \(subjects.level) <= (SELECT MIN(\(userInformation.subscriptionMaxLevelGranted)) FROM \(userInformation))
         ORDER BY \(table.index)
         """
         
@@ -31,17 +35,6 @@ struct SubjectRelation {
         var items = [Int]()
         while resultSet.next() {
             items.append(resultSet.long(forColumn: table.relatedSubjectID.name))
-        }
-        
-        return items
-    }
-    
-    static func read(from database: FMDatabase, type: SubjectRelationType, ids: [Int]) throws -> [Int: [Int]] {
-        var items = [Int: [Int]]()
-        items.reserveCapacity(ids.count)
-        
-        for id in ids {
-            items[id] = try read(from: database, type: type, id: id)
         }
         
         return items
