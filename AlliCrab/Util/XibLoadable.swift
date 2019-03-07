@@ -18,7 +18,17 @@ extension XibLoadable where Self: UIView {
         }
     }
     
-    func loadViewFromXib() -> UIView! {
+    func setupContentViewFromXib() -> UIView {
+        let contentView = loadViewFromXib()
+        contentView.frame = bounds
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        addSubview(contentView)
+        
+        return contentView
+    }
+    
+    private func loadViewFromXib() -> UIView {
         let bundle = Bundle(for: type(of: self))
         let nib = UINib(nibName: xibName, bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil).first as! UIView

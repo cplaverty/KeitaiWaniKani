@@ -69,26 +69,18 @@ class SubjectCharacterView: UIView, XibLoadable {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        xibSetup()
+        contentView = setupContentViewFromXib()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        xibSetup()
+        contentView = setupContentViewFromXib()
     }
     
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        xibSetup()
+        contentView = setupContentViewFromXib()
         contentView.prepareForInterfaceBuilder()
-    }
-    
-    func xibSetup() {
-        contentView = loadViewFromXib()
-        contentView.frame = bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        addSubview(contentView)
     }
     
     func setCharacters(_ characters: String) {
