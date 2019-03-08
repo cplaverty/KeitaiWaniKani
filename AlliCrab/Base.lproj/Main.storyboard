@@ -379,48 +379,49 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="79.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="LtP-3u-WAi" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
-                                            <rect key="frame" x="16" y="11" width="50" height="58"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="50" placeholder="YES" id="Hbq-Ah-VDd"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                    <real key="value" value="42"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                        </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1F8-0h-Fel">
-                                            <rect key="frame" x="317" y="35.666666666666664" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YOb-Sk-8n1">
-                                            <rect key="frame" x="317" y="11" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="alT-qW-DLT">
+                                            <rect key="frame" x="16" y="11" width="343" height="58"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7V6-SF-TiY" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="195.66666666666666" height="58"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                                            <real key="value" value="28"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="Lw5-K7-adb">
+                                                    <rect key="frame" x="294.66666666666669" y="0.0" width="48.333333333333314" height="58"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4E-vb-ZZR">
+                                                            <rect key="frame" x="2.3333333333333144" y="0.0" width="46" height="29"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meaning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3sk-IQ-ewd">
+                                                            <rect key="frame" x="0.0" y="29" width="48.333333333333336" height="29"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="1F8-0h-Fel" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LtP-3u-WAi" secondAttribute="trailing" constant="8" symbolic="YES" id="0UC-aJ-gTb"/>
-                                        <constraint firstItem="LtP-3u-WAi" firstAttribute="leading" secondItem="n8Y-56-edz" secondAttribute="leadingMargin" id="AOm-7u-k7B"/>
-                                        <constraint firstItem="1F8-0h-Fel" firstAttribute="trailing" secondItem="n8Y-56-edz" secondAttribute="trailingMargin" id="DuY-6z-fPy"/>
-                                        <constraint firstItem="YOb-Sk-8n1" firstAttribute="trailing" secondItem="n8Y-56-edz" secondAttribute="trailingMargin" id="GMe-Js-aLk"/>
-                                        <constraint firstItem="1F8-0h-Fel" firstAttribute="firstBaseline" secondItem="YOb-Sk-8n1" secondAttribute="baseline" constant="24" symbolType="layoutAnchor" id="NZk-eN-JW1"/>
-                                        <constraint firstItem="YOb-Sk-8n1" firstAttribute="top" secondItem="n8Y-56-edz" secondAttribute="topMargin" id="PB8-kv-mww"/>
-                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="1F8-0h-Fel" secondAttribute="bottom" id="Ug6-d5-r63"/>
-                                        <constraint firstItem="YOb-Sk-8n1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="LtP-3u-WAi" secondAttribute="trailing" constant="8" symbolic="YES" id="bLf-is-iJn"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="LtP-3u-WAi" secondAttribute="bottom" id="iAT-9I-Yog"/>
-                                        <constraint firstItem="LtP-3u-WAi" firstAttribute="top" secondItem="n8Y-56-edz" secondAttribute="topMargin" id="zDY-Rx-7wh"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="alT-qW-DLT" secondAttribute="bottom" id="8e4-6z-wSb"/>
+                                        <constraint firstItem="alT-qW-DLT" firstAttribute="top" secondItem="n8Y-56-edz" secondAttribute="topMargin" id="GDd-gD-Zvh"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="alT-qW-DLT" secondAttribute="trailing" id="LeG-A4-1u6"/>
+                                        <constraint firstItem="alT-qW-DLT" firstAttribute="leading" secondItem="n8Y-56-edz" secondAttribute="leadingMargin" id="oE5-d7-qIe"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <outlet property="characterView" destination="LtP-3u-WAi" id="5Qz-k1-KtT"/>
-                                    <outlet property="meaningLabel" destination="YOb-Sk-8n1" id="wGb-dv-2Pq"/>
-                                    <outlet property="readingLabel" destination="1F8-0h-Fel" id="zqC-xC-zH4"/>
+                                    <outlet property="characterView" destination="7V6-SF-TiY" id="jbt-8K-qZy"/>
+                                    <outlet property="primaryMeaningLabel" destination="3sk-IQ-ewd" id="N0W-R7-cAI"/>
+                                    <outlet property="primaryReadingLabel" destination="c4E-vb-ZZR" id="gL8-DL-8pR"/>
                                     <segue destination="8M7-Yf-8Qr" kind="show" identifier="SubjectDetail" id="nTC-ah-dsD">
                                         <segue key="commit" inheritsFrom="parent" id="DNS-R0-Cdc"/>
                                         <segue key="preview" inheritsFrom="commit" id="aPG-MQ-RRM"/>

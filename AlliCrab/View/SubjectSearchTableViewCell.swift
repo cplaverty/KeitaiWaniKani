@@ -17,16 +17,21 @@ class SubjectSearchTableViewCell: UITableViewCell {
     var subject: Subject! {
         didSet {
             characterView.subject = subject
-            meaningLabel.text = subject.meanings.lazy.filter({ $0.isPrimary }).map({ $0.meaning }).joined(separator: ", ")
-            readingLabel.text = subject.readings.lazy.filter({ $0.isPrimary }).map({ $0.reading }).joined(separator: ", ")
             backgroundColor = subject.subjectType.backgroundColor
+            
+            if let primaryReadingLabel = primaryReadingLabel {
+                primaryReadingLabel.text = subject.primaryReading
+            }
+            if let primaryMeaningLabel = primaryMeaningLabel {
+                primaryMeaningLabel.text = subject.primaryMeaning
+            }
         }
     }
     
     // MARK: - Outlets
     
     @IBOutlet weak var characterView: SubjectCharacterView!
-    @IBOutlet weak var meaningLabel: UILabel!
-    @IBOutlet weak var readingLabel: UILabel!
+    @IBOutlet weak var primaryReadingLabel: UILabel!
+    @IBOutlet weak var primaryMeaningLabel: UILabel!
     
 }

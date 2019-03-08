@@ -40,36 +40,48 @@ public protocol Subject {
     var lessonPosition: Int { get }
 }
 
-extension Subject {
-    public func earliestGuruDate(assignment: Assignment?, getAssignmentForSubjectID: (Int) -> Assignment?) -> Date? {
-        if assignment?.isPassed == true {
-            return assignment?.passedAt ?? Date.distantPast
+public extension Subject {
+    var primaryMeaning: String? {
+        get {
+            return meanings.lazy.filter({ $0.isPrimary }).map({ $0.meaning }).first
+        }
+    }
+    
+    var primaryReading: String? {
+        get {
+            return readings.lazy.filter({ $0.isPrimary }).map({ $0.reading }).first
+        }
+    }
+    
+    func earliestGuruDate(assignment: Assignment?, getAssignmentForSubjectID: (Int) -> Assignment?) -> Date? {
+        if let assignment = assignment, assignment.isPassed == true {
+            return assignment.passedAt!
         }
         
-        let pendingSubjectAssignments = componentSubjectIDs.map({ componentSubjectID in getAssignmentForSubjectID(componentSubjectID) })
+        let pendingSubjectAssignments = componentSubjectIDs
+            .map({ componentSubjectID in getAssignmentForSubjectID(componentSubjectID) })
             .filter({ assignment in assignment?.isPassed != true })
+        
+        if let assignment = assignment, pendingSubjectAssignments.isEmpty {
+            return assignment.guruDate(level: level)
+        }
         
         let unlockDateForLockedItems: Date?
         if pendingSubjectAssignments.isEmpty {
             unlockDateForLockedItems = Calendar.current.startOfHour(for: Date())
         } else {
             let guruDates = pendingSubjectAssignments.map({ assignment in assignment?.guruDate(level: level) })
-            unlockDateForLockedItems = guruDates.lazy.filter({ $0 == nil }).isEmpty ? guruDates.lazy.compactMap({ $0 }).max() : nil
+            unlockDateForLockedItems = guruDates.allSatisfy({ $0 != nil }) ? guruDates.lazy.compactMap({ $0 }).max() : nil
         }
         
-        let guruDate: Date?
-        if let assignment = assignment, pendingSubjectAssignments.isEmpty {
-            guruDate = assignment.guruDate(level: level)
-        } else if let unlockDateForLockedItems = unlockDateForLockedItems {
-            guruDate = Assignment.earliestDate(from: unlockDateForLockedItems,
-                                               forItemAtSRSStage: SRSStage.apprentice.numericLevelRange.lowerBound,
-                                               toSRSStage: SRSStage.guru.numericLevelRange.lowerBound,
-                                               subjectType: subjectType,
-                                               level: level)
+        if let unlockDateForLockedItems = unlockDateForLockedItems {
+            return Assignment.earliestDate(from: unlockDateForLockedItems,
+                                           forItemAtSRSStage: SRSStage.apprentice.numericLevelRange.lowerBound,
+                                           toSRSStage: SRSStage.guru.numericLevelRange.lowerBound,
+                                           subjectType: subjectType,
+                                           level: level)
         } else {
-            guruDate = nil
+            return nil
         }
-        
-        return guruDate
     }
 }

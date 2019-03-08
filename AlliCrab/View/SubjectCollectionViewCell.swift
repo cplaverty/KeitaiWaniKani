@@ -20,28 +20,16 @@ class SubjectCollectionViewCell: UICollectionViewCell {
             backgroundColor = subject.subjectType.backgroundColor
             
             if let primaryReadingLabel = primaryReadingLabel {
-                primaryReadingLabel.text = primaryReading
+                primaryReadingLabel.text = subject.primaryReading
             }
             if let primaryMeaningLabel = primaryMeaningLabel {
-                primaryMeaningLabel.text = primaryMeaning
+                primaryMeaningLabel.text = subject.primaryMeaning
             }
         }
     }
     
     var documentURL: URL {
         return subject.documentURL
-    }
-    
-    private var primaryMeaning: String? {
-        get {
-            return subject.meanings.lazy.filter({ $0.isPrimary }).map({ $0.meaning }).first
-        }
-    }
-    
-    private var primaryReading: String? {
-        get {
-            return subject.readings.lazy.filter({ $0.isPrimary }).map({ $0.reading }).first
-        }
     }
     
     // MARK: - Outlets

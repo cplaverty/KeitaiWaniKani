@@ -982,8 +982,8 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mHJ-dH-cxz">
                                             <rect key="frame" x="8" y="8" width="292" height="90"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3VK-Mn-OSO" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="198" height="50"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3VK-Mn-OSO" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="195.5" height="50"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                                             <real key="value" value="28"/>
@@ -991,16 +991,16 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="cAo-aa-zgJ">
-                                                    <rect key="frame" x="206" y="0.0" width="46" height="50"/>
+                                                    <rect key="frame" x="203.5" y="0.0" width="48.5" height="50"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TEd-pU-6nQ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="46" height="25"/>
+                                                            <rect key="frame" x="2.5" y="0.0" width="46" height="25"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meaning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEw-5O-azV">
-                                                            <rect key="frame" x="0.0" y="25" width="46" height="25"/>
+                                                            <rect key="frame" x="0.0" y="25" width="48.5" height="25"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -1042,8 +1042,7 @@
         <image name="Apprentice" width="23" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZlQ-aS-gUB"/>
-        <segue reference="1mC-r9-NRl"/>
+        <segue reference="q4w-16-Z37"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Colours/GlobalTint"/>
 </document>
