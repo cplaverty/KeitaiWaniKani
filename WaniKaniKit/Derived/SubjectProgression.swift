@@ -9,20 +9,39 @@ public struct SubjectProgression {
     public let subjectID: Int
     public let subject: Subject
     public let assignment: Assignment?
-    public let isLocked: Bool
-    public let isPassed: Bool
-    public let availableAt: NextReviewTime
-    public let guruTime: NextReviewTime
     public let percentComplete: Float
+    
+    private let earliestGuruDate: Date?
+    
+    public var isLocked: Bool {
+        get {
+            return assignment == nil || assignment!.srsStage == 0
+        }
+    }
+    
+    public var isPassed: Bool {
+        get {
+            return assignment?.isPassed ?? false
+        }
+    }
+    
+    public var availableAt: NextReviewTime {
+        get {
+            return NextReviewTime(date: assignment?.availableAt)
+        }
+    }
+    
+    public var guruTime: NextReviewTime {
+        get {
+            return NextReviewTime(date: earliestGuruDate)
+        }
+    }
     
     public init(subjectID: Int, subject: Subject, assignment: Assignment?, getAssignmentForSubjectID: (Int) -> Assignment?) {
         self.subjectID = subjectID
         self.subject = subject
         self.assignment = assignment
-        self.isLocked = assignment == nil || assignment!.srsStage == 0
-        self.isPassed = assignment?.isPassed ?? false
-        self.availableAt = NextReviewTime(date: assignment?.availableAt)
-        self.guruTime = NextReviewTime(date: subject.earliestGuruDate(assignment: assignment, getAssignmentForSubjectID: getAssignmentForSubjectID))
+        self.earliestGuruDate = subject.earliestGuruDate(assignment: assignment, getAssignmentForSubjectID: getAssignmentForSubjectID)
         self.percentComplete = min(Float(assignment?.srsStage ?? 0) / Float(SRSStage.guru.numericLevelRange.lowerBound), 1.0)
     }
 }
