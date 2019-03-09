@@ -63,6 +63,37 @@ public class ResourceRepositoryReader {
         }
     }
     
+    public func filterSubjectIDsForSubscription(_ ids: [Int]) throws -> [Int] {
+        guard let databaseQueue = self.databaseQueue else {
+            throw ResourceRepositoryError.noDatabase
+        }
+        
+        return try databaseQueue.inDatabase { database in
+            guard let userInformation = try UserInformation(from: database) else {
+                return []
+            }
+            
+            let subjects = Tables.subjectsView
+            
+            let query = """
+            SELECT \(subjects.id)
+            FROM \(subjects)
+            WHERE \(subjects.id) IN (\(ids.lazy.map({ String ($0) }).joined(separator: ",")))
+            AND \(subjects.level) <= ?
+            """
+            
+            let resultSet = try database.executeQuery(query, values: [userInformation.subscription.maxLevelGranted])
+            defer { resultSet.close() }
+            
+            var items = Set<Int>(minimumCapacity: ids.count)
+            while resultSet.next() {
+                items.insert(resultSet.long(forColumn: subjects.id.name))
+            }
+            
+            return ids.count == items.count ? ids : ids.filter({ items.contains($0) })
+        }
+    }
+    
     public func hasUserInformation() throws -> Bool {
         guard let databaseQueue = self.databaseQueue else {
             throw ResourceRepositoryError.noDatabase
@@ -545,7 +576,7 @@ public class ResourceRepositoryReader {
             let studyMaterials = try StudyMaterials(from: database, subjectID: id)
             let assignment = try Assignment(from: database, subjectID: id)
             let reviewStatistics = try ReviewStatistics(from: database, subjectID: id)
-
+            
             return (subjectItem.data as! Subject, studyMaterials, assignment, reviewStatistics)
         }
     }

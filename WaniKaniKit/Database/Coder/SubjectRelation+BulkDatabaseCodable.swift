@@ -22,10 +22,9 @@ struct SubjectRelation {
         
         let query = """
         SELECT \(table.relatedSubjectID)
-        FROM \(table) INNER JOIN \(subjects) on \(table.relatedSubjectID) = \(subjects.id)
+        FROM \(table)
         WHERE \(table.relationType) = ?
         AND \(table.subjectID) = ?
-        AND \(subjects.level) <= (SELECT MIN(\(userInformation.subscriptionMaxLevelGranted)) FROM \(userInformation))
         ORDER BY \(table.index)
         """
         
