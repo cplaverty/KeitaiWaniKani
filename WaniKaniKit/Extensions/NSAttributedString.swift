@@ -47,7 +47,6 @@ public extension NSAttributedString {
         }
     }
     
-    //init(string str: String, attributes attrs: [NSAttributedString.Key : Any]? = nil)
     internal convenience init(wkMarkup str: String, attributes attrs: [NSAttributedString.Key : Any]? = nil, attributesForTag: (String) -> [NSAttributedString.Key: Any]?) {
         let attributedString = NSMutableAttributedString(string: str, attributes: attrs)
         let matches = regex.matches(in: str, options: [], range: NSRange(str.startIndex..<str.endIndex, in: str))
