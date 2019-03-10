@@ -66,6 +66,7 @@ class SubjectDetailViewController: UIViewController {
     @IBOutlet weak var meaningHintView: UIView!
     @IBOutlet weak var meaningHintLabel: UILabel!
     @IBOutlet weak var meaningNoteLabel: UILabel!
+    
     @IBOutlet weak var readingMnemonicTitleLabel: UILabel!
     @IBOutlet weak var readingMnemonicLabel: UILabel!
     @IBOutlet weak var readingHintView: UIView!
@@ -76,6 +77,7 @@ class SubjectDetailViewController: UIViewController {
     @IBOutlet weak var relatedSubjectsView: UIView!
     @IBOutlet weak var relatedSubjectsContainerViewHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var foundInVocabularyView: UIView!
     @IBOutlet weak var foundInVocabularyContainerViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var srsStageImageView: UIImageView!
@@ -144,7 +146,7 @@ class SubjectDetailViewController: UIViewController {
             meaningMnemonicTitleLabel.text = "Name Mnemonic"
             setText(markup: r.meaningMnemonic, to: meaningMnemonicLabel)
             
-            setRelatedSubjects(ids: r.amalgamationSubjectIDs, title: "Found In Kanji")
+            try setRelatedSubjects(ids: r.amalgamationSubjectIDs, title: "Found In Kanji")
             
             meaningAnsweredCorrectProgressBarView.title = "Name Answered Correct"
         case let k as Kanji:
@@ -174,8 +176,8 @@ class SubjectDetailViewController: UIViewController {
                 readingHintView.removeFromSuperview()
             }
             
-            setRelatedSubjects(ids: k.visuallySimilarSubjectIDs, title: "Visually Similar Kanji")
-            setFoundVocabulary(ids: k.amalgamationSubjectIDs)
+            try setRelatedSubjects(ids: k.visuallySimilarSubjectIDs, title: "Visually Similar Kanji")
+            try setFoundVocabulary(ids: k.amalgamationSubjectIDs)
         case let v as Vocabulary:
             navigationItem.title = v.characters
             removeSubviews(from: stackView, ifNotIn: visibleViewsForVocabulary)
@@ -192,80 +194,46 @@ class SubjectDetailViewController: UIViewController {
             readingMnemonicTitleLabel.text = "Reading Explanation"
             setText(markup: v.readingMnemonic, to: readingMnemonicLabel)
             
-            setRelatedSubjects(ids: v.componentSubjectIDs, title: "Utilised Kanji")
+            try setRelatedSubjects(ids: v.componentSubjectIDs, title: "Utilised Kanji")
         default:
             fatalError("Unknown subject type")
         }
         
-        let primaryMeaning = subject.meanings.lazy.filter({ $0.isPrimary }).map({ $0.meaning }).first!
-        primaryMeaningLabel.text = primaryMeaning
-        let alternativeMeanings = subject.meanings.lazy.filter({ !$0.isPrimary }).map({ $0.meaning }).joined(separator: ", ")
-        if alternativeMeanings.isEmpty {
-            alternativeMeaningsLabel.removeFromSuperview()
-        } else {
-            alternativeMeaningsLabel.text = alternativeMeanings
-        }
+        setMeanings(from: subject)
         
-        setText(items: studyMaterials?.meaningSynonyms, title: "User Synonyms", to: userSynonymsLabel)
-        
-        // TODO Can only do meaning notes on items which are unlocked
-        setText(note: studyMaterials?.meaningNote, to: meaningNoteLabel)
-        setText(note: studyMaterials?.readingNote, to: readingNoteLabel)
-        
-        if let assignment = assignment,
-            let srsStage = SRSStage(numericLevel: assignment.srsStage), srsStage != .initiate {
-            srsStageNameLabel.text = srsStage.rawValue
-            srsStageImageView.image = UIImage(named: srsStage.rawValue)!.withRenderingMode(.alwaysOriginal)
-            
-            setReviewStatistics(reviewStatistics)
-            
-            if let burnedAt = assignment.burnedAt {
-                nextReviewTitleLabel.text = "Retired Date"
-                nextReviewLabel.text = absoluteDateFormatter.string(from: burnedAt)
-            } else {
-                nextReviewTitleLabel.text = "Next Review"
-                switch NextReviewTime(date: assignment.availableAt) {
-                case .none:
-                    nextReviewLabel.text = "-"
-                case .now:
-                    nextReviewLabel.text = "Available Now"
-                case let .date(date):
-                    nextReviewLabel.text = relativeDateFormatter.string(from: date.timeIntervalSinceNow)
-                }
-            }
-            
-            if let unlockedAt = assignment.unlockedAt {
-                unlockedDateLabel.text = absoluteDateFormatter.string(from: unlockedAt)
-            }
-        } else {
-            reviewStatisticsViews.forEach { view in
-                view.removeFromSuperview()
-            }
-        }
+        setStudyMaterials(studyMaterials)
+        setSubjectProgression(assignment: assignment, reviewStatistics: reviewStatistics)
     }
     
     private func setRadicalCombination(ids: [Int]) {
         setSubjectIDs(ids, toChildAtIndex: 0, autoSize: true)
     }
     
-    private func setRelatedSubjects(ids: [Int], title: String) {
-        guard !ids.isEmpty else {
+    private func setRelatedSubjects(ids: [Int], title: String) throws {
+        let allowedSubjectIDs = try repositoryReader.filterSubjectIDsForSubscription(ids.filterDuplicates())
+        guard !allowedSubjectIDs.isEmpty else {
             relatedSubjectsView.removeFromSuperview()
             return
         }
         
         relatedSubjectsLabel.text = title
-        setSubjectIDs(ids, toChildAtIndex: 1, autoSize: false)
+        setSubjectIDs(allowedSubjectIDs, toChildAtIndex: 1, autoSize: false)
     }
     
-    private func setFoundVocabulary(ids: [Int]) {
-        setSubjectIDs(ids, toChildAtIndex: 2, autoSize: false)
+    private func setFoundVocabulary(ids: [Int]) throws {
+        let allowedSubjectIDs = try repositoryReader.filterSubjectIDsForSubscription(ids.filterDuplicates())
+        guard !allowedSubjectIDs.isEmpty else {
+            foundInVocabularyView.removeFromSuperview()
+            return
+        }
+        
+        setSubjectIDs(allowedSubjectIDs, toChildAtIndex: 2, autoSize: false)
     }
     
     private func setSubjectIDs(_ ids: [Int], toChildAtIndex index: Int, autoSize: Bool) {
         let subjectSummaryViewController = children[index] as! SubjectSummaryCollectionViewController
         subjectSummaryViewController.repositoryReader = repositoryReader
-        subjectSummaryViewController.subjectIDs = try! repositoryReader.filterSubjectIDsForSubscription(ids.filterDuplicates())
+        subjectSummaryViewController.subjectIDs = ids
         
         if autoSize {
             let flowLayout = subjectSummaryViewController.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
@@ -298,8 +266,8 @@ class SubjectDetailViewController: UIViewController {
         }
     }
     
-    private func setText(items: [String]?, title: String, to label: UILabel) {
-        guard let items = items else {
+    private func setText(items: [String], title: String, to label: UILabel) {
+        guard !items.isEmpty else {
             label.removeFromSuperview()
             return
         }
@@ -315,11 +283,67 @@ class SubjectDetailViewController: UIViewController {
     }
     
     private func setText(note str: String?, to label: UILabel) {
-        if let str = str {
+        if let str = str, !str.isEmpty {
             label.text = str
         } else {
             label.attributedText = NSAttributedString(string: "None",
                                                       attributes: [.foregroundColor: UIColor.darkGray.withAlphaComponent(0.75)])
+        }
+    }
+    
+    private func setMeanings(from subject: Subject) {
+        let primaryMeaning = subject.meanings.lazy.filter({ $0.isPrimary }).map({ $0.meaning }).first!
+        primaryMeaningLabel.text = primaryMeaning
+        let alternativeMeanings = subject.meanings.lazy.filter({ !$0.isPrimary }).map({ $0.meaning }).joined(separator: ", ")
+        if alternativeMeanings.isEmpty {
+            alternativeMeaningsLabel.removeFromSuperview()
+        } else {
+            alternativeMeaningsLabel.text = alternativeMeanings
+        }
+    }
+    
+    private func setStudyMaterials(_ studyMaterials: StudyMaterials?) {
+        setText(note: studyMaterials?.meaningNote, to: meaningNoteLabel)
+        setText(note: studyMaterials?.readingNote, to: readingNoteLabel)
+        
+        if let studyMaterials = studyMaterials {
+            setText(items: studyMaterials.meaningSynonyms, title: "User Synonyms", to: userSynonymsLabel)
+        } else {
+            userSynonymsLabel.removeFromSuperview()
+        }
+    }
+    
+    private func setSubjectProgression(assignment: Assignment?, reviewStatistics: ReviewStatistics?) {
+        guard let assignment = assignment,
+            let srsStage = SRSStage(numericLevel: assignment.srsStage), srsStage != .initiate else {
+                reviewStatisticsViews.forEach { view in
+                    view.removeFromSuperview()
+                }
+                return
+        }
+        
+        srsStageNameLabel.text = srsStage.rawValue
+        srsStageImageView.image = UIImage(named: srsStage.rawValue)!.withRenderingMode(.alwaysOriginal)
+        
+        setReviewStatistics(reviewStatistics)
+        
+        if let burnedAt = assignment.burnedAt {
+            nextReviewTitleLabel.text = "Retired Date"
+            nextReviewLabel.text = absoluteDateFormatter.string(from: burnedAt)
+        } else {
+            nextReviewTitleLabel.text = "Next Review"
+            switch NextReviewTime(date: assignment.availableAt) {
+            case .none:
+                nextReviewLabel.text = "-"
+            case .now:
+                nextReviewLabel.text = "Available Now"
+            case let .date(date):
+                nextReviewLabel.text = relativeDateFormatter.string(from: date.timeIntervalSinceNow)
+            }
+        }
+        
+        if let unlockedAt = assignment.unlockedAt {
+            unlockedDateLabel.text = absoluteDateFormatter.string(from: unlockedAt)
         }
     }
     

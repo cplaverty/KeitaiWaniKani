@@ -687,6 +687,7 @@
                         <outlet property="combinedAnsweredCorrectProgressBarView" destination="zun-9k-LUH" id="tnl-Ng-Hy7"/>
                         <outlet property="contextSentencesStackView" destination="8eq-JH-NAK" id="eZR-Zv-cPY"/>
                         <outlet property="foundInVocabularyContainerViewHeightConstraint" destination="Cez-vh-FPD" id="e8Z-Zb-5Mj"/>
+                        <outlet property="foundInVocabularyView" destination="Qay-v2-sdd" id="hFq-zp-fY1"/>
                         <outlet property="headerView" destination="tXd-xj-9xy" id="p6g-6e-NUc"/>
                         <outlet property="kunyomiLabel" destination="EBi-L1-vKG" id="W5t-8l-sVJ"/>
                         <outlet property="kunyomiTitleLabel" destination="9M6-6U-lCm" id="qQ2-tq-Qhc"/>
@@ -798,7 +799,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="180"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAc-u8-QW3" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="144"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="24" height="144"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                                             <real key="value" value="24"/>
@@ -806,7 +807,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meaning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFS-ar-ocI">
-                                                    <rect key="frame" x="8" y="0.0" width="24" height="144"/>
+                                                    <rect key="frame" x="32" y="0.0" width="0.0" height="144"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -982,7 +983,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mHJ-dH-cxz">
                                             <rect key="frame" x="8" y="8" width="292" height="90"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3VK-Mn-OSO" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3VK-Mn-OSO" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="195.5" height="50"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
