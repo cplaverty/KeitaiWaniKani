@@ -55,7 +55,7 @@ public extension Subject {
     
     func earliestGuruDate(assignment: Assignment?, getAssignmentForSubjectID: (Int) -> Assignment?) -> Date? {
         if let assignment = assignment, assignment.isPassed == true {
-            return assignment.passedAt!
+            return assignment.passedAt ?? Date.distantPast
         }
         
         let pendingSubjectAssignments = componentSubjectIDs
