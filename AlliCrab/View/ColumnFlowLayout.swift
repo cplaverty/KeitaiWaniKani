@@ -19,12 +19,26 @@ class ColumnFlowLayout: UICollectionViewFlowLayout {
             return
         }
         
-        let availableWidth = collectionView.bounds.inset(by: collectionView.layoutMargins).size.width
+        let edgeInsets: UIEdgeInsets
+        if #available(iOS 11.0, *) {
+            switch sectionInsetReference {
+            case .fromContentInset:
+                edgeInsets = collectionView.contentInset
+            case .fromLayoutMargins:
+                edgeInsets = collectionView.layoutMargins
+            case .fromSafeArea:
+                edgeInsets = collectionView.safeAreaInsets
+            }
+        } else {
+            edgeInsets = collectionView.layoutMargins
+        }
+        
+        let availableWidth = collectionView.bounds.inset(by: edgeInsets).inset(by: sectionInset).size.width
         let effectiveMinimumWidth = minimumColumnWidth <= 0 ? availableWidth : min(minimumColumnWidth, availableWidth)
         let columnCount = (availableWidth / effectiveMinimumWidth).rounded(.down)
         let cellWidth = ((availableWidth - minimumInteritemSpacing * (columnCount - 1)) / columnCount).rounded(.down)
         
-        os_log("Total width %2f, calculated column count %0f with width %0f.  Current item size: %@", type: .debug, availableWidth, columnCount, cellWidth, itemSize.debugDescription)
+        os_log("Total width %.2f, calculated column count %.0f with width %.0f.  Current item size: %@", type: .debug, availableWidth, columnCount, cellWidth, itemSize.debugDescription)
         
         itemSize = CGSize(width: cellWidth, height: itemSize.height)
     }
