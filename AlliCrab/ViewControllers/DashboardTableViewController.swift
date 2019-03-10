@@ -277,8 +277,8 @@ class DashboardTableViewController: UITableViewController {
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: ReuseIdentifier.header.rawValue) as! DashboardTableViewHeaderFooterView
         let title = self.tableView(tableView, titleForHeaderInSection: section)
         view.titleLabel.text = title
-        view.titleLabel.sizeToFit()
-        let height = view.titleLabel.frame.height + view.layoutMargins.top + view.layoutMargins.bottom
+        
+        let height = view.contentView.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize).height
         return height
     }
     
@@ -287,7 +287,6 @@ class DashboardTableViewController: UITableViewController {
         
         let title = self.tableView(tableView, titleForHeaderInSection: section)
         view.titleLabel.text = title
-        view.titleLabel.sizeToFit()
         
         return view
     }

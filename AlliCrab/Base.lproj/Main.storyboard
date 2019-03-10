@@ -698,13 +698,13 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1WJ-T3-PHk" userLabel="Content View">
-                                            <rect key="frame" x="0.0" y="0.0" width="148" height="115"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="148" height="120"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="JkL-7L-XqK">
-                                                    <rect key="frame" x="8" y="8" width="132" height="91"/>
+                                                    <rect key="frame" x="8" y="8" width="132" height="96"/>
                                                     <subviews>
                                                         <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YgF-bH-50S" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="91"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="96"/>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                                                     <real key="value" value="50"/>
@@ -712,13 +712,13 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="t61-6h-dGQ">
-                                                            <rect key="frame" x="58" y="0.0" width="74" height="91"/>
+                                                            <rect key="frame" x="58" y="0.0" width="74" height="96"/>
                                                             <subviews>
                                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpi-q4-WCZ">
-                                                                    <rect key="frame" x="0.6666666666666714" y="0.0" width="73" height="41.666666666666664"/>
+                                                                    <rect key="frame" x="0.6666666666666714" y="0.0" width="73" height="44"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2d 15h" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4TP-ZM-P2x">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="73" height="26.666666666666668"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="73" height="29"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -726,7 +726,7 @@
                                                                             <size key="shadowOffset" width="1" height="1"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Review" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MOA-9t-LGO">
-                                                                            <rect key="frame" x="0.0" y="27.333333333333332" width="73" height="14.333333333333332"/>
+                                                                            <rect key="frame" x="0.0" y="29.666666666666661" width="73" height="14.333333333333332"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -745,10 +745,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gEs-w3-5UR">
-                                                                    <rect key="frame" x="5.6666666666666714" y="49.666666666666657" width="63" height="41.333333333333343"/>
+                                                                    <rect key="frame" x="5.6666666666666714" y="52" width="63" height="44"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6d 13h" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6r8-Uz-uHU">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="63" height="26.333333333333332"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="63" height="29"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -756,7 +756,7 @@
                                                                             <size key="shadowOffset" width="1" height="1"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guru Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oLb-HB-rKv">
-                                                                            <rect key="frame" x="0.0" y="27.000000000000004" width="63" height="14.333333333333332"/>
+                                                                            <rect key="frame" x="0.0" y="29.666666666666668" width="63" height="14.333333333333332"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -779,7 +779,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gnS-P1-6SX">
-                                                    <rect key="frame" x="8" y="107" width="132" height="0.0"/>
+                                                    <rect key="frame" x="8" y="112" width="132" height="0.0"/>
                                                     <color key="trackTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </progressView>
                                             </subviews>
@@ -817,6 +817,23 @@
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="Header" id="2b4-Bs-OP5" customClass="AssignmentProgressionCollectionReusableView" customModule="AlliCrab" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lhg-hf-gQh">
+                                    <rect key="frame" x="8" y="8" width="359" height="34"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="Lhg-hf-gQh" firstAttribute="top" secondItem="2b4-Bs-OP5" secondAttribute="topMargin" id="HqJ-Rf-SOl"/>
+                                <constraint firstAttribute="bottomMargin" secondItem="Lhg-hf-gQh" secondAttribute="bottom" id="Mif-Qs-fg1"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="Lhg-hf-gQh" secondAttribute="trailing" id="PVH-ZQ-ftT"/>
+                                <constraint firstItem="Lhg-hf-gQh" firstAttribute="leading" secondItem="2b4-Bs-OP5" secondAttribute="leadingMargin" id="eCg-OS-vHY"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="headerLabel" destination="Lhg-hf-gQh" id="eC5-6o-qvJ"/>
+                            </connections>
                         </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="VCB-Qy-NHv" id="y24-JV-N4T"/>

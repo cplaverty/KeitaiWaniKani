@@ -9,18 +9,14 @@ import UIKit
 
 class DashboardTableViewHeaderFooterView: UITableViewHeaderFooterView {
     
-    private let backgroundBlurEffectStyle = UIBlurEffect.Style.extraLight
+    // MARK: - Outlets
     
     let titleLabel: UILabel = {
         let label = UILabel()
         label.adjustsFontForContentSizeCategory = true
         label.font = UIFont.preferredFont(forTextStyle: .title2)
-        label.textColor = .black
+        label.textColor = .darkText
         label.translatesAutoresizingMaskIntoConstraints = false
-        if !UIAccessibility.isReduceTransparencyEnabled {
-            label.shadowColor = .black
-            label.shadowOffset = CGSize(width: 1, height: 1)
-        }
         
         return label
     }()
@@ -29,23 +25,17 @@ class DashboardTableViewHeaderFooterView: UITableViewHeaderFooterView {
         return nil
     }
     
+    // MARK: - Initialisers
+    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
-        if !UIAccessibility.isReduceTransparencyEnabled {
-            let visualEffectView = UIVisualEffectView(effect: UIVibrancyEffect(blurEffect: UIBlurEffect(style: backgroundBlurEffectStyle)))
-            visualEffectView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-            visualEffectView.preservesSuperviewLayoutMargins = true
-            visualEffectView.contentView.preservesSuperviewLayoutMargins = true
-            visualEffectView.contentView.addSubview(titleLabel)
-            contentView.addSubview(visualEffectView)
-        } else {
-            contentView.addSubview(titleLabel)
-        }
+        contentView.addSubview(titleLabel)
         
-        layoutMarginsGuide.topAnchor.constraint(greaterThanOrEqualTo: titleLabel.topAnchor).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

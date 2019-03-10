@@ -54,7 +54,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
     
     private var sections = [Section]() {
         didSet {
-            collectionView!.reloadData()
+            collectionView.reloadData()
         }
     }
     
@@ -125,7 +125,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
         let now = Date()
         let isStartOfHour = now.timeIntervalSince(Calendar.current.startOfHour(for: now)) < .oneMinute
         if isStartOfHour {
-            collectionView?.reloadData()
+            collectionView.reloadData()
             return
         }
         
@@ -144,7 +144,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
         
         os_log("Refreshing %d cells", type: .debug, indexPathsNeedingRefresh.count)
         
-        collectionView?.reloadItems(at: indexPathsNeedingRefresh)
+        collectionView.reloadItems(at: indexPathsNeedingRefresh)
     }
     
     // MARK: - View Controller Lifecycle
@@ -155,7 +155,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
         notificationObservers = addNotificationObservers()
         
         if !UIAccessibility.isReduceTransparencyEnabled {
-            collectionView!.backgroundView = BlurredImageView(frame: collectionView!.frame, imageNamed: "Art03", style: .extraLight)
+            collectionView.backgroundView = BlurredImageView(frame: collectionView.frame, imageNamed: "Art03", style: .extraLight)
         }
     }
     
@@ -247,12 +247,12 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
 
 extension AssignmentProgressionCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let view = AssignmentProgressionCollectionReusableView(frame: .zero)
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReuseIdentifier.header.rawValue, for: IndexPath(item: 0, section: section)) as! AssignmentProgressionCollectionReusableView
+        
         let section = sections[section]
         view.headerLabel.text = section.title
-        view.headerLabel.sizeToFit()
         
-        let insets = (collectionViewLayout as! UICollectionViewFlowLayout).sectionInset
-        return CGSize(width: collectionView.bounds.width, height: view.headerLabel.bounds.height + insets.top + insets.bottom)
+        let height = view.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize).height
+        return CGSize(width: collectionView.bounds.width, height: height)
     }
 }
