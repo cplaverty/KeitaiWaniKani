@@ -104,15 +104,16 @@ class SubjectDetailViewController: UIViewController {
     override func preferredContentSizeDidChange(forChildContentContainer container: UIContentContainer) {
         super.preferredContentSizeDidChange(forChildContentContainer: container)
         
+        let newHeight = container.preferredContentSize.height
         if container === children[0] {
-            os_log("Changing height constraint for radicals", type: .debug)
-            radicalCombinationContainerViewHeightConstraint.constant = container.preferredContentSize.height
+            os_log("Changing height constraint for radicals to %.1f", type: .debug, newHeight)
+            radicalCombinationContainerViewHeightConstraint.constant = newHeight
         } else if container === children[1] {
-            os_log("Changing height constraint for related subjects", type: .debug)
-            relatedSubjectsContainerViewHeightConstraint.constant = container.preferredContentSize.height
+            os_log("Changing height constraint for related subjects to %.1f", type: .debug, newHeight)
+            relatedSubjectsContainerViewHeightConstraint.constant = newHeight
         } else if container === children[2] {
-            os_log("Changing height constraint for vocabulary", type: .debug)
-            foundInVocabularyContainerViewHeightConstraint.constant = container.preferredContentSize.height
+            os_log("Changing height constraint for vocabulary to %.1f", type: .debug, newHeight)
+            foundInVocabularyContainerViewHeightConstraint.constant = newHeight
         } else {
             os_log("Content size change for unknown container %@: %@", type: .debug, ObjectIdentifier(container).debugDescription, container.preferredContentSize.debugDescription)
         }
