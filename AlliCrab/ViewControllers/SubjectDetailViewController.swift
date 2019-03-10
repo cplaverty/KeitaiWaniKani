@@ -16,6 +16,16 @@ class SubjectDetailViewController: UIViewController {
     
     // MARK: - Properties
     
+    private let relativeDateFormatter: DateComponentsFormatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.month, .day, .hour, .minute]
+        formatter.formattingContext = .standalone
+        formatter.includesApproximationPhrase = true
+        formatter.maximumUnitCount = 1
+        formatter.unitsStyle = .full
+        return formatter
+    }()
+    
     private let absoluteDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -134,6 +144,8 @@ class SubjectDetailViewController: UIViewController {
             setText(markup: r.meaningMnemonic, to: meaningMnemonicLabel)
             
             setRelatedSubjects(ids: r.amalgamationSubjectIDs, title: "Found In Kanji")
+            
+            meaningAnsweredCorrectProgressBarView.title = "Name Answered Correct"
         case let k as Kanji:
             navigationItem.title = k.characters
             removeSubviews(from: stackView, ifNotIn: visibleViewsForKanji)
@@ -204,6 +216,8 @@ class SubjectDetailViewController: UIViewController {
             srsStageNameLabel.text = srsStage.rawValue
             srsStageImageView.image = UIImage(named: srsStage.rawValue)!.withRenderingMode(.alwaysOriginal)
             
+            setReviewStatistics(reviewStatistics)
+            
             if let burnedAt = assignment.burnedAt {
                 nextReviewTitleLabel.text = "Retired Date"
                 nextReviewLabel.text = absoluteDateFormatter.string(from: burnedAt)
@@ -215,26 +229,12 @@ class SubjectDetailViewController: UIViewController {
                 case .now:
                     nextReviewLabel.text = "Available Now"
                 case let .date(date):
-                    nextReviewLabel.text = absoluteDateFormatter.string(from: date)
+                    nextReviewLabel.text = relativeDateFormatter.string(from: date.timeIntervalSinceNow)
                 }
             }
             
             if let unlockedAt = assignment.unlockedAt {
                 unlockedDateLabel.text = absoluteDateFormatter.string(from: unlockedAt)
-            }
-        }
-        
-        if let reviewStatistics = reviewStatistics, reviewStatistics.total > 0 {
-            meaningAnsweredCorrectProgressBarView.progress = Float(reviewStatistics.meaningPercentageCorrect) / 100.0
-            meaningAnsweredCorrectProgressBarView.totalCount = reviewStatistics.meaningTotal
-            
-            if subject is Radical {
-                meaningAnsweredCorrectProgressBarView.title = "Name Answered Correct"
-            } else {
-                combinedAnsweredCorrectProgressBarView.progress = Float(reviewStatistics.percentageCorrect) / 100.0
-                combinedAnsweredCorrectProgressBarView.totalCount = reviewStatistics.total
-                readingAnsweredCorrectProgressBarView.progress = Float(reviewStatistics.readingPercentageCorrect) / 100.0
-                readingAnsweredCorrectProgressBarView.totalCount = reviewStatistics.readingTotal
             }
         } else {
             reviewStatisticsViews.forEach { view in
@@ -320,6 +320,25 @@ class SubjectDetailViewController: UIViewController {
             label.attributedText = NSAttributedString(string: "None",
                                                       attributes: [.foregroundColor: UIColor.darkGray.withAlphaComponent(0.75)])
         }
+    }
+    
+    private func setReviewStatistics(_ reviewStatistics: ReviewStatistics?) {
+        guard let reviewStatistics = reviewStatistics else {
+            meaningAnsweredCorrectProgressBarView.progress = 1.0
+            meaningAnsweredCorrectProgressBarView.totalCount = 0
+            combinedAnsweredCorrectProgressBarView.progress = 1.0
+            combinedAnsweredCorrectProgressBarView.totalCount = 0
+            readingAnsweredCorrectProgressBarView.progress = 1.0
+            readingAnsweredCorrectProgressBarView.totalCount = 0
+            return
+        }
+        
+        meaningAnsweredCorrectProgressBarView.progress = Float(reviewStatistics.meaningPercentageCorrect) / 100.0
+        meaningAnsweredCorrectProgressBarView.totalCount = reviewStatistics.meaningTotal
+        combinedAnsweredCorrectProgressBarView.progress = Float(reviewStatistics.percentageCorrect) / 100.0
+        combinedAnsweredCorrectProgressBarView.totalCount = reviewStatistics.total
+        readingAnsweredCorrectProgressBarView.progress = Float(reviewStatistics.readingPercentageCorrect) / 100.0
+        readingAnsweredCorrectProgressBarView.totalCount = reviewStatistics.readingTotal
     }
     
     private func removeSubviews(from stackView: UIStackView, ifNotIn visibleViews: [UIView]) {
