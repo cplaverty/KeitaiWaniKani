@@ -180,6 +180,7 @@
 		83CE51DD1F4F40350050242A /* DashboardTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CE51DC1F4F40350050242A /* DashboardTableViewHeaderFooterView.swift */; };
 		83CE51DF1F4F53C70050242A /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CE51DE1F4F53C70050242A /* SettingsTableViewController.swift */; };
 		83CE51E11F4F541E0050242A /* UserScriptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CE51E01F4F541E0050242A /* UserScriptTableViewCell.swift */; };
+		83D00D7022352B03004B9B73 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D00D6F22352B03004B9B73 /* Collection.swift */; };
 		83D028BA2225D76700C61D3F /* NSAttributedStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D028B92225D76700C61D3F /* NSAttributedStringTests.swift */; };
 		83D7CBFE1F50B20600043D47 /* AssignmentProgressionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D7CBFD1F50B20600043D47 /* AssignmentProgressionCollectionViewController.swift */; };
 		83D7CC001F50B82A00043D47 /* AssignmentProgressionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D7CBFF1F50B82A00043D47 /* AssignmentProgressionCollectionViewCell.swift */; };
@@ -468,6 +469,7 @@
 		83CE51DC1F4F40350050242A /* DashboardTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		83CE51DE1F4F53C70050242A /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		83CE51E01F4F541E0050242A /* UserScriptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScriptTableViewCell.swift; sourceTree = "<group>"; };
+		83D00D6F22352B03004B9B73 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		83D028B92225D76700C61D3F /* NSAttributedStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedStringTests.swift; sourceTree = "<group>"; };
 		83D7CBFD1F50B20600043D47 /* AssignmentProgressionCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentProgressionCollectionViewController.swift; sourceTree = "<group>"; };
 		83D7CBFF1F50B82A00043D47 /* AssignmentProgressionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentProgressionCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -956,6 +958,7 @@
 		83F392791F4B2D6800E8DAE7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				83D00D6F22352B03004B9B73 /* Collection.swift */,
 				83B8A6F31F507A42006665DB /* ResourceRepository.swift */,
 				83F3927A1F4B2D7300E8DAE7 /* UIViewController.swift */,
 				832708571F4C9D9E00AB1525 /* WKWebView.swift */,
@@ -1542,6 +1545,7 @@
 				832C18741F4503D9001FFACD /* BundleResourceLoader.swift in Sources */,
 				831E92D71F4DDFE200B979DD /* DashboardTableViewController.swift in Sources */,
 				83B8A6FA1F50961F006665DB /* WaniKaniReviewPageWebViewController.swift in Sources */,
+				83D00D7022352B03004B9B73 /* Collection.swift in Sources */,
 				83CE51DD1F4F40350050242A /* DashboardTableViewHeaderFooterView.swift in Sources */,
 				83DEF7F51F53273200EDCACF /* ProgressReportingBarButtonItemView.swift in Sources */,
 				83CE51DF1F4F53C70050242A /* SettingsTableViewController.swift in Sources */,

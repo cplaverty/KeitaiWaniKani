@@ -264,7 +264,7 @@ class SubjectDetailViewController: UIViewController {
     private func setSubjectIDs(_ ids: [Int], toChildAtIndex index: Int, autoSize: Bool) {
         let subjectSummaryViewController = children[index] as! SubjectSummaryCollectionViewController
         subjectSummaryViewController.repositoryReader = repositoryReader
-        subjectSummaryViewController.subjectIDs = try! repositoryReader.filterSubjectIDsForSubscription(ids)
+        subjectSummaryViewController.subjectIDs = try! repositoryReader.filterSubjectIDsForSubscription(ids.filterDuplicates())
         
         if autoSize {
             let flowLayout = subjectSummaryViewController.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
