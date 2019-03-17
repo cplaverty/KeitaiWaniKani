@@ -89,6 +89,13 @@ public class DatabaseManager {
             
             isGoodConnection = true
             
+            do {
+                let journalMode = try database.stringForQuery("PRAGMA journal_mode=WAL")!
+                os_log("Database journal mode = %@", type: .debug, journalMode)
+            } catch {
+                os_log("Failed to change journal mode: %@", type: .error, error as NSError)
+            }
+            
             var schemaVersion = schemaManager.version(of: database)
             os_log("Database version %u (expected version is %u)", type: .info, schemaVersion, schemaManager.expectedSchemaVersion)
             
