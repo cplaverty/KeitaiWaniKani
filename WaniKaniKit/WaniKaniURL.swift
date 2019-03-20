@@ -12,7 +12,7 @@ public struct WaniKaniURL {
     public static let loginPage = home.appendingPathComponent("login")
     public static let dashboard = home.appendingPathComponent("dashboard")
     
-    public static let accountSettings = home.appendingPathComponent("settings").appendingPathComponent("account")
+    public static let tokenSettings = home.appendingPathComponent("settings").appendingPathComponent("personal_access_tokens")
     
     public static let reviewHome = home.appendingPathComponent("review")
     public static let reviewSession = reviewHome.appendingPathComponent("session")

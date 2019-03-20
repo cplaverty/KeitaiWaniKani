@@ -19,16 +19,19 @@ private struct MessageKey {
 }
 
 private let getAPIKeyScript = """
-"use strict";
-$.get('/settings/account').done(function(data, textStatus, jqXHR) {
-    var apiKey = $(data).find('#user_api_key_v2').attr('value');
-    if (typeof apiKey === 'string') {
-        window.webkit.messageHandlers.\(MessageHandlerName.apiKey.rawValue).postMessage({ '\(MessageKey.success)': apiKey });
-    }
-}).fail(function(jqXHR, textStatus) {
-    window.webkit.messageHandlers.\(MessageHandlerName.apiKey.rawValue).postMessage({ '\(MessageKey.error)': textStatus });
-});
-"""
+    "use strict";
+    $.get('/settings/personal_access_tokens').done(function(data, textStatus, jqXHR) {
+        var apiKey = $(data).find('#personal-access-tokens-list .personal-access-token-description:contains("Default read-only")')
+            .siblings('.personal-access-token-token')
+            .children('code')
+            .text();
+        if (typeof apiKey === 'string') {
+            window.webkit.messageHandlers.\(MessageHandlerName.apiKey.rawValue).postMessage({ '\(MessageKey.success)': apiKey });
+        }
+    }).fail(function(jqXHR, textStatus) {
+        window.webkit.messageHandlers.\(MessageHandlerName.apiKey.rawValue).postMessage({ '\(MessageKey.error)': textStatus });
+    });
+    """
 
 class WaniKaniLoginWebViewController: WebViewController {
     
@@ -55,20 +58,7 @@ class WaniKaniLoginWebViewController: WebViewController {
             dismiss(animated: true, completion: nil)
         } else {
             os_log("Got blank API key", type: .info)
-            let alert = UIAlertController(title: "No API version 2 key found.  Would you like to generate one?", message: "A WaniKani API version 2 key could not be found for your account.  If you've never used a third-party app or user script, one may not have been generated and you should generate one now.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Generate API Version 2 Key", style: .default) { _ in
-                self.webView.evaluateJavaScript("$('#edit_user_api_key_v2').submit();", completionHandler: { (_, error) in
-                    if let error = error {
-                        os_log("Failed to click API version 2 key generation button: %@", type: .error, error as NSError)
-                        self.showAlert(title: "Failed to generate API version 2 key", message: "API version 2 key could not be generated: \(error.localizedDescription).  Please try again later.") { self.finish() }
-                    }
-                })
-            })
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in
-                self.finish()
-            })
-            
-            self.present(alert, animated: true, completion: nil)
+            self.showAlert(title: "No WaniKani API version 2 token found", message: "A WaniKani API version 2 personal access token could not be found for your account.  If you've never used a third-party app or user script, one may not have been generated and you should generate one now from the settings on the WaniKani web site.")
         }
     }
     
@@ -87,7 +77,7 @@ extension WaniKaniLoginWebViewController {
             os_log("Logged in: redirecting to settings", type: .debug)
             decisionHandler(.cancel)
             DispatchQueue.main.async {
-                webView.load(URLRequest(url: WaniKaniURL.accountSettings))
+                webView.load(URLRequest(url: WaniKaniURL.tokenSettings))
             }
         default:
             decisionHandler(.allow)
@@ -95,22 +85,26 @@ extension WaniKaniLoginWebViewController {
     }
     
     override func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        guard let url = webView.url, url == WaniKaniURL.accountSettings else {
+        guard let url = webView.url, url == WaniKaniURL.tokenSettings else {
             super.webView(webView, didFinish: navigation)
             return
         }
         
         os_log("On settings page: fetching API Key", type: .debug)
-        webView.evaluateJavaScript("$('#user_api_key_v2').attr('value');") { apiKey, error in
-            if let apiKey = apiKey as? String {
-                DispatchQueue.main.async {
-                    self.validate(apiKey: apiKey)
+        webView.evaluateJavaScript("""
+            $('#personal-access-tokens-list .personal-access-token-description:contains("Default read-only")')
+                .siblings('.personal-access-token-token')
+                .children('code')
+                .text();
+            """) { apiKey, error in
+                if let apiKey = apiKey as? String {
+                    DispatchQueue.main.async {
+                        self.validate(apiKey: apiKey)
+                    }
+                } else if let error = error {
+                    os_log("Failed to execute API key fetch script: %@", type: .error, error as NSError)
+                    webView.configuration.userContentController.addUserScript(WKUserScript(source: getAPIKeyScript, injectionTime: .atDocumentStart, forMainFrameOnly: true))
                 }
-            }
-            else if let error = error {
-                os_log("Failed to execute API key fetch script: %@", type: .error, error as NSError)
-                webView.configuration.userContentController.addUserScript(WKUserScript(source: getAPIKeyScript, injectionTime: .atDocumentStart, forMainFrameOnly: true))
-            }
         }
     }
 }
@@ -133,6 +127,9 @@ extension WaniKaniLoginWebViewController {
                 }
             } else if let error = payload[MessageKey.error] {
                 os_log("Received script message error: %@", type: .debug, String(describing: error))
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Unable to find WaniKani API tokens", message: "Please close this page and enter the API version 2 personal access token manually")
+                }
             }
         }
     }
