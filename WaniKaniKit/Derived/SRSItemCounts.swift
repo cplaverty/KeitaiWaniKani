@@ -21,7 +21,7 @@ public struct SRSItemCounts: Equatable {
 }
 
 public extension SRSItemCounts {
-    public static func +(lhs: SRSItemCounts, rhs: SRSItemCounts) -> SRSItemCounts {
+    static func +(lhs: SRSItemCounts, rhs: SRSItemCounts) -> SRSItemCounts {
         return SRSItemCounts(radicals: lhs.radicals + rhs.radicals,
                              kanji: lhs.kanji + rhs.kanji,
                              vocabulary: lhs.vocabulary + rhs.vocabulary)

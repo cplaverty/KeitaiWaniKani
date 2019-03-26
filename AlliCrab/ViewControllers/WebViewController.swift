@@ -123,7 +123,7 @@ class WebViewController: UIViewController {
         
         let onePasswordExtension = OnePasswordExtension.shared()
         if onePasswordExtension.isAppExtensionAvailable() {
-            onePasswordExtension.createExtensionItem(forWebView: webView) { extensionItem, error -> Void in
+            onePasswordExtension.createExtensionItem(forWebView: webView!) { extensionItem, error -> Void in
                 if let error = error {
                     os_log("Failed to create 1Password extension item: %@", type: .error, error as NSError)
                 } else if let extensionItem = extensionItem {
@@ -144,7 +144,7 @@ class WebViewController: UIViewController {
                     }
                     
                     if onePasswordExtension.isOnePasswordExtensionActivityType(activityType?.rawValue) {
-                        onePasswordExtension.fillReturnedItems(returnedItems, intoWebView: self.webView) { success, error in
+                        onePasswordExtension.fillReturnedItems(returnedItems, intoWebView: self.webView!) { success, error in
                             if !success {
                                 let errorDescription = error?.localizedDescription ?? "(No error details)"
                                 os_log("Failed to fill password from password manager: %@", type: .error, errorDescription)

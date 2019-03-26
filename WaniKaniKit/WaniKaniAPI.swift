@@ -273,6 +273,7 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
                     networkActivityDelegate.networkActivityDidFinish()
                     running = false
                     observer.invalidate()
+                @unknown default: break
                 }
             }
         }

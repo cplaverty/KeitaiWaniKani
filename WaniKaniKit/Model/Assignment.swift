@@ -44,7 +44,7 @@ public extension Assignment {
         return level <= 2
     }
     
-    public static func earliestDate(from date: Date, forItemAtSRSStage initialStage: Int, toSRSStage finalStage: Int, subjectType: SubjectType, level: Int) -> Date? {
+    static func earliestDate(from date: Date, forItemAtSRSStage initialStage: Int, toSRSStage finalStage: Int, subjectType: SubjectType, level: Int) -> Date? {
         let isAccelerated = isAcceleratedLevel(level)
         
         let calendar = Calendar.current
@@ -59,7 +59,7 @@ public extension Assignment {
         return guruDate
     }
     
-    public func guruDate(level: Int) -> Date? {
+    func guruDate(level: Int) -> Date? {
         let initialLevel = srsStage + 1
         let guruNumericLevel = SRSStage.guru.numericLevelRange.lowerBound
         

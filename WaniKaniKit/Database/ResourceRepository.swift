@@ -9,23 +9,23 @@ import FMDB
 import os
 
 public extension NSNotification.Name {
-    public static let waniKaniAssignmentsDidChange = NSNotification.Name("waniKaniAssignmentsDidChange")
-    public static let waniKaniLevelProgressionDidChange = NSNotification.Name("waniKaniLevelProgressionDidChange")
-    public static let waniKaniReviewStatisticsDidChange = NSNotification.Name("waniKaniReviewStatisticsDidChange")
-    public static let waniKaniStudyMaterialsDidChange = NSNotification.Name("waniKaniStudyMaterialsDidChange")
-    public static let waniKaniSubjectsDidChange = NSNotification.Name("waniKaniSubjectsDidChange")
-    public static let waniKaniUserInformationDidChange = NSNotification.Name("waniKaniUserInformationDidChange")
+    static let waniKaniAssignmentsDidChange = NSNotification.Name("waniKaniAssignmentsDidChange")
+    static let waniKaniLevelProgressionDidChange = NSNotification.Name("waniKaniLevelProgressionDidChange")
+    static let waniKaniReviewStatisticsDidChange = NSNotification.Name("waniKaniReviewStatisticsDidChange")
+    static let waniKaniStudyMaterialsDidChange = NSNotification.Name("waniKaniStudyMaterialsDidChange")
+    static let waniKaniSubjectsDidChange = NSNotification.Name("waniKaniSubjectsDidChange")
+    static let waniKaniUserInformationDidChange = NSNotification.Name("waniKaniUserInformationDidChange")
 }
 
 public extension CFNotificationName {
     private static let notificationBaseName = "uk.me.laverty.keitaiWaniKani.notifications"
     
-    public static let waniKaniAssignmentsDidChange = CFNotificationName("\(notificationBaseName).waniKaniAssignmentsDidChange" as CFString)
-    public static let waniKaniLevelProgressionDidChange = CFNotificationName("\(notificationBaseName).waniKaniLevelProgressionDidChange" as CFString)
-    public static let waniKaniReviewStatisticsDidChange = CFNotificationName("\(notificationBaseName).waniKaniReviewStatisticsDidChange" as CFString)
-    public static let waniKaniStudyMaterialsDidChange = CFNotificationName("\(notificationBaseName).waniKaniStudyMaterialsDidChange" as CFString)
-    public static let waniKaniSubjectsDidChange = CFNotificationName("\(notificationBaseName).waniKaniSubjectsDidChange" as CFString)
-    public static let waniKaniUserInformationDidChange = CFNotificationName("\(notificationBaseName).waniKaniUserInformationDidChange" as CFString)
+    static let waniKaniAssignmentsDidChange = CFNotificationName("\(notificationBaseName).waniKaniAssignmentsDidChange" as CFString)
+    static let waniKaniLevelProgressionDidChange = CFNotificationName("\(notificationBaseName).waniKaniLevelProgressionDidChange" as CFString)
+    static let waniKaniReviewStatisticsDidChange = CFNotificationName("\(notificationBaseName).waniKaniReviewStatisticsDidChange" as CFString)
+    static let waniKaniStudyMaterialsDidChange = CFNotificationName("\(notificationBaseName).waniKaniStudyMaterialsDidChange" as CFString)
+    static let waniKaniSubjectsDidChange = CFNotificationName("\(notificationBaseName).waniKaniSubjectsDidChange" as CFString)
+    static let waniKaniUserInformationDidChange = CFNotificationName("\(notificationBaseName).waniKaniUserInformationDidChange" as CFString)
 }
 
 extension ResourceType {
@@ -133,9 +133,9 @@ public class ResourceRepository: ResourceRepositoryReader {
         let resourceType = ResourceType.user
         let requestStartTime = Date()
         
-        let lastUpdate = (try? databaseQueue.inDatabase { database in
+        let lastUpdate = try? databaseQueue.inDatabase { database in
             return try resourceType.getLastUpdateDate(in: database)
-            }).flatMap { $0 }
+        }
         
         if let lastUpdate = lastUpdate, requestStartTime.timeIntervalSince(lastUpdate) < minimumFetchInterval {
             os_log("Skipping resource fetch: %.3f < %.3f", type: .info, requestStartTime.timeIntervalSince(lastUpdate), minimumFetchInterval)
@@ -221,7 +221,7 @@ public class ResourceRepository: ResourceRepositoryReader {
                                         requestForLastUpdateDate: { .studyMaterials(filter: $0.map { StudyMaterialFilter(updatedAfter: $0) }) },
                                         completionHandler: completionHandler)
     }
-
+    
     @discardableResult public func updateSubjects(minimumFetchInterval: TimeInterval, completionHandler: @escaping (ResourceRefreshResult) -> Void) -> Progress {
         return updateResourceCollection(ofType: .subjects,
                                         minimumFetchInterval: minimumFetchInterval,
@@ -241,9 +241,9 @@ public class ResourceRepository: ResourceRepositoryReader {
         
         let requestStartTime = Date()
         
-        let lastUpdate = (try? databaseQueue.inDatabase { database in
+        let lastUpdate = try? databaseQueue.inDatabase { database in
             return try resourceType.getLastUpdateDate(in: database)
-            }).flatMap { $0 }
+        }
         
         if let lastUpdate = lastUpdate, requestStartTime.timeIntervalSince(lastUpdate) < minimumFetchInterval {
             os_log("Skipping resource fetch: %.3f < %.3f", type: .debug, requestStartTime.timeIntervalSince(lastUpdate), minimumFetchInterval)

@@ -48,10 +48,10 @@ class SettingsTableViewController: UITableViewController {
             let firstNonScriptIndex = UserScriptDefinitions.community.count + UserScriptDefinitions.custom.count
             switch self {
             case let .userScript(userScript):
-                if let index = UserScriptDefinitions.community.index(where: { $0.name == userScript.name }) {
+                if let index = UserScriptDefinitions.community.firstIndex(where: { $0.name == userScript.name }) {
                     return index
                 }
-                if let index = UserScriptDefinitions.custom.index(where: { $0.name == userScript.name }) {
+                if let index = UserScriptDefinitions.custom.firstIndex(where: { $0.name == userScript.name }) {
                     return index + UserScriptDefinitions.community.count
                 }
                 fatalError()

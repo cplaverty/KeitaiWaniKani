@@ -63,7 +63,7 @@ class ReviewTimelineFilterTableViewController: UITableViewController {
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        let previousSelection = selectedValue.map { IndexPath(row: values.index(of: $0)!, section: 0) }
+        let previousSelection = selectedValue.map { IndexPath(row: values.firstIndex(of: $0)!, section: 0) }
         selectedValue = values[indexPath.row]
         
         if let previousSelection = previousSelection {

@@ -28,6 +28,8 @@ class ColumnFlowLayout: UICollectionViewFlowLayout {
                 edgeInsets = collectionView.layoutMargins
             case .fromSafeArea:
                 edgeInsets = collectionView.safeAreaInsets
+            @unknown default:
+                edgeInsets = collectionView.safeAreaInsets
             }
         } else {
             edgeInsets = collectionView.layoutMargins

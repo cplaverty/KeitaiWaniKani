@@ -7,10 +7,10 @@
 
 import Foundation
 
-private let regex = try! NSRegularExpression(pattern: "<([^>]+)>(.+?)</\\1>", options: [.dotMatchesLineSeparators])
+private let regex = try! NSRegularExpression(pattern: #"<([^>]+)>(.+?)</\1>"#, options: [.dotMatchesLineSeparators])
 
 public extension NSAttributedString {
-    public convenience init(wkMarkup s: String, jpFont: UIFont? = nil, attributes attrs: [NSAttributedString.Key : Any]? = nil) {
+    convenience init(wkMarkup s: String, jpFont: UIFont? = nil, attributes attrs: [NSAttributedString.Key : Any]? = nil) {
         self.init(wkMarkup: s, attributes: attrs) { tag in
             switch tag.lowercased() {
             case "radical":

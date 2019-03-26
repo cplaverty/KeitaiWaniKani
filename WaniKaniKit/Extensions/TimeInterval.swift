@@ -6,7 +6,7 @@
 //
 
 public extension TimeInterval {
-    public static let oneMinute = TimeInterval(60)
-    public static let oneHour = TimeInterval(60 * oneMinute)
-    public static let oneDay = TimeInterval(24 * oneHour)
+    static let oneMinute = TimeInterval(60)
+    static let oneHour = TimeInterval(60 * oneMinute)
+    static let oneDay = TimeInterval(24 * oneHour)
 }
