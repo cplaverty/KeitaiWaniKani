@@ -8,9 +8,9 @@
 import os
 
 public protocol WaniKaniAPIProtocol {
-    func fetchResource(ofType type: StandaloneResourceRequestType, completionHandler: @escaping (StandaloneResource?, Error?) -> Void) -> Progress
-    func fetchResource(ofType type: ResourceCollectionItemRequestType, completionHandler: @escaping (ResourceCollectionItem?, Error?) -> Void) -> Progress
-    func fetchResourceCollection(ofType type: ResourceCollectionRequestType, completionHandler: @escaping (ResourceCollection?, Error?) -> Bool) -> Progress
+    func fetchResource(ofType type: StandaloneResourceRequestType, completionHandler: @escaping (Result<StandaloneResource, Error>) -> Void) -> Progress
+    func fetchResource(ofType type: ResourceCollectionItemRequestType, completionHandler: @escaping (Result<ResourceCollectionItem, Error>) -> Void) -> Progress
+    func fetchResourceCollection(ofType type: ResourceCollectionRequestType, completionHandler: @escaping (Result<ResourceCollection, Error>) -> Bool) -> Progress
 }
 
 public protocol NetworkActivityDelegate: class {
@@ -96,30 +96,32 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
         session.invalidateAndCancel()
     }
     
-    public func fetchResource(ofType type: StandaloneResourceRequestType, completionHandler: @escaping (StandaloneResource?, Error?) -> Void) -> Progress {
+    public func fetchResource(ofType type: StandaloneResourceRequestType, completionHandler: @escaping (Result<StandaloneResource, Error>) -> Void) -> Progress {
         return fetchResource(with: type.url(from: endpoints), completionHandler: completionHandler)
     }
     
-    public func fetchResource(ofType type: ResourceCollectionItemRequestType, completionHandler: @escaping (ResourceCollectionItem?, Error?) -> Void) -> Progress {
+    public func fetchResource(ofType type: ResourceCollectionItemRequestType, completionHandler: @escaping (Result<ResourceCollectionItem, Error>) -> Void) -> Progress {
         return fetchResource(with: type.url(from: endpoints), completionHandler: completionHandler)
     }
     
-    private func fetchResource<T: Decodable>(with url: URL, completionHandler: @escaping (T?, Error?) -> Void) -> Progress {
+    private func fetchResource<T: Decodable>(with url: URL, completionHandler: @escaping (Result<T, Error>) -> Void) -> Progress {
         let progress = Progress(totalUnitCount: 1)
         progress.isCancellable = true
         progress.isPausable = true
         
         let task = dataTask(with: url) { [weak progress] (data, response, error) in
             defer { progress?.completedUnitCount = 1 }
+            
             do {
                 let resource = try self.parseResource(T.self, data: data, response: response, error: error)
-                completionHandler(resource, error)
+                completionHandler(.success(resource))
             } catch let error as URLError where error.code == .cancelled {
                 // Ignore cancellation errors
             } catch {
-                completionHandler(nil, error)
+                completionHandler(.failure(error))
             }
         }
+        
         progress.cancellationHandler = { task.cancel() }
         progress.pausingHandler = { task.suspend() }
         progress.resumingHandler = { task.resume() }
@@ -129,7 +131,7 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
         return progress
     }
     
-    public func fetchResourceCollection(ofType type: ResourceCollectionRequestType, completionHandler: @escaping (ResourceCollection?, Error?) -> Bool) -> Progress {
+    public func fetchResourceCollection(ofType type: ResourceCollectionRequestType, completionHandler: @escaping (Result<ResourceCollection, Error>) -> Bool) -> Progress {
         let request = Request()
         
         let task = fetchResourceCollection(with: type.url(from: endpoints), request: request, completionHandler: completionHandler)
@@ -138,36 +140,32 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
         return request.progress
     }
     
-    private func fetchResourceCollection(with url: URL, request: Request, completionHandler: @escaping (ResourceCollection?, Error?) -> Bool) -> URLSessionDataTask {
+    private func fetchResourceCollection(with url: URL, request: Request, completionHandler: @escaping (Result<ResourceCollection, Error>) -> Bool) -> URLSessionDataTask {
         let task = dataTask(with: url) { (data, response, error) in
-            let resources: ResourceCollection?
+            defer { request.progress.completedUnitCount += 1 }
+            
+            let resources: ResourceCollection
             do {
                 resources = try self.parseResource(ResourceCollection.self, data: data, response: response, error: error)
             } catch let error as URLError where error.code == .cancelled {
                 // Do not notify errors due to cancellation
                 return
             } catch {
-                _ = completionHandler(nil, error)
+                _ = completionHandler(.failure(error))
                 return
             }
             
-            if let resources = resources {
-                defer { request.progress.completedUnitCount += 1 }
-                request.progress.totalUnitCount = Int64(resources.estimatedPageCount)
-                
-                guard !request.isCancelled else { return }
-                
-                if let nextPage = resources.pages.nextURL {
-                    request.tasks.append(self.fetchResourceCollection(with: nextPage, request: request, completionHandler: completionHandler))
-                }
-            } else {
-                defer { request.progress.completedUnitCount = 1 }
-                request.progress.totalUnitCount = 1
+            request.progress.totalUnitCount = Int64(resources.estimatedPageCount)
+            
+            guard !request.isCancelled else { return }
+            
+            if let nextPage = resources.pages.nextURL {
+                request.tasks.append(self.fetchResourceCollection(with: nextPage, request: request, completionHandler: completionHandler))
             }
             
             guard !request.isCancelled else { return }
             
-            let shouldGetNextPage = completionHandler(resources, error)
+            let shouldGetNextPage = completionHandler(.success(resources))
             if !shouldGetNextPage {
                 request.cancel()
             }
@@ -180,13 +178,13 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
         return task
     }
     
-    private func parseResource<T: Decodable>(_ type: T.Type, data: Data?, response: URLResponse?, error: Error?) throws -> T? {
+    private func parseResource<T: Decodable>(_ type: T.Type, data: Data?, response: URLResponse?, error: Error?) throws -> T {
         if let error = error {
             throw error
         }
         
         let httpResponse = response as? HTTPURLResponse
-        let httpStatusCode: Int = httpResponse?.statusCode ?? 200
+        let httpStatusCode = httpResponse?.statusCode ?? 200
         let httpStatusCodeDescription = HTTPURLResponse.localizedString(forStatusCode: httpStatusCode)
         
         if let data = data {
@@ -199,8 +197,6 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
         case 200:
             guard let data = data else { throw WaniKaniAPIError.noContent }
             return try self.decoder.decode(type, from: data)
-        case 304:
-            return nil
         case 400..<500:
             let errorMessage: String
             if let data = data, let error = try? self.decoder.decode(APIError.self, from: data) {

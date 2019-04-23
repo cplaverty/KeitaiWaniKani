@@ -88,14 +88,14 @@ class ResourceRepositoryTests: XCTestCase {
         var apiCallNumber = 0
         let api = MockWaniKaniAPI(resourceCollectionLocator: { resourceCollectionRequestType in
             apiCallNumber += 1
-            if case .assignments(filter: let filter) = resourceCollectionRequestType {
+            if case let .assignments(filter: filter) = resourceCollectionRequestType {
                 switch apiCallNumber {
                 case 1:
                     XCTAssertNil(filter)
-                    return (collection, nil)
+                    return .success(collection)
                 case 2:
                     XCTAssertNotNil(filter)
-                    return (emptyCollection, nil)
+                    return .success(emptyCollection)
                 default:
                     XCTFail("Only expected 2 requests")
                     fatalError()
@@ -192,14 +192,14 @@ class ResourceRepositoryTests: XCTestCase {
         var apiCallNumber = 0
         let api = MockWaniKaniAPI(resourceCollectionLocator: { resourceCollectionRequestType in
             apiCallNumber += 1
-            if case .studyMaterials(filter: let filter) = resourceCollectionRequestType {
+            if case let .studyMaterials(filter: filter) = resourceCollectionRequestType {
                 switch apiCallNumber {
                 case 1:
                     XCTAssertNil(filter)
-                    return (collection, nil)
+                    return .success(collection)
                 case 2:
                     XCTAssertNotNil(filter)
-                    return (emptyCollection, nil)
+                    return .success(emptyCollection)
                 default:
                     XCTFail("Only expected 2 requests")
                     fatalError()
@@ -361,14 +361,14 @@ class ResourceRepositoryTests: XCTestCase {
         var apiCallNumber = 0
         let api = MockWaniKaniAPI(resourceCollectionLocator: { resourceCollectionRequestType in
             apiCallNumber += 1
-            if case .subjects(filter: let filter) = resourceCollectionRequestType {
+            if case let .subjects(filter: filter) = resourceCollectionRequestType {
                 switch apiCallNumber {
                 case 1:
                     XCTAssertNil(filter)
-                    return (collection, nil)
+                    return .success(collection)
                 case 2:
                     XCTAssertNotNil(filter)
-                    return (emptyCollection, nil)
+                    return .success(emptyCollection)
                 default:
                     XCTFail("Only expected 2 requests")
                     fatalError()
@@ -473,14 +473,14 @@ class ResourceRepositoryTests: XCTestCase {
         var apiCallNumber = 0
         let api = MockWaniKaniAPI(resourceCollectionLocator: { resourceCollectionRequestType in
             apiCallNumber += 1
-            if case .reviewStatistics(filter: let filter) = resourceCollectionRequestType {
+            if case let .reviewStatistics(filter: filter) = resourceCollectionRequestType {
                 switch apiCallNumber {
                 case 1:
                     XCTAssertNil(filter)
-                    return (collection, nil)
+                    return .success(collection)
                 case 2:
                     XCTAssertNotNil(filter)
-                    return (emptyCollection, nil)
+                    return .success(emptyCollection)
                 default:
                     XCTFail("Only expected 2 requests")
                     fatalError()
@@ -559,7 +559,7 @@ class ResourceRepositoryTests: XCTestCase {
         
         let api = MockWaniKaniAPI(standaloneResourceLocator: { resourceRequestType in
             if case .user = resourceRequestType {
-                return (expected, nil)
+                return .success(expected)
             } else {
                 XCTFail("Expected load request")
                 fatalError()

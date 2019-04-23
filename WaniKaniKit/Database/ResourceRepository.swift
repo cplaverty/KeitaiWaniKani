@@ -148,49 +148,50 @@ public class ResourceRepository: ResourceRepositoryReader {
             return progress
         }
         
-        return api.fetchResource(ofType: .user) { (resource, requestError) in
-            if let error = requestError {
+        return api.fetchResource(ofType: .user) { result in
+            switch result {
+            case let .failure(error):
                 os_log("Got error when fetching: %@", type: .error, error as NSError)
                 completionHandler(.error(error))
-                return
-            }
-            guard let resource = resource, let data = resource.data as? UserInformation else {
-                os_log("No data available", type: .debug)
-                self.notifyNoData(databaseQueue: databaseQueue, resourceType: resourceType, requestStartTime: requestStartTime, completionHandler: completionHandler)
-                return
-            }
-            
-            if let lastUpdate = lastUpdate, resource.dataUpdatedAt < lastUpdate {
-                os_log("No change from last update", type: .debug)
-                self.notifyNoData(databaseQueue: databaseQueue, resourceType: resourceType, requestStartTime: requestStartTime, completionHandler: completionHandler)
-                return
-            }
-            
-            var databaseError: Error? = nil
-            databaseQueue.inImmediateTransaction { (database, rollback) in
-                os_log("Writing to database", type: .debug)
-                do {
-                    try data.write(to: database)
-                    
-                    os_log("Setting last update date for resource %@ to %@", type: .info, resourceType.rawValue, requestStartTime as NSDate)
-                    try resourceType.setLastUpdateDate(requestStartTime, in: database)
-                } catch {
-                    databaseError = error
-                    rollback.pointee = true
+            case let .success(resource):
+                guard let data = resource.data as? UserInformation else {
+                    os_log("No data available", type: .debug)
+                    self.notifyNoData(databaseQueue: databaseQueue, resourceType: resourceType, requestStartTime: requestStartTime, completionHandler: completionHandler)
+                    return
                 }
+                
+                if let lastUpdate = lastUpdate, resource.dataUpdatedAt < lastUpdate {
+                    os_log("No change from last update", type: .debug)
+                    self.notifyNoData(databaseQueue: databaseQueue, resourceType: resourceType, requestStartTime: requestStartTime, completionHandler: completionHandler)
+                    return
+                }
+                
+                var databaseError: Error? = nil
+                databaseQueue.inImmediateTransaction { (database, rollback) in
+                    os_log("Writing to database", type: .debug)
+                    do {
+                        try data.write(to: database)
+                        
+                        os_log("Setting last update date for resource %@ to %@", type: .info, resourceType.rawValue, requestStartTime as NSDate)
+                        try resourceType.setLastUpdateDate(requestStartTime, in: database)
+                    } catch {
+                        databaseError = error
+                        rollback.pointee = true
+                    }
+                }
+                
+                if let error = databaseError {
+                    os_log("Error writing to database", type: .error, error as NSError)
+                    completionHandler(.error(error))
+                    return
+                }
+                
+                os_log("Fetch of resource %@ finished successfully", type: .info, resourceType.rawValue)
+                DispatchQueue.main.async {
+                    self.postNotifications(for: resourceType)
+                }
+                completionHandler(.success)
             }
-            
-            if let error = databaseError {
-                os_log("Error writing to database", type: .error, error as NSError)
-                completionHandler(.error(error))
-                return
-            }
-            
-            os_log("Fetch of resource %@ finished successfully", type: .info, resourceType.rawValue)
-            DispatchQueue.main.async {
-                self.postNotifications(for: resourceType)
-            }
-            completionHandler(.success)
         }
     }
     
@@ -266,58 +267,58 @@ public class ResourceRepository: ResourceRepositoryReader {
         
         var totalPagesReceived = 0
         
-        return api.fetchResourceCollection(ofType: type) { (resources, requestError) -> Bool in
-            if let error = requestError {
-                switch error {
-                case WaniKaniAPIError.noContent:
-                    os_log("No data available: %@", type: .debug, error as NSError)
-                    self.notifyNoData(databaseQueue: databaseQueue, resourceType: resourceType, requestStartTime: requestStartTime, completionHandler: completionHandler)
-                default:
-                    os_log("Got error when fetching: %@", type: .error, error as NSError)
-                    completionHandler(.error(error))
-                }
-                return false
-            }
-            guard let resources = resources, resources.totalCount > 0 else {
-                os_log("No data available (response nil or total count zero)", type: .debug)
+        return api.fetchResourceCollection(ofType: type) { result -> Bool in
+            switch result {
+            case .failure(WaniKaniAPIError.noContent):
+                os_log("No data available", type: .debug)
                 self.notifyNoData(databaseQueue: databaseQueue, resourceType: resourceType, requestStartTime: requestStartTime, completionHandler: completionHandler)
                 return false
-            }
-            
-            totalPagesReceived += 1
-            let isLastPage = totalPagesReceived == resources.estimatedPageCount
-            
-            var databaseError: Error? = nil
-            databaseQueue.inImmediateTransaction { (database, rollback) in
-                os_log("Writing %d entries to database (page %d of %d)", type: .debug, resources.data.count, totalPagesReceived, resources.estimatedPageCount)
-                do {
-                    try resources.write(to: database)
-                    
-                    if isLastPage {
-                        try resourceType.setLastUpdateDate(requestStartTime, in: database)
-                    }
-                } catch {
-                    databaseError = error
-                    rollback.pointee = true
-                }
-            }
-            
-            if let error = databaseError {
-                os_log("Error writing to database", type: .error, error as NSError)
+            case let .failure(error):
+                os_log("Got error when fetching: %@", type: .error, error as NSError)
                 completionHandler(.error(error))
                 return false
-            }
-            
-            if isLastPage {
-                os_log("Fetch of resource %@ finished successfully", type: .info, resourceType.rawValue)
-                DispatchQueue.main.async {
-                    self.postNotifications(for: resourceType)
+            case let .success(resources):
+                guard resources.totalCount > 0 else {
+                    os_log("No data available (response nil or total count zero)", type: .debug)
+                    self.notifyNoData(databaseQueue: databaseQueue, resourceType: resourceType, requestStartTime: requestStartTime, completionHandler: completionHandler)
+                    return false
                 }
-                completionHandler(.success)
-                return false
+                
+                totalPagesReceived += 1
+                let isLastPage = totalPagesReceived == resources.estimatedPageCount
+                
+                var databaseError: Error? = nil
+                databaseQueue.inImmediateTransaction { (database, rollback) in
+                    os_log("Writing %d entries to database (page %d of %d)", type: .debug, resources.data.count, totalPagesReceived, resources.estimatedPageCount)
+                    do {
+                        try resources.write(to: database)
+                        
+                        if isLastPage {
+                            try resourceType.setLastUpdateDate(requestStartTime, in: database)
+                        }
+                    } catch {
+                        databaseError = error
+                        rollback.pointee = true
+                    }
+                }
+                
+                if let error = databaseError {
+                    os_log("Error writing to database", type: .error, error as NSError)
+                    completionHandler(.error(error))
+                    return false
+                }
+                
+                if isLastPage {
+                    os_log("Fetch of resource %@ finished successfully", type: .info, resourceType.rawValue)
+                    DispatchQueue.main.async {
+                        self.postNotifications(for: resourceType)
+                    }
+                    completionHandler(.success)
+                    return false
+                }
+                
+                return true
             }
-            
-            return true
         }
     }
     
