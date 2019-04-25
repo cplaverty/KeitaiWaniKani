@@ -50,7 +50,7 @@ extension Radical: Subject {
 }
 
 extension Radical {
-    public struct CharacterImage: SubjectImage, Codable, Equatable {
+    public struct CharacterImage: Codable, Equatable {
         public let url: URL
         public let metadata: Metadata
         public let contentType: String

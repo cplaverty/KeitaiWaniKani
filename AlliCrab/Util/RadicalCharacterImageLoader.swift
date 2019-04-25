@@ -12,78 +12,53 @@ import WaniKaniKit
 
 enum RadicalCharacterImageLoaderError: Error {
     case noRenderableImages
+    case loadFailed(URL)
 }
 
 class RadicalCharacterImageLoader {
-    private static let parentDirectory: URL = {
-        let fileManager = FileManager.default
-        let cachesDir = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        let parentDirectory = cachesDir.appendingPathComponent("RadicalImages", isDirectory: true)
-        if !fileManager.fileExists(atPath: parentDirectory.path) {
-            try! fileManager.createDirectory(at: parentDirectory, withIntermediateDirectories: true, attributes: nil)
-        }
-        return parentDirectory
-    }()
-    
-    let characterImage: SubjectImage?
-    private var task: URLSessionDownloadTask?
-    
-    init(characterImages: [SubjectImage]) {
-        self.characterImage = characterImages.first(where: { image in image.contentType == "image/png" })
-    }
+    private var task: URLSessionDataTask?
     
     deinit {
         task?.cancel()
     }
     
-    func loadImage(completionHandler: @escaping (UIImage?, Error?) -> Void) {
-        guard let image = characterImage else {
-            completionHandler(nil, RadicalCharacterImageLoaderError.noRenderableImages)
+    func loadImage(from choices: [Radical.CharacterImage], completionHandler: @escaping (Result<UIImage, Error>) -> Void) {
+        guard let image = selectImage(from: choices) else {
+            completionHandler(.failure(RadicalCharacterImageLoaderError.noRenderableImages))
             return
         }
         
         let url = image.url
-        let destination = RadicalCharacterImageLoader.parentDirectory.appendingPathComponent(url.lastPathComponent)
-        
-        guard !FileManager.default.fileExists(atPath: destination.path) else {
-            let image = makeUIImage(contentsOfFile: destination.path)
-            completionHandler(image, nil)
-            return
-        }
-        
         os_log("Downloading radical image at %@", type: .debug, url as NSURL)
-        let task = URLSession.shared.downloadTask(with: url) { (location, response, error) in
-            DispatchQueue.main.sync {
-                NetworkIndicatorController.shared.networkActivityDidFinish()
-                self.task = nil
-                
-                guard let location = location else {
-                    os_log("Download failed: %@", type: .error, error?.localizedDescription ?? "<no error>")
-                    completionHandler(nil, error)
+        
+        let urlRequest = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: .oneMinute)
+        let task = URLSession.shared.dataTask(with: urlRequest) { [weak self] (data, response, error) in
+            guard let self = self else { return }
+            
+            self.task = nil
+            
+            DispatchQueue.main.async {
+                if let error = error {
+                    os_log("Download failed: %@", type: .error, error as NSError)
+                    completionHandler(.failure(error))
                     return
                 }
                 
-                let fileManager = FileManager.default
-                try? fileManager.removeItem(at: destination)
-                
-                do {
-                    os_log("Caching radical image to %@", type: .debug, destination.path)
-                    try fileManager.moveItem(at: location, to: destination)
-                    let image = self.makeUIImage(contentsOfFile: destination.path)
-                    completionHandler(image, nil)
-                } catch {
-                    completionHandler(nil, error)
+                if let data = data, let image = UIImage(data: data) {
+                    completionHandler(.success(image))
+                } else {
+                    completionHandler(.failure(RadicalCharacterImageLoaderError.loadFailed(url)))
                 }
             }
         }
         
         self.task = task
         
-        NetworkIndicatorController.shared.networkActivityDidStart()
         task.resume()
     }
     
-    private func makeUIImage(contentsOfFile path: String) -> UIImage? {
-        return UIImage(contentsOfFile: path)?.withRenderingMode(.alwaysTemplate)
+    private func selectImage(from choices: [Radical.CharacterImage]) -> Radical.CharacterImage? {
+        let renderableImages = choices.filter({ $0.contentType == "image/png" })
+        return renderableImages.first(where: { $0.metadata.styleName == "original" }) ?? renderableImages.first
     }
 }

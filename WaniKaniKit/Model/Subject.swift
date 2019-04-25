@@ -24,11 +24,6 @@ public extension SubjectType {
     }
 }
 
-public protocol SubjectImage {
-    var url: URL { get }
-    var contentType: String { get }
-}
-
 public protocol Subject {
     var subjectType: SubjectType { get }
     var level: Int { get }

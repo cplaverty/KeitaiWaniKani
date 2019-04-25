@@ -94,7 +94,7 @@ class SubjectCharacterView: UIView, XibLoadable {
         }
     }
     
-    func setImage(_ imageChoices: [SubjectImage]) {
+    func setImage(_ imageChoices: [Radical.CharacterImage]) {
         characterLabel.isHidden = true
         characterLabel.text = nil
         displayImageView.isHidden = false
@@ -102,22 +102,26 @@ class SubjectCharacterView: UIView, XibLoadable {
             constraint.isActive = true
         }
         
-        let imageLoader = RadicalCharacterImageLoader(characterImages: imageChoices)
+        let imageLoader = RadicalCharacterImageLoader()
         self.imageLoader = imageLoader
-        imageLoader.loadImage { [weak self] (image, error) in
-            guard let currentImageLoader = self?.imageLoader, imageLoader === currentImageLoader else {
+        imageLoader.loadImage(from: imageChoices) { [weak self] result in
+            guard let self = self else { return }
+            
+            guard let currentImageLoader = self.imageLoader, imageLoader === currentImageLoader else {
                 os_log("Ignoring outdated image load request", type: .info)
                 return
             }
-            self?.imageLoader = nil
             
-            guard let image = image else {
-                os_log("Failed to fetch subject image %@: %@", type: .error, imageLoader.characterImage?.url.absoluteString ?? "<no renderable image>", error?.localizedDescription ?? "<no error>")
-                return
+            self.imageLoader = nil
+            
+            switch result {
+            case let .failure(error):
+                os_log("Failed to fetch subject image: %@", type: .error, error as NSError)
+            case let .success(image):
+                self.displayImageView.image = image.withRenderingMode(.alwaysTemplate)
+                self.displayImageView.isHidden = false
             }
-            
-            self?.displayImageView.image = image
-            self?.displayImageView.isHidden = false
         }
     }
 }
+
