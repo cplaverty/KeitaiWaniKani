@@ -21,26 +21,20 @@ class SubjectSearchTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    var repositoryReader: ResourceRepositoryReader!
+    private var cachingSubjectLoader: CachingSubjectLoader!
     
-    private var subjectIDs = [Int]() {
+    var repositoryReader: ResourceRepositoryReader! {
         didSet {
-            subjectsCache = Array(repeating: nil, count: subjectIDs.count)
-            tableView.reloadData()
+            cachingSubjectLoader = CachingSubjectLoader(repositoryReader: repositoryReader)
         }
     }
     
-    private var subjectsCache = [Subject?]()
-    
-    private func subject(at index: Int) -> Subject {
-        if let cached = subjectsCache[index] {
-            return cached
+    private var subjectIDs: [Int] {
+        get { return cachingSubjectLoader.subjectIDs }
+        set {
+            cachingSubjectLoader.subjectIDs = newValue
+            tableView.reloadData()
         }
-        
-        let subject = try! repositoryReader.loadSubject(id: subjectIDs[index]).data as! Subject
-        subjectsCache[index] = subject
-        
-        return subject
     }
     
     // MARK: - UITableViewDataSource
@@ -56,9 +50,8 @@ class SubjectSearchTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.subject.rawValue, for: indexPath) as! SubjectSearchTableViewCell
         
-        let s = subject(at: indexPath.row)
         cell.subjectID = subjectIDs[indexPath.row]
-        cell.subject = s
+        cell.subject = cachingSubjectLoader.subject(at: indexPath.row)
         
         return cell
     }
@@ -89,7 +82,7 @@ class SubjectSearchTableViewController: UITableViewController {
     
     @IBAction func unwindToSubjectDetailPresenter(_ unwindSegue: UIStoryboardSegue) {
     }
-
+    
 }
 
 // MARK: - UISearchResultsUpdating

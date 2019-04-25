@@ -141,6 +141,7 @@
 		839033D4220DD313009D4E54 /* AuxiliaryMeaningTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839033D3220DD313009D4E54 /* AuxiliaryMeaningTable.swift */; };
 		839033D6220DD3D0009D4E54 /* AuxiliaryMeaning+DatabaseCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839033D5220DD3D0009D4E54 /* AuxiliaryMeaning+DatabaseCodable.swift */; };
 		8392510A1F58A80F004D8088 /* SubjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 839251091F58A80F004D8088 /* SubjectTests.swift */; };
+		83956AD122718C5700814B95 /* CachingSubjectLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83956AD022718C5700814B95 /* CachingSubjectLoader.swift */; };
 		8396B04D1F2CD5550094C9EF /* AssignmentTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8396B04C1F2CD5550094C9EF /* AssignmentTable.swift */; };
 		83A783E81F9FEABC0000D28D /* LevelProgression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A783E71F9FEABC0000D28D /* LevelProgression.swift */; };
 		83A783EA1F9FEF590000D28D /* LevelProgressionTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A783E91F9FEF590000D28D /* LevelProgressionTable.swift */; };
@@ -430,6 +431,7 @@
 		839268401F2BF113006C744D /* StudyMaterialsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMaterialsTests.swift; sourceTree = "<group>"; };
 		839268421F2BF113006C744D /* UserInformationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationTests.swift; sourceTree = "<group>"; };
 		839268431F2BF113006C744D /* VocabularyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabularyTests.swift; sourceTree = "<group>"; };
+		83956AD022718C5700814B95 /* CachingSubjectLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachingSubjectLoader.swift; sourceTree = "<group>"; };
 		8396B04C1F2CD5550094C9EF /* AssignmentTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentTable.swift; sourceTree = "<group>"; };
 		83A783E71F9FEABC0000D28D /* LevelProgression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProgression.swift; sourceTree = "<group>"; };
 		83A783E91F9FEF590000D28D /* LevelProgressionTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProgressionTable.swift; sourceTree = "<group>"; };
@@ -949,6 +951,7 @@
 			isa = PBXGroup;
 			children = (
 				832C18731F4503D9001FFACD /* BundleResourceLoader.swift */,
+				83956AD022718C5700814B95 /* CachingSubjectLoader.swift */,
 				83C681FF1F51C2CD00CC431C /* RadicalCharacterImageLoader.swift */,
 				838973C5221E07A300EED665 /* XibLoadable.swift */,
 			);
@@ -1549,6 +1552,7 @@
 				83CE51DD1F4F40350050242A /* DashboardTableViewHeaderFooterView.swift in Sources */,
 				83DEF7F51F53273200EDCACF /* ProgressReportingBarButtonItemView.swift in Sources */,
 				83CE51DF1F4F53C70050242A /* SettingsTableViewController.swift in Sources */,
+				83956AD122718C5700814B95 /* CachingSubjectLoader.swift in Sources */,
 				83D7CC001F50B82A00043D47 /* AssignmentProgressionCollectionViewCell.swift in Sources */,
 				83F02ED81F8EC3BD00A85014 /* SubjectCharacterView.swift in Sources */,
 				83FFD90B1F5387B80015988F /* ReviewTimelineHeaderFooterView.swift in Sources */,

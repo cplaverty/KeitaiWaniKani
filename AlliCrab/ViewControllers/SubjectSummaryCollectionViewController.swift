@@ -21,26 +21,20 @@ class SubjectSummaryCollectionViewController: UICollectionViewController {
     
     // MARK: - Properties
     
-    var repositoryReader: ResourceRepositoryReader!
+    private var cachingSubjectLoader: CachingSubjectLoader!
     
-    var subjectIDs = [Int]() {
+    var repositoryReader: ResourceRepositoryReader! {
         didSet {
-            subjectsCache = Array(repeating: nil, count: subjectIDs.count)
-            collectionView.reloadData()
+            cachingSubjectLoader = CachingSubjectLoader(repositoryReader: repositoryReader)
         }
     }
     
-    private var subjectsCache = [Subject?]()
-    
-    private func subject(at index: Int) -> Subject {
-        if let cached = subjectsCache[index] {
-            return cached
+    var subjectIDs: [Int] {
+        get { return cachingSubjectLoader.subjectIDs }
+        set {
+            cachingSubjectLoader.subjectIDs = newValue
+            collectionView.reloadData()
         }
-        
-        let subject = try! repositoryReader.loadSubject(id: subjectIDs[index]).data as! Subject
-        subjectsCache[index] = subject
-        
-        return subject
     }
     
     private var contentSizeChangedObserver: NSObjectProtocol?
@@ -59,7 +53,7 @@ class SubjectSummaryCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.subject.rawValue, for: indexPath) as! SubjectCollectionViewCell
         
         cell.subjectID = subjectIDs[indexPath.row]
-        cell.subject = subject(at: indexPath.row)
+        cell.subject = cachingSubjectLoader.subject(at: indexPath.row)
         
         return cell
     }
