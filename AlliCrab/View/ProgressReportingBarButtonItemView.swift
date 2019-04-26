@@ -63,18 +63,26 @@ class ProgressReportingBarButtonItemView: UIView {
         
         observers = [
             progress.observe(\.fractionCompleted) { [weak self] progress, _ in
+                guard let self = self else { return }
+                
                 DispatchQueue.main.async {
-                    self?.progressView.setProgress(Float(progress.fractionCompleted), animated: true)
+                    self.progressView.setProgress(Float(progress.fractionCompleted), animated: true)
                 }
             },
             progress.observe(\.isCancelled) { [weak self] _, _ in
+                guard let self = self else { return }
+                
                 DispatchQueue.main.async {
-                    self?.markComplete()
+                    self.markComplete()
                 }
             }]
     }
     
     func markComplete() {
+        if !isTrackedOperationInProgress {
+            return
+        }
+        
         observers = nil
         trackedProgress = nil
         progressView.setProgress(1, animated: true)
