@@ -31,36 +31,36 @@ class SubjectCharacterView: UIView, XibLoadable {
         }
     }
     
-    var subject: Subject? {
-        didSet {
-            guard let subject = subject else {
-                characterLabel.text = nil
-                displayImageView.image = nil
-                imageLoader = nil
-                return
+    func setSubject(_ subject: Subject, id: Int) {
+        switch subject {
+        case let r as Radical:
+            if let image = UIImage(named: "Radicals/\(id)") {
+                setImage(image)
+            } else if let characters = r.characters {
+                setCharacters(characters)
+            } else {
+                setImage(r.characterImages)
             }
-            
-            switch subject {
-            case let r as Radical:
-                if let characters = r.characters {
-                    setCharacters(characters)
-                } else {
-                    setImage(r.characterImages)
-                }
-            case let k as Kanji:
-                setCharacters(k.characters)
-            case let v as Vocabulary:
-                setCharacters(v.characters)
-            default:
-                fatalError("Unknown subject type")
-            }
+        case let k as Kanji:
+            setCharacters(k.characters)
+        case let v as Vocabulary:
+            setCharacters(v.characters)
+        default:
+            fatalError("Unknown subject type")
         }
     }
     
     private var imageLoader: RadicalCharacterImageLoader? {
         didSet {
-            if imageLoader != nil {
-                downloadProgressActivityIndicator.startAnimating()
+            if let imageLoader = imageLoader {
+                let id = ObjectIdentifier(imageLoader)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) { [weak self] in
+                    guard let self = self else { return }
+                    
+                    if let imageLoader = self.imageLoader, ObjectIdentifier(imageLoader) == id {
+                        self.downloadProgressActivityIndicator.startAnimating()
+                    }
+                }
             } else {
                 downloadProgressActivityIndicator.stopAnimating()
             }
@@ -83,10 +83,10 @@ class SubjectCharacterView: UIView, XibLoadable {
         contentView.prepareForInterfaceBuilder()
     }
     
-    func setCharacters(_ characters: String) {
+    private func setCharacters(_ characters: String) {
         imageLoader = nil
-        characterLabel.text = characters
         characterLabel.isHidden = false
+        characterLabel.text = characters
         displayImageView.image = nil
         displayImageView.isHidden = true
         displayImageViewHeightConstraints.forEach { constraint in
@@ -94,9 +94,22 @@ class SubjectCharacterView: UIView, XibLoadable {
         }
     }
     
-    func setImage(_ imageChoices: [Radical.CharacterImage]) {
+    private func setImage(_ image: UIImage) {
+        imageLoader = nil
         characterLabel.isHidden = true
         characterLabel.text = nil
+        displayImageView.image = image.withRenderingMode(.alwaysTemplate)
+        displayImageView.isHidden = false
+        displayImageViewHeightConstraints.forEach { constraint in
+            constraint.isActive = true
+        }
+    }
+    
+    private func setImage(_ imageChoices: [Radical.CharacterImage]) {
+        imageLoader = nil
+        characterLabel.isHidden = true
+        characterLabel.text = nil
+        displayImageView.image = nil
         displayImageView.isHidden = false
         displayImageViewHeightConstraints.forEach { constraint in
             constraint.isActive = true

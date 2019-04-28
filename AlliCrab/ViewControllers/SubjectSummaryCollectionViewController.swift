@@ -52,8 +52,9 @@ class SubjectSummaryCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ReuseIdentifier.subject.rawValue, for: indexPath) as! SubjectCollectionViewCell
         
-        cell.subjectID = subjectIDs[indexPath.row]
-        cell.subject = cachingSubjectLoader.subject(at: indexPath.row)
+        let subjectID = subjectIDs[indexPath.row]
+        let subject = cachingSubjectLoader.subject(at: indexPath.row)
+        cell.setSubject(subject, id: subjectID)
         
         return cell
     }

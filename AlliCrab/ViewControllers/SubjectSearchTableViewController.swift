@@ -50,8 +50,9 @@ class SubjectSearchTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.subject.rawValue, for: indexPath) as! SubjectSearchTableViewCell
         
-        cell.subjectID = subjectIDs[indexPath.row]
-        cell.subject = cachingSubjectLoader.subject(at: indexPath.row)
+        let subjectID = subjectIDs[indexPath.row]
+        let subject = cachingSubjectLoader.subject(at: indexPath.row)
+        cell.setSubject(subject, id: subjectID)
         
         return cell
     }

@@ -132,7 +132,7 @@ class SubjectDetailViewController: UIViewController {
         
         let (subject, studyMaterials, assignment, reviewStatistics) = try repositoryReader.subjectDetail(id: subjectID)
         
-        characterView.subject = subject
+        characterView.setSubject(subject, id: subjectID)
         headerView.backgroundColor = subject.subjectType.backgroundColor
         
         levelLabel.text = String(subject.level)

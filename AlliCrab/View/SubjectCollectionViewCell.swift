@@ -12,24 +12,20 @@ class SubjectCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    var subjectID: Int!
+    private(set) var subjectID: Int = 0
     
-    var subject: Subject! {
-        didSet {
-            characterView.subject = subject
-            backgroundColor = subject.subjectType.backgroundColor
-            
-            if let primaryReadingLabel = primaryReadingLabel {
-                primaryReadingLabel.text = subject.primaryReading
-            }
-            if let primaryMeaningLabel = primaryMeaningLabel {
-                primaryMeaningLabel.text = subject.primaryMeaning
-            }
+    func setSubject(_ subject: Subject, id: Int) {
+        subjectID = id
+        characterView.setSubject(subject, id: id)
+        
+        backgroundColor = subject.subjectType.backgroundColor
+        
+        if let primaryReadingLabel = primaryReadingLabel {
+            primaryReadingLabel.text = subject.primaryReading
         }
-    }
-    
-    var documentURL: URL {
-        return subject.documentURL
+        if let primaryMeaningLabel = primaryMeaningLabel {
+            primaryMeaningLabel.text = subject.primaryMeaning
+        }
     }
     
     // MARK: - Outlets

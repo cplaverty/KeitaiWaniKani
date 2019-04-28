@@ -44,7 +44,7 @@ class AssignmentProgressionCollectionViewCell: UICollectionViewCell {
         let percentComplete = subjectProgression.percentComplete
         let subject = subjectProgression.subject
         
-        characterView.subject = subject
+        characterView.setSubject(subject, id: subjectProgression.subjectID)
         backgroundColor = subject.subjectType.backgroundColor.withAlphaComponent(isLocked ? 0.5 : 1.0)
         progressView.progressTintColor = subject.subjectType.backgroundColor.withAlphaComponent(0.4)
         
