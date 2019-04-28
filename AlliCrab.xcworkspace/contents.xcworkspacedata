@@ -5,6 +5,9 @@
       location = "group:WaniKaniKitAPIPlayground.playground">
    </FileRef>
    <FileRef
+      location = "group:OfflineSupport.playground">
+   </FileRef>
+   <FileRef
       location = "group:AlliCrab.xcodeproj">
    </FileRef>
    <FileRef

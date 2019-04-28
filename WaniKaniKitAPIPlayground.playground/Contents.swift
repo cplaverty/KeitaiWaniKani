@@ -11,20 +11,12 @@ let api = WaniKaniAPI(apiKey: apiKey, decoder: LoggingResourceDecoder(shouldPrin
 // Set apiKey above before uncommenting
 //
 
-//api.fetchResource(ofType: .user) { (resource, error) in
-//    if let error = error {
-//        print(error)
-//    } else {
-//        print(resource!)
-//    }
+//api.fetchResource(ofType: .user) { result in
+//    print(result)
 //}
 
-//api.fetchResourceCollection(ofType: .subjects(filter: nil)) { (resources, error) in
-//    if let error = error {
-//        print(error)
-//    } else {
-//        print(resources!)
-//    }
+//api.fetchResourceCollection(ofType: .subjects(filter: nil)) { result in
+//    print(result)
 //
 //    return true
 //}

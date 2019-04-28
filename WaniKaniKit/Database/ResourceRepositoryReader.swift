@@ -63,6 +63,23 @@ public class ResourceRepositoryReader {
         }
     }
     
+    public func loadSubjects(type: SubjectType, level: Int) throws -> [ResourceCollectionItem] {
+        guard let databaseQueue = self.databaseQueue else {
+            throw ResourceRepositoryError.noDatabase
+        }
+        
+        return try databaseQueue.inDatabase { database in
+            switch type {
+            case .radical:
+                return try Radical.read(from: database, level: level)
+            case .kanji:
+                return try Kanji.read(from: database, level: level)
+            case .vocabulary:
+                return try Vocabulary.read(from: database, level: level)
+            }
+        }
+    }
+    
     public func filterSubjectIDsForSubscription(_ ids: [Int]) throws -> [Int] {
         guard let databaseQueue = self.databaseQueue else {
             throw ResourceRepositoryError.noDatabase

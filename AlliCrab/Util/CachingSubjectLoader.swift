@@ -15,13 +15,13 @@ class CachingSubjectLoader {
         self.repositoryReader = repositoryReader
     }
     
-    public var subjectIDs = [Int]() {
+    var subjectIDs = [Int]() {
         didSet {
             subjectsCache = Array(repeating: nil, count: subjectIDs.count)
         }
     }
     
-    public func subject(at index: Int) -> Subject {
+    func subject(at index: Int) -> Subject {
         if let cached = subjectsCache[index] {
             return cached
         }
