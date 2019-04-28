@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QIe-vK-SmD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QIe-vK-SmD">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -845,72 +845,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I3p-9v-1kl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="788" y="1452"/>
-        </scene>
-        <!--Progress Detail Collection View Controller-->
-        <scene sceneID="IjL-FD-3PA">
-            <objects>
-                <collectionViewController hidesBottomBarWhenPushed="YES" id="KbW-gd-Le4" customClass="SRSProgressDetailCollectionViewController" customModule="AlliCrab" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="aCC-2m-JMj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="8" id="gb0-Zm-YVo">
-                            <size key="itemSize" width="60" height="60"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Subject" id="wvN-5I-lbI" customClass="SubjectCollectionViewCell" customModule="AlliCrab" customModuleProvider="target">
-                                <rect key="frame" x="8" y="8" width="60" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hLM-Dt-5J0">
-                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZgE-4G-mgy" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="52" width="44" height="0.0"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="42"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="ZgE-4G-mgy" firstAttribute="top" secondItem="hLM-Dt-5J0" secondAttribute="topMargin" id="1sP-vP-mvI"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="ZgE-4G-mgy" secondAttribute="bottom" id="Pga-nZ-exe"/>
-                                                <constraint firstItem="ZgE-4G-mgy" firstAttribute="leading" secondItem="hLM-Dt-5J0" secondAttribute="leadingMargin" id="bIB-Rs-NtP"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ZgE-4G-mgy" secondAttribute="trailing" id="rlO-dv-BII"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                </view>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="hLM-Dt-5J0" secondAttribute="trailing" id="EZj-mP-9bN"/>
-                                    <constraint firstItem="hLM-Dt-5J0" firstAttribute="leading" secondItem="wvN-5I-lbI" secondAttribute="leading" id="Q44-Qy-vHz"/>
-                                    <constraint firstItem="hLM-Dt-5J0" firstAttribute="top" secondItem="wvN-5I-lbI" secondAttribute="top" id="Y6O-2T-V9E"/>
-                                    <constraint firstAttribute="bottom" secondItem="hLM-Dt-5J0" secondAttribute="bottom" id="o7B-Be-JUR"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="characterView" destination="ZgE-4G-mgy" id="spP-9O-Nta"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="KbW-gd-Le4" id="Thf-He-J7c"/>
-                            <outlet property="delegate" destination="KbW-gd-Le4" id="0OH-2e-THw"/>
-                        </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="xmq-KH-h5L"/>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MHJ-1s-fwW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1574" y="1452"/>
         </scene>
         <!--SubjectDetail-->
         <scene sceneID="NYz-WS-3sX">

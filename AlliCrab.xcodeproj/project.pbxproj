@@ -16,7 +16,6 @@
 		8317E8891F54B31300B8D654 /* SubjectProgression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8317E8881F54B31300B8D654 /* SubjectProgression.swift */; };
 		831E92D71F4DDFE200B979DD /* DashboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831E92D61F4DDFE200B979DD /* DashboardTableViewController.swift */; };
 		8325D7891F49E225008A6DF2 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8325D7881F49E225008A6DF2 /* NotificationManager.swift */; };
-		8326F7E21F95654000CC3213 /* SRSProgressDetailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8326F7E11F95654000CC3213 /* SRSProgressDetailCollectionViewController.swift */; };
 		8326F7E41F95660600CC3213 /* SubjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8326F7E31F95660600CC3213 /* SubjectCollectionViewCell.swift */; };
 		832708511F4C595C00AB1525 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832708501F4C595C00AB1525 /* WebViewController.swift */; };
 		832708531F4C66F100AB1525 /* WebViewBackForwardListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832708521F4C66F100AB1525 /* WebViewBackForwardListTableViewController.swift */; };
@@ -301,7 +300,6 @@
 		8317E8881F54B31300B8D654 /* SubjectProgression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectProgression.swift; sourceTree = "<group>"; };
 		831E92D61F4DDFE200B979DD /* DashboardTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewController.swift; sourceTree = "<group>"; };
 		8325D7881F49E225008A6DF2 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		8326F7E11F95654000CC3213 /* SRSProgressDetailCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SRSProgressDetailCollectionViewController.swift; sourceTree = "<group>"; };
 		8326F7E31F95660600CC3213 /* SubjectCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCollectionViewCell.swift; sourceTree = "<group>"; };
 		832708501F4C595C00AB1525 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		832708521F4C66F100AB1525 /* WebViewBackForwardListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewBackForwardListTableViewController.swift; sourceTree = "<group>"; };
@@ -926,7 +924,6 @@
 				83FEF4451F50518E00A7029D /* ReviewTimelineFilterTableViewController.swift */,
 				83FEF43D1F4F952F00A7029D /* ReviewTimelineTableViewController.swift */,
 				83CE51DE1F4F53C70050242A /* SettingsTableViewController.swift */,
-				8326F7E11F95654000CC3213 /* SRSProgressDetailCollectionViewController.swift */,
 				833E0511221B33D700E99A53 /* SubjectDetailViewController.swift */,
 				836DE2B51F9B918D005E42EC /* SubjectSearchTableViewController.swift */,
 				8329E02022289EE700653324 /* SubjectSummaryCollectionViewController.swift */,
@@ -1520,7 +1517,6 @@
 				832708581F4C9D9E00AB1525 /* WKWebView.swift in Sources */,
 				83B8A6F41F507A42006665DB /* ResourceRepository.swift in Sources */,
 				832708561F4C920100AB1525 /* WebAddressBarView.swift in Sources */,
-				8326F7E21F95654000CC3213 /* SRSProgressDetailCollectionViewController.swift in Sources */,
 				832708531F4C66F100AB1525 /* WebViewBackForwardListTableViewController.swift in Sources */,
 				83CE51E11F4F541E0050242A /* UserScriptTableViewCell.swift in Sources */,
 				83C682001F51C2CD00CC431C /* RadicalCharacterImageLoader.swift in Sources */,

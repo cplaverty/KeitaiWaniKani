@@ -581,23 +581,6 @@ public class ResourceRepositoryReader {
         }
     }
     
-    public func subjects(srsStage: SRSStage) throws -> [(subject: Subject, assignment: Assignment)] {
-        guard let databaseQueue = self.databaseQueue else {
-            throw ResourceRepositoryError.noDatabase
-        }
-        
-        return try databaseQueue.inDatabase { database in
-            let assignmentsBySubjectID = try Assignment.read(from: database, srsStage: srsStage).values.reduce(into: [:], { (result, assignment) in
-                result[assignment.subjectID] = assignment
-            })
-            let subjectItems = try ResourceCollectionItem.readSubjects(from: database, ids: Array(assignmentsBySubjectID.keys))
-            
-            return subjectItems.map({ item in
-                (item.data as! Subject, assignmentsBySubjectID[item.id]!)
-            })
-        }
-    }
-    
     public func findSubjects(matching query: String) throws -> [Int] {
         guard let databaseQueue = self.databaseQueue else {
             throw ResourceRepositoryError.noDatabase
