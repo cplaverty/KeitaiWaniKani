@@ -55,6 +55,7 @@ class DashboardTableViewController: UITableViewController {
     }()
     
     var resourceRepository: ResourceRepository!
+    var lastError: Error?
     
     private let backgroundBlurEffectStyle = UIBlurEffect.Style.extraLight
     
@@ -104,6 +105,12 @@ class DashboardTableViewController: UITableViewController {
         performSegue(withIdentifier: SegueIdentifier.settings.rawValue, sender: nil)
     }
     
+    @IBAction func showLastError() {
+        guard let lastError = self.lastError else { return }
+        
+        showAlert(title: "Failed to update data", message: lastError.localizedDescription)
+    }
+
     // MARK: - UITableViewDataSource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -387,7 +394,11 @@ class DashboardTableViewController: UITableViewController {
         
         tableView.register(DashboardTableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: ReuseIdentifier.header.rawValue)
         
-        progressContainerView = ProgressReportingBarButtonItemView(frame: self.navigationController?.toolbar.frame ?? .zero)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showLastError))
+        let toolbarBounds = CGRect(origin: .zero, size: self.navigationController?.toolbar.frame.size ?? .zero)
+        progressContainerView = ProgressReportingBarButtonItemView(frame: toolbarBounds)
+        progressContainerView.textLabel.addGestureRecognizer(tapGestureRecognizer)
+        progressContainerView.textLabel.isUserInteractionEnabled = true
         
         if #available(iOS 11.0, *) {
             let searchResultViewController = storyboard?.instantiateViewController(withIdentifier: "SubjectSearch") as! SubjectSearchTableViewController
@@ -476,6 +487,14 @@ class DashboardTableViewController: UITableViewController {
     // MARK: - Update UI
     
     private func updateStatusBarForLastUpdate(_ lastUpdate: Date?) {
+        if lastError != nil {
+            let detailsText = NSMutableAttributedString(string: "Details...", attributes: [.foregroundColor: UIColor.blue])
+            let text = NSMutableAttributedString(string: "Error when fetching ")
+            text.append(detailsText)
+            progressContainerView.textLabel.attributedText = text
+            return
+        }
+        
         guard let lastUpdate = lastUpdate else {
             progressContainerView.textLabel.text = "No data found: fetch required"
             return
@@ -514,10 +533,13 @@ class DashboardTableViewController: UITableViewController {
                 
                 switch result {
                 case .success:
+                    self.lastError = nil
                     self.tableView.reloadData()
                 case .noData:
+                    self.lastError = nil
                     break
                 case let .error(error):
+                    self.lastError = error
                     if showAlertOnErrors {
                         self.showAlert(title: "Failed to update data", message: error.localizedDescription)
                     }
