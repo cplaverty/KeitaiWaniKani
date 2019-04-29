@@ -110,7 +110,7 @@ class DashboardTableViewController: UITableViewController {
         
         showAlert(title: "Failed to update data", message: lastError.localizedDescription)
     }
-
+    
     // MARK: - UITableViewDataSource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -487,37 +487,39 @@ class DashboardTableViewController: UITableViewController {
     // MARK: - Update UI
     
     private func updateStatusBarForLastUpdate(_ lastUpdate: Date?) {
-        if lastError != nil {
-            let detailsText = NSMutableAttributedString(string: "Details...", attributes: [.foregroundColor: UIColor.blue])
-            let text = NSMutableAttributedString(string: "Error when fetching ")
-            text.append(detailsText)
-            progressContainerView.textLabel.attributedText = text
-            return
-        }
-        
-        guard let lastUpdate = lastUpdate else {
-            progressContainerView.textLabel.text = "No data found: fetch required"
-            return
-        }
-        
-        switch Date().timeIntervalSince(lastUpdate) {
-        case let interval where interval < 2 * .oneMinute:
-            progressContainerView.textLabel.text = "Updated Just Now"
-        case let interval where interval < 6 * .oneMinute:
-            let relativeDate = lastUpdateDateRelativeFormatter.string(from: interval)!
-            progressContainerView.textLabel.text = "Updated \(relativeDate) ago"
-        default:
-            if Calendar.current.isDateInToday(lastUpdate) {
-                let formatter = lastUpdateDateAbsoluteFormatter
-                formatter.dateStyle = .none
-                let formatted = formatter.string(from: lastUpdate)
-                progressContainerView.textLabel.text = "Updated at \(formatted)"
-            } else {
-                let formatter = lastUpdateDateAbsoluteFormatter
-                formatter.dateStyle = .medium
-                let formatted = formatter.string(from: lastUpdate)
-                progressContainerView.textLabel.text = "Updated: \(formatted)"
+        let formattedUpdateTime: String
+        if let lastUpdate = lastUpdate {
+            switch Date().timeIntervalSince(lastUpdate) {
+            case let interval where interval < 2 * .oneMinute:
+                formattedUpdateTime = "Updated Just Now"
+            case let interval where interval < 6 * .oneMinute:
+                let relativeDate = lastUpdateDateRelativeFormatter.string(from: interval)!
+                formattedUpdateTime = "Updated \(relativeDate) ago"
+            default:
+                if Calendar.current.isDateInToday(lastUpdate) {
+                    let formatter = lastUpdateDateAbsoluteFormatter
+                    formatter.dateStyle = .none
+                    let formatted = formatter.string(from: lastUpdate)
+                    formattedUpdateTime = "Updated at \(formatted)"
+                } else {
+                    let formatter = lastUpdateDateAbsoluteFormatter
+                    formatter.dateStyle = .medium
+                    let formatted = formatter.string(from: lastUpdate)
+                    formattedUpdateTime = "Updated: \(formatted)"
+                }
             }
+        } else {
+            formattedUpdateTime = "No data found: fetch required"
+            return
+        }
+        
+        if lastError != nil {
+            let text = NSMutableAttributedString(string: formattedUpdateTime + "\n")
+            text.append(NSAttributedString(string: "Error when fetching ", attributes: [.foregroundColor: UIColor.gray]))
+            text.append(NSAttributedString(string: "Details...", attributes: [.foregroundColor: UIColor.globalTintColor]))
+            progressContainerView.textLabel.attributedText = text
+        } else {
+            progressContainerView.textLabel.text = formattedUpdateTime
         }
     }
     
@@ -528,8 +530,6 @@ class DashboardTableViewController: UITableViewController {
                 if let refreshControl = self.refreshControl, refreshControl.isRefreshing {
                     refreshControl.endRefreshing()
                 }
-                self.progressContainerView.markComplete()
-                self.updateStatusBarForLastUpdate(self.resourceRepository.lastAppDataUpdateDate)
                 
                 switch result {
                 case .success:
@@ -544,6 +544,9 @@ class DashboardTableViewController: UITableViewController {
                         self.showAlert(title: "Failed to update data", message: error.localizedDescription)
                     }
                 }
+                
+                self.progressContainerView.markComplete()
+                self.updateStatusBarForLastUpdate(self.resourceRepository.lastAppDataUpdateDate)
             }
         }
         
