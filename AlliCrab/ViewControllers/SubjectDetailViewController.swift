@@ -237,7 +237,7 @@ class SubjectDetailViewController: UIViewController {
         
         if autoSize {
             let flowLayout = subjectSummaryViewController.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-            flowLayout.estimatedItemSize = flowLayout.itemSize
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
     }
     
@@ -292,8 +292,7 @@ class SubjectDetailViewController: UIViewController {
     }
     
     private func setMeanings(from subject: Subject) {
-        let primaryMeaning = subject.meanings.lazy.filter({ $0.isPrimary }).map({ $0.meaning }).first!
-        primaryMeaningLabel.text = primaryMeaning
+        primaryMeaningLabel.text = subject.primaryMeaning
         let alternativeMeanings = subject.meanings.lazy.filter({ !$0.isPrimary }).map({ $0.meaning }).joined(separator: ", ")
         if alternativeMeanings.isEmpty {
             alternativeMeaningsLabel.removeFromSuperview()

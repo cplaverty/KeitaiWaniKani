@@ -26,6 +26,9 @@ class SubjectCollectionViewCell: UICollectionViewCell {
         if let primaryMeaningLabel = primaryMeaningLabel {
             primaryMeaningLabel.text = subject.primaryMeaning
         }
+        
+        // Fix for self-sizing cells on iOS 12
+        updateConstraintsIfNeeded()
     }
     
     // MARK: - Outlets
