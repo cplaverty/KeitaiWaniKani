@@ -69,7 +69,6 @@ class ProgressBarView: UIView, XibLoadable {
     
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
-        contentView = setupContentViewFromXib()
         contentView.prepareForInterfaceBuilder()
     }
     
