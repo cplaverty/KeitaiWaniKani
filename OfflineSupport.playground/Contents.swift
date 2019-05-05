@@ -61,13 +61,15 @@ let contents = """
     """.data(using: .utf8)
 fileManager.createFile(atPath: imageURL.appendingPathComponent("Contents.json").path, contents: contents, attributes: nil)
 
+let expectedContentType = "image/png"
+
 for level in 1...60 {
     let resources = try resourceRepository.loadSubjects(type: .radical, level: level)
     print("Level \(level): \(resources.count) radicals")
     for resource in resources {
         let id = resource.id
         let radical = resource.data as! Radical
-        let renderableImages = radical.characterImages.filter({ $0.contentType == "image/png" })
+        let renderableImages = radical.characterImages.filter({ $0.contentType == expectedContentType })
         if renderableImages.isEmpty {
             print("Skipping radical \(id): no renderable images")
             continue
@@ -93,6 +95,11 @@ for level in 1...60 {
                     return
                 }
                 
+                guard response?.mimeType == expectedContentType else {
+                    print("Ignoring response for radical \(id) with style name \(styleName): incorrect content type (expected '\(expectedContentType)', got '\(response?.mimeType ?? "")')")
+                    return
+                }
+                
                 try? fileManager.removeItem(at: destination)
                 
                 do {
@@ -104,6 +111,12 @@ for level in 1...60 {
             task.resume()
         }
         downloadGroup.wait()
+        
+        guard try fileManager.contentsOfDirectory(atPath: destinationBaseURL.path).count > 0 else {
+            print("Removing empty directory for radical \(id)")
+            try fileManager.removeItem(at: destinationBaseURL)
+            continue
+        }
         
         let imagesetContents = """
             {
@@ -133,4 +146,6 @@ for level in 1...60 {
         fileManager.createFile(atPath: destinationBaseURL.appendingPathComponent("Contents.json").path, contents: imagesetContents, attributes: nil)
     }
 }
+
 print("Done")
+PlaygroundPage.current.finishExecution()
