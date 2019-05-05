@@ -46,13 +46,20 @@ public struct ProjectedLevelInfo: Equatable {
     public let level: Int
     public let startDate: Date
     public let endDate: Date
-    public let isEndDateBasedOnLockedItem: Bool
+    public let endDateMethodology: EndDateMethodology
     
-    public init(level: Int, startDate: Date, endDate: Date, isEndDateBasedOnLockedItem: Bool) {
+    public init(level: Int, startDate: Date, endDate: Date, endDateMethodology: EndDateMethodology) {
         self.level = level
         self.startDate = startDate
         self.endDate = endDate
-        self.isEndDateBasedOnLockedItem = isEndDateBasedOnLockedItem
+        self.endDateMethodology = endDateMethodology
+    }
+}
+
+public extension ProjectedLevelInfo {
+    enum EndDateMethodology: Equatable {
+        case calculated(usingLockedItem: Bool)
+        case actual
     }
 }
 

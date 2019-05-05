@@ -524,8 +524,15 @@ public class ResourceRepositoryReader {
                 levelProgressions = inferredLevelProgressions + levelProgressions
             }
             
-            let currentLevelStartDate = levelProgressions.last?.startedAt ?? Date()
-            let projectedCurrentLevel = try projectedLevel(userInfo.level, startDate: currentLevelStartDate, from: database)
+            let lastLevel = levelProgressions.last
+            let projectedCurrentLevel: ProjectedLevelInfo?
+            if let lastLevel = lastLevel, let startedAt = lastLevel.startedAt, let passedAt = lastLevel.passedAt {
+                projectedCurrentLevel = ProjectedLevelInfo(level: lastLevel.level, startDate: startedAt, endDate: passedAt, endDateMethodology: .actual)
+            } else {
+                let level = lastLevel?.level ?? userInfo.level
+                let startedAt = lastLevel?.startedAt ?? Date()
+                projectedCurrentLevel = try projectedLevel(level, startDate: startedAt, from: database)
+            }
             
             return LevelData(detail: levelProgressions, projectedCurrentLevel: projectedCurrentLevel)
         }
@@ -637,7 +644,7 @@ public class ResourceRepositoryReader {
         let earliestLevellingDate = guruThresholdItem.guruDate
         let isEndDateBasedOnLockedItem = guruThresholdItem.assignment?.unlockedAt == nil
         
-        return ProjectedLevelInfo(level: level, startDate: startDate, endDate: earliestLevellingDate, isEndDateBasedOnLockedItem: isEndDateBasedOnLockedItem)
+        return ProjectedLevelInfo(level: level, startDate: startDate, endDate: earliestLevellingDate, endDateMethodology: .calculated(usingLockedItem: isEndDateBasedOnLockedItem))
     }
     
     private func getUnlockDatesByLevel(for subjectType: SubjectType, from database: FMDatabase) throws -> [Int: [Date]] {

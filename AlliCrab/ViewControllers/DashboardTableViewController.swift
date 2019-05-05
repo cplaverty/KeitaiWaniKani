@@ -151,7 +151,11 @@ class DashboardTableViewController: UITableViewController {
         case .upcomingReviews:
             return 3
         case .levelProgression:
-            return 5
+            if let projectedCurrentLevel = levelTimeline?.projectedCurrentLevel, case .actual = projectedCurrentLevel.endDateMethodology {
+                return 4
+            } else {
+                return 5
+            }
         case .srsDistribution:
             return 5
         case .links:
@@ -221,22 +225,29 @@ class DashboardTableViewController: UITableViewController {
                 return cell
             case 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.durationDetail.rawValue, for: indexPath) as! DurationDetailTableViewCell
-                cell.update(text: "Current Level Time", duration: (levelTimeline?.projectedCurrentLevel?.startDate.timeIntervalSinceNow).map { -$0 })
+                if let projectedCurrentLevel = levelTimeline?.projectedCurrentLevel, case .actual = projectedCurrentLevel.endDateMethodology {
+                    cell.update(text: "Level Passed In", duration: projectedCurrentLevel.endDate.timeIntervalSince(projectedCurrentLevel.startDate))
+                } else {
+                    cell.update(text: "Current Level Time", duration: (levelTimeline?.projectedCurrentLevel?.startDate.timeIntervalSinceNow).map({ -$0 }))
+                }
                 
                 return cell
             case 4:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.durationDetail.rawValue, for: indexPath) as! DurationDetailTableViewCell
                 
                 if let projectedCurrentLevel = levelTimeline?.projectedCurrentLevel {
-                    let text = projectedCurrentLevel.isEndDateBasedOnLockedItem ? "Level Up In (Estimated)" : "Level Up In"
-                    let startDate = projectedCurrentLevel.startDate
-                    let endDateByProjection = projectedCurrentLevel.endDate
+                    let text: String
                     let expectedEndDate: Date
-                    if projectedCurrentLevel.isEndDateBasedOnLockedItem {
-                        let endDateByEstimate = startDate.addingTimeInterval(levelTimeline?.stats?.mean ?? 0)
-                        expectedEndDate = max(endDateByEstimate, endDateByProjection)
-                    } else {
-                        expectedEndDate = endDateByProjection
+                    switch projectedCurrentLevel.endDateMethodology {
+                    case .calculated(usingLockedItem: true):
+                        let endDateByEstimate = projectedCurrentLevel.startDate.addingTimeInterval(levelTimeline?.stats?.mean ?? 0)
+                        expectedEndDate = max(projectedCurrentLevel.endDate, endDateByEstimate)
+                        text = "Level Up In (Estimated)"
+                    case .calculated(usingLockedItem: false):
+                        text = "Level Up In"
+                        expectedEndDate = projectedCurrentLevel.endDate
+                    case .actual:
+                        fatalError()
                     }
                     
                     cell.update(text: text, duration: expectedEndDate.timeIntervalSinceNow)
