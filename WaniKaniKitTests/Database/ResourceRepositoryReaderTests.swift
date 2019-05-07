@@ -426,7 +426,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         writeToDatabase(resourceItems)
         
         let minimumGuruTime = 4 * .oneHour + 8 * .oneHour + .oneDay - .oneHour + 2 * .oneDay - .oneHour
-        let projectedLevelInfo = ProjectedLevelInfo(level: testUserLevel, startDate: startDate, endDate: kanjiStart + minimumGuruTime, isEndDateBasedOnLockedItem: false)
+        let projectedLevelInfo = ProjectedLevelInfo(level: testUserLevel, startDate: startDate, endDate: kanjiStart + minimumGuruTime, endDateMethodology: .calculated(usingLockedItem: false))
         
         let expected = LevelData(detail: levelProgressions, projectedCurrentLevel: projectedLevelInfo)
         
