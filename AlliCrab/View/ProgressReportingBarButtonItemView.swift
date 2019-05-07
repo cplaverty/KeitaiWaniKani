@@ -73,8 +73,12 @@ class ProgressReportingBarButtonItemView: UIView {
             progress.observe(\.isCancelled) { [weak self] _, _ in
                 guard let self = self else { return }
                 
-                DispatchQueue.main.async {
-                    self.markComplete()
+                self.stopTrackingProgress()
+                
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    
+                    self.markProgressViewComplete()
                 }
             }]
     }
@@ -84,13 +88,22 @@ class ProgressReportingBarButtonItemView: UIView {
             return
         }
         
+        stopTrackingProgress()
+        markProgressViewComplete()
+    }
+    
+    private func stopTrackingProgress() {
         observers = nil
         trackedProgress = nil
+    }
+    
+    private func markProgressViewComplete() {
         progressView.setProgress(1, animated: true)
         UIView.animate(withDuration: 0.5, delay: 0.25, options: [.curveEaseIn], animations: {
             self.progressView.alpha = 0.0
+        }, completion: { _ in
+            self.progressView.setProgress(0, animated: false)
         })
-        progressView.setProgress(0, animated: false)
         textLabel.text = nil
     }
 }
