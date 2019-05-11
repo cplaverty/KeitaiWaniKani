@@ -561,23 +561,27 @@ class DashboardTableViewController: UITableViewController {
             }
         }
         
-        progressContainerView.track(progress: progress, description: "Downloading data from WaniKani...")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            if progress.completedUnitCount < progress.totalUnitCount && !progress.isCancelled {
+                self.progressContainerView.track(progress: progress, description: "Downloading data from WaniKani...")
+            }
+        }
     }
     
     private func addNotificationObservers() -> [NSObjectProtocol] {
         os_log("Adding NotificationCenter observers to %@", type: .debug, String(describing: type(of: self)))
         let notificationObservers = [
-            NotificationCenter.default.addObserver(forName: .waniKaniUserInformationDidChange, object: nil, queue: .main) { [unowned self] _ in
-                self.updateUI()
+            NotificationCenter.default.addObserver(forName: .waniKaniUserInformationDidChange, object: nil, queue: .main) { [weak self] _ in
+                self?.updateUI()
             },
-            NotificationCenter.default.addObserver(forName: .waniKaniAssignmentsDidChange, object: nil, queue: .main) { [unowned self] _ in
-                self.updateUI()
+            NotificationCenter.default.addObserver(forName: .waniKaniAssignmentsDidChange, object: nil, queue: .main) { [weak self] _ in
+                self?.updateUI()
             },
-            NotificationCenter.default.addObserver(forName: .waniKaniSubjectsDidChange, object: nil, queue: .main) { [unowned self] _ in
-                self.updateUI()
+            NotificationCenter.default.addObserver(forName: .waniKaniSubjectsDidChange, object: nil, queue: .main) { [weak self] _ in
+                self?.updateUI()
             },
-            NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [unowned self] _ in
-                self.updateData(minimumFetchInterval: 5 * .oneMinute, showAlertOnErrors: false)
+            NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
+                self?.updateData(minimumFetchInterval: 5 * .oneMinute, showAlertOnErrors: false)
             }
         ]
         
