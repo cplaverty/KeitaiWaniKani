@@ -24,11 +24,11 @@ enum ApplicationSettingKey: String {
 
 extension UIColor {
     class var globalTintColor: UIColor {
-        return UIColor(red: 29 / 255, green: 148 / 255, blue: 149 / 255, alpha: 1)
+        return UIColor(named: "Colours/GlobalTint")!
     }
     
     class var globalBarTintColor: UIColor {
-        return UIColor(hue: 180 / 360, saturation: 0.05, brightness: 0.9, alpha: 1)
+        return UIColor(named: "Colours/GlobalBarTint")!
     }
 }
 
