@@ -28,13 +28,10 @@
 		832C18521F4501ED001FFACD /* jitai.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 832C18421F4501EC001FFACD /* jitai.user.js */; };
 		832C18531F4501ED001FFACD /* jquery.qtip.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 832C18431F4501EC001FFACD /* jquery.qtip.min.css */; };
 		832C18541F4501ED001FFACD /* jquery.qtip.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 832C18441F4501EC001FFACD /* jquery.qtip.min.js */; };
-		832C18551F4501ED001FFACD /* markdown.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 832C18451F4501EC001FFACD /* markdown.user.js */; };
 		832C18561F4501ED001FFACD /* noswipe.js in Resources */ = {isa = PBXBuildFile; fileRef = 832C18461F4501EC001FFACD /* noswipe.js */; };
 		832C18571F4501ED001FFACD /* resize.css in Resources */ = {isa = PBXBuildFile; fileRef = 832C18471F4501EC001FFACD /* resize.css */; };
-		832C18581F4501ED001FFACD /* showdown.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 832C18481F4501EC001FFACD /* showdown.min.js */; };
 		832C18591F4501ED001FFACD /* UserScripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832C18491F4501EC001FFACD /* UserScripts.swift */; };
 		832C185A1F4501ED001FFACD /* UserScriptSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832C184A1F4501EC001FFACD /* UserScriptSupport.swift */; };
-		832C185C1F4501ED001FFACD /* wkhidem.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 832C184C1F4501EC001FFACD /* wkhidem.user.js */; };
 		832C185D1F4501ED001FFACD /* wkimprove.js in Resources */ = {isa = PBXBuildFile; fileRef = 832C184D1F4501EC001FFACD /* wkimprove.js */; };
 		832C185E1F4501ED001FFACD /* wkoverride.user.js in Resources */ = {isa = PBXBuildFile; fileRef = 832C184E1F4501EC001FFACD /* wkoverride.user.js */; };
 		832C186A1F4502A4001FFACD /* chigfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 832C18611F4502A4001FFACD /* chigfont.ttf */; };
@@ -312,13 +309,10 @@
 		832C18421F4501EC001FFACD /* jitai.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jitai.user.js; sourceTree = "<group>"; };
 		832C18431F4501EC001FFACD /* jquery.qtip.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = jquery.qtip.min.css; sourceTree = "<group>"; };
 		832C18441F4501EC001FFACD /* jquery.qtip.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.qtip.min.js; sourceTree = "<group>"; };
-		832C18451F4501EC001FFACD /* markdown.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = markdown.user.js; sourceTree = "<group>"; };
 		832C18461F4501EC001FFACD /* noswipe.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = noswipe.js; sourceTree = "<group>"; };
 		832C18471F4501EC001FFACD /* resize.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = resize.css; sourceTree = "<group>"; };
-		832C18481F4501EC001FFACD /* showdown.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = showdown.min.js; sourceTree = "<group>"; };
 		832C18491F4501EC001FFACD /* UserScripts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserScripts.swift; sourceTree = "<group>"; };
 		832C184A1F4501EC001FFACD /* UserScriptSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserScriptSupport.swift; sourceTree = "<group>"; };
-		832C184C1F4501EC001FFACD /* wkhidem.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkhidem.user.js; sourceTree = "<group>"; };
 		832C184D1F4501EC001FFACD /* wkimprove.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkimprove.js; sourceTree = "<group>"; };
 		832C184E1F4501EC001FFACD /* wkoverride.user.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = wkoverride.user.js; sourceTree = "<group>"; };
 		832C18611F4502A4001FFACD /* chigfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chigfont.ttf; sourceTree = "<group>"; };
@@ -631,11 +625,8 @@
 				832C18401F4501EC001FFACD /* common.js */,
 				832C18421F4501EC001FFACD /* jitai.user.js */,
 				832C18441F4501EC001FFACD /* jquery.qtip.min.js */,
-				832C18451F4501EC001FFACD /* markdown.user.js */,
 				832C18461F4501EC001FFACD /* noswipe.js */,
-				832C18481F4501EC001FFACD /* showdown.min.js */,
 				8372F7C21F953FB4007881B6 /* WKButNoCigar.user.js */,
-				832C184C1F4501EC001FFACD /* wkhidem.user.js */,
 				832C184D1F4501EC001FFACD /* wkimprove.js */,
 				832C184E1F4501EC001FFACD /* wkoverride.user.js */,
 				832C18491F4501EC001FFACD /* UserScripts.swift */,
@@ -1218,16 +1209,13 @@
 			files = (
 				832C185E1F4501ED001FFACD /* wkoverride.user.js in Resources */,
 				832C186D1F4502A4001FFACD /* fc_fl.ttf in Resources */,
-				832C185C1F4501ED001FFACD /* wkhidem.user.js in Resources */,
 				832C186B1F4502A4001FFACD /* cinecaption2.28.ttf in Resources */,
 				83629A8C1F2D1CE8000A26A2 /* Settings.bundle in Resources */,
 				832C186A1F4502A4001FFACD /* chigfont.ttf in Resources */,
 				8377948122313F8A009D7D7B /* ContextSentenceView.xib in Resources */,
-				832C18551F4501ED001FFACD /* markdown.user.js in Resources */,
 				832C18721F4502A4001FFACD /* santyoume.otf in Resources */,
 				8364CB6B1F27F28D002DBE6B /* LaunchScreen.storyboard in Resources */,
 				8303F8301F54678400E016E9 /* ReorderSettings.storyboard in Resources */,
-				832C18581F4501ED001FFACD /* showdown.min.js in Resources */,
 				832C18701F4502A4001FFACD /* n_chifont+.ttf in Resources */,
 				833E0519221B4E4000E99A53 /* Login.storyboard in Resources */,
 				8364CB681F27F28D002DBE6B /* Assets.xcassets in Resources */,

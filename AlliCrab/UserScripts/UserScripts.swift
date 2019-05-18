@@ -94,7 +94,7 @@ struct UserScriptDefinitions {
                    description: "Resizes fonts for legibility",
                    stylesheetNames: ["resize"],
                    injectionRules: [.ExactMatch(WaniKaniURL.lessonSession), .ExactMatch(WaniKaniURL.reviewSession)]),
-        ]
+    ]
     
     static let custom: [UserScript] = [
         UserScript(name: "Disable Lesson Swipe",
@@ -102,7 +102,7 @@ struct UserScriptDefinitions {
                    settingKey: ApplicationSettingKey.disableLessonSwipe,
                    scriptNames: ["noswipe"],
                    injectionRules: [.ExactMatch(WaniKaniURL.lessonSession)]),
-        ]
+    ]
     
     static let community: [UserScript] = [
         UserScript(name: "Close But No Cigar",
@@ -123,26 +123,6 @@ struct UserScriptDefinitions {
                    scriptNames: ["jitai.user"],
                    injectionRules: [.ExactMatch(WaniKaniURL.reviewSession)]),
         
-        UserScript(name: "Markdown Notes",
-                   author: "rfindley",
-                   description: "Allows you to write Markdown in the notes, which will be rendered as HTML when the page loads.  Script by rfindley.",
-                   forumLink: WaniKaniURL.forumTopic(withRelativePath: "userscript-markdown-notes-updated/11462"),
-                   settingKey: ApplicationSettingKey.userScriptMarkdownNotesEnabled,
-                   scriptNames: ["showdown.min", "markdown.user"],
-                   injectionRules: [.ExactMatch(WaniKaniURL.reviewSession),
-                                    .PrefixedWith(WaniKaniURL.levelRoot), .PrefixedWith(WaniKaniURL.radicalRoot),
-                                    .PrefixedWith(WaniKaniURL.kanjiRoot), .PrefixedWith(WaniKaniURL.vocabularyRoot)]),
-        
-        UserScript(name: "WaniKani Hide Mnemonics",
-                   author: "nibarius",
-                   description: "Allows you to hide the reading and meaning mnemonics on the site.  Script by nibarius.",
-                   forumLink: WaniKaniURL.forumTopic(withRelativePath: "userscript-wanikani-hide-mnemonics/3923"),
-                   settingKey: ApplicationSettingKey.userScriptHideMnemonicsEnabled,
-                   scriptNames: ["wkhidem.user"],
-                   injectionRules: [.ExactMatch(WaniKaniURL.lessonSession), .ExactMatch(WaniKaniURL.reviewSession),
-                                    .PrefixedWith(WaniKaniURL.levelRoot), .PrefixedWith(WaniKaniURL.radicalRoot),
-                                    .PrefixedWith(WaniKaniURL.kanjiRoot), .PrefixedWith(WaniKaniURL.vocabularyRoot)]),
-        
         UserScript(name: "WaniKani Improve",
                    author: "Seiji",
                    description: "Automatically moves to the next item if the answer was correct (also known as \"lightning mode\").  Script by Seiji.",
@@ -159,7 +139,7 @@ struct UserScriptDefinitions {
                    settingKey: ApplicationSettingKey.userScriptIgnoreAnswerEnabled,
                    scriptNames: ["wkoverride.user"],
                    injectionRules: [.ExactMatch(WaniKaniURL.reviewSession)]),
-        ]
+    ]
     
     static let all = alwaysEnabled + custom + community
 }

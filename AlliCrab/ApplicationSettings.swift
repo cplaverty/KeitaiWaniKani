@@ -17,8 +17,6 @@ enum ApplicationSettingKey: String {
     case userScriptIgnoreAnswerEnabled = "userScript-IgnoreAnswer"
     case userScriptDoubleCheckEnabled = "userScript-DoubleCheck"
     case userScriptWaniKaniImproveEnabled = "userScript-WaniKaniImprove"
-    case userScriptMarkdownNotesEnabled = "userScript-MarkdownNotes"
-    case userScriptHideMnemonicsEnabled = "userScript-HideMnemonics"
     case userScriptReorderUltimateEnabled = "userScript-ReorderUltimate"
 }
 
@@ -82,16 +80,6 @@ struct ApplicationSettings {
         set { userDefaults.set(newValue, forKey: .userScriptWaniKaniImproveEnabled) }
     }
     
-    static var userScriptMarkdownNotesEnabled: Bool {
-        get { return userDefaults.bool(forKey: .userScriptMarkdownNotesEnabled) }
-        set { userDefaults.set(newValue, forKey: .userScriptMarkdownNotesEnabled) }
-    }
-    
-    static var userScriptHideMnemonicsEnabled: Bool {
-        get { return userDefaults.bool(forKey: .userScriptHideMnemonicsEnabled) }
-        set { userDefaults.set(newValue, forKey: .userScriptHideMnemonicsEnabled) }
-    }
-    
     static var userScriptReorderUltimateEnabled: Bool {
         get { return userDefaults.bool(forKey: .userScriptReorderUltimateEnabled) }
         set { userDefaults.set(newValue, forKey: .userScriptReorderUltimateEnabled) }
@@ -107,8 +95,6 @@ struct ApplicationSettings {
         userScriptIgnoreAnswerEnabled = false
         userScriptDoubleCheckEnabled = false
         userScriptWaniKaniImproveEnabled = false
-        userScriptMarkdownNotesEnabled = false
-        userScriptHideMnemonicsEnabled = false
         userScriptReorderUltimateEnabled = false
     }
 }
