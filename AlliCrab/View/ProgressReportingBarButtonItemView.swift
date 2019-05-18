@@ -99,7 +99,7 @@ class ProgressReportingBarButtonItemView: UIView {
     
     private func markProgressViewComplete() {
         progressView.setProgress(1, animated: true)
-        UIView.animate(withDuration: 0.5, delay: 0.25, options: [.curveEaseIn], animations: {
+        UIView.animate(withDuration: 0.25, delay: 0.25, options: [.curveEaseInOut], animations: {
             self.progressView.alpha = 0.0
         }, completion: { _ in
             self.progressView.setProgress(0, animated: false)
