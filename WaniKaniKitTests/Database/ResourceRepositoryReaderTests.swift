@@ -94,7 +94,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         
         XCTAssertEqual(try resourceRepository.studyQueue(), expected)
     }
-
+    
     func testStudyQueue_VacationMode() {
         populateDatabaseForStudyQueue(lessonCount: 10, pendingReviewCount: 23, futureReviewCount: 6, futureReviewTime: nextHourReviewTime)
         populateDatabaseForStudyQueue(lessonCount: 0, pendingReviewCount: 0, futureReviewCount: 4, futureReviewTime: nextDayReviewTime)
@@ -266,9 +266,9 @@ class ResourceRepositoryReaderTests: XCTestCase {
         NSLog("Writing \(resourceItems.count) assignments")
         writeToDatabase(resourceItems)
         
-        XCTAssertEqual(try resourceRepository.reviewTimeline(forLevel: 1), expectedLvl1)
-        XCTAssertEqual(try resourceRepository.reviewTimeline(forLevel: 2), expectedLvl2)
-        XCTAssertEqual(try resourceRepository.reviewTimeline(forLevel: 3), expectedLvl3)
+        XCTAssertEqual(try resourceRepository.reviewTimeline(level: 1), expectedLvl1)
+        XCTAssertEqual(try resourceRepository.reviewTimeline(level: 2), expectedLvl2)
+        XCTAssertEqual(try resourceRepository.reviewTimeline(level: 3), expectedLvl3)
     }
     
     func testReviewTimeline_BySRSStage() {
@@ -317,10 +317,10 @@ class ResourceRepositoryReaderTests: XCTestCase {
         NSLog("Writing \(resourceItems.count) assignments")
         writeToDatabase(resourceItems)
         
-        XCTAssertEqual(try resourceRepository.reviewTimeline(forSRSStage: .apprentice), expectedApprentice)
-        XCTAssertEqual(try resourceRepository.reviewTimeline(forSRSStage: .guru), expectedGuru)
-        XCTAssertEqual(try resourceRepository.reviewTimeline(forSRSStage: .master), expectedMaster)
-        XCTAssertEqual(try resourceRepository.reviewTimeline(forSRSStage: .enlightened), expectedEnlightened)
+        XCTAssertEqual(try resourceRepository.reviewTimeline(srsStage: .apprentice), expectedApprentice)
+        XCTAssertEqual(try resourceRepository.reviewTimeline(srsStage: .guru), expectedGuru)
+        XCTAssertEqual(try resourceRepository.reviewTimeline(srsStage: .master), expectedMaster)
+        XCTAssertEqual(try resourceRepository.reviewTimeline(srsStage: .enlightened), expectedEnlightened)
     }
     
     func testReviewTimeline_Load() {
@@ -652,7 +652,7 @@ class ResourceRepositoryReaderTests: XCTestCase {
         for _ in 0..<resurrectedReviewCount {
             items += createTestRadicalWithAssignment(level: testUserLevel, srsStage: 3, availableAt: dateInPast, resurrectedAt: dateInPast)
         }
-
+        
         for _ in 0..<futureReviewCount {
             items += createTestRadicalWithAssignment(level: testUserLevel, srsStage: 3, availableAt: futureReviewTime!)
         }

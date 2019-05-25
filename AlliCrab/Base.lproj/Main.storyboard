@@ -461,10 +461,10 @@
             </objects>
             <point key="canvasLocation" x="17" y="681"/>
         </scene>
-        <!--Review Timeline Filter-->
+        <!--Review Timeline Options-->
         <scene sceneID="XvM-he-aVV">
             <objects>
-                <tableViewController id="D48-SX-sNZ" customClass="ReviewTimelineFilterTableViewController" customModule="AlliCrab" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="D48-SX-sNZ" customClass="ReviewTimelineOptionsTableViewController" customModule="AlliCrab" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="KRD-hO-UjX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -493,7 +493,7 @@
                             <outlet property="delegate" destination="D48-SX-sNZ" id="jAb-s9-xFv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Review Timeline Filter" id="867-IR-tMi">
+                    <navigationItem key="navigationItem" title="Review Timeline Options" id="867-IR-tMi">
                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="cK9-8o-V8f">
                             <connections>
                                 <action selector="done:" destination="D48-SX-sNZ" id="gD5-XH-LWC"/>
@@ -657,7 +657,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Review Timeline" largeTitleDisplayMode="never" id="Jjt-qP-qW1">
-                        <barButtonItem key="rightBarButtonItem" title="Filter" id="TPh-kp-2Aq">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="TPh-kp-2Aq">
                             <connections>
                                 <segue destination="D48-SX-sNZ" kind="popoverPresentation" identifier="ReviewTimelineFilter" popoverAnchorBarButtonItem="TPh-kp-2Aq" id="tii-Ka-HW3">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES"/>

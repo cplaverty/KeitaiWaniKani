@@ -9,8 +9,12 @@ import os
 import UIKit
 import WaniKaniKit
 
-enum ReviewTimelineFilter {
+enum ReviewTimelineFilter: CaseIterable {
     case none, currentLevel, toBeBurned
+}
+
+enum ReviewTimelineCountMethod: CaseIterable {
+    case histogram, cumulative
 }
 
 class ReviewTimelineTableViewController: UITableViewController {
@@ -24,14 +28,6 @@ class ReviewTimelineTableViewController: UITableViewController {
     private enum SegueIdentifier: String {
         case reviewTimelineFilter = "ReviewTimelineFilter"
     }
-    
-    private static let reviewDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.doesRelativeDateFormatting = true
-        formatter.dateStyle = .full
-        formatter.timeStyle = .none
-        return formatter
-    }()
     
     // MARK: - Properties
     
@@ -47,9 +43,21 @@ class ReviewTimelineTableViewController: UITableViewController {
         }
     }
     
-    private var reviewTimelineByDate = [(key: Date, value: [SRSReviewCounts])]() {
+    private var countMethod: ReviewTimelineCountMethod = .histogram {
         didSet {
             tableView.reloadData()
+        }
+    }
+    
+    private var histogramReviewTimelineByDate = [(date: Date, value: [SRSReviewCounts])]()
+    private var cumulativeReviewTimelineByDate = [(date: Date, value: [SRSReviewCounts])]()
+    
+    private var reviewTimelineByDate: [(date: Date, value: [SRSReviewCounts])] {
+        switch self.countMethod {
+        case .histogram:
+            return histogramReviewTimelineByDate
+        case .cumulative:
+            return cumulativeReviewTimelineByDate
         }
     }
     
@@ -105,11 +113,11 @@ class ReviewTimelineTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard !reviewTimelineByDate.isEmpty else {
+        guard !histogramReviewTimelineByDate.isEmpty else {
             return nil
         }
         
-        let (date, reviewCountsForDate) = reviewTimelineByDate[section]
+        let (date, reviewCountsForDate) = histogramReviewTimelineByDate[section]
         let totalForDay = reviewCountsForDate.reduce(0) { $0 + $1.itemCounts.total }
         
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: ReuseIdentifier.dateHeader.rawValue) as! ReviewTimelineHeaderFooterView
@@ -135,8 +143,9 @@ class ReviewTimelineTableViewController: UITableViewController {
         
         switch segueIdentifier {
         case .reviewTimelineFilter:
-            let vc = segue.destination as! ReviewTimelineFilterTableViewController
-            vc.selectedValue = filter
+            let vc = segue.destination as! ReviewTimelineOptionsTableViewController
+            vc.selectedFilterValue = filter
+            vc.selectedCountMethodValue = countMethod
             vc.delegate = self
             
             if let popover = vc.popoverPresentationController {
@@ -169,39 +178,89 @@ class ReviewTimelineTableViewController: UITableViewController {
             return
         }
         
-        os_log("Updating review timeline with filter %@", type: .info, String(describing: filter))
+        os_log("Updating review timeline with filter %@", type: .debug, String(describing: filter))
         
         var level: Int? = nil
         var srsStage: SRSStage? = nil
         switch filter {
         case .none: break
         case .currentLevel:
-            let user = try self.repositoryReader?.userInformation()
+            let user = try repositoryReader.userInformation()
             level = user?.level
         case .toBeBurned:
             srsStage = .enlightened
         }
         
-        let reviewTimeline = try repositoryReader.reviewTimeline(forLevel: level, forSRSStage: srsStage)
+        let reviewTimeline = try repositoryReader.reviewTimeline(level: level, srsStage: srsStage)
         
         let calendar = Calendar.current
         let pastDateMarker = Date.distantPast
-        var reviewTimelineByDate = Dictionary(grouping: reviewTimeline) { counts -> Date in
+        var histogramReviewTimelineByDate = [(date: Date, value: [SRSReviewCounts])]()
+        
+        var currentIndex = histogramReviewTimelineByDate.startIndex - 1
+        
+        for counts in reviewTimeline {
             let date = counts.dateAvailable
-            return date.timeIntervalSinceNow <= 0 ? pastDateMarker : calendar.startOfDay(for: date)
+            let isDateInPast = date.timeIntervalSinceNow <= 0
+            let key = isDateInPast ? pastDateMarker : calendar.startOfDay(for: date)
+            
+            if histogramReviewTimelineByDate.count > 0, histogramReviewTimelineByDate[currentIndex].date == key {
+                var countsForKey = histogramReviewTimelineByDate[currentIndex].value
+                accumulate(counts, into: &countsForKey, for: key, usingSum: isDateInPast)
+                histogramReviewTimelineByDate[currentIndex].value = countsForKey
+            } else {
+                var countsForKey = [SRSReviewCounts]()
+                accumulate(counts, into: &countsForKey, for: key, usingSum: isDateInPast)
+                histogramReviewTimelineByDate.append((key, countsForKey))
+                currentIndex += 1
+            }
         }
         
-        if let pastReviewCounts = reviewTimelineByDate[pastDateMarker] {
-            let aggregatedItemCounts = pastReviewCounts.lazy.map({ $0.itemCounts }).reduce(.zero, +)
-            reviewTimelineByDate[pastDateMarker] = [SRSReviewCounts(dateAvailable: pastDateMarker, itemCounts: aggregatedItemCounts)]
+        var cumulativeReviewTimelineByDate = [(date: Date, value: [SRSReviewCounts])]()
+        cumulativeReviewTimelineByDate.reserveCapacity(histogramReviewTimelineByDate.count)
+        
+        var cumulativeTotal = SRSItemCounts.zero
+        
+        for (date, values) in histogramReviewTimelineByDate {
+            var cumulativeCounts = [SRSReviewCounts]()
+            cumulativeCounts.reserveCapacity(values.count)
+            
+            for counts in values {
+                cumulativeTotal += counts.itemCounts
+                cumulativeCounts.append(SRSReviewCounts(dateAvailable: counts.dateAvailable, itemCounts: cumulativeTotal))
+            }
+            
+            cumulativeReviewTimelineByDate.append((date, cumulativeCounts))
         }
         
-        self.reviewTimelineByDate = reviewTimelineByDate.sorted(by: { $0.key < $1.key })
+        self.histogramReviewTimelineByDate = histogramReviewTimelineByDate
+        self.cumulativeReviewTimelineByDate = cumulativeReviewTimelineByDate
+        
+        tableView.reloadData()
+    }
+    
+    private func accumulate(_ counts: SRSReviewCounts, into countsForKey: inout [SRSReviewCounts], for date: Date, usingSum sum: Bool) {
+        guard sum else {
+            countsForKey.append(counts)
+            return
+        }
+        
+        let itemCounts: SRSItemCounts
+        if let current = countsForKey.first {
+            itemCounts = counts.itemCounts + current.itemCounts
+        } else {
+            itemCounts = counts.itemCounts
+        }
+        countsForKey = [SRSReviewCounts(dateAvailable: date, itemCounts: itemCounts)]
     }
     
 }
 
-extension ReviewTimelineTableViewController: ReviewTimelineFilterDelegate {
+extension ReviewTimelineTableViewController: ReviewTimelineOptionsDelegate {
+    func reviewTimelineCountMethod(didChangeTo newValue: ReviewTimelineCountMethod) {
+        countMethod = newValue
+    }
+    
     func reviewTimelineFilter(didChangeTo newValue: ReviewTimelineFilter) {
         filter = newValue
     }

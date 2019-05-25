@@ -400,7 +400,7 @@ public class ResourceRepositoryReader {
         }
     }
     
-    public func reviewTimeline(forLevel level: Int? = nil, forSRSStage srsStage: SRSStage? = nil) throws -> [SRSReviewCounts] {
+    public func reviewTimeline(level: Int? = nil, srsStage: SRSStage? = nil) throws -> [SRSReviewCounts] {
         guard let databaseQueue = self.databaseQueue else {
             throw ResourceRepositoryError.noDatabase
         }

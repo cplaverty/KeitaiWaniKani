@@ -207,7 +207,7 @@
 		83FEF2801F3138E5003D7992 /* FMDatabaseAdditionsVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF27F1F3138E5003D7992 /* FMDatabaseAdditionsVariadic.swift */; };
 		83FEF43E1F4F952F00A7029D /* ReviewTimelineTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF43D1F4F952F00A7029D /* ReviewTimelineTableViewController.swift */; };
 		83FEF4401F4F969900A7029D /* ReviewTimelineEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF43F1F4F969900A7029D /* ReviewTimelineEntryTableViewCell.swift */; };
-		83FEF4461F50518E00A7029D /* ReviewTimelineFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF4451F50518E00A7029D /* ReviewTimelineFilterTableViewController.swift */; };
+		83FEF4461F50518E00A7029D /* ReviewTimelineOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF4451F50518E00A7029D /* ReviewTimelineOptionsTableViewController.swift */; };
 		83FFD90B1F5387B80015988F /* ReviewTimelineHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FFD90A1F5387B80015988F /* ReviewTimelineHeaderFooterView.swift */; };
 		9F41C9076D950FB1F5D5FAE4 /* Pods_WaniKaniKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A22927479B44A413664183A1 /* Pods_WaniKaniKitTests.framework */; };
 		B93D08FFDF5DAF0EF3DA2989 /* Pods_WaniKaniStudyQueueWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 255106F1009FFFAC9EAB809E /* Pods_WaniKaniStudyQueueWidget.framework */; };
@@ -493,7 +493,7 @@
 		83FEF27F1F3138E5003D7992 /* FMDatabaseAdditionsVariadic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDatabaseAdditionsVariadic.swift; sourceTree = "<group>"; };
 		83FEF43D1F4F952F00A7029D /* ReviewTimelineTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTimelineTableViewController.swift; sourceTree = "<group>"; };
 		83FEF43F1F4F969900A7029D /* ReviewTimelineEntryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTimelineEntryTableViewCell.swift; sourceTree = "<group>"; };
-		83FEF4451F50518E00A7029D /* ReviewTimelineFilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTimelineFilterTableViewController.swift; sourceTree = "<group>"; };
+		83FEF4451F50518E00A7029D /* ReviewTimelineOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTimelineOptionsTableViewController.swift; sourceTree = "<group>"; };
 		83FFD90A1F5387B80015988F /* ReviewTimelineHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTimelineHeaderFooterView.swift; sourceTree = "<group>"; };
 		906ABAC46CC97C2A8D68969D /* Pods-AlliCrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab.release.xcconfig"; sourceTree = "<group>"; };
 		A22927479B44A413664183A1 /* Pods_WaniKaniKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaniKaniKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -912,7 +912,7 @@
 				831E92D61F4DDFE200B979DD /* DashboardTableViewController.swift */,
 				83C071FC1F4A4E630046A3FD /* LoginRootViewController.swift */,
 				83F392771F4B276C00E8DAE7 /* ManualAPIKeyEntryViewController.swift */,
-				83FEF4451F50518E00A7029D /* ReviewTimelineFilterTableViewController.swift */,
+				83FEF4451F50518E00A7029D /* ReviewTimelineOptionsTableViewController.swift */,
 				83FEF43D1F4F952F00A7029D /* ReviewTimelineTableViewController.swift */,
 				83CE51DE1F4F53C70050242A /* SettingsTableViewController.swift */,
 				833E0511221B33D700E99A53 /* SubjectDetailViewController.swift */,
@@ -1546,7 +1546,7 @@
 				83D7CC021F50EC7900043D47 /* AssignmentProgressionCollectionReusableView.swift in Sources */,
 				836DE2B61F9B918D005E42EC /* SubjectSearchTableViewController.swift in Sources */,
 				83CE51D31F4E1C5A0050242A /* SRSProgressTableViewCell.swift in Sources */,
-				83FEF4461F50518E00A7029D /* ReviewTimelineFilterTableViewController.swift in Sources */,
+				83FEF4461F50518E00A7029D /* ReviewTimelineOptionsTableViewController.swift in Sources */,
 				832C18591F4501ED001FFACD /* UserScripts.swift in Sources */,
 				83D7CBFE1F50B20600043D47 /* AssignmentProgressionCollectionViewController.swift in Sources */,
 				836DE2B81F9B9D1C005E42EC /* SubjectSearchTableViewCell.swift in Sources */,
