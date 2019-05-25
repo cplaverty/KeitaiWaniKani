@@ -7,48 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		000C8C8AAAA84B209C95A14F3B9BE803 /* sqlite3.h in Headers */ = {isa = PBXBuildFile; fileRef = 7977821DC116BC599B808F2526BC8FED /* sqlite3.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		07E2FBBEAC6C78A52F1F0CD8D3EAB45F /* Pods-WaniKaniKitTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 372058943B2D6E297059CE853F57689A /* Pods-WaniKaniKitTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		17584A4EF58F748634FDE31BC41CB15D /* 1Password.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B3DC5C5B7F4D188524E71D2FE9D4D0B /* 1Password.xcassets */; };
-		1CB332AE5B404330DB659F27DFD03C71 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35EC641595FCD03F72F43545B8C6E40 /* UIKit.framework */; };
-		2ECF09DE7482A519AA04C826B6F211EC /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7311D2B23D4EAAF3B65D85AF75356B0A /* MobileCoreServices.framework */; };
-		2F016D9D6CDF724FBE166E5BD8818F13 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E2EFBC7B4EC7F39DFD529859746AE8 /* Foundation.framework */; };
-		48200CC7159CEC1072B7C344C4808BBF /* FMDB-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 03864110CEEC761056297A86853B3789 /* FMDB-dummy.m */; };
-		4BB306109B05844E6E76335C931520D6 /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3545EB43789C2C14C579E506DFE85E7A /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5B3D75A6DBBFB958385E447FCDD55B4B /* 1PasswordExtension-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9285F6270717AA2B79A0F111F841534F /* 1PasswordExtension-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5E320987F5896331FBF5F404084A646B /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = C2370A5C35BDEBCA3B6343E091764AE8 /* FMDatabasePool.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		639BFC0238FB3FA1F50A6F14E8D3B26B /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 277C4330358DB71992ABD757B1E8880B /* FMDatabaseQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6DC50F73B8672C673857F755E4A67A92 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E2EFBC7B4EC7F39DFD529859746AE8 /* Foundation.framework */; };
-		756A8711EBF1107BDFA4544BE82BA3DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E2EFBC7B4EC7F39DFD529859746AE8 /* Foundation.framework */; };
-		7AD46FB3C8B4FD6CE47FA5FA36084FB0 /* Pods-WaniKaniKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 479AA01761D4B487753CCB0D641FAC67 /* Pods-WaniKaniKit-dummy.m */; };
-		7BC2ACCC7D03D1F7722A7A8A7B4DC7F1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E2EFBC7B4EC7F39DFD529859746AE8 /* Foundation.framework */; };
-		7DC1708C142EFE6BCE87C0AD4C0EF2A1 /* sqlite3-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 492F8986602C5EFB2A6AA405E03D06CD /* sqlite3-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7E15517BC75854499F923B34AD131F5D /* Pods-WaniKaniStudyQueueWidget-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A0DB97EAA7CBE9128814DD14514C7C9 /* Pods-WaniKaniStudyQueueWidget-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7FE16725F91C85B0E10C0293BAAA5982 /* Pods-WaniKaniKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B4E6B586A0C76F5051BE9AEFCBBF01D2 /* Pods-WaniKaniKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		830AD6BF899FEA60EEA926C552A944CF /* Pods-WaniKaniStudyQueueWidget-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C1ACCF644EBE582185E1C2A5BD4EA1 /* Pods-WaniKaniStudyQueueWidget-dummy.m */; };
-		895ADFEB73A244137083409BF304BC78 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2495B9466E4EEA5F3FD2EC93DCE6DEBC /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		8D0DF28304F7968C5D1AA7C7DACF48C4 /* Pods-AlliCrab-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D2367BE8904D8FE5E2C1F2190C5EC2 /* Pods-AlliCrab-dummy.m */; };
-		8F2F295B9B45BA69360E6EA65DA656A8 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = A25FEF2D826BDF6B89F1FF017B7054A5 /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8F4A9E1BD4AD2650F2BB39E66BD361F2 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = B032D4112E58C0E362E5F6E6BBBDFF80 /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9132D01241057B936C46CA17C87E87E0 /* Pods-AlliCrab-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C25C4505DD347914B4A045596A34B200 /* Pods-AlliCrab-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		99341EC767C39F54FE457B8A43C4FC2E /* sqlite3ext.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E07B4E3A13DD96D679DC3D9608DDA45 /* sqlite3ext.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A12B4F428A222649FD3565D7B3FF7DB1 /* OnePasswordExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A8851B6CCDB15F8828358913CB794E9 /* OnePasswordExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A7BEBEDD6F32A2A45B62C4256A71424E /* FMDB-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 208CDDA9B3B41CEAC60B47320B56DCC6 /* FMDB-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A80DF112B8CA7BFBFC42E23199B1DF65 /* sqlite3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF051A3C9503AAA2442182BA2E2FE7A7 /* sqlite3.framework */; };
-		AA55098913AF81C5AA777B591D3A3C0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E2EFBC7B4EC7F39DFD529859746AE8 /* Foundation.framework */; };
-		ADE7A10D7710993289DCEECA0FE1873A /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = 054EE75D6AC92E6E58539B9068149C90 /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B54D71BEB261B09B97A6E417D55EC9B7 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = D90E7E29FE1DB57264359595562DD0CC /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		BAD93A203C9670BA7F79F050D63432E4 /* sqlite3-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FD51588C537018287F961B081A9DE7E /* sqlite3-dummy.m */; };
-		BBFAB472F69F60119D935B74FDA0B544 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E2EFBC7B4EC7F39DFD529859746AE8 /* Foundation.framework */; };
-		C16BF5A66CBEAC5DAF9555A443537DA3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E2EFBC7B4EC7F39DFD529859746AE8 /* Foundation.framework */; };
-		D551FFEB0BF942161F47B5A51E920905 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BA94AE30C296ABCA2F4B4D4F75BDFA /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		D5F7AAA471F10E120AE25EE041BA0AEB /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5894912F8BC8324A9054E380CD1D2E46 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		DCC10F94F5F1F0622BC2F0A14F59A969 /* OnePasswordExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 325D92696AB85BDB3DEE7A126C4FD793 /* OnePasswordExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		DF84302DDAA080D8EA17CC6F36EC595B /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 244499A5BC340B607CC27DF2728D4D68 /* FMDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E6698319D6E2ACE8337CCB6D2F4EDC2C /* Pods-WaniKaniKitTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AFE2171579C48F338A5D32731145F /* Pods-WaniKaniKitTests-dummy.m */; };
-		ED511D2F505B779355F056B6321E622F /* OnePasswordExtensionResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DF9D3AD2A46BA13E7D56FEDE14571E6A /* OnePasswordExtensionResources.bundle */; };
-		F5A7914B3DAC8D994BBEB64DA78FD556 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = DD7F52B1DE95BC377F621BB1C3D40ECD /* sqlite3.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		FB23EF2A7885485BB512522546602762 /* 1PasswordExtension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2070B4C760337564C0BA86AC2648E9DD /* 1PasswordExtension-dummy.m */; };
+		0737940FBE76852CA25279555FA9224A /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D46370BA2EA9C0C0B311F1C13BCA086 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		07E2FBBEAC6C78A52F1F0CD8D3EAB45F /* Pods-WaniKaniKitTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B29636BA042841F21D7B430ED74DC4FE /* Pods-WaniKaniKitTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0D9F8133ADFA4F0CE6FA0D0956D58D85 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53177A1334CC3207160C6AA6CD688F0A /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		17584A4EF58F748634FDE31BC41CB15D /* 1Password.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 977C8F3CF80ABDD5C0B843E81D9B3169 /* 1Password.xcassets */; };
+		1DAE3E38112E0CE7564557D390AA97E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34EFFFB94DC8BF2FE985C78A775EC66 /* Foundation.framework */; };
+		23829FF9294D5A89C5E1F01045BA7374 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 5162A94405BFDD2A9811BF1CC4F486EE /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		307B70B6F58ED5F4CB2CB23840712509 /* 1PasswordExtension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF8C4B2F2CF78FA53C988A318637FB0 /* 1PasswordExtension-dummy.m */; };
+		43E55F4F4881756272AA1EB5B903DA79 /* sqlite3-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 618089449AEC74CB3C70A96E868A629B /* sqlite3-dummy.m */; };
+		46DB1EB90693AEE7699ADCDB7B517A8E /* OnePasswordExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6C977D8A24879CA799F64E90AF5315 /* OnePasswordExtension.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		50086F4DF15D7C12E098080DDF40FFE5 /* Pods-AlliCrab-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A219725D100FBB411791F919534920E9 /* Pods-AlliCrab-dummy.m */; };
+		54C724B0E2ABA49568645F46BC6B6423 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D43D448454811C7F71C7F976D03953 /* UIKit.framework */; };
+		56A9677BAD2F7E11BEB487A7EFBD8BDD /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C44CC023E17CE35769C79B3E5B60E33 /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		597FF072B00A40856E438AE24596033C /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C597164641085431493313001781A4D /* FMDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		59E5E143A9EFC301D85928FD362CD4B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34EFFFB94DC8BF2FE985C78A775EC66 /* Foundation.framework */; };
+		5B793A0574AED7F86030791560609215 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34EFFFB94DC8BF2FE985C78A775EC66 /* Foundation.framework */; };
+		62159CE76089E849EF785F00728D43B6 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = B2644B407CA28D31B1FE26B24A1B33FE /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		6FF78BE22F1A4E53DEEB5ADAF692E6CF /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = B0699AE2980DED5B5ADFCD54872D3BA3 /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		72551C1B931B1D4444DB56E2AF9692E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34EFFFB94DC8BF2FE985C78A775EC66 /* Foundation.framework */; };
+		78705FF8B9DD9927838BF04065F25839 /* OnePasswordExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 903C8103DD773DE6233F35E9A01346CF /* OnePasswordExtension.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7AD46FB3C8B4FD6CE47FA5FA36084FB0 /* Pods-WaniKaniKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 45B54B5273E35AA5BC80AF83B5D7C960 /* Pods-WaniKaniKit-dummy.m */; };
+		7E15517BC75854499F923B34AD131F5D /* Pods-WaniKaniStudyQueueWidget-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 94FD46A77B12113D8D9A16AEA1D52A54 /* Pods-WaniKaniStudyQueueWidget-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7FE16725F91C85B0E10C0293BAAA5982 /* Pods-WaniKaniKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F67592384F0317FF5A6F2BB545DD9E /* Pods-WaniKaniKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		830AD6BF899FEA60EEA926C552A944CF /* Pods-WaniKaniStudyQueueWidget-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5F8B26482A965865731D6E6A30EB46 /* Pods-WaniKaniStudyQueueWidget-dummy.m */; };
+		8DE3717D17C2A29B9EFE0569FDE2B3B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34EFFFB94DC8BF2FE985C78A775EC66 /* Foundation.framework */; };
+		90573686CA4F5C1E1288733323D045A0 /* sqlite3-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 440C66A8EEDF3BABA6D515EA4352A02C /* sqlite3-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A79D8B72B353FA983A5CB737F8B5CD6B /* 1PasswordExtension-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0926A670C537C261D6226EC6AFECDC2C /* 1PasswordExtension-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A80DF112B8CA7BFBFC42E23199B1DF65 /* sqlite3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142659D09DC14B69760EC4A5A060383E /* sqlite3.framework */; };
+		C0A6B190B2A215BF7474E74412835DF1 /* FMDB-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1382E913706E9D2C5756B02C57F72678 /* FMDB-dummy.m */; };
+		C5E2DB9C0B5A43CCA5419D232169587E /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = B07400E6EE29027BE0A41F5158B89B07 /* FMDatabaseQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C6184B380255DCE803E84154540B45E7 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = ED0098F9349CEE8931C5034AF100C096 /* FMDatabasePool.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0 -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		CA893647F9BCAC67DA61831C01B8B530 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 2088799D729BFCF69B18BCC41894D53C /* sqlite3.c */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		CB41CD4E101971F1F65294E866B58BDE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34EFFFB94DC8BF2FE985C78A775EC66 /* Foundation.framework */; };
+		D7492848E99FD931D96FBFE5DB4B0CE2 /* sqlite3.h in Headers */ = {isa = PBXBuildFile; fileRef = 2015397A632050D79AEAC699D814FE00 /* sqlite3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DC6E1AC16B5B7024795CBCC077F459C3 /* sqlite3ext.h in Headers */ = {isa = PBXBuildFile; fileRef = 226C71408467D713C4048382DB364B6E /* sqlite3ext.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DCDCCB229AB0D708AC74730D54883AD2 /* FMDB-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F6F93ADB47070DCCC0F5C5EF98A35DC1 /* FMDB-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DF0AABDC715F8BA209F1F6445AFFE876 /* Pods-AlliCrab-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 460A71F74BF2F5893426EF3F6948D50C /* Pods-AlliCrab-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E1489D9551561846435F9E21614FAF66 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E7359AC97512790EFDBBC410AFB0114 /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E6698319D6E2ACE8337CCB6D2F4EDC2C /* Pods-WaniKaniKitTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F8849699FEFBEC381BDDEAC56717A63 /* Pods-WaniKaniKitTests-dummy.m */; };
+		E8300AE821759B714D6ECA7AB4337091 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34EFFFB94DC8BF2FE985C78A775EC66 /* Foundation.framework */; };
+		ED511D2F505B779355F056B6321E622F /* OnePasswordExtensionResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AB6ECF5DD62A0B0A3AF755AE105D10C0 /* OnePasswordExtensionResources.bundle */; };
+		F42FB5895242CD4325FD36853B24158D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A80019CCA8C1449FAD14A3B18704AA51 /* MobileCoreServices.framework */; };
+		FC8B352F05D36A6A9DF66ADC8DA9C9DA /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 74FE93DD7CF76CF5401E78E66D15238D /* FMDatabaseAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,165 +56,165 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DC3EF9FFF20A78E2CD6FE4216CCA2947;
+			remoteGlobalIDString = 8592E0E389D40AC17881400ADC67ABC0;
 			remoteInfo = FMDB;
+		};
+		3110486772A9ECCE26E651E190F4A5B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7578477CA77D98D8282C395822C4A93C;
+			remoteInfo = sqlite3;
 		};
 		32629F952C18D80378DF943186EB71C2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DC3EF9FFF20A78E2CD6FE4216CCA2947;
+			remoteGlobalIDString = 8592E0E389D40AC17881400ADC67ABC0;
 			remoteInfo = FMDB;
 		};
 		341B12605B48ADA38ABCFDA5FADB8710 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8749F2EAEFF5F8073EA1595CFBCBAAAC;
+			remoteGlobalIDString = 7578477CA77D98D8282C395822C4A93C;
 			remoteInfo = sqlite3;
 		};
-		4F9D7D671734A07B24152AAEFF63E344 /* PBXContainerItemProxy */ = {
+		6DE7122F4B33B0A40F031565C3177C54 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DC3EF9FFF20A78E2CD6FE4216CCA2947;
+			remoteGlobalIDString = 8592E0E389D40AC17881400ADC67ABC0;
 			remoteInfo = FMDB;
 		};
-		683766128AA3FFCFA880DFD945281DD7 /* PBXContainerItemProxy */ = {
+		89A8480B5824C04AA17DB4BA94D088E5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2F48B7B446C3FC03187D2712A682601E;
+			remoteGlobalIDString = 8E34DB7C0B7C3F9DD81B0CFF93D50206;
 			remoteInfo = 1PasswordExtension;
-		};
-		85730F519F1492FBBDA3E1DC23EED697 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8749F2EAEFF5F8073EA1595CFBCBAAAC;
-			remoteInfo = sqlite3;
 		};
 		916EC8103377431E88446F2438A810EA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DC3EF9FFF20A78E2CD6FE4216CCA2947;
+			remoteGlobalIDString = 8592E0E389D40AC17881400ADC67ABC0;
 			remoteInfo = FMDB;
 		};
 		AA0CB1D9795D583BCD9DD8B8C1C3F5AA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8749F2EAEFF5F8073EA1595CFBCBAAAC;
+			remoteGlobalIDString = 7578477CA77D98D8282C395822C4A93C;
 			remoteInfo = sqlite3;
 		};
 		C1F6CF0C4BB12C17312EF21C1879FACE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8749F2EAEFF5F8073EA1595CFBCBAAAC;
+			remoteGlobalIDString = 7578477CA77D98D8282C395822C4A93C;
 			remoteInfo = sqlite3;
 		};
 		D274551A343B041653F5E45F5AFD9F8F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 0C682D0E61E7AA6B3EE6CFA15A6DBA21;
+			remoteGlobalIDString = 6208D25DC48703C16058EB76004A61D6;
 			remoteInfo = "1PasswordExtension-OnePasswordExtensionResources";
 		};
 		FC3E4A91CD53582B90F68EE8A9A5E5F4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8749F2EAEFF5F8073EA1595CFBCBAAAC;
+			remoteGlobalIDString = 7578477CA77D98D8282C395822C4A93C;
 			remoteInfo = sqlite3;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0061DA5DFA220AC1215916D0922F74D8 /* Pods-WaniKaniStudyQueueWidget-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WaniKaniStudyQueueWidget-acknowledgements.markdown"; sourceTree = "<group>"; };
-		03864110CEEC761056297A86853B3789 /* FMDB-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FMDB-dummy.m"; sourceTree = "<group>"; };
-		0395E69A61219E24733424E5323F7CF0 /* OnePasswordExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = OnePasswordExtension.framework; path = 1PasswordExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		03A29B6D335AD2112CCFCD82A5851F1C /* Pods-WaniKaniStudyQueueWidget.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-WaniKaniStudyQueueWidget.modulemap"; sourceTree = "<group>"; };
-		054EE75D6AC92E6E58539B9068149C90 /* FMDatabasePool.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = src/fmdb/FMDatabasePool.h; sourceTree = "<group>"; };
-		05C1ACCF644EBE582185E1C2A5BD4EA1 /* Pods-WaniKaniStudyQueueWidget-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WaniKaniStudyQueueWidget-dummy.m"; sourceTree = "<group>"; };
-		0ABA182F815457AEEB08580F278E100D /* 1PasswordExtension.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = 1PasswordExtension.xcconfig; sourceTree = "<group>"; };
-		0B3DC5C5B7F4D188524E71D2FE9D4D0B /* 1Password.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = 1Password.xcassets; sourceTree = "<group>"; };
-		170C3EBD697A53A2A3013FA20B58E24B /* Pods-AlliCrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AlliCrab.release.xcconfig"; sourceTree = "<group>"; };
-		191C11E4ABB8454AA2AAE1E4AA278284 /* FMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FMDB.framework; path = FMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D41C4D553F62A1D2B60EA54F9E94480 /* Pods_WaniKaniKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_WaniKaniKitTests.framework; path = "Pods-WaniKaniKitTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1DA01470F7DCAF09EDD4C5889FFBBEAC /* sqlite3-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "sqlite3-prefix.pch"; sourceTree = "<group>"; };
-		2070B4C760337564C0BA86AC2648E9DD /* 1PasswordExtension-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "1PasswordExtension-dummy.m"; sourceTree = "<group>"; };
-		208CDDA9B3B41CEAC60B47320B56DCC6 /* FMDB-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-umbrella.h"; sourceTree = "<group>"; };
-		244499A5BC340B607CC27DF2728D4D68 /* FMDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = src/fmdb/FMDB.h; sourceTree = "<group>"; };
-		2495B9466E4EEA5F3FD2EC93DCE6DEBC /* FMDatabaseQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = src/fmdb/FMDatabaseQueue.m; sourceTree = "<group>"; };
-		2634CF66E7B09A176FD0F5DE206A18FA /* 1PasswordExtension.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = 1PasswordExtension.modulemap; sourceTree = "<group>"; };
-		277C4330358DB71992ABD757B1E8880B /* FMDatabaseQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = src/fmdb/FMDatabaseQueue.h; sourceTree = "<group>"; };
-		28D2367BE8904D8FE5E2C1F2190C5EC2 /* Pods-AlliCrab-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AlliCrab-dummy.m"; sourceTree = "<group>"; };
-		325D92696AB85BDB3DEE7A126C4FD793 /* OnePasswordExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = OnePasswordExtension.m; sourceTree = "<group>"; };
-		353171C211AE1046B0A81DDC797FDF78 /* Pods-AlliCrab-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AlliCrab-acknowledgements.markdown"; sourceTree = "<group>"; };
-		3545EB43789C2C14C579E506DFE85E7A /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = src/fmdb/FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		372058943B2D6E297059CE853F57689A /* Pods-WaniKaniKitTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WaniKaniKitTests-umbrella.h"; sourceTree = "<group>"; };
-		3E7E7A9E5C663658C81C451057A50453 /* Pods-WaniKaniKitTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WaniKaniKitTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		40E2EFBC7B4EC7F39DFD529859746AE8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		4159217428B486B1894ABAC302FA4668 /* Pods-AlliCrab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AlliCrab.debug.xcconfig"; sourceTree = "<group>"; };
-		479AA01761D4B487753CCB0D641FAC67 /* Pods-WaniKaniKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WaniKaniKit-dummy.m"; sourceTree = "<group>"; };
-		492F8986602C5EFB2A6AA405E03D06CD /* sqlite3-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "sqlite3-umbrella.h"; sourceTree = "<group>"; };
-		55D500A3959922D74603EECCA34D15F1 /* Pods-WaniKaniKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniKitTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5894912F8BC8324A9054E380CD1D2E46 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = src/fmdb/FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		5A522725D70801CEB879F0B15D55A56A /* sqlite3-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "sqlite3-Info.plist"; sourceTree = "<group>"; };
-		5CC2B8DFD38C8FDEF4D2E607AA86EFBA /* Pods-AlliCrab-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AlliCrab-acknowledgements.plist"; sourceTree = "<group>"; };
-		5FD51588C537018287F961B081A9DE7E /* sqlite3-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "sqlite3-dummy.m"; sourceTree = "<group>"; };
-		61EB47DB0C28584D03541E61D301758C /* Pods-WaniKaniKit-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniKit-acknowledgements.plist"; sourceTree = "<group>"; };
-		696EC8176510B52FCD11F61504D64406 /* Pods-WaniKaniKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniKit-Info.plist"; sourceTree = "<group>"; };
-		706D80632BCC19A100E8709BAAF938E7 /* Pods-AlliCrab.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-AlliCrab.modulemap"; sourceTree = "<group>"; };
-		7311D2B23D4EAAF3B65D85AF75356B0A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
-		75EED18A243A9B6219FA348DDF15879E /* Pods_WaniKaniStudyQueueWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_WaniKaniStudyQueueWidget.framework; path = "Pods-WaniKaniStudyQueueWidget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7977821DC116BC599B808F2526BC8FED /* sqlite3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = "sqlite-amalgamation-3270200/sqlite3.h"; sourceTree = "<group>"; };
-		7CB511E20219EC040D6BC853ACBE2131 /* Pods-WaniKaniStudyQueueWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniStudyQueueWidget.debug.xcconfig"; sourceTree = "<group>"; };
-		7D6D9758B8CBF7B91736532E10D845F9 /* Pods-WaniKaniKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-WaniKaniKit.modulemap"; sourceTree = "<group>"; };
-		7E07B4E3A13DD96D679DC3D9608DDA45 /* sqlite3ext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sqlite3ext.h; path = "sqlite-amalgamation-3270200/sqlite3ext.h"; sourceTree = "<group>"; };
-		7FA5662BA46E627838CDA578BDA3EDBB /* FMDB.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FMDB.xcconfig; sourceTree = "<group>"; };
-		814AFB9BFD166A6FBD34ED0D5535797D /* Pods-WaniKaniKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniKitTests.release.xcconfig"; sourceTree = "<group>"; };
-		8243FEF6EC2B31F3E1747B1914145BAD /* Pods_AlliCrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AlliCrab.framework; path = "Pods-AlliCrab.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		89CB0B62E54329F0CEDEDC3C873E9957 /* sqlite3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = sqlite3.framework; path = sqlite3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A0DB97EAA7CBE9128814DD14514C7C9 /* Pods-WaniKaniStudyQueueWidget-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WaniKaniStudyQueueWidget-umbrella.h"; sourceTree = "<group>"; };
-		8A8851B6CCDB15F8828358913CB794E9 /* OnePasswordExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OnePasswordExtension.h; sourceTree = "<group>"; };
-		8B31F99D6B714B9366739009414DA53D /* Pods-WaniKaniStudyQueueWidget-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniStudyQueueWidget-acknowledgements.plist"; sourceTree = "<group>"; };
-		8B5C82A8E538D57E5E6141C13984406C /* sqlite3.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = sqlite3.modulemap; sourceTree = "<group>"; };
-		8C33FAC93F44F7B3BF2F4685381DBB47 /* Pods-WaniKaniKit-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WaniKaniKit-acknowledgements.markdown"; sourceTree = "<group>"; };
-		8C803CED639F0311112465FBCE1D9C38 /* Pods-WaniKaniKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniKit.debug.xcconfig"; sourceTree = "<group>"; };
-		9285F6270717AA2B79A0F111F841534F /* 1PasswordExtension-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "1PasswordExtension-umbrella.h"; sourceTree = "<group>"; };
-		968BA0C896C792C7937E1037148A1DE7 /* Pods-WaniKaniKitTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-WaniKaniKitTests.modulemap"; sourceTree = "<group>"; };
+		004898AB2561E2F2E8BE4CBABEBD6F7D /* Pods_WaniKaniKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_WaniKaniKitTests.framework; path = "Pods-WaniKaniKitTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		02D43D448454811C7F71C7F976D03953 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		05177A6557B7BC2671DB625B59668C60 /* Pods_AlliCrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AlliCrab.framework; path = "Pods-AlliCrab.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		067B0B0B4911AAB3B0B7CE0B39239E10 /* Pods-AlliCrab-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AlliCrab-acknowledgements.markdown"; sourceTree = "<group>"; };
+		0926A670C537C261D6226EC6AFECDC2C /* 1PasswordExtension-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "1PasswordExtension-umbrella.h"; sourceTree = "<group>"; };
+		0C44CC023E17CE35769C79B3E5B60E33 /* FMDatabasePool.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabasePool.h; path = src/fmdb/FMDatabasePool.h; sourceTree = "<group>"; };
+		11E04798166D93A6AC9B3803B22DB5A5 /* Pods-AlliCrab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AlliCrab.debug.xcconfig"; sourceTree = "<group>"; };
+		1382E913706E9D2C5756B02C57F72678 /* FMDB-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FMDB-dummy.m"; sourceTree = "<group>"; };
+		13A4EB00A3070F445A99B681625C8670 /* Pods-WaniKaniKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-WaniKaniKit.modulemap"; sourceTree = "<group>"; };
+		141460E47674B0485DC3AB311BB6E6B5 /* Pods-WaniKaniKitTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniKitTests-Info.plist"; sourceTree = "<group>"; };
+		142659D09DC14B69760EC4A5A060383E /* sqlite3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = sqlite3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		184E2FFFB06AFEE8BABAEC17ABF31BCE /* FMDB-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-prefix.pch"; sourceTree = "<group>"; };
+		19B49B19A266D5460A8C77AB55A6324E /* Pods-AlliCrab-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AlliCrab-acknowledgements.plist"; sourceTree = "<group>"; };
+		1A308E1763CBD07941CC21E990894999 /* Pods-AlliCrab-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AlliCrab-Info.plist"; sourceTree = "<group>"; };
+		1BAA8B34833436E50EE26144C342B0DC /* Pods-WaniKaniStudyQueueWidget-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WaniKaniStudyQueueWidget-acknowledgements.markdown"; sourceTree = "<group>"; };
+		2015397A632050D79AEAC699D814FE00 /* sqlite3.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = "sqlite-amalgamation-3270200/sqlite3.h"; sourceTree = "<group>"; };
+		2088799D729BFCF69B18BCC41894D53C /* sqlite3.c */ = {isa = PBXFileReference; includeInIndex = 1; name = sqlite3.c; path = "sqlite-amalgamation-3270200/sqlite3.c"; sourceTree = "<group>"; };
+		226C71408467D713C4048382DB364B6E /* sqlite3ext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = sqlite3ext.h; path = "sqlite-amalgamation-3270200/sqlite3ext.h"; sourceTree = "<group>"; };
+		230D4B7B70154FFA993FB83C9AC54DD3 /* Pods-WaniKaniKitTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WaniKaniKitTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		2933D413B4A1A3E54E29430CE903FC02 /* 1PasswordExtension.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = 1PasswordExtension.modulemap; sourceTree = "<group>"; };
+		2C5F8B26482A965865731D6E6A30EB46 /* Pods-WaniKaniStudyQueueWidget-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WaniKaniStudyQueueWidget-dummy.m"; sourceTree = "<group>"; };
+		440C66A8EEDF3BABA6D515EA4352A02C /* sqlite3-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "sqlite3-umbrella.h"; sourceTree = "<group>"; };
+		45B54B5273E35AA5BC80AF83B5D7C960 /* Pods-WaniKaniKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WaniKaniKit-dummy.m"; sourceTree = "<group>"; };
+		460A71F74BF2F5893426EF3F6948D50C /* Pods-AlliCrab-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AlliCrab-umbrella.h"; sourceTree = "<group>"; };
+		46387A0412E88C924A80AD05EFAF0A89 /* Pods-WaniKaniKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniKit-Info.plist"; sourceTree = "<group>"; };
+		4C191D9C239189AF615560ABE2114F3E /* Pods-WaniKaniKitTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniKitTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		4C9CDB39059D90E568E868801676DD00 /* sqlite3.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = sqlite3.xcconfig; sourceTree = "<group>"; };
+		5162A94405BFDD2A9811BF1CC4F486EE /* FMDatabaseQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseQueue.m; path = src/fmdb/FMDatabaseQueue.m; sourceTree = "<group>"; };
+		53177A1334CC3207160C6AA6CD688F0A /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabaseAdditions.m; path = src/fmdb/FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		5984ABCB3AAFE22D8F63876ED87A7FD3 /* Pods-WaniKaniStudyQueueWidget.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-WaniKaniStudyQueueWidget.modulemap"; sourceTree = "<group>"; };
+		618089449AEC74CB3C70A96E868A629B /* sqlite3-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "sqlite3-dummy.m"; sourceTree = "<group>"; };
+		63456D600B9F265E4E6697E88E276D98 /* sqlite3.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = sqlite3.modulemap; sourceTree = "<group>"; };
+		6579C3D2203C98E1028E6DD1758D8415 /* Pods-WaniKaniStudyQueueWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniStudyQueueWidget.debug.xcconfig"; sourceTree = "<group>"; };
+		6698D4E7D96F0A0499EA055B11DE2382 /* sqlite3-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "sqlite3-prefix.pch"; sourceTree = "<group>"; };
+		6995AE50E643E23B6A3ADA9303E4AAFA /* Pods-AlliCrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AlliCrab.release.xcconfig"; sourceTree = "<group>"; };
+		6C597164641085431493313001781A4D /* FMDB.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDB.h; path = src/fmdb/FMDB.h; sourceTree = "<group>"; };
+		6D46370BA2EA9C0C0B311F1C13BCA086 /* FMDatabase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = src/fmdb/FMDatabase.m; sourceTree = "<group>"; };
+		6E7359AC97512790EFDBBC410AFB0114 /* FMDatabase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = src/fmdb/FMDatabase.h; sourceTree = "<group>"; };
+		6F7C916A920D5D416ED434F7B629AB05 /* FMDB-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FMDB-Info.plist"; sourceTree = "<group>"; };
+		74FE93DD7CF76CF5401E78E66D15238D /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseAdditions.h; path = src/fmdb/FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		797B716967B32336AF13BF6D95E8B71A /* 1PasswordExtension-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "1PasswordExtension-prefix.pch"; sourceTree = "<group>"; };
+		80A129A925BF71B636A56EBB1B8F1277 /* Pods-WaniKaniKit-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniKit-acknowledgements.plist"; sourceTree = "<group>"; };
+		81A54EE7C12A44763DBDD95ADAA06B4B /* FMDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FMDB.framework; path = FMDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F8849699FEFBEC381BDDEAC56717A63 /* Pods-WaniKaniKitTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WaniKaniKitTests-dummy.m"; sourceTree = "<group>"; };
+		8FF8C4B2F2CF78FA53C988A318637FB0 /* 1PasswordExtension-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "1PasswordExtension-dummy.m"; sourceTree = "<group>"; };
+		903C8103DD773DE6233F35E9A01346CF /* OnePasswordExtension.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = OnePasswordExtension.h; sourceTree = "<group>"; };
+		91C80527148A65AEEFE29803C2BC667A /* Pods-WaniKaniKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniKit.release.xcconfig"; sourceTree = "<group>"; };
+		94FD46A77B12113D8D9A16AEA1D52A54 /* Pods-WaniKaniStudyQueueWidget-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WaniKaniStudyQueueWidget-umbrella.h"; sourceTree = "<group>"; };
+		956F1472D48EBF14C7EF427C6E53417B /* FMDB.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FMDB.xcconfig; sourceTree = "<group>"; };
+		972EA41D71C8E7FF7DD024BC6F1EC20D /* Pods-WaniKaniKit-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-WaniKaniKit-acknowledgements.markdown"; sourceTree = "<group>"; };
+		977C8F3CF80ABDD5C0B843E81D9B3169 /* 1Password.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = 1Password.xcassets; sourceTree = "<group>"; };
+		99CC5862ED7D840128D6AD49F59074B4 /* 1PasswordExtension.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = 1PasswordExtension.xcconfig; sourceTree = "<group>"; };
+		9B95A6172CCE91A7F3C1951B56FF1902 /* FMDB.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FMDB.modulemap; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A25FEF2D826BDF6B89F1FF017B7054A5 /* FMResultSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = src/fmdb/FMResultSet.h; sourceTree = "<group>"; };
-		AF5D739D03933CAC51FAC8C0B4A3DD81 /* 1PasswordExtension-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "1PasswordExtension-prefix.pch"; sourceTree = "<group>"; };
-		B032D4112E58C0E362E5F6E6BBBDFF80 /* FMDatabase.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabase.h; path = src/fmdb/FMDatabase.h; sourceTree = "<group>"; };
-		B17AEAF10D4321018876529AB4C6BC9D /* Pods-AlliCrab-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AlliCrab-frameworks.sh"; sourceTree = "<group>"; };
-		B48AFE2171579C48F338A5D32731145F /* Pods-WaniKaniKitTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WaniKaniKitTests-dummy.m"; sourceTree = "<group>"; };
-		B4E6B586A0C76F5051BE9AEFCBBF01D2 /* Pods-WaniKaniKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WaniKaniKit-umbrella.h"; sourceTree = "<group>"; };
-		B5BA94AE30C296ABCA2F4B4D4F75BDFA /* FMResultSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = src/fmdb/FMResultSet.m; sourceTree = "<group>"; };
-		BC1D36D951865D3EDAA5B8D825404E14 /* Pods-AlliCrab-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AlliCrab-Info.plist"; sourceTree = "<group>"; };
-		BC28BB81965881463B2DFB24848576FA /* Pods_WaniKaniKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_WaniKaniKit.framework; path = "Pods-WaniKaniKit.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C2370A5C35BDEBCA3B6343E091764AE8 /* FMDatabasePool.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = src/fmdb/FMDatabasePool.m; sourceTree = "<group>"; };
-		C25C4505DD347914B4A045596A34B200 /* Pods-AlliCrab-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AlliCrab-umbrella.h"; sourceTree = "<group>"; };
-		C35EC641595FCD03F72F43545B8C6E40 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		CD84BEEEB7A12EFA5C211CA6B2F5D50B /* FMDB-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FMDB-Info.plist"; sourceTree = "<group>"; };
-		D732759F06F3BB4CF964C82CD5BCDE72 /* Pods-WaniKaniKitTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniKitTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		D90E7E29FE1DB57264359595562DD0CC /* FMDatabase.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabase.m; path = src/fmdb/FMDatabase.m; sourceTree = "<group>"; };
-		D920BA0FDABF4D9BDC104287D7BDEF01 /* Pods-WaniKaniStudyQueueWidget-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniStudyQueueWidget-Info.plist"; sourceTree = "<group>"; };
-		DD7F52B1DE95BC377F621BB1C3D40ECD /* sqlite3.c */ = {isa = PBXFileReference; includeInIndex = 1; name = sqlite3.c; path = "sqlite-amalgamation-3270200/sqlite3.c"; sourceTree = "<group>"; };
-		DF051A3C9503AAA2442182BA2E2FE7A7 /* sqlite3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = sqlite3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DF9D3AD2A46BA13E7D56FEDE14571E6A /* OnePasswordExtensionResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = OnePasswordExtensionResources.bundle; path = "1PasswordExtension-OnePasswordExtensionResources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E5A6AE39824680CA5D98745A4C438B26 /* Pods-WaniKaniKitTests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniKitTests-Info.plist"; sourceTree = "<group>"; };
-		E7AF059C429FC57FA09EB440E789EE1B /* Pods-WaniKaniKitTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WaniKaniKitTests-frameworks.sh"; sourceTree = "<group>"; };
-		EE3197A68A7BC9831A733B3D5E769CE0 /* FMDB-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-prefix.pch"; sourceTree = "<group>"; };
-		F2460464A31492953826CD87EA7DD94A /* Pods-WaniKaniStudyQueueWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniStudyQueueWidget.release.xcconfig"; sourceTree = "<group>"; };
-		F2760957698EB062E8209A190F8CB8E6 /* sqlite3.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = sqlite3.xcconfig; sourceTree = "<group>"; };
-		F6A86539E428174CDF6EA32245AEBDC0 /* Pods-WaniKaniKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniKit.release.xcconfig"; sourceTree = "<group>"; };
-		F6E87814B96F46E033D02F3015711E96 /* 1PasswordExtension-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "1PasswordExtension-Info.plist"; sourceTree = "<group>"; };
-		FC055A6AD0F35A29A30A8950947F1472 /* FMDB.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FMDB.modulemap; sourceTree = "<group>"; };
-		FDA666F022CA94E82767A5860F035C38 /* ResourceBundle-OnePasswordExtensionResources-1PasswordExtension-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-OnePasswordExtensionResources-1PasswordExtension-Info.plist"; sourceTree = "<group>"; };
+		A219725D100FBB411791F919534920E9 /* Pods-AlliCrab-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AlliCrab-dummy.m"; sourceTree = "<group>"; };
+		A55CAFB04C1EF23D01E37D1CCB44C4E4 /* Pods_WaniKaniStudyQueueWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_WaniKaniStudyQueueWidget.framework; path = "Pods-WaniKaniStudyQueueWidget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A80019CCA8C1449FAD14A3B18704AA51 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		AB6ECF5DD62A0B0A3AF755AE105D10C0 /* OnePasswordExtensionResources.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = OnePasswordExtensionResources.bundle; path = "1PasswordExtension-OnePasswordExtensionResources.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE675141812FA4ED2FAFD9C47299DF31 /* Pods-WaniKaniStudyQueueWidget-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniStudyQueueWidget-acknowledgements.plist"; sourceTree = "<group>"; };
+		AF7FDDFDF8524CF4A15C8F405B9A56E0 /* Pods-AlliCrab.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-AlliCrab.modulemap"; sourceTree = "<group>"; };
+		B0699AE2980DED5B5ADFCD54872D3BA3 /* FMResultSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMResultSet.h; path = src/fmdb/FMResultSet.h; sourceTree = "<group>"; };
+		B07400E6EE29027BE0A41F5158B89B07 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FMDatabaseQueue.h; path = src/fmdb/FMDatabaseQueue.h; sourceTree = "<group>"; };
+		B1F67592384F0317FF5A6F2BB545DD9E /* Pods-WaniKaniKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WaniKaniKit-umbrella.h"; sourceTree = "<group>"; };
+		B2644B407CA28D31B1FE26B24A1B33FE /* FMResultSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMResultSet.m; path = src/fmdb/FMResultSet.m; sourceTree = "<group>"; };
+		B29636BA042841F21D7B430ED74DC4FE /* Pods-WaniKaniKitTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WaniKaniKitTests-umbrella.h"; sourceTree = "<group>"; };
+		B6E438D7BEB597B7D10393DDD470BF79 /* sqlite3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = sqlite3.framework; path = sqlite3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B754126F52B1BCF0D47382C7BF5D55E9 /* sqlite3-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "sqlite3-Info.plist"; sourceTree = "<group>"; };
+		B7B5C0DF780F654C6C51EEFA1C2D213A /* ResourceBundle-OnePasswordExtensionResources-1PasswordExtension-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-OnePasswordExtensionResources-1PasswordExtension-Info.plist"; sourceTree = "<group>"; };
+		BA8F87D8F06D4B5C59BD4EA69B25C1A4 /* Pods-WaniKaniStudyQueueWidget-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-WaniKaniStudyQueueWidget-Info.plist"; sourceTree = "<group>"; };
+		CC0FA47234A24123FAE58369CF1C6DAB /* Pods-WaniKaniKitTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-WaniKaniKitTests.modulemap"; sourceTree = "<group>"; };
+		D20EED746AE0C11FF07D2AAD035AD09C /* Pods-WaniKaniKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniKitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D323208D2F90589C7A09F6C4340174AA /* Pods-WaniKaniKitTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-WaniKaniKitTests-frameworks.sh"; sourceTree = "<group>"; };
+		D34EFFFB94DC8BF2FE985C78A775EC66 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		D678E4050A24896EDC91614A696274BB /* Pods-AlliCrab-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AlliCrab-frameworks.sh"; sourceTree = "<group>"; };
+		D812D7DF29329FADD5A576B5C04F8705 /* Pods-WaniKaniStudyQueueWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniStudyQueueWidget.release.xcconfig"; sourceTree = "<group>"; };
+		D848223A77754344B781CDD779C23C95 /* Pods-WaniKaniKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniKitTests.release.xcconfig"; sourceTree = "<group>"; };
+		DAE68E04C29E230A2DFDC4FFC8429955 /* Pods-WaniKaniKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WaniKaniKit.debug.xcconfig"; sourceTree = "<group>"; };
+		DB6C977D8A24879CA799F64E90AF5315 /* OnePasswordExtension.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = OnePasswordExtension.m; sourceTree = "<group>"; };
+		DBDE35B0CB25FFB65C560AE6CC211C45 /* Pods_WaniKaniKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_WaniKaniKit.framework; path = "Pods-WaniKaniKit.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED0098F9349CEE8931C5034AF100C096 /* FMDatabasePool.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FMDatabasePool.m; path = src/fmdb/FMDatabasePool.m; sourceTree = "<group>"; };
+		F1F20DBA4D44F509993B7E2B97F63BB2 /* 1PasswordExtension-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "1PasswordExtension-Info.plist"; sourceTree = "<group>"; };
+		F6F93ADB47070DCCC0F5C5EF98A35DC1 /* FMDB-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FMDB-umbrella.h"; sourceTree = "<group>"; };
+		FCAF63D37F8E24ECD72F399E840BB477 /* OnePasswordExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = OnePasswordExtension.framework; path = 1PasswordExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,7 +222,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DC50F73B8672C673857F755E4A67A92 /* Foundation.framework in Frameworks */,
+				CB41CD4E101971F1F65294E866B58BDE /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2426F7404B92DB9AED408252F8A84A39 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59E5E143A9EFC301D85928FD362CD4B2 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,7 +238,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				756A8711EBF1107BDFA4544BE82BA3DE /* Foundation.framework in Frameworks */,
+				E8300AE821759B714D6ECA7AB4337091 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,7 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C16BF5A66CBEAC5DAF9555A443537DA3 /* Foundation.framework in Frameworks */,
+				1DAE3E38112E0CE7564557D390AA97E6 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,15 +261,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F016D9D6CDF724FBE166E5BD8818F13 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CD89932F9D5AB1F93FBAD33F74AF88F7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7BC2ACCC7D03D1F7722A7A8A7B4DC7F1 /* Foundation.framework in Frameworks */,
+				72551C1B931B1D4444DB56E2AF9692E8 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,9 +269,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA55098913AF81C5AA777B591D3A3C0D /* Foundation.framework in Frameworks */,
-				2ECF09DE7482A519AA04C826B6F211EC /* MobileCoreServices.framework in Frameworks */,
-				1CB332AE5B404330DB659F27DFD03C71 /* UIKit.framework in Frameworks */,
+				5B793A0574AED7F86030791560609215 /* Foundation.framework in Frameworks */,
+				F42FB5895242CD4325FD36853B24158D /* MobileCoreServices.framework in Frameworks */,
+				54C724B0E2ABA49568645F46BC6B6423 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,7 +279,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBFAB472F69F60119D935B74FDA0B544 /* Foundation.framework in Frameworks */,
+				8DE3717D17C2A29B9EFE0569FDE2B3B2 /* Foundation.framework in Frameworks */,
 				A80DF112B8CA7BFBFC42E23199B1DF65 /* sqlite3.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,273 +287,290 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0857AC6F2083F1EAF9BE3EEF8A9CE9A7 /* FMDB */ = {
+		00CBF13B9EEC4B9E0EAF63F36470D0CD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C09A441D7231B630E3DF408C1F031DD1 /* standalone */,
-				AA65EE4692EA52AC2000D77A93A953ED /* Support Files */,
-			);
-			name = FMDB;
-			path = FMDB;
-			sourceTree = "<group>";
-		};
-		0A6D498BE53AECE34BD301AE34123EA4 /* Pods-WaniKaniKitTests */ = {
-			isa = PBXGroup;
-			children = (
-				968BA0C896C792C7937E1037148A1DE7 /* Pods-WaniKaniKitTests.modulemap */,
-				3E7E7A9E5C663658C81C451057A50453 /* Pods-WaniKaniKitTests-acknowledgements.markdown */,
-				D732759F06F3BB4CF964C82CD5BCDE72 /* Pods-WaniKaniKitTests-acknowledgements.plist */,
-				B48AFE2171579C48F338A5D32731145F /* Pods-WaniKaniKitTests-dummy.m */,
-				E7AF059C429FC57FA09EB440E789EE1B /* Pods-WaniKaniKitTests-frameworks.sh */,
-				E5A6AE39824680CA5D98745A4C438B26 /* Pods-WaniKaniKitTests-Info.plist */,
-				372058943B2D6E297059CE853F57689A /* Pods-WaniKaniKitTests-umbrella.h */,
-				55D500A3959922D74603EECCA34D15F1 /* Pods-WaniKaniKitTests.debug.xcconfig */,
-				814AFB9BFD166A6FBD34ED0D5535797D /* Pods-WaniKaniKitTests.release.xcconfig */,
-			);
-			name = "Pods-WaniKaniKitTests";
-			path = "Target Support Files/Pods-WaniKaniKitTests";
-			sourceTree = "<group>";
-		};
-		0AF5A46242B4750C3643E65B9F4919BF /* Pods-AlliCrab */ = {
-			isa = PBXGroup;
-			children = (
-				706D80632BCC19A100E8709BAAF938E7 /* Pods-AlliCrab.modulemap */,
-				353171C211AE1046B0A81DDC797FDF78 /* Pods-AlliCrab-acknowledgements.markdown */,
-				5CC2B8DFD38C8FDEF4D2E607AA86EFBA /* Pods-AlliCrab-acknowledgements.plist */,
-				28D2367BE8904D8FE5E2C1F2190C5EC2 /* Pods-AlliCrab-dummy.m */,
-				B17AEAF10D4321018876529AB4C6BC9D /* Pods-AlliCrab-frameworks.sh */,
-				BC1D36D951865D3EDAA5B8D825404E14 /* Pods-AlliCrab-Info.plist */,
-				C25C4505DD347914B4A045596A34B200 /* Pods-AlliCrab-umbrella.h */,
-				4159217428B486B1894ABAC302FA4668 /* Pods-AlliCrab.debug.xcconfig */,
-				170C3EBD697A53A2A3013FA20B58E24B /* Pods-AlliCrab.release.xcconfig */,
-			);
-			name = "Pods-AlliCrab";
-			path = "Target Support Files/Pods-AlliCrab";
-			sourceTree = "<group>";
-		};
-		1325BB9802D6AE7F148D926C5384D682 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				DF051A3C9503AAA2442182BA2E2FE7A7 /* sqlite3.framework */,
-				67379CDF434C9DC4DA9B1CBCF1F429EA /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		34D404E194708B5CFFE5AA8BDE13FC65 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				191C11E4ABB8454AA2AAE1E4AA278284 /* FMDB.framework */,
-				0395E69A61219E24733424E5323F7CF0 /* OnePasswordExtension.framework */,
-				DF9D3AD2A46BA13E7D56FEDE14571E6A /* OnePasswordExtensionResources.bundle */,
-				8243FEF6EC2B31F3E1747B1914145BAD /* Pods_AlliCrab.framework */,
-				BC28BB81965881463B2DFB24848576FA /* Pods_WaniKaniKit.framework */,
-				1D41C4D553F62A1D2B60EA54F9E94480 /* Pods_WaniKaniKitTests.framework */,
-				75EED18A243A9B6219FA348DDF15879E /* Pods_WaniKaniStudyQueueWidget.framework */,
-				89CB0B62E54329F0CEDEDC3C873E9957 /* sqlite3.framework */,
+				81A54EE7C12A44763DBDD95ADAA06B4B /* FMDB.framework */,
+				FCAF63D37F8E24ECD72F399E840BB477 /* OnePasswordExtension.framework */,
+				AB6ECF5DD62A0B0A3AF755AE105D10C0 /* OnePasswordExtensionResources.bundle */,
+				05177A6557B7BC2671DB625B59668C60 /* Pods_AlliCrab.framework */,
+				DBDE35B0CB25FFB65C560AE6CC211C45 /* Pods_WaniKaniKit.framework */,
+				004898AB2561E2F2E8BE4CBABEBD6F7D /* Pods_WaniKaniKitTests.framework */,
+				A55CAFB04C1EF23D01E37D1CCB44C4E4 /* Pods_WaniKaniStudyQueueWidget.framework */,
+				B6E438D7BEB597B7D10393DDD470BF79 /* sqlite3.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5285C2E27C84B496265832FA76A9BDFD /* Targets Support Files */ = {
+		192BA7CF28AF9F082BC79730463D6E10 /* sqlite3 */ = {
 			isa = PBXGroup;
 			children = (
-				0AF5A46242B4750C3643E65B9F4919BF /* Pods-AlliCrab */,
-				8A7C15DEACE2756718D377C433CD76EE /* Pods-WaniKaniKit */,
-				0A6D498BE53AECE34BD301AE34123EA4 /* Pods-WaniKaniKitTests */,
-				B7130A3E3185F6976DD64C78BB11F7F1 /* Pods-WaniKaniStudyQueueWidget */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		5BD93E9E5611C087BF70004209764D9C /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				8B5C82A8E538D57E5E6141C13984406C /* sqlite3.modulemap */,
-				F2760957698EB062E8209A190F8CB8E6 /* sqlite3.xcconfig */,
-				5FD51588C537018287F961B081A9DE7E /* sqlite3-dummy.m */,
-				5A522725D70801CEB879F0B15D55A56A /* sqlite3-Info.plist */,
-				1DA01470F7DCAF09EDD4C5889FFBBEAC /* sqlite3-prefix.pch */,
-				492F8986602C5EFB2A6AA405E03D06CD /* sqlite3-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/sqlite3";
-			sourceTree = "<group>";
-		};
-		67379CDF434C9DC4DA9B1CBCF1F429EA /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				40E2EFBC7B4EC7F39DFD529859746AE8 /* Foundation.framework */,
-				7311D2B23D4EAAF3B65D85AF75356B0A /* MobileCoreServices.framework */,
-				C35EC641595FCD03F72F43545B8C6E40 /* UIKit.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		79BA7A3945706877D86CC30FBD82D3CB /* 1PasswordExtension */ = {
-			isa = PBXGroup;
-			children = (
-				8A8851B6CCDB15F8828358913CB794E9 /* OnePasswordExtension.h */,
-				325D92696AB85BDB3DEE7A126C4FD793 /* OnePasswordExtension.m */,
-				C1D063641EBA6763887BC5A703CB32B2 /* Resources */,
-				9EAA5EA704517A5CF1D8E495CE05ABEE /* Support Files */,
-			);
-			name = 1PasswordExtension;
-			path = 1PasswordExtension;
-			sourceTree = "<group>";
-		};
-		80473BE76C1ABD0DC4360663D171BEA8 /* sqlite3 */ = {
-			isa = PBXGroup;
-			children = (
-				DC93BCD3808744B87FED4D5751C2D3EA /* common */,
-				5BD93E9E5611C087BF70004209764D9C /* Support Files */,
+				5B7CBB425E7444A276F3437D7CDC1B7D /* common */,
+				2DF0E714DF8CDD215B6BB31EE27EEB89 /* Support Files */,
 			);
 			name = sqlite3;
 			path = sqlite3;
 			sourceTree = "<group>";
 		};
-		8A7C15DEACE2756718D377C433CD76EE /* Pods-WaniKaniKit */ = {
+		1C7313888BFA09A5A0DEC91E14AD65CF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7D6D9758B8CBF7B91736532E10D845F9 /* Pods-WaniKaniKit.modulemap */,
-				8C33FAC93F44F7B3BF2F4685381DBB47 /* Pods-WaniKaniKit-acknowledgements.markdown */,
-				61EB47DB0C28584D03541E61D301758C /* Pods-WaniKaniKit-acknowledgements.plist */,
-				479AA01761D4B487753CCB0D641FAC67 /* Pods-WaniKaniKit-dummy.m */,
-				696EC8176510B52FCD11F61504D64406 /* Pods-WaniKaniKit-Info.plist */,
-				B4E6B586A0C76F5051BE9AEFCBBF01D2 /* Pods-WaniKaniKit-umbrella.h */,
-				8C803CED639F0311112465FBCE1D9C38 /* Pods-WaniKaniKit.debug.xcconfig */,
-				F6A86539E428174CDF6EA32245AEBDC0 /* Pods-WaniKaniKit.release.xcconfig */,
+				977C8F3CF80ABDD5C0B843E81D9B3169 /* 1Password.xcassets */,
 			);
-			name = "Pods-WaniKaniKit";
-			path = "Target Support Files/Pods-WaniKaniKit";
+			name = Resources;
 			sourceTree = "<group>";
 		};
-		9EAA5EA704517A5CF1D8E495CE05ABEE /* Support Files */ = {
+		2DF0E714DF8CDD215B6BB31EE27EEB89 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				2634CF66E7B09A176FD0F5DE206A18FA /* 1PasswordExtension.modulemap */,
-				0ABA182F815457AEEB08580F278E100D /* 1PasswordExtension.xcconfig */,
-				2070B4C760337564C0BA86AC2648E9DD /* 1PasswordExtension-dummy.m */,
-				F6E87814B96F46E033D02F3015711E96 /* 1PasswordExtension-Info.plist */,
-				AF5D739D03933CAC51FAC8C0B4A3DD81 /* 1PasswordExtension-prefix.pch */,
-				9285F6270717AA2B79A0F111F841534F /* 1PasswordExtension-umbrella.h */,
-				FDA666F022CA94E82767A5860F035C38 /* ResourceBundle-OnePasswordExtensionResources-1PasswordExtension-Info.plist */,
+				63456D600B9F265E4E6697E88E276D98 /* sqlite3.modulemap */,
+				4C9CDB39059D90E568E868801676DD00 /* sqlite3.xcconfig */,
+				618089449AEC74CB3C70A96E868A629B /* sqlite3-dummy.m */,
+				B754126F52B1BCF0D47382C7BF5D55E9 /* sqlite3-Info.plist */,
+				6698D4E7D96F0A0499EA055B11DE2382 /* sqlite3-prefix.pch */,
+				440C66A8EEDF3BABA6D515EA4352A02C /* sqlite3-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/1PasswordExtension";
+			path = "../Target Support Files/sqlite3";
 			sourceTree = "<group>";
 		};
-		AA65EE4692EA52AC2000D77A93A953ED /* Support Files */ = {
+		3B61EB2D9171BA1E51E2D84750F5C3D9 /* 1PasswordExtension */ = {
 			isa = PBXGroup;
 			children = (
-				FC055A6AD0F35A29A30A8950947F1472 /* FMDB.modulemap */,
-				7FA5662BA46E627838CDA578BDA3EDBB /* FMDB.xcconfig */,
-				03864110CEEC761056297A86853B3789 /* FMDB-dummy.m */,
-				CD84BEEEB7A12EFA5C211CA6B2F5D50B /* FMDB-Info.plist */,
-				EE3197A68A7BC9831A733B3D5E769CE0 /* FMDB-prefix.pch */,
-				208CDDA9B3B41CEAC60B47320B56DCC6 /* FMDB-umbrella.h */,
+				903C8103DD773DE6233F35E9A01346CF /* OnePasswordExtension.h */,
+				DB6C977D8A24879CA799F64E90AF5315 /* OnePasswordExtension.m */,
+				1C7313888BFA09A5A0DEC91E14AD65CF /* Resources */,
+				7DC4EDC6B38750BE9A396FBDF3479AFA /* Support Files */,
+			);
+			name = 1PasswordExtension;
+			path = 1PasswordExtension;
+			sourceTree = "<group>";
+		};
+		3D89B5D81B3FCB4CC0D288BFEEE915D4 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9B95A6172CCE91A7F3C1951B56FF1902 /* FMDB.modulemap */,
+				956F1472D48EBF14C7EF427C6E53417B /* FMDB.xcconfig */,
+				1382E913706E9D2C5756B02C57F72678 /* FMDB-dummy.m */,
+				6F7C916A920D5D416ED434F7B629AB05 /* FMDB-Info.plist */,
+				184E2FFFB06AFEE8BABAEC17ABF31BCE /* FMDB-prefix.pch */,
+				F6F93ADB47070DCCC0F5C5EF98A35DC1 /* FMDB-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/FMDB";
 			sourceTree = "<group>";
 		};
-		B7130A3E3185F6976DD64C78BB11F7F1 /* Pods-WaniKaniStudyQueueWidget */ = {
+		4D7C16E4A1E5FABEF41CC39787C82529 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				03A29B6D335AD2112CCFCD82A5851F1C /* Pods-WaniKaniStudyQueueWidget.modulemap */,
-				0061DA5DFA220AC1215916D0922F74D8 /* Pods-WaniKaniStudyQueueWidget-acknowledgements.markdown */,
-				8B31F99D6B714B9366739009414DA53D /* Pods-WaniKaniStudyQueueWidget-acknowledgements.plist */,
-				05C1ACCF644EBE582185E1C2A5BD4EA1 /* Pods-WaniKaniStudyQueueWidget-dummy.m */,
-				D920BA0FDABF4D9BDC104287D7BDEF01 /* Pods-WaniKaniStudyQueueWidget-Info.plist */,
-				8A0DB97EAA7CBE9128814DD14514C7C9 /* Pods-WaniKaniStudyQueueWidget-umbrella.h */,
-				7CB511E20219EC040D6BC853ACBE2131 /* Pods-WaniKaniStudyQueueWidget.debug.xcconfig */,
-				F2460464A31492953826CD87EA7DD94A /* Pods-WaniKaniStudyQueueWidget.release.xcconfig */,
+				D34EFFFB94DC8BF2FE985C78A775EC66 /* Foundation.framework */,
+				A80019CCA8C1449FAD14A3B18704AA51 /* MobileCoreServices.framework */,
+				02D43D448454811C7F71C7F976D03953 /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		508D1E7628C34969278B61A33188434C /* Pods-WaniKaniStudyQueueWidget */ = {
+			isa = PBXGroup;
+			children = (
+				5984ABCB3AAFE22D8F63876ED87A7FD3 /* Pods-WaniKaniStudyQueueWidget.modulemap */,
+				1BAA8B34833436E50EE26144C342B0DC /* Pods-WaniKaniStudyQueueWidget-acknowledgements.markdown */,
+				AE675141812FA4ED2FAFD9C47299DF31 /* Pods-WaniKaniStudyQueueWidget-acknowledgements.plist */,
+				2C5F8B26482A965865731D6E6A30EB46 /* Pods-WaniKaniStudyQueueWidget-dummy.m */,
+				BA8F87D8F06D4B5C59BD4EA69B25C1A4 /* Pods-WaniKaniStudyQueueWidget-Info.plist */,
+				94FD46A77B12113D8D9A16AEA1D52A54 /* Pods-WaniKaniStudyQueueWidget-umbrella.h */,
+				6579C3D2203C98E1028E6DD1758D8415 /* Pods-WaniKaniStudyQueueWidget.debug.xcconfig */,
+				D812D7DF29329FADD5A576B5C04F8705 /* Pods-WaniKaniStudyQueueWidget.release.xcconfig */,
 			);
 			name = "Pods-WaniKaniStudyQueueWidget";
 			path = "Target Support Files/Pods-WaniKaniStudyQueueWidget";
 			sourceTree = "<group>";
 		};
-		C09A441D7231B630E3DF408C1F031DD1 /* standalone */ = {
+		5285C2E27C84B496265832FA76A9BDFD /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				B032D4112E58C0E362E5F6E6BBBDFF80 /* FMDatabase.h */,
-				D90E7E29FE1DB57264359595562DD0CC /* FMDatabase.m */,
-				3545EB43789C2C14C579E506DFE85E7A /* FMDatabaseAdditions.h */,
-				5894912F8BC8324A9054E380CD1D2E46 /* FMDatabaseAdditions.m */,
-				054EE75D6AC92E6E58539B9068149C90 /* FMDatabasePool.h */,
-				C2370A5C35BDEBCA3B6343E091764AE8 /* FMDatabasePool.m */,
-				277C4330358DB71992ABD757B1E8880B /* FMDatabaseQueue.h */,
-				2495B9466E4EEA5F3FD2EC93DCE6DEBC /* FMDatabaseQueue.m */,
-				244499A5BC340B607CC27DF2728D4D68 /* FMDB.h */,
-				A25FEF2D826BDF6B89F1FF017B7054A5 /* FMResultSet.h */,
-				B5BA94AE30C296ABCA2F4B4D4F75BDFA /* FMResultSet.m */,
+				66F1529D9D7CE0F6D3091C0FC32880E0 /* Pods-AlliCrab */,
+				7C97CF654C45F1FED5FA05EF688C4593 /* Pods-WaniKaniKit */,
+				A2DA8464D3313CF481DEB8D953D693AF /* Pods-WaniKaniKitTests */,
+				508D1E7628C34969278B61A33188434C /* Pods-WaniKaniStudyQueueWidget */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		5B7CBB425E7444A276F3437D7CDC1B7D /* common */ = {
+			isa = PBXGroup;
+			children = (
+				2088799D729BFCF69B18BCC41894D53C /* sqlite3.c */,
+				2015397A632050D79AEAC699D814FE00 /* sqlite3.h */,
+				226C71408467D713C4048382DB364B6E /* sqlite3ext.h */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		66F1529D9D7CE0F6D3091C0FC32880E0 /* Pods-AlliCrab */ = {
+			isa = PBXGroup;
+			children = (
+				AF7FDDFDF8524CF4A15C8F405B9A56E0 /* Pods-AlliCrab.modulemap */,
+				067B0B0B4911AAB3B0B7CE0B39239E10 /* Pods-AlliCrab-acknowledgements.markdown */,
+				19B49B19A266D5460A8C77AB55A6324E /* Pods-AlliCrab-acknowledgements.plist */,
+				A219725D100FBB411791F919534920E9 /* Pods-AlliCrab-dummy.m */,
+				D678E4050A24896EDC91614A696274BB /* Pods-AlliCrab-frameworks.sh */,
+				1A308E1763CBD07941CC21E990894999 /* Pods-AlliCrab-Info.plist */,
+				460A71F74BF2F5893426EF3F6948D50C /* Pods-AlliCrab-umbrella.h */,
+				11E04798166D93A6AC9B3803B22DB5A5 /* Pods-AlliCrab.debug.xcconfig */,
+				6995AE50E643E23B6A3ADA9303E4AAFA /* Pods-AlliCrab.release.xcconfig */,
+			);
+			name = "Pods-AlliCrab";
+			path = "Target Support Files/Pods-AlliCrab";
+			sourceTree = "<group>";
+		};
+		7C97CF654C45F1FED5FA05EF688C4593 /* Pods-WaniKaniKit */ = {
+			isa = PBXGroup;
+			children = (
+				13A4EB00A3070F445A99B681625C8670 /* Pods-WaniKaniKit.modulemap */,
+				972EA41D71C8E7FF7DD024BC6F1EC20D /* Pods-WaniKaniKit-acknowledgements.markdown */,
+				80A129A925BF71B636A56EBB1B8F1277 /* Pods-WaniKaniKit-acknowledgements.plist */,
+				45B54B5273E35AA5BC80AF83B5D7C960 /* Pods-WaniKaniKit-dummy.m */,
+				46387A0412E88C924A80AD05EFAF0A89 /* Pods-WaniKaniKit-Info.plist */,
+				B1F67592384F0317FF5A6F2BB545DD9E /* Pods-WaniKaniKit-umbrella.h */,
+				DAE68E04C29E230A2DFDC4FFC8429955 /* Pods-WaniKaniKit.debug.xcconfig */,
+				91C80527148A65AEEFE29803C2BC667A /* Pods-WaniKaniKit.release.xcconfig */,
+			);
+			name = "Pods-WaniKaniKit";
+			path = "Target Support Files/Pods-WaniKaniKit";
+			sourceTree = "<group>";
+		};
+		7DC4EDC6B38750BE9A396FBDF3479AFA /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				2933D413B4A1A3E54E29430CE903FC02 /* 1PasswordExtension.modulemap */,
+				99CC5862ED7D840128D6AD49F59074B4 /* 1PasswordExtension.xcconfig */,
+				8FF8C4B2F2CF78FA53C988A318637FB0 /* 1PasswordExtension-dummy.m */,
+				F1F20DBA4D44F509993B7E2B97F63BB2 /* 1PasswordExtension-Info.plist */,
+				797B716967B32336AF13BF6D95E8B71A /* 1PasswordExtension-prefix.pch */,
+				0926A670C537C261D6226EC6AFECDC2C /* 1PasswordExtension-umbrella.h */,
+				B7B5C0DF780F654C6C51EEFA1C2D213A /* ResourceBundle-OnePasswordExtensionResources-1PasswordExtension-Info.plist */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/1PasswordExtension";
+			sourceTree = "<group>";
+		};
+		89C4FD638E11793D2F4D3814E1D294FE /* standalone */ = {
+			isa = PBXGroup;
+			children = (
+				6E7359AC97512790EFDBBC410AFB0114 /* FMDatabase.h */,
+				6D46370BA2EA9C0C0B311F1C13BCA086 /* FMDatabase.m */,
+				74FE93DD7CF76CF5401E78E66D15238D /* FMDatabaseAdditions.h */,
+				53177A1334CC3207160C6AA6CD688F0A /* FMDatabaseAdditions.m */,
+				0C44CC023E17CE35769C79B3E5B60E33 /* FMDatabasePool.h */,
+				ED0098F9349CEE8931C5034AF100C096 /* FMDatabasePool.m */,
+				B07400E6EE29027BE0A41F5158B89B07 /* FMDatabaseQueue.h */,
+				5162A94405BFDD2A9811BF1CC4F486EE /* FMDatabaseQueue.m */,
+				6C597164641085431493313001781A4D /* FMDB.h */,
+				B0699AE2980DED5B5ADFCD54872D3BA3 /* FMResultSet.h */,
+				B2644B407CA28D31B1FE26B24A1B33FE /* FMResultSet.m */,
 			);
 			name = standalone;
 			sourceTree = "<group>";
 		};
-		C1D063641EBA6763887BC5A703CB32B2 /* Resources */ = {
+		9ED13DA668E81C3BDADB40B8F8B25116 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0B3DC5C5B7F4D188524E71D2FE9D4D0B /* 1Password.xcassets */,
+				142659D09DC14B69760EC4A5A060383E /* sqlite3.framework */,
+				4D7C16E4A1E5FABEF41CC39787C82529 /* iOS */,
 			);
-			name = Resources;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A2DA8464D3313CF481DEB8D953D693AF /* Pods-WaniKaniKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				CC0FA47234A24123FAE58369CF1C6DAB /* Pods-WaniKaniKitTests.modulemap */,
+				230D4B7B70154FFA993FB83C9AC54DD3 /* Pods-WaniKaniKitTests-acknowledgements.markdown */,
+				4C191D9C239189AF615560ABE2114F3E /* Pods-WaniKaniKitTests-acknowledgements.plist */,
+				8F8849699FEFBEC381BDDEAC56717A63 /* Pods-WaniKaniKitTests-dummy.m */,
+				D323208D2F90589C7A09F6C4340174AA /* Pods-WaniKaniKitTests-frameworks.sh */,
+				141460E47674B0485DC3AB311BB6E6B5 /* Pods-WaniKaniKitTests-Info.plist */,
+				B29636BA042841F21D7B430ED74DC4FE /* Pods-WaniKaniKitTests-umbrella.h */,
+				D20EED746AE0C11FF07D2AAD035AD09C /* Pods-WaniKaniKitTests.debug.xcconfig */,
+				D848223A77754344B781CDD779C23C95 /* Pods-WaniKaniKitTests.release.xcconfig */,
+			);
+			name = "Pods-WaniKaniKitTests";
+			path = "Target Support Files/Pods-WaniKaniKitTests";
+			sourceTree = "<group>";
+		};
+		B6B2A616EDB9A5AA1E97AC1B249B5890 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3B61EB2D9171BA1E51E2D84750F5C3D9 /* 1PasswordExtension */,
+				D27544266F396477143458A7C1C0495B /* FMDB */,
+				192BA7CF28AF9F082BC79730463D6E10 /* sqlite3 */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				1325BB9802D6AE7F148D926C5384D682 /* Frameworks */,
-				FBC62BBA57EB82087645A3B1019B8955 /* Pods */,
-				34D404E194708B5CFFE5AA8BDE13FC65 /* Products */,
+				9ED13DA668E81C3BDADB40B8F8B25116 /* Frameworks */,
+				B6B2A616EDB9A5AA1E97AC1B249B5890 /* Pods */,
+				00CBF13B9EEC4B9E0EAF63F36470D0CD /* Products */,
 				5285C2E27C84B496265832FA76A9BDFD /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		DC93BCD3808744B87FED4D5751C2D3EA /* common */ = {
+		D27544266F396477143458A7C1C0495B /* FMDB */ = {
 			isa = PBXGroup;
 			children = (
-				DD7F52B1DE95BC377F621BB1C3D40ECD /* sqlite3.c */,
-				7977821DC116BC599B808F2526BC8FED /* sqlite3.h */,
-				7E07B4E3A13DD96D679DC3D9608DDA45 /* sqlite3ext.h */,
+				89C4FD638E11793D2F4D3814E1D294FE /* standalone */,
+				3D89B5D81B3FCB4CC0D288BFEEE915D4 /* Support Files */,
 			);
-			name = common;
-			sourceTree = "<group>";
-		};
-		FBC62BBA57EB82087645A3B1019B8955 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				79BA7A3945706877D86CC30FBD82D3CB /* 1PasswordExtension */,
-				0857AC6F2083F1EAF9BE3EEF8A9CE9A7 /* FMDB */,
-				80473BE76C1ABD0DC4360663D171BEA8 /* sqlite3 */,
-			);
-			name = Pods;
+			name = FMDB;
+			path = FMDB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		301E6D33785DE8F508CB284A57807BC7 /* Headers */ = {
+		0B9E39A1CAAF482540ABFE90FFFDD249 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DC1708C142EFE6BCE87C0AD4C0EF2A1 /* sqlite3-umbrella.h in Headers */,
-				000C8C8AAAA84B209C95A14F3B9BE803 /* sqlite3.h in Headers */,
-				99341EC767C39F54FE457B8A43C4FC2E /* sqlite3ext.h in Headers */,
+				DF0AABDC715F8BA209F1F6445AFFE876 /* Pods-AlliCrab-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4C3E5F7181A86D5D53470226C1608BE5 /* Headers */ = {
+		35997DD8872BE5FEC565884330EAB846 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F4A9E1BD4AD2650F2BB39E66BD361F2 /* FMDatabase.h in Headers */,
-				4BB306109B05844E6E76335C931520D6 /* FMDatabaseAdditions.h in Headers */,
-				ADE7A10D7710993289DCEECA0FE1873A /* FMDatabasePool.h in Headers */,
-				639BFC0238FB3FA1F50A6F14E8D3B26B /* FMDatabaseQueue.h in Headers */,
-				A7BEBEDD6F32A2A45B62C4256A71424E /* FMDB-umbrella.h in Headers */,
-				DF84302DDAA080D8EA17CC6F36EC595B /* FMDB.h in Headers */,
-				8F2F295B9B45BA69360E6EA65DA656A8 /* FMResultSet.h in Headers */,
+				E1489D9551561846435F9E21614FAF66 /* FMDatabase.h in Headers */,
+				FC8B352F05D36A6A9DF66ADC8DA9C9DA /* FMDatabaseAdditions.h in Headers */,
+				56A9677BAD2F7E11BEB487A7EFBD8BDD /* FMDatabasePool.h in Headers */,
+				C5E2DB9C0B5A43CCA5419D232169587E /* FMDatabaseQueue.h in Headers */,
+				DCDCCB229AB0D708AC74730D54883AD2 /* FMDB-umbrella.h in Headers */,
+				597FF072B00A40856E438AE24596033C /* FMDB.h in Headers */,
+				6FF78BE22F1A4E53DEEB5ADAF692E6CF /* FMResultSet.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6653CB3AA7F08A39A8F13F7AD1D6DF12 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				90573686CA4F5C1E1288733323D045A0 /* sqlite3-umbrella.h in Headers */,
+				D7492848E99FD931D96FBFE5DB4B0CE2 /* sqlite3.h in Headers */,
+				DC6E1AC16B5B7024795CBCC077F459C3 /* sqlite3ext.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6A2FC0194317455FE9A35529DD40732B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A79D8B72B353FA983A5CB737F8B5CD6B /* 1PasswordExtension-umbrella.h in Headers */,
+				78705FF8B9DD9927838BF04065F25839 /* OnePasswordExtension.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,28 +582,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		74B44025308D664C8AA1061300DAE569 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5B3D75A6DBBFB958385E447FCDD55B4B /* 1PasswordExtension-umbrella.h in Headers */,
-				A12B4F428A222649FD3565D7B3FF7DB1 /* OnePasswordExtension.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		A0BDA170BA4416D95BB517C6625B5BE0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7FE16725F91C85B0E10C0293BAAA5982 /* Pods-WaniKaniKit-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D19AD77562455C438FDDE743F65989BC /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9132D01241057B936C46CA17C87E87E0 /* Pods-AlliCrab-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,83 +601,7 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0C682D0E61E7AA6B3EE6CFA15A6DBA21 /* 1PasswordExtension-OnePasswordExtensionResources */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DE9FD9973C16AB8497467654BE62CC8C /* Build configuration list for PBXNativeTarget "1PasswordExtension-OnePasswordExtensionResources" */;
-			buildPhases = (
-				BC7C8678466278C9B8CBEC6CDB41317E /* Sources */,
-				A84AF7A73F290E8D351F11535D70B339 /* Frameworks */,
-				EFB0F6271B67A5C2E983B11210C66A99 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "1PasswordExtension-OnePasswordExtensionResources";
-			productName = "1PasswordExtension-OnePasswordExtensionResources";
-			productReference = DF9D3AD2A46BA13E7D56FEDE14571E6A /* OnePasswordExtensionResources.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
-		2F48B7B446C3FC03187D2712A682601E /* 1PasswordExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E96A03F53D8E4CEA5FD2B944A11C73C6 /* Build configuration list for PBXNativeTarget "1PasswordExtension" */;
-			buildPhases = (
-				74B44025308D664C8AA1061300DAE569 /* Headers */,
-				5CD593831C03B8B1B9FC5CBA6E3F126C /* Sources */,
-				D5BF92E5F5801DA9107CFB6D654C62B3 /* Frameworks */,
-				EE34208EE43224876C2ABCB7724965BE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				18E5596781B1D7F7E6E817A5A4E90CAE /* PBXTargetDependency */,
-			);
-			name = 1PasswordExtension;
-			productName = 1PasswordExtension;
-			productReference = 0395E69A61219E24733424E5323F7CF0 /* OnePasswordExtension.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		3E8C752365745B1A8735CBAB0969F21D /* Pods-WaniKaniKitTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0B9F0DB3C61F01A49C52BC7B16D12520 /* Build configuration list for PBXNativeTarget "Pods-WaniKaniKitTests" */;
-			buildPhases = (
-				E6D6B89EB6743EADC030B011F435E891 /* Headers */,
-				E8F6206CF5046CB16EF02E52A9E39BA0 /* Sources */,
-				AC270BF372E241816E27F0D028C05FC0 /* Frameworks */,
-				DEC337451B51D7D11990A8F2D803BD7C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				24830E83D46B55EB0CAE0CA544ED35AD /* PBXTargetDependency */,
-				7427FBD1B4E87B852C558E2000542B59 /* PBXTargetDependency */,
-			);
-			name = "Pods-WaniKaniKitTests";
-			productName = "Pods-WaniKaniKitTests";
-			productReference = 1D41C4D553F62A1D2B60EA54F9E94480 /* Pods_WaniKaniKitTests.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		537447340C0437DADA92A8105ADCE2EF /* Pods-WaniKaniStudyQueueWidget */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 63566F056B64384F852F1E05F26BDF3F /* Build configuration list for PBXNativeTarget "Pods-WaniKaniStudyQueueWidget" */;
-			buildPhases = (
-				6A8A8D8E9AD101973609C1A5A8821C9B /* Headers */,
-				C174C5BDD44B516D98D98DCE6E41E582 /* Sources */,
-				C2370A824453245BE6C192C5904E88DC /* Frameworks */,
-				45425D3FB08F801BB4C1DDB2D6906590 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4241325E5F56E60D7BC96605CCC25FC8 /* PBXTargetDependency */,
-				934BB84D3C11B2CC9AA1C5AE12CAAF1C /* PBXTargetDependency */,
-			);
-			name = "Pods-WaniKaniStudyQueueWidget";
-			productName = "Pods-WaniKaniStudyQueueWidget";
-			productReference = 75EED18A243A9B6219FA348DDF15879E /* Pods_WaniKaniStudyQueueWidget.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		5A3ABA0ECCCAF32A181E36989198AE77 /* Pods-WaniKaniKit */ = {
+		4FE08E9D7C180B736E43CCF2553D60B7 /* Pods-WaniKaniKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7F70AEA105443010862D137034FA28F5 /* Build configuration list for PBXNativeTarget "Pods-WaniKaniKit" */;
 			buildPhases = (
@@ -694,36 +618,53 @@
 			);
 			name = "Pods-WaniKaniKit";
 			productName = "Pods-WaniKaniKit";
-			productReference = BC28BB81965881463B2DFB24848576FA /* Pods_WaniKaniKit.framework */;
+			productReference = DBDE35B0CB25FFB65C560AE6CC211C45 /* Pods_WaniKaniKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		64640282A76B42CA1721475010BE06CA /* Pods-AlliCrab */ = {
+		6208D25DC48703C16058EB76004A61D6 /* 1PasswordExtension-OnePasswordExtensionResources */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 72ADE52F9F5AD6EFE7DA8C0D8E6193C7 /* Build configuration list for PBXNativeTarget "Pods-AlliCrab" */;
+			buildConfigurationList = DE9FD9973C16AB8497467654BE62CC8C /* Build configuration list for PBXNativeTarget "1PasswordExtension-OnePasswordExtensionResources" */;
 			buildPhases = (
-				D19AD77562455C438FDDE743F65989BC /* Headers */,
-				B14DFEE59A7A386A02C23C468D665F38 /* Sources */,
-				CD89932F9D5AB1F93FBAD33F74AF88F7 /* Frameworks */,
-				7B462912CEE7BD56E60A6B17553BE53C /* Resources */,
+				BC7C8678466278C9B8CBEC6CDB41317E /* Sources */,
+				A84AF7A73F290E8D351F11535D70B339 /* Frameworks */,
+				EFB0F6271B67A5C2E983B11210C66A99 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				EFEF14301ABDA55BFAC7222916B817D6 /* PBXTargetDependency */,
-				66DD2D7C26E309065771BAAB3A2D1BFC /* PBXTargetDependency */,
-				6535BE01FA55D92C91E0C1CD2D360CBD /* PBXTargetDependency */,
+			);
+			name = "1PasswordExtension-OnePasswordExtensionResources";
+			productName = "1PasswordExtension-OnePasswordExtensionResources";
+			productReference = AB6ECF5DD62A0B0A3AF755AE105D10C0 /* OnePasswordExtensionResources.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		735FC73097A620F59E27AE659D08E0AB /* Pods-AlliCrab */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DA01BED7A5D9707765FDD056F029EE7 /* Build configuration list for PBXNativeTarget "Pods-AlliCrab" */;
+			buildPhases = (
+				0B9E39A1CAAF482540ABFE90FFFDD249 /* Headers */,
+				2646EFD46053B843B23BF31366409BB4 /* Sources */,
+				2426F7404B92DB9AED408252F8A84A39 /* Frameworks */,
+				6582C6E28FF779E972360093A767C5D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AE8CE10ACC56AFFA0DF8624219C79431 /* PBXTargetDependency */,
+				67CF393757A7A70270ADA64113B9D5C0 /* PBXTargetDependency */,
+				99E6B325B62ED09350D00DA010176871 /* PBXTargetDependency */,
 			);
 			name = "Pods-AlliCrab";
 			productName = "Pods-AlliCrab";
-			productReference = 8243FEF6EC2B31F3E1747B1914145BAD /* Pods_AlliCrab.framework */;
+			productReference = 05177A6557B7BC2671DB625B59668C60 /* Pods_AlliCrab.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		8749F2EAEFF5F8073EA1595CFBCBAAAC /* sqlite3 */ = {
+		7578477CA77D98D8282C395822C4A93C /* sqlite3 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 23083BAEC58B161CA81BA7A334A29206 /* Build configuration list for PBXNativeTarget "sqlite3" */;
 			buildPhases = (
-				301E6D33785DE8F508CB284A57807BC7 /* Headers */,
-				79E835C31D669581EC1F22515DF233B8 /* Sources */,
+				6653CB3AA7F08A39A8F13F7AD1D6DF12 /* Headers */,
+				7D0702EC2C6E4DD66C4BCB723E04CAB7 /* Sources */,
 				0986FF2EC298EA9BC98AC95BD6249279 /* Frameworks */,
 				8AD307AF58176252FA94DB15746B1016 /* Resources */,
 			);
@@ -733,15 +674,35 @@
 			);
 			name = sqlite3;
 			productName = sqlite3;
-			productReference = 89CB0B62E54329F0CEDEDC3C873E9957 /* sqlite3.framework */;
+			productReference = B6E438D7BEB597B7D10393DDD470BF79 /* sqlite3.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		DC3EF9FFF20A78E2CD6FE4216CCA2947 /* FMDB */ = {
+		7591794B0EEDAA1078B0EABFFC62A511 /* Pods-WaniKaniKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0B9F0DB3C61F01A49C52BC7B16D12520 /* Build configuration list for PBXNativeTarget "Pods-WaniKaniKitTests" */;
+			buildPhases = (
+				E6D6B89EB6743EADC030B011F435E891 /* Headers */,
+				E8F6206CF5046CB16EF02E52A9E39BA0 /* Sources */,
+				AC270BF372E241816E27F0D028C05FC0 /* Frameworks */,
+				DEC337451B51D7D11990A8F2D803BD7C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				24830E83D46B55EB0CAE0CA544ED35AD /* PBXTargetDependency */,
+				7427FBD1B4E87B852C558E2000542B59 /* PBXTargetDependency */,
+			);
+			name = "Pods-WaniKaniKitTests";
+			productName = "Pods-WaniKaniKitTests";
+			productReference = 004898AB2561E2F2E8BE4CBABEBD6F7D /* Pods_WaniKaniKitTests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8592E0E389D40AC17881400ADC67ABC0 /* FMDB */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9DA09333EBDBBC9C360E3E0D69DB8083 /* Build configuration list for PBXNativeTarget "FMDB" */;
 			buildPhases = (
-				4C3E5F7181A86D5D53470226C1608BE5 /* Headers */,
-				E3A293B58414E071937078A23BB2B713 /* Sources */,
+				35997DD8872BE5FEC565884330EAB846 /* Headers */,
+				9D6DD1EAAE45F631518EED8D1235FE09 /* Sources */,
 				DE3A9CBF68EA0F83C4D27D4464F5809B /* Frameworks */,
 				D3667D64DC21000032473BDA23CEB7DA /* Resources */,
 			);
@@ -752,7 +713,46 @@
 			);
 			name = FMDB;
 			productName = FMDB;
-			productReference = 191C11E4ABB8454AA2AAE1E4AA278284 /* FMDB.framework */;
+			productReference = 81A54EE7C12A44763DBDD95ADAA06B4B /* FMDB.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8E34DB7C0B7C3F9DD81B0CFF93D50206 /* 1PasswordExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E96A03F53D8E4CEA5FD2B944A11C73C6 /* Build configuration list for PBXNativeTarget "1PasswordExtension" */;
+			buildPhases = (
+				6A2FC0194317455FE9A35529DD40732B /* Headers */,
+				53813626FD15D0A83C62C04966EB444A /* Sources */,
+				D5BF92E5F5801DA9107CFB6D654C62B3 /* Frameworks */,
+				EE34208EE43224876C2ABCB7724965BE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18E5596781B1D7F7E6E817A5A4E90CAE /* PBXTargetDependency */,
+			);
+			name = 1PasswordExtension;
+			productName = 1PasswordExtension;
+			productReference = FCAF63D37F8E24ECD72F399E840BB477 /* OnePasswordExtension.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		9145DE372721E44157ED5B56D3DFF5EA /* Pods-WaniKaniStudyQueueWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63566F056B64384F852F1E05F26BDF3F /* Build configuration list for PBXNativeTarget "Pods-WaniKaniStudyQueueWidget" */;
+			buildPhases = (
+				6A8A8D8E9AD101973609C1A5A8821C9B /* Headers */,
+				C174C5BDD44B516D98D98DCE6E41E582 /* Sources */,
+				C2370A824453245BE6C192C5904E88DC /* Frameworks */,
+				45425D3FB08F801BB4C1DDB2D6906590 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4241325E5F56E60D7BC96605CCC25FC8 /* PBXTargetDependency */,
+				934BB84D3C11B2CC9AA1C5AE12CAAF1C /* PBXTargetDependency */,
+			);
+			name = "Pods-WaniKaniStudyQueueWidget";
+			productName = "Pods-WaniKaniStudyQueueWidget";
+			productReference = A55CAFB04C1EF23D01E37D1CCB44C4E4 /* Pods_WaniKaniStudyQueueWidget.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -761,29 +761,29 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 34D404E194708B5CFFE5AA8BDE13FC65 /* Products */;
+			productRefGroup = 00CBF13B9EEC4B9E0EAF63F36470D0CD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2F48B7B446C3FC03187D2712A682601E /* 1PasswordExtension */,
-				0C682D0E61E7AA6B3EE6CFA15A6DBA21 /* 1PasswordExtension-OnePasswordExtensionResources */,
-				DC3EF9FFF20A78E2CD6FE4216CCA2947 /* FMDB */,
-				64640282A76B42CA1721475010BE06CA /* Pods-AlliCrab */,
-				5A3ABA0ECCCAF32A181E36989198AE77 /* Pods-WaniKaniKit */,
-				3E8C752365745B1A8735CBAB0969F21D /* Pods-WaniKaniKitTests */,
-				537447340C0437DADA92A8105ADCE2EF /* Pods-WaniKaniStudyQueueWidget */,
-				8749F2EAEFF5F8073EA1595CFBCBAAAC /* sqlite3 */,
+				8E34DB7C0B7C3F9DD81B0CFF93D50206 /* 1PasswordExtension */,
+				6208D25DC48703C16058EB76004A61D6 /* 1PasswordExtension-OnePasswordExtensionResources */,
+				8592E0E389D40AC17881400ADC67ABC0 /* FMDB */,
+				735FC73097A620F59E27AE659D08E0AB /* Pods-AlliCrab */,
+				4FE08E9D7C180B736E43CCF2553D60B7 /* Pods-WaniKaniKit */,
+				7591794B0EEDAA1078B0EABFFC62A511 /* Pods-WaniKaniKitTests */,
+				9145DE372721E44157ED5B56D3DFF5EA /* Pods-WaniKaniStudyQueueWidget */,
+				7578477CA77D98D8282C395822C4A93C /* sqlite3 */,
 			);
 		};
 /* End PBXProject section */
@@ -796,7 +796,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7B462912CEE7BD56E60A6B17553BE53C /* Resources */ = {
+		6582C6E28FF779E972360093A767C5D0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -850,29 +850,42 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5CD593831C03B8B1B9FC5CBA6E3F126C /* Sources */ = {
+		2646EFD46053B843B23BF31366409BB4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB23EF2A7885485BB512522546602762 /* 1PasswordExtension-dummy.m in Sources */,
-				DCC10F94F5F1F0622BC2F0A14F59A969 /* OnePasswordExtension.m in Sources */,
+				50086F4DF15D7C12E098080DDF40FFE5 /* Pods-AlliCrab-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		79E835C31D669581EC1F22515DF233B8 /* Sources */ = {
+		53813626FD15D0A83C62C04966EB444A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAD93A203C9670BA7F79F050D63432E4 /* sqlite3-dummy.m in Sources */,
-				F5A7914B3DAC8D994BBEB64DA78FD556 /* sqlite3.c in Sources */,
+				307B70B6F58ED5F4CB2CB23840712509 /* 1PasswordExtension-dummy.m in Sources */,
+				46DB1EB90693AEE7699ADCDB7B517A8E /* OnePasswordExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B14DFEE59A7A386A02C23C468D665F38 /* Sources */ = {
+		7D0702EC2C6E4DD66C4BCB723E04CAB7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D0DF28304F7968C5D1AA7C7DACF48C4 /* Pods-AlliCrab-dummy.m in Sources */,
+				43E55F4F4881756272AA1EB5B903DA79 /* sqlite3-dummy.m in Sources */,
+				CA893647F9BCAC67DA61831C01B8B530 /* sqlite3.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9D6DD1EAAE45F631518EED8D1235FE09 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0737940FBE76852CA25279555FA9224A /* FMDatabase.m in Sources */,
+				0D9F8133ADFA4F0CE6FA0D0956D58D85 /* FMDatabaseAdditions.m in Sources */,
+				C6184B380255DCE803E84154540B45E7 /* FMDatabasePool.m in Sources */,
+				23829FF9294D5A89C5E1F01045BA7374 /* FMDatabaseQueue.m in Sources */,
+				C0A6B190B2A215BF7474E74412835DF1 /* FMDB-dummy.m in Sources */,
+				62159CE76089E849EF785F00728D43B6 /* FMResultSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -888,19 +901,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				830AD6BF899FEA60EEA926C552A944CF /* Pods-WaniKaniStudyQueueWidget-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E3A293B58414E071937078A23BB2B713 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B54D71BEB261B09B97A6E417D55EC9B7 /* FMDatabase.m in Sources */,
-				D5F7AAA471F10E120AE25EE041BA0AEB /* FMDatabaseAdditions.m in Sources */,
-				5E320987F5896331FBF5F404084A646B /* FMDatabasePool.m in Sources */,
-				895ADFEB73A244137083409BF304BC78 /* FMDatabaseQueue.m in Sources */,
-				48200CC7159CEC1072B7C344C4808BBF /* FMDB-dummy.m in Sources */,
-				D551FFEB0BF942161F47B5A51E920905 /* FMResultSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -926,75 +926,75 @@
 		18E5596781B1D7F7E6E817A5A4E90CAE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "1PasswordExtension-OnePasswordExtensionResources";
-			target = 0C682D0E61E7AA6B3EE6CFA15A6DBA21 /* 1PasswordExtension-OnePasswordExtensionResources */;
+			target = 6208D25DC48703C16058EB76004A61D6 /* 1PasswordExtension-OnePasswordExtensionResources */;
 			targetProxy = D274551A343B041653F5E45F5AFD9F8F /* PBXContainerItemProxy */;
 		};
 		24830E83D46B55EB0CAE0CA544ED35AD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FMDB;
-			target = DC3EF9FFF20A78E2CD6FE4216CCA2947 /* FMDB */;
+			target = 8592E0E389D40AC17881400ADC67ABC0 /* FMDB */;
 			targetProxy = 916EC8103377431E88446F2438A810EA /* PBXContainerItemProxy */;
 		};
 		403E60813E9535FD0EE27F9B6B1B74BB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = sqlite3;
-			target = 8749F2EAEFF5F8073EA1595CFBCBAAAC /* sqlite3 */;
+			target = 7578477CA77D98D8282C395822C4A93C /* sqlite3 */;
 			targetProxy = AA0CB1D9795D583BCD9DD8B8C1C3F5AA /* PBXContainerItemProxy */;
 		};
 		4241325E5F56E60D7BC96605CCC25FC8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FMDB;
-			target = DC3EF9FFF20A78E2CD6FE4216CCA2947 /* FMDB */;
+			target = 8592E0E389D40AC17881400ADC67ABC0 /* FMDB */;
 			targetProxy = 32629F952C18D80378DF943186EB71C2 /* PBXContainerItemProxy */;
 		};
-		6535BE01FA55D92C91E0C1CD2D360CBD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = sqlite3;
-			target = 8749F2EAEFF5F8073EA1595CFBCBAAAC /* sqlite3 */;
-			targetProxy = 85730F519F1492FBBDA3E1DC23EED697 /* PBXContainerItemProxy */;
-		};
-		66DD2D7C26E309065771BAAB3A2D1BFC /* PBXTargetDependency */ = {
+		67CF393757A7A70270ADA64113B9D5C0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FMDB;
-			target = DC3EF9FFF20A78E2CD6FE4216CCA2947 /* FMDB */;
-			targetProxy = 4F9D7D671734A07B24152AAEFF63E344 /* PBXContainerItemProxy */;
+			target = 8592E0E389D40AC17881400ADC67ABC0 /* FMDB */;
+			targetProxy = 6DE7122F4B33B0A40F031565C3177C54 /* PBXContainerItemProxy */;
 		};
 		7427FBD1B4E87B852C558E2000542B59 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = sqlite3;
-			target = 8749F2EAEFF5F8073EA1595CFBCBAAAC /* sqlite3 */;
+			target = 7578477CA77D98D8282C395822C4A93C /* sqlite3 */;
 			targetProxy = FC3E4A91CD53582B90F68EE8A9A5E5F4 /* PBXContainerItemProxy */;
 		};
 		8127CDBD6EA3D58E0FCD41B477BCB730 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FMDB;
-			target = DC3EF9FFF20A78E2CD6FE4216CCA2947 /* FMDB */;
+			target = 8592E0E389D40AC17881400ADC67ABC0 /* FMDB */;
 			targetProxy = 0AA1331B7E657A2CDC126F880900A2E2 /* PBXContainerItemProxy */;
 		};
 		934BB84D3C11B2CC9AA1C5AE12CAAF1C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = sqlite3;
-			target = 8749F2EAEFF5F8073EA1595CFBCBAAAC /* sqlite3 */;
+			target = 7578477CA77D98D8282C395822C4A93C /* sqlite3 */;
 			targetProxy = 341B12605B48ADA38ABCFDA5FADB8710 /* PBXContainerItemProxy */;
 		};
 		98885E3A911D658E53940FB8929BA294 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = sqlite3;
-			target = 8749F2EAEFF5F8073EA1595CFBCBAAAC /* sqlite3 */;
+			target = 7578477CA77D98D8282C395822C4A93C /* sqlite3 */;
 			targetProxy = C1F6CF0C4BB12C17312EF21C1879FACE /* PBXContainerItemProxy */;
 		};
-		EFEF14301ABDA55BFAC7222916B817D6 /* PBXTargetDependency */ = {
+		99E6B325B62ED09350D00DA010176871 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = sqlite3;
+			target = 7578477CA77D98D8282C395822C4A93C /* sqlite3 */;
+			targetProxy = 3110486772A9ECCE26E651E190F4A5B4 /* PBXContainerItemProxy */;
+		};
+		AE8CE10ACC56AFFA0DF8624219C79431 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = 1PasswordExtension;
-			target = 2F48B7B446C3FC03187D2712A682601E /* 1PasswordExtension */;
-			targetProxy = 683766128AA3FFCFA880DFD945281DD7 /* PBXContainerItemProxy */;
+			target = 8E34DB7C0B7C3F9DD81B0CFF93D50206 /* 1PasswordExtension */;
+			targetProxy = 89A8480B5824C04AA17DB4BA94D088E5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		15114257ABEF6DED264FA045E4D16E0F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C803CED639F0311112465FBCE1D9C38 /* Pods-WaniKaniKit.debug.xcconfig */;
+			baseConfigurationReference = DAE68E04C29E230A2DFDC4FFC8429955 /* Pods-WaniKaniKit.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				APPLICATION_EXTENSION_API_ONLY = YES;
@@ -1030,7 +1030,7 @@
 		};
 		247B6DE7075CA6799ABC027D024DF2CD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2460464A31492953826CD87EA7DD94A /* Pods-WaniKaniStudyQueueWidget.release.xcconfig */;
+			baseConfigurationReference = D812D7DF29329FADD5A576B5C04F8705 /* Pods-WaniKaniStudyQueueWidget.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				APPLICATION_EXTENSION_API_ONLY = YES;
@@ -1065,112 +1065,7 @@
 			};
 			name = Release;
 		};
-		366D3C3B4C721864E513D9387279760B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 814AFB9BFD166A6FBD34ED0D5535797D /* Pods-WaniKaniKitTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		46BD38A41965F3769E71099F4818EA0A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0ABA182F815457AEEB08580F278E100D /* 1PasswordExtension.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/1PasswordExtension/1PasswordExtension-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/1PasswordExtension/1PasswordExtension-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/1PasswordExtension/1PasswordExtension.modulemap";
-				PRODUCT_MODULE_NAME = OnePasswordExtension;
-				PRODUCT_NAME = OnePasswordExtension;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		4B6395E1A0B02110C3E9F5888160D5A8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F6A86539E428174CDF6EA32245AEBDC0 /* Pods-WaniKaniKit.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-WaniKaniKit/Pods-WaniKaniKit-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-WaniKaniKit/Pods-WaniKaniKit.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		4CE281642D6EE9FAB113046B4B6328A0 /* Release */ = {
+		257497152829C177993B5EC99C1D227A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1225,14 +1120,155 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		26149E510BD97F337C857E6BBD6E93B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6995AE50E643E23B6A3ADA9303E4AAFA /* Pods-AlliCrab.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-AlliCrab/Pods-AlliCrab-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-AlliCrab/Pods-AlliCrab.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		366D3C3B4C721864E513D9387279760B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D848223A77754344B781CDD779C23C95 /* Pods-WaniKaniKitTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		46BD38A41965F3769E71099F4818EA0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99CC5862ED7D840128D6AD49F59074B4 /* 1PasswordExtension.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/1PasswordExtension/1PasswordExtension-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/1PasswordExtension/1PasswordExtension-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/1PasswordExtension/1PasswordExtension.modulemap";
+				PRODUCT_MODULE_NAME = OnePasswordExtension;
+				PRODUCT_NAME = OnePasswordExtension;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4B6395E1A0B02110C3E9F5888160D5A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91C80527148A65AEEFE29803C2BC667A /* Pods-WaniKaniKit.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-WaniKaniKit/Pods-WaniKaniKit-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-WaniKaniKit/Pods-WaniKaniKit.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
 		64CFF7A0160187E6FD448384D1A8039A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2760957698EB062E8209A190F8CB8E6 /* sqlite3.xcconfig */;
+			baseConfigurationReference = 4C9CDB39059D90E568E868801676DD00 /* sqlite3.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -1265,7 +1301,7 @@
 		};
 		6D4A06F39CA536AA3A165E781908D607 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7CB511E20219EC040D6BC853ACBE2131 /* Pods-WaniKaniStudyQueueWidget.debug.xcconfig */;
+			baseConfigurationReference = 6579C3D2203C98E1028E6DD1758D8415 /* Pods-WaniKaniStudyQueueWidget.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				APPLICATION_EXTENSION_API_ONLY = YES;
@@ -1299,7 +1335,208 @@
 			};
 			name = Debug;
 		};
-		6DFA1578582149B7E24AD55CBA30F07A /* Debug */ = {
+		6E632C110E5475824CE6CB5F7AB3DD64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 956F1472D48EBF14C7EF427C6E53417B /* FMDB.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FMDB/FMDB-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FMDB/FMDB-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/FMDB/FMDB.modulemap";
+				PRODUCT_MODULE_NAME = FMDB;
+				PRODUCT_NAME = FMDB;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		6F48E840CED2166882059530C4A6141B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D20EED746AE0C11FF07D2AAD035AD09C /* Pods-WaniKaniKitTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		808FD0DD1B833C255D5BE94093DBF88B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 956F1472D48EBF14C7EF427C6E53417B /* FMDB.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FMDB/FMDB-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FMDB/FMDB-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/FMDB/FMDB.modulemap";
+				PRODUCT_MODULE_NAME = FMDB;
+				PRODUCT_NAME = FMDB;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8B3840C0297178F01DDA6DF5CB8BAA8F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99CC5862ED7D840128D6AD49F59074B4 /* 1PasswordExtension.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/1PasswordExtension/1PasswordExtension-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/1PasswordExtension/1PasswordExtension-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/1PasswordExtension/1PasswordExtension.modulemap";
+				PRODUCT_MODULE_NAME = OnePasswordExtension;
+				PRODUCT_NAME = OnePasswordExtension;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A9CEF3037B0F2622A796804579D28CBD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99CC5862ED7D840128D6AD49F59074B4 /* 1PasswordExtension.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/1PasswordExtension";
+				INFOPLIST_FILE = "Target Support Files/1PasswordExtension/ResourceBundle-OnePasswordExtensionResources-1PasswordExtension-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = OnePasswordExtensionResources;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		AA9B67BF0B6504AF9B5DCE47C8CE32EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C9CDB39059D90E568E868801676DD00 /* sqlite3.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/sqlite3/sqlite3-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/sqlite3/sqlite3-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/sqlite3/sqlite3.modulemap";
+				PRODUCT_MODULE_NAME = sqlite3;
+				PRODUCT_NAME = sqlite3;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		BA001FE80945E625DD6F8FEA9E36C90D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99CC5862ED7D840128D6AD49F59074B4 /* 1PasswordExtension.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/1PasswordExtension";
+				INFOPLIST_FILE = "Target Support Files/1PasswordExtension/ResourceBundle-OnePasswordExtensionResources-1PasswordExtension-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = OnePasswordExtensionResources;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		DD8F832993327D1DD8046C3CBCBD97CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1358,83 +1595,14 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		6E632C110E5475824CE6CB5F7AB3DD64 /* Release */ = {
+		E9A0331C433F815F0E782750D11A70E1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7FA5662BA46E627838CDA578BDA3EDBB /* FMDB.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/FMDB/FMDB-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FMDB/FMDB-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/FMDB/FMDB.modulemap";
-				PRODUCT_MODULE_NAME = FMDB;
-				PRODUCT_NAME = FMDB;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		6F48E840CED2166882059530C4A6141B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55D500A3959922D74603EECCA34D15F1 /* Pods-WaniKaniKitTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		75585ADEDC6BE46B3C66805517935DB9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4159217428B486B1894ABAC302FA4668 /* Pods-AlliCrab.debug.xcconfig */;
+			baseConfigurationReference = 11E04798166D93A6AC9B3803B22DB5A5 /* Pods-AlliCrab.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
@@ -1464,174 +1632,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		808FD0DD1B833C255D5BE94093DBF88B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7FA5662BA46E627838CDA578BDA3EDBB /* FMDB.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/FMDB/FMDB-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FMDB/FMDB-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/FMDB/FMDB.modulemap";
-				PRODUCT_MODULE_NAME = FMDB;
-				PRODUCT_NAME = FMDB;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		8B3840C0297178F01DDA6DF5CB8BAA8F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0ABA182F815457AEEB08580F278E100D /* 1PasswordExtension.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/1PasswordExtension/1PasswordExtension-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/1PasswordExtension/1PasswordExtension-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/1PasswordExtension/1PasswordExtension.modulemap";
-				PRODUCT_MODULE_NAME = OnePasswordExtension;
-				PRODUCT_NAME = OnePasswordExtension;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		A4542EEA5B32906311EC9E819E8E3BED /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 170C3EBD697A53A2A3013FA20B58E24B /* Pods-AlliCrab.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-AlliCrab/Pods-AlliCrab-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-AlliCrab/Pods-AlliCrab.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		A9CEF3037B0F2622A796804579D28CBD /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0ABA182F815457AEEB08580F278E100D /* 1PasswordExtension.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/1PasswordExtension";
-				INFOPLIST_FILE = "Target Support Files/1PasswordExtension/ResourceBundle-OnePasswordExtensionResources-1PasswordExtension-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = OnePasswordExtensionResources;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		AA9B67BF0B6504AF9B5DCE47C8CE32EB /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2760957698EB062E8209A190F8CB8E6 /* sqlite3.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/sqlite3/sqlite3-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/sqlite3/sqlite3-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/sqlite3/sqlite3.modulemap";
-				PRODUCT_MODULE_NAME = sqlite3;
-				PRODUCT_NAME = sqlite3;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		BA001FE80945E625DD6F8FEA9E36C90D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0ABA182F815457AEEB08580F278E100D /* 1PasswordExtension.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/1PasswordExtension";
-				INFOPLIST_FILE = "Target Support Files/1PasswordExtension/ResourceBundle-OnePasswordExtensionResources-1PasswordExtension-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = OnePasswordExtensionResources;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
 		};
@@ -1643,6 +1643,15 @@
 			buildConfigurations = (
 				6F48E840CED2166882059530C4A6141B /* Debug */,
 				366D3C3B4C721864E513D9387279760B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DA01BED7A5D9707765FDD056F029EE7 /* Build configuration list for PBXNativeTarget "Pods-AlliCrab" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E9A0331C433F815F0E782750D11A70E1 /* Debug */,
+				26149E510BD97F337C857E6BBD6E93B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1659,8 +1668,8 @@
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6DFA1578582149B7E24AD55CBA30F07A /* Debug */,
-				4CE281642D6EE9FAB113046B4B6328A0 /* Release */,
+				DD8F832993327D1DD8046C3CBCBD97CD /* Debug */,
+				257497152829C177993B5EC99C1D227A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1670,15 +1679,6 @@
 			buildConfigurations = (
 				6D4A06F39CA536AA3A165E781908D607 /* Debug */,
 				247B6DE7075CA6799ABC027D024DF2CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		72ADE52F9F5AD6EFE7DA8C0D8E6193C7 /* Build configuration list for PBXNativeTarget "Pods-AlliCrab" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				75585ADEDC6BE46B3C66805517935DB9 /* Debug */,
-				A4542EEA5B32906311EC9E819E8E3BED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
