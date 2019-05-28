@@ -70,8 +70,8 @@ class SubjectSummaryCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        contentSizeChangedObserver = collectionView.observe(\.contentSize) { [unowned self] collectionView, _ in
-            self.preferredContentSize = collectionView.contentSize
+        contentSizeChangedObserver = collectionView.observe(\.contentSize) { [weak self] collectionView, _ in
+            self?.preferredContentSize = collectionView.contentSize
         }
     }
     

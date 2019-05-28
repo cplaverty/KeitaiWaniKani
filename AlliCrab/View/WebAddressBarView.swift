@@ -109,22 +109,30 @@ class WebAddressBarView: UIView {
     
     private func registerObservers(_ webView: WKWebView) -> [NSKeyValueObservation] {
         let keyValueObservers = [
-            webView.observe(\.hasOnlySecureContent, options: [.initial]) { [unowned self] webView, _ in
-                self.secureSiteIndicator.isHidden = !webView.hasOnlySecureContent
+            webView.observe(\.hasOnlySecureContent, options: [.initial]) { [weak self] webView, _ in
+                self?.secureSiteIndicator.isHidden = !webView.hasOnlySecureContent
             },
-            webView.observe(\.url, options: [.initial]) { [unowned self] webView, _ in
+            webView.observe(\.url, options: [.initial]) { [weak self] webView, _ in
+                guard let self = self else { return }
+                
                 self.addressLabel.text = self.host(for: webView.url)
             },
-            webView.observe(\.estimatedProgress, options: [.initial]) { [unowned self] webView, _ in
+            webView.observe(\.estimatedProgress, options: [.initial]) { [weak self] webView, _ in
+                guard let self = self else { return }
+                
                 let animated = webView.isLoading && self.progressView.progress < Float(webView.estimatedProgress)
                 self.progressView.setProgress(Float(webView.estimatedProgress), animated: animated)
             },
-            webView.observe(\.isLoading, options: [.initial]) { [unowned self] webView, _ in
+            webView.observe(\.isLoading, options: [.initial]) { [weak self] webView, _ in
+                guard let self = self else { return }
+                
                 if webView.isLoading {
                     self.progressView.alpha = 1.0
                     self.refreshButton.setImage(self.stopLoadingImage, for: .normal)
                 } else {
-                    UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveEaseIn], animations: { self.progressView.alpha = 0.0 })
+                    UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveEaseIn], animations: {
+                        self.progressView.alpha = 0.0
+                    })
                     self.refreshButton.setImage(self.reloadImage, for: .normal)
                 }
             }

@@ -159,14 +159,14 @@ class ReviewTimelineTableViewController: UITableViewController {
     private func addNotificationObservers() -> [NSObjectProtocol] {
         os_log("Adding NotificationCenter observers to %@", type: .debug, String(describing: type(of: self)))
         let notificationObservers = [
-            NotificationCenter.default.addObserver(forName: .waniKaniUserInformationDidChange, object: nil, queue: .main) { [unowned self] _ in
-                try! self.updateReviewTimeline()
+            NotificationCenter.default.addObserver(forName: .waniKaniUserInformationDidChange, object: nil, queue: .main) { [weak self] _ in
+                try? self?.updateReviewTimeline()
             },
-            NotificationCenter.default.addObserver(forName: .waniKaniAssignmentsDidChange, object: nil, queue: .main) { [unowned self] _ in
-                try! self.updateReviewTimeline()
+            NotificationCenter.default.addObserver(forName: .waniKaniAssignmentsDidChange, object: nil, queue: .main) { [weak self] _ in
+                try? self?.updateReviewTimeline()
             },
-            NotificationCenter.default.addObserver(forName: .waniKaniSubjectsDidChange, object: nil, queue: .main) { [unowned self] _ in
-                try! self.updateReviewTimeline()
+            NotificationCenter.default.addObserver(forName: .waniKaniSubjectsDidChange, object: nil, queue: .main) { [weak self] _ in
+                try? self?.updateReviewTimeline()
             }
         ]
         

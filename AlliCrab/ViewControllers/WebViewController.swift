@@ -248,20 +248,20 @@ class WebViewController: UIViewController {
     
     private func registerObservers(_ webView: WKWebView) -> [NSKeyValueObservation] {
         let keyValueObservers = [
-            webView.observe(\.canGoBack, options: [.initial]) { [unowned self] webView, _ in
-                self.backButton.isEnabled = webView.canGoBack
+            webView.observe(\.canGoBack, options: [.initial]) { [weak self] webView, _ in
+                self?.backButton.isEnabled = webView.canGoBack
             },
-            webView.observe(\.canGoForward, options: [.initial]) { [unowned self] webView, _ in
-                self.forwardButton.isEnabled = webView.canGoForward
+            webView.observe(\.canGoForward, options: [.initial]) { [weak self] webView, _ in
+                self?.forwardButton.isEnabled = webView.canGoForward
             },
-            webView.observe(\.isLoading, options: [.initial]) { [unowned self] webView, _ in
+            webView.observe(\.isLoading, options: [.initial]) { [weak self] webView, _ in
                 UIApplication.shared.isNetworkActivityIndicatorVisible = webView.isLoading
-                self.shareButton.isEnabled = !webView.isLoading && webView.url != nil
+                self?.shareButton.isEnabled = !webView.isLoading && webView.url != nil
             },
-            webView.observe(\.url, options: [.initial]) { [unowned self] webView, _ in
+            webView.observe(\.url, options: [.initial]) { [weak self] webView, _ in
                 let hasURL = webView.url != nil
-                self.shareButton.isEnabled = !webView.isLoading && hasURL
-                self.openInSafariButton.isEnabled = hasURL
+                self?.shareButton.isEnabled = !webView.isLoading && hasURL
+                self?.openInSafariButton.isEnabled = hasURL
             }
         ]
         
