@@ -2,17 +2,21 @@
 
 # A list of devices you want to take the screenshots from
 devices([
-  "iPhone 4s",
-  "iPhone SE",
-  "iPhone 7",
-  "iPhone 7 Plus",
-  "iPad Pro (9.7 inch)",
-  "iPad Pro (12.9 inch)",
-])
+        "iPhone SE",
+        "iPhone 8",
+        "iPhone 8 Plus",
+        "iPhone Xs",
+        "iPhone Xs Max",
+        "iPad Pro (9.7-inch)",
+        "iPad Pro (10.5-inch)",
+        "iPad Pro (11-inch)",
+        "iPad Pro (12.9-inch) (2nd generation)",
+        "iPad Pro (12.9-inch) (3rd generation)",
+        ])
 
 languages([
-  "en-US"
-])
+          "en-US"
+          ])
 
 # The name of the scheme which contains the UI Tests
 # scheme "SchemeName"
@@ -24,7 +28,7 @@ reinstall_app true
 clear_previous_screenshots true
 number_of_retries 3
 skip_open_summary true
-ios_version "10.3"
+ios_version "12.2"
 
 # Choose which project/workspace to use
 # project "./Project.xcodeproj"

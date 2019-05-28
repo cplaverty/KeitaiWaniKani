@@ -23,14 +23,14 @@ class SnapshotUITests: XCTestCase {
     
     func testScreenshot() {
         let app = XCUIApplication()
+        let tablesQuery = app.tables
+        
+        let exists = NSPredicate(format: "exists == YES")
         
         app.buttons["ManualAPIKeyEntry"].tap()
         
         app.textFields["EnterAPIKey"].typeText(apiKey)
         app.navigationBars["Enter API Key"].buttons["Done"].tap()
-        
-        let exists = NSPredicate(format: "exists == YES")
-        let hittable = NSPredicate(format: "hittable == YES")
         
         // Dashboard
         let dashboard = app.navigationBars["Dashboard"]
@@ -38,15 +38,13 @@ class SnapshotUITests: XCTestCase {
         waitForExpectations(timeout: 15, handler: nil)
         XCTAssert(dashboard.exists, "Dashboard not loaded")
         
-        snapshot("1 dashboard")
-        
-        let tablesQuery = app.tables
+        snapshot("1 dashboard", timeWaitingForIdle: 120)
         
         // Review Timeline
         let reviewTimelineText = tablesQuery.cells.staticTexts["ReviewTimeline"]
-        expectation(for: hittable, evaluatedWith: reviewTimelineText, handler: nil)
+        expectation(for: exists, evaluatedWith: reviewTimelineText, handler: nil)
         waitForExpectations(timeout: 15, handler: nil)
-        XCTAssert(reviewTimelineText.isHittable, "All Upcoming Reviews link not hittable")
+        XCTAssert(reviewTimelineText.exists, "All Upcoming Reviews link not found")
         reviewTimelineText.tap()
         
         let reviewTimeline = app.navigationBars["Review Timeline"]
@@ -54,20 +52,37 @@ class SnapshotUITests: XCTestCase {
         waitForExpectations(timeout: 15, handler: nil)
         XCTAssert(reviewTimeline.exists, "Review Timeline not loaded")
         snapshot("2 review-timeline")
-        reviewTimeline.buttons["Dashboard"].tap()
         
-        // Kanji
-        let kanjiText = tablesQuery.cells.staticTexts["Kanji"]
-        expectation(for: hittable, evaluatedWith: kanjiText, handler: nil)
+        // Back to Dashboard
+        reviewTimeline.buttons["Dashboard"].tap()
+        expectation(for: exists, evaluatedWith: dashboard, handler: nil)
         waitForExpectations(timeout: 15, handler: nil)
-        XCTAssert(kanjiText.isHittable, "Kanji level progress link not hittable")
+        XCTAssert(dashboard.exists, "Dashboard not loaded")
+        
+        // Kanji Progress
+        let kanjiText = tablesQuery.cells.staticTexts["Kanji"]
+        XCTAssert(kanjiText.exists, "Kanji level progress link not found")
         kanjiText.tap()
         
         let kanji = app.navigationBars["Kanji"]
         expectation(for: exists, evaluatedWith: kanji, handler: nil)
         waitForExpectations(timeout: 15, handler: nil)
-        XCTAssert(kanji.exists, "Kanji not loaded")
-        snapshot("3 kanji")
+        XCTAssert(kanji.exists, "Kanji progress not loaded")
+        snapshot("3 kanji-progress")
+        
+        // Subject Detail
+        let subjectCharacter = "下"
+        let subjectText = app.collectionViews.staticTexts[subjectCharacter]
+        XCTAssert(subjectText.exists, "Subject from Kanji level progress link not found")
+        subjectText.tap()
+        
+        let subject = app.navigationBars[subjectCharacter]
+        expectation(for: exists, evaluatedWith: subject, handler: nil)
+        waitForExpectations(timeout: 15, handler: nil)
+        XCTAssert(subject.exists, "Subject detail not loaded")
+        snapshot("4 subject-detail")
+        
+        subject.buttons["Kanji"].tap()
         kanji.buttons["Dashboard"].tap()
     }
     
