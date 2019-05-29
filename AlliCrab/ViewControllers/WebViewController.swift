@@ -12,7 +12,7 @@ import WaniKaniKit
 import WebKit
 
 protocol WebViewControllerDelegate: class {
-    func webViewController(_ controller: WebViewController, didFinish url: URL?)
+    func webViewControllerDidFinish(_ controller: WebViewController)
 }
 
 class WebViewController: UIViewController {
@@ -336,6 +336,7 @@ class WebViewController: UIViewController {
     
     func finish() {
         unregisterMessageHandlers(webView.configuration.userContentController)
+        delegate?.webViewControllerDidFinish(self)
         dismiss(animated: true, completion: nil)
     }
     
@@ -379,8 +380,6 @@ extension WebViewController: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        delegate?.webViewController(self, didFinish: webView.url)
-        
         guard let url = webView.url else { return }
         
         switch url {

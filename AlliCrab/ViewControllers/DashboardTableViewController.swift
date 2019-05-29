@@ -36,7 +36,8 @@ class DashboardTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    private let minimumFetchInterval = 15 * .oneMinute
+    private let foregroundFetchInterval = 5 * .oneMinute
+    private let backgroundFetchInterval = 15 * .oneMinute
     
     private let lastUpdateDateRelativeFormatter: DateComponentsFormatter = {
         let formatter = DateComponentsFormatter()
@@ -68,7 +69,6 @@ class DashboardTableViewController: UITableViewController {
     private var updateUITimer: Timer?
     private var notificationObservers: [NSObjectProtocol]?
     private var progressContainerView: ProgressReportingBarButtonItemView!
-    private var shouldForceDataReload = false
     
     // MARK: - Initialisers
     
@@ -388,14 +388,14 @@ class DashboardTableViewController: UITableViewController {
         }
         
         let lastUpdate = resourceRepository.lastAppDataUpdateDate
-        if let lastUpdate = lastUpdate, Date().timeIntervalSince(lastUpdate) < minimumFetchInterval {
-            os_log("No fetch required for update date %@ (%.3f < %.3f)", type: .debug, lastUpdate as NSDate, Date().timeIntervalSince(lastUpdate), minimumFetchInterval)
+        if let lastUpdate = lastUpdate, Date().timeIntervalSince(lastUpdate) < backgroundFetchInterval {
+            os_log("No fetch required for update date %@ (%.3f < %.3f)", type: .debug, lastUpdate as NSDate, Date().timeIntervalSince(lastUpdate), backgroundFetchInterval)
             updateStatusBarForLastUpdate(lastUpdate)
             return
         }
         
         os_log("Triggering fetch", type: .debug)
-        updateData(minimumFetchInterval: minimumFetchInterval, showAlertOnErrors: false)
+        updateData(minimumFetchInterval: backgroundFetchInterval, showAlertOnErrors: false)
     }
     
     // MARK: - View Controller Lifecycle
@@ -459,12 +459,13 @@ class DashboardTableViewController: UITableViewController {
         }
         
         notificationObservers = addNotificationObservers()
+        
+        updateData(minimumFetchInterval: foregroundFetchInterval, showAlertOnErrors: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        updateData(minimumFetchInterval: shouldForceDataReload ? 0 : minimumFetchInterval, showAlertOnErrors: false)
         updateUITimer = makeUpdateTimer()
     }
     
@@ -535,7 +536,6 @@ class DashboardTableViewController: UITableViewController {
     }
     
     private func updateData(minimumFetchInterval: TimeInterval, showAlertOnErrors: Bool) {
-        shouldForceDataReload = false
         let progress = resourceRepository.updateAppData(minimumFetchInterval: minimumFetchInterval) { result in
             DispatchQueue.main.async {
                 if let refreshControl = self.refreshControl, refreshControl.isRefreshing {
@@ -581,7 +581,9 @@ class DashboardTableViewController: UITableViewController {
                 self?.updateUI()
             },
             NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
-                self?.updateData(minimumFetchInterval: 5 * .oneMinute, showAlertOnErrors: false)
+                guard let self = self else { return }
+                
+                self.updateData(minimumFetchInterval: self.foregroundFetchInterval, showAlertOnErrors: false)
             }
         ]
         
@@ -619,15 +621,7 @@ class DashboardTableViewController: UITableViewController {
 
 // MARK: - WebViewControllerDelegate
 extension DashboardTableViewController: WebViewControllerDelegate {
-    func webViewController(_ controller: WebViewController, didFinish url: URL?) {
-        guard let url = url else {
-            return
-        }
-        
-        switch url {
-        case WaniKaniURL.lessonHome, WaniKaniURL.lessonSession, WaniKaniURL.reviewHome, WaniKaniURL.reviewSession:
-            shouldForceDataReload = true
-        default: break
-        }
+    func webViewControllerDidFinish(_ controller: WebViewController) {
+        updateData(minimumFetchInterval: 0, showAlertOnErrors: false)
     }
 }
