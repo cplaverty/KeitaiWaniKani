@@ -8,6 +8,7 @@
 import AVFoundation
 import os
 import UIKit
+import UserNotifications
 import WaniKaniKit
 import WebKit
 
@@ -31,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationManager = NotificationManager()
         
         super.init()
+        
+        notificationManager.delegate = self
     }
     
     // MARK: - Properties
@@ -41,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private var shouldSendNotifications = true
     
-    public var resourceRepository: ResourceRepository? {
+    var resourceRepository: ResourceRepository? {
         didSet {
             guard let resourceRepository = resourceRepository else {
                 UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalNever)
@@ -286,4 +289,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         presentLoginViewController(animated: true)
     }
     
+}
+
+// MARK: - UNUserNotificationCenterDelegate
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        defer { completionHandler() }
+        
+        os_log("Received notification with identifier %@, action identifier %@", type: .debug, response.notification.request.identifier, response.actionIdentifier)
+        guard let rootViewController = rootNavigationController else {
+            return
+        }
+        
+        if response.notification.request.identifier == NotificationManagerIdentifier.text.description
+            && response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+            os_log("Showing review page in response to notification interaction", type: .info)
+            presentReviewViewController(on: rootViewController.topPresentedViewController, animated: true)
+        }
+    }
 }

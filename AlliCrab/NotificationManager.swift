@@ -9,20 +9,35 @@ import os
 import UserNotifications
 import WaniKaniKit
 
+enum NotificationManagerIdentifier: CustomStringConvertible {
+    case badge(Int)
+    case text
+    
+    var description: String {
+        switch self {
+        case let .badge(badgeNumber):
+            return "ACBadge-\(badgeNumber)"
+        case .text:
+            return "ACText"
+        }
+    }
+}
+
 class NotificationManager {
-    private let notificationScheduler: NotificationScheduler
     private var notificationObservers: [NSObjectProtocol]?
     
-    init() {
-        notificationScheduler = UserNotificationScheduler()
+    var delegate: UNUserNotificationCenterDelegate? {
+        get { return UNUserNotificationCenter.current().delegate }
+        set { UNUserNotificationCenter.current().delegate = newValue }
     }
     
     deinit {
         unregisterForNotifications()
     }
     
-    public func registerForNotifications(resourceRepository: ResourceRepositoryReader) {
-        notificationScheduler.requestAuthorisation { (granted, error) in
+    func registerForNotifications(resourceRepository: ResourceRepositoryReader) {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
             if let error = error {
                 os_log("Got error from notification authorisation: %@", type: .error, error as NSError)
             }
@@ -35,7 +50,7 @@ class NotificationManager {
         }
     }
     
-    public func unregisterForNotifications() {
+    func unregisterForNotifications() {
         if let notificationObservers = notificationObservers {
             os_log("Removing NotificationCenter observers from %@", type: .debug, String(describing: type(of: self)))
             notificationObservers.forEach(NotificationCenter.default.removeObserver(_:))
@@ -60,9 +75,9 @@ class NotificationManager {
         return notificationObservers
     }
     
-    public func scheduleNotifications(resourceRepository: ResourceRepositoryReader) {
+    func scheduleNotifications(resourceRepository: ResourceRepositoryReader) {
         do {
-            notificationScheduler.removeAllNotifications()
+            removeAllNotifications()
             
             guard try resourceRepository.hasReviewTimeline() else {
                 return
@@ -83,16 +98,16 @@ class NotificationManager {
                 let nextReviewCount = nextReview.itemCounts.total
                 let formattedCount = NumberFormatter.localizedString(from: nextReviewCount as NSNumber, number: .decimal)
                 
-                notificationScheduler.scheduleNotification(at: nextReviewDate,
-                                                           body: nextReviewCount == 1
-                                                            ? "You have 1 new WaniKani review available"
-                                                            : "You have \(formattedCount) new WaniKani reviews available")
+                scheduleNotification(at: nextReviewDate,
+                                     body: nextReviewCount == 1
+                                        ? "You have 1 new WaniKani review available"
+                                        : "You have \(formattedCount) new WaniKani reviews available")
             }
             
             var cumulativeReviewTotal = currentReviewCount
             for review in futureReviews {
                 cumulativeReviewTotal += review.itemCounts.total
-                notificationScheduler.scheduleNotification(at: review.dateAvailable, badgeNumber: cumulativeReviewTotal)
+                scheduleNotification(at: review.dateAvailable, badgeNumber: cumulativeReviewTotal)
             }
         } catch ResourceRepositoryError.noDatabase {
             clearBadgeNumberAndRemoveAllNotifications()
@@ -101,31 +116,17 @@ class NotificationManager {
         }
     }
     
-    public func clearBadgeNumberAndRemoveAllNotifications() {
+    func clearBadgeNumberAndRemoveAllNotifications() {
         clearBadgeNumber()
-        notificationScheduler.removeAllNotifications()
+        removeAllNotifications()
     }
     
     private func clearBadgeNumber() {
         os_log("Clearing badge number", type: .debug)
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
-}
-
-private protocol NotificationScheduler {
-    func requestAuthorisation(completionHandler: @escaping (Bool, Error?) -> Void)
-    func scheduleNotification(at date: Date, badgeNumber: Int)
-    func scheduleNotification(at date: Date, body: String)
-    func removeAllNotifications()
-}
-
-private class UserNotificationScheduler: NotificationScheduler {
-    func requestAuthorisation(completionHandler: @escaping (Bool, Error?) -> Void) {
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert, .badge, .sound], completionHandler: completionHandler)
-    }
     
-    func removeAllNotifications() {
+    private func removeAllNotifications() {
         os_log("Removing all notifications", type: .debug)
         
         let center = UNUserNotificationCenter.current()
@@ -133,21 +134,22 @@ private class UserNotificationScheduler: NotificationScheduler {
         center.removeAllDeliveredNotifications()
     }
     
-    func scheduleNotification(at date: Date, badgeNumber: Int) {
+    private func scheduleNotification(at date: Date, badgeNumber: Int) {
         os_log("Scheduling local notification with badge number %d at %@", type: .debug, badgeNumber, date as NSDate)
         
         let content = UNMutableNotificationContent()
         content.badge = badgeNumber as NSNumber
         
-        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+        let dateComponents = Calendar.current.dateComponents([.era, .year, .month, .day, .hour, .minute, .second], from: date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         
-        let request = UNNotificationRequest(identifier: "ACBadge-\(badgeNumber)", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: NotificationManagerIdentifier.badge(badgeNumber).description,
+                                            content: content, trigger: trigger)
         let center = UNUserNotificationCenter.current()
         center.add(request, withCompletionHandler: nil)
     }
     
-    func scheduleNotification(at date: Date, body: String) {
+    private func scheduleNotification(at date: Date, body: String) {
         os_log("Scheduling local notification at %@", type: .debug, date as NSDate)
         
         let content = UNMutableNotificationContent()
@@ -157,7 +159,8 @@ private class UserNotificationScheduler: NotificationScheduler {
         let dateComponents = Calendar.current.dateComponents([.era, .year, .month, .day, .hour, .minute, .second], from: date)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         
-        let request = UNNotificationRequest(identifier: "ACText", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: NotificationManagerIdentifier.text.description,
+                                            content: content, trigger: trigger)
         let center = UNUserNotificationCenter.current()
         center.add(request, withCompletionHandler: nil)
     }
