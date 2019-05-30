@@ -549,6 +549,14 @@ class DashboardTableViewController: UITableViewController {
                 case .noData:
                     self.lastError = nil
                     break
+                case .error(WaniKaniAPIError.invalidAPIKey):
+                    os_log("Logging out due to invalid API key")
+                    let delegate = UIApplication.shared.delegate as! AppDelegate
+                    // This will pop to home screen
+                    delegate.logOut()
+                    
+                    UIApplication.shared.keyWindow?.rootViewController?.showAlert(title: "Invalid API Key", message: "You have been logged out because WaniKani has reported that your API key is now invalid.  Please log in again.")
+                    return
                 case let .error(error):
                     self.lastError = error
                     if showAlertOnErrors {
