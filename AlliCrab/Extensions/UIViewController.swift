@@ -6,6 +6,7 @@
 //
 
 import os
+import SafariServices
 import UIKit
 
 extension UIViewController {
@@ -15,6 +16,17 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
         self.present(alert, animated: true, completion: completion)
+    }
+    
+    func presentSafariViewController(url: URL) {
+        let vc = SFSafariViewController(url: url)
+        vc.preferredBarTintColor = .globalBarTintColor
+        vc.preferredControlTintColor = .globalTintColor
+        
+        if #available(iOS 11.0, *) {
+            vc.dismissButtonStyle = .close
+        }
+        present(vc, animated: true, completion: nil)
     }
     
     var topPresentedViewController: UIViewController {

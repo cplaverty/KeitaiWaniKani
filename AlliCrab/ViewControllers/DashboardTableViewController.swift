@@ -6,7 +6,6 @@
 //
 
 import os
-import SafariServices
 import UIKit
 import WaniKaniKit
 
@@ -328,10 +327,10 @@ class DashboardTableViewController: UITableViewController {
         case .links:
             switch indexPath.row {
             case 0:
-                showWebView(url: WaniKaniURL.dashboard)
+                presentSafariViewController(url: WaniKaniURL.dashboard)
                 return nil
             case 1:
-                showWebView(url: WaniKaniURL.communityCentre)
+                presentSafariViewController(url: WaniKaniURL.communityCentre)
                 return nil
             default: break
             }
@@ -339,17 +338,6 @@ class DashboardTableViewController: UITableViewController {
         }
         
         return indexPath
-    }
-    
-    private func showWebView(url: URL) {
-        let vc = SFSafariViewController(url: url)
-        vc.preferredBarTintColor = .globalBarTintColor
-        vc.preferredControlTintColor = .globalTintColor
-        
-        if #available(iOS 11.0, *) {
-            vc.dismissButtonStyle = .close
-        }
-        present(vc, animated: true, completion: nil)
     }
     
     // MARK: - Timer

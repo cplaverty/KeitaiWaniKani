@@ -157,12 +157,10 @@ class SettingsTableViewController: UITableViewController {
         switch tableViewSection {
         case let .userScript(userScript):
             if let forumLink = userScript.forumLink {
-                let vc = WebViewController.wrapped(url: forumLink)
-                present(vc, animated: true, completion: nil)
+                presentSafariViewController(url: forumLink)
             }
         case .feedback:
-            let vc = WebViewController.wrapped(url: WaniKaniURL.appForumTopic)
-            present(vc, animated: true, completion: nil)
+            presentSafariViewController(url: WaniKaniURL.appForumTopic)
         case .logOut: confirmLogOut()
         }
         
