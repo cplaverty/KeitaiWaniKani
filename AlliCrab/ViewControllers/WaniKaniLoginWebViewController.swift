@@ -21,11 +21,11 @@ private struct MessageKey {
 private let getAPIKeyScript = """
     "use strict";
     $.get('/settings/personal_access_tokens').done(function(data, textStatus, jqXHR) {
-        var apiKey = $(data).find('#personal-access-tokens-list .personal-access-token-description:contains("Default read-only")')
-            .siblings('.personal-access-token-token')
-            .children('code')
-            .text();
-        if (typeof apiKey === 'string') {
+        var apiKey =
+            $(data).find('#personal-access-tokens-list .personal-access-token-description:contains("AlliCrab") ~ .personal-access-token-token > code:eq(0)').text().trim()
+                || $(data).find('#personal-access-tokens-list .personal-access-token-description:contains("Default read-only") ~ .personal-access-token-token > code:eq(0)').text().trim()
+                || $(data).find('#personal-access-tokens-list .personal-access-token-description ~ .personal-access-token-token > code:eq(0)').text().trim();
+        if (typeof apiKey === 'string' && trim(apiKey).length == 1) {
             window.webkit.messageHandlers.\(MessageHandlerName.apiKey.rawValue).postMessage({ '\(MessageKey.success)': apiKey });
         }
     }).fail(function(jqXHR, textStatus) {
@@ -48,18 +48,20 @@ class WaniKaniLoginWebViewController: WebViewController {
     // MARK: - Implementation
     
     func validate(apiKey: String) {
-        if !apiKey.isEmpty {
-            os_log("Received API Key %@", type: .debug, apiKey)
-            ApplicationSettings.apiKey = apiKey
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let resourceRepository = appDelegate.makeResourceRepository(forAPIKey: apiKey)
-            appDelegate.resourceRepository = resourceRepository
-            appDelegate.presentDashboardViewController(animated: true)
-            dismiss(animated: true, completion: nil)
-        } else {
+        guard !apiKey.isEmpty else {
             os_log("Got blank API key", type: .info)
-            self.showAlert(title: "No WaniKani API version 2 token found", message: "A WaniKani API version 2 personal access token could not be found for your account.  If you've never used a third-party app or user script, one may not have been generated and you should generate one now from the settings on the WaniKani web site.")
+            self.showAlert(title: "No WaniKani API version 2 token found",
+                           message: "A WaniKani API version 2 personal access token could not be found for your account.  If you've never used a third-party app or user script, one may not have been generated and you should generate one now from the API Tokens settings on the WaniKani web site.")
+            return
         }
+        
+        os_log("Received API Key %@", type: .debug, apiKey)
+        ApplicationSettings.apiKey = apiKey
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let resourceRepository = appDelegate.makeResourceRepository(forAPIKey: apiKey)
+        appDelegate.resourceRepository = resourceRepository
+        appDelegate.presentDashboardViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
 }
@@ -92,10 +94,9 @@ extension WaniKaniLoginWebViewController {
         
         os_log("On settings page: fetching API Key", type: .debug)
         webView.evaluateJavaScript("""
-            $('#personal-access-tokens-list .personal-access-token-description:contains("Default read-only")')
-                .siblings('.personal-access-token-token')
-                .children('code')
-                .text();
+            $('#personal-access-tokens-list .personal-access-token-description:contains("AlliCrab") ~ .personal-access-token-token > code:eq(0)').text().trim()
+                || $('#personal-access-tokens-list .personal-access-token-description:contains("Default read-only") ~ .personal-access-token-token > code:eq(0)').text().trim()
+                || $('#personal-access-tokens-list .personal-access-token-description ~ .personal-access-token-token > code:eq(0)').text().trim();
             """) { apiKey, error in
                 if let apiKey = apiKey as? String {
                     DispatchQueue.main.async {
