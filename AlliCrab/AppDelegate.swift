@@ -184,7 +184,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 completionHandler(.newData)
             case .noData:
                 os_log("Background fetch result = .noData", type: .debug)
-                completionHandler(.noData)
+                self.notificationManager.updateDeliveredNotifications(resourceRepository: resourceRepository) {
+                    completionHandler(.noData)
+                }
             case let .error(error):
                 os_log("Background fetch result = .failed (%@)", type: .error, error as NSError)
                 completionHandler(.failed)

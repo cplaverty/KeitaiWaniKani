@@ -94,26 +94,61 @@ class NotificationManager {
             let futureReviews = reviewTimeline.lazy.filter({ review in review.dateAvailable > now }).prefix(48)
             
             if let nextReview = futureReviews.first, currentReviewCount == 0 {
-                let nextReviewDate = nextReview.dateAvailable
-                let nextReviewCount = nextReview.itemCounts.total
-                let formattedCount = NumberFormatter.localizedString(from: nextReviewCount as NSNumber, number: .decimal)
-                
-                scheduleNotification(at: nextReviewDate,
-                                     body: nextReviewCount == 1
-                                        ? "You have 1 new WaniKani review available"
-                                        : "You have \(formattedCount) new WaniKani reviews available")
+                let reviewNotificationText = notificationText(forCount: nextReview.itemCounts.total)
+                scheduleNotification(body: reviewNotificationText, at: nextReview.dateAvailable)
             }
             
             var cumulativeReviewTotal = currentReviewCount
             for review in futureReviews {
                 cumulativeReviewTotal += review.itemCounts.total
-                scheduleNotification(at: review.dateAvailable, badgeNumber: cumulativeReviewTotal)
+                scheduleNotification(badgeNumber: cumulativeReviewTotal, at: review.dateAvailable)
             }
         } catch ResourceRepositoryError.noDatabase {
             clearBadgeNumberAndRemoveAllNotifications()
         } catch {
             os_log("Failed to update badge count and send notifications: %@", type: .error, error as NSError)
         }
+    }
+    
+    func updateDeliveredNotifications(resourceRepository: ResourceRepositoryReader, completionHandler: @escaping () -> Void) {
+        do {
+            guard try resourceRepository.hasStudyQueue() else {
+                completionHandler()
+                return
+            }
+            
+            let studyQueue = try resourceRepository.studyQueue()
+            
+            guard studyQueue.reviewsAvailable > 0 else {
+                completionHandler()
+                return
+            }
+            
+            let reviewNotificationText = notificationText(forCount: studyQueue.reviewsAvailable)
+            let center = UNUserNotificationCenter.current()
+            center.getDeliveredNotifications { notifications in
+                defer { completionHandler() }
+                
+                guard let notification = notifications.lazy.filter({ $0.request.identifier == NotificationManagerIdentifier.text.description }).first else {
+                    return
+                }
+                
+                if notification.request.content.body != reviewNotificationText {
+                    self.scheduleNotification(body: reviewNotificationText)
+                }
+            }
+        } catch {
+            os_log("Failed to refresh delivered notification text: %@", type: .error, error as NSError)
+            completionHandler()
+        }
+    }
+    
+    private func notificationText(forCount count: Int) -> String {
+        let formattedCount = NumberFormatter.localizedString(from: count as NSNumber, number: .decimal)
+        
+        return count == 1
+            ? "You have 1 new WaniKani review available"
+            : "You have \(formattedCount) new WaniKani reviews available"
     }
     
     func clearBadgeNumberAndRemoveAllNotifications() {
@@ -134,33 +169,38 @@ class NotificationManager {
         center.removeAllDeliveredNotifications()
     }
     
-    private func scheduleNotification(at date: Date, badgeNumber: Int) {
+    private func scheduleNotification(badgeNumber: Int, at date: Date) {
         os_log("Scheduling local notification with badge number %d at %@", type: .debug, badgeNumber, date as NSDate)
         
         let content = UNMutableNotificationContent()
         content.badge = badgeNumber as NSNumber
         
-        let dateComponents = Calendar.current.dateComponents([.era, .year, .month, .day, .hour, .minute, .second], from: date)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: NotificationManagerIdentifier.badge(badgeNumber).description,
-                                            content: content, trigger: trigger)
-        let center = UNUserNotificationCenter.current()
-        center.add(request, withCompletionHandler: nil)
+        scheduleNotification(content: content, identifier: .badge(badgeNumber), at: date)
     }
     
-    private func scheduleNotification(at date: Date, body: String) {
-        os_log("Scheduling local notification at %@", type: .debug, date as NSDate)
+    private func scheduleNotification(body: String, at date: Date? = nil) {
+        if let date = date {
+            os_log("Scheduling local notification at %@", type: .debug, date as NSDate)
+        } else {
+            os_log("Scheduling immediate local notification", type: .debug)
+        }
         
         let content = UNMutableNotificationContent()
         content.body = body
-        content.sound = UNNotificationSound.default
+        if date != nil {
+            content.sound = UNNotificationSound.default
+        }
         
-        let dateComponents = Calendar.current.dateComponents([.era, .year, .month, .day, .hour, .minute, .second], from: date)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        scheduleNotification(content: content, identifier: .text, at: date)
+    }
+    
+    private func scheduleNotification(content: UNNotificationContent, identifier: NotificationManagerIdentifier, at date: Date? = nil) {
+        let trigger = date.map({ d -> UNNotificationTrigger in
+            let dateComponents = Calendar.current.dateComponents([.era, .year, .month, .day, .hour, .minute, .second], from: d)
+            return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        })
         
-        let request = UNNotificationRequest(identifier: NotificationManagerIdentifier.text.description,
-                                            content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: identifier.description, content: content, trigger: trigger)
         let center = UNUserNotificationCenter.current()
         center.add(request, withCompletionHandler: nil)
     }
