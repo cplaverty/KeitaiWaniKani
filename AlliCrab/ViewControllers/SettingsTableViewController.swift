@@ -18,7 +18,7 @@ class SettingsTableViewController: UITableViewController {
     }
     
     private enum TableViewSection: RawRepresentable {
-        case userScript(UserScript), feedback, logOut, count
+        case userScript(UserScript), feedback, logOut
         
         init?(rawValue: Int) {
             var section = rawValue
@@ -59,16 +59,18 @@ class SettingsTableViewController: UITableViewController {
                 return firstNonScriptIndex
             case .logOut:
                 return firstNonScriptIndex + 1
-            case .count:
-                return firstNonScriptIndex + 2
             }
+        }
+        
+        static var count: Int {
+            return UserScriptDefinitions.community.count + UserScriptDefinitions.custom.count + 2
         }
     }
     
     // MARK: - UITableViewDataSource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return TableViewSection.count.rawValue
+        return TableViewSection.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -80,7 +82,6 @@ class SettingsTableViewController: UITableViewController {
         case let .userScript(userScript): return userScript.forumLink == nil ? 1 : 2
         case .feedback: return 1
         case .logOut: return 1
-        case .count: fatalError("This is a placeholder and not a real section")
         }
     }
     
@@ -114,7 +115,6 @@ class SettingsTableViewController: UITableViewController {
             cell.textLabel?.text = "Log Out"
             
             return cell
-        case .count: fatalError("This is a placeholder and not a real section")
         }
     }
     
@@ -127,7 +127,6 @@ class SettingsTableViewController: UITableViewController {
         case let .userScript(userScript): return "Script: \(userScript.name)"
         case .feedback: return "Feedback"
         case .logOut: return nil
-        case .count: fatalError("This is a placeholder and not a real section")
         }
     }
     
@@ -147,7 +146,6 @@ class SettingsTableViewController: UITableViewController {
         case .logOut:
             let (product, version, build) = self.productAndVersion
             return "\(product) version \(version) (build \(build))"
-        case .count: fatalError("This is a placeholder and not a real section")
         }
     }
     
@@ -166,7 +164,6 @@ class SettingsTableViewController: UITableViewController {
             let vc = WebViewController.wrapped(url: WaniKaniURL.appForumTopic)
             present(vc, animated: true, completion: nil)
         case .logOut: confirmLogOut()
-        case .count: fatalError("This is a placeholder and not a real section")
         }
         
         return nil
