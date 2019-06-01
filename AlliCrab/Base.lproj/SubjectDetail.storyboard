@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zHh-9W-1z7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zHh-9W-1z7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -68,6 +68,11 @@
                                                             <constraint firstAttribute="trailing" secondItem="NTg-Gr-hKp" secondAttribute="trailing" constant="20" symbolic="YES" id="nWF-hm-fF4"/>
                                                             <constraint firstItem="NTg-Gr-hKp" firstAttribute="top" secondItem="tXd-xj-9xy" secondAttribute="top" constant="20" symbolic="YES" id="qdH-3Y-ugP"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbs-Db-fxP" userLabel="Primary Meaning View">
                                                         <rect key="frame" x="0.0" y="98" width="359" height="118"/>
@@ -109,6 +114,11 @@
                                                             <constraint firstItem="aYY-Rh-WMu" firstAttribute="leading" secondItem="nbs-Db-fxP" secondAttribute="leadingMargin" id="hGK-gM-UYf"/>
                                                             <constraint firstItem="aYY-Rh-WMu" firstAttribute="top" secondItem="nbs-Db-fxP" secondAttribute="topMargin" id="yoZ-0a-cqE"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H7M-6s-6wT" userLabel="Radical Combination View">
                                                         <rect key="frame" x="0.0" y="224" width="359" height="91.5"/>
@@ -335,6 +345,11 @@
                                                             <constraint firstItem="P9L-ul-Dx2" firstAttribute="top" secondItem="tDs-C0-X35" secondAttribute="topMargin" id="V2a-nb-6ta"/>
                                                             <constraint firstAttribute="trailingMargin" secondItem="P9L-ul-Dx2" secondAttribute="trailing" id="vne-Qb-0I9"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bva-J8-4kV" userLabel="Meaning Note View">
                                                         <rect key="frame" x="0.0" y="808" width="359" height="57"/>
@@ -405,6 +420,11 @@
                                                             <constraint firstAttribute="bottomMargin" secondItem="guW-1h-2gN" secondAttribute="bottom" id="N3m-ni-tHq"/>
                                                             <constraint firstAttribute="trailingMargin" secondItem="guW-1h-2gN" secondAttribute="trailing" id="VWJ-LY-vB4"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Agg-dI-Cc7" userLabel="Reading Note View">
                                                         <rect key="frame" x="0.0" y="996" width="359" height="57"/>
@@ -799,7 +819,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="180"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAc-u8-QW3" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="144"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="24" height="144"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                                             <real key="value" value="24"/>
@@ -807,7 +827,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meaning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFS-ar-ocI">
-                                                    <rect key="frame" x="8" y="0.0" width="24" height="144"/>
+                                                    <rect key="frame" x="32" y="0.0" width="0.0" height="144"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -823,6 +843,11 @@
                                     <constraint firstAttribute="bottomMargin" secondItem="ihj-Nj-bfR" secondAttribute="bottom" id="JwH-qX-eIa"/>
                                     <constraint firstItem="ihj-Nj-bfR" firstAttribute="top" secondItem="eWo-nc-Ma7" secondAttribute="topMargin" id="SQF-tL-LfU"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="characterView" destination="jAc-u8-QW3" id="tgB-yj-8Fi"/>
                                     <outlet property="primaryMeaningLabel" destination="JFS-ar-ocI" id="2ok-aW-cdy"/>
@@ -925,6 +950,11 @@
                                     <constraint firstAttribute="bottomMargin" secondItem="N4L-tp-yNc" secondAttribute="bottom" id="kfG-NS-3N6"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="N4L-tp-yNc" secondAttribute="trailing" id="n4b-AV-Z5A"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="characterView" destination="wF8-g9-lB4" id="fpg-22-uAw"/>
                                     <outlet property="primaryMeaningLabel" destination="Mfs-UB-ARG" id="wIU-H9-DeS"/>
@@ -1010,6 +1040,11 @@
                                     <constraint firstAttribute="trailingMargin" secondItem="mHJ-dH-cxz" secondAttribute="trailing" id="jFh-CN-JnM"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="mHJ-dH-cxz" secondAttribute="bottom" id="lyX-0E-JkV"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="characterView" destination="3VK-Mn-OSO" id="Ws7-VR-mNg"/>
                                     <outlet property="primaryMeaningLabel" destination="bEw-5O-azV" id="w4n-KB-6pB"/>

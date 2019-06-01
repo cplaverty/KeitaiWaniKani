@@ -718,7 +718,7 @@
                                                                     <rect key="frame" x="0.6666666666666714" y="0.0" width="73" height="44"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2d 15h" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4TP-ZM-P2x">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="73" height="29"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="73" height="21.333333333333332"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -726,7 +726,7 @@
                                                                             <size key="shadowOffset" width="1" height="1"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Review" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MOA-9t-LGO">
-                                                                            <rect key="frame" x="0.0" y="29.666666666666661" width="73" height="14.333333333333332"/>
+                                                                            <rect key="frame" x="0.0" y="22" width="73" height="22"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -748,7 +748,7 @@
                                                                     <rect key="frame" x="5.6666666666666714" y="52" width="63" height="44"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6d 13h" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6r8-Uz-uHU">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="63" height="29"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="63" height="21.333333333333332"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -756,7 +756,7 @@
                                                                             <size key="shadowOffset" width="1" height="1"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guru Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oLb-HB-rKv">
-                                                                            <rect key="frame" x="0.0" y="29.666666666666668" width="63" height="14.333333333333332"/>
+                                                                            <rect key="frame" x="0.0" y="22" width="63" height="22"/>
                                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
@@ -802,6 +802,11 @@
                                     <constraint firstItem="1WJ-T3-PHk" firstAttribute="top" secondItem="YX6-Xj-nSi" secondAttribute="top" id="sfW-ia-U7d"/>
                                     <constraint firstAttribute="trailing" secondItem="1WJ-T3-PHk" secondAttribute="trailing" id="w0x-bf-APR"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="characterView" destination="YgF-bH-50S" id="WkK-nj-hxr"/>
                                     <outlet property="progressView" destination="gnS-P1-6SX" id="xxV-l1-sQ2"/>
