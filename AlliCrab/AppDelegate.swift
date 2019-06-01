@@ -183,9 +183,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 os_log("Background fetch result = .newData", type: .debug)
                 completionHandler(.newData)
             case .noData:
-                os_log("Background fetch result = .noData", type: .debug)
-                self.notificationManager.updateDeliveredNotifications(resourceRepository: resourceRepository) {
-                    completionHandler(.noData)
+                self.notificationManager.updateDeliveredNotifications(resourceRepository: resourceRepository) { didScheduleNotification in
+                    if didScheduleNotification {
+                        os_log("Background fetch result = .newData", type: .debug)
+                        completionHandler(.newData)
+                    } else {
+                        os_log("Background fetch result = .noData", type: .debug)
+                        completionHandler(.noData)
+                    }
                 }
             case let .error(error):
                 os_log("Background fetch result = .failed (%@)", type: .error, error as NSError)
@@ -223,8 +228,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func makeShortcutItems() -> [UIApplicationShortcutItem] {
         return [
-            UIMutableApplicationShortcutItem(type: ShortcutItemType.lesson.rawValue, localizedTitle: "Lessons"),
-            UIMutableApplicationShortcutItem(type: ShortcutItemType.review.rawValue, localizedTitle: "Reviews")
+            UIApplicationShortcutItem(type: ShortcutItemType.lesson.rawValue, localizedTitle: "Lessons"),
+            UIApplicationShortcutItem(type: ShortcutItemType.review.rawValue, localizedTitle: "Reviews")
         ]
     }
     
@@ -303,10 +308,18 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             return
         }
         
-        if response.notification.request.identifier == NotificationManagerIdentifier.text.description
-            && response.actionIdentifier == UNNotificationDefaultActionIdentifier {
-            os_log("Showing review page in response to notification interaction", type: .info)
-            presentReviewViewController(on: rootViewController.topPresentedViewController, animated: true)
+        let identifier = response.notification.request.identifier
+        
+        if identifier == NotificationManagerIdentifier.text.description {
+            switch response.actionIdentifier {
+            case UNNotificationDefaultActionIdentifier:
+                os_log("Showing review page in response to notification interaction", type: .info)
+                presentReviewViewController(on: rootViewController.topPresentedViewController, animated: true)
+            case UNNotificationDismissActionIdentifier:
+                os_log("Removing any pending review count notifications due to notification dismissal", type: .info)
+                notificationManager.removePendingNotificationRequests(withIdentifier: identifier)
+            default: break
+            }
         }
     }
 }
