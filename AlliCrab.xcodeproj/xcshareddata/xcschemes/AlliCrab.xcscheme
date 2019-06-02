@@ -33,21 +33,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8364CB7B1F27F28D002DBE6B"
-               BuildableName = "AlliCrabUITests.xctest"
-               BlueprintName = "AlliCrabUITests"
-               ReferencedContainer = "container:AlliCrab.xcodeproj">
-            </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "SnapshotUITests">
-               </Test>
-            </SkippedTests>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "834B61A71F2BF01600825630"
                BuildableName = "WaniKaniKitTests.xctest"
                BlueprintName = "WaniKaniKitTests"

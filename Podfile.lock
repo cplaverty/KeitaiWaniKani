@@ -2,6 +2,7 @@ PODS:
   - 1PasswordExtension (1.8.5)
   - FMDB/standalone (2.7.5):
     - sqlite3
+  - SimulatorStatusMagic (2.4.1)
   - sqlite3 (3.27.2):
     - sqlite3/common (= 3.27.2)
   - sqlite3/common (3.27.2)
@@ -11,6 +12,7 @@ PODS:
 DEPENDENCIES:
   - 1PasswordExtension
   - FMDB/standalone
+  - SimulatorStatusMagic
   - sqlite3
   - sqlite3/fts5
 
@@ -18,13 +20,15 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - 1PasswordExtension
     - FMDB
+    - SimulatorStatusMagic
     - sqlite3
 
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  SimulatorStatusMagic: 28d4a9d1a500ac7cea0b2b5a43c1c6ddb40ba56c
   sqlite3: 80ee60823f7cf9ea4cd36ef7d68ea4a54b20906a
 
-PODFILE CHECKSUM: 37c1eacf56a0fbae4d14274fcbc1624e5099e912
+PODFILE CHECKSUM: 2ee9bb913829d7d400102dd6a57c8b9ad1bae51d
 
 COCOAPODS: 1.7.0

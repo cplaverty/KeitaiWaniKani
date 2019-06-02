@@ -5,6 +5,7 @@
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
+import SimulatorStatusMagic
 import XCTest
 
 class SnapshotUITests: XCTestCase {
@@ -16,9 +17,17 @@ class SnapshotUITests: XCTestCase {
         
         continueAfterFailure = false
         
+        SDStatusBarManager.sharedInstance()?.enableOverrides()
+        
         let app = XCUIApplication()
         setupSnapshot(app)
         app.launch()
+    }
+    
+    override func tearDown() {
+        super.tearDown()
+        
+        SDStatusBarManager.sharedInstance()?.disableOverrides()
     }
     
     func testScreenshot() {
@@ -71,7 +80,7 @@ class SnapshotUITests: XCTestCase {
         snapshot("3 kanji-progress")
         
         // Subject Detail
-        let subjectCharacter = "下"
+        let subjectCharacter = "右"
         let subjectText = app.collectionViews.staticTexts[subjectCharacter]
         XCTAssert(subjectText.exists, "Subject from Kanji level progress link not found")
         subjectText.tap()

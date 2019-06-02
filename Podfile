@@ -12,10 +12,14 @@ target 'WaniKaniStudyQueueWidget'
 target 'WaniKaniKitTests'
 
 target 'AlliCrab' do
-    pod '1PasswordExtension'
+  pod '1PasswordExtension'
+end
+
+target 'AlliCrabUITests' do
+  pod 'SimulatorStatusMagic'
 end
 
 post_install do |installer|
-    require 'fileutils'
-    FileUtils.cp_r('Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab-acknowledgements.plist', 'AlliCrab/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+  require 'fileutils'
+  FileUtils.cp_r('Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab-acknowledgements.plist', 'AlliCrab/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
 end
