@@ -20,7 +20,6 @@ var loadingDiv = $('#loading');
 if (userResponseInput != null) {
     if (loadingDiv != null) {
         // Logic to prevent response input focus until the loading panel is hidden
-
         function cancelEvent (e) {
             userResponseInput.blur();
             e.stopPropagation();
@@ -43,6 +42,13 @@ if (userResponseInput != null) {
         loadingDiv.on('hide', handleLoadingHidden);
         loadingDiv.on('show', handleLoadingShown)
     }
+    
+    // Logic to fix scrolling issue on focus of response input
+    window.addEventListener("scroll", function (e) {
+        if (userResponseInput.is(":focus")) {
+            document.body.scrollTop = 0;
+        }
+    })
 }
 
 // Add close button to timeout full-screen popup
