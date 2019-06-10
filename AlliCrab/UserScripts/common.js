@@ -7,11 +7,11 @@ function GM_addStyle(cssContents) {
 }
 
 // Create listenable events for jquery show/hide
-$.each(['show', 'hide'], function (i, ev) {
-    var el = $.fn[ev];
-    $.fn[ev] = function () {
-        this.trigger(ev);
-        return el.apply(this, arguments);
+$.each(['show', 'hide'], function (i, eventName) {
+    var origEventFn = $.fn[eventName];
+    $.fn[eventName] = function () {
+        this.trigger(eventName);
+        return origEventFn.apply(this, arguments);
     };
 });
 
@@ -20,19 +20,19 @@ var loadingDiv = $('#loading');
 if (userResponseInput != null) {
     if (loadingDiv != null) {
         // Logic to prevent response input focus until the loading panel is hidden
-        function cancelEvent (e) {
+        function cancelFocusEvent (e) {
             userResponseInput.blur();
             e.stopPropagation();
             e.preventDefault();
         }
 
         function handleLoadingHidden () {
-            userResponseInput.off('focus', cancelEvent);
+            userResponseInput.off('focus', cancelFocusEvent);
             userResponseInput.focus();
         };
 
         function handleLoadingShown () {
-            userResponseInput.on('focus', cancelEvent);
+            userResponseInput.on('focus', cancelFocusEvent);
             userResponseInput.blur();
         };
 
@@ -46,7 +46,7 @@ if (userResponseInput != null) {
     // Logic to fix scrolling issue on focus of response input
     window.addEventListener("scroll", function (e) {
         if (userResponseInput.is(":focus")) {
-            document.body.scrollTop = 0;
+            $("html, body").scrollTop(0)
         }
     })
 }
