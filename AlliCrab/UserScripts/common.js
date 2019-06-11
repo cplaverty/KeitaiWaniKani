@@ -6,6 +6,50 @@ function GM_addStyle(cssContents) {
     document.head.appendChild(style);
 }
 
+// Create listenable events for jquery show/hide
+$.each(['show', 'hide'], function (i, eventName) {
+    var origEventFn = $.fn[eventName];
+    $.fn[eventName] = function () {
+        this.trigger(eventName);
+        return origEventFn.apply(this, arguments);
+    };
+});
+
+var userResponseInput = $('#user-response');
+var loadingDiv = $('#loading');
+if (userResponseInput != null) {
+    if (loadingDiv != null) {
+        // Logic to prevent response input focus until the loading panel is hidden
+        function cancelFocusEvent (e) {
+            userResponseInput.blur();
+            e.stopPropagation();
+            e.preventDefault();
+        }
+
+        function handleLoadingHidden () {
+            userResponseInput.off('focus', cancelFocusEvent);
+            userResponseInput.focus();
+        };
+
+        function handleLoadingShown () {
+            userResponseInput.on('focus', cancelFocusEvent);
+            userResponseInput.blur();
+        };
+
+        if (loadingDiv.is(":visible")) {
+            handleLoadingShown();
+        }
+        loadingDiv.on('hide', handleLoadingHidden);
+        loadingDiv.on('show', handleLoadingShown)
+    }
+    
+    // Logic to fix scrolling issue on focus of response input
+    window.addEventListener("scroll", function (e) {
+        if (userResponseInput.is(":focus")) {
+            $("html, body").scrollTop(0)
+        }
+    })
+}
 
 // Add close button to timeout full-screen popup
 $('#timeout').prepend('<button id="timeout-close" type="button">&times;</button>');
