@@ -139,9 +139,9 @@
                                 </constraints>
                             </view>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J3j-VA-qVk">
-                                <rect key="frame" x="0.0" y="399" width="375" height="268"/>
+                                <rect key="frame" x="0.0" y="398.5" width="375" height="268.5"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bS1-4z-kDz">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="268"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="269"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sf-2j-0EM">
@@ -291,7 +291,7 @@
                             <constraint firstItem="byM-Ce-NTV" firstAttribute="bottom" secondItem="ZUe-hC-VDd" secondAttribute="bottom" id="4Ad-GM-BSs"/>
                             <constraint firstItem="ZUe-hC-VDd" firstAttribute="trailing" secondItem="byM-Ce-NTV" secondAttribute="trailing" id="IoR-fS-CmA"/>
                             <constraint firstItem="T8O-jJ-a6u" firstAttribute="centerX" secondItem="Yf9-aS-lc0" secondAttribute="centerX" id="XJR-pZ-WQ6"/>
-                            <constraint firstItem="WdR-jN-zZi" firstAttribute="width" secondItem="Yf9-aS-lc0" secondAttribute="width" id="ZfR-y6-Xsg"/>
+                            <constraint firstItem="WdR-jN-zZi" firstAttribute="width" secondItem="ZUe-hC-VDd" secondAttribute="width" id="ZfR-y6-Xsg"/>
                             <constraint firstItem="T8O-jJ-a6u" firstAttribute="centerY" secondItem="Yf9-aS-lc0" secondAttribute="centerY" id="kWt-NE-4LG"/>
                             <constraint firstItem="ZUe-hC-VDd" firstAttribute="leading" secondItem="byM-Ce-NTV" secondAttribute="leading" id="yO2-sw-JLX"/>
                         </constraints>
