@@ -99,7 +99,7 @@ struct UserScriptDefinitions {
     static let custom: [UserScript] = [
         UserScript(name: "Disable Lesson Swipe",
                    description: "Disables the horizontal swipe gesture on the info text during lessons to prevent it being accidentally triggered while scrolling.",
-                   settingKey: ApplicationSettingKey.disableLessonSwipe,
+                   settingKey: .disableLessonSwipe,
                    scriptNames: ["noswipe"],
                    injectionRules: [.ExactMatch(WaniKaniURL.lessonSession)]),
     ]
@@ -109,8 +109,7 @@ struct UserScriptDefinitions {
                    author: "Ethan",
                    description: "Prevent \"Your answer was a bit off\" answers from being accepted.  Script by Ethan.",
                    forumLink: WaniKaniURL.forumTopic(withRelativePath: "userscript-prevent-your-answer-was-a-bit-off-answers-from-being-accepted-a-k-a-close-but-no-cigar/7134"),
-                   settingKey: ApplicationSettingKey.userScriptCloseButNoCigarEnabled,
-                   requiresFonts: true,
+                   settingKey: .userScriptCloseButNoCigarEnabled,
                    scriptNames: ["WKButNoCigar.user"],
                    injectionRules: [.ExactMatch(WaniKaniURL.lessonSession), .ExactMatch(WaniKaniURL.reviewSession)]),
         
@@ -118,7 +117,7 @@ struct UserScriptDefinitions {
                    author: "obskyr",
                    description: "Display WaniKani reviews in randomised fonts, for more varied reading training.  Script by obskyr.",
                    forumLink: WaniKaniURL.forumTopic(withRelativePath: "jitai-the-font-randomizer-that-fits/12617"),
-                   settingKey: ApplicationSettingKey.userScriptJitaiEnabled,
+                   settingKey: .userScriptJitaiEnabled,
                    requiresFonts: true,
                    scriptNames: ["jitai.user"],
                    injectionRules: [.ExactMatch(WaniKaniURL.reviewSession)]),
@@ -127,7 +126,7 @@ struct UserScriptDefinitions {
                    author: "Seiji",
                    description: "Automatically moves to the next item if the answer was correct (also known as \"lightning mode\").  Script by Seiji.",
                    forumLink: WaniKaniURL.forumTopic(withRelativePath: "wanikani-improve-2-2-2-faster-and-smarter-reviews/2858"),
-                   settingKey: ApplicationSettingKey.userScriptWaniKaniImproveEnabled,
+                   settingKey: .userScriptWaniKaniImproveEnabled,
                    stylesheetNames: ["jquery.qtip.min"],
                    scriptNames: ["jquery.qtip.min", "wkimprove"],
                    injectionRules: [.ExactMatch(WaniKaniURL.reviewSession)]),
@@ -136,7 +135,7 @@ struct UserScriptDefinitions {
                    author: "ruipgpinheiro, Mempo",
                    description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  This script is intended to be used to correct genuine mistakes, like typographical errors.  Script by ruipgpinheiro, updated by Mempo.",
                    forumLink: WaniKaniURL.forumTopic(withRelativePath: "userscript-wanikani-override-ignore-answer-button-active-support/17999"),
-                   settingKey: ApplicationSettingKey.userScriptIgnoreAnswerEnabled,
+                   settingKey: .userScriptIgnoreAnswerEnabled,
                    scriptNames: ["wkoverride.user"],
                    injectionRules: [.ExactMatch(WaniKaniURL.reviewSession)]),
     ]
