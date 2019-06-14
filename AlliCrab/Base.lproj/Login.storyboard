@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -213,32 +213,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZUe-hC-VDd">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="ZUe-hC-VDd">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNz-tB-2PQ">
-                                        <rect key="frame" x="20" y="20" width="335" height="130.5"/>
-                                        <string key="text">Entering your API version 2 key will permit a basic level of functionality in the app.  However, please note that doing lessons or reviews within the app will open a web browser to the WaniKani site, where you will be prompted to log in.</string>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="AVn-xv-9lq">
-                                        <rect key="frame" x="20" y="170.5" width="335" height="30"/>
-                                        <accessibility key="accessibilityConfiguration" identifier="EnterAPIKey"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                                    </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WdR-jN-zZi" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="220.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNz-tB-2PQ">
+                                                <rect key="frame" x="20" y="20" width="335" height="130.5"/>
+                                                <string key="text">Entering your API version 2 key will permit a basic level of functionality in the app.  However, please note that doing lessons or reviews within the app will open a web browser to the WaniKani site, where you will be prompted to log in.</string>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="AVn-xv-9lq">
+                                                <rect key="frame" x="20" y="170.5" width="335" height="30"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="EnterAPIKey"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="gNz-tB-2PQ" firstAttribute="leading" secondItem="WdR-jN-zZi" secondAttribute="leading" constant="20" symbolic="YES" id="G6M-qB-MXz"/>
+                                            <constraint firstAttribute="bottom" secondItem="AVn-xv-9lq" secondAttribute="bottom" constant="20" symbolic="YES" id="OMa-Sx-NHb"/>
+                                            <constraint firstAttribute="trailing" secondItem="gNz-tB-2PQ" secondAttribute="trailing" constant="20" symbolic="YES" id="Yjp-2l-Ynm"/>
+                                            <constraint firstItem="AVn-xv-9lq" firstAttribute="top" secondItem="gNz-tB-2PQ" secondAttribute="bottom" constant="20" id="bzv-Iw-f9D"/>
+                                            <constraint firstItem="gNz-tB-2PQ" firstAttribute="top" secondItem="WdR-jN-zZi" secondAttribute="top" constant="20" symbolic="YES" id="dAC-le-n5X"/>
+                                            <constraint firstItem="AVn-xv-9lq" firstAttribute="leading" secondItem="WdR-jN-zZi" secondAttribute="leading" constant="20" symbolic="YES" id="dXw-GE-i2Y"/>
+                                            <constraint firstAttribute="trailing" secondItem="AVn-xv-9lq" secondAttribute="trailing" constant="20" symbolic="YES" id="e4f-ZC-60w"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="gNz-tB-2PQ" secondAttribute="trailing" constant="20" id="1po-5B-3Z4"/>
-                                    <constraint firstItem="gNz-tB-2PQ" firstAttribute="leading" secondItem="ZUe-hC-VDd" secondAttribute="leading" constant="20" id="47D-Aq-bv2"/>
-                                    <constraint firstAttribute="bottom" secondItem="AVn-xv-9lq" secondAttribute="bottom" constant="20" symbolic="YES" id="6af-X7-8gm"/>
-                                    <constraint firstItem="gNz-tB-2PQ" firstAttribute="top" secondItem="ZUe-hC-VDd" secondAttribute="top" constant="20" symbolic="YES" id="GUb-F2-uGH"/>
-                                    <constraint firstItem="AVn-xv-9lq" firstAttribute="leading" secondItem="ZUe-hC-VDd" secondAttribute="leading" constant="20" id="Qfc-PT-4f1"/>
-                                    <constraint firstAttribute="trailing" secondItem="AVn-xv-9lq" secondAttribute="trailing" constant="20" id="fAs-y2-H6e"/>
-                                    <constraint firstItem="AVn-xv-9lq" firstAttribute="top" secondItem="gNz-tB-2PQ" secondAttribute="bottom" constant="20" id="xRH-ig-0wg"/>
+                                    <constraint firstItem="WdR-jN-zZi" firstAttribute="leading" secondItem="ZUe-hC-VDd" secondAttribute="leading" id="9iK-dM-OZJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="WdR-jN-zZi" secondAttribute="trailing" id="ClA-Tf-oat"/>
+                                    <constraint firstItem="WdR-jN-zZi" firstAttribute="top" secondItem="ZUe-hC-VDd" secondAttribute="top" id="ckr-OS-YpT"/>
+                                    <constraint firstAttribute="bottom" secondItem="WdR-jN-zZi" secondAttribute="bottom" id="fpB-md-UHw"/>
                                 </constraints>
                             </scrollView>
                             <visualEffectView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T8O-jJ-a6u">
@@ -278,13 +289,10 @@
                         <constraints>
                             <constraint firstItem="ZUe-hC-VDd" firstAttribute="top" secondItem="byM-Ce-NTV" secondAttribute="top" id="3aC-6Q-YiY"/>
                             <constraint firstItem="byM-Ce-NTV" firstAttribute="bottom" secondItem="ZUe-hC-VDd" secondAttribute="bottom" id="4Ad-GM-BSs"/>
-                            <constraint firstItem="byM-Ce-NTV" firstAttribute="trailing" secondItem="gNz-tB-2PQ" secondAttribute="trailing" constant="20" id="IOk-A1-hXw"/>
                             <constraint firstItem="ZUe-hC-VDd" firstAttribute="trailing" secondItem="byM-Ce-NTV" secondAttribute="trailing" id="IoR-fS-CmA"/>
                             <constraint firstItem="T8O-jJ-a6u" firstAttribute="centerX" secondItem="Yf9-aS-lc0" secondAttribute="centerX" id="XJR-pZ-WQ6"/>
-                            <constraint firstItem="AVn-xv-9lq" firstAttribute="leading" secondItem="byM-Ce-NTV" secondAttribute="leading" constant="20" id="aZC-KP-fGA"/>
-                            <constraint firstItem="byM-Ce-NTV" firstAttribute="trailing" secondItem="AVn-xv-9lq" secondAttribute="trailing" constant="20" id="d11-5c-0uA"/>
+                            <constraint firstItem="WdR-jN-zZi" firstAttribute="width" secondItem="Yf9-aS-lc0" secondAttribute="width" id="ZfR-y6-Xsg"/>
                             <constraint firstItem="T8O-jJ-a6u" firstAttribute="centerY" secondItem="Yf9-aS-lc0" secondAttribute="centerY" id="kWt-NE-4LG"/>
-                            <constraint firstItem="gNz-tB-2PQ" firstAttribute="leading" secondItem="byM-Ce-NTV" secondAttribute="leading" constant="20" id="lvA-bq-naT"/>
                             <constraint firstItem="ZUe-hC-VDd" firstAttribute="leading" secondItem="byM-Ce-NTV" secondAttribute="leading" id="yO2-sw-JLX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="byM-Ce-NTV"/>
@@ -303,6 +311,7 @@
                         <outlet property="activityStatusView" destination="T8O-jJ-a6u" id="jid-25-Bid"/>
                         <outlet property="apiKeyTextField" destination="AVn-xv-9lq" id="ajk-uI-xtF"/>
                         <outlet property="doneBarButton" destination="PI0-M0-1pf" id="0Nc-Rk-ey7"/>
+                        <outlet property="scrollView" destination="ZUe-hC-VDd" id="8Wj-Bq-O0Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DaI-SU-bLh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -311,7 +320,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Art04" width="860.760009765625" height="537.84002685546875"/>
+        <image name="Art04" width="2391" height="1494"/>
     </resources>
     <color key="tintColor" name="Colours/GlobalTint"/>
 </document>

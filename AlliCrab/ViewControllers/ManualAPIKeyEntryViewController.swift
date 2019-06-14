@@ -13,10 +13,11 @@ class ManualAPIKeyEntryViewController: UIViewController {
     
     // MARK: - Properties
     
-    private var textFieldTextChangedObserver: NSObjectProtocol?
+    private var notificationObservers: [NSObjectProtocol]?
     
     // MARK: - Outlets
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
     @IBOutlet weak var apiKeyTextField: UITextField! {
         didSet {
@@ -94,27 +95,59 @@ class ManualAPIKeyEntryViewController: UIViewController {
         super.viewDidLoad()
         
         apiKeyTextField.text = ApplicationSettings.apiKey
-        apiKeyTextField.becomeFirstResponder()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        textFieldTextChangedObserver = NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: apiKeyTextField, queue: .main) { [unowned self] _ in
-            guard let apiKey = self.apiKeyTextField.text, !apiKey.isEmpty else { return }
-            
-            let isAPIKeyValidFormat = self.isAPIKeyValidFormat(apiKey)
-            self.doneBarButton.isEnabled = isAPIKeyValidFormat
-        }
+        notificationObservers = addNotificationObservers()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        if let textFieldTextChangedObserver = self.textFieldTextChangedObserver {
-            NotificationCenter.default.removeObserver(textFieldTextChangedObserver)
+        unregisterObservers()
+    }
+    
+    private func addNotificationObservers() -> [NSObjectProtocol] {
+        return [
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: apiKeyTextField, queue: .main) { _ in
+                guard let apiKey = self.apiKeyTextField.text, !apiKey.isEmpty else { return }
+                
+                let isAPIKeyValidFormat = self.isAPIKeyValidFormat(apiKey)
+                self.doneBarButton.isEnabled = isAPIKeyValidFormat
+            },
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidShowNotification, object: nil, queue: .main) { notification in
+                guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+                
+                let keyboardSize = keyboardFrame.cgRectValue.size
+                
+                let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+                self.adjustContentInsets(contentInsets)
+                
+                var rect = self.view.frame;
+                rect.size.height -= keyboardSize.height;
+                if !rect.contains(self.apiKeyTextField.frame.origin) {
+                    self.scrollView.scrollRectToVisible(self.apiKeyTextField.frame, animated: true)
+                }
+            },
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardDidHideNotification, object: nil, queue: .main) { _ in
+                self.adjustContentInsets(.zero)
+            }
+        ]
+    }
+    
+    private func unregisterObservers() {
+        if let notificationObservers = notificationObservers {
+            os_log("Removing NotificationCenter observers from %@", type: .debug, String(describing: type(of: self)))
+            notificationObservers.forEach(NotificationCenter.default.removeObserver(_:))
         }
-        textFieldTextChangedObserver = nil
+        notificationObservers = nil
+    }
+    
+    private func adjustContentInsets(_ insets: UIEdgeInsets) {
+        scrollView.contentInset = insets
+        scrollView.scrollIndicatorInsets = insets
     }
     
 }
