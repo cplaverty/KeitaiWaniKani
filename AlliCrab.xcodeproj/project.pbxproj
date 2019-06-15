@@ -145,6 +145,7 @@
 		83A783EC1F9FF1260000D28D /* LevelProgression+DatabaseCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A783EB1F9FF1260000D28D /* LevelProgression+DatabaseCodable.swift */; };
 		83A783EE1F9FF4430000D28D /* LevelProgressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A783ED1F9FF4430000D28D /* LevelProgressionTests.swift */; };
 		83AF99FA1F364ED800E35A00 /* ResourceLastUpdateTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AF99F91F364ED800E35A00 /* ResourceLastUpdateTable.swift */; };
+		83B1B75022B5B46D009CFAE5 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83B1B75222B5B46D009CFAE5 /* Settings.storyboard */; };
 		83B75F6A1F351B0300BECEB0 /* Assignment+DatabaseCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B75F691F351B0300BECEB0 /* Assignment+DatabaseCodable.swift */; };
 		83B75F6D1F351B5300BECEB0 /* ResourceCollectionItem+DatabaseCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B75F6C1F351B5300BECEB0 /* ResourceCollectionItem+DatabaseCodable.swift */; };
 		83B75F701F351E6500BECEB0 /* FMResultSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B75F6F1F351E6500BECEB0 /* FMResultSet.swift */; };
@@ -431,6 +432,7 @@
 		83A783EB1F9FF1260000D28D /* LevelProgression+DatabaseCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LevelProgression+DatabaseCodable.swift"; sourceTree = "<group>"; };
 		83A783ED1F9FF4430000D28D /* LevelProgressionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelProgressionTests.swift; sourceTree = "<group>"; };
 		83AF99F91F364ED800E35A00 /* ResourceLastUpdateTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceLastUpdateTable.swift; sourceTree = "<group>"; };
+		83B1B75122B5B46D009CFAE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		83B75F691F351B0300BECEB0 /* Assignment+DatabaseCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assignment+DatabaseCodable.swift"; sourceTree = "<group>"; };
 		83B75F6C1F351B5300BECEB0 /* ResourceCollectionItem+DatabaseCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResourceCollectionItem+DatabaseCodable.swift"; sourceTree = "<group>"; };
 		83B75F6F1F351E6500BECEB0 /* FMResultSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMResultSet.swift; sourceTree = "<group>"; };
@@ -793,6 +795,7 @@
 				833E051B221B4E4000E99A53 /* Login.storyboard */,
 				8364CB641F27F28D002DBE6B /* Main.storyboard */,
 				8303F82E1F54678300E016E9 /* ReorderSettings.storyboard */,
+				83B1B75222B5B46D009CFAE5 /* Settings.storyboard */,
 				8377C69522308BAE00656E9A /* SubjectDetail.storyboard */,
 			);
 			path = AlliCrab;
@@ -1221,6 +1224,7 @@
 				832C186D1F4502A4001FFACD /* fc_fl.ttf in Resources */,
 				832C186B1F4502A4001FFACD /* cinecaption2.28.ttf in Resources */,
 				83629A8C1F2D1CE8000A26A2 /* Settings.bundle in Resources */,
+				83B1B75022B5B46D009CFAE5 /* Settings.storyboard in Resources */,
 				832C186A1F4502A4001FFACD /* chigfont.ttf in Resources */,
 				8377948122313F8A009D7D7B /* ContextSentenceView.xib in Resources */,
 				832C18721F4502A4001FFACD /* santyoume.otf in Resources */,
@@ -1695,6 +1699,14 @@
 				8377C69422308BAE00656E9A /* Base */,
 			);
 			name = SubjectDetail.storyboard;
+			sourceTree = "<group>";
+		};
+		83B1B75222B5B46D009CFAE5 /* Settings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83B1B75122B5B46D009CFAE5 /* Base */,
+			);
+			name = Settings.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
