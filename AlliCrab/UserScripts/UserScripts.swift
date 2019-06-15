@@ -24,6 +24,7 @@ enum UserScriptInjectionRule {
 class UserScript {
     let name: String
     let author: String?
+    let updater: String?
     let description: String
     let forumLink: URL?
     let requiresFonts: Bool
@@ -43,9 +44,10 @@ class UserScript {
         }
     }
     
-    init(name: String, author: String? = nil, description: String, forumLink: URL? = nil, settingKey: ApplicationSettingKey? = nil, requiresFonts: Bool = false, stylesheetNames: [String]? = nil, scriptNames: [String]? = nil, injectionRules: [UserScriptInjectionRule]) {
+    init(name: String, author: String? = nil, updater: String? = nil, description: String, forumLink: URL? = nil, settingKey: ApplicationSettingKey? = nil, requiresFonts: Bool = false, stylesheetNames: [String]? = nil, scriptNames: [String]? = nil, injectionRules: [UserScriptInjectionRule]) {
         self.name = name
         self.author = author
+        self.updater = updater
         self.description = description
         self.forumLink = forumLink
         self.settingKey = settingKey
@@ -107,7 +109,7 @@ struct UserScriptDefinitions {
     static let community: [UserScript] = [
         UserScript(name: "Close But No Cigar",
                    author: "Ethan",
-                   description: "Prevent \"Your answer was a bit off\" answers from being accepted.  Script by Ethan.",
+                   description: "Prevent \"Your answer was a bit off\" answers from being accepted.",
                    forumLink: WaniKaniURL.forumTopic(withRelativePath: "userscript-prevent-your-answer-was-a-bit-off-answers-from-being-accepted-a-k-a-close-but-no-cigar/7134"),
                    settingKey: .userScriptCloseButNoCigarEnabled,
                    scriptNames: ["WKButNoCigar.user"],
@@ -115,7 +117,7 @@ struct UserScriptDefinitions {
         
         UserScript(name: "Jitai",
                    author: "obskyr",
-                   description: "Display WaniKani reviews in randomised fonts, for more varied reading training.  Script by obskyr.",
+                   description: "Display WaniKani reviews in randomised fonts for more varied reading training.",
                    forumLink: WaniKaniURL.forumTopic(withRelativePath: "jitai-the-font-randomizer-that-fits/12617"),
                    settingKey: .userScriptJitaiEnabled,
                    requiresFonts: true,
@@ -124,7 +126,7 @@ struct UserScriptDefinitions {
         
         UserScript(name: "WaniKani Improve",
                    author: "Seiji",
-                   description: "Automatically moves to the next item if the answer was correct (also known as \"lightning mode\").  Script by Seiji.",
+                   description: "Automatically moves to the next item if the answer was correct (also known as \"lightning mode\").",
                    forumLink: WaniKaniURL.forumTopic(withRelativePath: "wanikani-improve-2-2-2-faster-and-smarter-reviews/2858"),
                    settingKey: .userScriptWaniKaniImproveEnabled,
                    stylesheetNames: ["jquery.qtip.min"],
@@ -132,8 +134,9 @@ struct UserScriptDefinitions {
                    injectionRules: [.ExactMatch(WaniKaniURL.reviewSession)]),
         
         UserScript(name: "WaniKani Override",
-                   author: "ruipgpinheiro, Mempo",
-                   description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  This script is intended to be used to correct genuine mistakes, like typographical errors.  Script by ruipgpinheiro, updated by Mempo.",
+                   author: "ruipgpinheiro",
+                   updater: "Mempo",
+                   description: "Adds an \"Ignore Answer\" button to the bottom of WaniKani review pages, permitting incorrect answers to be ignored.  This script is intended to be used to correct genuine mistakes, like typographical errors.",
                    forumLink: WaniKaniURL.forumTopic(withRelativePath: "userscript-wanikani-override-ignore-answer-button-active-support/17999"),
                    settingKey: .userScriptIgnoreAnswerEnabled,
                    scriptNames: ["wkoverride.user"],
