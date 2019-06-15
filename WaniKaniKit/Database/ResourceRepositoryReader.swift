@@ -556,7 +556,7 @@ public class ResourceRepositoryReader {
                                         forItemAtSRSStage: SRSStage.apprentice.numericLevelRange.lowerBound,
                                         toSRSStage: SRSStage.guru.numericLevelRange.lowerBound,
                                         subjectType: .kanji,
-                                        level: level)
+                                        subjectLevel: level)
             }) ?? Date.distantPast
             
             let unlockDates: [Date]

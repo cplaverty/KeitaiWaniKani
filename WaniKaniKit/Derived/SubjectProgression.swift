@@ -12,6 +12,7 @@ public struct SubjectProgression {
     public let percentComplete: Float
     
     private let earliestGuruDate: Date?
+    private let earliestBurnDate: Date?
     
     public var isLocked: Bool {
         get {
@@ -37,11 +38,18 @@ public struct SubjectProgression {
         }
     }
     
+    public var burnTime: NextReviewTime {
+        get {
+            return NextReviewTime(date: earliestBurnDate)
+        }
+    }
+    
     public init(subjectID: Int, subject: Subject, assignment: Assignment?, getAssignmentForSubjectID: (Int) -> Assignment?) {
         self.subjectID = subjectID
         self.subject = subject
         self.assignment = assignment
         self.earliestGuruDate = subject.earliestGuruDate(assignment: assignment, getAssignmentForSubjectID: getAssignmentForSubjectID)
+        self.earliestBurnDate = subject.earliestBurnDate(assignment: assignment, getAssignmentForSubjectID: getAssignmentForSubjectID)
         self.percentComplete = min(Float(assignment?.srsStage ?? 0) / Float(SRSStage.guru.numericLevelRange.lowerBound), 1.0)
     }
 }

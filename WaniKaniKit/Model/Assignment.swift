@@ -44,8 +44,8 @@ public extension Assignment {
         return level <= 2
     }
     
-    static func earliestDate(from date: Date, forItemAtSRSStage initialStage: Int, toSRSStage finalStage: Int, subjectType: SubjectType, level: Int) -> Date? {
-        let isAccelerated = isAcceleratedLevel(level)
+    static func earliestDate(from date: Date, forItemAtSRSStage initialStage: Int, toSRSStage finalStage: Int, subjectType: SubjectType, subjectLevel: Int) -> Date? {
+        let isAccelerated = isAcceleratedLevel(subjectLevel)
         
         let calendar = Calendar.current
         var guruDate = calendar.startOfHour(for: date)
@@ -59,19 +59,29 @@ public extension Assignment {
         return guruDate
     }
     
-    func guruDate(level: Int) -> Date? {
-        let initialLevel = srsStage + 1
-        let guruNumericLevel = SRSStage.guru.numericLevelRange.lowerBound
+    func guruDate(subjectLevel: Int) -> Date? {
+        if isPassed { return passedAt ?? Date.distantPast }
         
-        if isPassed || initialLevel > guruNumericLevel { return passedAt ?? Date.distantPast }
+        return earliestDate(to: .guru, reportedDate: passedAt, subjectLevel: subjectLevel)
+    }
+    
+    func burnDate(subjectLevel: Int) -> Date? {
+        return earliestDate(to: .burned, reportedDate: burnedAt, subjectLevel: subjectLevel)
+    }
+    
+    private func earliestDate(to stage: SRSStage, reportedDate: Date?, subjectLevel: Int) -> Date? {
+        let initialStageNumeric = srsStage + 1
+        let finalStageNumeric = stage.numericLevelRange.lowerBound
+        
+        if initialStageNumeric > finalStageNumeric { return reportedDate ?? Date.distantPast }
         
         // Assume best case scenario: the next review is performed as soon as it becomes available (or now, if available now) and is successful
         let startOfHour = Calendar.current.startOfHour(for: Date())
-        let baseDate = availableAt.map({ max($0, startOfHour) }) ?? startOfHour
+        let date = availableAt.map({ max($0, startOfHour) }) ?? startOfHour
         
-        if initialLevel == guruNumericLevel { return baseDate }
+        guard initialStageNumeric < finalStageNumeric else { return date }
         
-        return Assignment.earliestDate(from: baseDate, forItemAtSRSStage: initialLevel, toSRSStage: guruNumericLevel, subjectType: subjectType, level: level)
+        return Assignment.earliestDate(from: date, forItemAtSRSStage: initialStageNumeric, toSRSStage: finalStageNumeric, subjectType: subjectType, subjectLevel: subjectLevel)
     }
     
     private static func timeToNextReview(forItemWithSRSStage srsStageNumeric: Int, isAccelerated: Bool) -> DateComponents? {

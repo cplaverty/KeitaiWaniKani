@@ -58,14 +58,14 @@ public extension Subject {
             .filter({ assignment in assignment?.isPassed != true })
         
         if let assignment = assignment, pendingSubjectAssignments.isEmpty {
-            return assignment.guruDate(level: level)
+            return assignment.guruDate(subjectLevel: level)
         }
         
         let unlockDateForLockedItems: Date?
         if pendingSubjectAssignments.isEmpty {
             unlockDateForLockedItems = Calendar.current.startOfHour(for: Date())
         } else {
-            let guruDates = pendingSubjectAssignments.map({ assignment in assignment?.guruDate(level: level) })
+            let guruDates = pendingSubjectAssignments.map({ assignment in assignment?.guruDate(subjectLevel: level) })
             unlockDateForLockedItems = guruDates.allSatisfy({ $0 != nil }) ? guruDates.lazy.compactMap({ $0 }).max() : nil
         }
         
@@ -74,7 +74,39 @@ public extension Subject {
                                            forItemAtSRSStage: SRSStage.apprentice.numericLevelRange.lowerBound,
                                            toSRSStage: SRSStage.guru.numericLevelRange.lowerBound,
                                            subjectType: subjectType,
-                                           level: level)
+                                           subjectLevel: level)
+        } else {
+            return nil
+        }
+    }
+    
+    func earliestBurnDate(assignment: Assignment?, getAssignmentForSubjectID: (Int) -> Assignment?) -> Date? {
+        if let assignment = assignment, let burnedAt = assignment.burnedAt {
+            return burnedAt
+        }
+        
+        let pendingSubjectAssignments = componentSubjectIDs
+            .map({ componentSubjectID in getAssignmentForSubjectID(componentSubjectID) })
+            .filter({ assignment in assignment?.isPassed != true })
+        
+        if let assignment = assignment, pendingSubjectAssignments.isEmpty {
+            return assignment.burnDate(subjectLevel: level)
+        }
+        
+        let unlockDateForLockedItems: Date?
+        if pendingSubjectAssignments.isEmpty {
+            unlockDateForLockedItems = Calendar.current.startOfHour(for: Date())
+        } else {
+            let guruDates = pendingSubjectAssignments.map({ assignment in assignment?.guruDate(subjectLevel: level) })
+            unlockDateForLockedItems = guruDates.allSatisfy({ $0 != nil }) ? guruDates.lazy.compactMap({ $0 }).max() : nil
+        }
+        
+        if let unlockDateForLockedItems = unlockDateForLockedItems {
+            return Assignment.earliestDate(from: unlockDateForLockedItems,
+                                           forItemAtSRSStage: SRSStage.apprentice.numericLevelRange.lowerBound,
+                                           toSRSStage: SRSStage.burned.numericLevelRange.lowerBound,
+                                           subjectType: subjectType,
+                                           subjectLevel: level)
         } else {
             return nil
         }

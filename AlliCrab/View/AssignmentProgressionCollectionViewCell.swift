@@ -27,9 +27,10 @@ class AssignmentProgressionCollectionViewCell: UICollectionViewCell {
     // MARK: - Outlets
     
     @IBOutlet weak var characterView: SubjectCharacterView!
-    @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var timeToNextReviewLabel: UILabel!
-    @IBOutlet weak var timeToGuruLabel: UILabel!
+    @IBOutlet weak var timeToNextMilestoneStageValueLabel: UILabel!
+    @IBOutlet weak var timeToNextMilestoneStageNameLabel: UILabel!
+    @IBOutlet weak var progressView: UIProgressView!
     
     // MARK: - Update UI
     
@@ -39,9 +40,6 @@ class AssignmentProgressionCollectionViewCell: UICollectionViewCell {
         }
         
         let isLocked = subjectProgression.isLocked
-        let availableAt = subjectProgression.availableAt
-        let guruTime = subjectProgression.guruTime
-        let percentComplete = subjectProgression.percentComplete
         let subject = subjectProgression.subject
         
         characterView.setSubject(subject, id: subjectProgression.subjectID)
@@ -51,29 +49,44 @@ class AssignmentProgressionCollectionViewCell: UICollectionViewCell {
         if isLocked {
             timeToNextReviewLabel.text = "Locked"
         } else {
-            switch availableAt {
-            case .none:
-                timeToNextReviewLabel.text = "Burned"
-            case .now:
-                timeToNextReviewLabel.text = "Now"
-            case let .date(date) where date.timeIntervalSinceNow <= 0:
-                timeToNextReviewLabel.text = "Now"
-            case let .date(date):
-                let formattedInterval = dateComponentsFormatter.string(from: date.timeIntervalSinceNow, roundingUpwardToNearest: .oneMinute) ?? "???"
-                timeToNextReviewLabel.text = formattedInterval
-            }
+            setNextReviewTime(subjectProgression.availableAt)
         }
+        
+        if !subjectProgression.isPassed {
+            setTimeToNextMilestone(subjectProgression.guruTime, name: "Guru")
+        } else {
+            setTimeToNextMilestone(subjectProgression.burnTime, name: "Burned")
+        }
+        
+        progressView.setProgress(subjectProgression.percentComplete, animated: false)
+    }
+    
+    private func setNextReviewTime(_ nextReviewTime: NextReviewTime) {
+        switch nextReviewTime {
+        case .none:
+            timeToNextReviewLabel.text = "Burned"
+        case .now:
+            timeToNextReviewLabel.text = "Now"
+        case let .date(date) where date.timeIntervalSinceNow <= 0:
+            timeToNextReviewLabel.text = "Now"
+        case let .date(date):
+            let formattedInterval = dateComponentsFormatter.string(from: date.timeIntervalSinceNow, roundingUpwardToNearest: .oneMinute) ?? "???"
+            timeToNextReviewLabel.text = formattedInterval
+        }
+    }
+    
+    private func setTimeToNextMilestone(_ guruTime: NextReviewTime, name: String) {
+        timeToNextMilestoneStageNameLabel.text = "To \(name)"
         
         switch guruTime {
         case .none, .now:
-            timeToGuruLabel.text = "-"
+            timeToNextMilestoneStageValueLabel.text = "-"
         case let .date(date) where date.timeIntervalSinceNow <= 0:
-            timeToGuruLabel.text = "-"
+            timeToNextMilestoneStageValueLabel.text = "-"
         case let .date(date):
             let formattedInterval = dateComponentsFormatter.string(from: date.timeIntervalSinceNow, roundingUpwardToNearest: .oneMinute) ?? "???"
-            timeToGuruLabel.text = formattedInterval
+            timeToNextMilestoneStageValueLabel.text = formattedInterval
         }
-        
-        progressView.setProgress(percentComplete, animated: false)
     }
+    
 }
