@@ -138,11 +138,11 @@ class SettingsTableViewController: UITableViewController {
         switch tableViewSection {
         case let .userScript(userScript):
             var scriptFooter = userScript.description
-            if userScript.author != nil {
-                scriptFooter += " Created by \(userScript.author!)."
+            if let author = userScript.author {
+                scriptFooter += " Created by \(author)."
             }
-            if userScript.updater != nil {
-                scriptFooter += " Updated by \(userScript.updater!)."
+            if let updater = userScript.updater {
+                scriptFooter += " Updated by \(updater)."
             }
             return scriptFooter
         case .feedback:
