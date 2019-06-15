@@ -167,7 +167,7 @@ public class ResourceRepositoryReader {
                 AND \(assignments.unlockedAt) IS NOT NULL
                 AND \(assignments.isHidden) = 0
                 """,
-                values: [userInfo.level])!
+                values: [userInfo.effectiveLevel])!
             let reviewsAvailable = try database.longForQuery("""
                 SELECT COUNT(*)
                 FROM \(assignments) INNER JOIN \(subjects) ON \(assignments.subjectID) = \(subjects.id) AND \(assignments.subjectType) = \(subjects.subjectType)
@@ -179,7 +179,7 @@ public class ResourceRepositoryReader {
                 AND (\(assignments.burnedAt) IS NULL OR \(assignments.isResurrected) = 1)
                 AND \(assignments.isHidden) = 0
                 """,
-                values: [userInfo.level, asOf])!
+                values: [userInfo.effectiveLevel, asOf])!
             let nextReviewDate = try database.dateForQuery("""
                 SELECT MIN(\(assignments.availableAt))
                 FROM \(assignments) INNER JOIN \(subjects) ON \(assignments.subjectID) = \(subjects.id) AND \(assignments.subjectType) = \(subjects.subjectType)
@@ -187,7 +187,7 @@ public class ResourceRepositoryReader {
                 AND \(subjects.hiddenAt) IS NULL
                 AND \(assignments.availableAt) > ? AND \(assignments.isHidden) = 0
                 """,
-                values: [userInfo.level, asOf])
+                values: [userInfo.effectiveLevel, asOf])
             
             let reviewsAvailableNextHour = try database.longForQuery("""
                 SELECT COUNT(*)
@@ -196,14 +196,14 @@ public class ResourceRepositoryReader {
                 AND \(subjects.hiddenAt) IS NULL
                 AND \(assignments.availableAt) BETWEEN ? AND ?
                 """,
-                values: [userInfo.level, asOf, asOf.addingTimeInterval(.oneHour)])!
+                values: [userInfo.effectiveLevel, asOf, asOf.addingTimeInterval(.oneHour)])!
             let reviewsAvailableNextDay = try database.longForQuery("""
                 SELECT COUNT(*)
                 FROM \(assignments) INNER JOIN \(subjects) ON \(assignments.subjectID) = \(subjects.id) AND \(assignments.subjectType) = \(subjects.subjectType)
                 WHERE \(subjects.level) <= ?
                 AND \(assignments.availableAt) BETWEEN ? AND ?
                 """,
-                values: [userInfo.level, asOf, asOf.addingTimeInterval(.oneDay)])!
+                values: [userInfo.effectiveLevel, asOf, asOf.addingTimeInterval(.oneDay)])!
             
             return StudyQueue(lessonsAvailable: lessonsAvailable, reviewsAvailable: reviewsAvailable, nextReviewDate: nextReviewDate, reviewsAvailableNextHour: reviewsAvailableNextHour, reviewsAvailableNextDay: reviewsAvailableNextDay)
         }
@@ -244,7 +244,7 @@ public class ResourceRepositoryReader {
             AND (\(assignments.isHidden) IS NULL OR \(assignments.isHidden) = 0)
             """
             
-            guard let resultSet = database.executeQuery(query, withParameterDictionary: ["level": userInformation.level]) else {
+            guard let resultSet = database.executeQuery(query, withParameterDictionary: ["level": userInformation.effectiveLevel]) else {
                 throw database.lastError()
             }
             defer { resultSet.close() }
@@ -365,7 +365,7 @@ public class ResourceRepositoryReader {
             GROUP BY 1
             """
             
-            let resultSet = try database.executeQuery(query, values: [userInformation.level])
+            let resultSet = try database.executeQuery(query, values: [userInformation.effectiveLevel])
             defer { resultSet.close() }
             
             var countsBySRSStage = [SRSStage: SRSItemCounts]()
@@ -444,7 +444,7 @@ public class ResourceRepositoryReader {
             queryArgs["level"] = level
         } else {
             additionalCriteria += "\nAND \(subjects.level) <= :level"
-            queryArgs["level"] = userInformation.level
+            queryArgs["level"] = userInformation.effectiveLevel
         }
         
         let query = """
@@ -511,7 +511,7 @@ public class ResourceRepositoryReader {
                 progress.abandonedAt == nil
             })
             
-            let maxLevelToInfer = levelProgressions.first.map({ $0.level - 1 }) ?? userInfo.level
+            let maxLevelToInfer = levelProgressions.first.map({ $0.level - 1 }) ?? userInfo.effectiveLevel
             if maxLevelToInfer > 0 {
                 let maxInferredLevelEndDate = levelProgressions.first.flatMap({ $0.unlockedAt })
                 let inferredLevelProgressions = try inferLevelProgressionFromSubjects(toLevel: maxLevelToInfer, toLevelStartDate: maxInferredLevelEndDate, from: database)
@@ -524,13 +524,13 @@ public class ResourceRepositoryReader {
                 levelProgressions = inferredLevelProgressions + levelProgressions
             }
             
-            let lastLevel = levelProgressions.last
+            let currentLevelProgression = levelProgressions.last(where: { $0.level == userInfo.effectiveLevel })
             let projectedCurrentLevel: ProjectedLevelInfo?
-            if let lastLevel = lastLevel, let startedAt = lastLevel.startedAt, let passedAt = lastLevel.passedAt {
+            if let lastLevel = currentLevelProgression, let startedAt = lastLevel.startedAt, let passedAt = lastLevel.passedAt {
                 projectedCurrentLevel = ProjectedLevelInfo(level: lastLevel.level, startDate: startedAt, endDate: passedAt, endDateMethodology: .actual)
             } else {
-                let level = lastLevel?.level ?? userInfo.level
-                let startedAt = lastLevel?.startedAt ?? Date()
+                let level = currentLevelProgression?.level ?? userInfo.effectiveLevel
+                let startedAt = currentLevelProgression?.startedAt ?? Date()
                 projectedCurrentLevel = try projectedLevel(level, startDate: startedAt, from: database)
             }
             

@@ -221,7 +221,7 @@ class AssignmentProgressionCollectionViewController: UICollectionViewController 
             return
         }
         
-        var progression = try! repositoryReader.subjectProgression(type: subjectType, forLevel: userInformation.level)
+        var progression = try! repositoryReader.subjectProgression(type: subjectType, forLevel: userInformation.effectiveLevel)
         
         var sections = [Section]()
         sections.reserveCapacity(2)

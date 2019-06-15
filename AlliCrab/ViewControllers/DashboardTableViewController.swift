@@ -127,7 +127,7 @@ class DashboardTableViewController: UITableViewController {
         case .upcomingReviews:
             return "Upcoming Reviews"
         case .levelProgression:
-            if let level = userInformation?.level {
+            if let level = userInformation?.effectiveLevel {
                 return "Level \(level) Progress"
             } else {
                 return "Level Progress"

@@ -186,7 +186,7 @@ class ReviewTimelineTableViewController: UITableViewController {
         case .none: break
         case .currentLevel:
             let user = try repositoryReader.userInformation()
-            level = user?.level
+            level = user?.effectiveLevel
         case .toBeBurned:
             srsStage = .enlightened
         }

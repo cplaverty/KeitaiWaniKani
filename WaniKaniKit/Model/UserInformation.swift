@@ -14,6 +14,10 @@ public struct UserInformation: StandaloneResourceData, Equatable {
     public let subscription: Subscription
     public let currentVacationStartedAt: Date?
     
+    public var effectiveLevel: Int {
+        return min(level, subscription.maxLevelGranted)
+    }
+    
     private enum CodingKeys: String, CodingKey {
         case id
         case username
