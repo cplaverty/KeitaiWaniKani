@@ -40,13 +40,13 @@ if (userResponseInput != null) {
             handleLoadingShown();
         }
         loadingDiv.on('hide', handleLoadingHidden);
-        loadingDiv.on('show', handleLoadingShown)
+        loadingDiv.on('show', handleLoadingShown);
     }
     
     // Logic to fix scrolling issue on focus of response input
     window.addEventListener("scroll", function (e) {
         if (userResponseInput.is(":focus")) {
-            $("html, body").scrollTop(0)
+            $("html, body").scrollTop(0);
         }
     })
 }
