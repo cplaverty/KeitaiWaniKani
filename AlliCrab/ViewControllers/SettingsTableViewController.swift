@@ -137,12 +137,16 @@ class SettingsTableViewController: UITableViewController {
         
         switch tableViewSection {
         case let .userScript(userScript):
-            guard let author = userScript.author else {
-                return nil
+            var scriptFooter = userScript.description
+            if let author = userScript.author {
+                scriptFooter += " Created by \(author)."
             }
-            return "Script by \(author)"
+            if let updater = userScript.updater {
+                scriptFooter += " Updated by \(updater)."
+            }
+            return scriptFooter
         case .feedback:
-            return "Please check the app forum topic for the latest news and support"
+            return "Please check the app forum topic for the latest news and support."
         case .logOut:
             let (product, version, build) = self.productAndVersion
             return "\(product) version \(version) (build \(build))"
