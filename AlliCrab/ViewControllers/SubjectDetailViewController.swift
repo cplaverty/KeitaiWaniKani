@@ -279,7 +279,7 @@ class SubjectDetailViewController: UIViewController {
     }
     
     private func setText(markup str: String, to label: UILabel) {
-        label.attributedText = NSAttributedString(wkMarkup: str, attributes: [.font: label.font!])
+        label.attributedText = NSAttributedString(wkMarkup: str, jpFont: jpFont, attributes: [.font: label.font!])
     }
     
     private func setText(note str: String?, to label: UILabel) {

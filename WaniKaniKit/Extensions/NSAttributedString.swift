@@ -33,7 +33,7 @@ public extension NSAttributedString {
                     .backgroundColor: UIColor.black,
                     .foregroundColor: UIColor.white,
                 ]
-            case "jp":
+            case "ja":
                 guard let jpFont = jpFont else {
                     return nil
                 }
