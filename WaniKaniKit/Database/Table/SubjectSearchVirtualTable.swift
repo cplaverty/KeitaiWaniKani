@@ -17,6 +17,6 @@ final class SubjectSearchVirtualTable: VirtualTable {
     let nonprimaryReadings = Column(name: "nonprimary_reading")
     
     init() {
-        super.init(name: "subject_search")
+        super.init(name: "subject_search", prefixIndexes: [2, 4])
     }
 }

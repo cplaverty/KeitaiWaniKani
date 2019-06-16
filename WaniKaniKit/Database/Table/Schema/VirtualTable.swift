@@ -11,8 +11,9 @@ class VirtualTable {
     
     // We have to make these vars so that we can create the Mirror in the initialiser
     var columns: [Column]! = nil
+    var prefixIndexes: [Int]! = nil
     
-    init(name: String) {
+    init(name: String, prefixIndexes: [Int]? = nil) {
         self.name = name
         let mirror = Mirror(reflecting: self)
         var columns = [Column]()
@@ -24,6 +25,7 @@ class VirtualTable {
             }
         }
         self.columns = columns
+        self.prefixIndexes = prefixIndexes
     }
     
     class Column {
@@ -58,6 +60,9 @@ extension VirtualTable: TableProtocol {
     var sqlStatement: String {
         var query = "CREATE VIRTUAL TABLE \(name) USING fts5("
         query += columns.lazy.map({ $0.sqlStatement }).joined(separator: ", ")
+        if let prefixIndexes = prefixIndexes {
+            query += ", prefix = '\(prefixIndexes.lazy.map({ String($0) }).joined(separator: ","))'"
+        }
         query += ", tokenize = porter);\n"
         query += "INSERT INTO \(name)(\(name), rank) VALUES('rank', 'bm25(\(columns.lazy.map({ String($0.rank) }).joined(separator: ", ")))');"
         
