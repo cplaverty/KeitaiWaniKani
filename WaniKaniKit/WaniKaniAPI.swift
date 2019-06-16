@@ -110,14 +110,16 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
         progress.isPausable = true
         
         let task = dataTask(with: url) { [weak progress] (data, response, error) in
-            defer { progress?.completedUnitCount = 1 }
-            
             do {
                 let resource = try self.parseResource(T.self, data: data, response: response, error: error)
+                progress?.completedUnitCount = 1
+                
                 completionHandler(.success(resource))
             } catch let error as URLError where error.code == .cancelled {
                 // Ignore cancellation errors
+                progress?.completedUnitCount = 1
             } catch {
+                progress?.completedUnitCount = 1
                 completionHandler(.failure(error))
             }
         }
@@ -142,15 +144,16 @@ public class WaniKaniAPI: WaniKaniAPIProtocol {
     
     private func fetchResourceCollection(with url: URL, request: Request, completionHandler: @escaping (Result<ResourceCollection, Error>) -> Bool) -> URLSessionDataTask {
         let task = dataTask(with: url) { (data, response, error) in
-            defer { request.progress.completedUnitCount += 1 }
-            
             let resources: ResourceCollection
             do {
                 resources = try self.parseResource(ResourceCollection.self, data: data, response: response, error: error)
+                request.progress.completedUnitCount += 1
             } catch let error as URLError where error.code == .cancelled {
                 // Do not notify errors due to cancellation
+                request.progress.completedUnitCount += 1
                 return
             } catch {
+                request.progress.completedUnitCount += 1
                 _ = completionHandler(.failure(error))
                 return
             }
