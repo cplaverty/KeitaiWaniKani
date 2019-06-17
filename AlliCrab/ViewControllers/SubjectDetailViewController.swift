@@ -35,6 +35,10 @@ class SubjectDetailViewController: UIViewController {
     
     var repositoryReader: ResourceRepositoryReader!
     var subjectID: Int?
+    private var subject: Subject?
+    private var studyMaterials: StudyMaterials?
+    private var assignment: Assignment?
+    private var reviewStatistics: ReviewStatistics?
     
     // MARK: - Outlets
     
@@ -96,6 +100,14 @@ class SubjectDetailViewController: UIViewController {
     @IBOutlet var visibleViewsForVocabulary: [UIView]!
     @IBOutlet var reviewStatisticsViews: [UIView]!
     
+    // MARK: - Actions
+    
+    @IBAction func openInSafariButtonTapped(_ sender: UIBarButtonItem) {
+        guard let subject = subject else { return }
+        
+        self.presentSafariViewController(url: subject.documentURL)
+    }
+    
     // MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
@@ -131,6 +143,11 @@ class SubjectDetailViewController: UIViewController {
         os_log("Fetching subject detail for %d", type: .info, subjectID)
         
         let (subject, studyMaterials, assignment, reviewStatistics) = try repositoryReader.subjectDetail(id: subjectID)
+        
+        self.subject = subject
+        self.studyMaterials = studyMaterials
+        self.assignment = assignment
+        self.reviewStatistics = reviewStatistics
         
         characterView.setSubject(subject, id: subjectID)
         headerView.backgroundColor = subject.subjectType.backgroundColor

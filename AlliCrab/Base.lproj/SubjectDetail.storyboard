@@ -693,11 +693,18 @@
                         <viewLayoutGuide key="safeArea" id="8t2-Kb-ZAH"/>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="cfP-7R-rqZ">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="jgG-Tz-p6K">
-                            <connections>
-                                <segue destination="uVs-jA-FHD" kind="unwind" unwindAction="unwindToSubjectDetailPresenter:" id="raL-oB-AJn"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="done" systemItem="done" id="jgG-Tz-p6K">
+                                <connections>
+                                    <segue destination="uVs-jA-FHD" kind="unwind" unwindAction="unwindToSubjectDetailPresenter:" id="raL-oB-AJn"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Open in Safari" image="OpenInSafari" id="y4u-gQ-wmr">
+                                <connections>
+                                    <action selector="openInSafariButtonTapped:" destination="gTi-cz-9aY" id="mhI-DB-oI2"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="1500"/>
@@ -819,7 +826,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="180"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAc-u8-QW3" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="24" height="144"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="144"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                                             <real key="value" value="24"/>
@@ -827,7 +834,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meaning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFS-ar-ocI">
-                                                    <rect key="frame" x="32" y="0.0" width="0.0" height="144"/>
+                                                    <rect key="frame" x="8" y="0.0" width="24" height="144"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -1067,9 +1074,10 @@
     </scenes>
     <resources>
         <image name="Apprentice" width="23" height="23"/>
+        <image name="OpenInSafari" width="23" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="q4w-16-Z37"/>
+        <segue reference="HhG-Ty-i5o"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Colours/GlobalTint"/>
 </document>
