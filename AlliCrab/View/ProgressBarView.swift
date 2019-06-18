@@ -34,7 +34,7 @@ class ProgressBarView: UIView, XibLoadable {
             return progressView.progress
         }
         set {
-            progressView.setProgress(newValue, animated: newValue > 0)
+            progressView.setProgress(newValue, animated: false)
             let formattedFractionComplete = type(of: self).percentFormatter.string(from: newValue as NSNumber)
             percentCompleteLabel.text = formattedFractionComplete
         }
