@@ -90,6 +90,7 @@ class DashboardTableViewController: UITableViewController {
         let vc = WaniKaniReviewPageWebViewController.wrapped(url: WaniKaniURL.lessonSession) { controller in
             controller.delegate = self
         }
+        vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
     
@@ -97,6 +98,7 @@ class DashboardTableViewController: UITableViewController {
         let vc = WaniKaniReviewPageWebViewController.wrapped(url: WaniKaniURL.reviewSession) { controller in
             controller.delegate = self
         }
+        vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
     
