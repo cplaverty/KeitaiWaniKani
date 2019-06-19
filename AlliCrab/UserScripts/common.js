@@ -152,24 +152,24 @@ if (!isReview) {
 }
 if (textNode.length > 0) {
     var observer = new MutationObserver(function() {
-        // The review span value changed. Reset the font-size to the default inherited value and resize if needed
+        // The lesson/review item has changed. Reset the font-size to the default inherited value and resize if needed
         textNode.css("font-size", "");
         var boundingWidth = isReview ? textNode.parent().width() : textNode.outerWidth();
         while (isReview ? textNode.width() > boundingWidth : textNode.prop('scrollWidth') > boundingWidth) {
-            // The text is extended beyond the available width of the container
+            // The text is extended beyond the available width of the container...
             var currentFontSize = parseInt(textNode.css("font-size"), 10);
-            
             if (currentFontSize <= 0) {
                 // This should NEVER happen, but is here just to prevent all possibility of an infinite loop.
                 textNode.css("font-size", "");
                 return;
             }
             
-            // Shrink the font size by 5px and re-test (NOTE: cannot use jQuery ".css" because it doesn't support "important")
+            // Shrink the font size by 5px and re-test 
+            // NOTE: We cannot use jQuery ".css" to set the font here because it doesn't support "important"
             textNode[0].style.setProperty('font-size', (currentFontSize - 5)  + 'px', 'important');
         }
     });
 
-    // Start observing the review span for changes
+    // Start observing the lesson/review item text for changes
     observer.observe(textNode[0], {childList: true, subtree: !isReview});
 }
