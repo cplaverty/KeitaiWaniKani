@@ -145,22 +145,19 @@ if (!String.prototype.repeat) {
 }
 
 // Logic to handle resizing long text to fit within one line
-var container = $('#main-info');
-var textNode = null;
-var isReview = !container.length;
-if (isReview) {
-    container = $('#character');
-    textNode = $('#character span');
+//#reviews #question #character,
+//#lessons header #main-info #character {
+var textNode = $('#reviews #question #character span');
+var isReview = textNode.length > 0;
+if (!isReview) {
+    textNode = $('#lessons header #main-info #character');
 }
-else {
-    textNode = $('#character');
-}
-if (container.length && textNode.length) {
+if (textNode.length > 0) {
     var observer = new MutationObserver(function() {
         // The review span value changed
         textNode.css("font-size", "");
-        var containerWidth = isReview ? container.width() : textNode.outerWidth();
-        while (isReview ? textNode.width() > containerWidth : textNode.prop('scrollWidth') > containerWidth) {
+        var boundingWidth = isReview ? textNode.parent().width() : textNode.outerWidth();
+        while (isReview ? textNode.width() > boundingWidth : textNode.prop('scrollWidth') > boundingWidth) {
             // The text is extended beyond the available width of the container
             var currentFontSize = parseInt(textNode.css("font-size"), 10);
             
