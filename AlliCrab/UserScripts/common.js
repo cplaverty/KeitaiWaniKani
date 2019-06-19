@@ -157,8 +157,8 @@ if (textNode.length > 0) {
         var boundingWidth = isReview ? textNode.parent().width() : textNode.outerWidth();
         while (isReview ? textNode.width() > boundingWidth : textNode.prop('scrollWidth') > boundingWidth) {
             // The text is extended beyond the available width of the container...
-            var currentFontSize = parseInt(textNode.css("font-size"), 10);
-            if (currentFontSize - 5 <= 0) {
+            var smallerFontSize = parseInt(textNode.css("font-size"), 10) - 5;
+            if (smallerFontSize <= 0) {
                 // This should NEVER happen, but is here just to prevent all possibility of an infinite loop.
                 textNode.css("font-size", "");
                 return;
@@ -166,7 +166,7 @@ if (textNode.length > 0) {
             
             // Shrink the font size by 5px and re-test 
             // NOTE: We cannot use jQuery ".css" to set the font here because it doesn't support "important"
-            textNode[0].style.setProperty('font-size', (currentFontSize - 5)  + 'px', 'important');
+            textNode[0].style.setProperty('font-size', smallerFontSize  + 'px', 'important');
         }
     });
 
