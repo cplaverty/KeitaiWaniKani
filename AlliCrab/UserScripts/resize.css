@@ -21,7 +21,8 @@ header #main-info #character {
     vertical-align: middle;
 }
 
-#reviews #question #character {
+#reviews #question #character,
+#lessons header #main-info #character {
     white-space: nowrap;
     padding-left: 4vw !important;
     padding-right: 4vw !important;

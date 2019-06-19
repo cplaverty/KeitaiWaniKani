@@ -145,29 +145,36 @@ if (!String.prototype.repeat) {
 }
 
 // Logic to handle resizing long text to fit within one line
-var reviewSpan = $('#character span');
-var reviewSpanContainer = $('#character');
-if (reviewSpanContainer.length && reviewSpan.length) {
+var container = $('#main-info');
+var textNode = null;
+var isReview = !container.length;
+if (isReview) {
+    container = $('#character');
+    textNode = $('#character span');
+}
+else {
+    textNode = $('#character');
+}
+if (container.length && textNode.length) {
     var observer = new MutationObserver(function() {
         // The review span value changed
-        // Reset the font-size to the default size defined by the css class
-        reviewSpan.css("font-size", "");
-        
-        while (reviewSpan.outerWidth() >= reviewSpanContainer.width()) {
+        textNode.css("font-size", "");
+        var containerWidth = isReview ? container.width() : textNode.outerWidth();
+        while (isReview ? textNode.width() > containerWidth : textNode.prop('scrollWidth') > containerWidth) {
             // The text is extended beyond the available width of the container
-            var currentFontSize = parseInt(reviewSpan.css("font-size"), 10);
+            var currentFontSize = parseInt(textNode.css("font-size"), 10);
             
             if (currentFontSize <= 0) {
                 // This should NEVER happen, but is here just to prevent all possibility of an infinite loop.
-                reviewSpan.css("font-size", "");
+                textNode.css("font-size", "");
                 return;
             }
             
             // Shrink the font size by 5px and re-test
-            reviewSpan.css("font-size", currentFontSize - 5);
+            textNode[0].style.setProperty('font-size', (currentFontSize - 5)  + 'px', 'important');
         }
     });
 
     // Start observing the review span for changes
-    observer.observe(reviewSpan[0], {childList: true});
+    observer.observe(textNode[0], {childList: true, subtree: !isReview});
 }
