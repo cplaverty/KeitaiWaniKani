@@ -21,6 +21,12 @@ header #main-info #character {
     vertical-align: middle;
 }
 
+#reviews #question #character {
+    white-space: nowrap;
+    padding-left: 4vw !important;
+    padding-right: 4vw !important;
+}
+
 @media (min-width: 320px) and (max-width: 767px) {
     #reviews #question #character, #lessons header #main-info #character {
         font-size: 10vh !important; line-height: 20vh !important; padding: 10px 0 0;

@@ -143,3 +143,31 @@ if (!String.prototype.repeat) {
         return rpt;
     }
 }
+
+// Logic to handle resizing long text to fit within one line
+var reviewSpan = $('#character span');
+var reviewSpanContainer = $('#character');
+if (reviewSpanContainer.length && reviewSpan.length) {
+    var observer = new MutationObserver(function() {
+        // The review span value changed
+        // Reset the font-size to the default size defined by the css class
+        reviewSpan.css("font-size", "");
+        
+        while (reviewSpan.outerWidth() >= reviewSpanContainer.width()) {
+            // The text is extended beyond the available width of the container
+            var currentFontSize = parseInt(reviewSpan.css("font-size"), 10);
+            
+            if (currentFontSize <= 0) {
+                // This should NEVER happen, but is here just to prevent all possibility of an infinite loop.
+                reviewSpan.css("font-size", "");
+                return;
+            }
+            
+            // Shrink the font size by 5px and re-test
+            reviewSpan.css("font-size", currentFontSize - 5);
+        }
+    });
+
+    // Start observing the review span for changes
+    observer.observe(reviewSpan[0], {childList: true});
+}
