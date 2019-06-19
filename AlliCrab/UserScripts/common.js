@@ -158,7 +158,7 @@ if (textNode.length > 0) {
         while (isReview ? textNode.width() > boundingWidth : textNode.prop('scrollWidth') > boundingWidth) {
             // The text is extended beyond the available width of the container...
             var currentFontSize = parseInt(textNode.css("font-size"), 10);
-            if (currentFontSize <= 0) {
+            if (currentFontSize - 5 <= 0) {
                 // This should NEVER happen, but is here just to prevent all possibility of an infinite loop.
                 textNode.css("font-size", "");
                 return;
