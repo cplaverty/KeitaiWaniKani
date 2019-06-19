@@ -145,8 +145,6 @@ if (!String.prototype.repeat) {
 }
 
 // Logic to handle resizing long text to fit within one line
-//#reviews #question #character,
-//#lessons header #main-info #character {
 var textNode = $('#reviews #question #character span');
 var isReview = textNode.length > 0;
 if (!isReview) {
@@ -154,7 +152,7 @@ if (!isReview) {
 }
 if (textNode.length > 0) {
     var observer = new MutationObserver(function() {
-        // The review span value changed
+        // The review span value changed. Reset the font-size to the default inherited value and resize if needed
         textNode.css("font-size", "");
         var boundingWidth = isReview ? textNode.parent().width() : textNode.outerWidth();
         while (isReview ? textNode.width() > boundingWidth : textNode.prop('scrollWidth') > boundingWidth) {
@@ -167,7 +165,7 @@ if (textNode.length > 0) {
                 return;
             }
             
-            // Shrink the font size by 5px and re-test
+            // Shrink the font size by 5px and re-test (NOTE: cannot use jQuery ".css" because it doesn't support "important")
             textNode[0].style.setProperty('font-size', (currentFontSize - 5)  + 'px', 'important');
         }
     });
