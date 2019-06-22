@@ -54,6 +54,7 @@
 		833E0512221B33D700E99A53 /* SubjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833E0511221B33D700E99A53 /* SubjectDetailViewController.swift */; };
 		833E0518221B4A2800E99A53 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833E0517221B4A2800E99A53 /* Storyboard.swift */; };
 		833E0519221B4E4000E99A53 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 833E051B221B4E4000E99A53 /* Login.storyboard */; };
+		833FA65722BE43FE00DBF17B /* UserScriptSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833FA65622BE43FE00DBF17B /* UserScriptSettingsTableViewController.swift */; };
 		834230AA1F3E0A51000E83FE /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834230A91F3E0A51000E83FE /* NotificationCenter.framework */; };
 		834230AD1F3E0A51000E83FE /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834230AC1F3E0A51000E83FE /* TodayViewController.swift */; };
 		834230B01F3E0A51000E83FE /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 834230AE1F3E0A51000E83FE /* MainInterface.storyboard */; };
@@ -334,6 +335,7 @@
 		833E0511221B33D700E99A53 /* SubjectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectDetailViewController.swift; sourceTree = "<group>"; };
 		833E0517221B4A2800E99A53 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		833E051A221B4E4000E99A53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
+		833FA65622BE43FE00DBF17B /* UserScriptSettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScriptSettingsTableViewController.swift; sourceTree = "<group>"; };
 		834230A81F3E0A51000E83FE /* WaniKaniStudyQueueWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WaniKaniStudyQueueWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		834230A91F3E0A51000E83FE /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		834230AC1F3E0A51000E83FE /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -926,6 +928,7 @@
 				833E0511221B33D700E99A53 /* SubjectDetailViewController.swift */,
 				836DE2B51F9B918D005E42EC /* SubjectSearchTableViewController.swift */,
 				8329E02022289EE700653324 /* SubjectSummaryCollectionViewController.swift */,
+				833FA65622BE43FE00DBF17B /* UserScriptSettingsTableViewController.swift */,
 				837CEC8C1F4CDAE9008EBE08 /* WaniKaniLoginWebViewController.swift */,
 				83B8A6F91F50961F006665DB /* WaniKaniReviewPageWebViewController.swift */,
 				832708521F4C66F100AB1525 /* WebViewBackForwardListTableViewController.swift */,
@@ -1582,6 +1585,7 @@
 				832708511F4C595C00AB1525 /* WebViewController.swift in Sources */,
 				83CE51D51F4EE2F70050242A /* NumericDetailTableViewCell.swift in Sources */,
 				833E0518221B4A2800E99A53 /* Storyboard.swift in Sources */,
+				833FA65722BE43FE00DBF17B /* UserScriptSettingsTableViewController.swift in Sources */,
 				832C185A1F4501ED001FFACD /* UserScriptSupport.swift in Sources */,
 				83FEF43E1F4F952F00A7029D /* ReviewTimelineTableViewController.swift in Sources */,
 				83C071FD1F4A4E630046A3FD /* LoginRootViewController.swift in Sources */,

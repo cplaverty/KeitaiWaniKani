@@ -9,6 +9,11 @@ import os
 import UserNotifications
 import WaniKaniKit
 
+enum NotificationStrategy: String, CaseIterable {
+    case firstReviewSession
+    case everyReviewSession
+}
+
 enum NotificationManagerIdentifier: CustomStringConvertible {
     case badge(Int)
     case text
@@ -24,6 +29,11 @@ enum NotificationManagerIdentifier: CustomStringConvertible {
 }
 
 class NotificationManager {
+    
+    private enum ThreadIdentifier: String {
+        case reviewCount = "review-count"
+    }
+    
     private var notificationObservers: [NSObjectProtocol]?
     
     var delegate: UNUserNotificationCenterDelegate? {
@@ -84,6 +94,7 @@ class NotificationManager {
             }
             
             let now = Date()
+            let notificationStrategy = ApplicationSettings.notificationStrategy
             let reviewTimeline = try resourceRepository.reviewTimeline()
             
             let currentReviewCount = reviewTimeline.lazy.filter({ $0.dateAvailable <= now }).map({ $0.itemCounts.total }).reduce(0, +)
@@ -93,15 +104,22 @@ class NotificationManager {
             
             let futureReviews = reviewTimeline.lazy.filter({ $0.dateAvailable > now }).prefix(48)
             
-            if let nextReview = futureReviews.first, currentReviewCount == 0 {
-                let reviewNotificationText = notificationText(forCount: nextReview.itemCounts.total)
-                scheduleNotification(body: reviewNotificationText, at: nextReview.dateAvailable)
+            if notificationStrategy == .firstReviewSession && currentReviewCount == 0 {
+                if let nextReview = futureReviews.first {
+                    let reviewNotificationText = notificationText(forCount: nextReview.itemCounts.total)
+                    scheduleNotification(body: reviewNotificationText, at: nextReview.dateAvailable)
+                }
             }
             
             var cumulativeReviewTotal = currentReviewCount
             for review in futureReviews {
                 cumulativeReviewTotal += review.itemCounts.total
-                scheduleNotification(badgeNumber: cumulativeReviewTotal, at: review.dateAvailable)
+                
+                let reviewNotificationText = notificationStrategy == .everyReviewSession
+                    ? notificationText(forCount: cumulativeReviewTotal)
+                    : nil
+                
+                scheduleNotification(badgeNumber: cumulativeReviewTotal, body: reviewNotificationText, at: review.dateAvailable)
             }
         } catch ResourceRepositoryError.noDatabase {
             clearBadgeNumberAndRemoveAllNotifications()
@@ -190,11 +208,16 @@ class NotificationManager {
         center.removeAllDeliveredNotifications()
     }
     
-    private func scheduleNotification(badgeNumber: Int, at date: Date) {
+    private func scheduleNotification(badgeNumber: Int, body: String? = nil, at date: Date) {
         os_log("Scheduling local notification with badge number %d at %@", type: .debug, badgeNumber, date as NSDate)
         
         let content = UNMutableNotificationContent()
         content.badge = badgeNumber as NSNumber
+        if let body = body {
+            content.body = body
+            content.sound = UNNotificationSound.default
+            content.threadIdentifier = ThreadIdentifier.reviewCount.rawValue
+        }
         
         scheduleNotification(content: content, identifier: .badge(badgeNumber), at: date)
     }
@@ -211,6 +234,7 @@ class NotificationManager {
         if includeSound {
             content.sound = UNNotificationSound.default
         }
+        content.threadIdentifier = ThreadIdentifier.reviewCount.rawValue
         
         scheduleNotification(content: content, identifier: .text, at: date)
     }
@@ -225,4 +249,5 @@ class NotificationManager {
         let center = UNUserNotificationCenter.current()
         center.add(request, withCompletionHandler: nil)
     }
+    
 }

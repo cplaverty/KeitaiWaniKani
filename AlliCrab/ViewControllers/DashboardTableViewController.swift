@@ -30,7 +30,7 @@ class DashboardTableViewController: UITableViewController {
     }
     
     private enum TableViewSection: Int, CaseIterable {
-        case available = 0, upcomingReviews, levelProgression, srsDistribution, links
+        case available, upcomingReviews, levelProgression, srsDistribution, links
     }
     
     // MARK: - Properties
@@ -474,7 +474,9 @@ class DashboardTableViewController: UITableViewController {
         os_log("Preparing segue %@", type: .debug, identifier)
         
         switch segueIdentifier {
-        case .settings: break
+        case .settings:
+            let vc = segue.destination as! SettingsTableViewController
+            vc.repositoryReader = resourceRepository
         case .assignmentProgression:
             let vc = segue.destination as! AssignmentProgressionCollectionViewController
             let cell = sender as! LevelProgressTableViewCell

@@ -5,72 +5,28 @@
 //  Copyright © 2017 Chris Laverty. All rights reserved.
 //
 
-import os
 import UIKit
 import WaniKaniKit
 
 class SettingsTableViewController: UITableViewController {
     
     private enum ReuseIdentifier: String {
-        case userScript = "UserScript"
-        case forumTopicLink = "ForumTopicLink"
         case basic = "Basic"
+        case forumTopicLink = "ForumTopicLink"
     }
     
-    private enum TableViewSection: RawRepresentable {
-        case userScript(UserScript), feedback, logOut
-        
-        init?(rawValue: Int) {
-            var section = rawValue
-            if section < UserScriptDefinitions.community.count {
-                self = .userScript(UserScriptDefinitions.community[section])
-                return
-            }
-            section -= UserScriptDefinitions.community.count
-            
-            if section < UserScriptDefinitions.custom.count {
-                self = .userScript(UserScriptDefinitions.custom[section])
-                return
-            }
-            section -= UserScriptDefinitions.custom.count
-            
-            switch section {
-            case 0:
-                self = .feedback
-            case 1:
-                self = .logOut
-            default:
-                return nil
-            }
-        }
-        
-        var rawValue: Int {
-            let firstNonScriptIndex = UserScriptDefinitions.community.count + UserScriptDefinitions.custom.count
-            switch self {
-            case let .userScript(userScript):
-                if let index = UserScriptDefinitions.community.firstIndex(where: { $0.name == userScript.name }) {
-                    return index
-                }
-                if let index = UserScriptDefinitions.custom.firstIndex(where: { $0.name == userScript.name }) {
-                    return index + UserScriptDefinitions.community.count
-                }
-                fatalError()
-            case .feedback:
-                return firstNonScriptIndex
-            case .logOut:
-                return firstNonScriptIndex + 1
-            }
-        }
-        
-        static var count: Int {
-            return UserScriptDefinitions.community.count + UserScriptDefinitions.custom.count + 2
-        }
+    private enum TableViewSection: Int, CaseIterable {
+        case notification, userScripts, feedback, logOut
     }
+    
+    // MARK: - Properties
+    
+    var repositoryReader: ResourceRepositoryReader?
     
     // MARK: - UITableViewDataSource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return TableViewSection.count
+        return TableViewSection.allCases.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -79,9 +35,10 @@ class SettingsTableViewController: UITableViewController {
         }
         
         switch tableViewSection {
-        case let .userScript(userScript): return userScript.forumLink == nil ? 1 : 2
-        case .feedback: return 1
-        case .logOut: return 1
+        case .notification:
+            return 2
+        case .userScripts, .feedback, .logOut:
+            return 1
         }
     }
     
@@ -91,20 +48,26 @@ class SettingsTableViewController: UITableViewController {
         }
         
         switch tableViewSection {
-        case let .userScript(userScript):
+        case .notification:
+            let notificationStrategy = ApplicationSettings.notificationStrategy
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.basic.rawValue, for: indexPath)
+            
             switch indexPath.row {
             case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.userScript.rawValue, for: indexPath) as! UserScriptTableViewCell
-                cell.userScript = userScript
-                
-                return cell
+                cell.textLabel?.text = "First Review Session"
+                cell.accessoryType = notificationStrategy == .firstReviewSession ? .checkmark : .none
             case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.forumTopicLink.rawValue, for: indexPath)
-                cell.detailTextLabel?.text = userScript.forumLink?.absoluteString.removingPercentEncoding
-                
-                return cell
+                cell.textLabel?.text = "Every Review Session"
+                cell.accessoryType = notificationStrategy == .everyReviewSession ? .checkmark : .none
             default: fatalError()
             }
+            
+            return cell
+        case .userScripts:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.basic.rawValue, for: indexPath)
+            cell.textLabel?.text = "User Scripts"
+            
+            return cell
         case .feedback:
             let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.forumTopicLink.rawValue, for: indexPath)
             cell.detailTextLabel?.text = WaniKaniURL.appForumTopic.absoluteString.removingPercentEncoding
@@ -124,9 +87,9 @@ class SettingsTableViewController: UITableViewController {
         }
         
         switch tableViewSection {
-        case let .userScript(userScript): return "Script: \(userScript.name)"
+        case .notification: return "Notifications"
         case .feedback: return "Feedback"
-        case .logOut: return nil
+        case .userScripts, .logOut: return nil
         }
     }
     
@@ -136,15 +99,7 @@ class SettingsTableViewController: UITableViewController {
         }
         
         switch tableViewSection {
-        case let .userScript(userScript):
-            var scriptFooter = userScript.description
-            if let author = userScript.author {
-                scriptFooter += " Created by \(author)."
-            }
-            if let updater = userScript.updater {
-                scriptFooter += " Updated by \(updater)."
-            }
-            return scriptFooter
+        case .notification, .userScripts: return nil
         case .feedback:
             return "Please check the app forum topic for the latest news and support."
         case .logOut:
@@ -153,22 +108,35 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let tableViewSection = TableViewSection(rawValue: indexPath.section) else {
             fatalError("Invalid section index \(indexPath.section) requested")
         }
         
         switch tableViewSection {
-        case let .userScript(userScript):
-            if let forumLink = userScript.forumLink {
-                presentSafariViewController(url: forumLink)
+        case .notification:
+            let previousSelection = IndexPath(row: NotificationStrategy.allCases.firstIndex(of: ApplicationSettings.notificationStrategy)!, section: indexPath.section)
+            
+            let selectedNotificationStrategy = NotificationStrategy.allCases[indexPath.row]
+            if ApplicationSettings.notificationStrategy != selectedNotificationStrategy {
+                ApplicationSettings.notificationStrategy = selectedNotificationStrategy
+                
+                if let repositoryReader = repositoryReader {
+                    let delegate = UIApplication.shared.delegate as! AppDelegate
+                    delegate.notificationManager.scheduleNotifications(resourceRepository: repositoryReader)
+                }
             }
+            
+            tableView.reloadRows(at: [previousSelection, indexPath], with: .automatic)
+        case .userScripts:
+            let vc = storyboard?.instantiateViewController(withIdentifier: "UserScriptSettings") as! UserScriptSettingsTableViewController
+            navigationController?.pushViewController(vc, animated: true)
         case .feedback:
             presentSafariViewController(url: WaniKaniURL.appForumTopic)
         case .logOut: confirmLogOut()
         }
         
-        return nil
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // MARK: - Log Out

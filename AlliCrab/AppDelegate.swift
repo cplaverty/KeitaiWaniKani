@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private let databaseConnectionFactory: DatabaseConnectionFactory
     private let databaseManager: DatabaseManager
-    private let notificationManager: NotificationManager
+    let notificationManager: NotificationManager
     
     private var shouldSendNotifications = true
     

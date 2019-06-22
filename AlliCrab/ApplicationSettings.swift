@@ -9,6 +9,7 @@ import WaniKaniKit
 
 enum ApplicationSettingKey: String {
     case apiKey = "apiKeyV2"
+    case notificationStrategy = "notificationStrategy"
     case purgeDatabase = "purgeDatabase"
     case purgeCaches = "purgeCaches"
     case disableLessonSwipe = "disableLessonSwipe"
@@ -38,6 +39,11 @@ struct ApplicationSettings {
     static var apiKey: String? {
         get { return userDefaults.string(forKey: .apiKey) }
         set { userDefaults.set(newValue, forKey: .apiKey) }
+    }
+    
+    static var notificationStrategy: NotificationStrategy {
+        get { return userDefaults.rawValue(NotificationStrategy.self, forKey: .notificationStrategy) ?? .firstReviewSession }
+        set { userDefaults.set(newValue, forKey: .notificationStrategy) }
     }
     
     static var purgeDatabase: Bool {
@@ -87,6 +93,7 @@ struct ApplicationSettings {
     
     static func resetToDefaults() {
         apiKey = nil
+        notificationStrategy = .firstReviewSession
         purgeDatabase = false
         purgeCaches = false
         disableLessonSwipe = false
@@ -124,6 +131,10 @@ extension UserDefaults {
         set(url, forKey: defaultName.rawValue)
     }
     
+    func set<T: RawRepresentable>(_ value: T?, forKey defaultName: ApplicationSettingKey) {
+        set(value?.rawValue, forKey: defaultName.rawValue)
+    }
+    
     func object(forKey defaultName: ApplicationSettingKey) -> Any? {
         return object(forKey: defaultName.rawValue)
     }
@@ -134,5 +145,12 @@ extension UserDefaults {
     
     func bool(forKey defaultName: ApplicationSettingKey) -> Bool {
         return bool(forKey: defaultName.rawValue)
+    }
+    
+    func rawValue<T: RawRepresentable>(_ type: T.Type, forKey defaultName: ApplicationSettingKey) -> T? {
+        guard let rawValue = object(forKey: defaultName) as? T.RawValue else {
+            return nil
+        }
+        return type.init(rawValue: rawValue)
     }
 }
