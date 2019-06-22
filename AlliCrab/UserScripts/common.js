@@ -143,3 +143,33 @@ if (!String.prototype.repeat) {
         return rpt;
     }
 }
+
+// Logic to handle resizing long text to fit within one line
+var textNode = $('#reviews #question #character span');
+var isReview = textNode.length > 0;
+if (!isReview) {
+    textNode = $('#lessons header #main-info #character');
+}
+if (textNode.length > 0) {
+    var observer = new MutationObserver(function() {
+        // The lesson/review item has changed. Reset the font-size to the default inherited value and resize if needed
+        textNode.css("font-size", "");
+        var boundingWidth = isReview ? textNode.parent().width() : textNode.outerWidth();
+        while (isReview ? textNode.width() > boundingWidth : textNode.prop('scrollWidth') > boundingWidth) {
+            // The text is extended beyond the available width of the container...
+            var smallerFontSize = parseInt(textNode.css("font-size"), 10) - 5;
+            if (smallerFontSize <= 0) {
+                // This should NEVER happen, but is here just to prevent all possibility of an infinite loop.
+                textNode.css("font-size", "");
+                return;
+            }
+            
+            // Shrink the font size by 5px and re-test 
+            // NOTE: We cannot use jQuery ".css" to set the font here because it doesn't support "important"
+            textNode[0].style.setProperty('font-size', smallerFontSize  + 'px', 'important');
+        }
+    });
+
+    // Start observing the lesson/review item text for changes
+    observer.observe(textNode[0], {childList: true, subtree: !isReview});
+}
