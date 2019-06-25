@@ -124,9 +124,11 @@ class ReviewTimelineOptionsTableViewController: UITableViewController {
         case .filter:
             previousSelection = selectedFilterValue.map { IndexPath(row: filterValues.firstIndex(of: $0)!, section: indexPath.section) }
             selectedFilterValue = filterValues[indexPath.row]
+            ApplicationSettings.reviewTimelineFilterType = selectedFilterValue
         case .countMethod:
             previousSelection = selectedCountMethodValue.map { IndexPath(row: countMethodValues.firstIndex(of: $0)!, section: indexPath.section) }
             selectedCountMethodValue = countMethodValues[indexPath.row]
+            ApplicationSettings.reviewTimelineValueType = selectedCountMethodValue
         }
         
         if let previousSelection = previousSelection {

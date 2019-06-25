@@ -19,6 +19,8 @@ enum ApplicationSettingKey: String {
     case userScriptDoubleCheckEnabled = "userScript-DoubleCheck"
     case userScriptWaniKaniImproveEnabled = "userScript-WaniKaniImprove"
     case userScriptReorderUltimateEnabled = "userScript-ReorderUltimate"
+    case reviewTimelineFilterType = "reviewTimelineFilterType"
+    case reviewTimelineValueType = "reviewTimelineValueType"
 }
 
 extension UIColor {
@@ -91,6 +93,24 @@ struct ApplicationSettings {
         set { userDefaults.set(newValue, forKey: .userScriptReorderUltimateEnabled) }
     }
     
+    static var reviewTimelineFilterType: ReviewTimelineFilter? {
+        get { return ReviewTimelineFilter(rawValue: userDefaults.integer(forKey: .reviewTimelineFilterType)) }
+        set {
+            if let timelineFilterValue = newValue {
+                userDefaults.set(timelineFilterValue.rawValue, forKey: .reviewTimelineFilterType)
+            }
+        }
+    }
+    
+    static var reviewTimelineValueType: ReviewTimelineCountMethod? {
+        get { return ReviewTimelineCountMethod(rawValue: userDefaults.integer(forKey: .reviewTimelineValueType))}
+        set {
+            if let timelineCountMethod = newValue {
+                userDefaults.set(timelineCountMethod.rawValue, forKey: .reviewTimelineValueType)
+            }
+        }
+    }
+    
     static func resetToDefaults() {
         apiKey = nil
         notificationStrategy = .firstReviewSession
@@ -103,6 +123,8 @@ struct ApplicationSettings {
         userScriptDoubleCheckEnabled = false
         userScriptWaniKaniImproveEnabled = false
         userScriptReorderUltimateEnabled = false
+        reviewTimelineFilterType = ReviewTimelineFilter.none
+        reviewTimelineValueType = ReviewTimelineCountMethod.histogram
     }
 }
 
@@ -145,6 +167,10 @@ extension UserDefaults {
     
     func bool(forKey defaultName: ApplicationSettingKey) -> Bool {
         return bool(forKey: defaultName.rawValue)
+    }
+    
+    func integer(forKey defaultName: ApplicationSettingKey) -> Int {
+        return integer(forKey: defaultName.rawValue)
     }
     
     func rawValue<T: RawRepresentable>(_ type: T.Type, forKey defaultName: ApplicationSettingKey) -> T? {

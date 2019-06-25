@@ -9,12 +9,15 @@ import os
 import UIKit
 import WaniKaniKit
 
-enum ReviewTimelineFilter: CaseIterable {
-    case none, currentLevel, toBeBurned
+enum ReviewTimelineFilter: Int, CaseIterable {
+    case none = 0
+    case currentLevel = 1
+    case toBeBurned = 2
 }
 
-enum ReviewTimelineCountMethod: CaseIterable {
-    case histogram, cumulative
+enum ReviewTimelineCountMethod: Int, CaseIterable {
+    case histogram = 0
+    case cumulative = 1
 }
 
 class ReviewTimelineTableViewController: UITableViewController {
@@ -37,13 +40,13 @@ class ReviewTimelineTableViewController: UITableViewController {
         }
     }
     
-    private var filter: ReviewTimelineFilter = .none {
+    private var filter: ReviewTimelineFilter = ApplicationSettings.reviewTimelineFilterType ?? .none {
         didSet {
             try! updateReviewTimeline()
         }
     }
     
-    private var countMethod: ReviewTimelineCountMethod = .histogram {
+    private var countMethod: ReviewTimelineCountMethod = ApplicationSettings.reviewTimelineValueType ?? .histogram {
         didSet {
             tableView.reloadData()
         }
