@@ -96,18 +96,20 @@ struct ApplicationSettings {
     static var reviewTimelineFilterType: ReviewTimelineFilter? {
         get { return ReviewTimelineFilter(rawValue: userDefaults.integer(forKey: .reviewTimelineFilterType)) }
         set {
-            if let timelineFilterValue = newValue {
-                userDefaults.set(timelineFilterValue.rawValue, forKey: .reviewTimelineFilterType)
+            guard let timelineFilterValue = newValue else {
+                return
             }
+            userDefaults.set(timelineFilterValue.rawValue, forKey: .reviewTimelineFilterType)
         }
     }
     
     static var reviewTimelineValueType: ReviewTimelineCountMethod? {
         get { return ReviewTimelineCountMethod(rawValue: userDefaults.integer(forKey: .reviewTimelineValueType))}
         set {
-            if let timelineCountMethod = newValue {
-                userDefaults.set(timelineCountMethod.rawValue, forKey: .reviewTimelineValueType)
+            guard let timelineCountMethod = newValue else {
+                return
             }
+            userDefaults.set(timelineCountMethod.rawValue, forKey: .reviewTimelineValueType)
         }
     }
     
@@ -168,7 +170,7 @@ extension UserDefaults {
     func bool(forKey defaultName: ApplicationSettingKey) -> Bool {
         return bool(forKey: defaultName.rawValue)
     }
-    
+
     func integer(forKey defaultName: ApplicationSettingKey) -> Int {
         return integer(forKey: defaultName.rawValue)
     }
