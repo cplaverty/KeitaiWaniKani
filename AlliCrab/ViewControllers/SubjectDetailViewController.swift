@@ -227,24 +227,24 @@ class SubjectDetailViewController: UIViewController {
     }
     
     private func setRelatedSubjects(ids: [Int], title: String) throws {
-        let allowedSubjectIDs = try repositoryReader.filterSubjectIDsForSubscription(ids.filterDuplicates())
-        guard !allowedSubjectIDs.isEmpty else {
+        let uniqueSubjectIDs = ids.filterDuplicates()
+        guard !uniqueSubjectIDs.isEmpty else {
             relatedSubjectsView.removeFromSuperview()
             return
         }
         
         relatedSubjectsLabel.text = title
-        setSubjectIDs(allowedSubjectIDs, toChildAtIndex: 1, autoSize: false)
+        setSubjectIDs(uniqueSubjectIDs, toChildAtIndex: 1, autoSize: false)
     }
     
     private func setFoundVocabulary(ids: [Int]) throws {
-        let allowedSubjectIDs = try repositoryReader.filterSubjectIDsForSubscription(ids.filterDuplicates())
-        guard !allowedSubjectIDs.isEmpty else {
+        let uniqueSubjectIDs = ids.filterDuplicates()
+        guard !uniqueSubjectIDs.isEmpty else {
             foundInVocabularyView.removeFromSuperview()
             return
         }
         
-        setSubjectIDs(allowedSubjectIDs, toChildAtIndex: 2, autoSize: false)
+        setSubjectIDs(uniqueSubjectIDs, toChildAtIndex: 2, autoSize: false)
     }
     
     private func setSubjectIDs(_ ids: [Int], toChildAtIndex index: Int, autoSize: Bool) {

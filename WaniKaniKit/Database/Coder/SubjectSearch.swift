@@ -10,16 +10,15 @@ import FMDB
 private let table = Tables.subjectSearch
 
 struct SubjectSearch {
-    static func read(from database: FMDatabase, searchQuery: String, maxLevel: Int) throws -> [Int] {
+    static func read(from database: FMDatabase, searchQuery: String) throws -> [Int] {
         let query = """
         SELECT \(table.subjectID)
         FROM \(table)
         WHERE \(table.name) MATCH ?
-        AND \(table.level) <= ?
         ORDER BY rank, \(table.subjectID)
         """
         
-        let resultSet = try database.executeQuery(query, values: ["\(searchQuery) *", maxLevel])
+        let resultSet = try database.executeQuery(query, values: ["\(searchQuery) *"])
         
         var subjectIDs = [Int]()
         while resultSet.next() {
