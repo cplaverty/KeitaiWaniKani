@@ -82,6 +82,10 @@ class SubjectCharacterView: UIView, XibLoadable {
         contentView.prepareForInterfaceBuilder()
     }
     
+    func cancelImageDownloadIfRequested() {
+        imageLoader = nil
+    }
+    
     private func setCharacters(_ characters: String) {
         imageLoader = nil
         characterLabel.isHidden = false

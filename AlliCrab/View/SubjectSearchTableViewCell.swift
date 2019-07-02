@@ -34,4 +34,10 @@ class SubjectSearchTableViewCell: UITableViewCell {
     @IBOutlet weak var primaryReadingLabel: UILabel!
     @IBOutlet weak var primaryMeaningLabel: UILabel!
     
+    // MARK: - UICollectionReusableView
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        characterView.cancelImageDownloadIfRequested()
+    }
 }

@@ -32,6 +32,13 @@ class AssignmentProgressionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var timeToNextMilestoneStageNameLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
     
+    // MARK: - UICollectionReusableView
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        characterView.cancelImageDownloadIfRequested()
+    }
+    
     // MARK: - Update UI
     
     func updateUI() {
