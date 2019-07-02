@@ -181,8 +181,8 @@ class NotificationManager {
         let formattedCount = NumberFormatter.localizedString(from: count as NSNumber, number: .decimal)
         
         return count == 1
-            ? "You have 1 new WaniKani review available"
-            : "You have \(formattedCount) new WaniKani reviews available"
+            ? "You have 1 WaniKani review available"
+            : "You have \(formattedCount) WaniKani reviews available"
     }
     
     func removePendingNotificationRequests(withIdentifier identifier: String) {
@@ -241,7 +241,7 @@ class NotificationManager {
     
     private func scheduleNotification(content: UNNotificationContent, identifier: NotificationManagerIdentifier, at date: Date?) {
         let trigger = date.map({ d -> UNNotificationTrigger in
-            let dateComponents = Calendar.current.dateComponents([.era, .year, .month, .day, .hour, .minute, .second], from: d)
+            let dateComponents = Calendar.current.dateComponents([.era, .year, .month, .day, .hour, .minute, .second, .calendar, .timeZone], from: d)
             return UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         })
         
