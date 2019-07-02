@@ -60,6 +60,8 @@ class StudyQueueTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         timeToNextReviewLabel?.text = "–"
         associatedNameLabel?.text = nil
         associatedValueLabel?.text = nil
