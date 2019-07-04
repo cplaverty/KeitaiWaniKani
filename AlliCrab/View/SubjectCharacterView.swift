@@ -31,7 +31,11 @@ class SubjectCharacterView: UIView, XibLoadable {
         }
     }
     
+    private(set) var subjectID: Int = 0
+    
     func setSubject(_ subject: Subject, id: Int) {
+        subjectID = id
+        
         switch subject {
         case let r as Radical:
             if let image = UIImage(named: "Radicals/\(id)") {

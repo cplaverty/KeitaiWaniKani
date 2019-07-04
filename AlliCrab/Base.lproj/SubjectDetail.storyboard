@@ -809,46 +809,44 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="25G-3O-t8o">
-                            <size key="itemSize" width="80" height="40"/>
+                            <size key="itemSize" width="150" height="40"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="Subject" id="eWo-nc-Ma7" customClass="SubjectCollectionViewCell" customModule="AlliCrab" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Subject" id="eWo-nc-Ma7" customClass="SubjectCollectionViewCell" customModule="AlliCrab" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="150" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="80" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="40"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ihj-Nj-bfR">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="180"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAc-u8-QW3" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="144"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="24"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meaning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFS-ar-ocI">
-                                                    <rect key="frame" x="8" y="0.0" width="24" height="144"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </stackView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jAc-u8-QW3" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
+                                            <rect key="frame" x="20" y="8" width="24" height="24"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                                    <real key="value" value="24"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meaning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFS-ar-ocI">
+                                            <rect key="frame" x="64" y="10" width="66" height="20.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="ihj-Nj-bfR" firstAttribute="leading" secondItem="eWo-nc-Ma7" secondAttribute="leadingMargin" id="E4Q-1l-BPg"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="ihj-Nj-bfR" secondAttribute="trailing" id="IFE-N1-i3y"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="ihj-Nj-bfR" secondAttribute="bottom" id="JwH-qX-eIa"/>
-                                    <constraint firstItem="ihj-Nj-bfR" firstAttribute="top" secondItem="eWo-nc-Ma7" secondAttribute="topMargin" id="SQF-tL-LfU"/>
+                                    <constraint firstItem="JFS-ar-ocI" firstAttribute="top" secondItem="eWo-nc-Ma7" secondAttribute="topMargin" id="9FJ-Kr-S3x"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="JFS-ar-ocI" secondAttribute="bottom" id="Ff6-o8-tTy"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="jAc-u8-QW3" secondAttribute="bottom" id="Jql-tr-x97"/>
+                                    <constraint firstItem="jAc-u8-QW3" firstAttribute="leading" secondItem="eWo-nc-Ma7" secondAttribute="leadingMargin" id="M01-hu-ba2"/>
+                                    <constraint firstItem="JFS-ar-ocI" firstAttribute="leading" secondItem="jAc-u8-QW3" secondAttribute="trailing" constant="8" symbolic="YES" id="Qfj-fO-tfi"/>
+                                    <constraint firstItem="jAc-u8-QW3" firstAttribute="top" secondItem="eWo-nc-Ma7" secondAttribute="topMargin" id="nUC-Kg-Oo1"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="JFS-ar-ocI" secondAttribute="trailing" id="ox4-K8-lqv"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -871,7 +869,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7ye-Mg-ny4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1513" y="-976"/>
+            <point key="canvasLocation" x="1512.8" y="-976.01199400299856"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8UO-eu-r9S">
@@ -911,51 +909,49 @@
                             </userDefinedRuntimeAttributes>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="Subject" id="rDb-8x-vdz" customClass="SubjectCollectionViewCell" customModule="AlliCrab" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Subject" id="rDb-8x-vdz" customClass="SubjectCollectionViewCell" customModule="AlliCrab" customModuleProvider="target">
                                 <rect key="frame" x="71.5" y="0.0" width="200" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="75"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="N4L-tp-yNc">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="180"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wF8-g9-lB4" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
+                                            <rect key="frame" x="8" y="8" width="42" height="42"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                                    <real key="value" value="42"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ekW-it-dEF">
+                                            <rect key="frame" x="94" y="8" width="66" height="45"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wF8-g9-lB4" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="72.5" height="121"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="42"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="ekW-it-dEF">
-                                                    <rect key="frame" x="86" y="0.0" width="66" height="121"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dtX-aR-r7v">
-                                                            <rect key="frame" x="3.5" y="0.0" width="62.5" height="60.5"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meaning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mfs-UB-ARG">
-                                                            <rect key="frame" x="0.0" y="60.5" width="66" height="60.5"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dtX-aR-r7v">
+                                                    <rect key="frame" x="3.5" y="0.0" width="62.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meaning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mfs-UB-ARG">
+                                                    <rect key="frame" x="0.0" y="24.5" width="66" height="20.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </stackView>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="N4L-tp-yNc" firstAttribute="top" secondItem="rDb-8x-vdz" secondAttribute="topMargin" id="R4I-dK-scM"/>
-                                    <constraint firstItem="N4L-tp-yNc" firstAttribute="leading" secondItem="rDb-8x-vdz" secondAttribute="leadingMargin" id="fQA-3D-7rM"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="N4L-tp-yNc" secondAttribute="bottom" id="kfG-NS-3N6"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="N4L-tp-yNc" secondAttribute="trailing" id="n4b-AV-Z5A"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="ekW-it-dEF" secondAttribute="bottom" id="0Vc-he-Xf0"/>
+                                    <constraint firstItem="wF8-g9-lB4" firstAttribute="top" secondItem="rDb-8x-vdz" secondAttribute="topMargin" id="7Hh-Hc-hn5"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="wF8-g9-lB4" secondAttribute="bottom" id="9Hp-u4-jc6"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="ekW-it-dEF" secondAttribute="trailing" id="aMD-sp-kH5"/>
+                                    <constraint firstItem="wF8-g9-lB4" firstAttribute="leading" secondItem="rDb-8x-vdz" secondAttribute="leadingMargin" id="luD-lF-P1z"/>
+                                    <constraint firstItem="ekW-it-dEF" firstAttribute="top" secondItem="rDb-8x-vdz" secondAttribute="topMargin" id="nos-ET-ODi"/>
+                                    <constraint firstItem="ekW-it-dEF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wF8-g9-lB4" secondAttribute="trailing" constant="8" symbolic="YES" id="o1W-cW-UBP"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -1001,51 +997,49 @@
                             </userDefinedRuntimeAttributes>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="Subject" id="yeK-Wa-dec" customClass="SubjectCollectionViewCell" customModule="AlliCrab" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Subject" id="yeK-Wa-dec" customClass="SubjectCollectionViewCell" customModule="AlliCrab" customModuleProvider="target">
                                 <rect key="frame" x="21.5" y="0.0" width="300" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mHJ-dH-cxz">
-                                            <rect key="frame" x="8" y="8" width="292" height="90"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3VK-Mn-OSO" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
+                                            <rect key="frame" x="8" y="8" width="28" height="28"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                                    <real key="value" value="28"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="cAo-aa-zgJ">
+                                            <rect key="frame" x="211.5" y="8" width="48.5" height="33"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3VK-Mn-OSO" customClass="SubjectCharacterView" customModule="AlliCrab" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="195.5" height="50"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
-                                                            <real key="value" value="28"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="cAo-aa-zgJ">
-                                                    <rect key="frame" x="203.5" y="0.0" width="48.5" height="50"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TEd-pU-6nQ">
-                                                            <rect key="frame" x="2.5" y="0.0" width="46" height="25"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meaning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bEw-5O-azV">
-                                                            <rect key="frame" x="0.0" y="25" width="48.5" height="25"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Reading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TEd-pU-6nQ">
+                                                    <rect key="frame" x="2.5" y="0.0" width="46" height="14.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Meaning" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bEw-5O-azV">
+                                                    <rect key="frame" x="0.0" y="18.5" width="48.5" height="14.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </stackView>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="mHJ-dH-cxz" firstAttribute="top" secondItem="yeK-Wa-dec" secondAttribute="topMargin" id="F9f-St-Fbk"/>
-                                    <constraint firstItem="mHJ-dH-cxz" firstAttribute="leading" secondItem="yeK-Wa-dec" secondAttribute="leadingMargin" id="Y7W-2j-MJc"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="mHJ-dH-cxz" secondAttribute="trailing" id="jFh-CN-JnM"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="mHJ-dH-cxz" secondAttribute="bottom" id="lyX-0E-JkV"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="cAo-aa-zgJ" secondAttribute="bottom" id="1vs-y8-tQC"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="cAo-aa-zgJ" secondAttribute="trailing" id="5TA-rM-BbA"/>
+                                    <constraint firstItem="cAo-aa-zgJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3VK-Mn-OSO" secondAttribute="trailing" constant="8" symbolic="YES" id="Bj8-zl-43f"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="3VK-Mn-OSO" secondAttribute="bottom" id="aNQ-RQ-D5F"/>
+                                    <constraint firstItem="cAo-aa-zgJ" firstAttribute="top" secondItem="yeK-Wa-dec" secondAttribute="topMargin" id="g5V-fN-Bor"/>
+                                    <constraint firstItem="3VK-Mn-OSO" firstAttribute="leading" secondItem="yeK-Wa-dec" secondAttribute="leadingMargin" id="lb0-E0-w7c"/>
+                                    <constraint firstItem="3VK-Mn-OSO" firstAttribute="top" secondItem="yeK-Wa-dec" secondAttribute="topMargin" id="rPt-uz-9Ob"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -1077,7 +1071,7 @@
         <image name="OpenInSafari" width="23" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HhG-Ty-i5o"/>
+        <segue reference="q4w-16-Z37"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="Colours/GlobalTint"/>
 </document>

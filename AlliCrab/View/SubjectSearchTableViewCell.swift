@@ -8,25 +8,7 @@
 import UIKit
 import WaniKaniKit
 
-class SubjectSearchTableViewCell: UITableViewCell {
-    
-    // MARK: - Properties
-    
-    private(set) var subjectID: Int = 0
-    
-    func setSubject(_ subject: Subject, id: Int) {
-        subjectID = id
-        characterView.setSubject(subject, id: id)
-        
-        backgroundColor = subject.subjectType.backgroundColor
-        
-        if let primaryReadingLabel = primaryReadingLabel {
-            primaryReadingLabel.text = subject.primaryReading
-        }
-        if let primaryMeaningLabel = primaryMeaningLabel {
-            primaryMeaningLabel.text = subject.primaryMeaning
-        }
-    }
+class SubjectSearchTableViewCell: UITableViewCell, SubjectCell {
     
     // MARK: - Outlets
     

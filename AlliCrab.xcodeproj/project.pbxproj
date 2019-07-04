@@ -49,6 +49,7 @@
 		8334ABEB1F48900F00BBFDC8 /* FMDatabaseQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8334ABEA1F48900F00BBFDC8 /* FMDatabaseQueue.swift */; };
 		8334ABEF1F4899C500BBFDC8 /* DateComponentsFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83150B1B1F3E67AF00B61F3A /* DateComponentsFormatter.swift */; };
 		8334ABF01F4899E000BBFDC8 /* DateComponentsFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83150B371F3F543500B61F3A /* DateComponentsFormatterTests.swift */; };
+		833814FB22CE98740023472E /* SubjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833814FA22CE98740023472E /* SubjectCell.swift */; };
 		833D7A0C1F2C9F8800A22F33 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833D7A0B1F2C9F8800A22F33 /* Table.swift */; };
 		833D7A0E1F2CB12200A22F33 /* UserInformationTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833D7A0D1F2CB12200A22F33 /* UserInformationTable.swift */; };
 		833E0512221B33D700E99A53 /* SubjectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833E0511221B33D700E99A53 /* SubjectDetailViewController.swift */; };
@@ -330,6 +331,7 @@
 		832C1E4D1F9345D10026F36D /* SubjectSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectSearch.swift; sourceTree = "<group>"; };
 		8334ABE81F488F6A00BBFDC8 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 		8334ABEA1F48900F00BBFDC8 /* FMDatabaseQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDatabaseQueue.swift; sourceTree = "<group>"; };
+		833814FA22CE98740023472E /* SubjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectCell.swift; sourceTree = "<group>"; };
 		833D7A0B1F2C9F8800A22F33 /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
 		833D7A0D1F2CB12200A22F33 /* UserInformationTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationTable.swift; sourceTree = "<group>"; };
 		833E0511221B33D700E99A53 /* SubjectDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectDetailViewController.swift; sourceTree = "<group>"; };
@@ -953,6 +955,7 @@
 				83956AD022718C5700814B95 /* CachingSubjectLoader.swift */,
 				83C681FF1F51C2CD00CC431C /* RadicalCharacterImageLoader.swift */,
 				838973C5221E07A300EED665 /* XibLoadable.swift */,
+				833814FA22CE98740023472E /* SubjectCell.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1563,6 +1566,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				833814FB22CE98740023472E /* SubjectCell.swift in Sources */,
 				832708581F4C9D9E00AB1525 /* WKWebView.swift in Sources */,
 				83B8A6F41F507A42006665DB /* ResourceRepository.swift in Sources */,
 				832708561F4C920100AB1525 /* WebAddressBarView.swift in Sources */,
