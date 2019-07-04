@@ -11,6 +11,7 @@ import UIKit
 import WaniKaniKit
 
 struct ApplicationURL {
+    static let dashboard = URL(string: "kwk://launch/dashboard")!
     static let launchReviews = URL(string: "kwk://launch/reviews")!
 }
 
@@ -114,11 +115,12 @@ class TodayViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if self.studyQueue != nil {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let studyQueue = self.studyQueue, studyQueue.reviewsAvailable > 0 {
             self.extensionContext?.open(ApplicationURL.launchReviews, completionHandler: nil)
+        } else {
+            self.extensionContext?.open(ApplicationURL.dashboard, completionHandler: nil)
         }
-        return nil
     }
     
 }
