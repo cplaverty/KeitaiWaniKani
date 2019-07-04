@@ -13,6 +13,7 @@ class SettingsTableViewController: UITableViewController {
     private enum ReuseIdentifier: String {
         case basic = "Basic"
         case forumTopicLink = "ForumTopicLink"
+        case signOut = "SignOut"
     }
     
     private enum TableViewSection: Int, CaseIterable {
@@ -74,8 +75,7 @@ class SettingsTableViewController: UITableViewController {
             
             return cell
         case .logOut:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.basic.rawValue, for: indexPath)
-            cell.textLabel?.text = "Log Out"
+            let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.signOut.rawValue, for: indexPath)
             
             return cell
         }
