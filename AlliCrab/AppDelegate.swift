@@ -310,16 +310,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         let identifier = response.notification.request.identifier
         
-        if identifier == NotificationManagerIdentifier.text.description {
-            switch response.actionIdentifier {
-            case UNNotificationDefaultActionIdentifier:
-                os_log("Showing review page in response to notification interaction", type: .info)
-                presentReviewViewController(on: rootViewController.topPresentedViewController, animated: true)
-            case UNNotificationDismissActionIdentifier:
-                os_log("Removing any pending review count notifications due to notification dismissal", type: .info)
-                notificationManager.removePendingNotificationRequests(withIdentifier: identifier)
-            default: break
-            }
+        switch response.actionIdentifier {
+        case UNNotificationDefaultActionIdentifier:
+            os_log("Showing review page in response to notification interaction", type: .info)
+            presentReviewViewController(on: rootViewController.topPresentedViewController, animated: true)
+        case UNNotificationDismissActionIdentifier:
+            os_log("Removing any pending review count notifications due to notification dismissal", type: .info)
+            notificationManager.removePendingNotificationRequests(withIdentifier: identifier)
+        default: break
         }
     }
 }
