@@ -26,21 +26,8 @@ class ReviewTimelineOptionsTableViewController: UITableViewController {
     
     weak var delegate: ReviewTimelineOptionsDelegate?
     
-    var selectedFilterValue: ReviewTimelineFilter? {
-        didSet {
-            if let selectedValue = selectedFilterValue {
-                delegate?.reviewTimelineFilter(didChangeTo: selectedValue)
-            }
-        }
-    }
-    
-    var selectedCountMethodValue: ReviewTimelineCountMethod? {
-        didSet {
-            if let selectedValue = selectedCountMethodValue {
-                delegate?.reviewTimelineCountMethod(didChangeTo: selectedValue)
-            }
-        }
-    }
+    var selectedFilterValue: ReviewTimelineFilter = ApplicationSettings.reviewTimelineFilterType
+    var selectedCountMethodValue: ReviewTimelineCountMethod = ApplicationSettings.reviewTimelineValueType
     
     private let filterValues = ReviewTimelineFilter.allCases
     private let countMethodValues = ReviewTimelineCountMethod.allCases
@@ -122,13 +109,19 @@ class ReviewTimelineOptionsTableViewController: UITableViewController {
         let previousSelection: IndexPath?
         switch tableViewSection {
         case .filter:
-            previousSelection = selectedFilterValue.map { IndexPath(row: filterValues.firstIndex(of: $0)!, section: indexPath.section) }
+            previousSelection = IndexPath(row: ReviewTimelineFilter.allCases.firstIndex(of: ApplicationSettings.reviewTimelineFilterType)!, section: indexPath.section)
             selectedFilterValue = filterValues[indexPath.row]
-            ApplicationSettings.reviewTimelineFilterType = selectedFilterValue
+            if ApplicationSettings.reviewTimelineFilterType != selectedFilterValue {
+                ApplicationSettings.reviewTimelineFilterType = selectedFilterValue
+                delegate?.reviewTimelineFilter(didChangeTo: selectedFilterValue)
+            }
         case .countMethod:
-            previousSelection = selectedCountMethodValue.map { IndexPath(row: countMethodValues.firstIndex(of: $0)!, section: indexPath.section) }
+            previousSelection = IndexPath(row: ReviewTimelineCountMethod.allCases.firstIndex(of: ApplicationSettings.reviewTimelineValueType)!, section: indexPath.section)
             selectedCountMethodValue = countMethodValues[indexPath.row]
-            ApplicationSettings.reviewTimelineValueType = selectedCountMethodValue
+            if ApplicationSettings.reviewTimelineValueType != selectedCountMethodValue {
+                ApplicationSettings.reviewTimelineValueType = selectedCountMethodValue
+                delegate?.reviewTimelineCountMethod(didChangeTo: selectedCountMethodValue)
+            }
         }
         
         if let previousSelection = previousSelection {

@@ -9,15 +9,15 @@ import os
 import UIKit
 import WaniKaniKit
 
-enum ReviewTimelineFilter: Int, CaseIterable {
-    case none = 0
-    case currentLevel = 1
-    case toBeBurned = 2
+enum ReviewTimelineFilter: String, CaseIterable {
+    case none
+    case currentLevel
+    case toBeBurned
 }
 
-enum ReviewTimelineCountMethod: Int, CaseIterable {
-    case histogram = 0
-    case cumulative = 1
+enum ReviewTimelineCountMethod: String, CaseIterable {
+    case histogram
+    case cumulative
 }
 
 class ReviewTimelineTableViewController: UITableViewController {
@@ -40,15 +40,17 @@ class ReviewTimelineTableViewController: UITableViewController {
         }
     }
     
-    private var filter: ReviewTimelineFilter = ApplicationSettings.reviewTimelineFilterType ?? .none {
+    private var filter: ReviewTimelineFilter = ApplicationSettings.reviewTimelineFilterType {
         didSet {
             try! updateReviewTimeline()
+            self.updateTitle()
         }
     }
     
-    private var countMethod: ReviewTimelineCountMethod = ApplicationSettings.reviewTimelineValueType ?? .histogram {
+    private var countMethod: ReviewTimelineCountMethod = ApplicationSettings.reviewTimelineValueType {
         didSet {
             tableView.reloadData()
+            self.updateTitle()
         }
     }
     
@@ -137,6 +139,8 @@ class ReviewTimelineTableViewController: UITableViewController {
         tableView.register(ReviewTimelineHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: ReuseIdentifier.dateHeader.rawValue)
         
         notificationObservers = addNotificationObservers()
+        
+        self.updateTitle()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -257,6 +261,16 @@ class ReviewTimelineTableViewController: UITableViewController {
         countsForKey = [SRSReviewCounts(dateAvailable: date, itemCounts: itemCounts)]
     }
     
+    private func updateTitle() {
+        switch ApplicationSettings.reviewTimelineFilterType {
+            case .currentLevel:
+                self.navigationItem.title = "Current Level Reviews"
+            case .toBeBurned:
+                self.navigationItem.title = "Burn Reviews"
+            default:
+                self.navigationItem.title = "All Reviews"
+        }
+    }
 }
 
 extension ReviewTimelineTableViewController: ReviewTimelineOptionsDelegate {

@@ -93,24 +93,14 @@ struct ApplicationSettings {
         set { userDefaults.set(newValue, forKey: .userScriptReorderUltimateEnabled) }
     }
     
-    static var reviewTimelineFilterType: ReviewTimelineFilter? {
-        get { return ReviewTimelineFilter(rawValue: userDefaults.integer(forKey: .reviewTimelineFilterType)) }
-        set {
-            guard let timelineFilterValue = newValue else {
-                return
-            }
-            userDefaults.set(timelineFilterValue.rawValue, forKey: .reviewTimelineFilterType)
-        }
+    static var reviewTimelineFilterType: ReviewTimelineFilter {
+        get { return userDefaults.rawValue(ReviewTimelineFilter.self, forKey: .reviewTimelineFilterType) ?? .none }
+        set { userDefaults.set(newValue, forKey: .reviewTimelineFilterType) }
     }
     
-    static var reviewTimelineValueType: ReviewTimelineCountMethod? {
-        get { return ReviewTimelineCountMethod(rawValue: userDefaults.integer(forKey: .reviewTimelineValueType))}
-        set {
-            guard let timelineCountMethod = newValue else {
-                return
-            }
-            userDefaults.set(timelineCountMethod.rawValue, forKey: .reviewTimelineValueType)
-        }
+    static var reviewTimelineValueType: ReviewTimelineCountMethod {
+        get { return userDefaults.rawValue(ReviewTimelineCountMethod.self, forKey: .reviewTimelineValueType) ?? .histogram }
+        set { userDefaults.set(newValue, forKey: .reviewTimelineValueType) }
     }
     
     static func resetToDefaults() {
@@ -125,8 +115,8 @@ struct ApplicationSettings {
         userScriptDoubleCheckEnabled = false
         userScriptWaniKaniImproveEnabled = false
         userScriptReorderUltimateEnabled = false
-        reviewTimelineFilterType = ReviewTimelineFilter.none
-        reviewTimelineValueType = ReviewTimelineCountMethod.histogram
+        reviewTimelineFilterType = .none
+        reviewTimelineValueType = .histogram
     }
 }
 
@@ -169,10 +159,6 @@ extension UserDefaults {
     
     func bool(forKey defaultName: ApplicationSettingKey) -> Bool {
         return bool(forKey: defaultName.rawValue)
-    }
-
-    func integer(forKey defaultName: ApplicationSettingKey) -> Int {
-        return integer(forKey: defaultName.rawValue)
     }
     
     func rawValue<T: RawRepresentable>(_ type: T.Type, forKey defaultName: ApplicationSettingKey) -> T? {
