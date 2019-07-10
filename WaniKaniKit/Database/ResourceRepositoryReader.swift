@@ -499,7 +499,7 @@ public class ResourceRepositoryReader {
                 projectedCurrentLevel = ProjectedLevelInfo(level: lastLevel.level, startDate: startedAt, endDate: passedAt, endDateMethodology: .actual)
             } else {
                 let level = currentLevelProgression?.level ?? userInfo.effectiveLevel
-                let startedAt = currentLevelProgression?.startedAt ?? Date()
+                let startedAt = currentLevelProgression?.startedAt
                 projectedCurrentLevel = try projectedLevel(level, startDate: startedAt, from: database)
             }
             
@@ -584,7 +584,7 @@ public class ResourceRepositoryReader {
         }
     }
     
-    private func projectedLevel(_ level: Int, startDate: Date, from database: FMDatabase) throws -> ProjectedLevelInfo? {
+    private func projectedLevel(_ level: Int, startDate: Date?, from database: FMDatabase) throws -> ProjectedLevelInfo? {
         let kanji = try Kanji.read(from: database, level: level)
         guard !kanji.isEmpty else { return nil }
         

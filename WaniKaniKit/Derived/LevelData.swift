@@ -44,11 +44,11 @@ public struct LevelStats: Equatable {
 
 public struct ProjectedLevelInfo: Equatable {
     public let level: Int
-    public let startDate: Date
+    public let startDate: Date?
     public let endDate: Date
     public let endDateMethodology: EndDateMethodology
     
-    public init(level: Int, startDate: Date, endDate: Date, endDateMethodology: EndDateMethodology) {
+    public init(level: Int, startDate: Date?, endDate: Date, endDateMethodology: EndDateMethodology) {
         self.level = level
         self.startDate = startDate
         self.endDate = endDate

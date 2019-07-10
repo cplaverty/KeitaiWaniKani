@@ -227,9 +227,9 @@ class DashboardTableViewController: UITableViewController {
             case 3:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.durationDetail.rawValue, for: indexPath) as! DurationDetailTableViewCell
                 if let projectedCurrentLevel = levelTimeline?.projectedCurrentLevel, case .actual = projectedCurrentLevel.endDateMethodology {
-                    cell.update(text: "Level Passed In", duration: projectedCurrentLevel.endDate.timeIntervalSince(projectedCurrentLevel.startDate))
+                    cell.update(text: "Level Passed In", duration: projectedCurrentLevel.startDate.map({ projectedCurrentLevel.endDate.timeIntervalSince($0) }))
                 } else {
-                    cell.update(text: "Current Level Time", duration: (levelTimeline?.projectedCurrentLevel?.startDate.timeIntervalSinceNow).map({ -$0 }))
+                    cell.update(text: "Current Level Time", duration: (levelTimeline?.projectedCurrentLevel?.startDate?.timeIntervalSinceNow).map({ -$0 }))
                 }
                 
                 return cell
@@ -241,7 +241,8 @@ class DashboardTableViewController: UITableViewController {
                     let expectedEndDate: Date
                     switch projectedCurrentLevel.endDateMethodology {
                     case .calculated(usingLockedItem: true):
-                        let endDateByEstimate = projectedCurrentLevel.startDate.addingTimeInterval(levelTimeline?.stats?.mean ?? 0)
+                        let startDate = projectedCurrentLevel.startDate ?? Date()
+                        let endDateByEstimate = startDate.addingTimeInterval(levelTimeline?.stats?.mean ?? 0)
                         expectedEndDate = max(projectedCurrentLevel.endDate, endDateByEstimate)
                         text = "Level Up In (Estimated)"
                     case .calculated(usingLockedItem: false):
