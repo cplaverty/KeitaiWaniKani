@@ -19,6 +19,8 @@ enum ApplicationSettingKey: String {
     case userScriptDoubleCheckEnabled = "userScript-DoubleCheck"
     case userScriptWaniKaniImproveEnabled = "userScript-WaniKaniImprove"
     case userScriptReorderUltimateEnabled = "userScript-ReorderUltimate"
+    case reviewTimelineFilterType = "reviewTimelineFilterType"
+    case reviewTimelineValueType = "reviewTimelineValueType"
 }
 
 extension UIColor {
@@ -91,6 +93,16 @@ struct ApplicationSettings {
         set { userDefaults.set(newValue, forKey: .userScriptReorderUltimateEnabled) }
     }
     
+    static var reviewTimelineFilterType: ReviewTimelineFilter {
+        get { return userDefaults.rawValue(ReviewTimelineFilter.self, forKey: .reviewTimelineFilterType) ?? .none }
+        set { userDefaults.set(newValue, forKey: .reviewTimelineFilterType) }
+    }
+    
+    static var reviewTimelineValueType: ReviewTimelineCountMethod {
+        get { return userDefaults.rawValue(ReviewTimelineCountMethod.self, forKey: .reviewTimelineValueType) ?? .histogram }
+        set { userDefaults.set(newValue, forKey: .reviewTimelineValueType) }
+    }
+    
     static func resetToDefaults() {
         apiKey = nil
         notificationStrategy = .firstReviewSession
@@ -103,6 +115,8 @@ struct ApplicationSettings {
         userScriptDoubleCheckEnabled = false
         userScriptWaniKaniImproveEnabled = false
         userScriptReorderUltimateEnabled = false
+        reviewTimelineFilterType = .none
+        reviewTimelineValueType = .histogram
     }
 }
 
