@@ -32,10 +32,12 @@ class DashboardTableViewHeaderFooterView: UITableViewHeaderFooterView {
         
         contentView.addSubview(titleLabel)
         
-        titleLabel.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor)
+            ])
     }
     
     required init?(coder aDecoder: NSCoder) {

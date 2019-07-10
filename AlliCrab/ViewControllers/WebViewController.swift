@@ -210,14 +210,16 @@ class WebViewController: UIViewController {
         self.view.addSubview(webView)
         self.view.addSubview(statusBarView)
         
-        webView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        webView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        webView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        
-        statusBarView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        statusBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        statusBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            webView.topAnchor.constraint(equalTo: view.topAnchor),
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            statusBarView.topAnchor.constraint(equalTo: view.topAnchor),
+            statusBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            statusBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            ])
         
         if let nc = self.navigationController {
             shouldIncludeDoneButton = nc.viewControllers[0] == self

@@ -51,13 +51,15 @@ class ReviewTimelineHeaderFooterView: UITableViewHeaderFooterView {
         addSubview(titleLabel)
         addSubview(countLabel)
         
-        titleLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor).isActive = true
-        
-        countLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        countLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        countLabel.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: topAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
+            
+            countLabel.topAnchor.constraint(equalTo: topAnchor),
+            countLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+            countLabel.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor)
+            ])
     }
     
     required init?(coder aDecoder: NSCoder) {

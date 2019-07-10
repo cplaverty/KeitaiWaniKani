@@ -96,9 +96,7 @@ class SubjectCharacterView: UIView, XibLoadable {
         characterLabel.text = characters
         displayImageView.image = nil
         displayImageView.isHidden = true
-        displayImageViewHeightConstraints.forEach { constraint in
-            constraint.isActive = false
-        }
+        NSLayoutConstraint.deactivate(displayImageViewHeightConstraints)
     }
     
     private func setImage(_ image: UIImage) {
@@ -107,9 +105,7 @@ class SubjectCharacterView: UIView, XibLoadable {
         characterLabel.text = nil
         displayImageView.image = image.withRenderingMode(.alwaysTemplate)
         displayImageView.isHidden = false
-        displayImageViewHeightConstraints.forEach { constraint in
-            constraint.isActive = true
-        }
+        NSLayoutConstraint.activate(displayImageViewHeightConstraints)
     }
     
     private func setImage(_ imageChoices: [Radical.CharacterImage]) {
@@ -118,9 +114,7 @@ class SubjectCharacterView: UIView, XibLoadable {
         characterLabel.text = nil
         displayImageView.image = nil
         displayImageView.isHidden = false
-        displayImageViewHeightConstraints.forEach { constraint in
-            constraint.isActive = true
-        }
+        NSLayoutConstraint.activate(displayImageViewHeightConstraints)
         
         let imageLoader = RadicalCharacterImageLoader()
         self.imageLoader = imageLoader
