@@ -15,33 +15,23 @@ public struct SubjectProgression {
     private let earliestBurnDate: Date?
     
     public var isLocked: Bool {
-        get {
-            return assignment == nil || assignment!.srsStage == 0
-        }
+        return assignment == nil || assignment!.srsStage == 0
     }
     
     public var isPassed: Bool {
-        get {
-            return assignment?.isPassed ?? false
-        }
+        return assignment?.isPassed ?? false
     }
     
     public var availableAt: NextReviewTime {
-        get {
-            return NextReviewTime(date: assignment?.availableAt)
-        }
+        return NextReviewTime(date: assignment?.availableAt)
     }
     
     public var guruTime: NextReviewTime {
-        get {
-            return NextReviewTime(date: earliestGuruDate)
-        }
+        return NextReviewTime(date: earliestGuruDate)
     }
     
     public var burnTime: NextReviewTime {
-        get {
-            return NextReviewTime(date: earliestBurnDate)
-        }
+        return NextReviewTime(date: earliestBurnDate)
     }
     
     public init(subjectID: Int, subject: Subject, assignment: Assignment?, getAssignmentForSubjectID: (Int) -> Assignment?) {

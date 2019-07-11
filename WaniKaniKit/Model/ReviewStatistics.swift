@@ -39,40 +39,30 @@ public struct ReviewStatistics: ResourceCollectionItemData, Equatable {
 
 public extension ReviewStatistics {
     var total: Int {
-        get {
-            return meaningCorrect + readingCorrect + meaningIncorrect + readingIncorrect
-        }
+        return meaningCorrect + readingCorrect + meaningIncorrect + readingIncorrect
     }
     
     var meaningTotal: Int {
-        get {
-            return meaningCorrect + meaningIncorrect
-        }
+        return meaningCorrect + meaningIncorrect
     }
     
     var meaningPercentageCorrect: Int {
-        get {
-            guard meaningTotal != 0 else {
-                return 100
-            }
-            
-            return meaningCorrect * 100 / meaningTotal
+        guard meaningTotal != 0 else {
+            return 100
         }
+        
+        return meaningCorrect * 100 / meaningTotal
     }
     
     var readingTotal: Int {
-        get {
-            return readingCorrect + readingIncorrect
-        }
+        return readingCorrect + readingIncorrect
     }
     
     var readingPercentageCorrect: Int {
-        get {
-            guard readingTotal != 0 else {
-                return 100
-            }
-            
-            return readingCorrect * 100 / readingTotal
+        guard readingTotal != 0 else {
+            return 100
         }
+        
+        return readingCorrect * 100 / readingTotal
     }
 }

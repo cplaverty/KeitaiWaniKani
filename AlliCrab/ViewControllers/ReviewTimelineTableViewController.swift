@@ -123,7 +123,7 @@ class ReviewTimelineTableViewController: UITableViewController {
         }
         
         let (date, reviewCountsForDate) = histogramReviewTimelineByDate[section]
-        let totalForDay = reviewCountsForDate.reduce(0) { $0 + $1.itemCounts.total }
+        let totalForDay = reviewCountsForDate.lazy.map({ $0.itemCounts.total }).reduce(0, +)
         
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: ReuseIdentifier.dateHeader.rawValue) as! ReviewTimelineHeaderFooterView
         view.updateHeader(date: date, totalForDay: totalForDay)
@@ -263,12 +263,12 @@ class ReviewTimelineTableViewController: UITableViewController {
     
     private func updateTitle() {
         switch ApplicationSettings.reviewTimelineFilterType {
-            case .currentLevel:
-                self.navigationItem.title = "Current Level Reviews"
-            case .toBeBurned:
-                self.navigationItem.title = "Burn Reviews"
-            default:
-                self.navigationItem.title = "All Reviews"
+        case .none:
+            self.navigationItem.title = "All Reviews"
+        case .currentLevel:
+            self.navigationItem.title = "Current Level Reviews"
+        case .toBeBurned:
+            self.navigationItem.title = "Burn Reviews"
         }
     }
 }

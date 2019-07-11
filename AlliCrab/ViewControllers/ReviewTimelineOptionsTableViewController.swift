@@ -29,8 +29,8 @@ class ReviewTimelineOptionsTableViewController: UITableViewController {
     var selectedFilterValue: ReviewTimelineFilter = ApplicationSettings.reviewTimelineFilterType
     var selectedCountMethodValue: ReviewTimelineCountMethod = ApplicationSettings.reviewTimelineValueType
     
-    private let filterValues = ReviewTimelineFilter.allCases
-    private let countMethodValues = ReviewTimelineCountMethod.allCases
+    private var filterValues: [ReviewTimelineFilter] { return ReviewTimelineFilter.allCases }
+    private var countMethodValues: [ReviewTimelineCountMethod] { return ReviewTimelineCountMethod.allCases }
     
     // MARK: - Actions
     
@@ -109,14 +109,14 @@ class ReviewTimelineOptionsTableViewController: UITableViewController {
         let previousSelection: IndexPath?
         switch tableViewSection {
         case .filter:
-            previousSelection = IndexPath(row: ReviewTimelineFilter.allCases.firstIndex(of: ApplicationSettings.reviewTimelineFilterType)!, section: indexPath.section)
+            previousSelection = IndexPath(row: filterValues.firstIndex(of: ApplicationSettings.reviewTimelineFilterType)!, section: indexPath.section)
             selectedFilterValue = filterValues[indexPath.row]
             if ApplicationSettings.reviewTimelineFilterType != selectedFilterValue {
                 ApplicationSettings.reviewTimelineFilterType = selectedFilterValue
                 delegate?.reviewTimelineFilter(didChangeTo: selectedFilterValue)
             }
         case .countMethod:
-            previousSelection = IndexPath(row: ReviewTimelineCountMethod.allCases.firstIndex(of: ApplicationSettings.reviewTimelineValueType)!, section: indexPath.section)
+            previousSelection = IndexPath(row: countMethodValues.firstIndex(of: ApplicationSettings.reviewTimelineValueType)!, section: indexPath.section)
             selectedCountMethodValue = countMethodValues[indexPath.row]
             if ApplicationSettings.reviewTimelineValueType != selectedCountMethodValue {
                 ApplicationSettings.reviewTimelineValueType = selectedCountMethodValue

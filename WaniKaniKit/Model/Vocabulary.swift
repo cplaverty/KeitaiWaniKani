@@ -24,9 +24,7 @@ public struct Vocabulary: ResourceCollectionItemData, Equatable {
     public let lessonPosition: Int
     
     public var normalisedPartsOfSpeech: [String] {
-        get {
-            return partsOfSpeech.map({ normalisePartOfSpeech($0).capitalized })
-        }
+        return partsOfSpeech.map({ normalisePartOfSpeech($0).capitalized })
     }
     
     private enum CodingKeys: String, CodingKey {

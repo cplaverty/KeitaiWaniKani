@@ -13,9 +13,7 @@ protocol XibLoadable {
 
 extension XibLoadable where Self: UIView {
     var xibName: String {
-        get {
-            return String(describing: type(of: self))
-        }
+        return String(describing: type(of: self))
     }
     
     func setupContentViewFromXib() -> UIView {

@@ -37,15 +37,11 @@ public protocol Subject {
 
 public extension Subject {
     var primaryMeaning: String? {
-        get {
-            return meanings.lazy.filter({ $0.isPrimary }).map({ $0.meaning }).first
-        }
+        return meanings.lazy.filter({ $0.isPrimary }).map({ $0.meaning }).first
     }
     
     var primaryReading: String? {
-        get {
-            return readings.lazy.filter({ $0.isPrimary }).map({ $0.reading }).first
-        }
+        return readings.lazy.filter({ $0.isPrimary }).map({ $0.reading }).first
     }
     
     func earliestGuruDate(assignment: Assignment?, getAssignmentForSubjectID: (Int) -> Assignment?) -> Date? {

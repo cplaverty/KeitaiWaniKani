@@ -19,9 +19,7 @@ protocol SubjectCell {
 
 extension SubjectCell {
     var subjectID: Int {
-        get {
-            return characterView.subjectID
-        }
+        return characterView.subjectID
     }
 }
 
