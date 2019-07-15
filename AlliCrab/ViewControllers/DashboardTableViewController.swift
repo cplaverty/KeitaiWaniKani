@@ -584,6 +584,7 @@ class DashboardTableViewController: UITableViewController {
             NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in
                 guard let self = self else { return }
                 
+                self.updateUI()
                 self.updateData(minimumFetchInterval: self.foregroundFetchInterval, showAlertOnErrors: false)
             }
         ]
