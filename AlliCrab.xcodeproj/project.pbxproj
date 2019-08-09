@@ -213,6 +213,8 @@
 		83FEF4401F4F969900A7029D /* ReviewTimelineEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF43F1F4F969900A7029D /* ReviewTimelineEntryTableViewCell.swift */; };
 		83FEF4461F50518E00A7029D /* ReviewTimelineOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEF4451F50518E00A7029D /* ReviewTimelineOptionsTableViewController.swift */; };
 		83FFD90B1F5387B80015988F /* ReviewTimelineHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FFD90A1F5387B80015988F /* ReviewTimelineHeaderFooterView.swift */; };
+		935C5EA322FD03AF00B28C1A /* srsReviewLevels.js in Resources */ = {isa = PBXBuildFile; fileRef = 935C5EA222FD03AF00B28C1A /* srsReviewLevels.js */; };
+		935C5EA522FD133F00B28C1A /* srsReviewLevels.css in Resources */ = {isa = PBXBuildFile; fileRef = 935C5EA422FD133F00B28C1A /* srsReviewLevels.css */; };
 		9F41C9076D950FB1F5D5FAE4 /* Pods_WaniKaniKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A22927479B44A413664183A1 /* Pods_WaniKaniKitTests.framework */; };
 		B93D08FFDF5DAF0EF3DA2989 /* Pods_WaniKaniStudyQueueWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 255106F1009FFFAC9EAB809E /* Pods_WaniKaniStudyQueueWidget.framework */; };
 /* End PBXBuildFile section */
@@ -503,6 +505,8 @@
 		83FEF4451F50518E00A7029D /* ReviewTimelineOptionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTimelineOptionsTableViewController.swift; sourceTree = "<group>"; };
 		83FFD90A1F5387B80015988F /* ReviewTimelineHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTimelineHeaderFooterView.swift; sourceTree = "<group>"; };
 		906ABAC46CC97C2A8D68969D /* Pods-AlliCrab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab.release.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab.release.xcconfig"; sourceTree = "<group>"; };
+		935C5EA222FD03AF00B28C1A /* srsReviewLevels.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = srsReviewLevels.js; sourceTree = "<group>"; };
+		935C5EA422FD133F00B28C1A /* srsReviewLevels.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = srsReviewLevels.css; sourceTree = "<group>"; };
 		A22927479B44A413664183A1 /* Pods_WaniKaniKitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaniKaniKitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A73A0BB811452A40B140EEF7 /* Pods-WaniKaniKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniKit.release.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniKit/Pods-WaniKaniKit.release.xcconfig"; sourceTree = "<group>"; };
 		AB341FCDE560DD1E5A54810E /* Pods-WaniKaniKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniKit/Pods-WaniKaniKit.debug.xcconfig"; sourceTree = "<group>"; };
@@ -642,6 +646,8 @@
 				832C184E1F4501EC001FFACD /* wkoverride.user.js */,
 				832C18491F4501EC001FFACD /* UserScripts.swift */,
 				832C184A1F4501EC001FFACD /* UserScriptSupport.swift */,
+				935C5EA222FD03AF00B28C1A /* srsReviewLevels.js */,
+				935C5EA422FD133F00B28C1A /* srsReviewLevels.css */,
 			);
 			path = UserScripts;
 			sourceTree = "<group>";
@@ -1234,6 +1240,7 @@
 				832C186A1F4502A4001FFACD /* chigfont.ttf in Resources */,
 				8377948122313F8A009D7D7B /* ContextSentenceView.xib in Resources */,
 				832C18721F4502A4001FFACD /* santyoume.otf in Resources */,
+				935C5EA322FD03AF00B28C1A /* srsReviewLevels.js in Resources */,
 				8364CB6B1F27F28D002DBE6B /* LaunchScreen.storyboard in Resources */,
 				8303F8301F54678400E016E9 /* ReorderSettings.storyboard in Resources */,
 				832C18701F4502A4001FFACD /* n_chifont+.ttf in Resources */,
@@ -1253,6 +1260,7 @@
 				832C184F1F4501ED001FFACD /* common.css in Resources */,
 				832C18521F4501ED001FFACD /* jitai.user.js in Resources */,
 				8377C69322308BAE00656E9A /* SubjectDetail.storyboard in Resources */,
+				935C5EA522FD133F00B28C1A /* srsReviewLevels.css in Resources */,
 				832C18561F4501ED001FFACD /* noswipe.js in Resources */,
 				832C186E1F4502A4001FFACD /* hkgokukaikk.ttf in Resources */,
 			);

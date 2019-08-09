@@ -1,0 +1,23 @@
+.srs .srs-up.srs-apprentice1:after,.srs .srs-down.srs-apprentice1:after {
+    content: 'Apprentice 1'
+}
+
+.srs .srs-up.srs-apprentice2:after,.srs .srs-down.srs-apprentice2:after {
+    content: 'Apprentice 2'
+}
+
+.srs .srs-up.srs-apprentice3:after,.srs .srs-down.srs-apprentice3:after {
+    content: 'Apprentice 3'
+}
+
+.srs .srs-up.srs-apprentice4:after,.srs .srs-down.srs-apprentice4:after {
+    content: 'Apprentice 4'
+}
+
+.srs .srs-up.srs-guru1:after,.srs .srs-down.srs-guru1:after {
+    content: 'Guru 1'
+}
+
+.srs .srs-up.srs-guru2:after,.srs .srs-down.srs-guru2:after {
+    content: 'Guru 2'
+}

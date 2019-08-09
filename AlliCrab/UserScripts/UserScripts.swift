@@ -141,6 +141,15 @@ struct UserScriptDefinitions {
                    settingKey: .userScriptIgnoreAnswerEnabled,
                    scriptNames: ["wkoverride.user"],
                    injectionRules: [.ExactMatch(WaniKaniURL.reviewSession)]),
+        
+        UserScript(name: "Show Specific SRS Level in Reviews",
+                   author: "seanblue",
+                   description: "Show \"Apprentice 3\" instead of \"Apprentice\", etc.",
+                   forumLink: WaniKaniURL.forumTopic(withRelativePath: "userscript-wanikani-show-specific-srs-level-in-reviews/19777"),
+                   settingKey: .userScriptShowSRSReviewLevel,
+                   stylesheetNames: ["srsReviewLevels"],
+                   scriptNames: ["srsReviewLevels"],
+                   injectionRules: [.ExactMatch(WaniKaniURL.reviewSession)]),
     ]
     
     static let all = alwaysEnabled + custom + community
