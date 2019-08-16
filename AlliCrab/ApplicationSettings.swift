@@ -16,6 +16,7 @@ enum ApplicationSettingKey: String {
     case userScriptCloseButNoCigarEnabled = "userScript-CloseButNoCigar"
     case userScriptJitaiEnabled = "userScript-Jitai"
     case userScriptIgnoreAnswerEnabled = "userScript-IgnoreAnswer"
+    case userScriptShowSRSReviewLevel = "userScript-ShowSRSLevel"
     case userScriptDoubleCheckEnabled = "userScript-DoubleCheck"
     case userScriptWaniKaniImproveEnabled = "userScript-WaniKaniImprove"
     case userScriptReorderUltimateEnabled = "userScript-ReorderUltimate"
@@ -78,6 +79,11 @@ struct ApplicationSettings {
         set { userDefaults.set(newValue, forKey: .userScriptIgnoreAnswerEnabled) }
     }
     
+    static var userScriptShowSRSReviewLevel: Bool {
+        get { return userDefaults.bool(forKey: .userScriptShowSRSReviewLevel) }
+        set { userDefaults.set(newValue, forKey: .userScriptShowSRSReviewLevel) }
+    }
+    
     static var userScriptDoubleCheckEnabled: Bool {
         get { return userDefaults.bool(forKey: .userScriptDoubleCheckEnabled) }
         set { userDefaults.set(newValue, forKey: .userScriptDoubleCheckEnabled) }
@@ -112,6 +118,7 @@ struct ApplicationSettings {
         userScriptCloseButNoCigarEnabled = false
         userScriptJitaiEnabled = false
         userScriptIgnoreAnswerEnabled = false
+        userScriptShowSRSReviewLevel = false
         userScriptDoubleCheckEnabled = false
         userScriptWaniKaniImproveEnabled = false
         userScriptReorderUltimateEnabled = false
