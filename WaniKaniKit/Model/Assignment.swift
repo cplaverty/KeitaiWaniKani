@@ -18,7 +18,9 @@ public struct Assignment: ResourceCollectionItemData, Equatable {
     public let availableAt: Date?
     public let resurrectedAt: Date?
     public let isPassed: Bool
-    public let isResurrected: Bool
+    public var isResurrected: Bool {
+        return resurrectedAt != nil
+    }
     public let isHidden: Bool
     
     private enum CodingKeys: String, CodingKey {
@@ -34,7 +36,6 @@ public struct Assignment: ResourceCollectionItemData, Equatable {
         case availableAt = "available_at"
         case resurrectedAt = "resurrected_at"
         case isPassed = "passed"
-        case isResurrected = "resurrected"
         case isHidden = "hidden"
     }
 }

@@ -12,7 +12,7 @@ class AssignmentTests: XCTestCase {
     
     func testDecode() {
         let data = """
-            {"id":2363694,"object":"assignment","url":"https://api.wanikani.com/v2/assignments/2363694","data_updated_at":"2018-05-09T21:21:30.000000Z","data":{"created_at":"2016-02-07T00:11:03.000000Z","subject_id":3234,"subject_type":"vocabulary","srs_stage":9,"srs_stage_name":"Burned","unlocked_at":"2016-02-07T00:11:03.000000Z","started_at":"2016-02-07T00:11:03.000000Z","passed_at":null,"burned_at":"2017-09-04T08:35:20.000000Z","available_at":null,"resurrected_at":null,"passed":true,"resurrected":false,"hidden":false}}
+            {"id":2363694,"object":"assignment","url":"https://api.wanikani.com/v2/assignments/2363694","data_updated_at":"2018-05-09T21:21:30.000000Z","data":{"created_at":"2016-02-07T00:11:03.000000Z","subject_id":3234,"subject_type":"vocabulary","srs_stage":9,"srs_stage_name":"Burned","unlocked_at":"2016-02-07T00:11:03.000000Z","started_at":"2016-02-07T00:11:03.000000Z","passed_at":null,"burned_at":"2017-09-04T08:35:20.000000Z","available_at":null,"resurrected_at":null,"passed":true,"hidden":false}}
             """.data(using: .utf8)!
         
         let decoder = WaniKaniResourceDecoder()
@@ -36,7 +36,6 @@ class AssignmentTests: XCTestCase {
                                                                    availableAt: nil,
                                                                    resurrectedAt: nil,
                                                                    isPassed: true,
-                                                                   isResurrected: false,
                                                                    isHidden: false))
             
             XCTAssertEqual(resource, expected)

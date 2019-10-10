@@ -114,7 +114,6 @@ extension Assignment: DatabaseCodable {
         self.availableAt = resultSet.date(forColumn: table.availableAt.name)
         self.resurrectedAt = resultSet.date(forColumn: table.resurrectedAt.name)
         self.isPassed = resultSet.bool(forColumn: table.isPassed.name)
-        self.isResurrected = resultSet.bool(forColumn: table.isResurrected.name)
         self.isHidden = resultSet.bool(forColumn: table.isHidden.name)
     }
     

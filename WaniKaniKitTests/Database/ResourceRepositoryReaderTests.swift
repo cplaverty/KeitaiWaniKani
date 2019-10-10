@@ -532,7 +532,6 @@ class ResourceRepositoryReaderTests: XCTestCase {
                                                            availableAt: availableAt,
                                                            resurrectedAt: resurrectedAt,
                                                            isPassed: isPassed ?? (srsStage >= SRSStage.guru.numericLevelRange.lowerBound),
-                                                           isResurrected: resurrectedAt != nil,
                                                            isHidden: false))
         nextAssignmentID += 1
         if subjectID == nil { nextSubjectID += 1 }

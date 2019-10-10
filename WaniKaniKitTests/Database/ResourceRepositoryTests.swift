@@ -51,7 +51,6 @@ class ResourceRepositoryTests: XCTestCase {
                                                                 availableAt: baseDate,
                                                                 resurrectedAt: nil,
                                                                 isPassed: true,
-                                                                isResurrected: false,
                                                                 isHidden: false))
         let expected2 = ResourceCollectionItem(id: 2,
                                                type: .assignment,
@@ -69,7 +68,6 @@ class ResourceRepositoryTests: XCTestCase {
                                                                 availableAt: baseDate,
                                                                 resurrectedAt: nil,
                                                                 isPassed: false,
-                                                                isResurrected: false,
                                                                 isHidden: false))
         
         let collection = ResourceCollection(object: "collection",

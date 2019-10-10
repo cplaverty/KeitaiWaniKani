@@ -176,7 +176,6 @@ class SubjectTests: XCTestCase {
                           availableAt: availableAt,
                           resurrectedAt: nil,
                           isPassed: srsStage >= .guru,
-                          isResurrected: false,
                           isHidden: false)
     }
     
