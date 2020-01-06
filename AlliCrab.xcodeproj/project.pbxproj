@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		241B61E988C1B1B96DDB4F62 /* Pods_AlliCrabUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD8884E6B3214A1921640485 /* Pods_AlliCrabUITests.framework */; };
+		487377D523C3D2A3009A0EAA /* ReorderSRS.js in Resources */ = {isa = PBXBuildFile; fileRef = 487377D423C3D2A2009A0EAA /* ReorderSRS.js */; };
 		4E1AF8AA26A4240751B17023 /* Pods_WaniKaniKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60F8CBAB747A47389AAE8E03 /* Pods_WaniKaniKit.framework */; };
 		4F7734D005F982824F0BD652 /* Pods_AlliCrab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D514A849E617FB97D41CF45 /* Pods_AlliCrab.framework */; };
 		8303F8301F54678400E016E9 /* ReorderSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8303F82E1F54678300E016E9 /* ReorderSettings.storyboard */; };
@@ -286,6 +287,7 @@
 		255106F1009FFFAC9EAB809E /* Pods_WaniKaniStudyQueueWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaniKaniStudyQueueWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26675F9C67491B19BBC51694 /* Pods-WaniKaniStudyQueueWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniStudyQueueWidget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniStudyQueueWidget/Pods-WaniKaniStudyQueueWidget.debug.xcconfig"; sourceTree = "<group>"; };
 		2D514A849E617FB97D41CF45 /* Pods_AlliCrab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlliCrab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		487377D423C3D2A2009A0EAA /* ReorderSRS.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ReorderSRS.js; sourceTree = "<group>"; };
 		5E20B51533E4BC7C7A20CA61 /* Pods-WaniKaniKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WaniKaniKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WaniKaniKitTests/Pods-WaniKaniKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5EA23079F4EAC898978078C3 /* Pods-AlliCrab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlliCrab.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AlliCrab/Pods-AlliCrab.debug.xcconfig"; sourceTree = "<group>"; };
 		60F8CBAB747A47389AAE8E03 /* Pods_WaniKaniKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WaniKaniKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -646,6 +648,7 @@
 				832C184E1F4501EC001FFACD /* wkoverride.user.js */,
 				832C18491F4501EC001FFACD /* UserScripts.swift */,
 				832C184A1F4501EC001FFACD /* UserScriptSupport.swift */,
+				487377D423C3D2A2009A0EAA /* ReorderSRS.js */,
 				935C5EA222FD03AF00B28C1A /* srsReviewLevels.js */,
 				935C5EA422FD133F00B28C1A /* srsReviewLevels.css */,
 			);
@@ -1240,6 +1243,7 @@
 				832C186A1F4502A4001FFACD /* chigfont.ttf in Resources */,
 				8377948122313F8A009D7D7B /* ContextSentenceView.xib in Resources */,
 				832C18721F4502A4001FFACD /* santyoume.otf in Resources */,
+				487377D523C3D2A3009A0EAA /* ReorderSRS.js in Resources */,
 				935C5EA322FD03AF00B28C1A /* srsReviewLevels.js in Resources */,
 				8364CB6B1F27F28D002DBE6B /* LaunchScreen.storyboard in Resources */,
 				8303F8301F54678400E016E9 /* ReorderSettings.storyboard in Resources */,

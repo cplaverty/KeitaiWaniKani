@@ -124,6 +124,24 @@ struct UserScriptDefinitions {
                    scriptNames: ["jitai.user"],
                    injectionRules: [.ExactMatch(WaniKaniURL.reviewSession)]),
         
+        UserScript(name: "Show Specific SRS Level in Reviews",
+                   author: "seanblue",
+                   description: "Show \"Apprentice 3\" instead of \"Apprentice\", etc.",
+                   forumLink: WaniKaniURL.forumTopic(withRelativePath: "userscript-wanikani-show-specific-srs-level-in-reviews/19777"),
+                   settingKey: .userScriptShowSRSReviewLevel,
+                   stylesheetNames: ["srsReviewLevels"],
+                   scriptNames: ["srsReviewLevels"],
+                   injectionRules: [.ExactMatch(WaniKaniURL.reviewSession)]),
+        
+        UserScript(name: "SRS Reorder Button",
+                   author: "Towe",
+                   description: "Adds button enabling item ordering by SRS level.",
+                   forumLink: WaniKaniURL.forumTopic(withRelativePath: "wanikani-srs-reorder-button/17880"),
+                   settingKey: .userScriptReorderSRSEnabled,
+                   stylesheetNames: ["jquery.qtip.min"],
+                   scriptNames: ["jquery.qtip.min", "ReorderSRS"],
+                   injectionRules: [.ExactMatch(WaniKaniURL.reviewSession)]),
+        
         UserScript(name: "WaniKani Improve",
                    author: "Seiji",
                    description: "Automatically moves to the next item if the answer was correct (also known as \"lightning mode\").",
@@ -140,15 +158,6 @@ struct UserScriptDefinitions {
                    forumLink: WaniKaniURL.forumTopic(withRelativePath: "userscript-wanikani-override-ignore-answer-button-active-support/17999"),
                    settingKey: .userScriptIgnoreAnswerEnabled,
                    scriptNames: ["wkoverride.user"],
-                   injectionRules: [.ExactMatch(WaniKaniURL.reviewSession)]),
-        
-        UserScript(name: "Show Specific SRS Level in Reviews",
-                   author: "seanblue",
-                   description: "Show \"Apprentice 3\" instead of \"Apprentice\", etc.",
-                   forumLink: WaniKaniURL.forumTopic(withRelativePath: "userscript-wanikani-show-specific-srs-level-in-reviews/19777"),
-                   settingKey: .userScriptShowSRSReviewLevel,
-                   stylesheetNames: ["srsReviewLevels"],
-                   scriptNames: ["srsReviewLevels"],
                    injectionRules: [.ExactMatch(WaniKaniURL.reviewSession)]),
     ]
     

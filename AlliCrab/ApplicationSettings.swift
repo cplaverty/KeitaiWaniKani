@@ -20,6 +20,7 @@ enum ApplicationSettingKey: String {
     case userScriptDoubleCheckEnabled = "userScript-DoubleCheck"
     case userScriptWaniKaniImproveEnabled = "userScript-WaniKaniImprove"
     case userScriptReorderUltimateEnabled = "userScript-ReorderUltimate"
+    case userScriptReorderSRSEnabled = "userScript-ReorderSRS"
     case reviewTimelineFilterType = "reviewTimelineFilterType"
     case reviewTimelineValueType = "reviewTimelineValueType"
 }
@@ -99,6 +100,11 @@ struct ApplicationSettings {
         set { userDefaults.set(newValue, forKey: .userScriptReorderUltimateEnabled) }
     }
     
+    static var userScriptReorderSRSEnabled: Bool {
+        get { return userDefaults.bool(forKey: .userScriptReorderSRSEnabled)}
+        set { userDefaults.set(newValue, forKey: .userScriptReorderSRSEnabled)}
+    }
+    
     static var reviewTimelineFilterType: ReviewTimelineFilter {
         get { return userDefaults.rawValue(ReviewTimelineFilter.self, forKey: .reviewTimelineFilterType) ?? .none }
         set { userDefaults.set(newValue, forKey: .reviewTimelineFilterType) }
@@ -122,6 +128,7 @@ struct ApplicationSettings {
         userScriptDoubleCheckEnabled = false
         userScriptWaniKaniImproveEnabled = false
         userScriptReorderUltimateEnabled = false
+        userScriptReorderSRSEnabled = false
         reviewTimelineFilterType = .none
         reviewTimelineValueType = .histogram
     }
